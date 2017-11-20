@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ChinaWeatherAPI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/hLJDecision/libs/ChinaWeatherAPI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

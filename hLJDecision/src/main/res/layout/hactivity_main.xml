@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/reTitle"
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:background="@color/title_bg"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="5dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvBlank"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <RelativeLayout
+            android:layout_below="@+id/tvBlank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/iv_logo" />
+
+            <ImageView
+                android:id="@+id/ivSetting"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/iv_setting" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/reBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#005086"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <com.viewpagerindicator.TabPageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tvLine"
+            android:background="@drawable/tab_indicator"
+            android:overScrollMode="never" />
+
+        <TextView
+            android:id="@+id/tvLine"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toLeftOf="@+id/ivAdd"
+            android:background="@color/white" />
+
+        <ImageView
+            android:id="@+id/ivAdd"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/iv_add" />
+    </RelativeLayout>
+
+    <com.hlj.view.MainViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"/>
+
+</LinearLayout>

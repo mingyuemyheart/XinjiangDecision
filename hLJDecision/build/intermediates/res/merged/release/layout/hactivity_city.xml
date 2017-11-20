@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/corner_edittext2"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <ImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/iv_search" />
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/ivSearch"
+            android:background="@color/transparent"
+            android:hint="@string/input_city_name"
+            android:textColor="@color/text_color2"
+            android:textColorHint="@color/text_color1"
+            android:textSize="@dimen/level_4" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:cacheColorHint="@color/transparent"
+        android:divider="#30ffffff"
+        android:dividerHeight="0.5dip"
+        android:listSelector="@color/transparent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/llGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center" >
+
+        <TextView
+            android:id="@+id/tvProvince"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/corner_left_blue"
+            android:gravity="center"
+            android:text="@string/hot_province"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_4" />
+
+        <TextView
+            android:id="@+id/tvNational"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/corner_right_white"
+            android:gravity="center"
+            android:text="@string/hot_national"
+            android:textColor="@color/title_bg"
+            android:textSize="@dimen/level_4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.hlj.stickygridheaders.StickyGridHeadersGridView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pGridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@color/transparent"
+            android:fadingEdge="none"
+            android:horizontalSpacing="3dip"
+            android:listSelector="@color/transparent"
+            android:numColumns="4"
+            android:overScrollMode="never"
+            android:layout_margin="10dp"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dip" />
+
+        <GridView
+            android:id="@+id/nGridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:cacheColorHint="@color/transparent"
+            android:columnWidth="100dip"
+            android:fadingEdge="none"
+            android:gravity="center"
+            android:horizontalSpacing="3dip"
+            android:listSelector="@color/transparent"
+            android:numColumns="4"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dip"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

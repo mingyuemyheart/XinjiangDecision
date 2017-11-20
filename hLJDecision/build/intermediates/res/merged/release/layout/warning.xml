@@ -1,0 +1,139 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/reMap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <com.amap.api.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/ivPlus"
+                android:layout_width="35dip"
+                android:layout_height="35dip"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/iv_plus" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/ivMinuse"
+                android:layout_width="35dip"
+                android:layout_height="35dip"
+                android:layout_below="@+id/ivPlus"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iv_minuse" />
+
+            <ImageView
+                android:id="@+id/ivLocation"
+                android:layout_width="35dip"
+                android:layout_height="35dip"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dip"
+                android:src="@drawable/iv_map_collose"
+                android:visibility="gone" />
+
+            <TextView
+            android:id="@+id/tvPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#90000000"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_4"
+            android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/reList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone" >
+
+            <ListView
+                android:id="@+id/cityListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="@color/transparent"
+                android:divider="@null"
+                android:listSelector="@color/transparent"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/llSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/corner_left_black"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/ivSwitch"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/iv_table" />
+
+            <TextView
+                android:id="@+id/tvSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/table"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/llSwitch"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/corner_left_black"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/ivRefresh"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/iv_refresh" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/refresh"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

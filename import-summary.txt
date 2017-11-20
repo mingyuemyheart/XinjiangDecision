@@ -1,0 +1,103 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Manifest Merging:
+-----------------
+Your project uses libraries that provide manifests, and your Eclipse
+project did not explicitly turn on manifest merging. In Android Gradle
+projects, manifests are always merged (meaning that contents from your
+libraries' manifests will be merged into the app manifest. If you had
+manually copied contents from library manifests into your app manifest
+you may need to remove these for the app to build correctly.
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+From HLJDecision:
+* ic_launcher-web.png
+* proguard-project.txt
+From HLJLibrary:
+* ic_launcher-web.png
+* proguard-project.txt
+From Indicatorlibrary:
+* build.xml
+* pom.xml
+* proguard-project.txt
+From SceneFinal:
+* build.xml
+* proguard-project.txt
+* proguard.cfg
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:19.1.0
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+In Indicatorlibrary:
+* AndroidManifest.xml => indicatorlibrary/src/main/AndroidManifest.xml
+* assets/ => indicatorlibrary/src/main/assets
+* res/ => indicatorlibrary/src/main/res/
+* src/ => indicatorlibrary/src/main/java/
+In SceneFinal:
+* AndroidManifest.xml => sceneFinal/src/main/AndroidManifest.xml
+* libs/commons-io-2.4.jar => sceneFinal/libs/commons-io-2.4.jar
+* libs/crypto.jar => sceneFinal/libs/crypto.jar
+* libs/file-zip-util-1.7.7.jar => sceneFinal/libs/file-zip-util-1.7.7.jar
+* res/ => sceneFinal/src/main/res
+* src/ => sceneFinal/src/main/java/
+* src/net/tsz/afinal/.DS_Store => sceneFinal/src/main/resources/net/tsz/afinal/.DS_Store
+In HLJLibrary:
+* AndroidManifest.xml => hLJLibrary/src/main/AndroidManifest.xml
+* assets/ => hLJLibrary/src/main/assets
+* libs/AMap_Location_V2.4.0_20160308.jar => hLJLibrary/libs/AMap_Location_V2.4.0_20160308.jar
+* libs/Android_Map_2.5.1.20150827.jar => hLJLibrary/libs/Android_Map_2.5.1.20150827.jar
+* libs/ChinaWeatherAPI.jar => hLJLibrary/libs/ChinaWeatherAPI.jar
+* libs/MapApiServices.jar => hLJLibrary/libs/MapApiServices.jar
+* libs/armeabi-v7a/libamapv304.so => hLJLibrary/src/main/jniLibs/armeabi-v7a/libamapv304.so
+* libs/armeabi-v7a/libamapv304ex.so => hLJLibrary/src/main/jniLibs/armeabi-v7a/libamapv304ex.so
+* libs/armeabi-v7a/libvudroid.so => hLJLibrary/src/main/jniLibs/armeabi-v7a/libvudroid.so
+* libs/armeabi/libamapv304.so => hLJLibrary/src/main/jniLibs/armeabi/libamapv304.so
+* libs/armeabi/libamapv304ex.so => hLJLibrary/src/main/jniLibs/armeabi/libamapv304ex.so
+* libs/armeabi/libvudroid.so => hLJLibrary/src/main/jniLibs/armeabi/libvudroid.so
+* libs/httpmime-4.1.3.jar => hLJLibrary/libs/httpmime-4.1.3.jar
+* libs/vudroid-pdfview-1.0.jar => hLJLibrary/libs/vudroid-pdfview-1.0.jar
+* libs/x86/libamapv304.so => hLJLibrary/src/main/jniLibs/x86/libamapv304.so
+* libs/x86/libamapv304ex.so => hLJLibrary/src/main/jniLibs/x86/libamapv304ex.so
+* libs/x86/libvudroid.so => hLJLibrary/src/main/jniLibs/x86/libvudroid.so
+* res/ => hLJLibrary/src/main/res/
+* src/ => hLJLibrary/src/main/java/
+In HLJDecision:
+* AndroidManifest.xml => hLJDecision/src/main/AndroidManifest.xml
+* assets/ => hLJDecision/src/main/assets/
+* res/ => hLJDecision/src/main/res/
+* src/ => hLJDecision/src/main/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

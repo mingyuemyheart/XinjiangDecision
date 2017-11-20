@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="shawn.cxwl.com.hlj"
+    android:versionCode="22"
+    android:versionName="1.0.21" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- umeng -->
+    <!-- 分享 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <!-- 必选 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- 可选 -->
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_ADDED" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_CHANGED" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_INSTALL" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+    <!-- umeng -->
+    <application
+        android:name="com.hlj.common.PgyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/iv_icon"
+        android:label="@string/app_name"
+        android:theme="@style/StyledIndicators" >
+        <service android:name="com.amap.api.location.APSService" />
+
+        <!-- 普通版本 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="41cb6e240846b9f30207a9e6ac79fdc2" />
+
+        <!--
+        决策气象服务
+        1.包名为shawn.cxwl.com.hlj.decision
+        2.高德地图key
+        3.appname
+        4.welcome界面welcome_icon2、main界面iv_logo2
+        5.更换MainActivity、SettingActivity自动更新app_id
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="51096dda8deea179e4a980f74d38c4d6"/>
+        -->
+
+
+        <!-- 自动更新下载完成广播 -->
+        <receiver android:name="com.hlj.utils.AutoUpdateBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <!-- <action android:name="android.intent.action.PACKAGE_INSTALL" /> -->
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.hlj.activity.HWelcomeActivity"
+            android:theme="@style/StyledIndicators" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.hlj.activity.HMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HLoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HSettingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HCityActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HWeatherDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HChannelManageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.TrendRankActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.TrendDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HAgriWeatherDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.WeatherKepuDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.WarningSignalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HUrlActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.Url2Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HTempratureForecastActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HPdfListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HRainfallFactActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.WindDirSpeedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.RelativeHumidityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HWeatherRadarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HCommonPdfListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HSixHourRainfallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HAirPolutionActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="com.hlj.activity.HProvinceForecastActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HWeatherStaticsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HHeadWarningActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HWeatherChartAnalysisActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 第三方类库名称 -->
+
+
+        <!-- 意见反馈 -->
+        <activity
+            android:name="com.hlj.activity.HFeedbackActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 雷达图 -->
+        <activity
+            android:name="com.hlj.activity.HWeatherChartActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.WeatherRadarDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.RadarZoomActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensor" />
+
+        <!-- 下一场雨 -->
+        <activity
+            android:name="com.hlj.activity.HMinuteFallActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 预警 -->
+        <activity
+            android:name="com.hlj.activity.WarningActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HWarningDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 空气质量 -->
+        <activity
+            android:name="com.hlj.activity.HWebviewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 空气质量 -->
+        <activity
+            android:name="com.hlj.activity.HPDFActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.NewsActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ProductActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 第三方类库名称 -->
+
+    </application>
+
+</manifest>

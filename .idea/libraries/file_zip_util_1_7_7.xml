@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="file-zip-util-1.7.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/sceneFinal/libs/file-zip-util-1.7.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

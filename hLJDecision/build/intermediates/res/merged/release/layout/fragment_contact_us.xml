@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_contact_us"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:lineSpacingExtra="5dp"
+        android:autoLink="phone"
+        android:textColorLink="@color/title_bg"
+        android:padding="15dp"
+        android:text="如果您需要更多精细化气象服务、专业气象服务，请致电（0451）55172953，与黑龙江省气象服务中心洽谈合作事宜。"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_3" />
+
+</LinearLayout>
