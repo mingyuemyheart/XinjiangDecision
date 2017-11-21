@@ -245,7 +245,7 @@
     <string name="weather58">特强浓雾</string>
 
     <!-- 风向表 -->
-    <string name="wind_dir0">无持续风向</string>
+    <string name="wind_dir0"></string>
     <string name="wind_dir1">东北风</string>
     <string name="wind_dir2">东风</string>
     <string name="wind_dir3">东南风</string>

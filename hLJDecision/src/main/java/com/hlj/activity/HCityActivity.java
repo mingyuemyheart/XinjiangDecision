@@ -196,11 +196,10 @@ public class HCityActivity extends BaseActivity implements OnClickListener{
 		for (int i = 0; i < array.length; i++) {
 			String[] data = array[i].split(",");
 			CityDto dto = new CityDto();
-			dto.lng = Double.valueOf(data[0]);
-			dto.lat = Double.valueOf(data[1]);
-			dto.cityId = data[2];
-			dto.areaName = data[3];
-			dto.spellName = data[4];
+			dto.lng = Double.valueOf(data[3]);
+			dto.lat = Double.valueOf(data[2]);
+			dto.cityId = data[0];
+			dto.areaName = data[1];
 			nList.add(dto);
 		}
 		return nList;

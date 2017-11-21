@@ -296,6 +296,23 @@ public class HWeatherDetailActivity extends BaseActivity implements OnClickListe
 									String windForce = WeatherUtil.lastValue(object.getString("l3"));
 									String force = WeatherUtil.getFactWindForce(Integer.valueOf(windForce));
 									tvWind.setText(dir+" "+force);
+									if (TextUtils.equals(dir, "北风")) {
+										ivWind.setRotation(0);
+									}else if (TextUtils.equals(dir, "东北风")) {
+										ivWind.setRotation(45);
+									}else if (TextUtils.equals(dir, "东风")) {
+										ivWind.setRotation(90);
+									}else if (TextUtils.equals(dir, "东南风")) {
+										ivWind.setRotation(135);
+									}else if (TextUtils.equals(dir, "南风")) {
+										ivWind.setRotation(180);
+									}else if (TextUtils.equals(dir, "西南风")) {
+										ivWind.setRotation(225);
+									}else if (TextUtils.equals(dir, "西风")) {
+										ivWind.setRotation(270);
+									}else if (TextUtils.equals(dir, "西北风")) {
+										ivWind.setRotation(315);
+									}
 								}
 							}
 						} catch (JSONException e) {
