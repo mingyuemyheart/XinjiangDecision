@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="shawn.cxwl.com.hlj"
-    android:versionCode="22"
-    android:versionName="1.0.21" >
+    android:versionCode="23"
+    android:versionName="1.0.22" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -174,6 +174,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.HWeatherChartAnalysisActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.FactActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.FactDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.FactDetailChartActivity"
             android:screenOrientation="portrait" />
 
         <!-- 第三方类库名称 -->

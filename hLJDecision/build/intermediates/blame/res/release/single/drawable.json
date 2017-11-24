@@ -208,6 +208,10 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/chart_strong_typhoon.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/bg_select_time.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/bg_select_time.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/point_gray.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/point_gray.xml"
     },
@@ -336,6 +340,10 @@
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/drawable/abc_edit_text_material.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/bg_check_detai.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/bg_check_detai.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/corner_bottom_black.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/corner_bottom_black.xml"
     },
@@ -408,6 +416,10 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/typhoon_item_bg.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/bg_check_detai_press.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/bg_check_detai_press.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/corner_middle_white.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/corner_middle_white.xml"
     },
@@ -460,12 +472,16 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/bg_know.xml"
     },
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/cornor_seekbar_bg.xml",
-        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/cornor_seekbar_bg.xml"
-    },
-    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/selector_detail.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/selector_detail.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/selector_check_detail.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/selector_check_detail.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/cornor_seekbar_bg.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/cornor_seekbar_bg.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable/pgy_right_btn.xml",

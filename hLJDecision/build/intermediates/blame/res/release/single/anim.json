@@ -44,11 +44,11 @@
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/anim/abc_slide_in_top.xml"
     },
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/anim/circle_progressbar.xml",
-        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/anim/circle_progressbar.xml"
-    },
-    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/anim/abc_fade_in.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/anim/anim_loading_white.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/anim/anim_loading_white.xml"
     }
 ]

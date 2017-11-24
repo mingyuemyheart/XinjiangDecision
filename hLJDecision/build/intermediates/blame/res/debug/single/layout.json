@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hactivity_six_hour_rainfall.xml",
-        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_six_hour_rainfall.xml"
-    },
-    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/trend_fragment.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/trend_fragment.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hactivity_six_hour_rainfall.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_six_hour_rainfall.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/drag_item.xml",
@@ -20,12 +20,12 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_weather_statics.xml"
     },
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hadapter_city_nation.xml",
-        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hadapter_city_nation.xml"
-    },
-    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hactivity_rainfall_fact.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_rainfall_fact.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hadapter_city_nation.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hadapter_city_nation.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
@@ -56,6 +56,10 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_weather_radar.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/layout_fact.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/layout_fact.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/webview_fragment.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/webview_fragment.xml"
     },
@@ -68,6 +72,10 @@
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/layout/notification_action.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/dialog_fact_check_time.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/dialog_fact_check_time.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/layout/support_simple_spinner_dropdown_item.xml"
     },
@@ -76,12 +84,12 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hadapter_temperature_forecast.xml"
     },
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hactivity_heading_warning.xml",
-        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_heading_warning.xml"
-    },
-    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/adapter_weekly_forecast.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_weekly_forecast.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hactivity_heading_warning.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_heading_warning.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
@@ -140,12 +148,20 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/wind_dir_speed.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/adapter_fact_detail.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_fact_detail.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/product_item.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/product_item.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/dialog_fact_history.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/dialog_fact_history.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/fact_weather.xml",
@@ -288,6 +304,10 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/fact_weather_item.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/adapter_fact2.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_fact2.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/notification_template_icon_group.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/layout/notification_template_icon_group.xml"
     },
@@ -302,6 +322,10 @@
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/activity_fact_detail.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/activity_fact_detail.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hadapter_agri_weather.xml",
@@ -384,6 +408,10 @@
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/layout/select_dialog_item_material.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/activity_fact2.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/activity_fact2.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hactivity_air_polution.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_air_polution.xml"
     },
@@ -396,8 +424,16 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/index.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/activity_fact_detail_chart.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/activity_fact_detail_chart.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/fragment_fact_check.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/fragment_fact_check.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/trend_detail.xml",
@@ -488,6 +524,10 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/relative_humidity.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/adapter_fact_check_citys.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_fact_check_citys.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hactivity_main.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_main.xml"
     },
@@ -516,6 +556,10 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hfragment_weather_warning.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/fragment_fact_detail.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/fragment_fact_detail.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/weather_marker_info.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/weather_marker_info.xml"
     },
@@ -538,6 +582,10 @@
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/abc_alert_dialog_title_material.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/layout/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/adapter_fact_time.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_fact_time.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/layout/hadapter_city_content.xml",

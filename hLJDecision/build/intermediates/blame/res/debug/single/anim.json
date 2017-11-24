@@ -36,16 +36,16 @@
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
     },
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/anim/anim_loading_black.xml",
-        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/anim/anim_loading_black.xml"
-    },
-    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/anim/abc_grow_fade_in_from_bottom.xml"
     },
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/anim/circle_progressbar.xml",
-        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/anim/circle_progressbar.xml"
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/anim/anim_loading_black.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/anim/anim_loading_black.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/anim/anim_loading_white.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/anim/anim_loading_white.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",

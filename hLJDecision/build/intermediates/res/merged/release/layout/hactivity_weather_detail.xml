@@ -43,8 +43,8 @@
 
                         <ImageView
                             android:id="@+id/ivLocation"
-                            android:layout_width="@dimen/level_4"
-                            android:layout_height="@dimen/level_4"
+                            android:layout_width="@dimen/level_3"
+                            android:layout_height="@dimen/level_3"
                             android:src="@drawable/iv_location_white"/>
 
                         <TextView
@@ -52,7 +52,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/level_5"/>
+                            android:textSize="@dimen/level_4"/>
 
                     </LinearLayout>
 
@@ -361,7 +361,7 @@
                         <ImageView
                             android:id="@+id/ivClose"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="8dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:src="@drawable/iv_open"/>
@@ -425,7 +425,7 @@
                         <ImageView
                             android:id="@+id/ivClose2"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="8dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:src="@drawable/iv_open"/>
@@ -488,7 +488,7 @@
                         <ImageView
                             android:id="@+id/ivClose3"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="8dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:src="@drawable/iv_open"/>

@@ -10,7 +10,7 @@
         style="@android:style/Widget.DeviceDefault.ProgressBar"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:indeterminateDrawable="@anim/circle_progressbar"
+        android:indeterminateDrawable="@anim/anim_loading_white"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>

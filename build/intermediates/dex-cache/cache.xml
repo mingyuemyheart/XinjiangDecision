@@ -84,6 +84,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/pinyin4j-2.5.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="ae353005f973da1cd8545b54354504c2503f6865">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/pinyin4j-2.5.0_0b2a4a52ff893fed5fcdcbcf9bda74ebab9b3a75/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/libs/commons-io-2.4.jar"
         jumboMode="true"
         optimize="true"
@@ -102,21 +111,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/okio-1.13.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/okio-1.13.0_45d1bb4aabc6d53050edc2c0f719e2a792050d46.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/libs/file-zip-util-1.7.7.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
         sha1="f3de636d26c5dbbce632a38de2b3ee196f6d2682">
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/file-zip-util-1.7.7_3019f1af76090f96b8ff5acc901024206ba2a6f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/okio-1.13.0_45d1bb4aabc6d53050edc2c0f719e2a792050d46.jar" />
     </item>
     <item
         is-multidex="true"
@@ -191,6 +200,15 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_bee38f375494b792193a30f7d7dfa4c654ab7bca.jar" />
     </item>
     <item
+        is-multidex="false"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/pinyin4j-2.5.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="ae353005f973da1cd8545b54354504c2503f6865">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/pinyin4j-2.5.0_0b2a4a52ff893fed5fcdcbcf9bda74ebab9b3a75.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/libs/crypto.jar"
         jumboMode="true"
@@ -232,7 +250,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="17e420ad0bc3dd27a74892dc329ec4b628df6cc2">
+        sha1="d41581db906c8e3850eed5215667be46ea7528b8">
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_1131b1bf9072bcd2979c6dddf1b7069f47dc9a76/classes.dex" />
     </item>
 

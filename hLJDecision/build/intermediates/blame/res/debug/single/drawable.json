@@ -60,6 +60,10 @@
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/drawable/abc_spinner_textfield_background_material.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/bg_check_detai_press.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/bg_check_detai_press.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/notification_bg.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/drawable/notification_bg.xml"
     },
@@ -222,6 +226,10 @@
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/abc_edit_text_material.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/drawable/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/bg_select_time.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/bg_select_time.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/corner_top.xml",
@@ -428,6 +436,10 @@
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/typhoon_legend.xml"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/selector_check_detail.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/selector_check_detail.xml"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/abc_ratingbar_material.xml",
         "source": "/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/res/drawable/abc_ratingbar_material.xml"
     },
@@ -470,6 +482,10 @@
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/selector_item.xml",
         "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/selector_item.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/bg_check_detai.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/bg_check_detai.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
