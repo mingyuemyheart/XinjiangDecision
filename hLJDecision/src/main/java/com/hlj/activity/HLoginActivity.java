@@ -227,11 +227,20 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 													for (int k = 0; k < child2Array.length(); k++) {
 														JSONObject child2Obj = child2Array.getJSONObject(k);
 														ColumnData child2 = new ColumnData();
+														if (!child2Obj.isNull("localviewid")) {
+															child2.id = child2Obj.getString("localviewid");
+														}
 														if (!child2Obj.isNull("name")) {
 															child2.name = child2Obj.getString("name");
 														}
 														if (!child2Obj.isNull("desc")) {
 															child2.desc = child2Obj.getString("desc");
+														}
+														if (!child2Obj.isNull("icon")) {
+															child2.icon = child2Obj.getString("icon");
+														}
+														if (!child2Obj.isNull("icon2")) {
+															child2.icon2 = child2Obj.getString("icon2");
 														}
 														if (!child2Obj.isNull("dataurl")) {
 															child2.dataUrl = child2Obj.getString("dataurl");

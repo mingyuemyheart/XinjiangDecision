@@ -195,6 +195,18 @@
         <activity
             android:name="com.hlj.activity.HWeatherChartAnalysisActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.FactActivity2"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.FactDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.FactDetailChartActivity"
+            android:screenOrientation="portrait" />
         
         
         <!-- 第三方类库名称 -->

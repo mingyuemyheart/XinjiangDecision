@@ -10,7 +10,7 @@ public class CONST {
 	public static String APPID = "18";//贵州客户端对应服务器的appid
 	public static final String GUIZHOU_PROVINCEID = "10105";//贵州省id
 	public static final String GUIZHOU_WARNINGID = "23";//贵州省预警id
-	public static final LatLng guizhouLatLng = new LatLng(48.102915,128.121040);//贵州中点
+	public static final LatLng guizhouLatLng = new LatLng(48.602915,128.121040);//贵州中点
 	public static final double guizhou_LATITUDE = guizhouLatLng.latitude;
 	public static final double guizhou_LONGITUDE = guizhouLatLng.longitude;
 	public static boolean isDelete = false;//判断是否可以删除

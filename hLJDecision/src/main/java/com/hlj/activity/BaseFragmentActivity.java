@@ -1,7 +1,9 @@
 package com.hlj.activity;
 
 import com.hlj.manager.SystemStatusManager;
+import com.hlj.view.MyDialog2;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,13 +13,16 @@ import android.view.WindowManager;
 
 public class BaseFragmentActivity extends FragmentActivity{
 
+	private Context mContext = null;
+	private MyDialog2 mDialog = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		mContext = this;
 		setTranslucentStatus();
 	}
-	
+
 	/**
 	 * 设置状态栏背景状态
 	 */
@@ -31,25 +36,22 @@ public class BaseFragmentActivity extends FragmentActivity{
 		}
 		SystemStatusManager tintManager = new SystemStatusManager(this);
 		tintManager.setStatusBarTintEnabled(true);
-		tintManager.setStatusBarTintResource(Color.TRANSPARENT);// 状态栏无背景
+		tintManager.setStatusBarTintResource(0);// 状态栏无背景
 	}
-	
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
+
+	/**
+	 * 初始化dialog
+	 */
+	public void showDialog() {
+		if (mDialog == null) {
+			mDialog = new MyDialog2(mContext);
+		}
+		mDialog.show();
 	}
-	
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-	}
-	
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
+	public void cancelDialog() {
+		if (mDialog != null) {
+			mDialog.dismiss();
+		}
 	}
 	
 }

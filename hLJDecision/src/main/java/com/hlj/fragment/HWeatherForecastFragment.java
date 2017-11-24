@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
+import com.hlj.activity.FactActivity2;
 import com.hlj.activity.HAirPolutionActivity;
 import com.hlj.activity.HCommonPdfListActivity;
 import com.hlj.activity.HMinuteFallActivity;
@@ -82,7 +83,7 @@ public class HWeatherForecastFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				AgriDto dto = mList.get(arg2);
-				Intent intent = null;
+				Intent intent;
 				if (TextUtils.equals(dto.showType, CONST.URL)) {//三天降水量预报
 					intent = new Intent(getActivity(), HUrlActivity.class);
 					intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
@@ -148,6 +149,14 @@ public class HWeatherForecastFragment extends Fragment {
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "1002")) {//铁路气象服务（6小时降水量）
 						intent = new Intent(getActivity(), HSixHourRainfallActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putParcelable("data", dto);
+						intent.putExtras(bundle);
+						startActivity(intent);
+					}else if (TextUtils.equals(dto.id, "115") || TextUtils.equals(dto.id, "113") || TextUtils.equals(dto.id, "114")) {//115降水实况，113气温实况，114风向风速实况，116相对湿度分析
+						intent = new Intent(getActivity(), FactActivity2.class);
+						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+						intent.putExtra(CONST.WEB_URL, dto.dataUrl);
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
