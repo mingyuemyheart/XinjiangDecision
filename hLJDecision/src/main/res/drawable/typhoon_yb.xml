@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 顶部带圆角 白色背景 灰色边框 无下边框 长方体 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <shape>
+            <solid android:color="@color/white" />
+
+            <corners
+                android:radius="15dp" />
+
+            <size
+                android:height="15dp"
+                android:width="15dp" />
+            
+            <stroke 
+                android:width="1.5dp"
+                android:color="@color/red"/>
+        </shape>
+    </item>
+
+</layer-list>

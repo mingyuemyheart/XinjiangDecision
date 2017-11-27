@@ -103,7 +103,6 @@ public class HWeatherRadarActivity extends BaseActivity implements OnClickListen
 		
 		getRadarData("http://decision-admin.tianqi.cn/Home/extra/getHljRadarData");
 		CommonUtil.drawHLJJson(mContext, aMap);
-		CommonUtil.drawJGDQJson(mContext, aMap);
 	}
 	
 	/**

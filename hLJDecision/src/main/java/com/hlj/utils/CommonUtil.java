@@ -59,7 +59,7 @@ public class CommonUtil {
      */  
     public static float dip2px(Context context, float dpValue) {  
         final float scale = context.getResources().getDisplayMetrics().density;  
-        return (float) (dpValue * scale);  
+        return dpValue * scale;
     }  
   
     /** 
@@ -67,7 +67,7 @@ public class CommonUtil {
      */  
     public static float px2dip(Context context, float pxValue) {  
         final float scale = context.getResources().getDisplayMetrics().density;  
-        return (float) (pxValue / scale);  
+        return pxValue / scale;
     } 
     
     /**
@@ -462,7 +462,7 @@ public class CommonUtil {
 		if (aMap == null) {
 			return;
 		}
-		String result = CommonUtil.getFromAssets(context, "hei_long_jiang.json");
+		String result = CommonUtil.getFromAssets(context, "heilongjiang.json");
 		if (!TextUtils.isEmpty(result)) {
 			try {
 				JSONObject obj = new JSONObject(result);
@@ -513,43 +513,13 @@ public class CommonUtil {
 	}
 	
 	/**
-	 * 回执区域
-	 * @param context
-	 * @param aMap
-	 */
-	public static void drawDistrict2(Context context, AMap aMap) {
-		if (aMap == null) {
-			return;
-		}
-		String result = CommonUtil.getFromAssets(context, "other.json");
-		if (!TextUtils.isEmpty(result)) {
-			try {
-				JSONObject obj = new JSONObject(result);
-				JSONArray array = obj.getJSONArray("coordinates");
-				PolygonOptions polylineOption = new PolygonOptions();
-				for (int i = 0; i < array.length(); i++) {
-					polylineOption.fillColor(0x800061C2);
-					polylineOption.strokeColor(Color.TRANSPARENT);
-					JSONArray itemArray = array.getJSONArray(i);
-					double lat = itemArray.getDouble(1);
-					double lng = itemArray.getDouble(0);
-					polylineOption.add(new LatLng(lat, lng));
-				}
-				aMap.addPolygon(polylineOption);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
 	 * 绘制黑龙江
 	 */
 	public static void drawHLJJson(Context context, AMap aMap) {
 		if (aMap == null) {
 			return;
 		}
-		String result = CommonUtil.getFromAssets(context, "hei_long_jiang.json");
+		String result = CommonUtil.getFromAssets(context, "heilongjiang.json");
 		if (!TextUtils.isEmpty(result)) {
 			try {
 				JSONObject obj = new JSONObject(result);
@@ -557,10 +527,15 @@ public class CommonUtil {
 				for (int i = 0; i < array.length(); i++) {
 					JSONObject itemObj = array.getJSONObject(i);
 
+					JSONObject properties = itemObj.getJSONObject("properties");
+					String name = properties.getString("name");
 					JSONObject geometry = itemObj.getJSONObject("geometry");
 					JSONArray coordinates = geometry.getJSONArray("coordinates");
 					JSONArray array2 = coordinates.getJSONArray(0);
 					PolylineOptions polylineOption = new PolylineOptions();
+					if (name.contains("加格达奇")) {
+						polylineOption.setDottedLine(true);
+					}
 					polylineOption.width(6).color(0xff406bbf);
 					for (int j = 0; j < array2.length(); j++) {
 						JSONArray itemArray = array2.getJSONArray(j);
@@ -576,32 +551,4 @@ public class CommonUtil {
 		}
 	}
 
-	/**
-	 * 绘制加格达奇
-	 */
-	public static void drawJGDQJson(Context context, AMap aMap) {
-		if (aMap == null) {
-			return;
-		}
-		String result = CommonUtil.getFromAssets(context, "other.json");
-		if (!TextUtils.isEmpty(result)) {
-			try {
-				JSONObject obj = new JSONObject(result);
-				JSONArray array = obj.getJSONArray("coordinates");
-				PolylineOptions polylineOption = new PolylineOptions();
-				polylineOption.setDottedLine(true);
-				for (int i = 0; i < array.length(); i++) {
-					polylineOption.width(6).color(0xff406bbf);
-					JSONArray itemArray = array.getJSONArray(i);
-					double lat = itemArray.getDouble(1);
-					double lng = itemArray.getDouble(0);
-					polylineOption.add(new LatLng(lat, lng));
-				}
-				aMap.addPolyline(polylineOption);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
 }

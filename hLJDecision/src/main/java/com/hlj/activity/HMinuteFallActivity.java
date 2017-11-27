@@ -133,7 +133,6 @@ public class HMinuteFallActivity extends BaseActivity implements View.OnClickLis
 		width = dm.widthPixels;
 
 		CommonUtil.drawHLJJson(mContext, aMap);
-		CommonUtil.drawJGDQJson(mContext, aMap);
 
 		geocoderSearch = new GeocodeSearch(mContext);
 		geocoderSearch.setOnGeocodeSearchListener(this);

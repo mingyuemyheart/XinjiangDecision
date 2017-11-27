@@ -13,8 +13,8 @@ android {
         applicationId "shawn.cxwl.com.hlj"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 23
-        versionName "1.0.22"
+        versionCode 24
+        versionName "1.0.23"
     }
 
     buildTypes {

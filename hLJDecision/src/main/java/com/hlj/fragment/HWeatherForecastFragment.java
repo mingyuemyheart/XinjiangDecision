@@ -28,6 +28,8 @@ import com.hlj.activity.HUrlActivity;
 import com.hlj.activity.HWeatherChartAnalysisActivity;
 import com.hlj.activity.HWeatherRadarActivity;
 import com.hlj.activity.HWeatherStaticsActivity;
+import com.hlj.activity.TyphoonRouteActivity;
+import com.hlj.activity.WaitWindActivity;
 import com.hlj.adapter.HWeatherForecastFragmentAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
@@ -126,6 +128,10 @@ public class HWeatherForecastFragment extends Fragment {
 						intent = new Intent(getActivity(), HWeatherStaticsActivity.class);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
+					}else if (TextUtils.equals(dto.id, "117")) {//台风路径
+						intent = new Intent(getActivity(), TyphoonRouteActivity.class);
+						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "201")) {//气温预报
 						intent = new Intent(getActivity(), HTempratureForecastActivity.class);
 						Bundle bundle = new Bundle();
@@ -134,6 +140,10 @@ public class HWeatherForecastFragment extends Fragment {
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "203")) {//分钟级降水
 						intent = new Intent(getActivity(), HMinuteFallActivity.class);
+						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+						startActivity(intent);
+					}else if (TextUtils.equals(dto.id, "205")) {//等风来
+						intent = new Intent(getActivity(), WaitWindActivity.class);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "701")) {//全省预报

@@ -13,7 +13,7 @@
         <com.amap.api.maps.MapView
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="400dp" />
 
         <ImageView
             android:id="@+id/ivChart"

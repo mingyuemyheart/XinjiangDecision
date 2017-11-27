@@ -207,6 +207,14 @@
         <activity
             android:name="com.hlj.activity.FactDetailChartActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.TyphoonRouteActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.WaitWindActivity"
+            android:screenOrientation="portrait" />
         
         
         <!-- 第三方类库名称 -->

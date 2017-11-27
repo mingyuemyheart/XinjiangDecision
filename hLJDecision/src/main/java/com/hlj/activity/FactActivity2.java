@@ -36,6 +36,8 @@ import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.GroundOverlayOptions;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.Polygon;
 import com.amap.api.maps.model.PolygonOptions;
 import com.amap.api.maps.model.Polyline;
@@ -84,7 +86,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
     private float density = 0;
     private MapView mapView = null;//高德地图
     private AMap aMap = null;//高德地图
-    private float zoom = 5.2f;
+    private float zoom = 5.5f;
     private ScrollView scrollView = null;
     private ListView listView = null;
     private FactAdapter2 factAdapter = null;
@@ -97,7 +99,8 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
     private List<Polygon> polygons = new ArrayList<>();//图层数据
     private List<Text> texts = new ArrayList<>();//等值线数值
     private List<Polyline> polylines = new ArrayList<>();//广西边界市县边界线
-    private List<Text> cityTexts = new ArrayList<>();//市县名称
+    private List<Marker> cityTexts = new ArrayList<>();//市县名称
+    private List<FactDto> cityInfos = new ArrayList<>();//城市信息
     private List<FactDto> timeList = new ArrayList<>();//时间列表
     private TextView tvDetail = null;
     private TextView tvHistory = null;
@@ -179,8 +182,8 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         LatLng rightLatlng = aMap.getProjection().fromScreenLocation(rightPoint);
 
         if (leftlatlng.latitude <= 3.9079 || rightLatlng.latitude >= 57.9079 || leftlatlng.longitude <= 71.9282
-                || rightLatlng.longitude >= 160 || arg0.zoom < 4.7f) {
-            aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(CONST.guizhouLatLng, 5.2f));
+                || rightLatlng.longitude >= 160 || arg0.zoom < 5.0f) {
+            aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(CONST.guizhouLatLng, 5.5f));
         }
     }
 
@@ -467,6 +470,28 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                                     tvIntro.setText(obj.getString("zx"));
                                 }
 
+                                if (!obj.isNull("t")) {
+                                    cityInfos.clear();
+                                    JSONArray array = obj.getJSONArray("t");
+                                    for (int i = 0; i < array.length(); i++) {
+                                        FactDto f = new FactDto();
+                                        JSONObject o = array.getJSONObject(i);
+                                        if (!o.isNull("name")) {
+                                            f.name = o.getString("name");
+                                        }
+                                        if (!o.isNull("lon")) {
+                                            f.lng = Double.parseDouble(o.getString("lon"));
+                                        }
+                                        if (!o.isNull("lat")) {
+                                            f.lat = Double.parseDouble(o.getString("lat"));
+                                        }
+                                        if (!o.isNull("value")) {
+                                            f.val = Double.parseDouble(o.getString("value"));
+                                        }
+                                        cityInfos.add(f);
+                                    }
+                                }
+
                                 if (!obj.isNull("dataUrl")) {
                                     String dataUrl = obj.getString("dataUrl");
                                     if (!TextUtils.isEmpty(dataUrl)) {
@@ -739,17 +764,17 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                     polygons.add(polygon);
                 }
 
-                if (!itemObj.isNull("v")) {
-                    double v = itemObj.getDouble("v");
-                    TextOptions options = new TextOptions();
-                    options.position(new LatLng(centerLat, centerLng));
-                    options.fontColor(Color.BLACK);
-                    options.fontSize(30);
-                    options.text(v+"");
-                    options.backgroundColor(Color.TRANSPARENT);
-                    Text text = aMap.addText(options);
-                    texts.add(text);
-                }
+//                if (!itemObj.isNull("v")) {
+//                    double v = itemObj.getDouble("v");
+//                    TextOptions options = new TextOptions();
+//                    options.position(new LatLng(centerLat, centerLng));
+//                    options.fontColor(Color.BLACK);
+//                    options.fontSize(30);
+//                    options.text(v+"");
+//                    options.backgroundColor(Color.TRANSPARENT);
+//                    Text text = aMap.addText(options);
+//                    texts.add(text);
+//                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -774,24 +799,42 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject itemObj = array.getJSONObject(i);
 
-					JSONObject properties = itemObj.getJSONObject("properties");
-					String name = properties.getString("name");
-                    if (name.contains("市")) {
-                        name = name.replace("市", "");
-                    }
-                    JSONArray cp = properties.getJSONArray("cp");
-                    for (int m = 0; m < cp.length(); m++) {
-                        double lat = cp.getDouble(1);
-                        double lng = cp.getDouble(0);
-                        TextOptions options = new TextOptions();
-                        options.position(new LatLng(lat, lng));
-                        options.fontColor(Color.BLACK);
-                        options.fontSize(20);
-                        options.text(name);
-                        options.backgroundColor(Color.TRANSPARENT);
-                        Text text = aMap.addText(options);
-                        cityTexts.add(text);
-                    }
+//					JSONObject properties = itemObj.getJSONObject("properties");
+//                    String value = "数值";
+//					String name = properties.getString("name");
+//                    if (name.contains("市")) {
+//                        name = name.replace("市", "");
+//                    }
+//                    JSONArray cp = properties.getJSONArray("cp");
+//                    for (int m = 0; m < cp.length(); m++) {
+//                        double lat = cp.getDouble(1);
+//                        double lng = cp.getDouble(0);
+////                        TextOptions options = new TextOptions();
+////                        options.position(new LatLng(lat, lng));
+////                        options.fontColor(Color.BLACK);
+////                        options.fontSize(20);
+////                        options.text(name);
+////                        options.backgroundColor(Color.TRANSPARENT);
+////                        Text text = aMap.addText(options);
+////                        cityTexts.add(text);
+//
+//                        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                        View view = inflater.inflate(R.layout.layout_fact_value, null);
+//                        TextView tvValue = (TextView) view.findViewById(R.id.tvValue);
+//                        TextView tvName = (TextView) view.findViewById(R.id.tvName);
+//                        if (!TextUtils.isEmpty(value)) {
+//                            tvValue.setText(value);
+//                        }
+//                        if (!TextUtils.isEmpty(name)) {
+//                            tvName.setText(name);
+//                        }
+//                        MarkerOptions options = new MarkerOptions();
+//                        options.anchor(0.5f, 0.5f);
+//                        options.position(new LatLng(lat, lng));
+//                        options.icon(BitmapDescriptorFactory.fromView(view));
+//                        Marker marker = aMap.addMarker(options);
+//                        cityTexts.add(marker);
+//                    }
 
                     JSONObject geometry = itemObj.getJSONObject("geometry");
                     JSONArray coordinates = geometry.getJSONArray("coordinates");
@@ -812,6 +855,25 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+
+        //绘制城市名称、数值
+        for (int i = 0; i < cityInfos.size(); i++) {
+            FactDto dto = cityInfos.get(i);
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.layout_fact_value, null);
+            TextView tvValue = (TextView) view.findViewById(R.id.tvValue);
+            TextView tvName = (TextView) view.findViewById(R.id.tvName);
+            tvValue.setText(dto.val+"");
+            if (!TextUtils.isEmpty(dto.name)) {
+                tvName.setText(dto.name);
+            }
+            MarkerOptions options = new MarkerOptions();
+            options.anchor(0.5f, 0.5f);
+            options.position(new LatLng(dto.lat, dto.lng));
+            options.icon(BitmapDescriptorFactory.fromView(view));
+            Marker marker = aMap.addMarker(options);
+            cityTexts.add(marker);
         }
     }
 

@@ -213,7 +213,6 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 		aMap.setOnCameraChangeListener(this);
 
 		CommonUtil.drawHLJJson(mContext, aMap);
-		CommonUtil.drawJGDQJson(mContext, aMap);
 	}
 
 	@Override

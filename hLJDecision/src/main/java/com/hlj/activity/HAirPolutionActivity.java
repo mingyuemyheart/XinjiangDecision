@@ -239,7 +239,6 @@ public class HAirPolutionActivity extends BaseActivity implements OnClickListene
 		aMap.setOnCameraChangeListener(this);
 
 		CommonUtil.drawHLJJson(mContext, aMap);
-		CommonUtil.drawJGDQJson(mContext, aMap);
 	}
 	
 	@Override

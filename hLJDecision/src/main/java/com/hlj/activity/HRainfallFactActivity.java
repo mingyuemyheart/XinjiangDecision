@@ -152,7 +152,6 @@ public class HRainfallFactActivity extends BaseActivity implements OnClickListen
 		aMap.runOnDrawFrame();
 		
 		CommonUtil.drawDistrict(mContext, aMap);//回执区域
-		CommonUtil.drawDistrict2(mContext, aMap);//回执区域
 	}
 	
 	@Override

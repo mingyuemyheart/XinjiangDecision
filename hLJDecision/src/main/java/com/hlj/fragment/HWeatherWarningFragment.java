@@ -236,7 +236,6 @@ public class HWeatherWarningFragment extends Fragment implements View.OnClickLis
 		aMap.setOnCameraChangeListener(this);
 
 		CommonUtil.drawHLJJson(getActivity(), aMap);
-		CommonUtil.drawJGDQJson(getActivity(), aMap);
 	}
 
 	/**

@@ -83,6 +83,18 @@
     <string name="rank_min_humidity">最小湿度</string>
     <string name="rank_wind_speed">风速</string>
     <string name="rank_visible">最低能见度</string>
+
+    <string name="typhoon_level1">热带低压</string>
+    <string name="typhoon_level2">热带风暴</string>
+    <string name="typhoon_level3">强热带风暴</string>
+    <string name="typhoon_level4">台风</string>
+    <string name="typhoon_level5">强台风</string>
+    <string name="typhoon_level6">超强台风</string>
+    <string name="typhoon_login">登陆地点</string>
+    <string name="typhoon_influnce">主要影响区域</string>
+    <string name="line_24h">24\n小\n时\n警\n戒\n线</string>
+    <string name="line_48h">48\n小\n时\n警\n戒\n线</string>
+    <string name="no_typhoon">当前无台风</string>
     
     <string name="setting_my_information">我的信息</string>
 	<string name="setting_push">要闻推送</string>

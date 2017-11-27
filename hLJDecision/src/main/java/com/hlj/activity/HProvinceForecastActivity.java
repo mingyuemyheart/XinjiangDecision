@@ -144,7 +144,6 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 		aMap.setOnCameraChangeListener(this);
 
 		CommonUtil.drawHLJJson(mContext, aMap);
-		CommonUtil.drawJGDQJson(mContext, aMap);
 	}
 	
 	/**
