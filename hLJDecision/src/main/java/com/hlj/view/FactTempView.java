@@ -120,7 +120,7 @@ public class FactTempView extends View{
 				}else if (maxValue >= 0 && minValue <= 0) {
 					totalDivider = (int) (maxValue-minValue);
 				}else if (maxValue < 0 && minValue < 0) {
-					totalDivider = (int) Math.abs(maxValue+minValue);
+					totalDivider = (int) (maxValue-minValue);
 				}
 
 				if (totalDivider <= 5) {
@@ -135,8 +135,10 @@ public class FactTempView extends View{
 					itemDivider = 5;
 				}
 				
-				maxValue = (float) (Math.ceil(maxValue)+itemDivider);
-				minValue = (float) (Math.floor(minValue)-itemDivider);
+//				maxValue = (float) (Math.ceil(maxValue));
+//				minValue = (float) (Math.floor(minValue));
+//				maxValue = maxValue+itemDivider;
+//				minValue = minValue-itemDivider;
 			}
 		}
 	}
@@ -152,7 +154,7 @@ public class FactTempView extends View{
 		float w = canvas.getWidth();
 		float h = canvas.getHeight();
 		float chartW = w-CommonUtil.dip2px(mContext, 40);
-		float chartH = h-CommonUtil.dip2px(mContext, 80);
+		float chartH = h-CommonUtil.dip2px(mContext, 100);
 		float leftMargin = CommonUtil.dip2px(mContext, 20);
 		float rightMargin = CommonUtil.dip2px(mContext, 20);
 		float bottomMargin = CommonUtil.dip2px(mContext, 35);
@@ -165,7 +167,7 @@ public class FactTempView extends View{
 			dto.x = columnWidth*i+leftMargin;
 
 			float value = dto.factTemp;
-			dto.y = chartH*Math.abs(maxValue-value)/totalDivider;
+			dto.y = chartH*Math.abs(maxValue-value)/totalDivider+bottomMargin;
 			Log.e("temp", value+"---"+dto.y);
 
 			tempList.set(i, dto);
@@ -211,7 +213,7 @@ public class FactTempView extends View{
 
 		//绘制刻度线
 		for (int i = (int) minValue; i <= maxValue; i+=itemDivider) {
-			float dividerY = chartH*Math.abs(maxValue-i)/totalDivider;
+			float dividerY = chartH*Math.abs(maxValue-i)/totalDivider+bottomMargin;
 			lineP.setColor(0xfff1f1f1);
 			canvas.drawLine(leftMargin, dividerY, w-rightMargin, dividerY, lineP);
 			textP.setColor(0xff999999);
@@ -243,6 +245,17 @@ public class FactTempView extends View{
 				canvas.drawPath(linePath, lineP);
 			}
 		}
+
+		//绘制区域
+		Path rectPath = new Path();
+		rectPath.moveTo(0, h-bottomMargin);
+		rectPath.lineTo(w, h-bottomMargin);
+		rectPath.lineTo(w, h);
+		rectPath.lineTo(0, h);
+		rectPath.close();
+		lineP.setColor(Color.WHITE);
+		lineP.setStyle(Style.FILL);
+		canvas.drawPath(rectPath, lineP);
 		
 		for (int i = 0; i < size; i++) {
 			FactDto dto = tempList.get(i);

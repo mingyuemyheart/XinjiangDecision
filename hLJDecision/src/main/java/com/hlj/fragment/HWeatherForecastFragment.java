@@ -163,7 +163,7 @@ public class HWeatherForecastFragment extends Fragment {
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
 						startActivity(intent);
-					}else if (TextUtils.equals(dto.id, "115") || TextUtils.equals(dto.id, "113") || TextUtils.equals(dto.id, "114")) {//115降水实况，113气温实况，114风向风速实况，116相对湿度分析
+					}else if (TextUtils.equals(dto.id, "115") || TextUtils.equals(dto.id, "113") || TextUtils.equals(dto.id, "114") || TextUtils.equals(dto.id, "116")) {//115降水实况，113气温实况，114风向风速实况，116相对湿度分析
 						intent = new Intent(getActivity(), FactActivity2.class);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						intent.putExtra(CONST.WEB_URL, dto.dataUrl);

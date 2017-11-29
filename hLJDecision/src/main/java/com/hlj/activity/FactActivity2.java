@@ -43,7 +43,6 @@ import com.amap.api.maps.model.PolygonOptions;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.maps.model.Text;
-import com.amap.api.maps.model.TextOptions;
 import com.hlj.adapter.FactAdapter2;
 import com.hlj.adapter.FactTimeAdapter;
 import com.hlj.common.CONST;
