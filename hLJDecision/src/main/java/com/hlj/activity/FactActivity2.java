@@ -863,7 +863,11 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
             View view = inflater.inflate(R.layout.layout_fact_value, null);
             TextView tvValue = (TextView) view.findViewById(R.id.tvValue);
             TextView tvName = (TextView) view.findViewById(R.id.tvName);
-            tvValue.setText(dto.val+"");
+            if (dto.val >= 99999) {
+                tvValue.setText("");
+            }else {
+                tvValue.setText(dto.val+"");
+            }
             if (!TextUtils.isEmpty(dto.name)) {
                 tvName.setText(dto.name);
             }
