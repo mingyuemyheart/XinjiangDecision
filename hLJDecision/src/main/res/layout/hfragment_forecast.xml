@@ -350,7 +350,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="1小时分钟降水预报"
+                        android:text="2小时分钟降水预报"
                         android:textColor="@color/white"
                         android:textSize="@dimen/level_4"/>
 

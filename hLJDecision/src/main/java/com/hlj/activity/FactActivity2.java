@@ -872,7 +872,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                 tvName.setText(dto.name);
             }
             MarkerOptions options = new MarkerOptions();
-            options.anchor(0.5f, 0.5f);
+            options.anchor(0.5f, 1.0f);
             options.position(new LatLng(dto.lat, dto.lng));
             options.icon(BitmapDescriptorFactory.fromView(view));
             Marker marker = aMap.addMarker(options);
