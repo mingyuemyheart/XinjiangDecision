@@ -470,7 +470,7 @@ public class HSettingActivity extends BaseActivity implements OnClickListener, A
 			startActivity(intent);
 			break;
 		case R.id.llVersion:
-			AutoUpdateUtil.checkUpdate(mContext, "41", getString(R.string.app_name), false);//黑龙江气象
+			AutoUpdateUtil.checkUpdate(HSettingActivity.this, mContext, "41", getString(R.string.app_name), false);//黑龙江气象
 //			AutoUpdateUtil.checkUpdate(mContext, "53", getString(R.string.app_name), false);//决策气象服务
 			break;
 		case R.id.llClearCache:

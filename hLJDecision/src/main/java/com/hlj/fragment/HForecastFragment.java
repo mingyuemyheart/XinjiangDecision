@@ -30,8 +30,8 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
 import com.hlj.activity.HCityActivity;
-import com.hlj.activity.HMinuteFallActivity;
 import com.hlj.activity.HHeadWarningActivity;
+import com.hlj.activity.HMinuteFallActivity;
 import com.hlj.adapter.WeeklyForecastAdapter;
 import com.hlj.common.CONST;
 import com.hlj.dto.WarningDto;
@@ -193,6 +193,7 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 		reMinuteTitle = (RelativeLayout) view.findViewById(R.id.reMinuteTitle);
 		reMinuteTitle.setOnClickListener(this);
 		reMinuteContent = (RelativeLayout) view.findViewById(R.id.reMinuteContent);
+		reMinuteContent.setOnClickListener(this);
 		reLocation = (RelativeLayout) view.findViewById(R.id.reLocation);
 		llFact = (LinearLayout) view.findViewById(R.id.llFact);
 		llDay1 = (LinearLayout) view.findViewById(R.id.llDay1);
@@ -594,9 +595,9 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 											if (!TextUtils.isEmpty(rain)) {
 												tvRain.setText(rain.replace(getString(R.string.little_caiyun), ""));
 												if (tvRain.getText().toString().contains("雪")) {
-													tvMinetePrompt.setText("1小时分钟降雪预报");
+													tvMinetePrompt.setText("2小时分钟降雪预报");
 												}else {
-													tvMinetePrompt.setText("1小时分钟降水预报");
+													tvMinetePrompt.setText("2小时分钟降水预报");
 												}
 
 												if (reMinuteContent.getVisibility() == View.VISIBLE) {
@@ -608,8 +609,8 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 												tvRain.setVisibility(View.GONE);
 											}
 										}
-										if (!objMin.isNull("precipitation")) {
-											JSONArray array = objMin.getJSONArray("precipitation");
+										if (!objMin.isNull("precipitation_2h")) {
+											JSONArray array = objMin.getJSONArray("precipitation_2h");
 											int size = array.length();
 											List<WeatherDto> minuteList = new ArrayList<>();
 											for (int i = 0; i < size; i++) {
@@ -696,6 +697,11 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 			Bundle bundle = new Bundle();
 			bundle.putParcelableArrayList("warningList", (ArrayList<? extends Parcelable>) warningList);
 			intent.putExtras(bundle);
+			startActivity(intent);
+			break;
+		case R.id.reMinuteContent:
+			intent = new Intent(getActivity(), HMinuteFallActivity.class);
+			intent.putExtra(CONST.ACTIVITY_NAME, getString(R.string.minute_fall));
 			startActivity(intent);
 			break;
 
