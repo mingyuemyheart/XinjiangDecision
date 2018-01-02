@@ -1,6 +1,5 @@
 package com.hlj.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -74,7 +73,6 @@ import shawn.cxwl.com.hlj.decision.R;
  *
  */
 
-@SuppressLint("SimpleDateFormat")
 public class HAirPolutionActivity extends BaseActivity implements OnClickListener, OnMarkerClickListener,
         OnMapClickListener, OnCameraChangeListener, AMapLocationListener {
 	

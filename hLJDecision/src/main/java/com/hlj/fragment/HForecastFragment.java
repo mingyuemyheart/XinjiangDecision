@@ -29,6 +29,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
+import com.hlj.activity.HAirPolutionActivity;
 import com.hlj.activity.HCityActivity;
 import com.hlj.activity.HHeadWarningActivity;
 import com.hlj.activity.HMinuteFallActivity;
@@ -167,7 +168,9 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 		ivPhe = (ImageView) view.findViewById(R.id.ivPhe);
 		tvPhe = (TextView) view.findViewById(R.id.tvPhe);
 		ivAqi = (ImageView) view.findViewById(R.id.ivAqi);
+		ivAqi.setOnClickListener(this);
 		tvAqi = (TextView) view.findViewById(R.id.tvAqi);
+		tvAqi.setOnClickListener(this);
 		ivWind = (ImageView) view.findViewById(R.id.ivWind);
 		tvWind = (TextView) view.findViewById(R.id.tvWind);
 		llContainer1 = (LinearLayout) view.findViewById(R.id.llContainer1);
@@ -663,6 +666,12 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 		case R.id.llPosition:
 			startActivity(new Intent(getActivity(), HCityActivity.class));
 			break;
+		case R.id.ivAqi:
+		case R.id.tvAqi:
+			Intent intent = new Intent(getActivity(), HAirPolutionActivity.class);
+			intent.putExtra(CONST.ACTIVITY_NAME, "空气质量");
+			startActivity(intent);
+			break;
 		case R.id.ivSwitcher:
 			if (mListView.getVisibility() == View.VISIBLE) {
 				ivSwitcher.setImageResource(R.drawable.iv_trend);
@@ -676,7 +685,7 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 			CommonUtil.setListViewHeightBasedOnChildren(mListView);
 			break;
 		case R.id.tvRain:
-			Intent intent = new Intent(getActivity(), HMinuteFallActivity.class);
+			intent = new Intent(getActivity(), HMinuteFallActivity.class);
 			intent.putExtra(CONST.ACTIVITY_NAME, getString(R.string.minute_fall));
 			startActivity(intent);
 			break;
