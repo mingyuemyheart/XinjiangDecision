@@ -23,6 +23,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    //打包，自动追加版本号、名称
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.each {
+                output -> output.outputFile = new File(output.outputFile.parent, "HLJDecision" + "_" + defaultConfig.versionCode + "_V" + defaultConfig.versionName + "_" + buildType.name + ".apk");
+            }
+    }
 }
 
 dependencies {
