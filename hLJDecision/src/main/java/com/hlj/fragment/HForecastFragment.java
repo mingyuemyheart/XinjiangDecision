@@ -387,11 +387,30 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 																warningList.add(dto);
 
 																if (j == 0) {
-																	Bitmap bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.blue[1]+CONST.imageSuffix);
-																	if (bitmap != null) {
-																		ivWarning.setImageBitmap(bitmap);
-																		ivWarning.setVisibility(View.VISIBLE);
+																	Bitmap bitmap = null;
+																	if (dto.color.equals(CONST.blue[0])) {
+																		bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.blue[1]+CONST.imageSuffix);
+																		if (bitmap == null) {
+																			bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.blue[1]+CONST.imageSuffix);
+																		}
+																	}else if (dto.color.equals(CONST.yellow[0])) {
+																		bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.yellow[1]+CONST.imageSuffix);
+																		if (bitmap == null) {
+																			bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.yellow[1]+CONST.imageSuffix);
+																		}
+																	}else if (dto.color.equals(CONST.orange[0])) {
+																		bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.orange[1]+CONST.imageSuffix);
+																		if (bitmap == null) {
+																			bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.orange[1]+CONST.imageSuffix);
+																		}
+																	}else if (dto.color.equals(CONST.red[0])) {
+																		bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.red[1]+CONST.imageSuffix);
+																		if (bitmap == null) {
+																			bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.red[1]+CONST.imageSuffix);
+																		}
 																	}
+																	ivWarning.setImageBitmap(bitmap);
+																	ivWarning.setVisibility(View.VISIBLE);
 																}
 															}
 														}
