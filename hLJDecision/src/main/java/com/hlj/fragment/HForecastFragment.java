@@ -5,8 +5,11 @@ package com.hlj.fragment;
  */
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -37,6 +40,7 @@ import com.hlj.adapter.WeeklyForecastAdapter;
 import com.hlj.common.CONST;
 import com.hlj.dto.WarningDto;
 import com.hlj.dto.WeatherDto;
+import com.hlj.manager.DBManager;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
 import com.hlj.utils.WeatherUtil;
@@ -46,6 +50,7 @@ import com.hlj.view.RefreshLayout;
 import com.hlj.view.RefreshLayout.OnRefreshListener;
 import com.hlj.view.WeeklyView;
 
+import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -358,71 +363,6 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 												e.printStackTrace();
 											}
 
-											//预警
-											try {
-												ivWarning.setVisibility(View.GONE);
-												warningList.clear();
-												JSONArray warningArray = content.getWarningInfo();
-												if (warningArray != null && warningArray.length() > 0) {
-													for (int j = 0; j < warningArray.length(); j++) {
-														JSONObject warningObj = warningArray.getJSONObject(j);
-														if (!warningObj.isNull("w11")) {
-															WarningDto dto = new WarningDto();
-															String html = warningObj.getString("w11");
-															dto.html = html;
-															if (!TextUtils.isEmpty(html) && html.contains("content2")) {
-																dto.html = html.substring(html.indexOf("content2/")+"content2/".length(), html.length());
-																String[] array = dto.html.split("-");
-																String item0 = array[0];
-																String item1 = array[1];
-																String item2 = array[2];
-
-																dto.item0 = item0;
-																dto.provinceId = item0.substring(0, 2);
-																dto.type = item2.substring(0, 5);
-																dto.color = item2.substring(5, 7);
-																dto.time = item1;
-																String w1 = warningObj.getString("w1");
-																String w3 = warningObj.getString("w3");
-																String w5 = warningObj.getString("w5");
-																String w7 = warningObj.getString("w7");
-																dto.name = w1+w3+"发布"+w5+w7+"预警";
-																warningList.add(dto);
-
-																if (j == 0) {
-																	Bitmap bitmap = null;
-																	if (dto.color.equals(CONST.blue[0])) {
-																		bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.blue[1]+CONST.imageSuffix);
-																		if (bitmap == null) {
-																			bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.blue[1]+CONST.imageSuffix);
-																		}
-																	}else if (dto.color.equals(CONST.yellow[0])) {
-																		bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.yellow[1]+CONST.imageSuffix);
-																		if (bitmap == null) {
-																			bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.yellow[1]+CONST.imageSuffix);
-																		}
-																	}else if (dto.color.equals(CONST.orange[0])) {
-																		bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.orange[1]+CONST.imageSuffix);
-																		if (bitmap == null) {
-																			bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.orange[1]+CONST.imageSuffix);
-																		}
-																	}else if (dto.color.equals(CONST.red[0])) {
-																		bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.red[1]+CONST.imageSuffix);
-																		if (bitmap == null) {
-																			bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.red[1]+CONST.imageSuffix);
-																		}
-																	}
-																	ivWarning.setImageBitmap(bitmap);
-																	ivWarning.setVisibility(View.VISIBLE);
-																}
-															}
-														}
-													}
-												}
-											} catch (JSONException e) {
-												e.printStackTrace();
-											}
-											
 											//逐小时预报信息
 											JSONArray hourlyArray = content.getHourlyFineForecast2();
 											try {
@@ -553,6 +493,12 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 										super.onError(error, content);
 									}
 								});
+
+								//获取预警信息
+								String warningId = queryWarningIdByCityId(cityId);
+								if (!TextUtils.isEmpty(warningId)) {
+									OkHttpWarning("http://decision-admin.tianqi.cn/Home/extra/getwarns?order=0&areaid="+warningId.substring(0,2), warningId);
+								}
 							}
 						}
 					} catch (JSONException e) {
@@ -564,6 +510,116 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 			@Override
 			public void onError(Throwable error, String content) {
 				super.onError(error, content);
+			}
+		});
+	}
+
+	/**
+	 * 获取预警id
+	 */
+	private String queryWarningIdByCityId(String cityId) {
+		DBManager dbManager = new DBManager(getActivity());
+		dbManager.openDateBase();
+		dbManager.closeDatabase();
+		SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
+		Cursor cursor = null;
+		cursor = database.rawQuery("select * from " + DBManager.TABLE_NAME3 + " where cid = " + "\"" + cityId + "\"",null);
+		String warningId = null;
+		for (int i = 0; i < cursor.getCount(); i++) {
+			cursor.moveToPosition(i);
+			warningId = cursor.getString(cursor.getColumnIndex("wid"));
+		}
+		return warningId;
+	}
+
+	/**
+	 * 异步请求
+	 */
+	private void OkHttpWarning(String url, final String warningId) {
+		OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
+
+			}
+
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				if (!response.isSuccessful()) {
+					return;
+				}
+				String result = response.body().string();
+				if (!TextUtils.isEmpty(result)) {
+					try {
+						JSONObject object = new JSONObject(result);
+						if (object != null) {
+							if (!object.isNull("data")) {
+								warningList.clear();
+								JSONArray jsonArray = object.getJSONArray("data");
+								for (int i = 0; i < jsonArray.length(); i++) {
+									JSONArray tempArray = jsonArray.getJSONArray(i);
+									WarningDto dto = new WarningDto();
+									dto.html = tempArray.optString(1);
+									String[] array = dto.html.split("-");
+									String item0 = array[0];
+									String item1 = array[1];
+									String item2 = array[2];
+
+									dto.provinceId = item0.substring(0, 2);
+									dto.type = item2.substring(0, 5);
+									dto.color = item2.substring(5, 7);
+									dto.time = item1;
+									dto.lng = tempArray.optString(2);
+									dto.lat = tempArray.optString(3);
+									dto.name = tempArray.optString(0);
+
+									if (!dto.name.contains("解除")) {
+										if (!TextUtils.isEmpty(warningId)) {
+											if (TextUtils.equals(warningId, item0) || TextUtils.equals(warningId.substring(0, 2)+"0000", item0) || TextUtils.equals(warningId.substring(0, 4)+"00", item0)) {
+												warningList.add(dto);
+											}
+										}
+									}
+								}
+
+								getActivity().runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										if (warningList.size() > 0) {
+											WarningDto dto = warningList.get(0);
+											Bitmap bitmap = null;
+											if (dto.color.equals(CONST.blue[0])) {
+												bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.blue[1]+CONST.imageSuffix);
+												if (bitmap == null) {
+													bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.blue[1]+CONST.imageSuffix);
+												}
+											}else if (dto.color.equals(CONST.yellow[0])) {
+												bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.yellow[1]+CONST.imageSuffix);
+												if (bitmap == null) {
+													bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.yellow[1]+CONST.imageSuffix);
+												}
+											}else if (dto.color.equals(CONST.orange[0])) {
+												bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.orange[1]+CONST.imageSuffix);
+												if (bitmap == null) {
+													bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.orange[1]+CONST.imageSuffix);
+												}
+											}else if (dto.color.equals(CONST.red[0])) {
+												bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+dto.type+CONST.red[1]+CONST.imageSuffix);
+												if (bitmap == null) {
+													bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.red[1]+CONST.imageSuffix);
+												}
+											}
+											ivWarning.setImageBitmap(bitmap);
+											ivWarning.setVisibility(View.VISIBLE);
+										}
+									}
+								});
+
+							}
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		});
 	}

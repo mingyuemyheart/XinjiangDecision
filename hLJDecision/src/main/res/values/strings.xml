@@ -314,7 +314,7 @@
     <string name="guizhou_province">黑龙江</string>
     <string name="xizang_province">西藏</string>
     <string name="no_warning">辖区暂无预警信息发布</string>
-    <string name="warning_guide">预警指南：\n\n</string>
+    <string name="warning_guide">预警指南：\n</string>
     <string name="tiao">条</string>
 
 </resources>
