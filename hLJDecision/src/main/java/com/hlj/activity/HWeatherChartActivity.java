@@ -49,7 +49,7 @@ import com.hlj.utils.CommonUtil;
 import com.hlj.utils.CustomHttpClient;
 import com.hlj.view.MyDialog;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HWeatherChartActivity extends BaseActivity implements OnClickListener, RadarListener{
 	

@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hlj.utils.CommonUtil;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 import com.hlj.adapter.DragAdapter;
 import com.hlj.common.CONST;
 

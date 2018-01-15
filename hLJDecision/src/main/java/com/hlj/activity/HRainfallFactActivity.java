@@ -67,7 +67,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 @SuppressLint("SimpleDateFormat")
 public class HRainfallFactActivity extends BaseActivity implements OnClickListener, OnCameraChangeListener{

@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class WeatherUtil {
 	

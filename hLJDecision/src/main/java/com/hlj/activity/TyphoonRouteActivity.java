@@ -87,7 +87,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 @SuppressLint("SimpleDateFormat")
 public class TyphoonRouteActivity extends BaseActivity implements OnClickListener, OnMapClickListener, AMapLocationListener, GeocodeSearch.OnGeocodeSearchListener,

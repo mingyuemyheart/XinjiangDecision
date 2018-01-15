@@ -17,7 +17,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 
 /**
@@ -507,8 +507,7 @@ public class CircularProgressBar extends View {
 	}
 
 	/**
-	 * similar to {@link getProgress}
-	 * 
+	 *
 	 * @return
 	 */
 	public float getMarkerProgress() {

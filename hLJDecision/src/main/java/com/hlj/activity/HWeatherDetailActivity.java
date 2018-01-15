@@ -65,7 +65,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HWeatherDetailActivity extends BaseActivity implements OnClickListener{
 
@@ -575,8 +575,8 @@ public class HWeatherDetailActivity extends BaseActivity implements OnClickListe
 												tvRain.setVisibility(View.GONE);
 											}
 										}
-										if (!objMin.isNull("precipitation")) {
-											JSONArray array = objMin.getJSONArray("precipitation");
+										if (!objMin.isNull("precipitation_2h")) {
+											JSONArray array = objMin.getJSONArray("precipitation_2h");
 											int size = array.length();
 											List<WeatherDto> minuteList = new ArrayList<>();
 											for (int i = 0; i < size; i++) {

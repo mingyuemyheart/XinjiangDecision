@@ -36,7 +36,7 @@ import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HLoginActivity extends BaseActivity implements OnClickListener{
 	
@@ -274,14 +274,22 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 												CONST.USERNAME = etUserName.getText().toString();
 												CONST.PASSWORD = etPwd.getText().toString();
 
+
 												runOnUiThread(new Runnable() {
 													@Override
 													public void run() {
+														cancelDialog();
+														if (HMainActivity.instance != null) {
+															HMainActivity.instance.finish();
+														}
+														if (HSettingActivity.instance != null) {
+															HSettingActivity.instance.finish();
+														}
 														startActivity(new Intent(mContext, HMainActivity.class));
 														finish();
-														cancelDialog();
 													}
 												});
+
 
 											}
 										}

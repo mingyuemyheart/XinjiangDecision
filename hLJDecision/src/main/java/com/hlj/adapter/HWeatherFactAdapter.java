@@ -14,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.hlj.stickygridheaders.StickyGridHeadersSimpleAdapter;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 import com.hlj.dto.RangeDto;
 
 public class HWeatherFactAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {

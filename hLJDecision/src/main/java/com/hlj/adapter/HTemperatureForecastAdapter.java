@@ -27,7 +27,7 @@ import android.widget.TextView;
 
 import com.hlj.dto.AgriDto;
 import com.hlj.utils.CustomHttpClient;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HTemperatureForecastAdapter extends BaseAdapter{
 	

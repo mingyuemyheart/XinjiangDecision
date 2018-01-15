@@ -2,7 +2,7 @@ package com.hlj.activity;
 
 import java.util.HashMap;
 import java.util.Map;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 import android.os.Bundle;
 import android.text.TextUtils;

@@ -19,7 +19,7 @@ import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
 import com.hlj.activity.HWebviewActivity;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 import com.hlj.activity.WarningSignalActivity;
 import com.hlj.activity.WeatherKepuDetailActivity;
 import com.hlj.adapter.HAgriWeatherAdapter;

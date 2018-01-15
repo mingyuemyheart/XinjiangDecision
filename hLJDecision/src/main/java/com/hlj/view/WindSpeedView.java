@@ -20,7 +20,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.hlj.utils.CommonUtil;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 import com.hlj.dto.TrendDto;
 
 public class WindSpeedView extends View{

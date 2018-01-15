@@ -14,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 import com.hlj.dto.WeatherDto;
 
 public class WeeklyForecastAdapter extends BaseAdapter{

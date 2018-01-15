@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class CubicView extends View{
 
@@ -93,7 +93,7 @@ public class CubicView extends View{
 			}else if (maxTemp >= 0 && minTemp <= 0) {
 				totalDivider = maxTemp-minTemp;
 			}else if (maxTemp < 0 && minTemp < 0) {
-				totalDivider = Math.abs(maxTemp+minTemp);
+				totalDivider = maxTemp-minTemp;
 			}
 			if (totalDivider <= 5) {
 				itemDivider = 1;
@@ -107,7 +107,7 @@ public class CubicView extends View{
 				itemDivider = 5;
 			}
 			maxTemp = maxTemp+itemDivider*3/2;
-			minTemp = minTemp-itemDivider;
+			minTemp = minTemp-itemDivider*3/2;
 		}
 	}
 

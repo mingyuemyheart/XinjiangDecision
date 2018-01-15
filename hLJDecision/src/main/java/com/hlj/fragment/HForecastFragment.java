@@ -4,7 +4,9 @@ package com.hlj.fragment;
  * 天气预报
  */
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -38,6 +40,8 @@ import com.hlj.activity.HHeadWarningActivity;
 import com.hlj.activity.HMinuteFallActivity;
 import com.hlj.adapter.WeeklyForecastAdapter;
 import com.hlj.common.CONST;
+import com.hlj.common.MyApplication;
+import com.hlj.dto.CityDto;
 import com.hlj.dto.WarningDto;
 import com.hlj.dto.WeatherDto;
 import com.hlj.manager.DBManager;
@@ -69,7 +73,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HForecastFragment extends Fragment implements OnClickListener, AMapLocationListener{
 	
@@ -497,6 +501,7 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 								//获取预警信息
 								String warningId = queryWarningIdByCityId(cityId);
 								if (!TextUtils.isEmpty(warningId)) {
+									setPushTags(warningId);
 									OkHttpWarning("http://decision-admin.tianqi.cn/Home/extra/getwarns?order=0&areaid="+warningId.substring(0,2), warningId);
 								}
 							}
@@ -512,6 +517,35 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 				super.onError(error, content);
 			}
 		});
+	}
+
+	/**
+	 * 设置umeng推送的tags
+	 * @param warningId
+	 */
+	private void setPushTags(String warningId) {
+		if (getActivity() == null) {
+			return;
+		}
+		String tags = warningId;
+		SharedPreferences sharedPreferences = getActivity().getSharedPreferences("RESERVE_CITY", Context.MODE_PRIVATE);
+		String cityInfo = sharedPreferences.getString("cityInfo", "");
+		if (!TextUtils.isEmpty(cityInfo)) {
+			tags = tags+",";
+			String[] array = cityInfo.split(";");
+			for (int i = 0; i < array.length; i++) {
+				String[] itemArray = array[i].split(",");
+				if (i == array.length-1) {
+					tags = tags+itemArray[2];
+				}else {
+					tags = tags+itemArray[2]+",";
+				}
+			}
+		}
+
+		if (!TextUtils.isEmpty(tags)) {
+			MyApplication.resetTags(tags);
+		}
 	}
 
 	/**

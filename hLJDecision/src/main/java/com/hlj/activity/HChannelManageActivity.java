@@ -34,7 +34,7 @@ import com.hlj.view.OtherGridView;
 import java.util.ArrayList;
 import java.util.List;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HChannelManageActivity extends BaseActivity implements OnClickListener, OnItemClickListener{
 	

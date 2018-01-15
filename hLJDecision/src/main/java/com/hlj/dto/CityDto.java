@@ -3,6 +3,9 @@ package com.hlj.dto;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CityDto implements Parcelable {
 
 	public String alpha = null;//首字母
@@ -21,6 +24,8 @@ public class CityDto implements Parcelable {
 	public String highTemp;
 	public String areaId;//行政区划id
 	public String areaName;//行政区划name
+	public String warningId;//预警id
+	public List<WarningDto> warningList = new ArrayList<>();
 
 	public CityDto() {
 	}
@@ -48,6 +53,8 @@ public class CityDto implements Parcelable {
 		dest.writeString(this.highTemp);
 		dest.writeString(this.areaId);
 		dest.writeString(this.areaName);
+		dest.writeString(this.warningId);
+		dest.writeTypedList(this.warningList);
 	}
 
 	protected CityDto(Parcel in) {
@@ -67,6 +74,8 @@ public class CityDto implements Parcelable {
 		this.highTemp = in.readString();
 		this.areaId = in.readString();
 		this.areaName = in.readString();
+		this.warningId = in.readString();
+		this.warningList = in.createTypedArrayList(WarningDto.CREATOR);
 	}
 
 	public static final Creator<CityDto> CREATOR = new Creator<CityDto>() {

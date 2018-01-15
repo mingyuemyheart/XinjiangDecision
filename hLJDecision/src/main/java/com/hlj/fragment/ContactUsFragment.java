@@ -1,6 +1,6 @@
 package com.hlj.fragment;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;

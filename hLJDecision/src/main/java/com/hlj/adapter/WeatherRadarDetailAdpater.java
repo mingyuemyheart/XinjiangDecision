@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.hlj.dto.RadarDto;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class WeatherRadarDetailAdpater extends BaseAdapter{
 	

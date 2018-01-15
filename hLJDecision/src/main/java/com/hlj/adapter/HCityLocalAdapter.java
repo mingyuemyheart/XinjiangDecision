@@ -16,7 +16,7 @@ import com.hlj.dto.CityDto;
 
 import java.util.List;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HCityLocalAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
 

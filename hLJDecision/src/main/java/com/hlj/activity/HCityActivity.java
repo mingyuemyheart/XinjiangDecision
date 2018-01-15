@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HCityActivity extends BaseActivity implements OnClickListener{
 	
@@ -123,11 +123,19 @@ public class HCityActivity extends BaseActivity implements OnClickListener{
 	 * 迁移到天气详情界面
 	 */
 	private void intentWeatherDetail(CityDto data) {
-		Intent intent = new Intent(mContext, HWeatherDetailActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putParcelable("data", data);
-		intent.putExtras(bundle);
-		startActivity(intent);
+		Intent intent;
+		if (getIntent().hasExtra("reserveCity")) {
+			intent = new Intent();
+			intent.putExtras(bundle);
+			setResult(RESULT_OK, intent);
+			finish();
+		}else {
+			intent = new Intent(mContext, HWeatherDetailActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}
 	}
 	
 	/**
@@ -239,6 +247,7 @@ public class HCityActivity extends BaseActivity implements OnClickListener{
 			dto.cityName = cursor.getString(cursor.getColumnIndex("city"));
 			dto.areaName = cursor.getString(cursor.getColumnIndex("dis"));
 			dto.cityId = cursor.getString(cursor.getColumnIndex("cid"));
+			dto.warningId = cursor.getString(cursor.getColumnIndex("wid"));
 			cityList.add(dto);
 		}
 		if (cityList.size() > 0 && cityAdapter != null) {

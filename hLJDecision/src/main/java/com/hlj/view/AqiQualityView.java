@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 @SuppressLint({ "DrawAllocation", "SimpleDateFormat" })
 public class AqiQualityView extends View{

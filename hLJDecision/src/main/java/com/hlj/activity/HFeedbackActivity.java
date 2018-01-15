@@ -26,7 +26,7 @@ import android.widget.Toast;
 import com.hlj.common.CONST;
 import com.hlj.utils.CustomHttpClient;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HFeedbackActivity extends BaseActivity implements OnClickListener{
 	

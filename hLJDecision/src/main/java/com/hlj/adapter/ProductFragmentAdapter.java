@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.hlj.dto.NewsDto;
 import com.hlj.utils.CommonUtil;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class ProductFragmentAdapter extends BaseAdapter{
 	

@@ -36,7 +36,7 @@ import com.hlj.activity.HWebviewActivity;
 import com.hlj.utils.CustomHttpClient;
 import com.hlj.view.RefreshLayout;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class ProductFragment extends Fragment implements RefreshLayout.OnRefreshListener, RefreshLayout.OnLoadListener {
 	

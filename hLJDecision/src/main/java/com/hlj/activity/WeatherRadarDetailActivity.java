@@ -52,7 +52,7 @@ import java.util.List;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 @SuppressLint("SimpleDateFormat")
 public class WeatherRadarDetailActivity extends BaseActivity implements OnClickListener, RadarListener{

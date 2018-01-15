@@ -8,7 +8,7 @@ import com.hlj.utils.WeatherUtil;
 
 import java.util.GregorianCalendar;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class TyphoonDto {
 

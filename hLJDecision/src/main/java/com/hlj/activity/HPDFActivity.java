@@ -34,7 +34,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HPDFActivity extends BaseActivity implements OnPageChangeListener, OnLoadCompleteListener, OnClickListener {
 	

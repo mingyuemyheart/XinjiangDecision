@@ -20,7 +20,7 @@ import net.tsz.afinal.FinalBitmap;
 import java.util.ArrayList;
 import java.util.List;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HAgriWeatherAdapter extends BaseAdapter{
 	

@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
 import com.hlj.activity.HWebviewActivity;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class WarningSignalAdapter extends BaseAdapter implements OnClickListener{
 	

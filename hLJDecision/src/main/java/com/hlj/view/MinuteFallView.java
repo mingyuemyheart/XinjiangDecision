@@ -21,7 +21,7 @@ import android.view.View;
 import com.hlj.dto.WeatherDto;
 import com.hlj.utils.CommonUtil;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 
 public class MinuteFallView extends View{

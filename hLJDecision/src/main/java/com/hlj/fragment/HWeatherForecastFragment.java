@@ -38,7 +38,7 @@ import com.hlj.dto.AgriDto;
 import java.util.ArrayList;
 import java.util.List;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class HWeatherForecastFragment extends Fragment {
 	

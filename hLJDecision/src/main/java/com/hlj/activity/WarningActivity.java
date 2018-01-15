@@ -59,7 +59,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class WarningActivity extends BaseActivity implements OnClickListener, OnMapClickListener, OnMarkerClickListener, InfoWindowAdapter, OnCameraChangeListener, OnDistrictSearchListener{
 	

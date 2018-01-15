@@ -2,7 +2,7 @@ package com.hlj.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 import android.content.Context;
 import android.content.Intent;

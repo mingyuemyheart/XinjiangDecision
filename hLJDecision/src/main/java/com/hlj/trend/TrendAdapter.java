@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.hlj.dto.TrendDto;
 import com.hlj.stickygridheaders.StickyGridHeadersSimpleAdapter;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class TrendAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
 

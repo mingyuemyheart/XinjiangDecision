@@ -23,7 +23,7 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 
 import com.hlj.stickygridheaders.StickyGridHeadersGridView;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 import com.hlj.activity.TrendDetailActivity;
 import com.hlj.adapter.HWeatherFactAdapter;
 import com.hlj.dto.RangeDto;

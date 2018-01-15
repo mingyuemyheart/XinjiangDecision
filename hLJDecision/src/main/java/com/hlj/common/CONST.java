@@ -7,6 +7,8 @@ import java.util.List;
 
 public class CONST {
 
+	public static final String publicUser = "publicuser";//公众账号
+	public static final String publicPwd = "123456";//公众密码
 	public static String APPID = "18";//贵州客户端对应服务器的appid
 	public static final String GUIZHOU_PROVINCEID = "10105";//贵州省id
 	public static final String GUIZHOU_WARNINGID = "23";//贵州省预警id
@@ -80,7 +82,7 @@ public class CONST {
 	public static String USERNAME = null;//用户名
 	public static String PASSWORD = null;//用户密码
 
-	public static final List<ColumnData> dataList = new ArrayList<ColumnData>();//存放接口数据对象
+	public static final List<ColumnData> dataList = new ArrayList<>();//存放接口数据对象
 
 	//预警颜色对应规则
 	public static String[] blue = {"01", "_blue"};

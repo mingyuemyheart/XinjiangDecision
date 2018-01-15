@@ -11,7 +11,7 @@ import android.webkit.WebViewClient;
 
 import com.hlj.common.ColumnData;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class WebViewFragment extends Fragment {
 	

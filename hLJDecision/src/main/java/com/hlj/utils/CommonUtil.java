@@ -16,6 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -50,7 +52,7 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolygonOptions;
 import com.amap.api.maps.model.PolylineOptions;
 
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
 public class CommonUtil {
 
@@ -68,7 +70,22 @@ public class CommonUtil {
     public static float px2dip(Context context, float pxValue) {  
         final float scale = context.getResources().getDisplayMetrics().density;  
         return pxValue / scale;
-    } 
+    }
+
+	/**
+	 * 获取版本号
+	 * @return 当前应用的版本号
+	 */
+	public static String getVersion(Context context) {
+		try {
+			PackageManager manager = context.getPackageManager();
+			PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+			return info.versionName;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
     
     /**
 	 * 解决ScrollView与ListView共存的问题

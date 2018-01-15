@@ -19,7 +19,7 @@ public class WarningDto implements Parcelable {
 	public String provinceId;//省份id
 	public String item0;
 	public int count;
-	public List<WarningDto> itemList = new ArrayList<WarningDto>();
+	public List<WarningDto> itemList = new ArrayList<>();
 
 	public WarningDto() {
 	}

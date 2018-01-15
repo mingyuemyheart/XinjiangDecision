@@ -4,12 +4,10 @@ package com.hlj.activity;
  * 主界面
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
-import shawn.cxwl.com.hlj.decision.R;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,25 +16,33 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
-import com.hlj.utils.AutoUpdateUtil;
-import com.hlj.fragment.HWeatherWarningFragment;
-import com.hlj.common.MyApplication;
-import com.hlj.fragment.HAgriWeatherFragment;
 import com.hlj.fragment.ContactUsFragment;
+import com.hlj.fragment.HAgriWeatherFragment;
 import com.hlj.fragment.HDecisionServiceFragment;
 import com.hlj.fragment.HForecastFragment;
 import com.hlj.fragment.HPersonInfuluceFragment;
 import com.hlj.fragment.HWeatherForecastFragment;
+import com.hlj.fragment.HWeatherWarningFragment;
 import com.hlj.fragment.WeatherKepuFragment;
+import com.hlj.utils.AutoUpdateUtil;
+import com.hlj.utils.CommonUtil;
 import com.hlj.view.MainViewPager;
 import com.viewpagerindicator.TabPageIndicator;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import shawn.cxwl.com.hlj.R;
 
 public class HMainActivity extends BaseFragmentActivity implements OnClickListener{
 	
@@ -50,13 +56,14 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
 	private long mExitTime;//记录点击完返回按钮后的long型时间
 //	private ChannelsManager manager = null;
 	private int position = 0;//用于存放下标
+	static HMainActivity instance;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hactivity_main);
         mContext = this;
-        MyApplication.addDestoryActivity(HMainActivity.this, "HMainActivity");
+        instance = this;
 		initWidget();
 		initViewPager();
     }
@@ -72,6 +79,55 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
 		ivSetting.setOnClickListener(this);
 		ivAdd = (ImageView) findViewById(R.id.ivAdd);
 		ivAdd.setOnClickListener(this);
+
+		//是否显示登录对话框
+		SharedPreferences sp = getSharedPreferences("LOGINDIALOG", Context.MODE_PRIVATE);
+		String versionCode = sp.getString("versionCode", "");
+
+		//获取保存的用户信息
+		SharedPreferences sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE);
+		String userName = sharedPreferences.getString(CONST.UserInfo.userName, null);
+		if (!TextUtils.equals(versionCode, CommonUtil.getVersion(mContext))) {
+			if (TextUtils.equals(userName, CONST.publicUser) || TextUtils.isEmpty(userName)) {//公众用户或为空
+				decisionLoginDialog(sp);
+			}
+		}
+	}
+
+	/**
+	 * 决策用户登录对话框
+	 */
+	private void decisionLoginDialog(final SharedPreferences sp) {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.dialog_decision_login, null);
+		LinearLayout llNegative = (LinearLayout) view.findViewById(R.id.llNegative);
+		LinearLayout llPositive = (LinearLayout) view.findViewById(R.id.llPositive);
+
+		final Dialog dialog = new Dialog(mContext, R.style.CustomProgressDialog);
+		dialog.setContentView(view);
+		dialog.setCanceledOnTouchOutside(false);
+		dialog.show();
+
+		llNegative.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				dialog.dismiss();
+				SharedPreferences.Editor editor = sp.edit();
+				editor.putString("versionCode", CommonUtil.getVersion(mContext));
+				editor.commit();
+			}
+		});
+
+		llPositive.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				dialog.dismiss();
+				SharedPreferences.Editor editor = sp.edit();
+				editor.putString("versionCode", CommonUtil.getVersion(mContext));
+				editor.commit();
+				startActivity(new Intent(mContext, HLoginActivity.class));
+			}
+		});
 	}
 	
 	/**

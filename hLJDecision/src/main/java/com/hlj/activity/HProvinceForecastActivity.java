@@ -4,7 +4,6 @@ package com.hlj.activity;
  * 全省预报
  */
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -33,11 +32,11 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.animation.ScaleAnimation;
 import com.hlj.common.CONST;
+import com.hlj.dto.CityDto;
 import com.hlj.manager.RainManager;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
 import com.hlj.utils.WeatherUtil;
-import com.hlj.dto.CityDto;
 import com.hlj.view.ExpandableTextView;
 
 import org.json.JSONArray;
@@ -60,15 +59,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
-import shawn.cxwl.com.hlj.decision.R;
+import shawn.cxwl.com.hlj.R;
 
-/**
- * 天气预报
- * @author shawn_sun
- *
- */
-
-@SuppressLint("SimpleDateFormat")
 public class HProvinceForecastActivity extends BaseActivity implements OnClickListener, OnMarkerClickListener, OnMapClickListener,
         InfoWindowAdapter, OnCameraChangeListener {
 	
@@ -175,7 +167,7 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 						c3 = c3.replace("<p>", "");
 						c3 = c3.replace("</p>", "").trim()+"\n";
 
-						final String content = c1+c3+c2;
+						final String content = "发布单位：黑龙江省气象台\n"+c1+c3+c2;
 
 						runOnUiThread(new Runnable() {
 							@Override
