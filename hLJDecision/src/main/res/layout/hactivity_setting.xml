@@ -208,4 +208,28 @@
             android:background="@drawable/iv_arrow"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/llPush"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/selector_detail"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="消息推送"
+            android:textColor="@color/text_color3"
+            android:textSize="@dimen/level_4"/>
+
+        <ImageView
+            android:id="@+id/ivPushNews"
+            android:layout_width="60dip"
+            android:layout_height="20dip"
+            android:src="@drawable/setting_checkbox_on" />
+    </LinearLayout>
+
 </LinearLayout>

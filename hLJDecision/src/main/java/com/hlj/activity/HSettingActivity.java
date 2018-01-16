@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hlj.common.CONST;
+import com.hlj.common.MyApplication;
 import com.hlj.manager.DataCleanManager;
 import com.hlj.utils.AutoUpdateUtil;
 import com.hlj.utils.CommonUtil;
@@ -42,6 +43,7 @@ public class HSettingActivity extends BaseActivity implements OnClickListener{
 	private TextView tvUserName = null;
 	private TextView tvVersion = null;//版本号
 	private TextView tvLogout = null;//退出登录
+	private ImageView ivPushNews = null;//消息推送
 	static HSettingActivity instance;
 
 	@Override
@@ -83,6 +85,8 @@ public class HSettingActivity extends BaseActivity implements OnClickListener{
 		ivPortrait.setOnClickListener(this);
 		tvUserName = (TextView) findViewById(R.id.tvUserName);
 		tvUserName.setOnClickListener(this);
+		ivPushNews = (ImageView) findViewById(R.id.ivPushNews);
+		ivPushNews.setOnClickListener(this);
 
 		SharedPreferences sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE);
 		String userName = sharedPreferences.getString(CONST.UserInfo.userName, null);
@@ -99,6 +103,14 @@ public class HSettingActivity extends BaseActivity implements OnClickListener{
 			tvCache.setText(cache);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+
+		SharedPreferences push = getSharedPreferences("PUSH_STATE", Context.MODE_PRIVATE);
+		boolean pushState = push.getBoolean("state", true);
+		if (pushState) {
+			ivPushNews.setImageResource(R.drawable.setting_checkbox_on);
+		}else {
+			ivPushNews.setImageResource(R.drawable.setting_checkbox_off);
 		}
 	}
 	
@@ -239,6 +251,22 @@ public class HSettingActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.llCity:
 			startActivity(new Intent(mContext, HReserveCityActivity.class));
+			break;
+		case R.id.ivPushNews:
+			SharedPreferences push = getSharedPreferences("PUSH_STATE", Context.MODE_PRIVATE);
+			boolean pushState = push.getBoolean("state", true);
+			Editor editor = push.edit();
+			if (pushState) {
+				editor.putBoolean("state", false);
+				editor.commit();
+				ivPushNews.setImageResource(R.drawable.setting_checkbox_off);
+				MyApplication.disablePush();
+			}else {
+				editor.putBoolean("state", true);
+				editor.commit();
+				ivPushNews.setImageResource(R.drawable.setting_checkbox_on);
+				MyApplication.enablePush();
+			}
 			break;
 
 		default:
