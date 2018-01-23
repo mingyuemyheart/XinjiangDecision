@@ -111,11 +111,10 @@ public class ReserveCityAdapter extends BaseAdapter{
 		Drawable drawable;
 		if (hour >= 5 && hour < 18) {
 			drawable = mContext.getResources().getDrawable(R.drawable.phenomenon_drawable);
-			drawable.setLevel(dto.highPheCode);
 		}else {
 			drawable = mContext.getResources().getDrawable(R.drawable.phenomenon_drawable_night);
-			drawable.setLevel(dto.lowPheCode);
 		}
+		drawable.setLevel(dto.highPheCode);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 			mHolder.ivPhe.setBackground(drawable);
 		}else {
