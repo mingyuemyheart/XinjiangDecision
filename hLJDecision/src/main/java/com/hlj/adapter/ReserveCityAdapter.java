@@ -104,8 +104,8 @@ public class ReserveCityAdapter extends BaseAdapter{
 
 		final CityDto dto = mArrayList.get(position);
 
-		if (!TextUtils.isEmpty(dto.cityName)) {
-			mHolder.tvCity.setText(dto.cityName);
+		if (!TextUtils.isEmpty(dto.areaName)) {
+			mHolder.tvCity.setText(dto.areaName);
 		}
 
 		Drawable drawable;

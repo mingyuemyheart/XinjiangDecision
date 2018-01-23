@@ -256,7 +256,12 @@ public class HReserveCityActivity extends BaseActivity implements View.OnClickLi
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
+                CityDto data = cityList.get(arg2);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("data", data);
+                Intent intent = new Intent(mContext, HWeatherDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
@@ -300,7 +305,7 @@ public class HReserveCityActivity extends BaseActivity implements View.OnClickLi
         cityIds.add(locationCityId);
         CityDto dto = new CityDto();
         dto.cityId = locationCityId;
-        dto.cityName = locationCityName;
+        dto.areaName = locationCityName;
         dto.warningId = locationWarningId;
         cityList.add(dto);
         if (!TextUtils.isEmpty(cityInfo)) {
@@ -309,7 +314,7 @@ public class HReserveCityActivity extends BaseActivity implements View.OnClickLi
                 String[] itemArray = array[i].split(",");
                 dto = new CityDto();
                 dto.cityId = itemArray[0];
-                dto.cityName = itemArray[1];
+                dto.areaName = itemArray[1];
                 dto.warningId = itemArray[2];
                 cityList.add(dto);
                 cityIds.add(itemArray[0]);
@@ -395,7 +400,7 @@ public class HReserveCityActivity extends BaseActivity implements View.OnClickLi
                     JSONObject object = content.getWeatherFactInfo();
                     try {
                         CityDto dto = new CityDto();
-                        dto.cityName = cityName;
+                        dto.areaName = cityName;
                         dto.cityId = cityId;
                         if (!object.isNull("l5")) {
                             String weatherCode = WeatherUtil.lastValue(object.getString("l5"));
@@ -451,7 +456,7 @@ public class HReserveCityActivity extends BaseActivity implements View.OnClickLi
         //保存预定城市信息
         String cityInfo = "";
         for (int i = 1; i < cityList.size(); i++) {//从1开始是为了过滤掉定位城市
-            cityInfo += (cityList.get(i).cityId+","+cityList.get(i).cityName+","+cityList.get(i).warningId+";");
+            cityInfo += (cityList.get(i).cityId+","+cityList.get(i).areaName+","+cityList.get(i).warningId+";");
         }
         SharedPreferences sharedPreferences = getSharedPreferences("RESERVE_CITY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
