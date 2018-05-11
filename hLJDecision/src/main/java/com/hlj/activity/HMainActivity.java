@@ -314,7 +314,7 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
         	} else if (TextUtils.equals(id, "11")) {
         		mAdapter.addItem(channel, bundle, HWeatherForecastFragment.class);//铁路气象服务
         	} else if (TextUtils.equals(id, "12")) {
-        		mAdapter.addItem(channel, bundle, ContactUsFragment.class);//铁路气象服务
+        		mAdapter.addItem(channel, bundle, ContactUsFragment.class);//联系我们
         	} 
 		}else if (TextUtils.equals(showType, CONST.NEWS)) {
 			mAdapter.addItem(channel, bundle, HDecisionServiceFragment.class);//决策服务

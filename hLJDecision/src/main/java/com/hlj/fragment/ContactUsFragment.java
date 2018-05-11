@@ -13,6 +13,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.hlj.activity.HPDFActivity;
+import com.hlj.common.CONST;
 
 /**
  * 联系我们
@@ -22,7 +26,7 @@ import android.widget.TextView;
 
 public class ContactUsFragment extends Fragment{
 	
-	private TextView tvPhone = null;
+	private TextView tvData,tvPhone;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,7 +37,19 @@ public class ContactUsFragment extends Fragment{
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		tvData = (TextView) view.findViewById(R.id.tvData);
 		tvPhone = (TextView) view.findViewById(R.id.tvPhone);
+
+		tvData.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), HPDFActivity.class);
+				intent.putExtra(CONST.ACTIVITY_NAME, "部分产品数据说明");
+				intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/data/%E9%BB%91%E9%BE%99%E6%B1%9F%E6%B0%94%E8%B1%A1%E6%89%8B%E6%9C%BAAPP%E9%83%A8%E5%88%86%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E8%AF%B4%E6%98%8E.pdf");
+				startActivity(intent);
+			}
+		});
+
 		tvPhone.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
