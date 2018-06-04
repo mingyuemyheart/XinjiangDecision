@@ -105,7 +105,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
     private TextView tvHistory = null;
     private LinearLayout llBottom = null;
     private List<FactDto> realDatas = new ArrayList<>();//全省站点列表
-    private String stationName = "", stationId = "", area = "", val = "", timeString = "";
+    private String stationName = "", area = "", val = "", timeString = "";
     private String dataUrl = "", childId = "";
     private MainViewPager viewPager = null;
     private LinearLayout llViewPager = null;
