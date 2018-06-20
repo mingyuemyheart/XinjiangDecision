@@ -34,7 +34,7 @@ public class WeatherKepuFragment extends Fragment{
 	
 	private ListView mListView = null;
 	private HAgriWeatherAdapter mAdapter = null;
-	private List<AgriDto> mList = new ArrayList<AgriDto>();
+	private List<AgriDto> mList = new ArrayList<>();
 	private ColumnData data = null;
 	
 	@Override

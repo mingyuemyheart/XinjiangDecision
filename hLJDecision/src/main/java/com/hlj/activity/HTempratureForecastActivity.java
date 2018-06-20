@@ -63,7 +63,7 @@ public class HTempratureForecastActivity extends BaseActivity implements OnClick
 	
 	private void initListView() {
 		mListView = (ListView) findViewById(R.id.listView);
-		mAdapter = new HTemperatureForecastAdapter(mContext, mList);
+		mAdapter = new HTemperatureForecastAdapter(mContext, mList, HTempratureForecastActivity.this);
 		mListView.setAdapter(mAdapter);
 	}
 

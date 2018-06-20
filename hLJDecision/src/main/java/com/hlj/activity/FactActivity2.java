@@ -1,12 +1,16 @@
 package com.hlj.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -79,8 +83,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
     private Context mContext = null;
     private LinearLayout llBack = null;
     private TextView tvTitle = null;
-    private LinearLayout llContainer = null;
-    private LinearLayout llContainer1 = null;
+    private LinearLayout llContainer,llContainer1;
     private int width = 0;
     private float density = 0;
     private MapView mapView = null;//高德地图
@@ -99,6 +102,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
     private List<Text> texts = new ArrayList<>();//等值线数值
     private List<Polyline> polylines = new ArrayList<>();//广西边界市县边界线
     private List<Marker> cityTexts = new ArrayList<>();//市县名称
+    private List<Marker> autoTexts = new ArrayList<>();//自动站
     private List<FactDto> cityInfos = new ArrayList<>();//城市信息
     private List<FactDto> timeList = new ArrayList<>();//时间列表
     private TextView tvDetail = null;
@@ -116,8 +120,8 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fact2);
         mContext = this;
-        initWidget();
         initAmap(savedInstanceState);
+        initWidget();
         initListView();
     }
 
@@ -153,8 +157,6 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         });
 
         LatLngBounds bounds = new LatLngBounds.Builder()
-//		.include(new LatLng(57.9079, 71.9282))
-//		.include(new LatLng(3.9079, 134.8656))
                 .include(new LatLng(1, -179))
                 .include(new LatLng(89, 179))
                 .build();
@@ -164,32 +166,6 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.empty))
                 .transparency(0.0f));
         aMap.runOnDrawFrame();
-    }
-
-    @Override
-    public void onCameraChange(CameraPosition arg0) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void onCameraChangeFinish(CameraPosition arg0) {
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        Point leftPoint = new Point(0, dm.heightPixels);
-        Point rightPoint = new Point(dm.widthPixels, 0);
-        LatLng leftlatlng = aMap.getProjection().fromScreenLocation(leftPoint);
-        LatLng rightLatlng = aMap.getProjection().fromScreenLocation(rightPoint);
-
-        if (leftlatlng.latitude <= 3.9079 || rightLatlng.latitude >= 57.9079 || leftlatlng.longitude <= 71.9282
-                || rightLatlng.longitude >= 160 || arg0.zoom < 5.0f) {
-            aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(CONST.guizhouLatLng, 5.5f));
-        }
-    }
-
-    private void initListView() {
-        listView = (ListView) findViewById(R.id.listView);
-        factAdapter = new FactAdapter2(mContext, factList);
-        listView.setAdapter(factAdapter);
     }
 
     private void initWidget() {
@@ -226,6 +202,12 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         }
 
         addColumn(data);
+    }
+
+    private void initListView() {
+        listView = (ListView) findViewById(R.id.listView);
+        factAdapter = new FactAdapter2(mContext, factList);
+        listView.setAdapter(factAdapter);
     }
 
     /**
@@ -346,334 +328,288 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
     }
 
     /**
-     * 初始化viewPager
-     */
-    private void initViewPager() {
-        if (viewPager != null) {
-            viewPager.removeAllViewsInLayout();
-            fragments.clear();
-        }
-
-        Bundle bundle = new Bundle();
-        bundle.putString("childId", childId);
-        Fragment fragment1 = new FactCheckFragment();
-        fragment1.setArguments(bundle);
-        fragments.add(fragment1);
-
-        if (viewPager == null) {
-            viewPager = (MainViewPager) findViewById(R.id.viewPager);
-            viewPager.setSlipping(true);//设置ViewPager是否可以滑动
-            viewPager.setOffscreenPageLimit(fragments.size());
-            viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
-        }
-        viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-    }
-
-    public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
-        @Override
-        public void onPageSelected(int arg0) {
-
-        }
-
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
-        }
-    }
-
-    /**
-     * @ClassName: MyPagerAdapter
-     * @Description: TODO填充ViewPager的数据适配器
-     * @author Panyy
-     * @date 2013 2013年11月6日 下午2:37:47
-     *
-     */
-    private class MyPagerAdapter extends FragmentStatePagerAdapter {
-
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-        @Override
-        public Fragment getItem(int arg0) {
-            return fragments.get(arg0);
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-            return PagerAdapter.POSITION_NONE;
-        }
-    }
-
-    /**
      * 获取实况信息
      * @param url
      */
-    private void OkHttpFact(String url) {
+    private void OkHttpFact(final String url) {
         if (TextUtils.isEmpty(url)) {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+        new Thread(new Runnable() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    return;
-                }
-                final String result = response.body().string();
-                runOnUiThread(new Runnable() {
+            public void run() {
+                OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
                     @Override
-                    public void run() {
-                        if (result != null) {
-                            try {
-                                JSONObject obj = new JSONObject(result);
+                    public void onFailure(Call call, IOException e) {
 
-                                if (!obj.isNull("zh")) {
-                                    JSONObject itemObj = obj.getJSONObject("zh");
-                                    if (!itemObj.isNull("stationName")) {
-                                        tv3.setText(itemObj.getString("stationName"));
-                                    }
-                                    if (!itemObj.isNull("area")) {
-                                        tv2.setText(itemObj.getString("area"));
-                                    }
-                                    if (!itemObj.isNull("val")) {
-                                        tv1.setText(itemObj.getString("val"));
-                                    }
-                                }
+                    }
 
-                                if (!obj.isNull("title")) {
-                                    tvLayerName.setText(obj.getString("title"));
-                                    tvLayerName.setVisibility(View.VISIBLE);
-                                }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            return;
+                        }
+                        final String result = response.body().string();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (!TextUtils.isEmpty(result)) {
+                                    try {
+                                        JSONObject obj = new JSONObject(result);
 
-                                if (!obj.isNull("cutlineUrl")) {
-                                    FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-                                    finalBitmap.display(ivChart, obj.getString("cutlineUrl"), null, 0);
-                                }
-
-                                if (!obj.isNull("zx")) {
-                                    tvIntro.setText(obj.getString("zx"));
-                                }
-
-                                if (!obj.isNull("t")) {
-                                    cityInfos.clear();
-                                    JSONArray array = obj.getJSONArray("t");
-                                    for (int i = 0; i < array.length(); i++) {
-                                        FactDto f = new FactDto();
-                                        JSONObject o = array.getJSONObject(i);
-                                        if (!o.isNull("name")) {
-                                            f.name = o.getString("name");
-                                        }
-                                        if (!o.isNull("lon")) {
-                                            f.lng = Double.parseDouble(o.getString("lon"));
-                                        }
-                                        if (!o.isNull("lat")) {
-                                            f.lat = Double.parseDouble(o.getString("lat"));
-                                        }
-                                        if (!o.isNull("value")) {
-                                            f.val = Double.parseDouble(o.getString("value"));
-                                        }
-                                        cityInfos.add(f);
-                                    }
-                                }
-
-                                if (!obj.isNull("dataUrl")) {
-                                    String dataUrl = obj.getString("dataUrl");
-                                    if (!TextUtils.isEmpty(dataUrl)) {
-                                        OkHttpJson(dataUrl);
-                                    }
-                                }
-
-                                //详情开始
-                                if (!obj.isNull("th")) {
-                                    JSONObject itemObj = obj.getJSONObject("th");
-                                    if (!itemObj.isNull("stationName")) {
-                                        stationName = itemObj.getString("stationName");
-                                    }
-                                    if (!itemObj.isNull("area")) {
-                                        area = itemObj.getString("area");
-                                    }
-                                    if (!itemObj.isNull("val")) {
-                                        val = itemObj.getString("val");
-                                    }
-                                }
-
-                                if (!obj.isNull("times")) {
-                                    timeList.clear();
-                                    JSONArray timeArray = obj.getJSONArray("times");
-                                    for (int i = 0; i < timeArray.length(); i++) {
-                                        FactDto f = new FactDto();
-                                        JSONObject fo = timeArray.getJSONObject(i);
-                                        if (!fo.isNull("timeString")) {
-                                            f.timeString = fo.getString("timeString");
-                                        }
-                                        if (!fo.isNull("timestart")) {
-                                            f.timeStart = fo.getString("timestart");
-                                        }
-                                        if (!fo.isNull("timeParams")) {
-                                            f.timeParams = fo.getString("timeParams");
-                                        }
-                                        timeList.add(f);
-
-                                        if (i == 0) {
-                                            timeString = f.timeString;
-                                        }
-                                    }
-                                }
-
-                                realDatas.clear();
-                                if (!obj.isNull("realDatas")) {
-                                    JSONArray array = new JSONArray(obj.getString("realDatas"));
-                                    for (int i = 0; i < array.length(); i++) {
-                                        JSONObject itemObj = array.getJSONObject(i);
-                                        FactDto dto = new FactDto();
-                                        if (!itemObj.isNull("stationCode")) {
-                                            dto.stationCode = itemObj.getString("stationCode");
-                                        }
-                                        if (!itemObj.isNull("stationName")) {
-                                            dto.stationName = itemObj.getString("stationName");
-                                        }
-                                        if (!itemObj.isNull("area")) {
-                                            dto.area = itemObj.getString("area");
-                                        }
-                                        if (!itemObj.isNull("area1")) {
-                                            dto.area1 = itemObj.getString("area1");
-                                        }
-                                        if (!itemObj.isNull("val")) {
-                                            dto.val = itemObj.getDouble("val");
-                                        }
-
-                                        if (!TextUtils.isEmpty(dto.stationName) && !TextUtils.isEmpty(dto.area)) {
-                                            realDatas.add(dto);
-                                        }
-                                    }
-                                }
-                                //详情结束
-
-                                if (!obj.isNull("jb")) {
-                                    factList.clear();
-                                    JSONArray array = obj.getJSONArray("jb");
-                                    for (int i = 0; i < array.length(); i++) {
-                                        JSONObject itemObj = array.getJSONObject(i);
-                                        FactDto data = new FactDto();
-                                        if (!itemObj.isNull("lv")) {
-                                            data.rainLevel = itemObj.getString("lv");
-                                        }
-                                        if (!itemObj.isNull("count")) {
-                                            data.count = itemObj.getInt("count")+"";
-                                        }
-                                        if (!itemObj.isNull("xs")) {
-                                            JSONArray xsArray = itemObj.getJSONArray("xs");
-                                            List<FactDto> list = new ArrayList<>();
-                                            list.clear();
-                                            for (int j = 0; j < xsArray.length(); j++) {
-                                                FactDto d = new FactDto();
-                                                d.area = xsArray.getString(j);
-                                                list.add(d);
+                                        if (!obj.isNull("zh")) {
+                                            JSONObject itemObj = obj.getJSONObject("zh");
+                                            if (!itemObj.isNull("stationName")) {
+                                                tv3.setText(itemObj.getString("stationName"));
                                             }
-                                            data.areaList.addAll(list);
+                                            if (!itemObj.isNull("area")) {
+                                                tv2.setText(itemObj.getString("area"));
+                                            }
+                                            if (!itemObj.isNull("val")) {
+                                                tv1.setText(itemObj.getString("val"));
+                                            }
                                         }
-                                        factList.add(data);
-                                    }
-                                    if (factList.size() > 0 && factAdapter != null) {
-                                        CommonUtil.setListViewHeightBasedOnChildren(listView);
-                                        factAdapter.timeString = timeString;
-                                        factAdapter.stationName = stationName;
-                                        factAdapter.area = area;
-                                        factAdapter.val = val;
-                                        factAdapter.realDatas.clear();
-                                        factAdapter.realDatas.addAll(realDatas);
-                                        factAdapter.notifyDataSetChanged();
-                                        tvIntro.setVisibility(View.VISIBLE);
-                                        listTitle.setVisibility(View.VISIBLE);
-                                        listView.setVisibility(View.VISIBLE);
-                                        llBottom.setVisibility(View.VISIBLE);
+
+                                        if (!obj.isNull("title")) {
+                                            tvLayerName.setText(obj.getString("title"));
+                                            tvLayerName.setVisibility(View.VISIBLE);
+                                        }
+
+                                        if (!obj.isNull("cutlineUrl")) {
+                                            FinalBitmap finalBitmap = FinalBitmap.create(mContext);
+                                            finalBitmap.display(ivChart, obj.getString("cutlineUrl"), null, 0);
+                                        }
+
+                                        if (!obj.isNull("zx")) {
+                                            tvIntro.setText(obj.getString("zx"));
+                                        }
+
+                                        if (!obj.isNull("t")) {
+                                            cityInfos.clear();
+                                            JSONArray array = obj.getJSONArray("t");
+                                            for (int i = 0; i < array.length(); i++) {
+                                                FactDto f = new FactDto();
+                                                JSONObject o = array.getJSONObject(i);
+                                                if (!o.isNull("name")) {
+                                                    f.name = o.getString("name");
+                                                    f.stationName = o.getString("name");
+                                                }
+                                                if (!o.isNull("lon")) {
+                                                    f.lng = Double.parseDouble(o.getString("lon"));
+                                                }
+                                                if (!o.isNull("lat")) {
+                                                    f.lat = Double.parseDouble(o.getString("lat"));
+                                                }
+                                                if (!o.isNull("value")) {
+                                                    f.val = Double.parseDouble(o.getString("value"));
+                                                }
+                                                if (!o.isNull("val1")) {
+                                                    f.val1 = Double.parseDouble(o.getString("val1"));
+                                                }
+                                                cityInfos.add(f);
+                                            }
+                                        }
+
+                                        if (!obj.isNull("dataUrl")) {
+                                            String dataUrl = obj.getString("dataUrl");
+                                            if (!TextUtils.isEmpty(dataUrl)) {
+                                                OkHttpJson(dataUrl);
+                                            }
+                                        }
+
+                                        //详情开始
+                                        if (!obj.isNull("th")) {
+                                            JSONObject itemObj = obj.getJSONObject("th");
+                                            if (!itemObj.isNull("stationName")) {
+                                                stationName = itemObj.getString("stationName");
+                                            }
+                                            if (!itemObj.isNull("area")) {
+                                                area = itemObj.getString("area");
+                                            }
+                                            if (!itemObj.isNull("val")) {
+                                                val = itemObj.getString("val");
+                                            }
+                                        }
+
+                                        if (!obj.isNull("times")) {
+                                            timeList.clear();
+                                            JSONArray timeArray = obj.getJSONArray("times");
+                                            for (int i = 0; i < timeArray.length(); i++) {
+                                                FactDto f = new FactDto();
+                                                JSONObject fo = timeArray.getJSONObject(i);
+                                                if (!fo.isNull("timeString")) {
+                                                    f.timeString = fo.getString("timeString");
+                                                }
+                                                if (!fo.isNull("timestart")) {
+                                                    f.timeStart = fo.getString("timestart");
+                                                }
+                                                if (!fo.isNull("timeParams")) {
+                                                    f.timeParams = fo.getString("timeParams");
+                                                }
+                                                timeList.add(f);
+
+                                                if (i == 0) {
+                                                    timeString = f.timeString;
+                                                }
+                                            }
+                                        }
+
+                                        realDatas.clear();
+                                        if (!obj.isNull("realDatas")) {
+                                            JSONArray array = new JSONArray(obj.getString("realDatas"));
+                                            for (int i = 0; i < array.length(); i++) {
+                                                JSONObject itemObj = array.getJSONObject(i);
+                                                FactDto dto = new FactDto();
+                                                if (!itemObj.isNull("stationCode")) {
+                                                    dto.stationCode = itemObj.getString("stationCode");
+                                                }
+                                                if (!itemObj.isNull("stationName")) {
+                                                    dto.stationName = itemObj.getString("stationName");
+                                                }
+                                                if (!itemObj.isNull("area")) {
+                                                    dto.area = itemObj.getString("area");
+                                                }
+                                                if (!itemObj.isNull("area1")) {
+                                                    dto.area1 = itemObj.getString("area1");
+                                                }
+                                                if (!itemObj.isNull("val")) {
+                                                    dto.val = itemObj.getDouble("val");
+                                                }
+                                                if (!itemObj.isNull("val1")) {
+                                                    dto.val1 = itemObj.getDouble("val1");
+                                                }
+                                                if (!itemObj.isNull("Lon")) {
+                                                    dto.lng = Double.parseDouble(itemObj.getString("Lon"));
+                                                }
+                                                if (!itemObj.isNull("Lat")) {
+                                                    dto.lat = Double.parseDouble(itemObj.getString("Lat"));
+                                                }
+
+                                                if (!TextUtils.isEmpty(dto.stationName) && !TextUtils.isEmpty(dto.area)) {
+                                                    realDatas.add(dto);
+                                                }
+                                            }
+                                        }
+                                        //详情结束
+
+                                        if (!obj.isNull("jb")) {
+                                            factList.clear();
+                                            JSONArray array = obj.getJSONArray("jb");
+                                            for (int i = 0; i < array.length(); i++) {
+                                                JSONObject itemObj = array.getJSONObject(i);
+                                                FactDto data = new FactDto();
+                                                if (!itemObj.isNull("lv")) {
+                                                    data.rainLevel = itemObj.getString("lv");
+                                                }
+                                                if (!itemObj.isNull("count")) {
+                                                    data.count = itemObj.getInt("count")+"";
+                                                }
+                                                if (!itemObj.isNull("xs")) {
+                                                    JSONArray xsArray = itemObj.getJSONArray("xs");
+                                                    List<FactDto> list = new ArrayList<>();
+                                                    list.clear();
+                                                    for (int j = 0; j < xsArray.length(); j++) {
+                                                        FactDto d = new FactDto();
+                                                        d.area = xsArray.getString(j);
+                                                        list.add(d);
+                                                    }
+                                                    data.areaList.addAll(list);
+                                                }
+                                                factList.add(data);
+                                            }
+                                            if (factList.size() > 0 && factAdapter != null) {
+                                                CommonUtil.setListViewHeightBasedOnChildren(listView);
+                                                factAdapter.timeString = timeString;
+                                                factAdapter.stationName = stationName;
+                                                factAdapter.area = area;
+                                                factAdapter.val = val;
+                                                factAdapter.realDatas.clear();
+                                                factAdapter.realDatas.addAll(realDatas);
+                                                factAdapter.notifyDataSetChanged();
+                                                tvIntro.setVisibility(View.VISIBLE);
+                                                listTitle.setVisibility(View.VISIBLE);
+                                                listView.setVisibility(View.VISIBLE);
+                                                llBottom.setVisibility(View.VISIBLE);
+                                            }
+                                        }else {
+                                            tvIntro.setVisibility(View.GONE);
+                                            listTitle.setVisibility(View.GONE);
+                                            listView.setVisibility(View.GONE);
+                                            llBottom.setVisibility(View.GONE);
+                                        }
+
+                                        tvLayerName.setFocusable(true);
+                                        tvLayerName.setFocusableInTouchMode(true);
+                                        tvLayerName.requestFocus();
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
                                     }
                                 }else {
-                                    tvIntro.setVisibility(View.GONE);
-                                    listTitle.setVisibility(View.GONE);
-                                    listView.setVisibility(View.GONE);
-                                    llBottom.setVisibility(View.GONE);
+                                    removePolygons();
+                                    progressBar.setVisibility(View.GONE);
+                                    tvToast.setVisibility(View.VISIBLE);
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            tvToast.setVisibility(View.GONE);
+                                        }
+                                    }, 1000);
                                 }
-
-                                tvLayerName.setFocusable(true);
-                                tvLayerName.setFocusableInTouchMode(true);
-                                tvLayerName.requestFocus();
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
-                        }else {
-                            removePolygons();
-                            progressBar.setVisibility(View.GONE);
-                            tvToast.setVisibility(View.VISIBLE);
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    tvToast.setVisibility(View.GONE);
-                                }
-                            }, 1000);
-                        }
+                        });
                     }
                 });
             }
-        });
+        }).start();
     }
 
     /**
      * 请求图层数据
      * @param url
      */
-    private void OkHttpJson(String url) {
+    private void OkHttpJson(final String url) {
         if (TextUtils.isEmpty(url)) {
             return;
         }
-        OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+        new Thread(new Runnable() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    return;
-                }
-                final String result = response.body().string();
-                runOnUiThread(new Runnable() {
+            public void run() {
+                OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
                     @Override
-                    public void run() {
-                        if (result != null) {
-                            drawDataToMap(result);
-                        }else {
-                            removePolygons();
-                            progressBar.setVisibility(View.GONE);
-                            tvToast.setVisibility(View.VISIBLE);
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    tvToast.setVisibility(View.GONE);
-                                }
-                            }, 1000);
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            return;
                         }
+                        final String result = response.body().string();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (result != null) {
+                                    drawDataToMap(result);
+                                }else {
+                                    removePolygons();
+                                    progressBar.setVisibility(View.GONE);
+                                    tvToast.setVisibility(View.VISIBLE);
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            tvToast.setVisibility(View.GONE);
+                                        }
+                                    }, 1000);
+                                }
+                            }
+                        });
                     }
                 });
             }
-        });
+        }).start();
     }
 
     private void removeTexts() {
@@ -714,6 +650,16 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
     }
 
     /**
+     * 清除自动站
+     */
+    private void removeAutoTexts() {
+        for (int i = 0; i < autoTexts.size(); i++) {
+            autoTexts.get(i).remove();
+        }
+        autoTexts.clear();
+    }
+
+    /**
      * 绘制图层
      */
     private void drawDataToMap(String result) {
@@ -724,6 +670,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         removePolygons();
         removePolylines();
         removeCityTexts();
+        removeAutoTexts();
 
         try {
             JSONObject obj = new JSONObject(result);
@@ -856,27 +803,213 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
             }
         }
 
-        //绘制城市名称、数值
-        for (int i = 0; i < cityInfos.size(); i++) {
-            FactDto dto = cityInfos.get(i);
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.layout_fact_value, null);
-            TextView tvValue = (TextView) view.findViewById(R.id.tvValue);
-            TextView tvName = (TextView) view.findViewById(R.id.tvName);
-            if (dto.val >= 99999) {
-                tvValue.setText("");
-            }else {
-                tvValue.setText(dto.val+"");
+        handler.removeMessages(1001);
+        Message msg = handler.obtainMessage();
+        msg.what = 1001;
+        msg.obj = zoom;
+        handler.sendMessageDelayed(msg, 1000);
+
+    }
+
+    @Override
+    public void onCameraChange(CameraPosition arg0) {
+    }
+
+    @Override
+    public void onCameraChangeFinish(CameraPosition arg0) {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Point leftPoint = new Point(0, dm.heightPixels);
+        Point rightPoint = new Point(dm.widthPixels, 0);
+        LatLng leftlatlng = aMap.getProjection().fromScreenLocation(leftPoint);
+        LatLng rightLatlng = aMap.getProjection().fromScreenLocation(rightPoint);
+
+//        if (leftlatlng.latitude <= 3.9079 || rightLatlng.latitude >= 57.9079 || leftlatlng.longitude <= 71.9282
+//                || rightLatlng.longitude >= 160 || arg0.zoom < 5.0f) {
+//            aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(CONST.guizhouLatLng, 5.5f));
+//        }
+
+        if ((arg0.zoom <= 8.5f && isPersonStation) || (arg0.zoom > 8.5f && !isPersonStation)) {
+            zoom = arg0.zoom;
+        }else {
+            zoom = arg0.zoom;
+
+            handler.removeMessages(1001);
+            Message msg = handler.obtainMessage();
+            msg.what = 1001;
+            msg.obj = arg0.zoom;
+            handler.sendMessageDelayed(msg, 1000);
+        }
+    }
+
+    private boolean isPersonStation = true;
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1001:
+                    float msgZoom = (Float)msg.obj;
+                    removeCityTexts();
+                    removeAutoTexts();
+                    if (msgZoom <= 8.5f) {
+                        //绘制人工站
+                        isPersonStation = true;
+                        for (int i = 0; i < cityInfos.size(); i++) {
+                            FactDto dto = cityInfos.get(i);
+                            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            View view = inflater.inflate(R.layout.layout_fact_value, null);
+                            TextView tvValue = (TextView) view.findViewById(R.id.tvValue);
+                            TextView tvName = (TextView) view.findViewById(R.id.tvName);
+                            ImageView ivWind = (ImageView) view.findViewById(R.id.ivWind);
+
+                            if (dto.val >= 99999) {
+                                tvValue.setText("");
+                            }else {
+                                tvValue.setText(dto.val+"");
+
+                                if (dto.val1 != -1) {
+                                    Bitmap b = CommonUtil.getWindMarker(mContext, dto.val);
+                                    if (b != null) {
+                                        Matrix matrix = new Matrix();
+                                        matrix.postScale(1, 1);
+                                        matrix.postRotate((float)dto.val1);
+                                        Bitmap bitmap = Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), matrix, true);
+                                        if (bitmap != null) {
+                                            ivWind.setImageBitmap(bitmap);
+                                            ivWind.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                }
+
+                                if (!TextUtils.isEmpty(dto.stationName)) {
+                                    tvName.setText(dto.stationName);
+                                }
+                                MarkerOptions options = new MarkerOptions();
+                                options.title(dto.stationName);
+                                options.anchor(0.5f, 0.5f);
+                                options.position(new LatLng(dto.lat, dto.lng));
+                                options.icon(BitmapDescriptorFactory.fromView(view));
+                                Marker marker = aMap.addMarker(options);
+                                marker.setVisible(true);
+                                cityTexts.add(marker);
+                            }
+                        }
+                    } else {//乡镇站点
+                        isPersonStation = false;
+                        for (int i = 0; i < realDatas.size(); i++) {
+                            FactDto dto = realDatas.get(i);
+                            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            View view = inflater.inflate(R.layout.layout_fact_value, null);
+                            TextView tvValue = (TextView) view.findViewById(R.id.tvValue);
+                            TextView tvName = (TextView) view.findViewById(R.id.tvName);
+                            ImageView ivWind = (ImageView) view.findViewById(R.id.ivWind);
+
+                            if (dto.val >= 99999) {
+                                tvValue.setText("");
+                            }else {
+                                tvValue.setText(dto.val+"");
+
+                                if (dto.val1 != -1) {
+                                    Bitmap b = CommonUtil.getWindMarker(mContext, dto.val);
+                                    if (b != null) {
+                                        Matrix matrix = new Matrix();
+                                        matrix.postScale(1, 1);
+                                        matrix.postRotate((float)dto.val1);
+                                        Bitmap bitmap = Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), matrix, true);
+                                        if (bitmap != null) {
+                                            ivWind.setImageBitmap(bitmap);
+                                            ivWind.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                }
+
+                                if (!TextUtils.isEmpty(dto.stationName)) {
+                                    tvName.setText(dto.stationName);
+                                }
+                                MarkerOptions options = new MarkerOptions();
+                                options.title(dto.stationName);
+                                options.anchor(0.5f, 0.5f);
+                                options.position(new LatLng(dto.lat, dto.lng));
+                                options.icon(BitmapDescriptorFactory.fromView(view));
+                                Marker marker = aMap.addMarker(options);
+                                marker.setVisible(true);
+                                autoTexts.add(marker);
+                            }
+                        }
+                    }
+                    break;
             }
-            if (!TextUtils.isEmpty(dto.name)) {
-                tvName.setText(dto.name);
-            }
-            MarkerOptions options = new MarkerOptions();
-            options.anchor(0.5f, 1.0f);
-            options.position(new LatLng(dto.lat, dto.lng));
-            options.icon(BitmapDescriptorFactory.fromView(view));
-            Marker marker = aMap.addMarker(options);
-            cityTexts.add(marker);
+        }
+    };
+
+    /**
+     * 初始化viewPager
+     */
+    private void initViewPager() {
+        if (viewPager != null) {
+            viewPager.removeAllViewsInLayout();
+            fragments.clear();
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putString("childId", childId);
+        Fragment fragment1 = new FactCheckFragment();
+        fragment1.setArguments(bundle);
+        fragments.add(fragment1);
+
+        if (viewPager == null) {
+            viewPager = (MainViewPager) findViewById(R.id.viewPager);
+            viewPager.setSlipping(true);//设置ViewPager是否可以滑动
+            viewPager.setOffscreenPageLimit(fragments.size());
+            viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+        }
+        viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+    }
+
+    public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
+        @Override
+        public void onPageSelected(int arg0) {
+
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+        }
+    }
+
+    /**
+     * @ClassName: MyPagerAdapter
+     * @Description: TODO填充ViewPager的数据适配器
+     * @author Panyy
+     * @date 2013 2013年11月6日 下午2:37:47
+     *
+     */
+    private class MyPagerAdapter extends FragmentStatePagerAdapter {
+
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Override
+        public Fragment getItem(int arg0) {
+            return fragments.get(arg0);
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return PagerAdapter.POSITION_NONE;
         }
     }
 
@@ -929,6 +1062,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                 break;
             case R.id.tvHistory:
                 dialogHistory();
+                break;
         }
     }
 }

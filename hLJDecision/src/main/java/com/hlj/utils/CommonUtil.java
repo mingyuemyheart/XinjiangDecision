@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.json.JSONArray;
@@ -34,6 +35,8 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +54,9 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolygonOptions;
 import com.amap.api.maps.model.PolylineOptions;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 
 import shawn.cxwl.com.hlj.R;
 
@@ -449,6 +455,44 @@ public class CommonUtil {
 	    }
 		return bitmap;
 	}
+
+	/**
+	 * 根据风速获取风向标
+	 * @param context
+	 * @param speed
+	 * @return
+	 */
+	public static Bitmap getWindMarker(Context context, double speed) {
+		Bitmap bitmap = null;
+		if (speed <= 0.2) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind12);
+		}else if (speed > 0.2 && speed <= 1.5) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind12);
+		}else if (speed > 1.5 && speed <= 3.3) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind12);
+		}else if (speed > 3.3 && speed <= 5.4) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind34);
+		}else if (speed > 5.4 && speed <= 7.9) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind34);
+		}else if (speed > 7.9 && speed <= 10.7) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind56);
+		}else if (speed > 10.7 && speed <= 13.8) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind56);
+		}else if (speed > 13.8 && speed <= 17.1) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind78);
+		}else if (speed > 17.1 && speed <= 20.7) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind78);
+		}else if (speed > 20.7 && speed <= 24.4) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind8s);
+		}else if (speed > 24.4 && speed <= 28.4) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind8s);
+		}else if (speed > 28.4 && speed <= 32.6) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind8s);
+		}else if (speed > 32.6 && speed < 99999.0) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind8s);
+		}
+		return bitmap;
+	}
 	
 	/**
 	 * 读取assets下文件
@@ -566,6 +610,116 @@ public class CommonUtil {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * 根据当前时间获取日期
+	 * @param i (+1为后一天，-1为前一天，0表示当天)
+	 * @return
+	 */
+	public static String getDate(String time, int i) {
+		Calendar c = Calendar.getInstance();
+
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmm");
+		try {
+			Date date = sdf2.parse(time);
+			c.setTime(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		c.add(Calendar.DAY_OF_MONTH, i);
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+		String date = sdf1.format(c.getTime());
+		return date;
+	}
+
+	/**
+	 * 根据当前时间获取星期几
+	 * @param i (+1为后一天，-1为前一天，0表示当天)
+	 * @return
+	 */
+	public static String getWeek(int i) {
+		String week = "";
+
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DAY_OF_WEEK, i);
+
+		switch (c.get(Calendar.DAY_OF_WEEK)) {
+			case Calendar.SUNDAY:
+				week = "周日";
+				break;
+			case Calendar.MONDAY:
+				week = "周一";
+				break;
+			case Calendar.TUESDAY:
+				week = "周二";
+				break;
+			case Calendar.WEDNESDAY:
+				week = "周三";
+				break;
+			case Calendar.THURSDAY:
+				week = "周四";
+				break;
+			case Calendar.FRIDAY:
+				week = "周五";
+				break;
+			case Calendar.SATURDAY:
+				week = "周六";
+				break;
+		}
+
+		return week;
+	}
+
+	/**
+	 * 获取http://decision.tianqi.cn域名的请求头
+	 * @return
+	 */
+	public static String getRequestHeader() {
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd00");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd06");
+		SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMdd12");
+		SimpleDateFormat sdf4 = new SimpleDateFormat("yyyyMMdd18");
+		SimpleDateFormat sdf5 = new SimpleDateFormat("yyyyMMddHH");
+		long time1 = 0, time2 = 0, time3 = 0, time4 = 0;
+		long currentTime = 0;
+		try {
+			time1 = sdf5.parse(sdf1.format(new Date())).getTime();
+			time2 = sdf5.parse(sdf2.format(new Date())).getTime();
+			time3 = sdf5.parse(sdf3.format(new Date())).getTime();
+			time4 = sdf5.parse(sdf4.format(new Date())).getTime();
+			currentTime = new Date().getTime();
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		String date = null;
+		if (currentTime >= time1 && currentTime < time2) {
+			date = sdf1.format(new Date());
+		}else if (currentTime >= time2 && currentTime < time3) {
+			date = sdf2.format(new Date());
+		}else if (currentTime >= time3 && currentTime < time4) {
+			date = sdf3.format(new Date());
+		}else if (currentTime >= time4) {
+			date = sdf4.format(new Date());
+		}
+		String publicKey = "http://decision.tianqi.cn/?date="+date;//公钥
+		String privateKye = "url_private_key_789";//私钥
+		String result = "";
+		try{
+			byte[] rawHmac = null;
+			byte[] keyBytes = privateKye.getBytes("UTF-8");
+			SecretKeySpec signingKey = new SecretKeySpec(keyBytes, "HmacSHA1");
+			Mac mac = Mac.getInstance("HmacSHA1");
+			mac.init(signingKey);
+			rawHmac = mac.doFinal(publicKey.getBytes("UTF-8"));
+			result = Base64.encodeToString(rawHmac, Base64.DEFAULT);
+//			result = URLEncoder.encode(result, "UTF-8");
+			result = "http://decision.tianqi.cn/"+result;
+		}catch(Exception e){
+			Log.e("SceneException", e.getMessage(), e);
+		}
+		return result;
 	}
 
 }

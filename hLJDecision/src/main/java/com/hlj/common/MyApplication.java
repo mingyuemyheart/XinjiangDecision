@@ -48,7 +48,7 @@ public class MyApplication extends Application{
 	private void registerUmengPush() {
 		mPushAgent = PushAgent.getInstance(this);
 		tagManager = mPushAgent.getTagManager();
-        mPushAgent.setDebugMode(true);
+        mPushAgent.setDebugMode(false);
         
         //参数number可以设置为0~10之间任意整数。当参数为0时，表示不合并通知
         mPushAgent.setDisplayNotificationNumber(0);
@@ -284,20 +284,6 @@ public class MyApplication extends Application{
 //					}, tags);
 //				}
 //			});
-		}
-	}
-	
-	/**
-	 * 添加tags，添加多个tag以","隔开
-	 * @param tags
-	 */
-	public static void addTags(String tags) {
-		if (tagManager != null) {
-			tagManager.add(new TCallBack() {
-				@Override
-				public void onMessage(boolean arg0, Result arg1) {
-				}
-			}, tags);
 		}
 	}
 	

@@ -5,9 +5,6 @@ package com.hlj.adapter;
  * 降水实况、气温实况、风向风速实况、相对湿度分析列表
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -19,13 +16,15 @@ import android.widget.TextView;
 
 import com.hlj.dto.AgriDto;
 
+import java.util.List;
+
 import shawn.cxwl.com.hlj.R;
 
 public class HFactTableAdapter extends BaseAdapter{
 	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<AgriDto> mArrayList = new ArrayList<>();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<AgriDto> mArrayList;
 	
 	private final class ViewHolder{
 		TextView tvTitle;

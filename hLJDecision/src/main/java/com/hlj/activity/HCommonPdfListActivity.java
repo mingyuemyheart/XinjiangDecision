@@ -17,12 +17,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hlj.adapter.CommonPdfListAdapter;
 import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
 import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.RefreshLayout;
 import com.hlj.view.RefreshLayout.OnRefreshListener;
-import com.hlj.adapter.CommonPdfListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -128,55 +128,60 @@ public class HCommonPdfListActivity extends BaseActivity implements OnClickListe
 	/**
 	 * 获取详情
 	 */
-	private void OkHttpDetail(String url) {
-		OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+	private void OkHttpDetail(final String url) {
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-			}
+					}
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (!TextUtils.isEmpty(result)) {
-					try {
-						JSONObject obj = new JSONObject(result);
-						if (!obj.isNull("info")) {
-							mList.clear();
-							JSONArray array = obj.getJSONArray("info");
-							for (int i = 0; i < array.length(); i++) {
-								AgriDto tempDto = new AgriDto();
-								tempDto.title = dto.name;
-								tempDto.dataUrl = array.getString(i);
-								try {
-									String time = tempDto.dataUrl.substring(tempDto.dataUrl.length()-12, tempDto.dataUrl.length()-4);
-									tempDto.time = sdf2.format(sdf1.parse(time));
-								} catch (ParseException e) {
-									e.printStackTrace();
-								}
-								mList.add(tempDto);
-							}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
 						}
-
+						final String result = response.body().string();
 						runOnUiThread(new Runnable() {
 							@Override
 							public void run() {
-								refreshLayout.setRefreshing(false);
-								if (mList.size() > 0 && mAdapter != null) {
-									mAdapter.notifyDataSetChanged();
+								if (!TextUtils.isEmpty(result)) {
+									refreshLayout.setRefreshing(false);
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (!obj.isNull("info")) {
+											mList.clear();
+											JSONArray array = obj.getJSONArray("info");
+											for (int i = 0; i < array.length(); i++) {
+												AgriDto tempDto = new AgriDto();
+												tempDto.title = dto.name;
+												tempDto.dataUrl = array.getString(i);
+												try {
+													String time = tempDto.dataUrl.substring(tempDto.dataUrl.length()-12, tempDto.dataUrl.length()-4);
+													tempDto.time = sdf2.format(sdf1.parse(time));
+												} catch (ParseException e) {
+													e.printStackTrace();
+												}
+												mList.add(tempDto);
+											}
+										}
+
+										if (mAdapter != null) {
+											mAdapter.notifyDataSetChanged();
+										}
+
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
 								}
 							}
 						});
-
-					} catch (JSONException e) {
-						e.printStackTrace();
 					}
-				}
+				});
 			}
-		});
+		}).start();
 	}
 	
 	@Override

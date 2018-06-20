@@ -1,6 +1,5 @@
 package com.hlj.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -70,15 +69,15 @@ import com.hlj.dto.WindDto;
 import com.hlj.manager.CaiyunManager;
 import com.hlj.manager.RainManager;
 import com.hlj.utils.CommonUtil;
-import com.hlj.utils.CustomHttpClient;
+import com.hlj.utils.OkHttpUtil;
 import com.hlj.utils.WeatherUtil;
 import com.hlj.view.WaitWindView;
 
-import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -87,9 +86,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
-@SuppressLint("SimpleDateFormat")
 public class TyphoonRouteActivity extends BaseActivity implements OnClickListener, OnMapClickListener, AMapLocationListener, GeocodeSearch.OnGeocodeSearchListener,
         OnMarkerClickListener, InfoWindowAdapter, CaiyunManager.RadarListener, OnCameraChangeListener {
 
@@ -381,14 +383,14 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 				TyphoonDto dto = yearList.get(arg2);
 				String url = "http://decision-admin.tianqi.cn/Home/extra/gettyphoon/list/" + dto.yearly;
 				if (!TextUtils.isEmpty(url)) {
-					asyncQuery(url, currentYear, dto.yearly);
+					OkHttpList(url, currentYear, dto.yearly);
 				}
 			}
 		});
 
 		String url = "http://decision-admin.tianqi.cn/Home/extra/gettyphoon/list/" + yearList.get(0).yearly;
 		if (!TextUtils.isEmpty(url)) {
-			asyncQuery(url, currentYear, yearList.get(0).yearly);
+			OkHttpList(url, currentYear, yearList.get(0).yearly);
 		}
 	}
 
@@ -396,161 +398,125 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 	 * 异步请求
 	 * 获取某一年的台风信息
 	 */
-	private void asyncQuery(String requestUrl, int currentYear, int selectYear) {
-		HttpAsyncTask task = new HttpAsyncTask(currentYear, selectYear);
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(requestUrl);
-	}
+	private void OkHttpList(final String url, final int currentYear, final int selectYear) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-	/**
-	 * 异步请求方法
-	 *
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		private int currentYear = 0;
-		private int selectYear = -1;
-
-		public HttpAsyncTask(int currentYear, int selectYear) {
-			this.currentYear = currentYear;
-			this.selectYear = selectYear;
-		}
-
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(String requestResult) throws StringIndexOutOfBoundsException {
-			super.onPostExecute(requestResult);
-			try {
-				nameList.clear();
-				startList.clear();
-				if (!TextUtils.isEmpty(requestResult)) {
-					String c = "(";
-					String c2 = "})";
-					String result = requestResult.substring(requestResult.indexOf(c)+c.length(), requestResult.indexOf(c2)+1);
-					if (!TextUtils.isEmpty(result)) {
-						JSONObject obj = new JSONObject(result);
-						if (obj != null) {
-							if (!obj.isNull("typhoonList")) {
-								JSONArray array = obj.getJSONArray("typhoonList");
-								for (int i = 0; i < array.length(); i++) {
-									JSONArray itemArray = array.getJSONArray(i);
-									TyphoonDto dto = new TyphoonDto();
-									dto.id = itemArray.getString(0);
-									dto.enName = itemArray.getString(1);
-									dto.name = itemArray.getString(2);
-									dto.code = itemArray.getString(4);
-									dto.status = itemArray.getString(7);
-									nameList.add(dto);
-
-									//把活跃台风过滤出来存放
-									if (TextUtils.equals(dto.status, "start")) {
-										startList.add(dto);
-									}
-								}
-
-								String typhoonName = "";
-								for (int i = startList.size()-1; i >= 0; i--) {
-									TyphoonDto data = startList.get(i);
-									if (TextUtils.equals(data.enName, "nameless")) {
-										if (!TextUtils.isEmpty(typhoonName)) {
-											typhoonName = data.enName+"\n"+typhoonName;
-										}else {
-											typhoonName = data.enName;
-										}
-										String detailUrl = "http://decision-admin.tianqi.cn/Home/extra/gettyphoon/view/" + data.id;
-										asyncQueryDetail(detailUrl, data.code + " " + data.enName);
-									}else {
-										if (!TextUtils.isEmpty(typhoonName)) {
-											typhoonName = data.code + " " + data.name + " " + data.enName+"\n"+typhoonName;;
-										}else {
-											typhoonName = data.code + " " + data.name + " " + data.enName;
-										}
-										String detailUrl = "http://decision-admin.tianqi.cn/Home/extra/gettyphoon/view/" + data.id;
-										asyncQueryDetail(detailUrl, data.code + " " + data.name + " " + data.enName);
-									}
-								}
-								tvTyphoonName.setText(typhoonName);
-
-								if (startList.size() == 0) {// 没有生效台风
-									if (currentYear == selectYear) {// 判断选中年数==当前年数
-										tvTyphoonName.setText(getString(R.string.no_typhoon));
-									}else {
-										tvTyphoonName.setText(selectYear+"年");
-									}
-									ivLocation.setVisibility(View.GONE);
-									ivTyphoonPlay.setVisibility(View.GONE);
-									ivTyphoonWind.setVisibility(View.GONE);
-									ivTyphoonRange.setVisibility(View.GONE);
-									cancelDialog();
-								} else if (startList.size() == 1) {// 1个生效台风
-									ivLocation.setVisibility(View.VISIBLE);
-									ivTyphoonWind.setVisibility(View.VISIBLE);
-									ivTyphoonPlay.setVisibility(View.VISIBLE);
-									ivTyphoonRange.setVisibility(View.VISIBLE);
-									mRadarManager = new CaiyunManager(getApplicationContext());
-									asyncQueryMinutes("http://api.tianqi.cn:8070/v1/img.py");
-									asyncQueryCloud("http://decision-admin.tianqi.cn/Home/other/getDecisionCloudImages");
-								} else {// 2个以上生效台风
-									ivLocation.setVisibility(View.VISIBLE);
-									ivTyphoonWind.setVisibility(View.VISIBLE);
-									ivTyphoonRange.setVisibility(View.VISIBLE);
-									ivTyphoonPlay.setVisibility(View.GONE);
-									mRadarManager = new CaiyunManager(getApplicationContext());
-									asyncQueryMinutes("http://api.tianqi.cn:8070/v1/img.py");
-									asyncQueryCloud("http://decision-admin.tianqi.cn/Home/other/getDecisionCloudImages");
-								}
-								tvTyphoonName.setVisibility(View.VISIBLE);
-							}
-
-							initNameListView();
-						}
 					}
-				}else {
-					tvTyphoonName.setText(getString(R.string.no_typhoon));
-					tvTyphoonName.setVisibility(View.VISIBLE);
-				}
-			} catch (IndexOutOfBoundsException e) {
-				e.printStackTrace();
-			} catch (JSONException e) {
-				e.printStackTrace();
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String requestResult = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								try {
+									nameList.clear();
+									startList.clear();
+									if (!TextUtils.isEmpty(requestResult)) {
+										String c = "(";
+										String c2 = "})";
+										String result = requestResult.substring(requestResult.indexOf(c)+c.length(), requestResult.indexOf(c2)+1);
+										if (!TextUtils.isEmpty(result)) {
+											JSONObject obj = new JSONObject(result);
+											if (obj != null) {
+												if (!obj.isNull("typhoonList")) {
+													JSONArray array = obj.getJSONArray("typhoonList");
+													for (int i = 0; i < array.length(); i++) {
+														JSONArray itemArray = array.getJSONArray(i);
+														TyphoonDto dto = new TyphoonDto();
+														dto.id = itemArray.getString(0);
+														dto.enName = itemArray.getString(1);
+														dto.name = itemArray.getString(2);
+														dto.code = itemArray.getString(4);
+														dto.status = itemArray.getString(7);
+														nameList.add(dto);
+
+														//把活跃台风过滤出来存放
+														if (TextUtils.equals(dto.status, "start")) {
+															startList.add(dto);
+														}
+													}
+
+													String typhoonName = "";
+													for (int i = startList.size()-1; i >= 0; i--) {
+														TyphoonDto data = startList.get(i);
+														if (TextUtils.equals(data.enName, "nameless")) {
+															if (!TextUtils.isEmpty(typhoonName)) {
+																typhoonName = data.enName+"\n"+typhoonName;
+															}else {
+																typhoonName = data.enName;
+															}
+															String detailUrl = "http://decision-admin.tianqi.cn/Home/extra/gettyphoon/view/" + data.id;
+															OkHttpDetail(detailUrl, data.code + " " + data.enName);
+														}else {
+															if (!TextUtils.isEmpty(typhoonName)) {
+																typhoonName = data.code + " " + data.name + " " + data.enName+"\n"+typhoonName;;
+															}else {
+																typhoonName = data.code + " " + data.name + " " + data.enName;
+															}
+															String detailUrl = "http://decision-admin.tianqi.cn/Home/extra/gettyphoon/view/" + data.id;
+															OkHttpDetail(detailUrl, data.code + " " + data.name + " " + data.enName);
+														}
+													}
+													tvTyphoonName.setText(typhoonName);
+
+													if (startList.size() == 0) {// 没有生效台风
+														if (currentYear == selectYear) {// 判断选中年数==当前年数
+															tvTyphoonName.setText(getString(R.string.no_typhoon));
+														}else {
+															tvTyphoonName.setText(selectYear+"年");
+														}
+														ivLocation.setVisibility(View.GONE);
+														ivTyphoonPlay.setVisibility(View.GONE);
+														ivTyphoonWind.setVisibility(View.GONE);
+														ivTyphoonRange.setVisibility(View.GONE);
+														cancelDialog();
+													} else if (startList.size() == 1) {// 1个生效台风
+														ivLocation.setVisibility(View.VISIBLE);
+														ivTyphoonWind.setVisibility(View.VISIBLE);
+														ivTyphoonPlay.setVisibility(View.VISIBLE);
+														ivTyphoonRange.setVisibility(View.VISIBLE);
+														mRadarManager = new CaiyunManager(getApplicationContext());
+														asyncQueryMinutes("http://api.tianqi.cn:8070/v1/img.py");
+														asyncQueryCloud("http://decision-admin.tianqi.cn/Home/other/getDecisionCloudImages");
+													} else {// 2个以上生效台风
+														ivLocation.setVisibility(View.VISIBLE);
+														ivTyphoonWind.setVisibility(View.VISIBLE);
+														ivTyphoonRange.setVisibility(View.VISIBLE);
+														ivTyphoonPlay.setVisibility(View.GONE);
+														mRadarManager = new CaiyunManager(getApplicationContext());
+														asyncQueryMinutes("http://api.tianqi.cn:8070/v1/img.py");
+														asyncQueryCloud("http://decision-admin.tianqi.cn/Home/other/getDecisionCloudImages");
+													}
+													tvTyphoonName.setVisibility(View.VISIBLE);
+												}
+
+												initNameListView();
+											}
+										}
+									}else {
+										tvTyphoonName.setText(getString(R.string.no_typhoon));
+										tvTyphoonName.setVisibility(View.VISIBLE);
+									}
+								} catch (IndexOutOfBoundsException e) {
+									e.printStackTrace();
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 
 	private void initNameListView() {
@@ -594,7 +560,7 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 
 				isShowInfoWindow = true;
 				String detailUrl = "http://decision-admin.tianqi.cn/Home/extra/gettyphoon/view/" + dto.id;
-				asyncQueryDetail(detailUrl, tvTyphoonName.getText().toString());
+				OkHttpDetail(detailUrl, tvTyphoonName.getText().toString());
 
 				clearAllPoints();
 
@@ -620,244 +586,210 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 	/**
 	 * 异步请求
 	 */
-	private void asyncQueryDetail(String requestUrl, String name) {
-		HttpAsyncTaskDetail task = new HttpAsyncTaskDetail(name);
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(requestUrl);
-	}
+	private void OkHttpDetail(final String url, final String name) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-	/**
-	 * 异步请求方法
-	 *
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTaskDetail extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		private String name = null;
-
-		public HttpAsyncTaskDetail(String name) {
-			this.name = name;
-		}
-
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			if (requestResult != null) {
-				String c = "(";
-				String result = requestResult.substring(requestResult.indexOf(c)+c.length(), requestResult.indexOf(")"));
-				if (!TextUtils.isEmpty(result)) {
-					try {
-						JSONObject obj = new JSONObject(result);
-						if (!obj.isNull("typhoon")) {
-							ArrayList<TyphoonDto> points = new ArrayList<TyphoonDto>();//台风实点
-							List<TyphoonDto> forePoints = new ArrayList<TyphoonDto>();//台风预报点
-							JSONArray array = obj.getJSONArray("typhoon");
-							JSONArray itemArray = array.getJSONArray(8);
-							for (int j = 0; j < itemArray.length(); j++) {
-								JSONArray itemArray2 = itemArray.getJSONArray(j);
-								TyphoonDto dto = new TyphoonDto();
-								if (!TextUtils.isEmpty(name)) {
-									dto.name = name;
-								}
-								long longTime = itemArray2.getLong(2);
-								String time = sdf2.format(new Date(longTime));
-								dto.time = time;
-//									String time = itemArray2.getString(1);
-								String str_year = time.substring(0, 4);
-								if(!TextUtils.isEmpty(str_year)){
-									dto.year = Integer.parseInt(str_year);
-								}
-								String str_month = time.substring(4, 6);
-								if(!TextUtils.isEmpty(str_month)){
-									dto.month = Integer.parseInt(str_month);
-								}
-								String str_day = time.substring(6, 8);
-								if(!TextUtils.isEmpty(str_day)){
-									dto.day = Integer.parseInt(str_day);
-								}
-								String str_hour = time.substring(8, 10);
-								if(!TextUtils.isEmpty(str_hour)){
-									dto.hour = Integer.parseInt(str_hour);
-								}
-
-								dto.lng = itemArray2.getDouble(4);
-								dto.lat = itemArray2.getDouble(5);
-								dto.pressure = itemArray2.getString(6);
-								dto.max_wind_speed = itemArray2.getString(7);
-								dto.move_speed = itemArray2.getString(9);
-								String fx_string = itemArray2.getString(8);
-								if( !TextUtils.isEmpty(fx_string)){
-									String windDir = "";
-									for (int i = 0; i < fx_string.length(); i++) {
-										String item = fx_string.substring(i, i+1);
-										if (TextUtils.equals(item, "N")) {
-											item = "北";
-										}else if (TextUtils.equals(item, "S")) {
-											item = "南";
-										}else if (TextUtils.equals(item, "W")) {
-											item = "西";
-										}else if (TextUtils.equals(item, "E")) {
-											item = "东";
-										}
-										windDir = windDir+item;
-									}
-									dto.wind_dir = windDir;
-								}
-
-								String type = itemArray2.getString(3);
-								if (TextUtils.equals(type, "TD")) {//热带低压
-									type = "1";
-								}else if (TextUtils.equals(type, "TS")) {//热带风暴
-									type = "2";
-								}else if (TextUtils.equals(type, "STS")) {//强热带风暴
-									type = "3";
-								}else if (TextUtils.equals(type, "TY")) {//台风
-									type = "4";
-								}else if (TextUtils.equals(type, "STY")) {//强台风
-									type = "5";
-								}else if (TextUtils.equals(type, "SuperTY")) {//超强台风
-									type = "6";
-								}
-								dto.type = type;
-								dto.isFactPoint = true;
-
-								JSONArray array10 = itemArray2.getJSONArray(10);
-								for (int m = 0; m < array10.length(); m++) {
-									JSONArray itemArray10 = array10.getJSONArray(m);
-									if (m == 0) {
-										dto.radius_7 = itemArray10.getString(1);
-										dto.en_radius_7 = itemArray10.getString(1);
-										dto.es_radius_7 = itemArray10.getString(2);
-										dto.wn_radius_7 = itemArray10.getString(3);
-										dto.ws_radius_7 = itemArray10.getString(4);
-									}else if (m == 1) {
-										dto.radius_10 = itemArray10.getString(1);
-										dto.en_radius_10 = itemArray10.getString(1);
-										dto.es_radius_10 = itemArray10.getString(2);
-										dto.wn_radius_10 = itemArray10.getString(3);
-										dto.ws_radius_10 = itemArray10.getString(4);
-									}
-								}
-								points.add(dto);
-
-								if (!itemArray2.get(11).equals(null)) {
-									JSONObject obj11 = itemArray2.getJSONObject(11);
-									JSONArray array11 = obj11.getJSONArray("BABJ");
-									if (array11.length() > 0) {
-										forePoints.clear();
-									}
-									for (int n = 0; n < array11.length(); n++) {
-										JSONArray itemArray11 = array11.getJSONArray(n);
-										for (int i = 0; i < itemArray11.length(); i++) {
-											TyphoonDto data = new TyphoonDto();
-											if (!TextUtils.isEmpty(name)) {
-												data.name = name;
-											}
-											data.lng = itemArray11.getDouble(2);
-											data.lat = itemArray11.getDouble(3);
-											data.pressure = itemArray11.getString(4);
-											data.move_speed = itemArray11.getString(5);
-
-											long t1 = longTime;
-											long t2 = itemArray11.getLong(0)*3600*1000;
-											long ttt = t1+t2;
-											String ttime = sdf2.format(new Date(ttt));
-											data.time = ttime;
-											String year = ttime.substring(0, 4);
-											if(!TextUtils.isEmpty(year)){
-												data.year = Integer.parseInt(year);
-											}
-											String month = ttime.substring(4, 6);
-											if(!TextUtils.isEmpty(month)){
-												data.month = Integer.parseInt(month);
-											}
-											String day = ttime.substring(6, 8);
-											if(!TextUtils.isEmpty(day)){
-												data.day = Integer.parseInt(day);
-											}
-											String hour = ttime.substring(8, 10);
-											if(!TextUtils.isEmpty(hour)){
-												data.hour = Integer.parseInt(hour);
-											}
-
-											String babjType = itemArray11.getString(7);
-											if (TextUtils.equals(babjType, "TD")) {//热带低压
-												babjType = "1";
-											}else if (TextUtils.equals(babjType, "TS")) {//热带风暴
-												babjType = "2";
-											}else if (TextUtils.equals(babjType, "STS")) {//强热带风暴
-												babjType = "3";
-											}else if (TextUtils.equals(babjType, "TY")) {//台风
-												babjType = "4";
-											}else if (TextUtils.equals(babjType, "STY")) {//强台风
-												babjType = "5";
-											}else if (TextUtils.equals(babjType, "SuperTY")) {//超强台风
-												babjType = "6";
-											}
-											data.type = babjType;
-											data.isFactPoint = false;
-
-											forePoints.add(data);
-										}
-									}
-								}
-							}
-
-							points.addAll(forePoints);
-							pointsList.add(points);
-
-							if (startList.size() <= 1) {
-								drawTyphoon(false, pointsList.get(0));
-							}else {
-								for (int i = 0; i < pointsList.size(); i++) {
-									drawTyphoon(false, pointsList.get(i));
-								}
-							}
-
-							cancelDialog();
-						}
-					} catch (JSONException e) {
-						e.printStackTrace();
 					}
-				}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String requestResult = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(requestResult)) {
+									String c = "(";
+									String result = requestResult.substring(requestResult.indexOf(c)+c.length(), requestResult.indexOf(")"));
+									if (!TextUtils.isEmpty(result)) {
+										try {
+											JSONObject obj = new JSONObject(result);
+											if (!obj.isNull("typhoon")) {
+												ArrayList<TyphoonDto> points = new ArrayList<TyphoonDto>();//台风实点
+												List<TyphoonDto> forePoints = new ArrayList<TyphoonDto>();//台风预报点
+												JSONArray array = obj.getJSONArray("typhoon");
+												JSONArray itemArray = array.getJSONArray(8);
+												for (int j = 0; j < itemArray.length(); j++) {
+													JSONArray itemArray2 = itemArray.getJSONArray(j);
+													TyphoonDto dto = new TyphoonDto();
+													if (!TextUtils.isEmpty(name)) {
+														dto.name = name;
+													}
+													long longTime = itemArray2.getLong(2);
+													String time = sdf2.format(new Date(longTime));
+													dto.time = time;
+//									String time = itemArray2.getString(1);
+													String str_year = time.substring(0, 4);
+													if(!TextUtils.isEmpty(str_year)){
+														dto.year = Integer.parseInt(str_year);
+													}
+													String str_month = time.substring(4, 6);
+													if(!TextUtils.isEmpty(str_month)){
+														dto.month = Integer.parseInt(str_month);
+													}
+													String str_day = time.substring(6, 8);
+													if(!TextUtils.isEmpty(str_day)){
+														dto.day = Integer.parseInt(str_day);
+													}
+													String str_hour = time.substring(8, 10);
+													if(!TextUtils.isEmpty(str_hour)){
+														dto.hour = Integer.parseInt(str_hour);
+													}
+
+													dto.lng = itemArray2.getDouble(4);
+													dto.lat = itemArray2.getDouble(5);
+													dto.pressure = itemArray2.getString(6);
+													dto.max_wind_speed = itemArray2.getString(7);
+													dto.move_speed = itemArray2.getString(9);
+													String fx_string = itemArray2.getString(8);
+													if( !TextUtils.isEmpty(fx_string)){
+														String windDir = "";
+														for (int i = 0; i < fx_string.length(); i++) {
+															String item = fx_string.substring(i, i+1);
+															if (TextUtils.equals(item, "N")) {
+																item = "北";
+															}else if (TextUtils.equals(item, "S")) {
+																item = "南";
+															}else if (TextUtils.equals(item, "W")) {
+																item = "西";
+															}else if (TextUtils.equals(item, "E")) {
+																item = "东";
+															}
+															windDir = windDir+item;
+														}
+														dto.wind_dir = windDir;
+													}
+
+													String type = itemArray2.getString(3);
+													if (TextUtils.equals(type, "TD")) {//热带低压
+														type = "1";
+													}else if (TextUtils.equals(type, "TS")) {//热带风暴
+														type = "2";
+													}else if (TextUtils.equals(type, "STS")) {//强热带风暴
+														type = "3";
+													}else if (TextUtils.equals(type, "TY")) {//台风
+														type = "4";
+													}else if (TextUtils.equals(type, "STY")) {//强台风
+														type = "5";
+													}else if (TextUtils.equals(type, "SuperTY")) {//超强台风
+														type = "6";
+													}
+													dto.type = type;
+													dto.isFactPoint = true;
+
+													JSONArray array10 = itemArray2.getJSONArray(10);
+													for (int m = 0; m < array10.length(); m++) {
+														JSONArray itemArray10 = array10.getJSONArray(m);
+														if (m == 0) {
+															dto.radius_7 = itemArray10.getString(1);
+															dto.en_radius_7 = itemArray10.getString(1);
+															dto.es_radius_7 = itemArray10.getString(2);
+															dto.wn_radius_7 = itemArray10.getString(3);
+															dto.ws_radius_7 = itemArray10.getString(4);
+														}else if (m == 1) {
+															dto.radius_10 = itemArray10.getString(1);
+															dto.en_radius_10 = itemArray10.getString(1);
+															dto.es_radius_10 = itemArray10.getString(2);
+															dto.wn_radius_10 = itemArray10.getString(3);
+															dto.ws_radius_10 = itemArray10.getString(4);
+														}
+													}
+													points.add(dto);
+
+													if (!itemArray2.get(11).equals(null)) {
+														JSONObject obj11 = itemArray2.getJSONObject(11);
+														JSONArray array11 = obj11.getJSONArray("BABJ");
+														if (array11.length() > 0) {
+															forePoints.clear();
+														}
+														for (int n = 0; n < array11.length(); n++) {
+															JSONArray itemArray11 = array11.getJSONArray(n);
+															for (int i = 0; i < itemArray11.length(); i++) {
+																TyphoonDto data = new TyphoonDto();
+																if (!TextUtils.isEmpty(name)) {
+																	data.name = name;
+																}
+																data.lng = itemArray11.getDouble(2);
+																data.lat = itemArray11.getDouble(3);
+																data.pressure = itemArray11.getString(4);
+																data.move_speed = itemArray11.getString(5);
+
+																long t1 = longTime;
+																long t2 = itemArray11.getLong(0)*3600*1000;
+																long ttt = t1+t2;
+																String ttime = sdf2.format(new Date(ttt));
+																data.time = ttime;
+																String year = ttime.substring(0, 4);
+																if(!TextUtils.isEmpty(year)){
+																	data.year = Integer.parseInt(year);
+																}
+																String month = ttime.substring(4, 6);
+																if(!TextUtils.isEmpty(month)){
+																	data.month = Integer.parseInt(month);
+																}
+																String day = ttime.substring(6, 8);
+																if(!TextUtils.isEmpty(day)){
+																	data.day = Integer.parseInt(day);
+																}
+																String hour = ttime.substring(8, 10);
+																if(!TextUtils.isEmpty(hour)){
+																	data.hour = Integer.parseInt(hour);
+																}
+
+																String babjType = itemArray11.getString(7);
+																if (TextUtils.equals(babjType, "TD")) {//热带低压
+																	babjType = "1";
+																}else if (TextUtils.equals(babjType, "TS")) {//热带风暴
+																	babjType = "2";
+																}else if (TextUtils.equals(babjType, "STS")) {//强热带风暴
+																	babjType = "3";
+																}else if (TextUtils.equals(babjType, "TY")) {//台风
+																	babjType = "4";
+																}else if (TextUtils.equals(babjType, "STY")) {//强台风
+																	babjType = "5";
+																}else if (TextUtils.equals(babjType, "SuperTY")) {//超强台风
+																	babjType = "6";
+																}
+																data.type = babjType;
+																data.isFactPoint = false;
+
+																forePoints.add(data);
+															}
+														}
+													}
+												}
+
+												points.addAll(forePoints);
+												pointsList.add(points);
+
+												if (startList.size() <= 1) {
+													drawTyphoon(false, pointsList.get(0));
+												}else {
+													for (int i = 0; i < pointsList.size(); i++) {
+														drawTyphoon(false, pointsList.get(i));
+													}
+												}
+
+												cancelDialog();
+											}
+										} catch (JSONException e) {
+											e.printStackTrace();
+										}
+									}
+								}
+							}
+						});
+					}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 
 	private Handler handler = new Handler() {
@@ -1676,86 +1608,60 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 	 * 获取分钟级降水图
 	 * @param url
 	 */
-	private void asyncQueryMinutes(String url) {
-		HttpAsyncTaskMinutes task = new HttpAsyncTaskMinutes();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(url);
-	}
+	private void asyncQueryMinutes(final String url) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-	private class HttpAsyncTaskMinutes extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
+					}
 
-		public HttpAsyncTaskMinutes() {
-		}
-
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			super.onPostExecute(result);
-			if (result != null) {
-				try {
-					JSONObject obj = new JSONObject(result.toString());
-					if (!obj.isNull("status")) {
-						if (obj.getString("status").equals("ok")) {
-							if (!obj.isNull("radar_img")) {
-								JSONArray array = new JSONArray(obj.getString("radar_img"));
-								for (int i = 0; i < array.length(); i++) {
-									JSONArray array0 = array.getJSONArray(i);
-									MinuteFallDto dto = new MinuteFallDto();
-									dto.setImgUrl(array0.optString(0));
-									dto.setTime(array0.optLong(1));
-									JSONArray itemArray = array0.getJSONArray(2);
-									dto.setP1(itemArray.optDouble(0));
-									dto.setP2(itemArray.optDouble(1));
-									dto.setP3(itemArray.optDouble(2));
-									dto.setP4(itemArray.optDouble(3));
-									radarList.add(dto);
-								}
-								if (radarList.size() > 0) {
-									startDownLoadImgs(radarList);
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (!obj.isNull("status")) {
+											if (obj.getString("status").equals("ok")) {
+												if (!obj.isNull("radar_img")) {
+													JSONArray array = new JSONArray(obj.getString("radar_img"));
+													for (int i = 0; i < array.length(); i++) {
+														JSONArray array0 = array.getJSONArray(i);
+														MinuteFallDto dto = new MinuteFallDto();
+														dto.setImgUrl(array0.optString(0));
+														dto.setTime(array0.optLong(1));
+														JSONArray itemArray = array0.getJSONArray(2);
+														dto.setP1(itemArray.optDouble(0));
+														dto.setP2(itemArray.optDouble(1));
+														dto.setP3(itemArray.optDouble(2));
+														dto.setP4(itemArray.optDouble(3));
+														radarList.add(dto);
+													}
+													if (radarList.size() > 0) {
+														startDownLoadImgs(radarList);
+													}
+												}
+											}
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
 								}
 							}
-						}
+						});
 					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 鍙栨秷褰撳墠task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 
 	private void startDownLoadImgs(List<MinuteFallDto> list) {
@@ -1926,79 +1832,48 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 	/**
 	 * 获取云图数据
 	 */
-	private void asyncQueryCloud(String url) {
-		HttpAsyncTaskCloud task = new HttpAsyncTaskCloud();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(url);
-	}
+	private void asyncQueryCloud(final String url) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTaskCloud extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-
-		public HttpAsyncTaskCloud() {
-		}
-
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			super.onPostExecute(result);
-			if (result != null) {
-				try {
-					JSONObject obj = new JSONObject(result.toString());
-					if (!obj.isNull("l")) {
-						JSONArray array = obj.getJSONArray("l");
-						if (array.length() > 0) {
-							JSONObject itemObj = array.getJSONObject(0);
-							String imgUrl = itemObj.getString("l2");
-							if (!TextUtils.isEmpty(imgUrl)) {
-								downloadPortrait(imgUrl);
-							}
-						}
 					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (!obj.isNull("l")) {
+											JSONArray array = obj.getJSONArray("l");
+											if (array.length() > 0) {
+												JSONObject itemObj = array.getJSONObject(0);
+												String imgUrl = itemObj.getString("l2");
+												if (!TextUtils.isEmpty(imgUrl)) {
+													downloadPortrait(imgUrl);
+												}
+											}
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
+					}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 
 	/**
@@ -2108,110 +1983,80 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 	/**
 	 * 异步请求
 	 */
-	private void asyncQueryWind(String requestUrl) {
-		HttpAsyncTaskWind task = new HttpAsyncTaskWind();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(getWindSecretUrl(requestUrl, "1000"));
-	}
+	private void asyncQueryWind(final String requestUrl) {
+		final String url = getWindSecretUrl(requestUrl, "1000");
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTaskWind extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-
-		public HttpAsyncTaskWind() {
-		}
-
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			if (requestResult != null) {
-				try {
-					JSONObject obj = new JSONObject(requestResult);
-					if (windData == null) {
-						windData = new WindData();
 					}
-					if (obj != null) {
-						if (!obj.isNull("gridHeight")) {
-							windData.height = obj.getInt("gridHeight");
-						}
-						if (!obj.isNull("gridWidth")) {
-							windData.width = obj.getInt("gridWidth");
-						}
-						if (!obj.isNull("x0")) {
-							windData.x0 = obj.getDouble("x0");
-						}
-						if (!obj.isNull("y0")) {
-							windData.y0 = obj.getDouble("y0");
-						}
-						if (!obj.isNull("x1")) {
-							windData.x1 = obj.getDouble("x1");
-						}
-						if (!obj.isNull("y1")) {
-							windData.y1 = obj.getDouble("y1");
-						}
-						if (!obj.isNull("filetime")) {
-							windData.filetime = obj.getString("filetime");
-						}
 
-						if (!obj.isNull("field")) {
-							windData.dataList.clear();
-							JSONArray array = new JSONArray(obj.getString("field"));
-							for (int i = 0; i < array.length(); i+=2) {
-								WindDto dto2 = new WindDto();
-								dto2.initX = (float)(array.optDouble(i));
-								dto2.initY = (float)(array.optDouble(i+1));
-								windData.dataList.add(dto2);
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (windData == null) {
+											windData = new WindData();
+										}
+										if (obj != null) {
+											if (!obj.isNull("gridHeight")) {
+												windData.height = obj.getInt("gridHeight");
+											}
+											if (!obj.isNull("gridWidth")) {
+												windData.width = obj.getInt("gridWidth");
+											}
+											if (!obj.isNull("x0")) {
+												windData.x0 = obj.getDouble("x0");
+											}
+											if (!obj.isNull("y0")) {
+												windData.y0 = obj.getDouble("y0");
+											}
+											if (!obj.isNull("x1")) {
+												windData.x1 = obj.getDouble("x1");
+											}
+											if (!obj.isNull("y1")) {
+												windData.y1 = obj.getDouble("y1");
+											}
+											if (!obj.isNull("filetime")) {
+												windData.filetime = obj.getString("filetime");
+											}
+
+											if (!obj.isNull("field")) {
+												windData.dataList.clear();
+												JSONArray array = new JSONArray(obj.getString("field"));
+												for (int i = 0; i < array.length(); i+=2) {
+													WindDto dto2 = new WindDto();
+													dto2.initX = (float)(array.optDouble(i));
+													dto2.initY = (float)(array.optDouble(i+1));
+													windData.dataList.add(dto2);
+												}
+											}
+
+											cancelDialog();
+											reloadWind();
+											isHaveWindData = true;
+										}
+									} catch (JSONException e1) {
+										e1.printStackTrace();
+									}
+								}
 							}
-						}
-
-						cancelDialog();
-						reloadWind();
-						isHaveWindData = true;
+						});
 					}
-				} catch (JSONException e1) {
-					e1.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 
 	@Override

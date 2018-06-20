@@ -4,18 +4,8 @@ package com.hlj.adapter;
  * 气温预报、雾霾预报、降温大风沙尘预报
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.tsz.afinal.FinalBitmap;
-
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,14 +16,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hlj.dto.AgriDto;
-import com.hlj.utils.CustomHttpClient;
+import com.hlj.utils.OkHttpUtil;
+
+import net.tsz.afinal.FinalBitmap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
 public class HTemperatureForecastAdapter extends BaseAdapter{
 	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<AgriDto> mArrayList = new ArrayList<AgriDto>();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<AgriDto> mArrayList;
+	private Activity activity;
 	
 	private final class ViewHolder{
 		TextView tvName;
@@ -42,7 +47,8 @@ public class HTemperatureForecastAdapter extends BaseAdapter{
 	
 	private ViewHolder mHolder = null;
 	
-	public HTemperatureForecastAdapter(Context context, List<AgriDto> mArrayList) {
+	public HTemperatureForecastAdapter(Context context, List<AgriDto> mArrayList, Activity activity) {
+		this.activity = activity;
 		mContext = context;
 		this.mArrayList = mArrayList;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -77,7 +83,7 @@ public class HTemperatureForecastAdapter extends BaseAdapter{
 		
 		AgriDto dto = mArrayList.get(position);
 		mHolder.tvName.setText(dto.name);
-		asyncQuery(dto.dataUrl, mHolder.imageView);
+		OkHttpImage(dto.dataUrl, mHolder.imageView);
 		Log.d("name", dto.name);
 		
 		return convertView;
@@ -86,80 +92,47 @@ public class HTemperatureForecastAdapter extends BaseAdapter{
 	/**
 	 * 获取详情
 	 */
-	private void asyncQuery(String requestUrl, ImageView imageView) {
-		HttpAsyncTask task = new HttpAsyncTask(imageView);
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(requestUrl);
-	}
-	
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		private ImageView imageView = null;
-		
-		public HttpAsyncTask(ImageView imageView) {
-			this.imageView = imageView;
-		}
-		
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
+	private void OkHttpImage(final String url, final ImageView imageView) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			if (requestResult != null) {
-				try {
-					JSONObject obj = new JSONObject(requestResult);
-					if (!obj.isNull("imgs")) {
-						JSONArray array = obj.getJSONArray("imgs");
-						JSONObject itemObj = array.getJSONObject(0);
-						String icon = itemObj.getString("i");
-						if (!TextUtils.isEmpty(icon)) {
-							FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-							finalBitmap.display(imageView, icon, null, 0);
-						}
 					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						activity.runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (!obj.isNull("imgs")) {
+											JSONArray array = obj.getJSONArray("imgs");
+											JSONObject itemObj = array.getJSONObject(0);
+											String icon = itemObj.getString("i");
+											if (!TextUtils.isEmpty(icon)) {
+												FinalBitmap finalBitmap = FinalBitmap.create(mContext);
+												finalBitmap.display(imageView, icon, null, 0);
+											}
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
+					}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 	
 }

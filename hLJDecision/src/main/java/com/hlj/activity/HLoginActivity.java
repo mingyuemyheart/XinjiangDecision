@@ -126,7 +126,7 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 	/**
 	 * 异步请求
 	 */
-	private void OkHttpLogin(String url) {
+	private void OkHttpLogin(final String url) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("username", etUserName.getText().toString());
 		builder.add("password", etPwd.getText().toString());
@@ -139,28 +139,34 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 		builder.add("address", "");
 		builder.add("lat", lat);
 		builder.add("lon", lon);
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-			}
+					}
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (!TextUtils.isEmpty(result)) {
-					try {
-						JSONObject object = new JSONObject(result);
-						if (object != null) {
-							if (!object.isNull("status")) {
-								int status  = object.getInt("status");
-								if (status == 1) {//成功
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status  = object.getInt("status");
+												if (status == 1) {//成功
 
-									JSONArray array = new JSONArray(object.getString("column"));
+													JSONArray array = new JSONArray(object.getString("column"));
 
 //								SharedPreferences sp = getSharedPreferences(com.hlj.common.CONST.CHANNELSIZESHARE, Context.MODE_PRIVATE);
 //								Editor channelEditor = sp.edit();
@@ -168,155 +174,147 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 //								channelEditor.putInt(com.hlj.common.CONST.CHANNELSIZE, size);
 //								channelEditor.commit();
 
-									CONST.dataList.clear();
-									for (int i = 0; i < array.length(); i++) {
-										JSONObject obj = array.getJSONObject(i);
-										ColumnData data = new ColumnData();
-										if (!obj.isNull("localviewid")) {
-											data.id = obj.getString("localviewid");
-										}
-										if (!obj.isNull("name")) {
-											data.name = obj.getString("name");
-										}
-										if (!obj.isNull("default")) {
-											data.level = obj.getString("default");
-										}
-										if (!obj.isNull("icon")) {
-											data.icon = obj.getString("icon");
-										}
-										if (!obj.isNull("icon2")) {
-											data.icon2 = obj.getString("icon2");
-										}
-										if (!obj.isNull("desc")) {
-											data.desc = obj.getString("desc");
-										}
-										if (!obj.isNull("dataurl")) {
-											data.dataUrl = obj.getString("dataurl");
-										}
-										if (!obj.isNull("showtype")) {
-											data.showType = obj.getString("showtype");
-										}
-										if (!obj.isNull("child")) {
-											JSONArray childArray = new JSONArray(obj.getString("child"));
-											for (int j = 0; j < childArray.length(); j++) {
-												JSONObject childObj = childArray.getJSONObject(j);
-												ColumnData dto = new ColumnData();
-												if (!childObj.isNull("localviewid")) {
-													dto.id = childObj.getString("localviewid");
-												}
-												if (!childObj.isNull("name")) {
-													dto.name = childObj.getString("name");
-												}
-												if (!childObj.isNull("desc")) {
-													dto.desc = childObj.getString("desc");
-												}
-												if (!childObj.isNull("icon")) {
-													dto.icon = childObj.getString("icon");
-												}
-												if (!childObj.isNull("icon2")) {
-													dto.icon2 = childObj.getString("icon2");
-												}
-												if (!childObj.isNull("showtype")) {
-													dto.showType = childObj.getString("showtype");
-												}
-												if (!childObj.isNull("dataurl")) {
-													dto.dataUrl = childObj.getString("dataurl");
-												}
-												if (!childObj.isNull("child")) {
-													JSONArray child2Array = new JSONArray(childObj.getString("child"));
-													for (int k = 0; k < child2Array.length(); k++) {
-														JSONObject child2Obj = child2Array.getJSONObject(k);
-														ColumnData child2 = new ColumnData();
-														if (!child2Obj.isNull("localviewid")) {
-															child2.id = child2Obj.getString("localviewid");
+													CONST.dataList.clear();
+													for (int i = 0; i < array.length(); i++) {
+														JSONObject obj = array.getJSONObject(i);
+														ColumnData data = new ColumnData();
+														if (!obj.isNull("localviewid")) {
+															data.id = obj.getString("localviewid");
 														}
-														if (!child2Obj.isNull("name")) {
-															child2.name = child2Obj.getString("name");
+														if (!obj.isNull("name")) {
+															data.name = obj.getString("name");
 														}
-														if (!child2Obj.isNull("desc")) {
-															child2.desc = child2Obj.getString("desc");
+														if (!obj.isNull("default")) {
+															data.level = obj.getString("default");
 														}
-														if (!child2Obj.isNull("icon")) {
-															child2.icon = child2Obj.getString("icon");
+														if (!obj.isNull("icon")) {
+															data.icon = obj.getString("icon");
 														}
-														if (!child2Obj.isNull("icon2")) {
-															child2.icon2 = child2Obj.getString("icon2");
+														if (!obj.isNull("icon2")) {
+															data.icon2 = obj.getString("icon2");
 														}
-														if (!child2Obj.isNull("dataurl")) {
-															child2.dataUrl = child2Obj.getString("dataurl");
+														if (!obj.isNull("desc")) {
+															data.desc = obj.getString("desc");
 														}
-														if (!child2Obj.isNull("showtype")) {
-															child2.showType = child2Obj.getString("showtype");
+														if (!obj.isNull("dataurl")) {
+															data.dataUrl = obj.getString("dataurl");
 														}
-														dto.child.add(child2);
+														if (!obj.isNull("showtype")) {
+															data.showType = obj.getString("showtype");
+														}
+														if (!obj.isNull("child")) {
+															JSONArray childArray = new JSONArray(obj.getString("child"));
+															for (int j = 0; j < childArray.length(); j++) {
+																JSONObject childObj = childArray.getJSONObject(j);
+																ColumnData dto = new ColumnData();
+																if (!childObj.isNull("localviewid")) {
+																	dto.id = childObj.getString("localviewid");
+																}
+																if (!childObj.isNull("name")) {
+																	dto.name = childObj.getString("name");
+																}
+																if (!childObj.isNull("desc")) {
+																	dto.desc = childObj.getString("desc");
+																}
+																if (!childObj.isNull("icon")) {
+																	dto.icon = childObj.getString("icon");
+																}
+																if (!childObj.isNull("icon2")) {
+																	dto.icon2 = childObj.getString("icon2");
+																}
+																if (!childObj.isNull("showtype")) {
+																	dto.showType = childObj.getString("showtype");
+																}
+																if (!childObj.isNull("dataurl")) {
+																	dto.dataUrl = childObj.getString("dataurl");
+																}
+																if (!childObj.isNull("child")) {
+																	JSONArray child2Array = new JSONArray(childObj.getString("child"));
+																	for (int k = 0; k < child2Array.length(); k++) {
+																		JSONObject child2Obj = child2Array.getJSONObject(k);
+																		ColumnData child2 = new ColumnData();
+																		if (!child2Obj.isNull("localviewid")) {
+																			child2.id = child2Obj.getString("localviewid");
+																		}
+																		if (!child2Obj.isNull("name")) {
+																			child2.name = child2Obj.getString("name");
+																		}
+																		if (!child2Obj.isNull("desc")) {
+																			child2.desc = child2Obj.getString("desc");
+																		}
+																		if (!child2Obj.isNull("icon")) {
+																			child2.icon = child2Obj.getString("icon");
+																		}
+																		if (!child2Obj.isNull("icon2")) {
+																			child2.icon2 = child2Obj.getString("icon2");
+																		}
+																		if (!child2Obj.isNull("dataurl")) {
+																			child2.dataUrl = child2Obj.getString("dataurl");
+																		}
+																		if (!child2Obj.isNull("showtype")) {
+																			child2.showType = child2Obj.getString("showtype");
+																		}
+																		dto.child.add(child2);
+																	}
+																}
+																data.child.add(dto);
+															}
+														}
+														CONST.dataList.add(data);
 													}
-												}
-												data.child.add(dto);
-											}
-										}
-										CONST.dataList.add(data);
-									}
 
-									if (!object.isNull("info")) {
-										JSONObject obj = new JSONObject(object.getString("info"));
-										if (!obj.isNull("id")) {
-											String uid = obj.getString("id");
-											if (uid != null) {
-												//把用户信息保存在sharedPreferance里
-												SharedPreferences sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE);
-												Editor editor = sharedPreferences.edit();
-												editor.putString(CONST.UserInfo.uId, uid);
-												editor.putString(CONST.UserInfo.userName, etUserName.getText().toString());
-												editor.putString(CONST.UserInfo.passWord, etPwd.getText().toString());
-												editor.commit();
+													if (!object.isNull("info")) {
+														JSONObject obj = new JSONObject(object.getString("info"));
+														if (!obj.isNull("id")) {
+															String uid = obj.getString("id");
+															if (uid != null) {
+																//把用户信息保存在sharedPreferance里
+																SharedPreferences sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE);
+																Editor editor = sharedPreferences.edit();
+																editor.putString(CONST.UserInfo.uId, uid);
+																editor.putString(CONST.UserInfo.userName, etUserName.getText().toString());
+																editor.putString(CONST.UserInfo.passWord, etPwd.getText().toString());
+																editor.commit();
 
-												CONST.UID = uid;
-												CONST.USERNAME = etUserName.getText().toString();
-												CONST.PASSWORD = etPwd.getText().toString();
+																CONST.UID = uid;
+																CONST.USERNAME = etUserName.getText().toString();
+																CONST.PASSWORD = etPwd.getText().toString();
 
+																cancelDialog();
+																if (HMainActivity.instance != null) {
+																	HMainActivity.instance.finish();
+																}
+																if (HSettingActivity.instance != null) {
+																	HSettingActivity.instance.finish();
+																}
+																startActivity(new Intent(mContext, HMainActivity.class));
+																finish();
 
-												runOnUiThread(new Runnable() {
-													@Override
-													public void run() {
+															}
+														}
+													}
+												}else {
+													//失败
+													if (!object.isNull("msg")) {
+														final String msg = object.getString("msg");
 														cancelDialog();
-														if (HMainActivity.instance != null) {
-															HMainActivity.instance.finish();
+														if (msg != null) {
+															Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
 														}
-														if (HSettingActivity.instance != null) {
-															HSettingActivity.instance.finish();
-														}
-														startActivity(new Intent(mContext, HMainActivity.class));
-														finish();
 													}
-												});
-
-
-											}
-										}
-									}
-								}else {
-									//失败
-									if (!object.isNull("msg")) {
-										final String msg = object.getString("msg");
-										runOnUiThread(new Runnable() {
-											@Override
-											public void run() {
-												cancelDialog();
-												if (msg != null) {
-													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
 												}
 											}
-										});
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
 							}
-						}
-					} catch (JSONException e) {
-						e.printStackTrace();
+						});
 					}
-				}
+				});
 			}
-		});
+		}).start();
 	}
 
 	@Override

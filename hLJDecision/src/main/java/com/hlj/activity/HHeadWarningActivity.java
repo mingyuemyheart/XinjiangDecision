@@ -59,7 +59,6 @@ public class HHeadWarningActivity extends BaseActivity implements OnClickListene
 	/**
 	 * 初始化viewPager
 	 */
-	@SuppressWarnings("unchecked")
 	private void initViewPager() {
 		warnList.clear();
 		warnList.addAll(getIntent().getExtras().<WarningDto>getParcelableArrayList("warningList"));

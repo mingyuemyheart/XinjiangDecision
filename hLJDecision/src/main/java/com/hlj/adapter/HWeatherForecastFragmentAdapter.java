@@ -16,20 +16,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hlj.dto.AgriDto;
-import com.hlj.utils.CommonUtil;
 
 import net.tsz.afinal.FinalBitmap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import shawn.cxwl.com.hlj.R;
 
 public class HWeatherForecastFragmentAdapter extends BaseAdapter{
 	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<AgriDto> mArrayList = new ArrayList<>();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<AgriDto> mArrayList;
 	private int width = 0;
 	
 	private final class ViewHolder{

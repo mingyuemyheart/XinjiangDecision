@@ -10,12 +10,12 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-//        applicationId "shawn.cxwl.com.hlj"
-        applicationId "shawn.cxwl.com.hlj.decision"
+        applicationId "shawn.cxwl.com.hlj"
+//        applicationId "shawn.cxwl.com.hlj.decision"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 37
-        versionName "2.1.3"
+        versionCode 38
+        versionName "2.1.4"
 
         ndk {
             abiFilters 'armeabi-v7a', 'armeabi'
@@ -43,7 +43,6 @@ dependencies {
     compile project(':indicatorlibrary')
     compile project(':sceneFinal')
     compile files('libs/ChinaWeatherAPI.jar')
-    compile files('libs/httpmime-4.1.3.jar')
     compile files('libs/vudroid-pdfview-1.0.jar')
     compile files('libs/okhttp-3.8.1.jar')
     compile files('libs/okio-1.13.0.jar')

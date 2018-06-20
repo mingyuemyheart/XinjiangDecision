@@ -11,13 +11,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,14 +22,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
-import com.amap.api.location.AMapLocationListener;
-import com.hlj.activity.HCityActivity;
-import com.hlj.activity.HMinuteFallActivity;
-import com.hlj.activity.HHeadWarningActivity;
 import com.hlj.adapter.WeeklyForecastAdapter;
 import com.hlj.common.CONST;
 import com.hlj.dto.CityDto;
@@ -258,83 +247,81 @@ public class HWeatherDetailActivity extends BaseActivity implements OnClickListe
 				@Override
 				public void onComplete(Weather content) {
 					super.onComplete(content);
-					if (content != null) {
-						JSONObject city = content.getCityInfo();
+					String result = content.toString();
+					if (!TextUtils.isEmpty(result)) {
 						try {
-							double lat = Double.valueOf(city.getString("c14"));
-							double lng = Double.valueOf(city.getString("c13"));
-							OkHttpHourRain(lng, lat);
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
+							JSONObject obj = new JSONObject(result);
 
-						//实况信息
-						JSONObject object = content.getWeatherFactInfo();
-						try {
-							if (!object.isNull("l7")) {
-								String time = object.getString("l7");
-								if (time != null) {
-									tvTime.setText(time + getString(R.string.update));
+							//城市信息
+							if (!obj.isNull("c")) {
+								JSONObject c = obj.getJSONObject("c");
+								double lat = Double.valueOf(c.getString("c14"));
+								double lng = Double.valueOf(c.getString("c13"));
+								OkHttpHourRain(lng, lat);
+							}
+
+							//实况信息
+							if (!obj.isNull("l")) {
+								JSONObject object = obj.getJSONObject("l");
+								if (!object.isNull("l7")) {
+									String time = object.getString("l7");
+									if (time != null) {
+										tvTime.setText(time + getString(R.string.update));
+									}
 								}
-							}
-							if (!object.isNull("l5")) {
-								String weatherCode = WeatherUtil.lastValue(object.getString("l5"));
-								tvPhe.setText(getString(WeatherUtil.getWeatherId(Integer.valueOf(weatherCode))));
-								Drawable drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
-								drawable.setLevel(Integer.valueOf(weatherCode));
-								ivPhe.setBackground(drawable);
-							}
-							if (!object.isNull("l1")) {
-								String factTemp = WeatherUtil.lastValue(object.getString("l1"));
-								tvTemp.setText(factTemp);
-							}
+								if (!object.isNull("l5")) {
+									String weatherCode = WeatherUtil.lastValue(object.getString("l5"));
+									tvPhe.setText(getString(WeatherUtil.getWeatherId(Integer.valueOf(weatherCode))));
+									Drawable drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
+									drawable.setLevel(Integer.valueOf(weatherCode));
+									ivPhe.setBackground(drawable);
+								}
+								if (!object.isNull("l1")) {
+									String factTemp = WeatherUtil.lastValue(object.getString("l1"));
+									tvTemp.setText(factTemp);
+								}
 
-							if (!object.isNull("l4")) {
-								String windDir = WeatherUtil.lastValue(object.getString("l4"));
-								String dir = getString(WeatherUtil.getWindDirection(Integer.valueOf(windDir)));
-								if (!object.isNull("l3")) {
-									String windForce = WeatherUtil.lastValue(object.getString("l3"));
-									String force = WeatherUtil.getFactWindForce(Integer.valueOf(windForce));
-									tvWind.setText(dir+" "+force);
-									if (TextUtils.equals(dir, "北风")) {
-										ivWind.setRotation(0);
-									}else if (TextUtils.equals(dir, "东北风")) {
-										ivWind.setRotation(45);
-									}else if (TextUtils.equals(dir, "东风")) {
-										ivWind.setRotation(90);
-									}else if (TextUtils.equals(dir, "东南风")) {
-										ivWind.setRotation(135);
-									}else if (TextUtils.equals(dir, "南风")) {
-										ivWind.setRotation(180);
-									}else if (TextUtils.equals(dir, "西南风")) {
-										ivWind.setRotation(225);
-									}else if (TextUtils.equals(dir, "西风")) {
-										ivWind.setRotation(270);
-									}else if (TextUtils.equals(dir, "西北风")) {
-										ivWind.setRotation(315);
+								if (!object.isNull("l4")) {
+									String windDir = WeatherUtil.lastValue(object.getString("l4"));
+									String dir = getString(WeatherUtil.getWindDirection(Integer.valueOf(windDir)));
+									if (!object.isNull("l3")) {
+										String windForce = WeatherUtil.lastValue(object.getString("l3"));
+										String force = WeatherUtil.getFactWindForce(Integer.valueOf(windForce));
+										tvWind.setText(dir+" "+force);
+										if (TextUtils.equals(dir, "北风")) {
+											ivWind.setRotation(0);
+										}else if (TextUtils.equals(dir, "东北风")) {
+											ivWind.setRotation(45);
+										}else if (TextUtils.equals(dir, "东风")) {
+											ivWind.setRotation(90);
+										}else if (TextUtils.equals(dir, "东南风")) {
+											ivWind.setRotation(135);
+										}else if (TextUtils.equals(dir, "南风")) {
+											ivWind.setRotation(180);
+										}else if (TextUtils.equals(dir, "西南风")) {
+											ivWind.setRotation(225);
+										}else if (TextUtils.equals(dir, "西风")) {
+											ivWind.setRotation(270);
+										}else if (TextUtils.equals(dir, "西北风")) {
+											ivWind.setRotation(315);
+										}
 									}
 								}
 							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
 
-						//空气质量
-						JSONObject aqiObj = content.getAirQualityInfo();
-						try {
-							if (!aqiObj.isNull("k3")) {
-								String aqi = WeatherUtil.lastValue(aqiObj.getString("k3"));
-								if (!TextUtils.isEmpty(aqi)) {
-									tvAqi.setText(aqi+" "+WeatherUtil.getAqi(mContext, Integer.valueOf(aqi)));
-									ivAqi.setImageResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)));
+							//空气质量
+							if (!obj.isNull("k")) {
+								JSONObject k = obj.getJSONObject("k");
+								if (!k.isNull("k3")) {
+									String aqi = WeatherUtil.lastValue(k.getString("k3"));
+									if (!TextUtils.isEmpty(aqi)) {
+										tvAqi.setText(aqi+" "+WeatherUtil.getAqi(mContext, Integer.valueOf(aqi)));
+										ivAqi.setImageResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)));
+									}
 								}
 							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
 
-						//预警
-						try {
+							//预警
 							ivWarning.setVisibility(View.GONE);
 							warningList.clear();
 							JSONArray warningArray = content.getWarningInfo();
@@ -375,133 +362,127 @@ public class HWeatherDetailActivity extends BaseActivity implements OnClickListe
 									}
 								}
 							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-
-						//逐小时预报信息
-						JSONArray hourlyArray = content.getHourlyFineForecast2();
-						try {
-							List<WeatherDto> hourlyList = new ArrayList<>();
-							for (int i = 0; i < hourlyArray.length(); i++) {
-								JSONObject itemObj = hourlyArray.getJSONObject(i);
-								WeatherDto dto = new WeatherDto();
-								dto.hourlyCode = Integer.valueOf(itemObj.getString("ja"));
-								dto.hourlyTemp = Integer.valueOf(itemObj.getString("jb"));
-								dto.hourlyTime = itemObj.getString("jf");
-								dto.hourlyWindDirCode = Integer.valueOf(itemObj.getString("jc"));
-								dto.hourlyWindForceCode = Integer.valueOf(itemObj.getString("jd"));
-								hourlyList.add(dto);
-							}
 
 							//逐小时预报信息
-							CubicView cubicView = new CubicView(mContext);
-							cubicView.setData(hourlyList);
-							llContainer1.removeAllViews();
-							llContainer1.addView(cubicView, width*2, (int)(CommonUtil.dip2px(mContext, 300)));
-						} catch (JSONException e) {
-							e.printStackTrace();
-						} catch (NullPointerException e) {
-							e.printStackTrace();
-						}
-
-						//一周预报信息
-						try {
-							weeklyList.clear();
-							//这里只去一周预报，默认为15天，所以遍历7次
-							for (int i = 1; i <= 15; i++) {
-								WeatherDto dto = new WeatherDto();
-
-								JSONArray weeklyArray = content.getWeatherForecastInfo(i);
-								JSONObject weeklyObj = weeklyArray.getJSONObject(0);
-
-								//晚上
-								dto.lowPheCode = Integer.valueOf(weeklyObj.getString("fb"));
-								dto.lowPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fb"))));
-								dto.lowTemp = Integer.valueOf(weeklyObj.getString("fd"));
-
-								//白天
-								dto.highPheCode = Integer.valueOf(weeklyObj.getString("fa"));
-								dto.highPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fa"))));
-								dto.highTemp = Integer.valueOf(weeklyObj.getString("fc"));
-
-								if (hour >= 5 && hour < 18) {
-									dto.windDir = Integer.valueOf(weeklyObj.getString("fe"));
-									dto.windForce = Integer.valueOf(weeklyObj.getString("fg"));
-									dto.windForceString = WeatherUtil.getDayWindForce(Integer.valueOf(dto.windForce));
-								}else {
-									dto.windDir = Integer.valueOf(weeklyObj.getString("ff"));
-									dto.windForce = Integer.valueOf(weeklyObj.getString("fh"));
-									dto.windForceString = WeatherUtil.getDayWindForce(Integer.valueOf(dto.windForce));
+							if (!obj.isNull("jh")) {
+								JSONArray hourlyArray = obj.getJSONArray("jh");
+								List<WeatherDto> hourlyList = new ArrayList<>();
+								for (int i = 0; i < hourlyArray.length(); i++) {
+									JSONObject itemObj = hourlyArray.getJSONObject(i);
+									WeatherDto dto = new WeatherDto();
+									dto.hourlyCode = Integer.valueOf(itemObj.getString("ja"));
+									dto.hourlyTemp = Integer.valueOf(itemObj.getString("jb"));
+									dto.hourlyTime = itemObj.getString("jf");
+									dto.hourlyWindDirCode = Integer.valueOf(itemObj.getString("jc"));
+									dto.hourlyWindForceCode = Integer.valueOf(itemObj.getString("jd"));
+									hourlyList.add(dto);
 								}
 
-								JSONArray timeArray =  content.getTimeInfo(i);
-								JSONObject timeObj = timeArray.getJSONObject(0);
-								dto.week = timeObj.getString("t4");//星期几
-								dto.date = timeObj.getString("t1");//日期
-
-								weeklyList.add(dto);
-
-								if (i == 1) {
-									tvDay1.setText("今天");
-									Drawable drawable;
-									if (hour >= 5 && hour < 18) {
-										drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
-										drawable.setLevel(dto.highPheCode);
-										tvPhe1.setText(getString(WeatherUtil.getWeatherId(dto.highPheCode)));
-									}else {
-										drawable = getResources().getDrawable(R.drawable.phenomenon_drawable_night);
-										drawable.setLevel(dto.lowPheCode);
-										tvPhe1.setText(getString(WeatherUtil.getWeatherId(dto.lowPheCode)));
-									}
-									if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-										ivPhe1.setBackground(drawable);
-									}else {
-										ivPhe1.setBackgroundDrawable(drawable);
-									}
-									tvTemp1.setText(dto.highTemp+"/"+dto.lowTemp);
-								}
-								if (i == 2) {
-									tvDay2.setText("明天");
-									Drawable drawable;
-									if (hour >= 5 && hour < 18) {
-										drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
-										drawable.setLevel(dto.highPheCode);
-										tvPhe2.setText(getString(WeatherUtil.getWeatherId(dto.highPheCode)));
-									}else {
-										drawable = getResources().getDrawable(R.drawable.phenomenon_drawable_night);
-										drawable.setLevel(dto.lowPheCode);
-										tvPhe2.setText(getString(WeatherUtil.getWeatherId(dto.lowPheCode)));
-									}
-									if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-										ivPhe2.setBackground(drawable);
-									}else {
-										ivPhe2.setBackgroundDrawable(drawable);
-									}
-									tvTemp2.setText(dto.highTemp+"/"+dto.lowTemp);
-								}
+								//逐小时预报信息
+								CubicView cubicView = new CubicView(mContext);
+								cubicView.setData(hourlyList);
+								llContainer1.removeAllViews();
+								llContainer1.addView(cubicView, width*2, (int)(CommonUtil.dip2px(mContext, 300)));
 							}
 
-							//一周预报列表
-							if (mAdapter != null) {
-								mAdapter.notifyDataSetChanged();
-								CommonUtil.setListViewHeightBasedOnChildren(mListView);
+							//15天预报
+							if (!obj.isNull("f")) {
+								JSONObject f = obj.getJSONObject("f");
+								String f0 = f.getString("f0");
+								JSONArray f1 = f.getJSONArray("f1");
+								weeklyList.clear();
+								for (int i = 0; i < f1.length(); i++) {
+									WeatherDto dto = new WeatherDto();
+
+									JSONObject weeklyObj = f1.getJSONObject(i);
+
+									//晚上
+									dto.lowPheCode = Integer.valueOf(weeklyObj.getString("fb"));
+									dto.lowPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fb"))));
+									dto.lowTemp = Integer.valueOf(weeklyObj.getString("fd"));
+
+									//白天
+									dto.highPheCode = Integer.valueOf(weeklyObj.getString("fa"));
+									dto.highPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fa"))));
+									dto.highTemp = Integer.valueOf(weeklyObj.getString("fc"));
+
+									if (hour >= 5 && hour < 18) {
+										dto.windDir = Integer.valueOf(weeklyObj.getString("fe"));
+										dto.windForce = Integer.valueOf(weeklyObj.getString("fg"));
+										dto.windForceString = WeatherUtil.getDayWindForce(Integer.valueOf(dto.windForce));
+									}else {
+										dto.windDir = Integer.valueOf(weeklyObj.getString("ff"));
+										dto.windForce = Integer.valueOf(weeklyObj.getString("fh"));
+										dto.windForceString = WeatherUtil.getDayWindForce(Integer.valueOf(dto.windForce));
+									}
+
+									dto.week = CommonUtil.getWeek(i);//星期几
+									dto.date = CommonUtil.getDate(f0, i);//日期
+
+									weeklyList.add(dto);
+
+									if (i == 0) {
+										tvDay1.setText("今天");
+										Drawable drawable;
+										if (hour >= 5 && hour < 18) {
+											drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
+											drawable.setLevel(dto.highPheCode);
+											tvPhe1.setText(getString(WeatherUtil.getWeatherId(dto.highPheCode)));
+										}else {
+											drawable = getResources().getDrawable(R.drawable.phenomenon_drawable_night);
+											drawable.setLevel(dto.lowPheCode);
+											tvPhe1.setText(getString(WeatherUtil.getWeatherId(dto.lowPheCode)));
+										}
+										if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+											ivPhe1.setBackground(drawable);
+										}else {
+											ivPhe1.setBackgroundDrawable(drawable);
+										}
+										tvTemp1.setText(dto.highTemp+"/"+dto.lowTemp);
+									}
+									if (i == 1) {
+										tvDay2.setText("明天");
+										Drawable drawable;
+										if (hour >= 5 && hour < 18) {
+											drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
+											drawable.setLevel(dto.highPheCode);
+											tvPhe2.setText(getString(WeatherUtil.getWeatherId(dto.highPheCode)));
+										}else {
+											drawable = getResources().getDrawable(R.drawable.phenomenon_drawable_night);
+											drawable.setLevel(dto.lowPheCode);
+											tvPhe2.setText(getString(WeatherUtil.getWeatherId(dto.lowPheCode)));
+										}
+										if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+											ivPhe2.setBackground(drawable);
+										}else {
+											ivPhe2.setBackgroundDrawable(drawable);
+										}
+										tvTemp2.setText(dto.highTemp+"/"+dto.lowTemp);
+									}
+								}
+								//一周预报列表
+								if (mAdapter != null) {
+									mAdapter.notifyDataSetChanged();
+									CommonUtil.setListViewHeightBasedOnChildren(mListView);
+								}
+
+								//一周预报曲线
+								WeeklyView weeklyView = new WeeklyView(mContext);
+								weeklyView.setData(weeklyList);
+								llContainer2.removeAllViews();
+								llContainer2.addView(weeklyView, width*2, (int) CommonUtil.dip2px(mContext, 320));
 							}
 
-							//一周预报曲线
-							WeeklyView weeklyView = new WeeklyView(mContext);
-							weeklyView.setData(weeklyList);
-							llContainer2.removeAllViews();
-							llContainer2.addView(weeklyView, width*2, (int) CommonUtil.dip2px(mContext, 320));
+
 						} catch (JSONException e) {
-							e.printStackTrace();
-						} catch (NullPointerException e) {
 							e.printStackTrace();
 						}
 
 						reMain.setVisibility(View.VISIBLE);
 						refreshLayout.setRefreshing(false);
+
 					}
+
 				}
 
 				@Override
@@ -528,80 +509,85 @@ public class HWeatherDetailActivity extends BaseActivity implements OnClickListe
 	 * @param lat
 	 */
 	private void OkHttpHourRain(double lng, double lat) {
-		String url = "http://api.caiyunapp.com/v2/HyTVV5YAkoxlQ3Zd/"+lng+","+lat+"/forecast";
-		OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+		final String url = "http://api.caiyunapp.com/v2/HyTVV5YAkoxlQ3Zd/"+lng+","+lat+"/forecast";
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
-
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				final String result = response.body().string();
-				runOnUiThread(new Runnable() {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
 					@Override
-					public void run() {
-						if (!TextUtils.isEmpty(result)) {
-							try {
-								JSONObject object = new JSONObject(result);
-								if (!object.isNull("server_time")) {
-									long t = object.getLong("server_time");
-									Date date = new Date(t*1000);
-									tvTime2.setText(sdf2.format(date)+"发布");
-								}
-								if (!object.isNull("result")) {
-									JSONObject obj = object.getJSONObject("result");
-									if (!obj.isNull("minutely")) {
-										JSONObject objMin = obj.getJSONObject("minutely");
-										if (!objMin.isNull("description")) {
-											String rain = objMin.getString("description");
-											if (!TextUtils.isEmpty(rain)) {
-												tvRain.setText(rain.replace(getString(R.string.little_caiyun), ""));
-												if (tvRain.getText().toString().contains("雪")) {
-													tvMinetePrompt.setText("1小时分钟降雪预报");
-												}else {
-													tvMinetePrompt.setText("1小时分钟降水预报");
-												}
+					public void onFailure(Call call, IOException e) {
 
-												if (reMinuteContent.getVisibility() == View.VISIBLE) {
-													tvRain.setVisibility(View.VISIBLE);
-												}else {
-													tvRain.setVisibility(View.GONE);
-												}
-											}else {
-												tvRain.setVisibility(View.GONE);
-											}
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (!object.isNull("server_time")) {
+											long t = object.getLong("server_time");
+											Date date = new Date(t*1000);
+											tvTime2.setText(sdf2.format(date)+"发布");
 										}
-										if (!objMin.isNull("precipitation_2h")) {
-											JSONArray array = objMin.getJSONArray("precipitation_2h");
-											int size = array.length();
-											List<WeatherDto> minuteList = new ArrayList<>();
-											for (int i = 0; i < size; i++) {
-												WeatherDto dto = new WeatherDto();
-												dto.minuteFall = (float) array.getDouble(i);
+										if (!object.isNull("result")) {
+											JSONObject obj = object.getJSONObject("result");
+											if (!obj.isNull("minutely")) {
+												JSONObject objMin = obj.getJSONObject("minutely");
+												if (!objMin.isNull("description")) {
+													String rain = objMin.getString("description");
+													if (!TextUtils.isEmpty(rain)) {
+														tvRain.setText(rain.replace(getString(R.string.little_caiyun), ""));
+														if (tvRain.getText().toString().contains("雪")) {
+															tvMinetePrompt.setText("1小时分钟降雪预报");
+														}else {
+															tvMinetePrompt.setText("1小时分钟降水预报");
+														}
+
+														if (reMinuteContent.getVisibility() == View.VISIBLE) {
+															tvRain.setVisibility(View.VISIBLE);
+														}else {
+															tvRain.setVisibility(View.GONE);
+														}
+													}else {
+														tvRain.setVisibility(View.GONE);
+													}
+												}
+												if (!objMin.isNull("precipitation_2h")) {
+													JSONArray array = objMin.getJSONArray("precipitation_2h");
+													int size = array.length();
+													List<WeatherDto> minuteList = new ArrayList<>();
+													for (int i = 0; i < size; i++) {
+														WeatherDto dto = new WeatherDto();
+														dto.minuteFall = (float) array.getDouble(i);
 //										dto.minuteFall = new Random().nextFloat();
-												minuteList.add(dto);
-											}
+														minuteList.add(dto);
+													}
 
-											MinuteFallView minuteFallView = new MinuteFallView(mContext);
-											minuteFallView.setData(minuteList, tvRain.getText().toString());
-											llContainer3.removeAllViews();
-											llContainer3.addView(minuteFallView, width, (int)(CommonUtil.dip2px(mContext, 150)));
+													MinuteFallView minuteFallView = new MinuteFallView(mContext);
+													minuteFallView.setData(minuteList, tvRain.getText().toString());
+													llContainer3.removeAllViews();
+													llContainer3.addView(minuteFallView, width, (int)(CommonUtil.dip2px(mContext, 150)));
+												}
+											}
 										}
+									} catch (JSONException e1) {
+										e1.printStackTrace();
 									}
 								}
-							} catch (JSONException e1) {
-								e1.printStackTrace();
 							}
-						}
+						});
+
 					}
 				});
-
 			}
-		});
+		}).start();
 	}
 
 	@Override

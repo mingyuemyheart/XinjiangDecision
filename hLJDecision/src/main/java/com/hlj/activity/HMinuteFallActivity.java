@@ -9,7 +9,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -46,19 +45,23 @@ import com.hlj.dto.MinuteFallDto;
 import com.hlj.dto.WeatherDto;
 import com.hlj.manager.CaiyunManager;
 import com.hlj.utils.CommonUtil;
-import com.hlj.utils.CustomHttpClient;
+import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.MinuteFallView;
 
-import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
 public class HMinuteFallActivity extends BaseActivity implements View.OnClickListener, CaiyunManager.RadarListener,
@@ -179,102 +182,71 @@ public class HMinuteFallActivity extends BaseActivity implements View.OnClickLis
 	 * @param lat
 	 */
 	private void queryMinute(double lng, double lat) {
-		String url = "http://api.caiyunapp.com/v2/HyTVV5YAkoxlQ3Zd/"+lng+","+lat+"/forecast";
-		HttpAsyncTaskMinute task = new HttpAsyncTaskMinute();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(url);
-	}
+		final String url = "http://api.caiyunapp.com/v2/HyTVV5YAkoxlQ3Zd/"+lng+","+lat+"/forecast";
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTaskMinute extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<>();
+					}
 
-		public HttpAsyncTaskMinute() {
-		}
-
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			if (requestResult != null) {
-				try {
-					JSONObject object = new JSONObject(requestResult);
-					if (object != null) {
-						if (!object.isNull("result")) {
-							JSONObject obj = object.getJSONObject("result");
-							if (!obj.isNull("minutely")) {
-								JSONObject objMin = obj.getJSONObject("minutely");
-								if (!objMin.isNull("description")) {
-									String rain = objMin.getString("description");
-									if (!TextUtils.isEmpty(rain)) {
-										tvRain.setText(rain.replace("小彩云", ""));
-										tvRain.setVisibility(View.VISIBLE);
-									}else {
-										tvRain.setVisibility(View.GONE);
-									}
-								}
-								if (!objMin.isNull("precipitation_2h")) {
-									JSONArray array = objMin.getJSONArray("precipitation_2h");
-									int size = array.length();
-									List<WeatherDto> minuteList = new ArrayList<>();
-									for (int i = 0; i < size; i++) {
-										WeatherDto dto = new WeatherDto();
-										dto.minuteFall = (float) array.getDouble(i);
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("result")) {
+												JSONObject obj = object.getJSONObject("result");
+												if (!obj.isNull("minutely")) {
+													JSONObject objMin = obj.getJSONObject("minutely");
+													if (!objMin.isNull("description")) {
+														String rain = objMin.getString("description");
+														if (!TextUtils.isEmpty(rain)) {
+															tvRain.setText(rain.replace("小彩云", ""));
+															tvRain.setVisibility(View.VISIBLE);
+														}else {
+															tvRain.setVisibility(View.GONE);
+														}
+													}
+													if (!objMin.isNull("precipitation_2h")) {
+														JSONArray array = objMin.getJSONArray("precipitation_2h");
+														int size = array.length();
+														List<WeatherDto> minuteList = new ArrayList<>();
+														for (int i = 0; i < size; i++) {
+															WeatherDto dto = new WeatherDto();
+															dto.minuteFall = (float) array.getDouble(i);
 //										dto.minuteFall = new Random().nextFloat();
-										minuteList.add(dto);
-									}
+															minuteList.add(dto);
+														}
 
-									MinuteFallView minuteFallView = new MinuteFallView(mContext);
-									minuteFallView.setData(minuteList, tvRain.getText().toString());
-									llContainer3.removeAllViews();
-									llContainer3.addView(minuteFallView, width, (int)(CommonUtil.dip2px(mContext, 120)));
+														MinuteFallView minuteFallView = new MinuteFallView(mContext);
+														minuteFallView.setData(minuteList, tvRain.getText().toString());
+														llContainer3.removeAllViews();
+														llContainer3.addView(minuteFallView, width, (int)(CommonUtil.dip2px(mContext, 120)));
+													}
+												}
+											}
+										}
+									} catch (JSONException e1) {
+										e1.printStackTrace();
+									}
 								}
 							}
-						}
+						});
 					}
-				} catch (JSONException e1) {
-					e1.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 
 	private SeekBar.OnSeekBarChangeListener seekbarListener = new SeekBar.OnSeekBarChangeListener() {
@@ -369,169 +341,112 @@ public class HMinuteFallActivity extends BaseActivity implements View.OnClickLis
 	 * @param lat
 	 */
 	private void query(double lng, double lat) {
-		String url = "http://api.caiyunapp.com/v2/HyTVV5YAkoxlQ3Zd/"+lng+","+lat+"/forecast";
-		HttpAsyncRain task = new HttpAsyncRain();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(url);
-	}
+		final String url = "http://api.caiyunapp.com/v2/HyTVV5YAkoxlQ3Zd/"+lng+","+lat+"/forecast";
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncRain extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
+					}
 
-		public HttpAsyncRain() {
-		}
-
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			if (requestResult != null) {
-				try {
-					JSONObject object = new JSONObject(requestResult);
-					if (object != null) {
-						if (!object.isNull("result")) {
-							JSONObject objResult = object.getJSONObject("result");
-							if (!objResult.isNull("minutely")) {
-								JSONObject objMin = objResult.getJSONObject("minutely");
-								if (!objMin.isNull("description")) {
-									String rain = objMin.getString("description");
-									if (!TextUtils.isEmpty(rain)) {
-										tvRain.setText(rain.replace("小彩云", ""));
-										tvRain.setVisibility(View.VISIBLE);
-									}else {
-										tvRain.setVisibility(View.GONE);
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("result")) {
+												JSONObject objResult = object.getJSONObject("result");
+												if (!objResult.isNull("minutely")) {
+													JSONObject objMin = objResult.getJSONObject("minutely");
+													if (!objMin.isNull("description")) {
+														String rain = objMin.getString("description");
+														if (!TextUtils.isEmpty(rain)) {
+															tvRain.setText(rain.replace("小彩云", ""));
+															tvRain.setVisibility(View.VISIBLE);
+														}else {
+															tvRain.setVisibility(View.GONE);
+														}
+													}
+												}
+											}
+										}
+									} catch (JSONException e1) {
+										e1.printStackTrace();
 									}
 								}
 							}
-						}
+						});
 					}
-				} catch (JSONException e1) {
-					e1.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 
-	private void asyncImages(String url) {
-		HttpAsyncTask task = new HttpAsyncTask();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(url);
-	}
+	private void asyncImages(final String url) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
+					}
 
-		public HttpAsyncTask() {
-		}
-
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			super.onPostExecute(result);
-			if (result != null) {
-				try {
-					JSONObject obj = new JSONObject(result.toString());
-					if (!obj.isNull("status")) {
-						if (obj.getString("status").equals("ok")) {//鎴愬姛
-							if (!obj.isNull("radar_img")) {
-								mList.clear();
-								JSONArray array = new JSONArray(obj.getString("radar_img"));
-								for (int i = 0; i < array.length(); i++) {
-									JSONArray array0 = array.getJSONArray(i);
-									MinuteFallDto dto = new MinuteFallDto();
-									dto.setImgUrl(array0.optString(0));
-									dto.setTime(array0.optLong(1));
-									JSONArray itemArray = array0.getJSONArray(2);
-									dto.setP1(itemArray.optDouble(0));
-									dto.setP2(itemArray.optDouble(1));
-									dto.setP3(itemArray.optDouble(2));
-									dto.setP4(itemArray.optDouble(3));
-									mList.add(dto);
-								}
-								if (mList.size() > 0) {
-									startDownLoadImgs(mList);
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (!obj.isNull("status")) {
+											if (obj.getString("status").equals("ok")) {//鎴愬姛
+												if (!obj.isNull("radar_img")) {
+													mList.clear();
+													JSONArray array = new JSONArray(obj.getString("radar_img"));
+													for (int i = 0; i < array.length(); i++) {
+														JSONArray array0 = array.getJSONArray(i);
+														MinuteFallDto dto = new MinuteFallDto();
+														dto.setImgUrl(array0.optString(0));
+														dto.setTime(array0.optLong(1));
+														JSONArray itemArray = array0.getJSONArray(2);
+														dto.setP1(itemArray.optDouble(0));
+														dto.setP2(itemArray.optDouble(1));
+														dto.setP3(itemArray.optDouble(2));
+														dto.setP4(itemArray.optDouble(3));
+														mList.add(dto);
+													}
+													if (mList.size() > 0) {
+														startDownLoadImgs(mList);
+													}
+												}
+											}
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
 								}
 							}
-						}
+						});
 					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 鍙栨秷褰撳墠task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 
 	private void startDownLoadImgs(List<MinuteFallDto> list) {

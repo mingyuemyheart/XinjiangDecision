@@ -1,16 +1,6 @@
 package com.hlj.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import shawn.cxwl.com.hlj.R;
-
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -33,11 +23,25 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hlj.dto.AgriDto;
 import com.hlj.adapter.HFactTableAdapter;
-import com.hlj.utils.CustomHttpClient;
+import com.hlj.dto.AgriDto;
+import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.RefreshLayout;
 import com.hlj.view.RefreshLayout.OnRefreshListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
+import shawn.cxwl.com.hlj.R;
 
 public class WeatherKepuDetailActivity extends BaseActivity implements OnClickListener{
 	
@@ -48,7 +52,7 @@ public class WeatherKepuDetailActivity extends BaseActivity implements OnClickLi
 	private RelativeLayout reContainer = null;
 	private ListView tableListView = null;
 	private HFactTableAdapter tableAdapter = null;
-	private List<AgriDto> tableList = new ArrayList<AgriDto>();
+	private List<AgriDto> tableList = new ArrayList<>();
 	private WebView webView = null;
 	private WebSettings webSettings = null;
 	private String url = null;
@@ -96,7 +100,7 @@ public class WeatherKepuDetailActivity extends BaseActivity implements OnClickLi
 		AgriDto dto = getIntent().getExtras().getParcelable("dto");
 		if (dto != null) {
 			if (!TextUtils.isEmpty(dto.dataUrl)) {
-				asyncQuery(dto.dataUrl);
+				OkHttpList(dto.dataUrl);
 			}
 		}
 	}
@@ -104,94 +108,63 @@ public class WeatherKepuDetailActivity extends BaseActivity implements OnClickLi
 	/**
 	 * 获取详情
 	 */
-	private void asyncQuery(String requestUrl) {
+	private void OkHttpList(final String requestUrl) {
 		refreshLayout.setRefreshing(true);
-		HttpAsyncTask task = new HttpAsyncTask();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(requestUrl);
-	}
-	
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		
-		public HttpAsyncTask() {
-		}
-		
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(requestUrl).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			if (requestResult != null) {
-				try {
-					JSONObject obj = new JSONObject(requestResult);
-					if (!obj.isNull("info")) {
-						tableList.clear();
-						JSONArray array = obj.getJSONArray("info");
-						for (int i = 0; i < array.length(); i++) {
-							JSONObject itemObj = array.getJSONObject(i);
-							AgriDto dto = new AgriDto();
-							dto.title = itemObj.getString("name");
-							dto.dataUrl = itemObj.getString("urladdress");
-							dto.time = itemObj.getString("addtime");
-							dto.showType = itemObj.getString("showtype");
-							tableList.add(dto);
-							
-							if (i == 0) {
-								url = dto.dataUrl;
-								tvTitle.setText(dto.title);
-								ivArrow.setVisibility(View.VISIBLE);
-								initWebView();
-							}
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
 						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (!obj.isNull("info")) {
+											tableList.clear();
+											JSONArray array = obj.getJSONArray("info");
+											for (int i = 0; i < array.length(); i++) {
+												JSONObject itemObj = array.getJSONObject(i);
+												AgriDto dto = new AgriDto();
+												dto.title = itemObj.getString("name");
+												dto.dataUrl = itemObj.getString("urladdress");
+												dto.time = itemObj.getString("addtime");
+												dto.showType = itemObj.getString("showtype");
+												tableList.add(dto);
+
+												if (i == 0) {
+													url = dto.dataUrl;
+													tvTitle.setText(dto.title);
+													ivArrow.setVisibility(View.VISIBLE);
+													initWebView();
+												}
+											}
+										}
+
+										if (tableAdapter != null) {
+											tableAdapter.notifyDataSetChanged();
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
 					}
-					
-					if (tableAdapter != null) {
-						tableAdapter.notifyDataSetChanged();
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 	
 	/**

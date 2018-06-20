@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,21 +26,21 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.hlj.adapter.WeatherRadarDetailAdpater;
 import com.hlj.dto.AgriDto;
 import com.hlj.dto.RadarDto;
 import com.hlj.manager.RadarManager;
 import com.hlj.manager.RadarManager.RadarListener;
-import com.hlj.adapter.WeatherRadarDetailAdpater;
-import com.hlj.utils.CustomHttpClient;
+import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.MyDialog;
 
 import net.tsz.afinal.FinalBitmap;
 
-import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,9 +51,12 @@ import java.util.List;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
-@SuppressLint("SimpleDateFormat")
 public class WeatherRadarDetailActivity extends BaseActivity implements OnClickListener, RadarListener{
 	
 	private Context mContext = null;
@@ -204,123 +206,93 @@ public class WeatherRadarDetailActivity extends BaseActivity implements OnClickL
 	 */
 	private void getRadarData(String radarCode, String currentTime) {
 		initDialog();
-		HttpAsyncTask task = new HttpAsyncTask();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(getRadarUrl(baseUrl, radarCode, "product", currentTime));
-	}
-	
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		
-		public HttpAsyncTask() {
-		}
+		final String url = getRadarUrl(baseUrl, radarCode, "product", currentTime);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
+					}
 
-		@Override
-		protected void onPostExecute(String result) {
-			super.onPostExecute(result);
-			dismissDialog();
-			if (result != null) {
-				try {
-					JSONObject obj = new JSONObject(result.toString());
-					String r2 = obj.getString("r2");
-					String r3 = obj.getString("r3");
-					String r5 = obj.getString("r5");
-					JSONArray array = new JSONArray(obj.getString("r6"));
-					for (int i = array.length()-1; i >= 0 ; i--) {
-						JSONArray itemArray = array.getJSONArray(i);
-						String r6_0 = itemArray.getString(0);
-						String r6_1 = itemArray.getString(1);
-						
-						String url = r2 + r5 + r6_0 + "." + r3;
-						
-						if (i == 0) {
-							if (!TextUtils.isEmpty(url)) {
-								FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-								finalBitmap.display(imageView, url, null, 0);
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								dismissDialog();
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										String r2 = obj.getString("r2");
+										String r3 = obj.getString("r3");
+										String r5 = obj.getString("r5");
+										JSONArray array = new JSONArray(obj.getString("r6"));
+										for (int i = array.length()-1; i >= 0 ; i--) {
+											JSONArray itemArray = array.getJSONArray(i);
+											String r6_0 = itemArray.getString(0);
+											String r6_1 = itemArray.getString(1);
+
+											String url = r2 + r5 + r6_0 + "." + r3;
+
+											if (i == 0) {
+												if (!TextUtils.isEmpty(url)) {
+													FinalBitmap finalBitmap = FinalBitmap.create(mContext);
+													finalBitmap.display(imageView, url, null, 0);
+												}
+												try {
+													tvTime.setText(sdf1.format(sdf2.parse(r6_1)));
+												} catch (ParseException e) {
+													e.printStackTrace();
+												}
+												llSeekBar.setVisibility(View.VISIBLE);
+											}
+
+											RadarDto dto = new RadarDto();
+											dto.url = url;
+											try {
+												dto.time = sdf1.format(sdf2.parse(r6_1));
+											} catch (ParseException e) {
+												e.printStackTrace();
+											}
+
+											if (i == 0) {
+												dto.isSelect = "1";
+											}else {
+												dto.isSelect = "0";
+											}
+
+											radarList.add(dto);
+										}
+
+										if (seekBar != null) {
+											seekBar.setMax(radarList.size());
+											seekBar.setProgress(radarList.size());
+										}
+
+										if (mAdapter != null) {
+											mAdapter.notifyDataSetChanged();
+										}
+
+										if (radarList.size() <= 0) {
+											cancelDialog();
+											imageView.setImageResource(R.drawable.iv_no_pic);
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
 							}
-							try {
-								tvTime.setText(sdf1.format(sdf2.parse(r6_1)));
-							} catch (ParseException e) {
-								e.printStackTrace();
-							}
-							llSeekBar.setVisibility(View.VISIBLE);
-						}
-						
-						RadarDto dto = new RadarDto();
-						dto.url = url;
-						try {
-							dto.time = sdf1.format(sdf2.parse(r6_1));
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-						
-						if (i == 0) {
-							dto.isSelect = "1";
-						}else {
-							dto.isSelect = "0";
-						}
-						
-						radarList.add(dto);
+						});
 					}
-					
-					if (seekBar != null) {
-						seekBar.setMax(radarList.size());
-						seekBar.setProgress(radarList.size());
-					}
-					
-					if (mAdapter != null) {
-						mAdapter.notifyDataSetChanged();
-					}
-					
-					if (radarList.size() <= 0) {
-						cancelDialog();
-						imageView.setImageResource(R.drawable.iv_no_pic);
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 	
 	/**

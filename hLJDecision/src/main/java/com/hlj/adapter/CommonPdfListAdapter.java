@@ -5,10 +5,6 @@ package com.hlj.adapter;
  * 铁路气象服务（站点预报、旬预报、一周天气预报、全省重大天气预报、短时预警预报）
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.tsz.afinal.FinalBitmap;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,13 +15,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hlj.dto.AgriDto;
+
+import net.tsz.afinal.FinalBitmap;
+
+import java.util.List;
+
 import shawn.cxwl.com.hlj.R;
 
 public class CommonPdfListAdapter extends BaseAdapter{
 	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<AgriDto> mArrayList = new ArrayList<>();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<AgriDto> mArrayList;
 	
 	private final class ViewHolder{
 		TextView tvTitle;

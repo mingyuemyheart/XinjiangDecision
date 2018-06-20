@@ -112,41 +112,6 @@ public class HPDFActivity extends BaseActivity implements OnPageChangeListener, 
 		
 		asynLoadPdf(pdfUrl);
 		
-//		final String cacheDir = ImageCache.getDiskCacheDir(getApplicationContext(), "pdf").getAbsolutePath();
-//		final String cachePath = cacheDir + "/" + ImageCache.hashKeyForDisk(pdfUrl);
-//		PdfOnlineLoader loader = new PdfOnlineLoader(pdfUrl, cachePath) {
-//			@Override
-//			protected void onDownloadSuccess(String url) {
-//				Configurator conf = pdfView.fromFile(new File(cachePath));
-//				conf.onPageChange(PDFActivity.this);
-//				conf.onLoad(new OnLoadCompleteListener() {
-//					@Override
-//					public void loadComplete(int arg0) {
-//						cancelDialog();
-//					}
-//				});
-//				conf.load();
-//			}
-//
-//			@Override
-//			protected void onDownloadProgress(int progress) {
-//				if (mDialog != null) {
-//					mDialog.setPercent(progress);
-//					if (progress >= 100) {
-//						cancelDialog();
-//					}
-//				}
-//			}
-//
-//			@Override
-//			protected void onDownloadFailure(String url) {
-//			}
-//
-//			@Override
-//			protected void onDownloadCancel(String url) {
-//			}
-//		};
-//		loader.start();
 	}
 	
 	/**
@@ -174,7 +139,7 @@ public class HPDFActivity extends BaseActivity implements OnPageChangeListener, 
 	}
 	
 	private interface AsynLoadCompleteListener {
-		public void loadComplete(File file);
+		void loadComplete(File file);
 	}
     
 	private class AsynLoadTask extends AsyncTask<Void, File, File> {

@@ -1,6 +1,5 @@
 package com.hlj.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -42,7 +41,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
-@SuppressLint("SimpleDateFormat")
 public class WaitWindActivity extends BaseActivity implements OnClickListener, OnCameraChangeListener {
 
     private Context mContext = null;
@@ -354,9 +352,8 @@ public class WaitWindActivity extends BaseActivity implements OnClickListener, O
             windData1.latLngEnd = latLngEnd;
         }
         if (waitWindView == null) {
-            waitWindView = new WaitWindView2(this, mContext);
-            waitWindView.setWidth(width);
-            waitWindView.setHeight(height);
+            waitWindView = new WaitWindView2(mContext);
+            waitWindView.init(WaitWindActivity.this);
             if (isGfs) {
                 waitWindView.setData(windData2);
             }else {

@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/iv_logo2" />
+                android:src="@drawable/iv_logo" />
 
             <ImageView
                 android:id="@+id/ivSetting"

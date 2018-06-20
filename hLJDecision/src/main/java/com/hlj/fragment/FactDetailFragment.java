@@ -40,7 +40,6 @@ public class FactDetailFragment extends Fragment{
 		initWidget(view);
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void initWidget(View view) {
 		llContainer1 = (LinearLayout) view.findViewById(R.id.llContainer1);
 		tvPrompt = (TextView) view.findViewById(R.id.tvPrompt);

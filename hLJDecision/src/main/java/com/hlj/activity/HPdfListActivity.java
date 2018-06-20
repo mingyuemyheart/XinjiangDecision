@@ -4,18 +4,8 @@ package com.hlj.activity;
  * 15天预报等pdf列表
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import shawn.cxwl.com.hlj.R;
-
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -33,13 +23,27 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hlj.adapter.CommonPdfListAdapter;
+import com.hlj.adapter.HFactTableAdapter;
 import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
-import com.hlj.adapter.HFactTableAdapter;
-import com.hlj.utils.CustomHttpClient;
+import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.RefreshLayout;
 import com.hlj.view.RefreshLayout.OnRefreshListener;
-import com.hlj.adapter.CommonPdfListAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
+import shawn.cxwl.com.hlj.R;
 
 public class HPdfListActivity extends BaseActivity implements OnClickListener{
 	
@@ -115,11 +119,11 @@ public class HPdfListActivity extends BaseActivity implements OnClickListener{
 	private void refresh() {
 		if (TextUtils.isEmpty(dto.showType)) {
 			if (!TextUtils.isEmpty(dto.child.get(0).dataUrl)) {
-				asyncQuery(dto.child.get(0).dataUrl);
+				OkHttpList(dto.child.get(0).dataUrl);
 			}
 		}else {
 			if (!TextUtils.isEmpty(dto.dataUrl)) {
-				asyncQuery(dto.dataUrl);
+				OkHttpList(dto.dataUrl);
 			}
 		}
 	}
@@ -151,92 +155,61 @@ public class HPdfListActivity extends BaseActivity implements OnClickListener{
 	/**
 	 * 获取详情
 	 */
-	private void asyncQuery(String requestUrl) {
+	private void OkHttpList(final String url) {
 		refreshLayout.setRefreshing(true);
-		HttpAsyncTask task = new HttpAsyncTask();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(requestUrl);
-	}
-	
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		
-		public HttpAsyncTask() {
-		}
-		
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			refreshLayout.setRefreshing(false);
-			if (requestResult != null) {
-				try {
-					JSONObject obj = new JSONObject(requestResult);
-					String type = null;
-					if (!obj.isNull("type")) {
-						type = obj.getString("type");
 					}
-					if (!obj.isNull("l")) {
-						mList.clear();
-						JSONArray array = obj.getJSONArray("l");
-						for (int i = 0; i < array.length(); i++) {
-							JSONObject itemObj = array.getJSONObject(i);
-							AgriDto dto = new AgriDto();
-							dto.title = itemObj.getString("l1");
-							dto.dataUrl = itemObj.getString("l2");
-							dto.time = itemObj.getString("l3");
-							dto.type = type;
-							mList.add(dto);
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
 						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								refreshLayout.setRefreshing(false);
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										String type = null;
+										if (!obj.isNull("type")) {
+											type = obj.getString("type");
+										}
+										if (!obj.isNull("l")) {
+											mList.clear();
+											JSONArray array = obj.getJSONArray("l");
+											for (int i = 0; i < array.length(); i++) {
+												JSONObject itemObj = array.getJSONObject(i);
+												AgriDto dto = new AgriDto();
+												dto.title = itemObj.getString("l1");
+												dto.dataUrl = itemObj.getString("l2");
+												dto.time = itemObj.getString("l3");
+												dto.type = type;
+												mList.add(dto);
+											}
+										}
+
+										if (mAdapter != null) {
+											mAdapter.notifyDataSetChanged();
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
 					}
-					
-					if (mAdapter != null) {
-						mAdapter.notifyDataSetChanged();
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 	
 	private void initTableListView() {
@@ -261,7 +234,7 @@ public class HPdfListActivity extends BaseActivity implements OnClickListener{
 				if (!TextUtils.isEmpty(dto.dataUrl)) {
 					tvTitle.setText(dto.title);
 					switchData();
-					asyncQuery(dto.dataUrl);
+					OkHttpList(dto.dataUrl);
 				}
 			}
 		});

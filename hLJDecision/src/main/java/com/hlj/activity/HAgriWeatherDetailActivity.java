@@ -23,14 +23,14 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hlj.adapter.CommonPdfListAdapter;
+import com.hlj.adapter.HFactTableAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
-import com.hlj.adapter.HFactTableAdapter;
 import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.RefreshLayout;
 import com.hlj.view.RefreshLayout.OnRefreshListener;
-import com.hlj.adapter.CommonPdfListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -144,57 +144,61 @@ public class HAgriWeatherDetailActivity extends BaseActivity implements OnClickL
 	/**
 	 * 获取详情
 	 */
-	private void OkHttpDetail(String url) {
-		OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+	private void OkHttpDetail(final String url) {
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-			}
+					}
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (!TextUtils.isEmpty(result)) {
-					refreshLayout.setRefreshing(false);
-					try {
-						JSONObject obj = new JSONObject(result);
-						String type = null;
-						if (!obj.isNull("type")) {
-							type = obj.getString("type");
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
 						}
-						if (!obj.isNull("l")) {
-							mList.clear();
-							JSONArray array = obj.getJSONArray("l");
-							for (int i = 0; i < array.length(); i++) {
-								JSONObject itemObj = array.getJSONObject(i);
-								AgriDto dto = new AgriDto();
-								dto.title = itemObj.getString("l1");
-								dto.dataUrl = itemObj.getString("l2");
-								dto.time = itemObj.getString("l3");
-								dto.type = type;
-								mList.add(dto);
-							}
-						}
-
+						final String result = response.body().string();
 						runOnUiThread(new Runnable() {
 							@Override
 							public void run() {
-								if (mList.size() > 0 && mAdapter != null) {
-									mAdapter.notifyDataSetChanged();
+								if (!TextUtils.isEmpty(result)) {
+									refreshLayout.setRefreshing(false);
+									try {
+										JSONObject obj = new JSONObject(result);
+										String type = null;
+										if (!obj.isNull("type")) {
+											type = obj.getString("type");
+										}
+										if (!obj.isNull("l")) {
+											mList.clear();
+											JSONArray array = obj.getJSONArray("l");
+											for (int i = 0; i < array.length(); i++) {
+												JSONObject itemObj = array.getJSONObject(i);
+												AgriDto dto = new AgriDto();
+												dto.title = itemObj.getString("l1");
+												dto.dataUrl = itemObj.getString("l2");
+												dto.time = itemObj.getString("l3");
+												dto.type = type;
+												mList.add(dto);
+											}
+										}
+
+										if (mAdapter != null) {
+											mAdapter.notifyDataSetChanged();
+										}
+
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
 								}
-								refreshLayout.setRefreshing(false);
 							}
 						});
-
-					} catch (JSONException e) {
-						e.printStackTrace();
 					}
-				}
+				});
 			}
-		});
+		}).start();
 	}
 	
 	private void initTableListView() {

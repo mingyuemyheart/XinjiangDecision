@@ -86,7 +86,6 @@ public class FactDetailChartActivity extends BaseActivity implements OnClickList
 	/**
 	 * 初始化viewPager
 	 */
-	@SuppressWarnings("unchecked")
 	private void initViewPager() {
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);

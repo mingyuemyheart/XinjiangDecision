@@ -306,20 +306,30 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 			@Override
 			public void onComplete(Weather content) {
 				super.onComplete(content);
-				try {
-					//获取明天预报信息
-					JSONArray weeklyArray = content.getWeatherForecastInfo(2);
-					JSONObject weeklyObj = weeklyArray.getJSONObject(0);
+				String result = content.toString();
+				if (!TextUtils.isEmpty(result)) {
+					try {
+						JSONObject obj = new JSONObject(result);
 
-					dto.lowPheCode = Integer.valueOf(weeklyObj.getString("fb"));
-					dto.highPheCode = Integer.valueOf(weeklyObj.getString("fa"));
-					dto.lowTemp = weeklyObj.getString("fd");
-					dto.highTemp = weeklyObj.getString("fc");
+						//获取明天预报信息
+						if (!obj.isNull("f")) {
+							JSONObject f = obj.getJSONObject("f");
+							JSONArray f1 = f.getJSONArray("f1");
+							JSONObject weeklyObj = f1.getJSONObject(1);
 
-					addMarker(dto, markers, isVisible);
-				} catch (JSONException e) {
-					e.printStackTrace();
+							dto.lowPheCode = Integer.valueOf(weeklyObj.getString("fb"));
+							dto.highPheCode = Integer.valueOf(weeklyObj.getString("fa"));
+							dto.lowTemp = weeklyObj.getString("fd");
+							dto.highTemp = weeklyObj.getString("fc");
+
+							addMarker(dto, markers, isVisible);
+						}
+
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
 				}
+
 			}
 
 			@Override
@@ -394,7 +404,7 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 		Drawable drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
 		try {
 			long zao8 = sdf3.parse("06").getTime();
-			long wan8 = sdf3.parse("20").getTime();
+			long wan8 = sdf3.parse("18").getTime();
 			long current = sdf3.parse(sdf3.format(new Date())).getTime();
 			if (current >= zao8 && current < wan8) {
 				drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
@@ -461,7 +471,6 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 	
 	@Override
 	public void onCameraChange(CameraPosition arg0) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -505,72 +514,78 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 			@Override
 			public void onComplete(Weather content) {
 				super.onComplete(content);
-				if (content != null) {
-					//实况信息
-					String factContent = cityName+"预报";
-					
+				String result = content.toString();
+				if (!TextUtils.isEmpty(result)) {
 					try {
-						JSONObject object = content.getWeatherFactInfo();
-						if (!object.isNull("l7")) {
-							String time = object.getString("l7");
-							if (time != null) {
-								factContent = factContent + "（"+time+"）"+"发布：\n";
+						JSONObject obj = new JSONObject(result);
+
+						String factContent = cityName+"预报";
+
+						//实况信息
+						if (!obj.isNull("l")) {
+							JSONObject l = obj.getJSONObject("l");
+							if (!l.isNull("l7")) {
+								String time = l.getString("l7");
+								if (time != null) {
+									factContent = factContent + "（"+time+"）"+"发布：\n";
+								}
 							}
 						}
-						
-						//获取明天预报信息
-						JSONArray weeklyArray = content.getWeatherForecastInfo(2);
-						JSONObject weeklyObj = weeklyArray.getJSONObject(0);
 
-						JSONArray timeArray =  content.getTimeInfo(2);
-						JSONObject timeObj = timeArray.getJSONObject(0);
-						String week = timeObj.getString("t4");//星期几
-						String date = timeObj.getString("t1");//日期
-						if (week != null && date != null) {
+						//获取明天预报信息
+						if (!obj.isNull("f")) {
+							JSONObject f = obj.getJSONObject("f");
+							String f0 = f.getString("f0");
+							JSONArray f1 = f.getJSONArray("f1");
+							int i = 1;
+							JSONObject weeklyObj = f1.getJSONObject(i);
+
+							String week = CommonUtil.getWeek(i);//星期几
+							String date = CommonUtil.getDate(f0, i);//日期
 							try {
 								factContent = factContent + sdf2.format(sdf1.parse(date)) + "（"+week+"），";
 							} catch (ParseException e) {
 								e.printStackTrace();
 							}
-						}
-						
-						String lowPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fb"))));
-						String highPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fa"))));
-						if (highPhe != null && lowPhe != null) {
-							String phe = lowPhe;
-							if (!TextUtils.equals(highPhe, lowPhe)) {
-								phe = lowPhe + "转" + highPhe;
-							}else {
-								phe = lowPhe;
+
+							String lowPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fb"))));
+							String highPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fa"))));
+							if (highPhe != null && lowPhe != null) {
+								String phe = lowPhe;
+								if (!TextUtils.equals(highPhe, lowPhe)) {
+									phe = lowPhe + "转" + highPhe;
+								}else {
+									phe = lowPhe;
+								}
+								factContent = factContent + phe + "，";
 							}
-							factContent = factContent + phe + "，";
+
+							String lowTemp = weeklyObj.getString("fd");
+							String highTemp = weeklyObj.getString("fc");
+							if (lowTemp != null && highTemp != null) {
+								factContent = factContent + lowTemp + " ~ " + highTemp + "℃，";
+							}
+
+							String lowDir = getString(WeatherUtil.getWindDirection(Integer.valueOf(weeklyObj.getString("ff"))));
+							String lowForce = WeatherUtil.getDayWindForce(Integer.valueOf(weeklyObj.getString("fh")));
+							String highDir = getString(WeatherUtil.getWindDirection(Integer.valueOf(weeklyObj.getString("fe"))));
+							String highForce = WeatherUtil.getDayWindForce(Integer.valueOf(weeklyObj.getString("fg")));
+							if (!TextUtils.equals(lowDir+lowForce, highDir+highForce)) {
+								factContent = factContent + lowDir + lowForce + "转" + highDir + highForce;
+							}else {
+								factContent = factContent + lowDir + lowForce;
+							}
+
+							tvContent.setText(factContent);
+							tvDetail.setVisibility(View.VISIBLE);
+							progressBar.setVisibility(View.GONE);
 						}
-						
-						String lowTemp = weeklyObj.getString("fd");
-						String highTemp = weeklyObj.getString("fc");
-						if (lowTemp != null && highTemp != null) {
-							factContent = factContent + lowTemp + " ~ " + highTemp + "℃，";
-						}
-						
-						String lowDir = getString(WeatherUtil.getWindDirection(Integer.valueOf(weeklyObj.getString("ff"))));
-						String lowForce = WeatherUtil.getDayWindForce(Integer.valueOf(weeklyObj.getString("fh")));
-						String highDir = getString(WeatherUtil.getWindDirection(Integer.valueOf(weeklyObj.getString("fe"))));
-						String highForce = WeatherUtil.getDayWindForce(Integer.valueOf(weeklyObj.getString("fg")));
-						if (!TextUtils.equals(lowDir+lowForce, highDir+highForce)) {
-							factContent = factContent + lowDir + lowForce + "转" + highDir + highForce;
-						}else {
-							factContent = factContent + lowDir + lowForce;
-						}
-						
-						tvContent.setText(factContent);
-						tvDetail.setVisibility(View.VISIBLE);
-						progressBar.setVisibility(View.GONE);
+
 					} catch (JSONException e) {
-						e.printStackTrace();
-					} catch (NullPointerException e) {
 						e.printStackTrace();
 					}
 				}
+
 			}
 			
 			@Override

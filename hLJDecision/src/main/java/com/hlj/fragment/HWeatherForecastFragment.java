@@ -21,7 +21,6 @@ import com.hlj.activity.HCommonPdfListActivity;
 import com.hlj.activity.HMinuteFallActivity;
 import com.hlj.activity.HPdfListActivity;
 import com.hlj.activity.HProvinceForecastActivity;
-import com.hlj.activity.HRainfallFactActivity;
 import com.hlj.activity.HSixHourRainfallActivity;
 import com.hlj.activity.HTempratureForecastActivity;
 import com.hlj.activity.HUrlActivity;
@@ -92,29 +91,13 @@ public class HWeatherForecastFragment extends Fragment {
 					intent.putExtra(CONST.WEB_URL, dto.dataUrl);
 					startActivity(intent);
 				}else if (TextUtils.equals(dto.showType, CONST.LOCAL)) {//气温预报、雾霾预报、降温大风沙尘预报
-					if (TextUtils.equals(dto.id, "101")) {//降水实况
-						intent = new Intent(getActivity(), HRainfallFactActivity.class);
-						intent.putExtra("type", "rain");
-						startActivity(intent);
-					}else if (TextUtils.equals(dto.id, "102")) {//气温实况
-						intent = new Intent(getActivity(), HRainfallFactActivity.class);
-						intent.putExtra("type", "temp");
-						startActivity(intent);
-					}else if (TextUtils.equals(dto.id, "103")) {//风向风速实况
-						intent = new Intent(getActivity(), HRainfallFactActivity.class);
-						intent.putExtra("type", "wind");
-						startActivity(intent);
-					}else if (TextUtils.equals(dto.id, "107")) {//相对湿度分析
-						intent = new Intent(getActivity(), HRainfallFactActivity.class);
-						intent.putExtra("type", "humidity");
-						startActivity(intent);
-					}else if (TextUtils.equals(dto.id, "111")) {//天气雷达
+					if (TextUtils.equals(dto.id, "111")) {//天气雷达
 						intent = new Intent(getActivity(), HWeatherRadarActivity.class);
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
 						startActivity(intent);
-					}else if (TextUtils.equals(dto.id, "105")) {//天气图分析
+					}else if (TextUtils.equals(dto.id, "106")) {//天气图分析
 						intent = new Intent(getActivity(), HWeatherChartAnalysisActivity.class);
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);

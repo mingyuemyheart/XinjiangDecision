@@ -17,10 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hlj.common.CONST;
+import com.hlj.dto.WarningDto;
 import com.hlj.manager.DBManager;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
-import com.hlj.dto.WarningDto;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,8 +86,7 @@ public class HWarningDetailActivity extends BaseActivity implements OnClickListe
 		dbManager.openDateBase();
 		dbManager.closeDatabase();
 		SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
-		Cursor cursor = null;
-		cursor = database.rawQuery("SELECT * FROM " + DBManager.TABLE_NAME4 + " where WarningId like '%"+data.id+"%'",null);
+		Cursor cursor = database.rawQuery("SELECT * FROM " + DBManager.TABLE_NAME4 + " where WarningId like '%"+data.id+"%'",null);
 		for (int i = 0; i < cursor.getCount(); i++) {
 			cursor.moveToPosition(i);
 			tvGuide.setText(getString(R.string.warning_guide)+cursor.getString(cursor.getColumnIndex("WarningGuide")));
@@ -97,80 +96,85 @@ public class HWarningDetailActivity extends BaseActivity implements OnClickListe
 	/**
 	 * 异步请求
 	 */
-	private void OkHttpWarningDetail(String url) {
-		OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+	private void OkHttpWarningDetail(final String url) {
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
-
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				final String result = response.body().string();
-				runOnUiThread(new Runnable() {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
 					@Override
-					public void run() {
-						if (!TextUtils.isEmpty(result)) {
-							try {
-								JSONObject object = new JSONObject(result);
-								if (object != null) {
-									tvTitle.setText(getString(R.string.warning_detail));
-									if (!object.isNull("sendTime")) {
-										tvTime.setText(object.getString("sendTime"));
-									}
-									if (!object.isNull("description")) {
-										tvIntro.setText(object.getString("description"));
-									}
-									String name = object.getString("headline");
-									if (!TextUtils.isEmpty(name)) {
-										tvName.setText(name.replace(getString(R.string.publish), getString(R.string.publish)+"\n"));
-									}
+					public void onFailure(Call call, IOException e) {
 
-									Bitmap bitmap = null;
-									if (object.getString("severityCode").equals(CONST.blue[0])) {
-										bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.blue[1]+CONST.imageSuffix);
-										if (bitmap != null) {
-											imageView.setImageBitmap(bitmap);
-										}else {
-											imageView.setImageResource(R.drawable.default_blue);
-										}
-									}else if (object.getString("severityCode").equals(CONST.yellow[0])) {
-										bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.yellow[1]+CONST.imageSuffix);
-										if (bitmap != null) {
-											imageView.setImageBitmap(bitmap);
-										}else {
-											imageView.setImageResource(R.drawable.default_yellow);
-										}
-									}else if (object.getString("severityCode").equals(CONST.orange[0])) {
-										bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.orange[1]+CONST.imageSuffix);
-										if (bitmap != null) {
-											imageView.setImageBitmap(bitmap);
-										}else {
-											imageView.setImageResource(R.drawable.default_orange);
-										}
-									}else if (object.getString("severityCode").equals(CONST.red[0])) {
-										bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.red[1]+CONST.imageSuffix);
-										if (bitmap != null) {
-											imageView.setImageBitmap(bitmap);
-										}else {
-											imageView.setImageResource(R.drawable.default_red);
-										}
-									}
+					}
 
-									initDBManager();
-									cancelDialog();
-								}
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
 						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											tvTitle.setText(getString(R.string.warning_detail));
+											if (!object.isNull("sendTime")) {
+												tvTime.setText(object.getString("sendTime"));
+											}
+											if (!object.isNull("description")) {
+												tvIntro.setText(object.getString("description"));
+											}
+											String name = object.getString("headline");
+											if (!TextUtils.isEmpty(name)) {
+												tvName.setText(name.replace(getString(R.string.publish), getString(R.string.publish)+"\n"));
+											}
+
+											Bitmap bitmap = null;
+											if (object.getString("severityCode").equals(CONST.blue[0])) {
+												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.blue[1]+CONST.imageSuffix);
+												if (bitmap != null) {
+													imageView.setImageBitmap(bitmap);
+												}else {
+													imageView.setImageResource(R.drawable.default_blue);
+												}
+											}else if (object.getString("severityCode").equals(CONST.yellow[0])) {
+												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.yellow[1]+CONST.imageSuffix);
+												if (bitmap != null) {
+													imageView.setImageBitmap(bitmap);
+												}else {
+													imageView.setImageResource(R.drawable.default_yellow);
+												}
+											}else if (object.getString("severityCode").equals(CONST.orange[0])) {
+												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.orange[1]+CONST.imageSuffix);
+												if (bitmap != null) {
+													imageView.setImageBitmap(bitmap);
+												}else {
+													imageView.setImageResource(R.drawable.default_orange);
+												}
+											}else if (object.getString("severityCode").equals(CONST.red[0])) {
+												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.red[1]+CONST.imageSuffix);
+												if (bitmap != null) {
+													imageView.setImageBitmap(bitmap);
+												}else {
+													imageView.setImageResource(R.drawable.default_red);
+												}
+											}
+
+											initDBManager();
+											cancelDialog();
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
 					}
 				});
 			}
-		});
+		}).start();
 	}
 	
 	@Override

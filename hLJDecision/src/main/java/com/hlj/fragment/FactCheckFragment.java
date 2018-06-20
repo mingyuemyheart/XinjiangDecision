@@ -180,133 +180,138 @@ public class FactCheckFragment extends Fragment implements OnClickListener{
 		});
 	}
 	
-	private void OkHttpCheck(String url) {
+	private void OkHttpCheck(final String url) {
 		progressBar.setVisibility(View.VISIBLE);
-		OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
-
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				final String result = response.body().string();
-				getActivity().runOnUiThread(new Runnable() {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
 					@Override
-					public void run() {
-						if (!TextUtils.isEmpty(result)) {
-							try {
-								JSONObject obj = new JSONObject(result);
-								if (TextUtils.isEmpty(startTimeCheck) && TextUtils.isEmpty(endTimeCheck)) {
-									if (!obj.isNull("maxtime")) {
-										try {
-											minTime = obj.getString("mintime");
-											maxTime = obj.getString("maxtime");
-											endTimeCheck = obj.getString("maxtime");
-											startTimeCheck = sdf3.format(sdf3.parse(endTimeCheck).getTime()-1000*60*60);
-											tvArea.setText(hanNan);
-											checkArea = "";
+					public void onFailure(Call call, IOException e) {
 
-											String y = startTimeCheck.substring(0, 4);
-											String m = startTimeCheck.substring(4, 6);
-											String d = startTimeCheck.substring(6, 8);
-											String h = startTimeCheck.substring(8, 10);
-											tvStartDay.setText(y+"-"+m+"-"+d);
-											tvStartHour.setText(h+"时");
+					}
 
-											String y2 = endTimeCheck.substring(0, 4);
-											String m2 = endTimeCheck.substring(4, 6);
-											String d2 = endTimeCheck.substring(6, 8);
-											String h2 = endTimeCheck.substring(8, 10);
-											tvEndDay.setText(y2+"-"+m2+"-"+d2);
-											tvEndHour.setText(h2+"时");
-										} catch (ParseException e) {
-											e.printStackTrace();
-										}
-									}
-								}
-
-								if (!obj.isNull("ciytlist")) {
-									areaList.clear();
-									JSONArray array = obj.getJSONArray("ciytlist");
-									for (int i = 0; i < array.length(); i++) {
-										FactDto dto = new FactDto();
-										if (!TextUtils.isEmpty(array.getString(i))) {
-											dto.area = array.getString(i);
-											areaList.add(dto);
-										}
-									}
-
-									FactDto dto = new FactDto();
-									dto.area = hanNan;
-									areaList.add(0, dto);
-									if (areaList.size() > 0 && areaAdapter != null) {
-										areaAdapter.notifyDataSetChanged();
-									}
-								}
-
-								if(!obj.isNull("th")) {
-									JSONObject th = obj.getJSONObject("th");
-									if (!th.isNull("stationName")) {
-										tv1.setText(th.getString("stationName"));
-									}
-									if (!th.isNull("area")) {
-										tv2.setText(th.getString("area"));
-									}
-									if (!th.isNull("val")) {
-										tv3.setText(th.getString("val"));
-									}
-								}
-
-								if (!obj.isNull("list")) {
-									checkList.clear();
-									JSONArray array = obj.getJSONArray("list");
-									for (int i = 0; i < array.length(); i++) {
-										JSONObject itemObj = array.getJSONObject(i);
-										FactDto dto = new FactDto();
-										if (!itemObj.isNull("stationCode")) {
-											dto.stationCode = itemObj.getString("stationCode");
-										}
-										if (!itemObj.isNull("stationName")) {
-											dto.stationName = itemObj.getString("stationName");
-										}
-										if (!itemObj.isNull("area")) {
-											dto.area = itemObj.getString("area");
-										}
-										if (!itemObj.isNull("val")) {
-											dto.val = itemObj.getDouble("val");
-										}
-										if (!TextUtils.isEmpty(dto.area)) {
-											checkList.add(dto);
-										}
-									}
-									if (checkList.size() > 0 && checkAdapter != null) {
-										checkAdapter.notifyDataSetChanged();
-										CommonUtil.setListViewHeightBasedOnChildren(listViewCheck);
-									}
-								}
-
-								if (!b3) {//将序
-									iv3.setImageResource(R.drawable.arrow_down);
-								}else {//将序
-									iv3.setImageResource(R.drawable.arrow_up);
-								}
-								iv3.setVisibility(View.VISIBLE);
-
-								progressBar.setVisibility(View.GONE);
-								reContent.setVisibility(View.VISIBLE);
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
 						}
+						final String result = response.body().string();
+						getActivity().runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (TextUtils.isEmpty(startTimeCheck) && TextUtils.isEmpty(endTimeCheck)) {
+											if (!obj.isNull("maxtime")) {
+												try {
+													minTime = obj.getString("mintime");
+													maxTime = obj.getString("maxtime");
+													endTimeCheck = obj.getString("maxtime");
+													startTimeCheck = sdf3.format(sdf3.parse(endTimeCheck).getTime()-1000*60*60);
+													tvArea.setText(hanNan);
+													checkArea = "";
+
+													String y = startTimeCheck.substring(0, 4);
+													String m = startTimeCheck.substring(4, 6);
+													String d = startTimeCheck.substring(6, 8);
+													String h = startTimeCheck.substring(8, 10);
+													tvStartDay.setText(y+"-"+m+"-"+d);
+													tvStartHour.setText(h+"时");
+
+													String y2 = endTimeCheck.substring(0, 4);
+													String m2 = endTimeCheck.substring(4, 6);
+													String d2 = endTimeCheck.substring(6, 8);
+													String h2 = endTimeCheck.substring(8, 10);
+													tvEndDay.setText(y2+"-"+m2+"-"+d2);
+													tvEndHour.setText(h2+"时");
+												} catch (ParseException e) {
+													e.printStackTrace();
+												}
+											}
+										}
+
+										if (!obj.isNull("ciytlist")) {
+											areaList.clear();
+											JSONArray array = obj.getJSONArray("ciytlist");
+											for (int i = 0; i < array.length(); i++) {
+												FactDto dto = new FactDto();
+												if (!TextUtils.isEmpty(array.getString(i))) {
+													dto.area = array.getString(i);
+													areaList.add(dto);
+												}
+											}
+
+											FactDto dto = new FactDto();
+											dto.area = hanNan;
+											areaList.add(0, dto);
+											if (areaList.size() > 0 && areaAdapter != null) {
+												areaAdapter.notifyDataSetChanged();
+											}
+										}
+
+										if(!obj.isNull("th")) {
+											JSONObject th = obj.getJSONObject("th");
+											if (!th.isNull("stationName")) {
+												tv1.setText(th.getString("stationName"));
+											}
+											if (!th.isNull("area")) {
+												tv2.setText(th.getString("area"));
+											}
+											if (!th.isNull("val")) {
+												tv3.setText(th.getString("val"));
+											}
+										}
+
+										if (!obj.isNull("list")) {
+											checkList.clear();
+											JSONArray array = obj.getJSONArray("list");
+											for (int i = 0; i < array.length(); i++) {
+												JSONObject itemObj = array.getJSONObject(i);
+												FactDto dto = new FactDto();
+												if (!itemObj.isNull("stationCode")) {
+													dto.stationCode = itemObj.getString("stationCode");
+												}
+												if (!itemObj.isNull("stationName")) {
+													dto.stationName = itemObj.getString("stationName");
+												}
+												if (!itemObj.isNull("area")) {
+													dto.area = itemObj.getString("area");
+												}
+												if (!itemObj.isNull("val")) {
+													dto.val = itemObj.getDouble("val");
+												}
+												if (!TextUtils.isEmpty(dto.area)) {
+													checkList.add(dto);
+												}
+											}
+											if (checkList.size() > 0 && checkAdapter != null) {
+												checkAdapter.notifyDataSetChanged();
+												CommonUtil.setListViewHeightBasedOnChildren(listViewCheck);
+											}
+										}
+
+										if (!b3) {//将序
+											iv3.setImageResource(R.drawable.arrow_down);
+										}else {//将序
+											iv3.setImageResource(R.drawable.arrow_up);
+										}
+										iv3.setVisibility(View.VISIBLE);
+
+										progressBar.setVisibility(View.GONE);
+										reContent.setVisibility(View.VISIBLE);
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
+
 					}
 				});
-
 			}
-		});
+		}).start();
 	}
 	
 	// 返回中文的首字母  

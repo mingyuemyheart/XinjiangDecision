@@ -1,9 +1,5 @@
 package com.hlj.activity;
 
-import java.util.HashMap;
-import java.util.Map;
-import shawn.cxwl.com.hlj.R;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -18,9 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hlj.common.CONST;
-import com.hlj.utils.CustomHttpClient;
+import com.hlj.utils.CommonUtil;
 import com.hlj.view.RefreshLayout;
 import com.hlj.view.RefreshLayout.OnRefreshListener;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import shawn.cxwl.com.hlj.R;
 
 /**
  * 普通url，处理网页界面
@@ -105,7 +106,7 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 		
 		//添加请求头
 		Map<String, String> extraHeaders = new HashMap<String, String>();
-		extraHeaders.put("Referer", CustomHttpClient.getRequestHeader());
+		extraHeaders.put("Referer", CommonUtil.getRequestHeader());
 		webView.loadUrl(url, extraHeaders);
 		
 		webView.setWebChromeClient(new WebChromeClient() {
@@ -126,7 +127,7 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 				
 				//添加请求头
 				Map<String, String> extraHeaders = new HashMap<String, String>();
-				extraHeaders.put("Referer", CustomHttpClient.getRequestHeader());
+				extraHeaders.put("Referer", CommonUtil.getRequestHeader());
 				webView.loadUrl(url, extraHeaders);
 				return true;
 			}

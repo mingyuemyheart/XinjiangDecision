@@ -6,7 +6,6 @@ package com.hlj.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,20 +16,24 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hlj.adapter.ProductFragmentAdapter;
 import com.hlj.common.CONST;
 import com.hlj.dto.NewsDto;
-import com.hlj.adapter.ProductFragmentAdapter;
-import com.hlj.utils.CustomHttpClient;
+import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.RefreshLayout;
 
-import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
 public class ProductActivity extends BaseActivity implements OnClickListener, RefreshLayout.OnRefreshListener, RefreshLayout.OnLoadListener {
@@ -40,7 +43,7 @@ public class ProductActivity extends BaseActivity implements OnClickListener, Re
 	private TextView tvTitle = null;
 	private GridView gridView = null;
 	private ProductFragmentAdapter mAdapter = null;
-	private List<NewsDto> mList = new ArrayList<NewsDto>();
+	private List<NewsDto> mList = new ArrayList<>();
 	private int countpage = 0;//总页数
 	private int page = 1;
 	private int pageSize = 20;
@@ -156,95 +159,64 @@ public class ProductActivity extends BaseActivity implements OnClickListener, Re
 		});
 	}
 	
-	private void asyncQuery(String url) {
-		HttpAsyncTask task = new HttpAsyncTask();
-		task.setMethod("GET");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(url);
-	}
-	
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		private String method = "GET";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		
-		public HttpAsyncTask() {
-		}
+	private void asyncQuery(final String url) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			cancelDialog();
-			refreshLayout.setRefreshing(false);
-			refreshLayout.setLoading(false);
-			if (requestResult != null) {
-				try {
-					JSONObject obj = new JSONObject(requestResult);
-					if (!obj.isNull("count")) {
-						String num = obj.getString("countpage");
-						if (!TextUtils.isEmpty(num)) {
-							countpage = Integer.valueOf(obj.getString("countpage"));
-						}
 					}
-					if (!obj.isNull("info")) {
-						JSONArray array = new JSONArray(obj.getString("info"));
-						for (int i = 0; i < array.length(); i++) {
-							JSONObject itemObj = array.getJSONObject(i);
-							NewsDto dto = new NewsDto();
-							dto.imgUrl = itemObj.getString("icon");
-							dto.title = itemObj.getString("name");
-							dto.time = itemObj.getString("addtime");
-							dto.detailUrl = itemObj.getString("urladdress");
-							dto.showType = itemObj.getString("showtype");
-							mList.add(dto);
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
 						}
-						
-						if (mAdapter != null) {
-							mAdapter.notifyDataSetChanged();
-						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								cancelDialog();
+								refreshLayout.setRefreshing(false);
+								refreshLayout.setLoading(false);
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (!obj.isNull("count")) {
+											String num = obj.getString("countpage");
+											if (!TextUtils.isEmpty(num)) {
+												countpage = Integer.valueOf(obj.getString("countpage"));
+											}
+										}
+										if (!obj.isNull("info")) {
+											JSONArray array = new JSONArray(obj.getString("info"));
+											for (int i = 0; i < array.length(); i++) {
+												JSONObject itemObj = array.getJSONObject(i);
+												NewsDto dto = new NewsDto();
+												dto.imgUrl = itemObj.getString("icon");
+												dto.title = itemObj.getString("name");
+												dto.time = itemObj.getString("addtime");
+												dto.detailUrl = itemObj.getString("urladdress");
+												dto.showType = itemObj.getString("showtype");
+												mList.add(dto);
+											}
+
+											if (mAdapter != null) {
+												mAdapter.notifyDataSetChanged();
+											}
+										}
+									} catch (JSONException e1) {
+										e1.printStackTrace();
+									}
+								}
+							}
+						});
 					}
-				} catch (JSONException e1) {
-					e1.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		}).start();
 	}
 	
 	@Override
