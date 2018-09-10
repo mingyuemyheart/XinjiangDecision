@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hlj.common.CONST;
@@ -33,7 +32,6 @@ import com.hlj.fragment.HForecastFragment;
 import com.hlj.fragment.HPersonInfuluceFragment;
 import com.hlj.fragment.HWeatherForecastFragment;
 import com.hlj.fragment.HWeatherWarningFragment;
-import com.hlj.fragment.WeatherKepuFragment;
 import com.hlj.utils.AutoUpdateUtil;
 import com.hlj.utils.CommonUtil;
 import com.hlj.view.MainViewPager;
@@ -306,7 +304,7 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
         	} else if (TextUtils.equals(id, "5")) {
         		mAdapter.addItem(channel, bundle, HWeatherWarningFragment.class);//天气预警
         	} else if (TextUtils.equals(id, "7")) {
-        		mAdapter.addItem(channel, bundle, WeatherKepuFragment.class);//气象科普
+        		mAdapter.addItem(channel, bundle, HPersonInfuluceFragment.class);//气象科普
         	} else if (TextUtils.equals(id, "8")) {
         		mAdapter.addItem(channel, bundle, HPersonInfuluceFragment.class);//人工影响天气
         	} else if (TextUtils.equals(id, "10")) {
@@ -315,7 +313,9 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
         		mAdapter.addItem(channel, bundle, HWeatherForecastFragment.class);//铁路气象服务
         	} else if (TextUtils.equals(id, "12")) {
         		mAdapter.addItem(channel, bundle, ContactUsFragment.class);//联系我们
-        	} 
+        	} else if (TextUtils.equals(id, "13")) {
+				mAdapter.addItem(channel, bundle, HPersonInfuluceFragment.class);//森林防火
+			}
 		}else if (TextUtils.equals(showType, CONST.NEWS)) {
 			mAdapter.addItem(channel, bundle, HDecisionServiceFragment.class);//决策服务
 		}
