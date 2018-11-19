@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 import com.hlj.activity.HAgriWeatherDetailActivity;
+import com.hlj.activity.HUrlActivity;
 import com.hlj.adapter.HWeatherForecastFragmentAdapter;
+import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
 
@@ -73,12 +76,19 @@ public class HAgriWeatherFragment extends Fragment{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				AgriDto dto = mList.get(arg2);
-				Intent intent = new Intent(getActivity(), HAgriWeatherDetailActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putParcelable("dto", dto);
-				bundle.putParcelable("data", data);
-				intent.putExtras(bundle);
-				startActivity(intent);
+				if (TextUtils.equals(dto.id, "205")) {//农业气象服务
+					Intent intentBuild = new Intent(getActivity(), HUrlActivity.class);
+					intentBuild.putExtra(CONST.ACTIVITY_NAME, dto.name);
+					intentBuild.putExtra(CONST.WEB_URL, dto.dataUrl);
+					startActivity(intentBuild);
+				}else {
+					Intent intent = new Intent(getActivity(), HAgriWeatherDetailActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putParcelable("dto", dto);
+					bundle.putParcelable("data", data);
+					intent.putExtras(bundle);
+					startActivity(intent);
+				}
 			}
 		});
 	}

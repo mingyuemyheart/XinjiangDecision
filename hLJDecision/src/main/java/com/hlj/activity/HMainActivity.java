@@ -32,6 +32,7 @@ import com.hlj.fragment.HForecastFragment;
 import com.hlj.fragment.HPersonInfuluceFragment;
 import com.hlj.fragment.HWeatherForecastFragment;
 import com.hlj.fragment.HWeatherWarningFragment;
+import com.hlj.fragment.ShawnWebviewFragment;
 import com.hlj.utils.AutoUpdateUtil;
 import com.hlj.utils.CommonUtil;
 import com.hlj.view.MainViewPager;
@@ -315,6 +316,8 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
         		mAdapter.addItem(channel, bundle, ContactUsFragment.class);//联系我们
         	} else if (TextUtils.equals(id, "13")) {
 				mAdapter.addItem(channel, bundle, HPersonInfuluceFragment.class);//森林防火
+			} else if (TextUtils.equals(id, "106")) {
+				mAdapter.addItem(channel, bundle, ShawnWebviewFragment.class);//旅游气象
 			}
 		}else if (TextUtils.equals(showType, CONST.NEWS)) {
 			mAdapter.addItem(channel, bundle, HDecisionServiceFragment.class);//决策服务
