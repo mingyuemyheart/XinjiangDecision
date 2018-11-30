@@ -7,6 +7,7 @@ import java.util.List;
 
 public class CONST {
 
+	public static String noValue = "--";
 	public static final String publicUser = "publicuser";//公众账号
 	public static final String publicPwd = "123456";//公众密码
 	public static String APPID = "18";//贵州客户端对应服务器的appid

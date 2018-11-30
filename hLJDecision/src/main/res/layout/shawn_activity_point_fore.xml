@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title" />
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_below="@+id/reTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/reShare"
+        android:layout_below="@+id/reTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/level_4"/>
+
+        <TextView
+            android:id="@+id/tvPublishTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvName"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/text_color3"
+            android:textSize="@dimen/level_5"/>
+
+        <ImageView
+            android:id="@+id/ivTemp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tvName"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/com_temp_press"/>
+
+        <ImageView
+            android:id="@+id/ivHumidity"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/ivTemp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/com_humidity"/>
+
+        <ImageView
+            android:id="@+id/ivWind"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/ivHumidity"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/com_wind"/>
+
+        <ImageView
+            android:id="@+id/ivCloud"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/ivWind"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/com_cloud"/>
+
+        <ImageView
+            android:id="@+id/ivSwitch"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/reDataSource"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/com_switch_map"/>
+
+        <RelativeLayout
+            android:id="@+id/reDataSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ivLocation"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="10dp">
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvDataSource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="中央气象台智能网格预报产品"
+                android:textSize="@dimen/level_5"
+                android:textColor="@color/blue"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shawn_bg_corner_switch_height"
+                android:gravity="center_vertical"
+                android:paddingStart="40dp"
+                android:paddingEnd="10dp"/>
+
+            <ImageView
+                android:id="@+id/ivDataSource"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:src="@drawable/com_data_source"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivLocation"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/llSeekBar"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/shawn_icon_location_off"/>
+
+        <LinearLayout
+            android:id="@+id/llSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#f9f9f7"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingBottom="5dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:id="@+id/ivPlay"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/shawn_icon_play"/>
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxHeight="2dp"
+                android:minHeight="2dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/shawn_seekbar_drawable_minute"
+                android:thumb="@drawable/shawn_seekbar_thumb"
+                android:thumbOffset="0dp"/>
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_5"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

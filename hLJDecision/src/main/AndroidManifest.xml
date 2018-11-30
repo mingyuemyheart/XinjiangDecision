@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="shawn.cxwl.com.hlj" >
+          xmlns:tools="http://schemas.android.com/tools"
+          package="shawn.cxwl.com.hlj" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -38,7 +39,8 @@
         android:allowBackup="true"
         android:icon="@drawable/iv_icon"
         android:label="@string/app_name"
-        android:theme="@style/StyledIndicators" >
+        android:theme="@style/StyledIndicators"
+        tools:ignore="GoogleAppIndexingWarning">
         
         <service android:name="com.amap.api.location.APSService" />
         
@@ -195,6 +197,14 @@
 
         <activity
             android:name="com.hlj.activity.HWarningListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnPointForeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnPointForeDetailActivity"
             android:screenOrientation="portrait" />
         
         

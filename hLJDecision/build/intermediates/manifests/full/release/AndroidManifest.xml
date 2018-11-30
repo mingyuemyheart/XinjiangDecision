@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="shawn.cxwl.com.hlj"
-    android:versionCode="23"
-    android:versionName="1.0.22" >
+    android:versionCode="41"
+    android:versionName="2.1.7" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="19"
         android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -22,33 +22,25 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!-- umeng -->
-    <!-- 分享 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.SET_DEBUG_APP" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-
-    <!-- 必选 -->
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-    <!-- 可选 -->
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_ADDED" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_CHANGED" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_INSTALL" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED" />
     <uses-permission android:name="android.permission.RESTART_PACKAGES" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <!-- umeng -->
     <application
-        android:name="com.hlj.common.PgyApplication"
+        android:name="com.hlj.common.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/iv_icon"
         android:label="@string/app_name"
@@ -60,31 +52,29 @@
             android:name="com.amap.api.v2.apikey"
             android:value="41cb6e240846b9f30207a9e6ac79fdc2" />
 
-        <!--
-        决策气象服务
-        1.包名为shawn.cxwl.com.hlj.decision
-        2.高德地图key
-        3.appname
-        4.welcome界面welcome_icon2、main界面iv_logo2
-        5.更换MainActivity、SettingActivity自动更新app_id
+        <!-- 决策气象服务 -->
+        <!-- 1.包名为shawn.cxwl.com.hlj.decision -->
+        <!-- 2.高德地图key -->
+        <!-- 3.appname -->
+        <!-- 4.welcome界面welcome_icon2、main界面iv_logo2 -->
+        <!-- 5.更换MainActivity、SettingActivity自动更新app_id -->
+        <!-- 6.gradle 修改打包名称 -->
 
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="51096dda8deea179e4a980f74d38c4d6"/>
-        -->
+
+        <!-- <meta-data -->
+        <!-- android:name="com.amap.api.v2.apikey" -->
+        <!-- android:value="51096dda8deea179e4a980f74d38c4d6"/> -->
 
 
         <!-- 自动更新下载完成广播 -->
         <receiver android:name="com.hlj.utils.AutoUpdateBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-                <!-- <action android:name="android.intent.action.PACKAGE_INSTALL" /> -->
+                <action android:name="android.intent.action.PACKAGE_INSTALL" />
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name="com.hlj.activity.HWelcomeActivity"
-            android:theme="@style/StyledIndicators" >
+        <activity android:name="com.hlj.activity.HWelcomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -93,7 +83,6 @@
         </activity>
         <activity
             android:name="com.hlj.activity.HMainActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.HLoginActivity"
@@ -113,9 +102,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.HChannelManageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.hlj.activity.TrendRankActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.TrendDetailActivity"
@@ -140,15 +126,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.HPdfListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.hlj.activity.HRainfallFactActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.hlj.activity.WindDirSpeedActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.hlj.activity.RelativeHumidityActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.HWeatherRadarActivity"
@@ -184,6 +161,24 @@
         <activity
             android:name="com.hlj.activity.FactDetailChartActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.TyphoonRouteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.WaitWindActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HReserveCityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.HWarningListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnPointForeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnPointForeDetailActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 第三方类库名称 -->
 
@@ -195,10 +190,7 @@
             android:screenOrientation="portrait" />
 
         <!-- 雷达图 -->
-        <activity
-            android:name="com.hlj.activity.HWeatherChartActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.hlj.activity.WeatherRadarDetailActivity"
             android:launchMode="singleTask"
@@ -216,10 +208,7 @@
             android:screenOrientation="portrait" />
 
         <!-- 预警 -->
-        <activity
-            android:name="com.hlj.activity.WarningActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.hlj.activity.HWarningDetailActivity"
             android:launchMode="singleTask"
@@ -246,6 +235,133 @@
             android:screenOrientation="portrait" />
 
         <!-- 第三方类库名称 -->
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5755277767e58e5ca4000e07" />
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="3464bbdf388960ddcea9c5cebf46cd66" />
+
+        <!-- umeng推送 -->
+        <service
+            android:name="com.taobao.accs.ChannelService"
+            android:exported="true"
+            android:process=":channel" >
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.SERVICE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.ELECTION" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.taobao.accs.data.MsgDistributeService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.taobao.accs.EventReceiver"
+            android:process=":channel" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.taobao.accs.ServiceReceiver"
+            android:process=":channel" >
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.COMMAND" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.START_FROM_AGOO" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.taobao.accs.ChannelService$KernelService"
+            android:process=":channel" >
+        </service>
+        <service
+            android:name="org.android.agoo.accs.AgooService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.umeng.message.UmengIntentService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.taobao.agoo.AgooCommondReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="shawn.cxwl.com.hlj.intent.action.COMMAND" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
+            android:exported="false" />
+
+        <service
+            android:name="com.umeng.message.UmengMessageCallbackHandlerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.umeng.messge.registercallback.action" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.enablecallback.action" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.disablecallback.action" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.message.handler.action" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.umeng.message.UmengDownloadResourceService"
+            android:exported="false" />
+        <service
+            android:name="com.umeng.message.UmengMessageIntentReceiverService"
+            android:exported="true"
+            android:process=":channel" >
+            <intent-filter>
+                <action android:name="org.android.agoo.client.MessageReceiverService" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name="com.umeng.message.provider.MessageProvider"
+            android:authorities="shawn.cxwl.com.hlj.umeng.message"
+            android:exported="false" >
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <!-- umeng -->
 
     </application>
 

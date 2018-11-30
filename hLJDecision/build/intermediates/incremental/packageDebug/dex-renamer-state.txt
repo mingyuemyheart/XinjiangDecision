@@ -1,7 +1,0 @@
-#Fri Nov 24 14:38:52 CST 2017
-base.0=/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_1131b1bf9072bcd2979c6dddf1b7069f47dc9a76
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_678574dd7e408d3df37b42855ec532b86f3e17cd/classes.dex
-base.1=/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_678574dd7e408d3df37b42855ec532b86f3e17cd
-file.0=/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_1131b1bf9072bcd2979c6dddf1b7069f47dc9a76/classes.dex

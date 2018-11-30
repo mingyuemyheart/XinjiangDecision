@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="shawn.cxwl.com.hlj"
-      android:versionCode="23"
-      android:versionName="1.0.22"
-      split="lib_dependencies_apk">
-</manifest>

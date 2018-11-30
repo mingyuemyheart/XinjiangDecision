@@ -27,6 +27,7 @@ import com.hlj.activity.HUrlActivity;
 import com.hlj.activity.HWeatherChartAnalysisActivity;
 import com.hlj.activity.HWeatherRadarActivity;
 import com.hlj.activity.HWeatherStaticsActivity;
+import com.hlj.activity.ShawnPointForeActivity;
 import com.hlj.activity.TyphoonRouteActivity;
 import com.hlj.activity.WaitWindActivity;
 import com.hlj.adapter.HWeatherForecastFragmentAdapter;
@@ -127,6 +128,10 @@ public class HWeatherForecastFragment extends Fragment {
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "205")) {//等风来
 						intent = new Intent(getActivity(), WaitWindActivity.class);
+						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+						startActivity(intent);
+					}else if (TextUtils.equals(dto.id, "207")) {//格点预报
+						intent = new Intent(getActivity(), ShawnPointForeActivity.class);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "701")) {//全省预报

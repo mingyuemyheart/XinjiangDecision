@@ -1,489 +1,708 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-280:12
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-399:12
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-399:12
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-399:12
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-399:12
+MERGED from [:indicatorlibrary] /Users/shawn/AndroidStudioProjects/HLJDecision/indicatorlibrary/build/intermediates/manifests/full/release/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:appcompat-v7:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/853e983b6bd1941919ad165c1f215e8d/AndroidManifest.xml:17:1-22:12
+MERGED from [:sceneFinal] /Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/manifests/full/release/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.0.aar/8738c6d02b400c84916a7cc0fb76602b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.0.aar/5f7d7b62c6e92be5fa5ae824c948737b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.0.aar/55f9202b441182840d2d6ac4cecae569/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.0.aar/4789eddb6c6516aa6396b77e7f0d9fd6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.0.aar/5b1aac14f4fcca52b9aae3e7f7735ecc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/55c47cc5d6890a4ce4bf66f2657ceb6e/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/ca18e290d2d8dad5f94ba3b316f373ca/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/0e8097f223c8440c24f30453968bded2/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/43fcda339e5c4ee332854483c600a672/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/363e66d71ef032fab59411045a6138a0/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-399:12
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-399:12
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-399:12
 	package
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:3:5-42
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:4:11-39
 		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-399:12
+		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:3:11-57
+	android:versionCode
+		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-399:12
 		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:11-69
-	android:versionCode
-		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
-		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 uses-permission#android.permission.INTERNET
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:5:5-67
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:6:5-67
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:5:22-64
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:6:22-64
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:6:5-81
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:6:22-78
-uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:7:5-81
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:7:22-78
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:8:5-79
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:8:5-81
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:8:22-76
-uses-permission#android.permission.ACCESS_FINE_LOCATION
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:8:22-78
+uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:9:5-79
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:9:22-76
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:10:5-79
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:10:22-76
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:10:5-75
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:11:5-75
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:10:22-72
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:11:22-72
 uses-permission#android.permission.CHANGE_WIFI_STATE
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:11:5-76
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:11:22-73
-uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:12:5-76
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:12:22-73
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:13:5-76
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:13:22-73
 uses-permission#android.permission.CHANGE_CONFIGURATION
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:13:5-79
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:14:5-79
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:13:22-76
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:14:22-76
 uses-permission#android.permission.WAKE_LOCK
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:14:5-68
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:15:5-68
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:14:22-65
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:15:22-65
 uses-permission#android.permission.WRITE_SETTINGS
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:15:5-73
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:16:5-73
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:15:22-70
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:16:22-70
 uses-permission#android.permission.CALL_PHONE
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:16:5-69
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:17:5-69
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:16:22-66
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:17:22-66
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:20:5-80
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:20:22-77
 uses-permission#android.permission.READ_LOGS
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:20:5-68
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:21:5-68
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:20:22-65
-uses-permission#android.permission.SET_DEBUG_APP
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:21:5-72
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:21:22-69
-uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:22:5-78
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:22:22-75
-uses-permission#android.permission.USE_CREDENTIALS
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:23:5-74
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:23:22-71
-uses-permission#android.permission.MANAGE_ACCOUNTS
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:24:5-74
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:24:22-71
-uses-permission#android.permission.SEND_SMS
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:25:5-67
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:25:22-64
-uses-permission#android.permission.CHANGE_NETWORK_STATE
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:28:5-79
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:28:22-76
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:21:22-65
 uses-permission#android.permission.GET_TASKS
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:29:5-68
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:22:5-68
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:29:22-65
-uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:30:5-81
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:22:22-65
+uses-permission#android.permission.SET_DEBUG_APP
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:23:5-72
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:30:22-78
-uses-permission#android.permission.BROADCAST_PACKAGE_ADDED
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:33:5-82
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:23:22-69
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:24:5-78
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:33:22-79
-uses-permission#android.permission.BROADCAST_PACKAGE_CHANGED
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:34:5-84
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:34:22-81
-uses-permission#android.permission.BROADCAST_PACKAGE_INSTALL
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:35:5-84
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:35:22-81
-uses-permission#android.permission.BROADCAST_PACKAGE_REPLACED
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:36:5-85
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:36:22-82
-uses-permission#android.permission.RESTART_PACKAGES
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:37:5-75
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:37:22-72
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:24:22-75
 uses-permission#android.permission.GET_ACCOUNTS
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:38:5-71
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:25:5-71
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:38:22-68
-uses-permission#android.permission.VIBRATE
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:39:5-66
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:25:22-68
+uses-permission#android.permission.USE_CREDENTIALS
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:26:5-74
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:39:22-63
-uses-permission#android.permission.RECEIVE_SMS
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:40:5-70
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:26:22-71
+uses-permission#android.permission.MANAGE_ACCOUNTS
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:27:5-74
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:40:22-67
-uses-permission#android.permission.READ_SMS
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:41:5-67
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:27:22-71
+uses-permission#android.permission.BROADCAST_PACKAGE_ADDED
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:28:5-82
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:41:22-64
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:28:22-79
+uses-permission#android.permission.BROADCAST_PACKAGE_CHANGED
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:29:5-84
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:29:22-81
+uses-permission#android.permission.BROADCAST_PACKAGE_INSTALL
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:30:5-84
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:30:22-81
+uses-permission#android.permission.BROADCAST_PACKAGE_REPLACED
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:31:5-85
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:31:22-82
+uses-permission#android.permission.RESTART_PACKAGES
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:32:5-75
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:32:22-72
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:33:5-81
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:33:22-78
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:34:5-79
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:34:22-76
 application
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:44:5-278:19
-MERGED from [com.android.support:appcompat-v7:25.1.1] /Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:25.1.1] /Users/shawn/.android/build-cache/2f71cdd8da0e165da6f6dbe50b84c0178d2888ff/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-fragment:25.1.1] /Users/shawn/.android/build-cache/74168adef9f145d7d3dc7096ef1d0fd06c645946/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-media-compat:25.1.1] /Users/shawn/.android/build-cache/2fec614e8de0f8cd02b43e8fa82183979d0232d6/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-ui:25.1.1] /Users/shawn/.android/build-cache/c9395eb9aeea056985524d8f9d0161443326dfef/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-utils:25.1.1] /Users/shawn/.android/build-cache/08df6def9ba877375608ace7c204b3db7258463e/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:25.1.1] /Users/shawn/.android/build-cache/6a4c2e6da7dad4842eb3b22f5ab2fcb32d0ad453/output/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:25.1.1] /Users/shawn/.android/build-cache/49f2426cde20d9ddfdfeaa5c51e6519d412fc632/output/AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-compat:25.1.1] /Users/shawn/.android/build-cache/b0b4a69c09f65cb5c45933df3094d0eab2a04599/output/AndroidManifest.xml:25:5-20
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:37:5-397:19
 	android:label
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:48:9-41
-	android:allowBackup
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:46:9-35
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:41:9-41
+	tools:ignore
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:43:9-48
 	android:icon
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:47:9-41
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:40:9-41
+	android:allowBackup
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:39:9-35
 	android:theme
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:49:9-48
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:42:9-48
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:45:9-53
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:38:9-52
 service#com.amap.api.location.APSService
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:51:9-68
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:45:9-68
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:51:18-65
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:45:18-65
 meta-data#com.amap.api.v2.apikey
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:54:9-56:63
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:48:9-50:63
 	android:value
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:56:13-61
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:50:13-61
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:55:13-50
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:49:13-50
 receiver#com.hlj.utils.AutoUpdateBroadcastReceiver
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:72:9-77:20
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:65:9-70:20
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:72:19-75
-intent-filter#android.intent.action.DOWNLOAD_COMPLETE
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:73:13-76:29
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:65:19-75
+intent-filter#action:name:android.intent.action.DOWNLOAD_COMPLETE+action:name:android.intent.action.PACKAGE_INSTALL
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:66:13-69:29
 action#android.intent.action.DOWNLOAD_COMPLETE
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:74:17-82
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:67:17-82
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:74:25-79
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:67:25-79
+action#android.intent.action.PACKAGE_INSTALL
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:68:18-81
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:68:26-78
 activity#com.hlj.activity.HWelcomeActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:79:9-87:20
-	android:theme
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:81:13-52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:72:9-79:20
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:80:13-61
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:82:13-86:29
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:73:13-61
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:74:13-78:29
 action#android.intent.action.MAIN
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:83:17-69
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:75:17-69
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:83:25-66
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:75:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:85:17-77
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:77:17-77
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:85:27-74
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:77:27-74
 activity#com.hlj.activity.HMainActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:89:9-92:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:81:9-83:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:92:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:91:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:83:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:90:13-58
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:82:13-58
 activity#com.hlj.activity.HLoginActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:94:9-97:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:85:9-88:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:97:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:88:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:96:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:87:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:95:13-59
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:86:13-59
 activity#com.hlj.activity.HSettingActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:99:9-102:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:90:9-93:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:102:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:93:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:101:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:92:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:100:13-61
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:91:13-61
 activity#com.hlj.activity.HCityActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:104:9-107:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:95:9-98:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:98:13-49
+	android:launchMode
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:97:13-44
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:96:13-58
+activity#com.hlj.activity.HWeatherDetailActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:100:9-103:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:103:13-49
+	android:launchMode
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:102:13-44
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:101:13-67
+activity#com.hlj.activity.HChannelManageActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:105:9-107:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:107:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:106:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:105:13-58
-activity#com.hlj.activity.HWeatherDetailActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:109:9-112:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:112:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:111:13-44
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:110:13-67
-activity#com.hlj.activity.HChannelManageActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:114:9-116:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:116:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:115:13-67
-activity#com.hlj.activity.TrendRankActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:118:9-120:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:120:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:119:13-62
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:106:13-67
 activity#com.hlj.activity.TrendDetailActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:122:9-124:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:109:9-111:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:124:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:111:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:123:13-64
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:110:13-64
 activity#com.hlj.activity.HAgriWeatherDetailActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:126:9-128:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:113:9-115:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:128:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:115:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:127:13-71
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:114:13-71
 activity#com.hlj.activity.WeatherKepuDetailActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:130:9-132:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:117:9-119:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:132:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:119:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:131:13-70
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:118:13-70
 activity#com.hlj.activity.WarningSignalActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:134:9-136:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:121:9-123:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:136:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:123:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:135:13-66
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:122:13-66
 activity#com.hlj.activity.HUrlActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:138:9-140:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:125:9-127:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:140:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:127:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:139:13-57
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:126:13-57
 activity#com.hlj.activity.Url2Activity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:142:9-144:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:129:9-131:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:144:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:131:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:143:13-57
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:130:13-57
 activity#com.hlj.activity.HTempratureForecastActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:146:9-148:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:133:9-135:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:148:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:135:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:147:13-72
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:134:13-72
 activity#com.hlj.activity.HPdfListActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:150:9-152:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:137:9-139:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:152:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:139:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:151:13-61
-activity#com.hlj.activity.HRainfallFactActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:154:9-156:52
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:138:13-61
+activity#com.hlj.activity.HWeatherRadarActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:141:9-143:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:156:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:143:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:155:13-66
-activity#com.hlj.activity.WindDirSpeedActivity
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:142:13-66
+activity#com.hlj.activity.HCommonPdfListActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:145:9-147:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:147:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:146:13-67
+activity#com.hlj.activity.HSixHourRainfallActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:149:9-151:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:151:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:150:13-69
+activity#com.hlj.activity.HAirPolutionActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:153:9-156:86
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:155:13-49
+	android:configChanges
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:156:13-83
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:154:13-65
+activity#com.hlj.activity.HProvinceForecastActivity
 ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:158:9-160:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:160:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:159:13-65
-activity#com.hlj.activity.RelativeHumidityActivity
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:159:13-70
+activity#com.hlj.activity.HWeatherStaticsActivity
 ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:162:9-164:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:164:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:163:13-69
-activity#com.hlj.activity.HWeatherRadarActivity
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:163:13-68
+activity#com.hlj.activity.HHeadWarningActivity
 ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:166:9-168:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:168:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:167:13-66
-activity#com.hlj.activity.HCommonPdfListActivity
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:167:13-65
+activity#com.hlj.activity.HWeatherChartAnalysisActivity
 ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:170:9-172:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:172:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:171:13-67
-activity#com.hlj.activity.HSixHourRainfallActivity
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:171:13-74
+activity#com.hlj.activity.FactActivity2
 ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:174:9-176:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:176:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:175:13-69
-activity#com.hlj.activity.HAirPolutionActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:178:9-181:86
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:175:13-58
+activity#com.hlj.activity.FactDetailActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:178:9-180:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:180:13-49
-	android:configChanges
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:181:13-83
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:179:13-65
-activity#com.hlj.activity.HProvinceForecastActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:183:9-185:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:185:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:184:13-70
-activity#com.hlj.activity.HWeatherStaticsActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:187:9-189:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:189:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:188:13-68
-activity#com.hlj.activity.HHeadWarningActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:191:9-193:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:193:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:192:13-65
-activity#com.hlj.activity.HWeatherChartAnalysisActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:195:9-197:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:197:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:196:13-74
-activity#com.hlj.activity.FactActivity2
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:199:9-201:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:201:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:200:13-58
-activity#com.hlj.activity.FactDetailActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:203:9-205:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:205:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:204:13-63
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:179:13-63
 activity#com.hlj.activity.FactDetailChartActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:207:9-209:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:182:9-184:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:209:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:184:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:208:13-68
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:183:13-68
+activity#com.hlj.activity.TyphoonRouteActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:186:9-188:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:188:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:187:13-65
+activity#com.hlj.activity.WaitWindActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:190:9-192:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:192:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:191:13-61
+activity#com.hlj.activity.HReserveCityActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:194:9-196:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:196:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:195:13-65
+activity#com.hlj.activity.HWarningListActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:198:9-200:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:200:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:199:13-65
+activity#com.hlj.activity.ShawnPointForeActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:202:9-204:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:204:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:203:13-67
+activity#com.hlj.activity.ShawnPointForeDetailActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:206:9-208:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:208:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:207:13-73
 activity#com.hlj.activity.HFeedbackActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:215:10-218:49
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:214:10-217:49
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:218:10-46
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:217:10-46
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:217:10-41
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:216:10-41
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:216:10-59
-activity#com.hlj.activity.HWeatherChartActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:221:10-224:49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:215:10-59
+activity#com.hlj.activity.WeatherRadarDetailActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:221:9-224:49
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:224:10-46
 	android:launchMode
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:223:10-41
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:222:10-63
-activity#com.hlj.activity.WeatherRadarDetailActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:226:10-229:49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:222:10-68
+activity#com.hlj.activity.RadarZoomActivity
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:226:10-230:86
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:229:10-46
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:229:10-44
 	android:launchMode
 		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:228:10-41
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:227:10-68
-activity#com.hlj.activity.RadarZoomActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:231:10-235:86
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:234:10-44
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:233:10-41
 	android:configChanges
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:235:13-83
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:230:13-83
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:232:10-59
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:227:10-59
 activity#com.hlj.activity.HMinuteFallActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:238:10-241:49
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:233:10-236:49
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:241:10-46
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:236:10-46
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:240:10-41
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:235:10-41
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:239:10-61
-activity#com.hlj.activity.WarningActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:244:10-247:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:247:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:246:13-44
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:245:13-60
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:234:10-61
 activity#com.hlj.activity.HWarningDetailActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:249:10-252:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:240:9-243:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:252:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:243:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:251:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:242:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:250:13-67
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:241:13-67
 activity#com.hlj.activity.HWebviewActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:255:10-258:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:246:10-249:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:258:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:249:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:257:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:248:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:256:13-61
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:247:13-61
 activity#com.hlj.activity.HPDFActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:261:10-264:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:252:10-255:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:264:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:255:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:263:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:254:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:262:13-57
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:253:13-57
 activity#com.hlj.activity.NewsActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:266:10-269:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:257:10-260:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:269:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:260:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:268:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:259:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:267:13-57
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:258:13-57
 activity#com.hlj.activity.ProductActivity
-ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:271:10-274:52
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:262:10-265:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:274:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:265:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:273:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:264:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:272:13-60
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:263:13-60
+meta-data#UMENG_APPKEY
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:270:9-272:56
+	android:value
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:272:13-53
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:271:13-40
+meta-data#UMENG_MESSAGE_SECRET
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:273:9-275:64
+	android:value
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:275:13-61
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:274:13-48
+service#com.taobao.accs.ChannelService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:278:9-288:19
+	android:process
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:281:13-39
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:280:13-36
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:279:13-58
+intent-filter#action:name:com.taobao.accs.intent.action.SERVICE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:282:13-284:29
+action#com.taobao.accs.intent.action.SERVICE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:283:17-80
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:283:25-77
+intent-filter#action:name:com.taobao.accs.intent.action.ELECTION
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:285:13-287:29
+action#com.taobao.accs.intent.action.ELECTION
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:286:17-81
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:286:25-78
+service#com.taobao.accs.data.MsgDistributeService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:289:9-295:19
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:291:13-36
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:290:13-69
+intent-filter#action:name:com.taobao.accs.intent.action.RECEIVE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:292:13-294:29
+action#com.taobao.accs.intent.action.RECEIVE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:293:17-80
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:293:25-77
+receiver#com.taobao.accs.EventReceiver
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:297:9-314:20
+	android:process
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:299:13-39
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:298:13-57
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:300:13-302:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:301:17-79
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:301:25-76
+intent-filter#action:name:android.net.conn.CONNECTIVITY_CHANGE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:303:13-305:29
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:304:17-79
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:304:25-76
+intent-filter#action:name:android.intent.action.PACKAGE_REMOVED+data:scheme:package
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:306:13-310:29
+action#android.intent.action.PACKAGE_REMOVED
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:307:17-80
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:307:25-77
+data
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:309:17-50
+	android:scheme
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:309:23-47
+intent-filter#action:name:android.intent.action.USER_PRESENT
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:311:13-313:29
+action#android.intent.action.USER_PRESENT
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:312:17-77
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:312:25-74
+receiver#com.taobao.accs.ServiceReceiver
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:315:9-324:20
+	android:process
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:317:13-39
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:316:13-59
+intent-filter#action:name:com.taobao.accs.intent.action.COMMAND
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:318:13-320:29
+action#com.taobao.accs.intent.action.COMMAND
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:319:17-80
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:319:25-77
+intent-filter#action:name:com.taobao.accs.intent.action.START_FROM_AGOO
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:321:13-323:29
+action#com.taobao.accs.intent.action.START_FROM_AGOO
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:322:17-88
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:322:25-85
+service#com.taobao.accs.ChannelService$KernelService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:326:9-329:19
+	android:process
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:328:13-39
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:327:13-72
+service#org.android.agoo.accs.AgooService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:330:9-336:19
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:332:13-36
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:331:13-61
+service#com.umeng.message.UmengIntentService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:337:9-343:19
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:339:13-36
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:338:13-64
+intent-filter#action:name:org.agoo.android.intent.action.RECEIVE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:340:13-342:29
+action#org.agoo.android.intent.action.RECEIVE
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:341:17-81
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:341:25-78
+receiver#com.taobao.agoo.AgooCommondReceiver
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:345:9-356:20
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:347:13-36
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:346:13-63
+intent-filter#action:name:shawn.cxwl.com.hlj.intent.action.COMMAND
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:348:13-350:29
+action#shawn.cxwl.com.hlj.intent.action.COMMAND
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:349:17-83
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:349:25-80
+receiver#com.umeng.message.NotificationProxyBroadcastReceiver
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:357:9-359:40
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:359:13-37
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:358:13-80
+service#com.umeng.message.UmengMessageCallbackHandlerService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:361:9-376:19
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:363:13-37
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:362:13-80
+intent-filter#action:name:com.umeng.messge.registercallback.action
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:364:13-366:29
+action#com.umeng.messge.registercallback.action
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:365:17-83
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:365:25-80
+intent-filter#action:name:com.umeng.message.enablecallback.action
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:367:13-369:29
+action#com.umeng.message.enablecallback.action
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:368:17-82
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:368:25-79
+intent-filter#action:name:com.umeng.message.disablecallback.action
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:370:13-372:29
+action#com.umeng.message.disablecallback.action
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:371:17-83
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:371:25-80
+intent-filter#action:name:com.umeng.message.message.handler.action
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:373:13-375:29
+action#com.umeng.message.message.handler.action
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:374:17-83
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:374:25-80
+service#com.umeng.message.UmengDownloadResourceService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:377:9-379:40
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:379:13-37
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:378:13-74
+service#com.umeng.message.UmengMessageIntentReceiverService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:380:9-387:19
+	android:process
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:383:13-39
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:382:13-36
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:381:13-79
+intent-filter#action:name:org.android.agoo.client.MessageReceiverService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:384:13-386:29
+action#org.android.agoo.client.MessageReceiverService
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:385:17-89
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:385:25-86
+provider#com.umeng.message.provider.MessageProvider
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:389:9-394:20
+	android:authorities
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:391:13-67
+	android:exported
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:392:13-37
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:390:13-70
+grant-uri-permission
+ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:393:13-62
+	android:pathPattern
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:393:35-59
 uses-sdk
 INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [HLJDecision:indicatorlibrary:unspecified] /Users/shawn/AndroidStudioProjects/HLJDecision/indicatorlibrary/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:25.1.1] /Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-v4:25.1.1] /Users/shawn/.android/build-cache/2f71cdd8da0e165da6f6dbe50b84c0178d2888ff/output/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:25.1.1] /Users/shawn/.android/build-cache/74168adef9f145d7d3dc7096ef1d0fd06c645946/output/AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-media-compat:25.1.1] /Users/shawn/.android/build-cache/2fec614e8de0f8cd02b43e8fa82183979d0232d6/output/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-ui:25.1.1] /Users/shawn/.android/build-cache/c9395eb9aeea056985524d8f9d0161443326dfef/output/AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-utils:25.1.1] /Users/shawn/.android/build-cache/08df6def9ba877375608ace7c204b3db7258463e/output/AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:animated-vector-drawable:25.1.1] /Users/shawn/.android/build-cache/6a4c2e6da7dad4842eb3b22f5ab2fcb32d0ad453/output/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:25.1.1] /Users/shawn/.android/build-cache/49f2426cde20d9ddfdfeaa5c51e6519d412fc632/output/AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-compat:25.1.1] /Users/shawn/.android/build-cache/b0b4a69c09f65cb5c45933df3094d0eab2a04599/output/AndroidManifest.xml:21:5-23:58
-MERGED from [HLJDecision:sceneFinal:unspecified] /Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
-	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:25.1.1] /Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/AndroidManifest.xml:23:9-75
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+MERGED from [:indicatorlibrary] /Users/shawn/AndroidStudioProjects/HLJDecision/indicatorlibrary/build/intermediates/manifests/full/release/AndroidManifest.xml:7:5-9:41
+MERGED from [:indicatorlibrary] /Users/shawn/AndroidStudioProjects/HLJDecision/indicatorlibrary/build/intermediates/manifests/full/release/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/853e983b6bd1941919ad165c1f215e8d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/853e983b6bd1941919ad165c1f215e8d/AndroidManifest.xml:20:5-44
+MERGED from [:sceneFinal] /Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/manifests/full/release/AndroidManifest.xml:7:5-9:41
+MERGED from [:sceneFinal] /Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/manifests/full/release/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-fragment:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.0.aar/8738c6d02b400c84916a7cc0fb76602b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.0.aar/8738c6d02b400c84916a7cc0fb76602b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.0.aar/5f7d7b62c6e92be5fa5ae824c948737b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.0.aar/5f7d7b62c6e92be5fa5ae824c948737b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.0.aar/55f9202b441182840d2d6ac4cecae569/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.0.aar/55f9202b441182840d2d6ac4cecae569/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.0.aar/4789eddb6c6516aa6396b77e7f0d9fd6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.0.aar/4789eddb6c6516aa6396b77e7f0d9fd6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.0.aar/5b1aac14f4fcca52b9aae3e7f7735ecc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.0.aar/5b1aac14f4fcca52b9aae3e7f7735ecc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/55c47cc5d6890a4ce4bf66f2657ceb6e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/55c47cc5d6890a4ce4bf66f2657ceb6e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/ca18e290d2d8dad5f94ba3b316f373ca/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/ca18e290d2d8dad5f94ba3b316f373ca/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/0e8097f223c8440c24f30453968bded2/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/0e8097f223c8440c24f30453968bded2/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/43fcda339e5c4ee332854483c600a672/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/43fcda339e5c4ee332854483c600a672/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/363e66d71ef032fab59411045a6138a0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/shawn/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/363e66d71ef032fab59411045a6138a0/AndroidManifest.xml:20:5-44
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 	android:targetSdkVersion
 		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 		INJECTED from /Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
