@@ -129,6 +129,10 @@
         <activity 
             android:name="com.hlj.activity.Url2Activity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.SinggleUrlActivity"
+            android:screenOrientation="portrait" />
         
         <activity 
             android:name="com.hlj.activity.HTempratureForecastActivity"
@@ -251,6 +255,11 @@
          <!-- 空气质量 -->
          <activity
             android:name="com.hlj.activity.HPDFActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.SinglePDFActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
          

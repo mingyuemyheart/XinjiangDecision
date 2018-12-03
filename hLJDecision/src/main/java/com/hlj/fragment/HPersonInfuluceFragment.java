@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 import com.hlj.activity.HCommonPdfListActivity;
+import com.hlj.activity.SinggleUrlActivity;
+import com.hlj.activity.SinglePDFActivity;
 import com.hlj.adapter.HWeatherForecastFragmentAdapter;
 import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
@@ -73,7 +76,14 @@ public class HPersonInfuluceFragment extends Fragment{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				AgriDto dto = mList.get(arg2);
-				Intent intent = new Intent(getActivity(), HCommonPdfListActivity.class);
+				Intent intent;
+				if (TextUtils.equals(dto.id, "131")) {
+					intent = new Intent(getActivity(), SinggleUrlActivity.class);
+				}else if (TextUtils.equals(dto.id, "132")) {
+					intent = new Intent(getActivity(), SinglePDFActivity.class);
+				}else {
+					intent = new Intent(getActivity(), HCommonPdfListActivity.class);
+				}
 				Bundle bundle = new Bundle();
 				bundle.putParcelable("data", dto);
 				intent.putExtras(bundle);
