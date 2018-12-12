@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:lineSpacingExtra="3dp"
-            android:textColor="@color/text_color4"
+            android:textColor="@color/text_color3"
             android:textSize="@dimen/level_5" />
         
         </LinearLayout>

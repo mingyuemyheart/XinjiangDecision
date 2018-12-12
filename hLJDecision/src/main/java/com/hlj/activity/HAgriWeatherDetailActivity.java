@@ -23,6 +23,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.hlj.adapter.CommonPdfListAdapter;
 import com.hlj.adapter.HFactTableAdapter;
 import com.hlj.common.CONST;
@@ -46,7 +50,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
-public class HAgriWeatherDetailActivity extends BaseActivity implements OnClickListener{
+public class HAgriWeatherDetailActivity extends BaseActivity implements OnClickListener, AMapLocationListener {
 	
 	private Context mContext = null;
 	private LinearLayout llBack = null;
@@ -62,6 +66,7 @@ public class HAgriWeatherDetailActivity extends BaseActivity implements OnClickL
 	private HFactTableAdapter tableAdapter = null;
 	private List<AgriDto> tableList = new ArrayList<>();
 	private RelativeLayout llContainer = null;
+	private String adcode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +77,31 @@ public class HAgriWeatherDetailActivity extends BaseActivity implements OnClickL
 		initWidget();
 		initListView();
 		initTableListView();
+	}
+
+	/**
+	 * 开始定位
+	 */
+	private void startLocation() {
+		AMapLocationClientOption mLocationOption = new AMapLocationClientOption();//初始化定位参数
+		AMapLocationClient mLocationClient = new AMapLocationClient(mContext);//初始化定位
+		mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
+		mLocationOption.setNeedAddress(true);//设置是否返回地址信息（默认返回地址信息）
+		mLocationOption.setOnceLocation(true);//设置是否只定位一次,默认为false
+		mLocationOption.setWifiActiveScan(true);//设置是否强制刷新WIFI，默认为强制刷新
+		mLocationOption.setMockEnable(false);//设置是否允许模拟位置,默认为false，不允许模拟位置
+		mLocationOption.setInterval(2000);//设置定位间隔,单位毫秒,默认为2000ms
+		mLocationClient.setLocationOption(mLocationOption);//给定位客户端对象设置定位参数
+		mLocationClient.setLocationListener(this);
+		mLocationClient.startLocation();//启动定位
+	}
+
+	@Override
+	public void onLocationChanged(AMapLocation amapLocation) {
+		if (amapLocation != null && amapLocation.getErrorCode() == 0) {
+			adcode = amapLocation.getAdCode();
+			refresh();
+		}
 	}
 	
 	private void initWidget() {
@@ -88,15 +118,19 @@ public class HAgriWeatherDetailActivity extends BaseActivity implements OnClickL
 			if (dto.child.get(0).name != null) {
 				tvTitle.setText(dto.child.get(0).name);
 			}
-			
-			refresh();
+
+			startLocation();
 		}
 	}
 	
 	private void refresh() {
 		if (TextUtils.isEmpty(dto.showType)) {
 			if (!TextUtils.isEmpty(dto.child.get(0).dataUrl)) {
-				OkHttpDetail(dto.child.get(0).dataUrl);
+				if (TextUtils.equals(dto.child.get(0).id, "578")) {//农业气象服务产品
+					OkHttpDetail(dto.child.get(0).dataUrl+"");
+				}else {
+					OkHttpDetail(dto.child.get(0).dataUrl+"?areaCode="+adcode);
+				}
 			}
 		}else {
 			if (!TextUtils.isEmpty(dto.dataUrl)) {

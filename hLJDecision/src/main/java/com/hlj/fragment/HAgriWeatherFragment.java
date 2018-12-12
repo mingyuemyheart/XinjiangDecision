@@ -14,6 +14,7 @@ import android.widget.GridView;
 
 import com.hlj.activity.HAgriWeatherDetailActivity;
 import com.hlj.activity.HUrlActivity;
+import com.hlj.activity.ShawnAgriActivity;
 import com.hlj.adapter.HWeatherForecastFragmentAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
@@ -77,7 +78,7 @@ public class HAgriWeatherFragment extends Fragment{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				AgriDto dto = mList.get(arg2);
 				if (TextUtils.equals(dto.id, "205")) {//农业气象服务
-					Intent intentBuild = new Intent(getActivity(), HUrlActivity.class);
+					Intent intentBuild = new Intent(getActivity(), ShawnAgriActivity.class);
 					intentBuild.putExtra(CONST.ACTIVITY_NAME, dto.name);
 					intentBuild.putExtra(CONST.WEB_URL, dto.dataUrl);
 					startActivity(intentBuild);

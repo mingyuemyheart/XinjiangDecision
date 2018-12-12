@@ -210,6 +210,10 @@
         <activity
             android:name="com.hlj.activity.ShawnPointForeDetailActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnAgriActivity"
+            android:screenOrientation="portrait" />
         
         
         <!-- 第三方类库名称 -->
