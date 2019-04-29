@@ -44,10 +44,10 @@
         
         <service android:name="com.amap.api.location.APSService" />
         
-        <!-- 普通版本-->
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="41cb6e240846b9f30207a9e6ac79fdc2"/>
+        <!--&lt;!&ndash; 普通版本&ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="com.amap.api.v2.apikey"-->
+            <!--android:value="41cb6e240846b9f30207a9e6ac79fdc2"/>-->
 
         <!-- 决策气象服务-->
         <!--1.包名为shawn.cxwl.com.hlj.decision-->
@@ -57,9 +57,9 @@
         <!--5.更换MainActivity、SettingActivity自动更新app_id-->
         <!--6.gradle 修改打包名称-->
 
-        <!--<meta-data-->
-            <!--android:name="com.amap.api.v2.apikey"-->
-            <!--android:value="51096dda8deea179e4a980f74d38c4d6"/>-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="51096dda8deea179e4a980f74d38c4d6"/>
 
         <!-- 自动更新下载完成广播 -->
         <receiver android:name="com.hlj.utils.AutoUpdateBroadcastReceiver" >

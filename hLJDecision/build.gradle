@@ -9,8 +9,8 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "shawn.cxwl.com.hlj"
-//        applicationId "shawn.cxwl.com.hlj.decision"
+//        applicationId "shawn.cxwl.com.hlj"
+        applicationId "shawn.cxwl.com.hlj.decision"
         minSdkVersion 19
         targetSdkVersion 22
         versionCode 43
