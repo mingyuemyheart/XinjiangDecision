@@ -1,9 +1,5 @@
 package com.hlj.activity;
 
-/**
- * 欢迎界面
- */
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,14 +28,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
-public class HWelcomeActivity extends BaseActivity{
+public class ShawnWelcomeActivity extends BaseActivity{
 
 	private Context mContext;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.hactivity_welcome);
+		setContentView(R.layout.shawn_activity_welcome);
 		mContext = this;
 
 		new Handler().postDelayed(new Runnable() {
@@ -50,9 +46,9 @@ public class HWelcomeActivity extends BaseActivity{
 				String pwd = sharedPreferences.getString(CONST.UserInfo.passWord, null);
 
 				if (!TextUtils.isEmpty(userName) && !TextUtils.equals(userName, CONST.publicUser)) {//决策用户
-					OkHttpLogin(CONST.GUIZHOU_LOGIN, userName, pwd);
+					OkHttpLogin(userName, pwd);
 				}else {
-					OkHttpLogin(CONST.GUIZHOU_LOGIN, CONST.publicUser, CONST.publicPwd);
+					OkHttpLogin(CONST.publicUser, CONST.publicPwd);
 				}
 			}
 		}, 1500);
@@ -61,7 +57,8 @@ public class HWelcomeActivity extends BaseActivity{
 	/**
 	 * 登录
 	 */
-	private void OkHttpLogin(final String url, final String userName, final String pwd) {
+	private void OkHttpLogin(final String userName, final String pwd) {
+		final String url = "http://decision-admin.tianqi.cn/Home/Work/login";
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("username", userName);
 		builder.add("password", pwd);

@@ -208,7 +208,7 @@ public class HSettingActivity extends BaseActivity implements OnClickListener{
 				editor.clear();
 				editor.commit();
 				HMainActivity.instance.finish();
-				startActivity(new Intent(mContext, HWelcomeActivity.class));
+				startActivity(new Intent(mContext, ShawnWelcomeActivity.class));
 				finish();
 			}
 		});

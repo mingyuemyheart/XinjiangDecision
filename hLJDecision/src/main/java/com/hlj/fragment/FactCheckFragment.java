@@ -314,25 +314,25 @@ public class FactCheckFragment extends Fragment implements OnClickListener{
 		}).start();
 	}
 	
-	// 返回中文的首字母  
-    public static String getPinYinHeadChar(String str) {  
-        String convert = "";  
+	// 返回中文的首字母
+    public static String getPinYinHeadChar(String str) {
+        String convert = "";
         int size = str.length();
         if (size >= 2) {
         	size = 2;
 		}
-        for (int j = 0; j < size; j++) {  
-            char word = str.charAt(j);  
+        for (int j = 0; j < size; j++) {
+            char word = str.charAt(j);
             String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word);
-            if (pinyinArray != null) {  
-                convert += pinyinArray[0].charAt(0);  
-            } else {  
-                convert += word;  
-            }  
-        }  
-        return convert;  
-    }  
-    
+            if (pinyinArray != null) {
+                convert += pinyinArray[0].charAt(0);
+            } else {
+                convert += word;
+            }
+        }
+        return convert;
+    }
+
     private void selectDateTimeDialog(String message) {
     	LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.dialog_fact_check_time, null);

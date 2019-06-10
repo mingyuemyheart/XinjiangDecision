@@ -2,15 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_welcome">
+                android:background="@drawable/shawn_bg_welcome">
 
     <ImageView
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="30dp"
-        android:src="@drawable/welcome_icon2"/>
-
+        android:layout_marginStart="30dp"
+        android:src="@drawable/shawn_welcome_icon2"/>
 
     <TextView
         android:layout_width="wrap_content"

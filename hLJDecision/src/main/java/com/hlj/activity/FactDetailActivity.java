@@ -126,24 +126,24 @@ public class FactDetailActivity extends BaseActivity implements OnClickListener{
  	 * @param str
 	 * @return
 	 */
-    public static String getPinYinHeadChar(String str) {  
-        String convert = "";  
+    public static String getPinYinHeadChar(String str) {
+        String convert = "";
         int size = str.length();
         if (size >= 2) {
         	size = 2;
 		}
-        for (int j = 0; j < size; j++) {  
-            char word = str.charAt(j);  
+        for (int j = 0; j < size; j++) {
+            char word = str.charAt(j);
             String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word);
-            if (pinyinArray != null) {  
-                convert += pinyinArray[0].charAt(0);  
-            } else {  
-                convert += word;  
-            }  
-        }  
-        return convert;  
-    }  
-	
+            if (pinyinArray != null) {
+                convert += pinyinArray[0].charAt(0);
+            } else {
+                convert += word;
+            }
+        }
+        return convert;
+    }
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {

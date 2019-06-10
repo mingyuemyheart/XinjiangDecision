@@ -93,13 +93,7 @@ public class ProductActivity extends BaseActivity implements OnClickListener, Re
 				
 				String url2 = url;
 				if (url2.contains("pagesize")) {
-					if (TextUtils.equals(appid, "15")) {
-						url2 = CONST.GUIZHOU_BASE+"/Work/getnewslist/p/"+page+"/pagesize/"+pageSize+"/type/";
-					}else if (TextUtils.equals(appid, "14")) {
-						url2 = CONST.TIANJIN_BASE+"/Work/getnewslist/p/"+page+"/pagesize/"+pageSize+"/type/";
-					}else if (TextUtils.equals(appid, "13")) {
-						url2 = CONST.XIZANG_BASE+"/Work/getnewslist/p/"+page+"/pagesize/"+pageSize+"/type/";
-					}
+					url2 = CONST.GUIZHOU_BASE+"/Work/getnewslist/p/"+page+"/pagesize/"+pageSize+"/type/";
 					
 					String[] urls = url2.split("/");
 					asyncQuery(url2 + urls[urls.length-1]);

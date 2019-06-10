@@ -13,11 +13,11 @@ android {
         applicationId "shawn.cxwl.com.hlj.decision"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 43
-        versionName "2.1.9"
+        versionCode 44
+        versionName "2.2.1"
 
         ndk {
-            abiFilters 'armeabi-v7a', 'armeabi'
+            abiFilters 'armeabi-v7a'
         }
     }
 
@@ -41,16 +41,16 @@ android {
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation project(':indicatorlibrary')
-    implementation project(':sceneFinal')
     implementation files('libs/ChinaWeatherAPI.jar')
     implementation files('libs/vudroid-pdfview-1.0.jar')
-    implementation files('libs/okhttp-3.8.1.jar')
-    implementation files('libs/okio-1.13.0.jar')
-    implementation files('libs/AMap_3DMap_V4.0.1_20160923.jar')
-    implementation files('libs/AMap_Location_V2.4.0_20160308.jar')
-    implementation files('libs/MapApiServices.jar')
     implementation files('libs/pinyin4j-2.5.0.jar')
     implementation files('libs/alicloud-android-sdk-httpdns-1.0.7.jar')
     implementation files('libs/com.umeng.message_3.1.5a.jar')
     implementation files('libs/utdid4all-1.1.5.3_proguard.jar')
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okio:okio:1.14.1'
+    implementation 'com.amap.api:3dmap:5.7.0'
+    implementation 'com.amap.api:search:5.7.0'
+    implementation 'com.amap.api:location:3.7.0'
+    implementation files('libs/scene-final.jar')
 }

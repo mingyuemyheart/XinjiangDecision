@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="shawn.cxwl.com.hlj" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="shawn.cxwl.com.hlj">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -33,7 +33,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <!-- umeng -->
-    
+
     <application
         android:name="com.hlj.common.MyApplication"
         android:allowBackup="true"
@@ -41,13 +41,11 @@
         android:label="@string/app_name"
         android:theme="@style/StyledIndicators"
         tools:ignore="GoogleAppIndexingWarning">
-        
-        <service android:name="com.amap.api.location.APSService" />
-        
+
         <!--&lt;!&ndash; 普通版本&ndash;&gt;-->
         <!--<meta-data-->
-            <!--android:name="com.amap.api.v2.apikey"-->
-            <!--android:value="41cb6e240846b9f30207a9e6ac79fdc2"/>-->
+        <!--android:name="com.amap.api.v2.apikey"-->
+        <!--android:value="41cb6e240846b9f30207a9e6ac79fdc2"/>-->
 
         <!-- 决策气象服务-->
         <!--1.包名为shawn.cxwl.com.hlj.decision-->
@@ -59,26 +57,27 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="51096dda8deea179e4a980f74d38c4d6"/>
+            android:value="51096dda8deea179e4a980f74d38c4d6" />
+
+        <service android:name="com.amap.api.location.APSService" />
 
         <!-- 自动更新下载完成广播 -->
-        <receiver android:name="com.hlj.utils.AutoUpdateBroadcastReceiver" >
+        <receiver android:name="com.hlj.utils.AutoUpdateBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-                 <action android:name="android.intent.action.PACKAGE_INSTALL" />
+                <action android:name="android.intent.action.PACKAGE_INSTALL" />
             </intent-filter>
         </receiver>
-        
-        <activity
-            android:name="com.hlj.activity.HWelcomeActivity" >
+
+        <activity android:name="com.hlj.activity.ShawnWelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HMainActivity"
             android:screenOrientation="portrait" />
 
@@ -86,78 +85,78 @@
             android:name="com.hlj.activity.HLoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HSettingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HCityActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HWeatherDetailActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HChannelManageActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.hlj.activity.TrendDetailActivity"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HAgriWeatherDetailActivity"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.WeatherKepuDetailActivity"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.WarningSignalActivity"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HUrlActivity"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.Url2Activity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.hlj.activity.SinggleUrlActivity"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HTempratureForecastActivity"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HPdfListActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.hlj.activity.HWeatherRadarActivity"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HCommonPdfListActivity"
             android:screenOrientation="portrait" />
-        
-        <activity 
+
+        <activity
             android:name="com.hlj.activity.HSixHourRainfallActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.hlj.activity.HAirPolutionActivity"
-            android:screenOrientation="nosensor"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name="com.hlj.activity.HProvinceForecastActivity"
@@ -214,50 +213,39 @@
         <activity
             android:name="com.hlj.activity.ShawnAgriActivity"
             android:screenOrientation="portrait" />
-        
-        
-        <!-- 第三方类库名称 -->
-        
-        <!-- 意见反馈 -->
-         <activity
-	        android:name="com.hlj.activity.HFeedbackActivity"
-	        android:launchMode="singleTask"
-	        android:screenOrientation="portrait" />
-        
-        <!-- 雷达图 -->
 
         <activity
-	        android:name="com.hlj.activity.WeatherRadarDetailActivity"
-	        android:launchMode="singleTask"
-	        android:screenOrientation="portrait" />
-         
-         <activity
-	        android:name="com.hlj.activity.RadarZoomActivity"
-	        android:launchMode="singleTask"
-	        android:screenOrientation="sensor"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-         
-         <!-- 下一场雨 -->
-         <activity
-	        android:name="com.hlj.activity.HMinuteFallActivity"
-	        android:launchMode="singleTask"
-	        android:screenOrientation="portrait" />
-         
-         <!-- 预警 -->
+            android:name="com.hlj.activity.HFeedbackActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.WeatherRadarDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.RadarZoomActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensor" />
+
+        <activity
+            android:name="com.hlj.activity.HMinuteFallActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.hlj.activity.HWarningDetailActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-         
-         <!-- 空气质量 -->
-         <activity
+
+        <activity
             android:name="com.hlj.activity.HWebviewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-         
-         <!-- 空气质量 -->
-         <activity
+
+        <activity
             android:name="com.hlj.activity.HPDFActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -266,20 +254,19 @@
             android:name="com.hlj.activity.SinglePDFActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-         
-         <activity
+
+        <activity
             android:name="com.hlj.activity.NewsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-         
-         <activity
+
+        <activity
             android:name="com.hlj.activity.ProductActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-         
-         <!-- 第三方类库名称 -->
 
 
+        <!-- umeng -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5755277767e58e5ca4000e07" />
@@ -291,7 +278,7 @@
         <service
             android:name="com.taobao.accs.ChannelService"
             android:exported="true"
-            android:process=":channel" >
+            android:process=":channel">
             <intent-filter>
                 <action android:name="com.taobao.accs.intent.action.SERVICE" />
             </intent-filter>
@@ -301,7 +288,7 @@
         </service>
         <service
             android:name="com.taobao.accs.data.MsgDistributeService"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.taobao.accs.intent.action.RECEIVE" />
             </intent-filter>
@@ -309,7 +296,7 @@
 
         <receiver
             android:name="com.taobao.accs.EventReceiver"
-            android:process=":channel" >
+            android:process=":channel">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -327,7 +314,7 @@
         </receiver>
         <receiver
             android:name="com.taobao.accs.ServiceReceiver"
-            android:process=":channel" >
+            android:process=":channel">
             <intent-filter>
                 <action android:name="com.taobao.accs.intent.action.COMMAND" />
             </intent-filter>
@@ -338,18 +325,17 @@
 
         <service
             android:name="com.taobao.accs.ChannelService$KernelService"
-            android:process=":channel" >
-        </service>
+            android:process=":channel"/>
         <service
             android:name="org.android.agoo.accs.AgooService"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.taobao.accs.intent.action.RECEIVE" />
             </intent-filter>
         </service>
         <service
             android:name="com.umeng.message.UmengIntentService"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.RECEIVE" />
             </intent-filter>
@@ -357,7 +343,7 @@
 
         <receiver
             android:name="com.taobao.agoo.AgooCommondReceiver"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="shawn.cxwl.com.hlj.intent.action.COMMAND" />
             </intent-filter>
@@ -373,7 +359,7 @@
 
         <service
             android:name="com.umeng.message.UmengMessageCallbackHandlerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.umeng.messge.registercallback.action" />
             </intent-filter>
@@ -393,7 +379,7 @@
         <service
             android:name="com.umeng.message.UmengMessageIntentReceiverService"
             android:exported="true"
-            android:process=":channel" >
+            android:process=":channel">
             <intent-filter>
                 <action android:name="org.android.agoo.client.MessageReceiverService" />
             </intent-filter>
@@ -402,11 +388,11 @@
         <provider
             android:name="com.umeng.message.provider.MessageProvider"
             android:authorities="shawn.cxwl.com.hlj.umeng.message"
-            android:exported="false" >
+            android:exported="false">
             <grant-uri-permission android:pathPattern=".*" />
         </provider>
         <!-- umeng -->
-         
+
     </application>
 
 </manifest>

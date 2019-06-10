@@ -67,7 +67,8 @@ public class HFeedbackActivity extends BaseActivity implements OnClickListener{
 	/**
 	 * 异步请求
 	 */
-	private void OkHttpFeedBack(final String url) {
+	private void OkHttpFeedBack() {
+		final String url = "http://decision-admin.tianqi.cn/Home/Work/request";
 		final FormBody.Builder builder = new FormBody.Builder();
 		builder.add("uid", CONST.UID);
 		builder.add("content", etContent.getText().toString());
@@ -133,7 +134,7 @@ public class HFeedbackActivity extends BaseActivity implements OnClickListener{
 				return;
 			}
 			showDialog();
-			OkHttpFeedBack(CONST.GUIZHOU_FEEDBACK);
+			OkHttpFeedBack();
 		}
 	}
 }

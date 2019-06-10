@@ -89,7 +89,7 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 	private void doLogin() {
 		if (checkInfo()) {
 			showDialog();
-			OkHttpLogin(CONST.GUIZHOU_LOGIN);
+			OkHttpLogin();
 		}
 	}
 	
@@ -126,7 +126,8 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 	/**
 	 * 异步请求
 	 */
-	private void OkHttpLogin(final String url) {
+	private void OkHttpLogin() {
+		final String url = "http://decision-admin.tianqi.cn/Home/Work/login";
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("username", etUserName.getText().toString());
 		builder.add("password", etPwd.getText().toString());
