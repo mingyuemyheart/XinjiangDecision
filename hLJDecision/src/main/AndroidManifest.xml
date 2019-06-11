@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--//添加允许安装未知应用市场权限，这个权限不是动态权限，所以不用进行动态申请，否则自动更新功能失效-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <!-- umeng -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -54,6 +56,7 @@
         <!--4.welcome界面welcome_icon2、main界面iv_logo2-->
         <!--5.更换MainActivity、SettingActivity自动更新app_id-->
         <!--6.gradle 修改打包名称-->
+        <!--7.修改umeng推送的authorities-->
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -387,7 +390,7 @@
 
         <provider
             android:name="com.umeng.message.provider.MessageProvider"
-            android:authorities="shawn.cxwl.com.hlj.umeng.message"
+            android:authorities="shawn.cxwl.com.hlj.decision.umeng.message"
             android:exported="false">
             <grant-uri-permission android:pathPattern=".*" />
         </provider>

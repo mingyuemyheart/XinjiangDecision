@@ -13,8 +13,8 @@ android {
         applicationId "shawn.cxwl.com.hlj.decision"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 44
-        versionName "2.2.1"
+        versionCode 45
+        versionName "2.2.2"
 
         ndk {
             abiFilters 'armeabi-v7a'
