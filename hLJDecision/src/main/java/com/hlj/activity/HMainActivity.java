@@ -33,7 +33,6 @@ import com.hlj.fragment.HPersonInfuluceFragment;
 import com.hlj.fragment.HWeatherForecastFragment;
 import com.hlj.fragment.HWeatherWarningFragment;
 import com.hlj.fragment.ShawnTourFragment;
-import com.hlj.fragment.ShawnWebviewFragment;
 import com.hlj.utils.AutoUpdateUtil;
 import com.hlj.utils.CommonUtil;
 import com.hlj.view.MainViewPager;

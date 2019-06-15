@@ -28,6 +28,7 @@ import com.hlj.activity.HWeatherChartAnalysisActivity;
 import com.hlj.activity.HWeatherRadarActivity;
 import com.hlj.activity.HWeatherStaticsActivity;
 import com.hlj.activity.ShawnPointForeActivity;
+import com.hlj.activity.ShawnWeatherMeetingActivity;
 import com.hlj.activity.TyphoonRouteActivity;
 import com.hlj.activity.WaitWindActivity;
 import com.hlj.adapter.HWeatherForecastFragmentAdapter;
@@ -158,6 +159,10 @@ public class HWeatherForecastFragment extends Fragment {
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
+						startActivity(intent);
+					}else if (TextUtils.equals(dto.id, "118")) {//天气会商
+						intent = new Intent(getActivity(), ShawnWeatherMeetingActivity.class);
+						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}
 				}else if (TextUtils.isEmpty(dto.showType) || TextUtils.equals(dto.showType, CONST.NEWS)) {//专业气象预报、中期旬报
