@@ -253,6 +253,7 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 	private void getPointInfo(long delayMillis) {
 		String url = String.format("http://scapi.weather.com.cn/weather/getqggdybql?zoom=%s&statlonlat=%s,%s&endlonlat=%s,%s&test=ncg",
 				(int)zoom, start.longitude, start.latitude, end.longitude, end.latitude);
+		Log.e("url", url);
 		handler.removeMessages(1000);
 		Message msg = handler.obtainMessage(1000);
 		msg.obj = url;
@@ -343,8 +344,13 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 										}
 
 										switchElement();
-										StationMonitorDto dto = dataList.get(currentIndex).itemList.get(0);
-										changeProgress(dto.time, 0, dataList.get(currentIndex).itemList.size()-1);
+										if (dataList.size() > 0) {
+											StationMonitorDto dto = dataList.get(currentIndex);
+											if (dto != null && dto.itemList.size() > 0) {
+												StationMonitorDto data = dto.itemList.get(0);
+												changeProgress(data.time, 0, dto.itemList.size()-1);
+											}
+										}
 
 									} catch (JSONException e) {
 										e.printStackTrace();
@@ -387,23 +393,26 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 					}else if (mapType == AMap.MAP_TYPE_SATELLITE){
 						tvMarker.setTextColor(Color.WHITE);
 					}
-					String content = "";
-					if (dataType == 1) {
-						content = dto.itemList.get(currentIndex).pointTemp;
-					}else if (dataType == 2) {
-						content = dto.itemList.get(currentIndex).humidity;
-					}else if (dataType == 3) {
-						content = dto.itemList.get(currentIndex).windSpeed;
-					}else if (dataType == 5) {
-						content = dto.itemList.get(currentIndex).cloud;
-					}
-					tvMarker.setText(content);
-					options.icon(BitmapDescriptorFactory.fromView(view));
-					if (!TextUtils.isEmpty(content)) {
-						float value = Float.valueOf(content);
-						if (value < 9000) {
-							Marker marker = aMap.addMarker(options);
-							markers.add(marker);
+
+					if (dto.itemList.size() > 0) {
+						String content = "";
+						if (dataType == 1) {
+							content = dto.itemList.get(currentIndex).pointTemp;
+						}else if (dataType == 2) {
+							content = dto.itemList.get(currentIndex).humidity;
+						}else if (dataType == 3) {
+							content = dto.itemList.get(currentIndex).windSpeed;
+						}else if (dataType == 5) {
+							content = dto.itemList.get(currentIndex).cloud;
+						}
+						tvMarker.setText(content);
+						options.icon(BitmapDescriptorFactory.fromView(view));
+						if (!TextUtils.isEmpty(content)) {
+							float value = Float.valueOf(content);
+							if (value < 9000) {
+								Marker marker = aMap.addMarker(options);
+								markers.add(marker);
+							}
 						}
 					}
 				}
@@ -578,10 +587,12 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 					mapType = AMap.MAP_TYPE_SATELLITE;
 					ivSwitch.setImageResource(R.drawable.com_switch_map_press);
 					tvName.setTextColor(Color.WHITE);
+					tvPublishTime.setTextColor(Color.WHITE);
 				}else if (mapType == AMap.MAP_TYPE_SATELLITE) {
 					mapType = AMap.MAP_TYPE_NORMAL;
 					ivSwitch.setImageResource(R.drawable.com_switch_map);
 					tvName.setTextColor(Color.BLACK);
+					tvPublishTime.setTextColor(Color.BLACK);
 				}
 				if (aMap != null) {
 					aMap.setMapType(mapType);
