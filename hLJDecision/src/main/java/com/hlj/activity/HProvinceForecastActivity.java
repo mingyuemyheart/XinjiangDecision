@@ -135,6 +135,9 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 		aMap.setInfoWindowAdapter(this);
 		aMap.setOnCameraChangeListener(this);
 
+		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
+
 		CommonUtil.drawHLJJson(mContext, aMap);
 	}
 	

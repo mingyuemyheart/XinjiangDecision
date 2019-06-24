@@ -284,6 +284,22 @@
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name="com.hlj.activity.ShawnWarningStatisticActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnWarningStatisticListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnWarningStatisticScreenActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnWarningStatisticScreenAreaActivity"
+            android:screenOrientation="portrait" />
+
 
         <!-- umeng -->
         <meta-data

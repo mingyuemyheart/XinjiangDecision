@@ -253,6 +253,9 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 		aMap.setInfoWindowAdapter(this);
 		aMap.setOnCameraChangeListener(this);
 
+		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
+
 		startLocation();
 
 		drawWarningLines();

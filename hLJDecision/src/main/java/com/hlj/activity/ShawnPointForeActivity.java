@@ -226,6 +226,9 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 		aMap.setOnCameraChangeListener(this);
 		aMap.setOnMarkerClickListener(this);
 
+		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
+
 		CommonUtil.drawHLJJson(mContext, aMap);
 	}
 

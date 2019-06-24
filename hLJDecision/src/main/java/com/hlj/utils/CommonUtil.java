@@ -50,8 +50,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdate;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolygonOptions;
 import com.amap.api.maps.model.PolylineOptions;
@@ -584,6 +587,7 @@ public class CommonUtil {
 		String result = CommonUtil.getFromAssets(context, "heilongjiang.json");
 		if (!TextUtils.isEmpty(result)) {
 			try {
+                LatLngBounds.Builder builder = LatLngBounds.builder();
 				JSONObject obj = new JSONObject(result);
 				JSONArray array = obj.getJSONArray("features");
 				for (int i = 0; i < array.length(); i++) {
@@ -604,9 +608,13 @@ public class CommonUtil {
 						double lng = itemArray.getDouble(0);
 						double lat = itemArray.getDouble(1);
 						polylineOption.add(new LatLng(lat, lng));
+                        builder.include(new LatLng(lat, lng));
 					}
 					aMap.addPolyline(polylineOption);
 				}
+				if (array.length() > 0) {
+				    aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
+                }
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -760,6 +768,27 @@ public class CommonUtil {
 		if (w < 0)
 			w = 0;
 		return weekDays[w];
+	}
+
+	/**
+	 * 获取listview高度
+	 * @param listView
+	 */
+	public static int getListViewHeightBasedOnChildren(ListView listView) {
+		int height = 0;
+		ListAdapter listAdapter = listView.getAdapter();
+		if (listAdapter == null) {
+			return height;
+		}
+
+		int totalHeight = 0;
+		for (int i = 0; i < listAdapter.getCount(); i++) {
+			View listItem = listAdapter.getView(i, null, listView);
+			listItem.measure(0, 0);
+			totalHeight += listItem.getMeasuredHeight();
+		}
+		height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+		return height;
 	}
 
 }

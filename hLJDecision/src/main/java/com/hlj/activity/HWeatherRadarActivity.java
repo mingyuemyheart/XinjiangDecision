@@ -105,6 +105,9 @@ public class HWeatherRadarActivity extends BaseActivity implements OnClickListen
 		aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
 		aMap.getUiSettings().setZoomControlsEnabled(false);
 		aMap.setOnMarkerClickListener(this);
+
+		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
 		
 		getRadarData("http://decision-admin.tianqi.cn/Home/extra/getHljRadarData");
 		CommonUtil.drawHLJJson(mContext, aMap);

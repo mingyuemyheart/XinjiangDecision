@@ -143,6 +143,9 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         aMap.showMapText(false);
         aMap.setOnCameraChangeListener(this);
 
+        TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+        tvMapNumber.setText(aMap.getMapContentApprovalNumber());
+
         aMap.setOnMapTouchListener(new AMap.OnMapTouchListener() {
             @Override
             public void onTouch(MotionEvent arg0) {

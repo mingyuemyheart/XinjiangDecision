@@ -111,6 +111,9 @@ public class WaitWindActivity extends BaseActivity implements OnClickListener, O
                 asyncGFS();
             }
         });
+
+        TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+        tvMapNumber.setText(aMap.getMapContentApprovalNumber());
     }
 
     private void asyncGFS() {

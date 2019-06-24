@@ -212,6 +212,9 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 		aMap.setOnMapClickListener(this);
 		aMap.setOnCameraChangeListener(this);
 
+		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
+
 		CommonUtil.drawHLJJson(mContext, aMap);
 	}
 

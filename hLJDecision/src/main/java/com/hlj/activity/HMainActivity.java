@@ -31,8 +31,8 @@ import com.hlj.fragment.HDecisionServiceFragment;
 import com.hlj.fragment.HForecastFragment;
 import com.hlj.fragment.HPersonInfuluceFragment;
 import com.hlj.fragment.HWeatherForecastFragment;
-import com.hlj.fragment.HWeatherWarningFragment;
 import com.hlj.fragment.ShawnTourFragment;
+import com.hlj.fragment.ShawnWarningFragment;
 import com.hlj.utils.AutoUpdateUtil;
 import com.hlj.utils.CommonUtil;
 import com.hlj.view.MainViewPager;
@@ -303,7 +303,7 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
         	} else if (TextUtils.equals(id, "4")) {
         		mAdapter.addItem(channel, bundle, HWeatherForecastFragment.class);//天气预报
         	} else if (TextUtils.equals(id, "5")) {
-        		mAdapter.addItem(channel, bundle, HWeatherWarningFragment.class);//天气预警
+        		mAdapter.addItem(channel, bundle, ShawnWarningFragment.class);//天气预警
         	} else if (TextUtils.equals(id, "7")) {
         		mAdapter.addItem(channel, bundle, HPersonInfuluceFragment.class);//气象科普
         	} else if (TextUtils.equals(id, "8")) {

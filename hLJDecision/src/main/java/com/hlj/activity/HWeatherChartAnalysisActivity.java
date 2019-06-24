@@ -80,7 +80,7 @@ public class HWeatherChartAnalysisActivity extends BaseActivity implements View.
      * 初始化地图
      */
     private void initMap(Bundle bundle) {
-        mMapView = (MapView) findViewById(R.id.map);
+        mMapView = (MapView) findViewById(R.id.mapView);
         mMapView.onCreate(bundle);
         if (aMap == null) {
             aMap = mMapView.getMap();
@@ -88,6 +88,9 @@ public class HWeatherChartAnalysisActivity extends BaseActivity implements View.
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.926628, 105.178100), zoom));
         aMap.getUiSettings().setZoomControlsEnabled(false);
         aMap.getUiSettings().setRotateGesturesEnabled(false);
+
+        TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+        tvMapNumber.setText(aMap.getMapContentApprovalNumber());
 
         refresh();
     }

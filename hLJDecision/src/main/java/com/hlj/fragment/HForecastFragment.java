@@ -628,8 +628,8 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 													dto.type = item2.substring(0, 5);
 													dto.color = item2.substring(5, 7);
 													dto.time = item1;
-													dto.lng = tempArray.optString(2);
-													dto.lat = tempArray.optString(3);
+													dto.lng = tempArray.getDouble(2);
+													dto.lat = tempArray.getDouble(3);
 													dto.name = tempArray.optString(0);
 
 													if (!dto.name.contains("解除")) {

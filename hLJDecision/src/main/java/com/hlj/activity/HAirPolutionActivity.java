@@ -223,7 +223,7 @@ public class HAirPolutionActivity extends BaseActivity implements OnClickListene
 	 * 初始化地图
 	 */
 	private void initMap(Bundle bundle) {
-		mMapView = (MapView) findViewById(R.id.map);
+		mMapView = (MapView) findViewById(R.id.mapView);
 		mMapView.onCreate(bundle);
 		if (aMap == null) {
 			aMap = mMapView.getMap();
@@ -235,6 +235,9 @@ public class HAirPolutionActivity extends BaseActivity implements OnClickListene
 		aMap.setOnMarkerClickListener(this);
 		aMap.setOnMapClickListener(this);
 		aMap.setOnCameraChangeListener(this);
+
+		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
 
 		CommonUtil.drawHLJJson(mContext, aMap);
 	}

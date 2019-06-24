@@ -270,7 +270,7 @@ public class HMinuteFallActivity extends BaseActivity implements View.OnClickLis
 	};
 
 	private void initMap(Bundle bundle) {
-		mMapView = (MapView) findViewById(R.id.map);
+		mMapView = (MapView) findViewById(R.id.mapView);
 		mMapView.onCreate(bundle);
 		if (aMap == null) {
 			aMap = mMapView.getMap();
@@ -279,6 +279,9 @@ public class HMinuteFallActivity extends BaseActivity implements View.OnClickLis
 		aMap.getUiSettings().setZoomControlsEnabled(false);
 		aMap.getUiSettings().setRotateGesturesEnabled(false);
 		aMap.setOnMapClickListener(this);
+
+		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
 	}
 
 	private void addMarkerToMap(LatLng latLng) {

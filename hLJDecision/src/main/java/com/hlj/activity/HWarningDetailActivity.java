@@ -1,19 +1,17 @@
 package com.hlj.activity;
 
-/**
- * 预警详情
- */
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.hlj.common.CONST;
@@ -33,79 +31,82 @@ import okhttp3.Request;
 import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
+/**
+ * 预警详情
+ */
 public class HWarningDetailActivity extends BaseActivity implements OnClickListener{
-	
-	private Context mContext = null;
-	private LinearLayout llBack = null;
-	private TextView tvTitle = null;
-	private ImageView imageView = null;//预警图标
-	private TextView tvName = null;//预警名称
-	private TextView tvTime = null;//预警时间
-	private TextView tvIntro = null;//预警介绍
-	private TextView tvGuide = null;//防御指南
-	private String url = "http://decision.tianqi.cn/alarm12379/content2/";//详情页面url
-	private WarningDto data = null;
+
+	private Context mContext;
+	private ImageView imageView;
+	private TextView tvName,tvTime,tvIntro,tvGuide;
+	private WarningDto data;
+	private ScrollView scrollView;
+	private SwipeRefreshLayout refreshLayout;//下拉刷新布局
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hactivity_warning_detail);
 		mContext = this;
-		showDialog();
+		initRefreshLayout();
 		initWidget();
 	}
-	
+
+	/**
+	 * 初始化下拉刷新布局
+	 */
+	private void initRefreshLayout() {
+		refreshLayout = findViewById(R.id.refreshLayout);
+		refreshLayout.setColorSchemeResources(CONST.color1, CONST.color2, CONST.color3, CONST.color4);
+		refreshLayout.setProgressViewEndTarget(true, 300);
+		refreshLayout.setRefreshing(true);
+		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				refresh();
+			}
+		});
+	}
+
+	private void refresh() {
+		if (getIntent().hasExtra("data")) {
+			data = getIntent().getExtras().getParcelable("data");
+			if (data != null && !TextUtils.isEmpty(data.html)) {
+				OkHttpWarningDetail(data.html);
+			}
+		}
+	}
+
 	/**
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		llBack = (LinearLayout) findViewById(R.id.llBack);
+		LinearLayout llBack = findViewById(R.id.llBack);
 		llBack.setOnClickListener(this);
-		tvTitle = (TextView) findViewById(R.id.tvTitle);
-		imageView = (ImageView) findViewById(R.id.imageView);
-		tvName = (TextView) findViewById(R.id.tvName);
-		tvTime = (TextView) findViewById(R.id.tvTime);
-		tvIntro = (TextView) findViewById(R.id.tvIntro);
-		tvGuide = (TextView) findViewById(R.id.tvGuide);
-		
-		if (getIntent().hasExtra("data")) {
-			data = getIntent().getExtras().getParcelable("data");
-			try {
-				OkHttpWarningDetail(url+data.html);
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
+		TextView tvTitle = findViewById(R.id.tvTitle);
+		tvTitle.setText("预警详情");
+		imageView = findViewById(R.id.imageView);
+		tvName = findViewById(R.id.tvName);
+		tvTime = findViewById(R.id.tvTime);
+		tvIntro = findViewById(R.id.tvIntro);
+		tvGuide = findViewById(R.id.tvGuide);
+		scrollView = findViewById(R.id.scrollView);
+
+		refresh();
 	}
-	
+
 	/**
-	 * 初始化数据库
+	 * 获取预警详情
 	 */
-	private void initDBManager() {
-		DBManager dbManager = new DBManager(mContext);
-		dbManager.openDateBase();
-		dbManager.closeDatabase();
-		SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
-		Cursor cursor = database.rawQuery("SELECT * FROM " + DBManager.TABLE_NAME4 + " where WarningId like '%"+data.id+"%'",null);
-		for (int i = 0; i < cursor.getCount(); i++) {
-			cursor.moveToPosition(i);
-			tvGuide.setText(getString(R.string.warning_guide)+cursor.getString(cursor.getColumnIndex("WarningGuide")));
-		}
-	}
-	
-	/**
-	 * 异步请求
-	 */
-	private void OkHttpWarningDetail(final String url) {
+	private void OkHttpWarningDetail(final String html) {
+		final String url = "http://decision.tianqi.cn/alarm12379/content2/"+html;
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
 					@Override
 					public void onFailure(Call call, IOException e) {
-
 					}
-
 					@Override
 					public void onResponse(Call call, Response response) throws IOException {
 						if (!response.isSuccessful()) {
@@ -118,53 +119,53 @@ public class HWarningDetailActivity extends BaseActivity implements OnClickListe
 								if (!TextUtils.isEmpty(result)) {
 									try {
 										JSONObject object = new JSONObject(result);
-										if (object != null) {
-											tvTitle.setText(getString(R.string.warning_detail));
-											if (!object.isNull("sendTime")) {
-												tvTime.setText(object.getString("sendTime"));
-											}
-											if (!object.isNull("description")) {
-												tvIntro.setText(object.getString("description"));
-											}
+										if (!object.isNull("sendTime")) {
+											tvTime.setText(object.getString("sendTime"));
+										}
+
+										if (!object.isNull("description")) {
+											tvIntro.setText(object.getString("description"));
+										}
+
+										if (!object.isNull("headline")) {
 											String name = object.getString("headline");
 											if (!TextUtils.isEmpty(name)) {
-												tvName.setText(name.replace(getString(R.string.publish), getString(R.string.publish)+"\n"));
+												tvName.setText(name.replace("发布", "发布\n"));
 											}
-
-											Bitmap bitmap = null;
-											if (object.getString("severityCode").equals(CONST.blue[0])) {
-												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.blue[1]+CONST.imageSuffix);
-												if (bitmap != null) {
-													imageView.setImageBitmap(bitmap);
-												}else {
-													imageView.setImageResource(R.drawable.default_blue);
-												}
-											}else if (object.getString("severityCode").equals(CONST.yellow[0])) {
-												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.yellow[1]+CONST.imageSuffix);
-												if (bitmap != null) {
-													imageView.setImageBitmap(bitmap);
-												}else {
-													imageView.setImageResource(R.drawable.default_yellow);
-												}
-											}else if (object.getString("severityCode").equals(CONST.orange[0])) {
-												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.orange[1]+CONST.imageSuffix);
-												if (bitmap != null) {
-													imageView.setImageBitmap(bitmap);
-												}else {
-													imageView.setImageResource(R.drawable.default_orange);
-												}
-											}else if (object.getString("severityCode").equals(CONST.red[0])) {
-												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+object.getString("eventType")+CONST.red[1]+CONST.imageSuffix);
-												if (bitmap != null) {
-													imageView.setImageBitmap(bitmap);
-												}else {
-													imageView.setImageResource(R.drawable.default_red);
-												}
-											}
-
-											initDBManager();
-											cancelDialog();
 										}
+
+										String color = object.getString("severityCode");
+										String type = object.getString("eventType");
+										Bitmap bitmap = null;
+										if (color.equals(CONST.blue[0])) {
+											bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+type+CONST.blue[1]+CONST.imageSuffix);
+											if (bitmap == null) {
+												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+"default"+CONST.blue[1]+CONST.imageSuffix);
+											}
+										}else if (color.equals(CONST.yellow[0])) {
+											bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+type+CONST.yellow[1]+CONST.imageSuffix);
+											if (bitmap == null) {
+												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+"default"+CONST.yellow[1]+CONST.imageSuffix);
+											}
+										}else if (color.equals(CONST.orange[0])) {
+											bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+type+CONST.orange[1]+CONST.imageSuffix);
+											if (bitmap == null) {
+												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+"default"+CONST.orange[1]+CONST.imageSuffix);
+											}
+										}else if (color.equals(CONST.red[0])) {
+											bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+type+CONST.red[1]+CONST.imageSuffix);
+											if (bitmap == null) {
+												bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+"default"+CONST.red[1]+CONST.imageSuffix);
+											}
+										}
+										if (bitmap == null) {
+											bitmap = CommonUtil.getImageFromAssetsFile(mContext,"warning/"+"default"+CONST.imageSuffix);
+										}
+										imageView.setImageBitmap(bitmap);
+
+										initDBManager();
+										scrollView.setVisibility(View.VISIBLE);
+										refreshLayout.setRefreshing(false);
 									} catch (JSONException e) {
 										e.printStackTrace();
 									}
@@ -176,11 +177,39 @@ public class HWarningDetailActivity extends BaseActivity implements OnClickListe
 			}
 		}).start();
 	}
-	
+
+	/**
+	 * 初始化数据库
+	 */
+	private void initDBManager() {
+		DBManager dbManager = new DBManager(mContext);
+		dbManager.openDateBase();
+		dbManager.closeDatabase();
+		SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
+		Cursor cursor = database.rawQuery("select * from " + DBManager.TABLE_NAME2 + " where WarningId = " + "\"" + data.type+data.color + "\"",null);
+		String content = null;
+		for (int i = 0; i < cursor.getCount(); i++) {
+			cursor.moveToPosition(i);
+			content = cursor.getString(cursor.getColumnIndex("WarningGuide"));
+		}
+		cursor.close();
+		if (!TextUtils.isEmpty(content)) {
+			tvGuide.setText("预警指南：\n"+content);
+			tvGuide.setVisibility(View.VISIBLE);
+		}else {
+			tvGuide.setVisibility(View.GONE);
+		}
+	}
+
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.llBack) {
-			finish();
+		switch (v.getId()) {
+			case R.id.llBack:
+				finish();
+				break;
+
+			default:
+				break;
 		}
 	}
 

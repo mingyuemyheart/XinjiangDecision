@@ -70,6 +70,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <TextView
+            android:id="@+id/tvMapNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_alignBottom="@+id/mapView"
+            android:textColor="#6990A9"
+            android:textSize="@dimen/level_5" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
