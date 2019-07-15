@@ -1,10 +1,16 @@
 package com.hlj.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
@@ -12,15 +18,26 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hlj.common.CONST;
 import com.hlj.utils.CommonUtil;
+import com.hlj.utils.OkHttpUtil;
+import com.hlj.view.MyDialog;
 import com.hlj.view.RefreshLayout;
 import com.hlj.view.RefreshLayout.OnRefreshListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
 /**
@@ -37,6 +54,8 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 	private WebSettings webSettings = null;
 	private String url = null;
 	private RefreshLayout refreshLayout = null;//下拉刷新布局
+	private MyDialog myDialog;
+	private String fileDir = Environment.getExternalStorageDirectory()+"/HLJ";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +64,21 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 		initRefreshLayout();
 		initWidget();
 		initWebView();
+	}
+
+	private void initDialog() {
+		if (myDialog == null) {
+			myDialog = new MyDialog(this);
+		}
+		myDialog.setCanceledOnTouchOutside(false);
+		myDialog.setCancelable(false);
+		myDialog.show();
+	}
+
+	private void disDialog() {
+		if (myDialog != null) {
+			myDialog.dismiss();
+		}
 	}
 	
 	/**
@@ -138,6 +172,15 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 				refreshLayout.setRefreshing(false);
 			}
 		});
+
+		webView.setDownloadListener(new DownloadListener() {
+			@Override
+			public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+				String fileName = contentDisposition.substring(contentDisposition.indexOf("\"")+1, contentDisposition.lastIndexOf("\""));
+				OkHttpFile(url, fileName);
+			}
+		});
+
 	}
 	
 	@Override
@@ -159,5 +202,90 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 			finish();
 		}
 	}
+
+	private void OkHttpFile(final String url, final String fileName) {
+		if (TextUtils.isEmpty(url)) {
+			return;
+		}
+		initDialog();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+					}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						InputStream is = null;
+						FileOutputStream fos = null;
+						try {
+							is = response.body().byteStream();//获取输入流
+							float total = response.body().contentLength();//获取文件大小
+							if(is != null){
+								File files = new File(fileDir);
+								if (!files.exists()) {
+									files.mkdirs();
+								}
+								String filePath = files.getAbsolutePath()+"/"+fileName;
+								fos = new FileOutputStream(filePath);
+								byte[] buf = new byte[1024];
+								int ch = -1;
+								int process = 0;
+								while ((ch = is.read(buf)) != -1) {
+									fos.write(buf, 0, ch);
+									process += ch;
+
+//									int percent = (int) Math.floor((process / total * 100));
+//									Log.e("percent", process+"--"+total+"--"+percent);
+//									Message msg = handler.obtainMessage(1001);
+//									msg.what = 1001;
+//									msg.obj = filePath;
+//									msg.arg1 = percent;
+//									handler.sendMessage(msg);
+								}
+							}
+							fos.flush();
+							fos.close();// 下载完成
+
+							Message msg = handler.obtainMessage(1001);
+							msg.what = 1001;
+							handler.sendMessage(msg);
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							if (is != null) {
+								is.close();
+							}
+							if (fos != null) {
+								fos.close();
+							}
+						}
+
+					}
+				});
+			}
+		}).start();
+	}
+
+	@SuppressLint("HandlerLeak")
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			if (msg.what == 1001) {
+//				int percent = msg.arg1;
+//				if (myDialog != null) {
+//					myDialog.setPercent(percent);
+//				}
+//				if (percent >= 100) {
+					disDialog();
+					Toast.makeText(HUrlActivity.this, "文件已保存至目录"+fileDir, Toast.LENGTH_LONG).show();
+//				}
+			}
+		}
+	};
 	
 }

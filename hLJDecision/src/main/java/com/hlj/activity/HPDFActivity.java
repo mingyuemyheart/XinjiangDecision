@@ -113,7 +113,7 @@ public class HPDFActivity extends BaseActivity implements OnPageChangeListener, 
 		asynLoadPdf(pdfUrl);
 		
 	}
-	
+
 	/**
 	 * 异步下载pdf文件
 	 * @param pdfUrl pdf地址
@@ -134,16 +134,16 @@ public class HPDFActivity extends BaseActivity implements OnPageChangeListener, 
 					conf.load();
 				}
 			}
-		}, pdfUrl);  
+		}, pdfUrl);
         task.execute();
 	}
-	
+
 	private interface AsynLoadCompleteListener {
 		void loadComplete(File file);
 	}
-    
+
 	private class AsynLoadTask extends AsyncTask<Void, File, File> {
-		
+
 		private String url;
 		private AsynLoadCompleteListener completeListener;
 
@@ -155,7 +155,7 @@ public class HPDFActivity extends BaseActivity implements OnPageChangeListener, 
 		@Override
 		protected void onPreExecute() {
 		}
-		
+
 		@Override
 		protected void onProgressUpdate(File... values) {
 		}
@@ -172,7 +172,7 @@ public class HPDFActivity extends BaseActivity implements OnPageChangeListener, 
             }
 		}
 	}
-	
+
 	/**
 	 * 下载pdf文件
 	 * @param pdfUrl
@@ -215,7 +215,7 @@ public class HPDFActivity extends BaseActivity implements OnPageChangeListener, 
 		}
 		return null;
 	}
-	
+
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 //			if (msg.what == 0) {
