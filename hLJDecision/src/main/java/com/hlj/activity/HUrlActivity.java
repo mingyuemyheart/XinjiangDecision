@@ -6,7 +6,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,9 +22,6 @@ import android.widget.Toast;
 import com.hlj.common.CONST;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
-import com.hlj.view.MyDialog;
-import com.hlj.view.RefreshLayout;
-import com.hlj.view.RefreshLayout.OnRefreshListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,53 +49,17 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 	private WebView webView = null;
 	private WebSettings webSettings = null;
 	private String url = null;
-	private RefreshLayout refreshLayout = null;//下拉刷新布局
-	private MyDialog myDialog;
 	private String fileDir = Environment.getExternalStorageDirectory()+"/HLJ";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.url);
-		initRefreshLayout();
+		showDialog();
 		initWidget();
 		initWebView();
 	}
 
-	private void initDialog() {
-		if (myDialog == null) {
-			myDialog = new MyDialog(this);
-		}
-		myDialog.setCanceledOnTouchOutside(false);
-		myDialog.setCancelable(false);
-		myDialog.show();
-	}
-
-	private void disDialog() {
-		if (myDialog != null) {
-			myDialog.dismiss();
-		}
-	}
-	
-	/**
-	 * 初始化下拉刷新布局
-	 */
-	private void initRefreshLayout() {
-		refreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
-		refreshLayout.setColor(com.hlj.common.CONST.color1, com.hlj.common.CONST.color2, com.hlj.common.CONST.color3, com.hlj.common.CONST.color4);
-		refreshLayout.setMode(RefreshLayout.Mode.PULL_FROM_START);
-		refreshLayout.setLoadNoFull(false);
-		refreshLayout.setRefreshing(true);
-		refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				if (webView != null && !TextUtils.isEmpty(url)) {
-					webView.loadUrl(url);
-				}
-			}
-		});
-	}
-	
 	/**
 	 * 初始化控件
 	 */
@@ -169,7 +129,7 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
-				refreshLayout.setRefreshing(false);
+				cancelDialog();
 			}
 		});
 
@@ -207,7 +167,7 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 		if (TextUtils.isEmpty(url)) {
 			return;
 		}
-		initDialog();
+		showDialog();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -220,6 +180,7 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 						if (!response.isSuccessful()) {
 							return;
 						}
+						String filePath = null;
 						InputStream is = null;
 						FileOutputStream fos = null;
 						try {
@@ -230,7 +191,7 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 								if (!files.exists()) {
 									files.mkdirs();
 								}
-								String filePath = files.getAbsolutePath()+"/"+fileName;
+								filePath = files.getAbsolutePath()+"/"+fileName;
 								fos = new FileOutputStream(filePath);
 								byte[] buf = new byte[1024];
 								int ch = -1;
@@ -253,6 +214,7 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 
 							Message msg = handler.obtainMessage(1001);
 							msg.what = 1001;
+							msg.obj = filePath;
 							handler.sendMessage(msg);
 
 						} catch (Exception e) {
@@ -276,14 +238,13 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			if (msg.what == 1001) {
-//				int percent = msg.arg1;
-//				if (myDialog != null) {
-//					myDialog.setPercent(percent);
-//				}
-//				if (percent >= 100) {
-					disDialog();
-					Toast.makeText(HUrlActivity.this, "文件已保存至目录"+fileDir, Toast.LENGTH_LONG).show();
-//				}
+				cancelDialog();
+				String filePath = String.valueOf(msg.obj);
+				if (TextUtils.isEmpty(filePath)) {
+					Toast.makeText(HUrlActivity.this, "文件下载失败，请点击重新下载", Toast.LENGTH_LONG).show();
+				}else {
+					CommonUtil.intentWPSOffice(HUrlActivity.this, filePath);
+				}
 			}
 		}
 	};

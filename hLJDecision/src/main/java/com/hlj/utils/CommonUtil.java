@@ -1,6 +1,7 @@
 package com.hlj.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -35,6 +37,10 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -48,6 +54,7 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
@@ -789,6 +796,36 @@ public class CommonUtil {
 		}
 		height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 		return height;
+	}
+
+	/**
+	 * 跳转至wps-office
+	 * @param filePath
+	 */
+	public static void intentWPSOffice(Context context, String filePath) {
+		if (context == null || TextUtils.isEmpty(filePath)) {
+			return;
+		}
+		Uri uri;
+		File file = new File(filePath);
+		if (file.exists()) {
+			final String authority = "shawn.cxwl.com.hlj.fileprovider";
+			boolean build = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
+			uri = build ? FileProvider.getUriForFile(context, authority, file) : Uri.fromFile(file);
+		}else {
+			uri = Uri.parse(filePath);
+		}
+		Intent intent = context.getPackageManager().getLaunchIntentForPackage("cn.wps.moffice_eng");//WPS个人版的包名
+		if (intent == null) {
+			context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=cn.wps.moffice_eng")));
+			Toast.makeText(context, "可下载WPS Office来打开文件", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		Bundle bundle = new Bundle();
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件
+		intent.setData(uri);//这里采用传入文档的在线地址进行打开，免除下载的步骤，也不需要判断安卓版本号
+		intent.putExtras(bundle);
+		context.startActivity(intent);
 	}
 
 }

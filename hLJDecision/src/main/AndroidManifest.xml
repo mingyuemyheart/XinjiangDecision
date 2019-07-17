@@ -64,6 +64,16 @@
 
         <service android:name="com.amap.api.location.APSService" />
 
+        <provider
+            android:authorities="shawn.cxwl.com.hlj.fileprovider"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
         <!-- 自动更新下载完成广播 -->
         <receiver android:name="com.hlj.utils.AutoUpdateBroadcastReceiver">
             <intent-filter>
