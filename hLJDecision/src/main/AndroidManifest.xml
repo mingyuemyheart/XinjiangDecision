@@ -53,7 +53,7 @@
         <!--1.包名为shawn.cxwl.com.hlj.decision-->
         <!--2.高德地图key-->
         <!--3.appname-->
-        <!--4.shawn_activity_welcome界面welcome_icon2、main界面iv_logo2-->
+        <!--4.shawn_activity_welcome界面welcome_icon2、hactivity_main界面iv_logo2-->
         <!--5.更换MainActivity、SettingActivity自动更新app_id-->
         <!--6.gradle 修改打包名称-->
         <!--7.修改umeng推送的authorities-->

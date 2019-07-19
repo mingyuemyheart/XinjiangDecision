@@ -25,6 +25,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptor;
@@ -328,7 +329,7 @@ public class HMinuteFallActivity extends BaseActivity implements View.OnClickLis
 	}
 	@Override
 	public void onRegeocodeSearched(RegeocodeResult result, int rCode) {
-		if (rCode == 0) {
+		if (rCode == 1000) {
 			if (result != null && result.getRegeocodeAddress() != null && result.getRegeocodeAddress().getFormatAddress() != null) {
 				String addr = result.getRegeocodeAddress().getFormatAddress();
 				if (!TextUtils.isEmpty(addr)) {
