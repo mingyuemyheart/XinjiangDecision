@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -35,8 +36,10 @@ import android.widget.TextView;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.GroundOverlay;
 import com.amap.api.maps.model.GroundOverlayOptions;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
@@ -66,7 +69,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -114,6 +120,8 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
     private MainViewPager viewPager = null;
     private LinearLayout llViewPager = null;
     private List<Fragment> fragments = new ArrayList<>();
+    private Map<String, String> layerMap = new HashMap<>();
+    private GroundOverlay factOverlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,13 +212,57 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
             tvTitle.setText(data.name);
         }
 
-        addColumn(data);
+        OkHttpLayer(data);
     }
 
     private void initListView() {
         listView = (ListView) findViewById(R.id.listView);
         factAdapter = new FactAdapter2(mContext, factList);
         listView.setAdapter(factAdapter);
+    }
+
+    private void OkHttpLayer(final AgriDto data) {
+        final String url = "https://decision-admin.tianqi.cn/Home/work2019/getHljSKImages";
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                    }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            return;
+                        }
+                        final String result = response.body().string();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                layerMap.clear();
+                                if (!TextUtils.isEmpty(result)) {
+                                    try {
+                                        JSONObject obj = new JSONObject(result);
+                                        Iterator<String> iterator = obj.keys();
+                                        while (iterator.hasNext() ) {
+                                            String key = iterator.next();
+                                            String value = obj.getString(key);
+                                            layerMap.put(key, value);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                if (layerMap.size() > 0) {
+                                    addColumn(data);
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }).start();
     }
 
     /**
@@ -420,6 +472,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                                                 OkHttpJson(dataUrl);
                                             }
                                         }
+                                        OkHttpLayer();
 
                                         //详情开始
                                         if (!obj.isNull("th")) {
@@ -568,6 +621,80 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         }).start();
     }
 
+    private void OkHttpLayer() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (layerMap.containsKey(childId)) {
+                    String value = layerMap.get(childId);
+                    if (!TextUtils.isEmpty(value)) {
+                        try {
+                            JSONObject obj = new JSONObject(value);
+                            final double maxlat = obj.getDouble("maxlat");
+                            final double maxlon = obj.getDouble("maxlon");
+                            final double minlat = obj.getDouble("minlat");
+                            final double minlon = obj.getDouble("minlon");
+                            String imgurl = obj.getString("imgurl");
+                            OkHttpUtil.enqueue(new Request.Builder().url(imgurl).build(), new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                }
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    if (!response.isSuccessful()) {
+                                        return;
+                                    }
+                                    final byte[] bytes = response.body().bytes();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                            if (bitmap != null) {
+                                                drawFactBitmap(bitmap, new LatLng(maxlat, maxlon), new LatLng(minlat, minlon));
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * 绘制实况图
+     */
+    private void drawFactBitmap(Bitmap bitmap, LatLng max, LatLng min) {
+        if (bitmap == null) {
+            return;
+        }
+        BitmapDescriptor fromView = BitmapDescriptorFactory.fromBitmap(bitmap);
+        LatLngBounds bounds = new LatLngBounds.Builder()
+                .include(max)
+                .include(min)
+                .build();
+
+//        aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
+
+        if (factOverlay == null) {
+            factOverlay = aMap.addGroundOverlay(new GroundOverlayOptions()
+                    .anchor(0.5f, 0.5f)
+                    .positionFromBounds(bounds)
+                    .image(fromView)
+                    .transparency(0.2f));
+        } else {
+            factOverlay.setImage(null);
+            factOverlay.setPositionFromBounds(bounds);
+            factOverlay.setImage(fromView);
+        }
+
+        drawDataToMap("");
+    }
+
     /**
      * 请求图层数据
      * @param url
@@ -675,59 +802,59 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         removeCityTexts();
         removeAutoTexts();
 
-        try {
-            JSONObject obj = new JSONObject(result);
-            JSONArray array = obj.getJSONArray("l");
-            int length = array.length();
-//			if (length > 200) {
-//				length = 200;
-//			}
-            for (int i = 0; i < length; i++) {
-                JSONObject itemObj = array.getJSONObject(i);
-                JSONArray c = itemObj.getJSONArray("c");
-                int r = c.getInt(0);
-                int g = c.getInt(1);
-                int b = c.getInt(2);
-                int a = (int) (c.getInt(3)*255*1.0);
-
-                double centerLat = 0;
-                double centerLng = 0;
-                String p = itemObj.getString("p");
-                if (!TextUtils.isEmpty(p)) {
-                    String[] points = p.split(";");
-                    PolygonOptions polygonOption = new PolygonOptions();
-                    polygonOption.fillColor(Color.argb(a, r, g, b));
-                    polygonOption.strokeColor(0xffd9d9d9);
-                    polygonOption.strokeWidth(1);
-                    for (int j = 0; j < points.length; j++) {
-                        String[] value = points[j].split(",");
-                        double lat = Double.valueOf(value[1]);
-                        double lng = Double.valueOf(value[0]);
-                        polygonOption.add(new LatLng(lat, lng));
-                        if (j == points.length/2) {
-                            centerLat = lat;
-                            centerLng = lng;
-                        }
-                    }
-                    Polygon polygon = aMap.addPolygon(polygonOption);
-                    polygons.add(polygon);
-                }
-
-//                if (!itemObj.isNull("v")) {
-//                    double v = itemObj.getDouble("v");
-//                    TextOptions options = new TextOptions();
-//                    options.position(new LatLng(centerLat, centerLng));
-//                    options.fontColor(Color.BLACK);
-//                    options.fontSize(30);
-//                    options.text(v+"");
-//                    options.backgroundColor(Color.TRANSPARENT);
-//                    Text text = aMap.addText(options);
-//                    texts.add(text);
+//        try {
+//            JSONObject obj = new JSONObject(result);
+//            JSONArray array = obj.getJSONArray("l");
+//            int length = array.length();
+////			if (length > 200) {
+////				length = 200;
+////			}
+//            for (int i = 0; i < length; i++) {
+//                JSONObject itemObj = array.getJSONObject(i);
+//                JSONArray c = itemObj.getJSONArray("c");
+//                int r = c.getInt(0);
+//                int g = c.getInt(1);
+//                int b = c.getInt(2);
+//                int a = (int) (c.getInt(3)*255*1.0);
+//
+//                double centerLat = 0;
+//                double centerLng = 0;
+//                String p = itemObj.getString("p");
+//                if (!TextUtils.isEmpty(p)) {
+//                    String[] points = p.split(";");
+//                    PolygonOptions polygonOption = new PolygonOptions();
+//                    polygonOption.fillColor(Color.argb(a, r, g, b));
+//                    polygonOption.strokeColor(0xffd9d9d9);
+//                    polygonOption.strokeWidth(1);
+//                    for (int j = 0; j < points.length; j++) {
+//                        String[] value = points[j].split(",");
+//                        double lat = Double.valueOf(value[1]);
+//                        double lng = Double.valueOf(value[0]);
+//                        polygonOption.add(new LatLng(lat, lng));
+//                        if (j == points.length/2) {
+//                            centerLat = lat;
+//                            centerLng = lng;
+//                        }
+//                    }
+//                    Polygon polygon = aMap.addPolygon(polygonOption);
+//                    polygons.add(polygon);
 //                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//
+////                if (!itemObj.isNull("v")) {
+////                    double v = itemObj.getDouble("v");
+////                    TextOptions options = new TextOptions();
+////                    options.position(new LatLng(centerLat, centerLng));
+////                    options.fontColor(Color.BLACK);
+////                    options.fontSize(30);
+////                    options.text(v+"");
+////                    options.backgroundColor(Color.TRANSPARENT);
+////                    Text text = aMap.addText(options);
+////                    texts.add(text);
+////                }
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         drawAllDistrict();
         progressBar.setVisibility(View.GONE);
@@ -790,7 +917,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                     for (int m = 0; m < coordinates.length(); m++) {
                         JSONArray array2 = coordinates.getJSONArray(m);
                         PolylineOptions polylineOption = new PolylineOptions();
-                        polylineOption.width(1).color(0xffd9d9d9);
+                        polylineOption.width(3).color(0xffd9d9d9);
                         for (int j = 0; j < array2.length(); j++) {
                             JSONArray itemArray = array2.getJSONArray(j);
                             double lng = itemArray.getDouble(0);
