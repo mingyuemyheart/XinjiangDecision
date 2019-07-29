@@ -33,6 +33,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -50,8 +52,14 @@ public class HCommonPdfListActivity extends BaseActivity implements OnClickListe
 	private List<AgriDto> mList = new ArrayList<>();
 	private RefreshLayout refreshLayout = null;//下拉刷新布局
 	private AgriDto dto = null;
-	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-	private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy年MM月dd日");
+	private SimpleDateFormat sdf11 = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
+	private SimpleDateFormat sdf12 = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+	private SimpleDateFormat sdf21 = new SimpleDateFormat("yyyyMMddHH", Locale.CHINA);
+	private SimpleDateFormat sdf22 = new SimpleDateFormat("yyyy年MM月dd日HH时", Locale.CHINA);
+	private SimpleDateFormat sdf31 = new SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA);
+	private SimpleDateFormat sdf32 = new SimpleDateFormat("yyyy年MM月dd日 HH:mm", Locale.CHINA);
+	private SimpleDateFormat sdf41 = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA);
+	private SimpleDateFormat sdf42 = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss", Locale.CHINA);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -158,12 +166,7 @@ public class HCommonPdfListActivity extends BaseActivity implements OnClickListe
 												AgriDto tempDto = new AgriDto();
 												tempDto.title = dto.name;
 												tempDto.dataUrl = array.getString(i);
-												try {
-													String time = tempDto.dataUrl.substring(tempDto.dataUrl.length()-12, tempDto.dataUrl.length()-4);
-													tempDto.time = sdf2.format(sdf1.parse(time));
-												} catch (ParseException e) {
-													e.printStackTrace();
-												}
+												tempDto.time = time(tempDto.dataUrl);
 												mList.add(tempDto);
 											}
 										}
@@ -182,6 +185,30 @@ public class HCommonPdfListActivity extends BaseActivity implements OnClickListe
 				});
 			}
 		}).start();
+	}
+
+	private boolean isMatches(String pattern, String content) {
+		return Pattern.matches(pattern, content);
+	}
+
+	private String time(String dataUrl) {
+		String time = "";
+		try {
+			if (isMatches("^[0-9]\\d{13}", dataUrl.substring(dataUrl.length()-18, dataUrl.length()-4))) {
+				time = sdf42.format(sdf41.parse(dataUrl.substring(dataUrl.length()-18, dataUrl.length()-4)));
+			}else if (isMatches("^[0-9]\\d{11}", dataUrl.substring(dataUrl.length()-16, dataUrl.length()-4))) {
+				time = sdf32.format(sdf31.parse(dataUrl.substring(dataUrl.length()-16, dataUrl.length()-4)));
+			}else if (isMatches("^[0-9]\\d{9}", dataUrl.substring(dataUrl.length()-14, dataUrl.length()-4))) {
+				time = sdf22.format(sdf21.parse(dataUrl.substring(dataUrl.length()-14, dataUrl.length()-4)));
+			}else if (isMatches("^[0-9]\\d{7}", dataUrl.substring(dataUrl.length()-12, dataUrl.length()-4))) {
+				time = sdf12.format(sdf11.parse(dataUrl.substring(dataUrl.length()-12, dataUrl.length()-4)));
+			}else if (isMatches("^[0-9]\\d{7}-[0-9]", dataUrl.substring(dataUrl.length()-14, dataUrl.length()-4))) {
+				time = sdf12.format(sdf11.parse(dataUrl.substring(dataUrl.length()-14, dataUrl.length()-6)));
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return time;
 	}
 	
 	@Override

@@ -45,6 +45,7 @@ public class WeeklyView extends View{
 	private SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
 	private int totalDivider = 0;
 	private int itemDivider = 1;
+	private long foreDate = 0, currentDate = 0;
 
 	public WeeklyView(Context context) {
 		super(context);
@@ -87,7 +88,9 @@ public class WeeklyView extends View{
 	/**
 	 * 对polyView进行赋值
 	 */
-	public void setData(List<WeatherDto> dataList) {
+	public void setData(List<WeatherDto> dataList, long foreDate, long currentDate) {
+		this.foreDate = foreDate;
+		this.currentDate = currentDate;
 		if (!dataList.isEmpty()) {
 			tempList.clear();
 			tempList.addAll(dataList);
@@ -166,8 +169,24 @@ public class WeeklyView extends View{
 			textP.setColor(getResources().getColor(R.color.white));
 			textP.setTextSize(getResources().getDimension(R.dimen.level_5));
 			String week = mContext.getString(R.string.week)+dto.week.substring(dto.week.length()-1, dto.week.length());
-			if (i == 0) {
-				week = "今天";
+			if (currentDate > foreDate) {
+				if (i == 0) {
+					week = "昨天";
+				}else if (i == 1) {
+					week = "今天";
+				}else if (i == 2) {
+					week = "明天";
+				}else {
+					week = dto.week;
+				}
+			}else {
+				if (i == 0) {
+					week = "今天";
+				}else if (i == 1) {
+					week = "明天";
+				}else {
+					week = dto.week;
+				}
 			}
 			float weekText = textP.measureText(week);
 			canvas.drawText(week, dto.highX-weekText/2, CommonUtil.dip2px(mContext, 20), textP);

@@ -57,10 +57,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import cn.com.weather.api.WeatherAPI;
 import cn.com.weather.beans.Weather;
@@ -99,6 +101,8 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 	private AMapLocationClient mLocationClient = null;//声明AMapLocationClient类对象
 	private SimpleDateFormat sdf1 = new SimpleDateFormat("HH");
 	private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	private SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
+	private SimpleDateFormat sdf4 = new SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA);
 	private int hour = 0;
 
 	private TextView tvDay1 = null;
@@ -418,6 +422,15 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 										if (!obj.isNull("f")) {
 											JSONObject f = obj.getJSONObject("f");
 											String f0 = f.getString("f0");
+											long foreDate = 0,currentDate = 0;
+											try {
+												String fTime = sdf3.format(sdf4.parse(f0));
+												foreDate = sdf3.parse(fTime).getTime();
+												currentDate = sdf3.parse(sdf3.format(new Date())).getTime();
+											} catch (ParseException e) {
+												e.printStackTrace();
+											}
+
 											JSONArray f1 = f.getJSONArray("f1");
 											for (int i = 0; i < f1.length(); i++) {
 												WeatherDto dto = new WeatherDto();
@@ -493,13 +506,15 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 
 											//一周预报列表
 											if (mAdapter != null) {
+											    mAdapter.foreDate = foreDate;
+											    mAdapter.currentDate = currentDate;
 												mAdapter.notifyDataSetChanged();
 												CommonUtil.setListViewHeightBasedOnChildren(mListView);
 											}
 
 											//一周预报曲线
 											WeeklyView weeklyView = new WeeklyView(getActivity());
-											weeklyView.setData(weeklyList);
+											weeklyView.setData(weeklyList, foreDate, currentDate);
 											llContainer2.removeAllViews();
 											llContainer2.addView(weeklyView, width*2, (int) CommonUtil.dip2px(getActivity(), 320));
 

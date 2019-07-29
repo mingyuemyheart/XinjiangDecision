@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:scaleType="fitXY"
         android:src="@drawable/iv_hlj1" />
@@ -26,7 +26,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color4"
+            android:textColor="@color/text_color3"
             android:textSize="@dimen/level_4" />
 
         <TextView
