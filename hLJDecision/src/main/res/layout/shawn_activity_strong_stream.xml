@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title"/>
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/reTitle"/>
+
+    <RelativeLayout
+        android:id="@+id/reShare"
+        android:layout_above="@+id/llContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reTitle">
+
+        <ImageView
+            android:id="@+id/ivLighting"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/shawn_icon_lighting_offf"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/ivRadar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/ivLighting"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/shawn_icon_radar_on"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/llLegend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivRank"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/shawn_icon_map_legend_off"/>
+
+            <ImageView
+                android:id="@+id/ivLegend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/shawn_legend_strong_stream"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#90000000"
+        android:clickable="true"
+        android:orientation="horizontal"/>
+
+</RelativeLayout>

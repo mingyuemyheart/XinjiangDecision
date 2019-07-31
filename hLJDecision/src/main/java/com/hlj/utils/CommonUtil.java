@@ -828,4 +828,26 @@ public class CommonUtil {
 		context.startActivity(intent);
 	}
 
+	/**
+	 * 根据风速获取风向标
+	 * @param context
+	 * @param speed
+	 * @return
+	 */
+	public static Bitmap getStrongWindMarker(Context context, double speed) {
+		Bitmap bitmap = null;
+		if (speed > 17.1 && speed <= 20.7) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.fzj_wind_78);
+		}else if (speed > 20.7 && speed <= 24.4) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.fzj_wind_89);
+		}else if (speed > 24.4 && speed <= 28.4) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.fzj_wind_910);
+		}else if (speed > 28.4 && speed <= 32.6) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.fzj_wind_1011);
+		}else if (speed > 32.6 && speed < 99999.0) {
+			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.fzj_wind_1112);
+		}
+		return bitmap;
+	}
+
 }

@@ -14,4 +14,7 @@ public class WindDto {
 	public LatLng latLng = null;// 对应手机屏幕上点的经纬度
 	public float vx = 0;// x轴速度
 	public float vy = 0;// y轴速度
+
+	public String speed;//风速
+	public String date;//时间
 }

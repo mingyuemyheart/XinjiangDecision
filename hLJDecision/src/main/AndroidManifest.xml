@@ -53,7 +53,7 @@
         <!--1.包名为shawn.cxwl.com.hlj.decision-->
         <!--2.高德地图key-->
         <!--3.appname-->
-        <!--4.shawn_activity_welcome界面welcome_icon2、hactivity_main界面iv_logo2-->
+        <!--4.shawn_activity_welcome界面welcome_icon2、hactivity_main界面iv_logo2、fragment_contact_us界面qrcode2-->
         <!--5.更换MainActivity、SettingActivity自动更新app_id-->
         <!--6.gradle 修改打包名称-->
         <!--7.修改umeng推送的authorities-->
@@ -65,8 +65,8 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <provider
-            android:authorities="shawn.cxwl.com.hlj.fileprovider"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -204,10 +204,6 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.WaitWindActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name="com.hlj.activity.HReserveCityActivity"
             android:screenOrientation="portrait" />
 
@@ -308,6 +304,26 @@
 
         <activity
             android:name="com.hlj.activity.ShawnWarningStatisticScreenAreaActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnProductActivity2"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnStreamFactActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnStreamFactListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnStrongStreamActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ShawnWaitWindActivity"
             android:screenOrientation="portrait" />
 
 
@@ -432,7 +448,7 @@
 
         <provider
             android:name="com.umeng.message.provider.MessageProvider"
-            android:authorities="shawn.cxwl.com.hlj.decision.umeng.message"
+            android:authorities="${applicationId}.umeng.message"
             android:exported="false">
             <grant-uri-permission android:pathPattern=".*" />
         </provider>

@@ -13,8 +13,8 @@ android {
         applicationId "shawn.cxwl.com.hlj.decision"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 55
-        versionName "2.3.2"
+        versionCode 56
+        versionName "2.3.3"
 
         ndk {
             abiFilters 'armeabi-v7a'
@@ -54,4 +54,5 @@ dependencies {
     implementation 'com.amap.api:location:3.7.0'
     implementation files('libs/scene-final.jar')
     implementation files('libs/exoplayer_lib.jar')
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

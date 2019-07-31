@@ -28,9 +28,12 @@ import com.hlj.activity.HWeatherChartAnalysisActivity;
 import com.hlj.activity.HWeatherRadarActivity;
 import com.hlj.activity.HWeatherStaticsActivity;
 import com.hlj.activity.ShawnPointForeActivity;
+import com.hlj.activity.ShawnProductActivity2;
+import com.hlj.activity.ShawnStreamFactActivity;
+import com.hlj.activity.ShawnStrongStreamActivity;
+import com.hlj.activity.ShawnWaitWindActivity;
 import com.hlj.activity.ShawnWeatherMeetingActivity;
 import com.hlj.activity.TyphoonRouteActivity;
-import com.hlj.activity.WaitWindActivity;
 import com.hlj.adapter.HWeatherForecastFragmentAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
@@ -92,6 +95,14 @@ public class HWeatherForecastFragment extends Fragment {
 					intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 					intent.putExtra(CONST.WEB_URL, dto.dataUrl);
 					startActivity(intent);
+				}else if (TextUtils.equals(dto.showType, CONST.PRODUCT)) {
+					intent = new Intent(getActivity(), ShawnProductActivity2.class);
+					intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+					intent.putExtra(CONST.WEB_URL, dto.dataUrl);
+					Bundle bundle = new Bundle();
+					bundle.putParcelable("data", dto);
+					intent.putExtras(bundle);
+					startActivity(intent);
 				}else if (TextUtils.equals(dto.showType, CONST.LOCAL)) {//气温预报、雾霾预报、降温大风沙尘预报
 					if (TextUtils.equals(dto.id, "111")) {//天气雷达
 						intent = new Intent(getActivity(), HWeatherRadarActivity.class);
@@ -117,6 +128,10 @@ public class HWeatherForecastFragment extends Fragment {
 						intent = new Intent(getActivity(), TyphoonRouteActivity.class);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
+					}else if (TextUtils.equals(dto.id, "120")) {//强对流天气实况（新）
+						intent = new Intent(getActivity(), ShawnStreamFactActivity.class);
+						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "201")) {//气温预报
 						intent = new Intent(getActivity(), HTempratureForecastActivity.class);
 						Bundle bundle = new Bundle();
@@ -128,11 +143,15 @@ public class HWeatherForecastFragment extends Fragment {
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "205")) {//等风来
-						intent = new Intent(getActivity(), WaitWindActivity.class);
+						intent = new Intent(getActivity(), ShawnWaitWindActivity.class);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "207")) {//格点预报
 						intent = new Intent(getActivity(), ShawnPointForeActivity.class);
+						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+						startActivity(intent);
+					}else if (TextUtils.equals(dto.id, "208")) {//分钟降水与强对流
+						intent = new Intent(getActivity(), ShawnStrongStreamActivity.class);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "701")) {//全省预报
