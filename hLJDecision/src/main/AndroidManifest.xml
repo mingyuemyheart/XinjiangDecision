@@ -192,6 +192,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name="com.hlj.activity.ShawnFactMonitorActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.hlj.activity.FactDetailActivity"
             android:screenOrientation="portrait" />
 

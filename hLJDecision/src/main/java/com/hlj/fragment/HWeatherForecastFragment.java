@@ -27,6 +27,7 @@ import com.hlj.activity.HUrlActivity;
 import com.hlj.activity.HWeatherChartAnalysisActivity;
 import com.hlj.activity.HWeatherRadarActivity;
 import com.hlj.activity.HWeatherStaticsActivity;
+import com.hlj.activity.ShawnFactMonitorActivity;
 import com.hlj.activity.ShawnPointForeActivity;
 import com.hlj.activity.ShawnProductActivity2;
 import com.hlj.activity.ShawnStreamFactActivity;
@@ -182,6 +183,11 @@ public class HWeatherForecastFragment extends Fragment {
 					}else if (TextUtils.equals(dto.id, "118")) {//天气会商
 						intent = new Intent(getActivity(), ShawnWeatherMeetingActivity.class);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+						startActivity(intent);
+					}else if (TextUtils.equals(dto.id, "119")) {//自动站实况监测
+						intent = new Intent(getActivity(), ShawnFactMonitorActivity.class);
+						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+						intent.putExtra(CONST.WEB_URL, dto.dataUrl);
 						startActivity(intent);
 					}
 				}else if (TextUtils.isEmpty(dto.showType) || TextUtils.equals(dto.showType, CONST.NEWS)) {//专业气象预报、中期旬报

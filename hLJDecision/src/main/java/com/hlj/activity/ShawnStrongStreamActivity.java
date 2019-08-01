@@ -143,6 +143,9 @@ public class ShawnStrongStreamActivity extends BaseActivity implements OnClickLi
 		aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.926628, 105.178100), 3.7f));
 		aMap.getUiSettings().setZoomControlsEnabled(false);
 		aMap.getUiSettings().setRotateGesturesEnabled(false);
+
+		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
 	}
 
 	private void initWidget() {

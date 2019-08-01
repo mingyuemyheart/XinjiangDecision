@@ -86,7 +86,7 @@ public class FactCheckFragment extends Fragment implements OnClickListener{
 	private RelativeLayout reContent = null;
 	private ProgressBar progressBar = null;
 	private LinearLayout llStartMinute, llEndMinute;
-	private String childId = "";
+	private String childId = "1154";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -141,10 +141,10 @@ public class FactCheckFragment extends Fragment implements OnClickListener{
 		tv2 = (TextView) view.findViewById(R.id.tv2);
 		tv3 = (TextView) view.findViewById(R.id.tv3);
 
-		childId = getArguments().getString("childId");
-		if (TextUtils.isEmpty(childId)) {
-			childId = "";
-		}
+//		childId = getArguments().getString("childId");
+//		if (TextUtils.isEmpty(childId)) {
+//			childId = "";
+//		}
 		OkHttpCheck("http://decision-171.tianqi.cn/api/heilj/dates/getcitid?city=&start=&end=&cid="+childId);
 	}
 	

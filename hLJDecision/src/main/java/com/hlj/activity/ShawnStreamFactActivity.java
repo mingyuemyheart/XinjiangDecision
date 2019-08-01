@@ -217,7 +217,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 	 * 初始化地图
 	 */
 	private void initMap(Bundle bundle) {
-		mMapView = findViewById(R.id.map);
+		mMapView = findViewById(R.id.mapView);
 		mMapView.onCreate(bundle);
 		if (aMap == null) {
 			aMap = mMapView.getMap();
@@ -229,6 +229,9 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 		aMap.setOnMarkerClickListener(this);
 		aMap.setOnMapClickListener(this);
 		aMap.setInfoWindowAdapter(this);
+
+		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
 	}
 
 	@Override
