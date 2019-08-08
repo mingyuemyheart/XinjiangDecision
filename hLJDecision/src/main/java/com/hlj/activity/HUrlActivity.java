@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -167,6 +168,7 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 		if (TextUtils.isEmpty(url)) {
 			return;
 		}
+		Log.e("OkHttpFile url:", url);
 		showDialog();
 		new Thread(new Runnable() {
 			@Override

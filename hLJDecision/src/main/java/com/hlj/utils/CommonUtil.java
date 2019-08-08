@@ -809,7 +809,7 @@ public class CommonUtil {
 		Uri uri;
 		File file = new File(filePath);
 		if (file.exists()) {
-			final String authority = "shawn.cxwl.com.hlj.fileprovider";
+			final String authority = context.getPackageName()+".fileprovider";
 			boolean build = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
 			uri = build ? FileProvider.getUriForFile(context, authority, file) : Uri.fromFile(file);
 		}else {
