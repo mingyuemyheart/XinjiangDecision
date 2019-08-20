@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
@@ -47,8 +48,8 @@ public class AutoUpdateBroadcastReceiver extends BroadcastReceiver{
 	        }
 		}
 	}
-	
-	/**
+
+    /**
      * 通过downLoadId查询下载的apk，解决6.0以后安装的问题
      * @param context
      * @return
@@ -76,11 +77,16 @@ public class AutoUpdateBroadcastReceiver extends BroadcastReceiver{
     }
 
     private void openFile(File file, Context context) {
-        Intent intent = new Intent();
-        intent.addFlags(268435456);
-        intent.setAction("android.intent.action.VIEW");
-        String type = getMIMEType(file);
-        intent.setDataAndType(Uri.fromFile(file), type);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(context, context.getPackageName()+".fileprovider", file);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
         try {
             context.startActivity(intent);
         } catch (Exception var5) {

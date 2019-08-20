@@ -75,7 +75,6 @@ OnMarkerClickListener, InfoWindowAdapter {
 	private RelativeLayout reWarningStatistic;
 	private MapView mapView;//高德地图
 	private AMap aMap;//高德地图
-	private float zoom = 6.0f;
 	private ArcMenu arcMenu;
 	private boolean blue = true, yellow = true, orange = true, red = true;
 	private List<WarningDto> warningList = new ArrayList<>();
@@ -114,7 +113,7 @@ OnMarkerClickListener, InfoWindowAdapter {
 			aMap = mapView.getMap();
 		}
 
-		aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.926628, 105.178100), zoom));
+		aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.926628, 105.178100), 6.0f));
 		aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
 		aMap.getUiSettings().setZoomControlsEnabled(false);
 		aMap.getUiSettings().setRotateGesturesEnabled(false);
