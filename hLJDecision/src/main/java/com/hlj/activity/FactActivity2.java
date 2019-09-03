@@ -213,6 +213,9 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         }
 
         OkHttpLayer(data);
+
+        String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+        CommonUtil.submitClickCount(columnId, data.name);
     }
 
     private void initListView() {

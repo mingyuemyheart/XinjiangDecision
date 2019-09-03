@@ -113,6 +113,9 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 
 		//获取站点信息
 		OkHttpRank();
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
     }
 	
 	/**

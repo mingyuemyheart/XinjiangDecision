@@ -248,6 +248,10 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 		}
 
 		startLocation();
+
+		String columnId = getArguments().getString(CONST.COLUMN_ID);
+		String title = getArguments().getString(CONST.ACTIVITY_NAME);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 	
 	/**

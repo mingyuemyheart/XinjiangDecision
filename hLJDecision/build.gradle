@@ -9,12 +9,12 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "shawn.cxwl.com.hlj"
-//        applicationId "shawn.cxwl.com.hlj.decision"
+//        applicationId "shawn.cxwl.com.hlj"
+        applicationId "shawn.cxwl.com.hlj.decision"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 60
-        versionName "2.3.7"
+        versionCode 64
+        versionName "2.4.1"
 
         ndk {
             abiFilters 'armeabi-v7a'

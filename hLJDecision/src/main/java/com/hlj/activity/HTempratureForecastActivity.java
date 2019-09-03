@@ -12,8 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
 import com.hlj.adapter.HTemperatureForecastAdapter;
+import com.hlj.utils.CommonUtil;
 
 /**
  * 气温预报、雾霾预报、降温大风沙尘预报  同一种类型
@@ -59,6 +61,9 @@ public class HTempratureForecastActivity extends BaseActivity implements OnClick
 				mAdapter.notifyDataSetChanged();
 			}
 		}
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, data.name);
 	}
 	
 	private void initListView() {

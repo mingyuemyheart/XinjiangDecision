@@ -174,6 +174,9 @@ public class ShawnStrongStreamActivity extends BaseActivity implements OnClickLi
 		
 		mRadarManager = new StrongStreamManager(mContext);
 		OkHttpData();
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 	
 	/**

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.hlj.common.CONST;
 import com.hlj.dto.WeatherMeetingDto;
 import com.hlj.fragment.ShawnWeatherMeetingFragment;
+import com.hlj.utils.CommonUtil;
 import com.hlj.view.MainViewPager;
 
 import org.json.JSONArray;
@@ -95,6 +96,9 @@ public class ShawnWeatherMeetingActivity extends BaseActivity implements OnClick
 				}
 			}
 		}).start();
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 
 	}
 

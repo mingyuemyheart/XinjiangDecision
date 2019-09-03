@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
 import com.hlj.stickygridheaders.StickyGridHeadersGridView;
 import com.hlj.utils.CommonUtil;
@@ -92,6 +93,9 @@ public class HSixHourRainfallActivity extends BaseActivity implements OnClickLis
 		}
 		
 		parseCityInfo(mContext);
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, data.name);
 	}
 	
 	/**

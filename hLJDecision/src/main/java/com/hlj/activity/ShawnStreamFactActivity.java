@@ -173,6 +173,9 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 				OkHttpCaiyun();
 			}
 		}).start();
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**

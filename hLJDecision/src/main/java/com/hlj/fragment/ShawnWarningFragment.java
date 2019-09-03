@@ -101,6 +101,10 @@ OnMarkerClickListener, InfoWindowAdapter {
 		initAmap(view, savedInstanceState);
 		initWidget(view);
 		initListView(view);
+
+		String columnId = getArguments().getString(CONST.COLUMN_ID);
+		String title = getArguments().getString(CONST.ACTIVITY_NAME);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.hlj.activity.HPDFActivity;
 import com.hlj.common.CONST;
+import com.hlj.utils.CommonUtil;
 
 /**
  * 联系我们
@@ -56,6 +57,10 @@ public class ContactUsFragment extends Fragment{
 //				dialPhone("联系电话", "0451-55172953", "拨打");
 			}
 		});
+
+		String columnId = getArguments().getString(CONST.COLUMN_ID);
+		String title = getArguments().getString(CONST.ACTIVITY_NAME);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 	
 	private void dialPhone(String message, final String content, String positive) {

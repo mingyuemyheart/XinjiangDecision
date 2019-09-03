@@ -17,7 +17,9 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
+import com.hlj.utils.CommonUtil;
 
 import shawn.cxwl.com.hlj.R;
 
@@ -42,6 +44,10 @@ public class ShawnTourFragment extends Fragment implements AMapLocationListener 
 		super.onViewCreated(view, savedInstanceState);
 		initWebView(view);
 		startLocation();
+
+		String columnId = getArguments().getString(CONST.COLUMN_ID);
+		String title = getArguments().getString(CONST.ACTIVITY_NAME);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**

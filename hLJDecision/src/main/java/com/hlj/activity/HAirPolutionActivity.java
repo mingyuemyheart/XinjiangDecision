@@ -170,6 +170,9 @@ public class HAirPolutionActivity extends BaseActivity implements OnClickListene
 		configuration = getResources().getConfiguration();
 
 		startLocation();
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**

@@ -23,6 +23,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.hlj.activity.BaseActivity;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
+import com.hlj.utils.CommonUtil;
 
 import shawn.cxwl.com.hlj.R;
 
@@ -56,6 +57,9 @@ public class ShawnAgriActivity extends BaseActivity implements AMapLocationListe
 		}
 
 		startLocation();
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**

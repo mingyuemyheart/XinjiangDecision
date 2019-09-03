@@ -19,6 +19,7 @@ import com.hlj.adapter.HWeatherForecastFragmentAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
+import com.hlj.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,10 @@ public class HAgriWeatherFragment extends Fragment{
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		initGridView(view);
+
+		String columnId = getArguments().getString(CONST.COLUMN_ID);
+		String title = getArguments().getString(CONST.ACTIVITY_NAME);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**
@@ -59,6 +64,7 @@ public class HAgriWeatherFragment extends Fragment{
 		if (data != null) {
 			for (int i = 0; i < data.child.size(); i++) {
 				AgriDto dto = new AgriDto();
+				dto.columnId = data.child.get(i).columnId;
 				dto.id = data.child.get(i).id;
 				dto.icon = data.child.get(i).icon;
 				dto.icon2 = data.child.get(i).icon2;
@@ -81,9 +87,11 @@ public class HAgriWeatherFragment extends Fragment{
 					Intent intentBuild = new Intent(getActivity(), ShawnAgriActivity.class);
 					intentBuild.putExtra(CONST.ACTIVITY_NAME, dto.name);
 					intentBuild.putExtra(CONST.WEB_URL, dto.dataUrl);
+					intentBuild.putExtra(CONST.COLUMN_ID, dto.columnId);
 					startActivity(intentBuild);
 				}else {
 					Intent intent = new Intent(getActivity(), HAgriWeatherDetailActivity.class);
+					intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 					Bundle bundle = new Bundle();
 					bundle.putParcelable("dto", dto);
 					bundle.putParcelable("data", data);

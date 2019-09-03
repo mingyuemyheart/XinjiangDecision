@@ -144,6 +144,9 @@ public class HMinuteFallActivity extends BaseActivity implements View.OnClickLis
 		mRadarManager = new CaiyunManager(mContext);
 
 		startLocation();
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**

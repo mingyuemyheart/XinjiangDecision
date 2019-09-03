@@ -73,6 +73,9 @@ public class HUrlActivity extends BaseActivity implements OnClickListener{
 		if (title != null) {
 			tvTitle.setText(title);
 		}
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**

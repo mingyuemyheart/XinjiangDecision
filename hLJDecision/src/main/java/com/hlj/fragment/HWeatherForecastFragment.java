@@ -39,6 +39,7 @@ import com.hlj.adapter.HWeatherForecastFragmentAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
+import com.hlj.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,10 @@ public class HWeatherForecastFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		initGridView(view);
+
+		String columnId = getArguments().getString(CONST.COLUMN_ID);
+		String title = getArguments().getString(CONST.ACTIVITY_NAME);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 	
 	/**
@@ -72,6 +77,7 @@ public class HWeatherForecastFragment extends Fragment {
 		if (data != null) {
 			for (int i = 0; i < data.child.size(); i++) {
 				AgriDto dto = new AgriDto();
+				dto.columnId = data.child.get(i).columnId;
 				dto.id = data.child.get(i).id;
 				dto.icon = data.child.get(i).icon;
 				dto.icon2 = data.child.get(i).icon2;
@@ -95,11 +101,13 @@ public class HWeatherForecastFragment extends Fragment {
 					intent = new Intent(getActivity(), HUrlActivity.class);
 					intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 					intent.putExtra(CONST.WEB_URL, dto.dataUrl);
+					intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 					startActivity(intent);
 				}else if (TextUtils.equals(dto.showType, CONST.PRODUCT)) {
 					intent = new Intent(getActivity(), ShawnProductActivity2.class);
 					intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 					intent.putExtra(CONST.WEB_URL, dto.dataUrl);
+					intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 					Bundle bundle = new Bundle();
 					bundle.putParcelable("data", dto);
 					intent.putExtras(bundle);
@@ -107,67 +115,81 @@ public class HWeatherForecastFragment extends Fragment {
 				}else if (TextUtils.equals(dto.showType, CONST.LOCAL)) {//气温预报、雾霾预报、降温大风沙尘预报
 					if (TextUtils.equals(dto.id, "111")) {//天气雷达
 						intent = new Intent(getActivity(), HWeatherRadarActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "106")) {//天气图分析
 						intent = new Intent(getActivity(), HWeatherChartAnalysisActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "108")) {//空气质量
 						intent = new Intent(getActivity(), HAirPolutionActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "112")) {//天气统计
 						intent = new Intent(getActivity(), HWeatherStaticsActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "117")) {//台风路径
 						intent = new Intent(getActivity(), TyphoonRouteActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "120")) {//强对流天气实况（新）
 						intent = new Intent(getActivity(), ShawnStreamFactActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "201")) {//气温预报
 						intent = new Intent(getActivity(), HTempratureForecastActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "203")) {//分钟级降水
 						intent = new Intent(getActivity(), HMinuteFallActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "205")) {//等风来
 						intent = new Intent(getActivity(), ShawnWaitWindActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "207")) {//格点预报
 						intent = new Intent(getActivity(), ShawnPointForeActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "208")) {//分钟降水与强对流
 						intent = new Intent(getActivity(), ShawnStrongStreamActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "701")) {//全省预报
 						intent = new Intent(getActivity(), HProvinceForecastActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						intent.putExtra(CONST.WEB_URL, dto.dataUrl);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "1001")) {//电力气象预报、铁路气象服务子项目
 						intent = new Intent(getActivity(), HCommonPdfListActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "1002")) {//铁路气象服务（6小时降水量）
 						intent = new Intent(getActivity(), HSixHourRainfallActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
@@ -176,22 +198,26 @@ public class HWeatherForecastFragment extends Fragment {
 						intent = new Intent(getActivity(), FactActivity2.class);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						intent.putExtra(CONST.WEB_URL, dto.dataUrl);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						Bundle bundle = new Bundle();
 						bundle.putParcelable("data", dto);
 						intent.putExtras(bundle);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "118")) {//天气会商
 						intent = new Intent(getActivity(), ShawnWeatherMeetingActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						startActivity(intent);
 					}else if (TextUtils.equals(dto.id, "119")) {//自动站实况监测
 						intent = new Intent(getActivity(), ShawnFactMonitorActivity.class);
+						intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 						intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 						intent.putExtra(CONST.WEB_URL, dto.dataUrl);
 						startActivity(intent);
 					}
 				}else if (TextUtils.isEmpty(dto.showType) || TextUtils.equals(dto.showType, CONST.NEWS)) {//专业气象预报、中期旬报
 					intent = new Intent(getActivity(), HPdfListActivity.class);
+					intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 					Bundle bundle = new Bundle();
 					bundle.putParcelable("data", dto);
 					intent.putExtras(bundle);

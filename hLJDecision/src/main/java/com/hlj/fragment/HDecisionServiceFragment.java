@@ -17,6 +17,7 @@ import com.hlj.adapter.CommonPdfListAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
+import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.RefreshLayout;
 import com.hlj.view.RefreshLayout.OnRefreshListener;
@@ -59,6 +60,10 @@ public class HDecisionServiceFragment extends Fragment {
 		initRefreshLayout(view);
 		refresh();
 		initListView(view);
+
+		String columnId = getArguments().getString(CONST.COLUMN_ID);
+		String title = getArguments().getString(CONST.ACTIVITY_NAME);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 	
 	/**

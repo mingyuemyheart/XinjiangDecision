@@ -78,20 +78,22 @@ public class AutoUpdateBroadcastReceiver extends BroadcastReceiver{
 
     private void openFile(File file, Context context) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri contentUri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(context, context.getPackageName()+".fileprovider", file);
-            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+            //添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            contentUri = FileProvider.getUriForFile(context, context.getPackageName()+".fileprovider", file);
         } else {
-            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            contentUri = Uri.fromFile(file);
         }
+        intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
 
         try {
             context.startActivity(intent);
         } catch (Exception var5) {
             var5.printStackTrace();
-            Toast.makeText(context, "没有找到打开此类文件的程序", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, var5.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }

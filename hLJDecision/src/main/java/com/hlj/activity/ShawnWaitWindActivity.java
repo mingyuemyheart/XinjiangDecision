@@ -172,6 +172,9 @@ public class ShawnWaitWindActivity extends BaseActivity implements OnClickListen
 
         int currentYear = Integer.valueOf(sdf1.format(new Date()));
         OkHttpTyphoonList(currentYear);
+
+        String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+        CommonUtil.submitClickCount(columnId, title);
     }
 
     /**

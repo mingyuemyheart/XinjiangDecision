@@ -179,6 +179,9 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 													for (int i = 0; i < array.length(); i++) {
 														JSONObject obj = array.getJSONObject(i);
 														ColumnData data = new ColumnData();
+														if (!obj.isNull("id")) {
+															data.columnId = obj.getString("id");
+														}
 														if (!obj.isNull("localviewid")) {
 															data.id = obj.getString("localviewid");
 														}

@@ -28,6 +28,7 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.hlj.adapter.WeatherRadarAdapter;
+import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
@@ -89,6 +90,9 @@ public class HWeatherRadarActivity extends BaseActivity implements OnClickListen
 				tvTitle.setText(data.name);
 			}
 		}
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, data.name);
 	}
 	
 	/**

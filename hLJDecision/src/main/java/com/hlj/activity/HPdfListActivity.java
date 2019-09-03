@@ -27,6 +27,7 @@ import com.hlj.adapter.CommonPdfListAdapter;
 import com.hlj.adapter.HFactTableAdapter;
 import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
+import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.RefreshLayout;
 import com.hlj.view.RefreshLayout.OnRefreshListener;
@@ -114,6 +115,9 @@ public class HPdfListActivity extends BaseActivity implements OnClickListener{
 			
 			refresh();
 		}
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, dto.name);
 	}
 	
 	private void refresh() {

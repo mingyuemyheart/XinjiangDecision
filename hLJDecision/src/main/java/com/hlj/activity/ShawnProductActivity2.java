@@ -16,6 +16,7 @@ import com.hlj.adapter.ShawnProductAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
+import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
 
 import org.json.JSONArray;
@@ -73,6 +74,10 @@ public class ShawnProductActivity2 extends BaseActivity implements OnClickListen
 				dataList.addAll(data.child);
 			}
 		}
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
+
 	}
 	
 	/**

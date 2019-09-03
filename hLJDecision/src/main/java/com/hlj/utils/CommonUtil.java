@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,10 +66,16 @@ import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolygonOptions;
 import com.amap.api.maps.model.PolylineOptions;
+import com.hlj.common.CONST;
+import com.hlj.common.MyApplication;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
 public class CommonUtil {
@@ -848,6 +855,32 @@ public class CommonUtil {
 			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.fzj_wind_1112);
 		}
 		return bitmap;
+	}
+
+	/**
+	 * 提交点击次数
+	 */
+	public static void submitClickCount(final String columnId, final String name) {
+		if (TextUtils.isEmpty(columnId) || TextUtils.isEmpty(name)) {
+			return;
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH", Locale.CHINA);
+		String addtime = sdf.format(new Date());
+		final String clickUrl = String.format("http://decision-admin.tianqi.cn/Home/Count/clickCount?addtime=%s&appid=%s&eventid=menuClick_%s&eventname=%s&userid=%s&username=%s",
+				addtime, CONST.APPID, columnId, name, CONST.UID, CONST.USERNAME);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(clickUrl).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+					}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+					}
+				});
+			}
+		}).start();
 	}
 
 }

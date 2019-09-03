@@ -146,6 +146,9 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 		}
 
 		startLocation();
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**

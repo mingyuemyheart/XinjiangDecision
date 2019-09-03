@@ -20,7 +20,9 @@ import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.maps.model.Text;
 import com.amap.api.maps.model.TextOptions;
+import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
+import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
 
 import org.json.JSONArray;
@@ -137,6 +139,9 @@ public class HWeatherChartAnalysisActivity extends BaseActivity implements View.
                 tvTitle.setText(data.name);
             }
         }
+
+        String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+        CommonUtil.submitClickCount(columnId, data.name);
     }
 
     private void OkHttpData(String url) {

@@ -16,8 +16,10 @@ import com.hlj.activity.HCommonPdfListActivity;
 import com.hlj.activity.SinggleUrlActivity;
 import com.hlj.activity.SinglePDFActivity;
 import com.hlj.adapter.HWeatherForecastFragmentAdapter;
+import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
+import com.hlj.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,10 @@ public class HPersonInfuluceFragment extends Fragment{
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		initGridView(view);
+
+		String columnId = getArguments().getString(CONST.COLUMN_ID);
+		String title = getArguments().getString(CONST.ACTIVITY_NAME);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	/**
@@ -58,6 +64,7 @@ public class HPersonInfuluceFragment extends Fragment{
 		if (data != null) {
 			for (int i = 0; i < data.child.size(); i++) {
 				AgriDto dto = new AgriDto();
+				dto.columnId = data.child.get(i).columnId;
 				dto.id = data.child.get(i).id;
 				dto.icon = data.child.get(i).icon;
 				dto.icon2 = data.child.get(i).icon2;
@@ -84,6 +91,7 @@ public class HPersonInfuluceFragment extends Fragment{
 				}else {
 					intent = new Intent(getActivity(), HCommonPdfListActivity.class);
 				}
+				intent.putExtra(CONST.COLUMN_ID, dto.columnId);
 				Bundle bundle = new Bundle();
 				bundle.putParcelable("data", dto);
 				intent.putExtras(bundle);

@@ -236,6 +236,9 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		width = dm.widthPixels;
 		height = dm.heightPixels;
+
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 
 	private void initAmap(Bundle bundle) {

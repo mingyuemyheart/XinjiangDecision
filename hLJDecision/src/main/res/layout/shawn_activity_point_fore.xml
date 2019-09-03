@@ -39,15 +39,6 @@
             android:textColor="@color/black"
             android:textSize="@dimen/level_4"/>
 
-        <TextView
-            android:id="@+id/tvPublishTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvName"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/level_5"/>
-
         <ImageView
             android:id="@+id/ivTemp"
             android:layout_width="35dp"
@@ -133,10 +124,30 @@
             android:id="@+id/ivLocation"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_above="@+id/llSeekBar"
+            android:layout_above="@+id/ivLegendPrompt"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/shawn_icon_location_off"/>
+
+        <ImageView
+            android:id="@+id/ivLegendPrompt"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/llSeekBar"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/shawn_icon_map_legend_off" />
+
+        <ImageView
+            android:id="@+id/ivLegend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/llSeekBar"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/ivLegendPrompt"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fzj_stream_legend"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:id="@+id/llSeekBar"

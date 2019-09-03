@@ -71,8 +71,8 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "41", getString(R.string.app_name), true);//黑龙江气象
-//		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "53", getString(R.string.app_name), true);//决策气象服务
+//		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "41", getString(R.string.app_name), true);//黑龙江气象
+		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "53", getString(R.string.app_name), true);//决策气象服务
 
 		ivSetting = (ImageView) findViewById(R.id.ivSetting);
 		ivSetting.setOnClickListener(this);
@@ -290,6 +290,8 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
     	}
     	Bundle bundle = new Bundle();
         bundle.putString(CONST.INTENT_APPID, com.hlj.common.CONST.APPID);
+		bundle.putString(CONST.COLUMN_ID, channel.columnId);
+		bundle.putString(CONST.ACTIVITY_NAME, channel.name);
         bundle.putParcelable("data", channel);
         String showType = channel.showType;
         if (TextUtils.equals(showType, CONST.LOCAL)) {

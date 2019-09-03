@@ -243,6 +243,9 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
         }
 
         OkHttpLayer();
+
+        String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+        CommonUtil.submitClickCount(columnId, title);
     }
 
     private void initListView() {
