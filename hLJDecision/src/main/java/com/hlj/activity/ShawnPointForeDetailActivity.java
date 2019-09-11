@@ -144,7 +144,8 @@ public class ShawnPointForeDetailActivity extends BaseActivity implements View.O
                                             String publishTime = obj.getString("Time");
                                             if (!TextUtils.isEmpty(publishTime)) {
                                                 try {
-                                                    tvPublishTime.setText("北纬:"+lng+"°"+" "+"东经："+lat+"°"+"   "+"中央气象台"+sdf2.format(sdf1.parse(publishTime))+"发布");
+//                                                    tvPublishTime.setText("北纬:"+lng+"°"+" "+"东经："+lat+"°"+"   "+"中央气象台"+sdf2.format(sdf1.parse(publishTime))+"发布");
+                                                    tvPublishTime.setText("中央气象台"+sdf2.format(sdf1.parse(publishTime))+"发布");
                                                 } catch (ParseException e) {
                                                     e.printStackTrace();
                                                 }

@@ -206,166 +206,158 @@ OnMarkerClickListener, InfoWindowAdapter {
 										if (!dto.name.contains("解除")) {
 											warningList.add(dto);
 										}
-
 									}
 
 									addWarningMarkers();
+								}
 
-									try {
-										String count = warningList.size()+"";
-										if (TextUtils.equals(count, "0")) {
-											String time = "";
-											if (!object.isNull("time")) {
-												long t = object.getLong("time");
-												time = sdf3.format(new Date(t*1000));
-											}
-											tvWarningStatistic.setText(time+", "+"当前生效预警"+count+"条");
-											ivList.setVisibility(View.GONE);
-											ivStatistic.setVisibility(View.GONE);
-											arcMenu.setVisibility(View.GONE);
-											reWarningStatistic.setVisibility(View.VISIBLE);
-											return;
-										}
-
+								try {
+									String count = warningList.size()+"";
+									if (TextUtils.equals(count, "0")) {
 										String time = "";
 										if (!object.isNull("time")) {
 											long t = object.getLong("time");
 											time = sdf3.format(new Date(t*1000));
 										}
-										String str1 = time+", "+"当前生效预警";
-										String str2 = "条";
-										String warningInfo = str1+count+str2;
-										SpannableStringBuilder builder = new SpannableStringBuilder(warningInfo);
-										ForegroundColorSpan builderSpan1 = new ForegroundColorSpan(getResources().getColor(R.color.text_color3));
-										ForegroundColorSpan builderSpan2 = new ForegroundColorSpan(getResources().getColor(R.color.red));
-										ForegroundColorSpan builderSpan3 = new ForegroundColorSpan(getResources().getColor(R.color.text_color3));
-										builder.setSpan(builderSpan1, 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-										builder.setSpan(builderSpan2, str1.length(), str1.length()+count.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-										builder.setSpan(builderSpan3, str1.length()+count.length(), str1.length()+count.length()+str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-										tvWarningStatistic.setText(builder);
-										ivList.setVisibility(View.VISIBLE);
-										ivStatistic.setVisibility(View.VISIBLE);
-										arcMenu.setVisibility(View.VISIBLE);
+										tvWarningStatistic.setText(time+", "+"当前生效预警"+count+"条");
 										reWarningStatistic.setVisibility(View.VISIBLE);
-
-										//计算统计列表信息
-										int rnation = 0;int rpro = 0;int rcity = 0;int rdis = 0;
-										int onation = 0;int opro = 0;int ocity = 0;int odis = 0;
-										int ynation = 0;int ypro = 0;int ycity = 0;int ydis = 0;
-										int bnation = 0;int bpro = 0;int bcity = 0;int bdis = 0;
-										int wnation = 0;int wpro = 0;int wcity = 0;int wdis = 0;
-										for (int i = 0; i < warningList.size(); i++) {
-											WarningDto dto = warningList.get(i);
-											if (TextUtils.equals(dto.color, "04")) {
-												if (TextUtils.equals(dto.item0, "000000")) {
-													rnation += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
-													rpro += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
-													rcity += 1;
-												}else {
-													rdis += 1;
-												}
-											}else if (TextUtils.equals(dto.color, "03")) {
-												if (TextUtils.equals(dto.item0, "000000")) {
-													onation += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
-													opro += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
-													ocity += 1;
-												}else {
-													odis += 1;
-												}
-											}else if (TextUtils.equals(dto.color, "02")) {
-												if (TextUtils.equals(dto.item0, "000000")) {
-													ynation += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
-													ypro += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
-													ycity += 1;
-												}else {
-													ydis += 1;
-												}
-											}else if (TextUtils.equals(dto.color, "01")) {
-												if (TextUtils.equals(dto.item0, "000000")) {
-													bnation += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
-													bpro += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
-													bcity += 1;
-												}else {
-													bdis += 1;
-												}
-											}else if (TextUtils.equals(dto.color, "05")) {
-												if (TextUtils.equals(dto.item0, "000000")) {
-													wnation += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
-													wpro += 1;
-												}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
-													wcity += 1;
-												}else {
-													wdis += 1;
-												}
-											}
-										}
-
-										statisticList.clear();
-										WarningDto wDto = new WarningDto();
-										wDto.colorName = "预警"+warningList.size();
-										wDto.nationCount = "国家级"+(rnation+onation+ynation+bnation+wnation);
-										wDto.proCount = "省级"+(rpro+opro+ypro+bpro+wpro);
-										wDto.cityCount = "市级"+(rcity+ocity+ycity+bcity+wcity);
-										wDto.disCount = "县级"+(rdis+odis+ydis+bdis+wdis);
-										statisticList.add(wDto);
-
-										wDto = new WarningDto();
-										wDto.colorName = "红"+(rnation+rpro+rcity+rdis);
-										wDto.nationCount = rnation+"";
-										wDto.proCount = rpro+"";
-										wDto.cityCount = rcity+"";
-										wDto.disCount = rdis+"";
-										statisticList.add(wDto);
-
-										wDto = new WarningDto();
-										wDto.colorName = "橙"+(onation+opro+ocity+odis);
-										wDto.nationCount = onation+"";
-										wDto.proCount = opro+"";
-										wDto.cityCount = ocity+"";
-										wDto.disCount = odis+"";
-										statisticList.add(wDto);
-
-										wDto = new WarningDto();
-										wDto.colorName = "黄"+(ynation+ypro+ycity+ydis);
-										wDto.nationCount = ynation+"";
-										wDto.proCount = ypro+"";
-										wDto.cityCount = ycity+"";
-										wDto.disCount = ydis+"";
-										statisticList.add(wDto);
-
-										wDto = new WarningDto();
-										wDto.colorName = "蓝"+(bnation+bpro+bcity+bdis);
-										wDto.nationCount = bnation+"";
-										wDto.proCount = bpro+"";
-										wDto.cityCount = bcity+"";
-										wDto.disCount = bdis+"";
-										statisticList.add(wDto);
-
-										wDto = new WarningDto();
-										wDto.colorName = "未知"+(wnation+wpro+wcity+wdis);
-										wDto.nationCount = wnation+"";
-										wDto.proCount = wpro+"";
-										wDto.cityCount = wcity+"";
-										wDto.disCount = wdis+"";
-										statisticList.add(wDto);
-
-										if (statisticAdapter != null) {
-											statisticAdapter.notifyDataSetChanged();
-										}
-									} catch (Exception e) {
-										e.printStackTrace();
 									}
 
+									String time = "";
+									if (!object.isNull("time")) {
+										long t = object.getLong("time");
+										time = sdf3.format(new Date(t*1000));
+									}
+									String str1 = time+", "+"当前生效预警";
+									String str2 = "条";
+									String warningInfo = str1+count+str2;
+									SpannableStringBuilder builder = new SpannableStringBuilder(warningInfo);
+									ForegroundColorSpan builderSpan1 = new ForegroundColorSpan(getResources().getColor(R.color.text_color3));
+									ForegroundColorSpan builderSpan2 = new ForegroundColorSpan(getResources().getColor(R.color.red));
+									ForegroundColorSpan builderSpan3 = new ForegroundColorSpan(getResources().getColor(R.color.text_color3));
+									builder.setSpan(builderSpan1, 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+									builder.setSpan(builderSpan2, str1.length(), str1.length()+count.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+									builder.setSpan(builderSpan3, str1.length()+count.length(), str1.length()+count.length()+str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+									tvWarningStatistic.setText(builder);
+									reWarningStatistic.setVisibility(View.VISIBLE);
+
+									//计算统计列表信息
+									int rnation = 0;int rpro = 0;int rcity = 0;int rdis = 0;
+									int onation = 0;int opro = 0;int ocity = 0;int odis = 0;
+									int ynation = 0;int ypro = 0;int ycity = 0;int ydis = 0;
+									int bnation = 0;int bpro = 0;int bcity = 0;int bdis = 0;
+									int wnation = 0;int wpro = 0;int wcity = 0;int wdis = 0;
+									for (int i = 0; i < warningList.size(); i++) {
+										WarningDto dto = warningList.get(i);
+										if (TextUtils.equals(dto.color, "04")) {
+											if (TextUtils.equals(dto.item0, "000000")) {
+												rnation += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
+												rpro += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
+												rcity += 1;
+											}else {
+												rdis += 1;
+											}
+										}else if (TextUtils.equals(dto.color, "03")) {
+											if (TextUtils.equals(dto.item0, "000000")) {
+												onation += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
+												opro += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
+												ocity += 1;
+											}else {
+												odis += 1;
+											}
+										}else if (TextUtils.equals(dto.color, "02")) {
+											if (TextUtils.equals(dto.item0, "000000")) {
+												ynation += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
+												ypro += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
+												ycity += 1;
+											}else {
+												ydis += 1;
+											}
+										}else if (TextUtils.equals(dto.color, "01")) {
+											if (TextUtils.equals(dto.item0, "000000")) {
+												bnation += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
+												bpro += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
+												bcity += 1;
+											}else {
+												bdis += 1;
+											}
+										}else if (TextUtils.equals(dto.color, "05")) {
+											if (TextUtils.equals(dto.item0, "000000")) {
+												wnation += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-4, dto.item0.length()), "0000")) {
+												wpro += 1;
+											}else if (TextUtils.equals(dto.item0.substring(dto.item0.length()-2, dto.item0.length()), "00")) {
+												wcity += 1;
+											}else {
+												wdis += 1;
+											}
+										}
+									}
+
+									statisticList.clear();
+									WarningDto wDto = new WarningDto();
+									wDto.colorName = "预警"+warningList.size();
+									wDto.nationCount = "国家级"+(rnation+onation+ynation+bnation+wnation);
+									wDto.proCount = "省级"+(rpro+opro+ypro+bpro+wpro);
+									wDto.cityCount = "市级"+(rcity+ocity+ycity+bcity+wcity);
+									wDto.disCount = "县级"+(rdis+odis+ydis+bdis+wdis);
+									statisticList.add(wDto);
+
+									wDto = new WarningDto();
+									wDto.colorName = "红"+(rnation+rpro+rcity+rdis);
+									wDto.nationCount = rnation+"";
+									wDto.proCount = rpro+"";
+									wDto.cityCount = rcity+"";
+									wDto.disCount = rdis+"";
+									statisticList.add(wDto);
+
+									wDto = new WarningDto();
+									wDto.colorName = "橙"+(onation+opro+ocity+odis);
+									wDto.nationCount = onation+"";
+									wDto.proCount = opro+"";
+									wDto.cityCount = ocity+"";
+									wDto.disCount = odis+"";
+									statisticList.add(wDto);
+
+									wDto = new WarningDto();
+									wDto.colorName = "黄"+(ynation+ypro+ycity+ydis);
+									wDto.nationCount = ynation+"";
+									wDto.proCount = ypro+"";
+									wDto.cityCount = ycity+"";
+									wDto.disCount = ydis+"";
+									statisticList.add(wDto);
+
+									wDto = new WarningDto();
+									wDto.colorName = "蓝"+(bnation+bpro+bcity+bdis);
+									wDto.nationCount = bnation+"";
+									wDto.proCount = bpro+"";
+									wDto.cityCount = bcity+"";
+									wDto.disCount = bdis+"";
+									statisticList.add(wDto);
+
+									wDto = new WarningDto();
+									wDto.colorName = "未知"+(wnation+wpro+wcity+wdis);
+									wDto.nationCount = wnation+"";
+									wDto.proCount = wpro+"";
+									wDto.cityCount = wcity+"";
+									wDto.disCount = wdis+"";
+									statisticList.add(wDto);
+
+									if (statisticAdapter != null) {
+										statisticAdapter.notifyDataSetChanged();
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
 								}
+
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
