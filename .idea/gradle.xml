@@ -10,7 +10,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/hLJDecision" />
             <option value="$PROJECT_DIR$/indicatorlibrary" />
-            <option value="$PROJECT_DIR$/sceneFinal" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

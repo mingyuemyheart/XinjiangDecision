@@ -2,15 +2,6 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/MapApiServices.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="e84628aa8eea7b9892768f19c41dbe02abc7f666">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/MapApiServices_f578caecf90314d5062f2de5d8998267c39e8387/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/AMap_3DMap_V4.0.1_20160923.jar"
         jumboMode="false"
@@ -18,15 +9,6 @@
         revision="25.0.3"
         sha1="1c2f0300aa931afaee1392e8bcac9fa878995cbd">
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/AMap_3DMap_V4.0.1_20160923_ab021b54312065a8286a4c97ea6cb50562062852.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/AMap_3DMap_V4.0.1_20160923.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="1c2f0300aa931afaee1392e8bcac9fa878995cbd">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/AMap_3DMap_V4.0.1_20160923_ab021b54312065a8286a4c97ea6cb50562062852/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -38,22 +20,13 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/MapApiServices_f578caecf90314d5062f2de5d8998267c39e8387.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/AMap_Location_V2.4.0_20160308.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="dd8aedb3d0d87b92777ab997ec883427d88f379a">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/AMap_Location_V2.4.0_20160308_4164e89cddfef444659565336a9b65df970faa67/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/classes.jar"
+        jar="/Users/shawn/.android/build-cache/c927dcc2c29b04a7382d20241212bdbf42ddbdd0/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="58f32ee117aebbafd49c726d9c2831e63fd58184">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_6bc27b0d08fb6f8645fb69d5846b866da75082a5.jar" />
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_bc14679e63b02540c5e79339e66d0f28e925f9ad.jar" />
     </item>
     <item
         is-multidex="false"
@@ -65,15 +38,6 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/AMap_Location_V2.4.0_20160308_4164e89cddfef444659565336a9b65df970faa67.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_678574dd7e408d3df37b42855ec532b86f3e17cd/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/libs/commons-io-2.4.jar"
         jumboMode="false"
@@ -83,40 +47,13 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/commons-io-2.4_bd1ffdea767c5af11dafe57d17d33a1791fb3779.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/pinyin4j-2.5.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="ae353005f973da1cd8545b54354504c2503f6865">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/pinyin4j-2.5.0_0b2a4a52ff893fed5fcdcbcf9bda74ebab9b3a75/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/libs/commons-io-2.4.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="4be1d7736d7a4a966682e109acddef2fc0554c6f">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/8/commons-io-2.4_bd1ffdea767c5af11dafe57d17d33a1791fb3779/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/okhttp-3.8.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="4d060ca3190df0eda4dc13415532a12e15ca5f11">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/okhttp-3.8.1_fc625c2a67efe37b784fa5637d61cd29f1d9f1ee/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/libs/file-zip-util-1.7.7.jar"
+        jar="/Users/shawn/.android/build-cache/c9395eb9aeea056985524d8f9d0161443326dfef/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="f3de636d26c5dbbce632a38de2b3ee196f6d2682">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/file-zip-util-1.7.7_3019f1af76090f96b8ff5acc901024206ba2a6f1.jar" />
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_41aa51d5fecd800f2f1ab06c359b0389a4047baf.jar" />
     </item>
     <item
         is-multidex="false"
@@ -128,67 +65,22 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/okio-1.13.0_45d1bb4aabc6d53050edc2c0f719e2a792050d46.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/vudroid-pdfview-1.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="b3d626de543240e8dd7ba9567831a83079d9b02c">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/vudroid-pdfview-1.0_e0629f7ed001d2d554128ba2810e2fcd1f10dfaa/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/okio-1.13.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/okio-1.13.0_45d1bb4aabc6d53050edc2c0f719e2a792050d46/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/ChinaWeatherAPI.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="a6e54a22629e98f8e1d4b4e6a5fa8798c0eff574">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/ChinaWeatherAPI_704b6a26c0e49206ebc7f70b113190bbb574173c/classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/okhttp-3.8.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="4d060ca3190df0eda4dc13415532a12e15ca5f11">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/okhttp-3.8.1_fc625c2a67efe37b784fa5637d61cd29f1d9f1ee.jar" />
-    </item>
-    <item
         is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/ChinaWeatherAPI.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="a6e54a22629e98f8e1d4b4e6a5fa8798c0eff574">
+        sha1="c00b40fad1180efe2913f07ec2949c6041bf78ea">
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/ChinaWeatherAPI_704b6a26c0e49206ebc7f70b113190bbb574173c.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/libs/file-zip-util-1.7.7.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="f3de636d26c5dbbce632a38de2b3ee196f6d2682">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/8/file-zip-util-1.7.7_3019f1af76090f96b8ff5acc901024206ba2a6f1/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/vudroid-pdfview-1.0.jar"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/alicloud-android-sdk-httpdns-1.0.7.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="b3d626de543240e8dd7ba9567831a83079d9b02c">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/vudroid-pdfview-1.0_e0629f7ed001d2d554128ba2810e2fcd1f10dfaa.jar" />
+        sha1="93e53791e05a4a2c2d4d8e9b57f3387b8882faee">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/alicloud-android-sdk-httpdns-1.0.7_179676311facf1727b1d7fe8ab74202008bad286.jar" />
     </item>
     <item
         is-multidex="false"
@@ -201,6 +93,24 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/shawn/.android/build-cache/74168adef9f145d7d3dc7096ef1d0fd06c645946/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_15a1533a06b25963a9312e10657f6bf70413b262.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/.android/build-cache/2fec614e8de0f8cd02b43e8fa82183979d0232d6/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_87377b33b44b8e2779b3d5a57771a62f4bde8b9d.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/pinyin4j-2.5.0.jar"
         jumboMode="false"
         optimize="true"
@@ -209,31 +119,112 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/pinyin4j-2.5.0_0b2a4a52ff893fed5fcdcbcf9bda74ebab9b3a75.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/libs/crypto.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="79b805bf6363edf4c0f3c191687e35193c1fc8e5">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/8/crypto_26db4deb4c5fe122bb21012e000c5d2be600fcf6/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/httpmime-4.1.3.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/2/httpmime-4.1.3_7bc40a43395ed749b00ddc501ad5dab1e487e872/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/httpmime-4.1.3.jar"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/com.umeng.message_3.1.5a.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/httpmime-4.1.3_7bc40a43395ed749b00ddc501ad5dab1e487e872.jar" />
+        sha1="c0bb547e4316c2cd07140a22a78b9fff240b30b4">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/com.umeng.message_3.1.5a_c106ccdb1277d1f77ebef1a33f8017fb4a087272.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="58f32ee117aebbafd49c726d9c2831e63fd58184">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_6bc27b0d08fb6f8645fb69d5846b866da75082a5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/.android/build-cache/08df6def9ba877375608ace7c204b3db7258463e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_2aba4e1122839c2d8974e5a3bf2072629bc3367f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/sceneFinal/build/intermediates/bundles/default/libs/file-zip-util-1.7.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="f3de636d26c5dbbce632a38de2b3ee196f6d2682">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/file-zip-util-1.7.7_3019f1af76090f96b8ff5acc901024206ba2a6f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/utdid4all-1.1.5.3_proguard.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="989c3bb13060da1e3154bfe00236f76453a2725f">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/utdid4all-1.1.5.3_proguard_0cdaeb8bbfb9a0ee85fcb9a80dde5d17e77b97f8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/okhttp-3.8.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="4d060ca3190df0eda4dc13415532a12e15ca5f11">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/okhttp-3.8.1_fc625c2a67efe37b784fa5637d61cd29f1d9f1ee.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/libs/vudroid-pdfview-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b3d626de543240e8dd7ba9567831a83079d9b02c">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/vudroid-pdfview-1.0_e0629f7ed001d2d554128ba2810e2fcd1f10dfaa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/.android/build-cache/2f71cdd8da0e165da6f6dbe50b84c0178d2888ff/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_7a7fff8a3b31ab314b78de89e95cbe37411fc5c3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.1/support-annotations-25.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/support-annotations-25.1.1_797d61be58730317b6d2821e453eb4048ace6f70.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/.android/build-cache/b0b4a69c09f65cb5c45933df3094d0eab2a04599/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_57a44c6f3ffd59c2ee99665a3d037de85d772e6d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/.android/build-cache/6a4c2e6da7dad4842eb3b22f5ab2fcb32d0ad453/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_911c6e2fa4d0c6976a719d8f1ae7a2f8c6cf58fa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shawn/.android/build-cache/49f2426cde20d9ddfdfeaa5c51e6519d412fc632/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/classes_67eb4e7dcad2c45f8ea3d5b65fe68725c07ca9ad.jar" />
     </item>
     <item
         is-multidex="false"
@@ -243,15 +234,6 @@
         revision="25.0.3"
         sha1="79b805bf6363edf4c0f3c191687e35193c1fc8e5">
         <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/pre-dexed/release/crypto_26db4deb4c5fe122bb21012e000c5d2be600fcf6.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="d41581db906c8e3850eed5215667be46ea7528b8">
-        <dex dex="/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_1131b1bf9072bcd2979c6dddf1b7069f47dc9a76/classes.dex" />
     </item>
 
 </items>

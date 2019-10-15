@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-lo/values-lo.xml",
+            "outputFile": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-lo/values-lo.xml",
             "map": [
                 {
-                    "source": "/Users/shawn/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/853e983b6bd1941919ad165c1f215e8d/res/values-lo/values-lo.xml",
+                    "source": "/Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/b998780dd713c496842d606a0e01b0b1/res/values-lo/values-lo.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/shawn/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/55c47cc5d6890a4ce4bf66f2657ceb6e/res/values-lo/values-lo.xml",
+                    "source": "/Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/2d80cff7b9fd5df2459034aeb219aac5/res/values-lo/values-lo.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

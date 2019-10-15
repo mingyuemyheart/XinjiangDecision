@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="shawn.cxwl.com.hlj"
-    android:versionCode="41"
-    android:versionName="2.1.7" >
+    android:versionCode="68"
+    android:versionName="2.4.5" >
 
     <uses-sdk
         android:minSdkVersion="19"
-        android:targetSdkVersion="22" />
+        android:targetSdkVersion="27" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -20,6 +20,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- //添加允许安装未知应用市场权限，这个权限不是动态权限，所以不用进行动态申请，否则自动更新功能失效 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <!-- umeng -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -45,29 +47,15 @@
         android:debuggable="true"
         android:icon="@drawable/iv_icon"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/StyledIndicators" >
-        <service android:name="com.amap.api.location.APSService" />
 
-        <!-- 普通版本 -->
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="41cb6e240846b9f30207a9e6ac79fdc2" />
+        <!-- 解决android28以后无法使用apache http协议 -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
-        <!-- 决策气象服务 -->
-        <!-- 1.包名为shawn.cxwl.com.hlj.decision -->
-        <!-- 2.高德地图key -->
-        <!-- 3.appname -->
-        <!-- 4.welcome界面welcome_icon2、main界面iv_logo2 -->
-        <!-- 5.更换MainActivity、SettingActivity自动更新app_id -->
-        <!-- 6.gradle 修改打包名称 -->
-
-
-        <!-- <meta-data -->
-        <!-- android:name="com.amap.api.v2.apikey" -->
-        <!-- android:value="51096dda8deea179e4a980f74d38c4d6"/> -->
-
-
-        <!-- 自动更新下载完成广播 -->
+        <!-- 自动更新 -->
         <receiver android:name="com.hlj.utils.AutoUpdateBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
@@ -75,7 +63,40 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.hlj.activity.HWelcomeActivity" >
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="shawn.cxwl.com.hlj.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <!-- 自动更新 -->
+
+
+        <!-- 决策气象服务 -->
+        <!-- 1.包名为shawn.cxwl.com.hlj.decision -->
+        <!-- 2.高德地图key -->
+        <!-- 3.appname -->
+        <!-- 4.shawn_activity_welcome界面welcome_icon2、hactivity_main界面iv_logo2、fragment_contact_us界面qrcode2 -->
+        <!-- 5.更换HMainActivity、HSettingActivity自动更新app_id -->
+        <!-- 6.gradle 修改打包名称 -->
+        <!-- 7.修改umeng推送的authorities -->
+
+
+        <!-- 普通版本 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="41cb6e240846b9f30207a9e6ac79fdc2" />
+
+        <!-- <meta-data -->
+        <!-- android:name="com.amap.api.v2.apikey" -->
+        <!-- android:value="51096dda8deea179e4a980f74d38c4d6" /> -->
+
+        <service android:name="com.amap.api.location.APSService" />
+
+        <activity android:name="com.hlj.activity.ShawnWelcomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -123,6 +144,9 @@
             android:name="com.hlj.activity.Url2Activity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.hlj.activity.SinggleUrlActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.hlj.activity.HTempratureForecastActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -157,6 +181,9 @@
             android:name="com.hlj.activity.FactActivity2"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.hlj.activity.ShawnFactMonitorActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.hlj.activity.FactDetailActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -164,9 +191,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.TyphoonRouteActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.hlj.activity.WaitWindActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.HReserveCityActivity"
@@ -180,18 +204,13 @@
         <activity
             android:name="com.hlj.activity.ShawnPointForeDetailActivity"
             android:screenOrientation="portrait" />
-
-        <!-- 第三方类库名称 -->
-
-
-        <!-- 意见反馈 -->
+        <activity
+            android:name="com.hlj.activity.ShawnAgriActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.HFeedbackActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
-        <!-- 雷达图 -->
-
         <activity
             android:name="com.hlj.activity.WeatherRadarDetailActivity"
             android:launchMode="singleTask"
@@ -201,29 +220,24 @@
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="sensor" />
-
-        <!-- 下一场雨 -->
         <activity
             android:name="com.hlj.activity.HMinuteFallActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
-        <!-- 预警 -->
-
         <activity
             android:name="com.hlj.activity.HWarningDetailActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
-        <!-- 空气质量 -->
         <activity
             android:name="com.hlj.activity.HWebviewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
-        <!-- 空气质量 -->
         <activity
             android:name="com.hlj.activity.HPDFActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.SinglePDFActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
@@ -234,9 +248,48 @@
             android:name="com.hlj.activity.ProductActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnWeatherMeetingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnWeatherMeetingDetailActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.hlj.activity.ShawnWeatherMeetingVideoActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.hlj.activity.ShawnWarningStatisticActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnWarningStatisticListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnWarningStatisticScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnWarningStatisticScreenAreaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnProductActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnStreamFactActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnStreamFactListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnStrongStreamActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.ShawnWaitWindActivity"
+            android:screenOrientation="portrait" />
 
-        <!-- 第三方类库名称 -->
-
+        <!-- umeng -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5755277767e58e5ca4000e07" />
@@ -295,8 +348,7 @@
 
         <service
             android:name="com.taobao.accs.ChannelService$KernelService"
-            android:process=":channel" >
-        </service>
+            android:process=":channel" />
         <service
             android:name="org.android.agoo.accs.AgooService"
             android:exported="true" >
@@ -364,6 +416,10 @@
         </provider>
         <!-- umeng -->
 
+        <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:authorities="shawn.cxwl.com.hlj.com.squareup.picasso"
+            android:exported="false" />
     </application>
 
 </manifest>

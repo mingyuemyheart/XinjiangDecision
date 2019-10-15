@@ -263,6 +263,13 @@
 		<item>03,橙色</item>
 		<item>04,红色</item>
     </string-array>
+    <string-array name="warningColor2">
+		<item>999999,全部</item>
+		<item>Blue,蓝色</item>
+		<item>Yellow,黄色</item>
+		<item>Orange,橙色</item>
+		<item>Red,红色</item>
+	</string-array>
     <string-array name="warningType">
         <item>01,台风</item>
 		<item>02,暴雨</item>
@@ -817,12 +824,12 @@
     <item format="float" name="hint_alpha_material_light" type="dimen">0.38</item>
     <item format="float" name="hint_pressed_alpha_material_dark" type="dimen">0.70</item>
     <item format="float" name="hint_pressed_alpha_material_light" type="dimen">0.54</item>
-    <dimen name="level_1">20dip</dimen>
-    <dimen name="level_2">18dip</dimen>
-    <dimen name="level_3">16dip</dimen>
-    <dimen name="level_4">14dip</dimen>
-    <dimen name="level_5">12dip</dimen>
-    <dimen name="level_6">10dip</dimen>
+    <dimen name="level_1">20sp</dimen>
+    <dimen name="level_2">18sp</dimen>
+    <dimen name="level_3">16sp</dimen>
+    <dimen name="level_4">14sp</dimen>
+    <dimen name="level_5">12sp</dimen>
+    <dimen name="level_6">10sp</dimen>
     <dimen name="notification_action_icon_size">32dp</dimen>
     <dimen name="notification_action_text_size">13sp</dimen>
     <dimen name="notification_big_circle_margin">12dp</dimen>
@@ -1049,7 +1056,10 @@
     <string name="search_menu_title">Search</string>
     <string name="select_city">城市选择</string>
     <string name="select_end_point">选择终点</string>
+    <string name="select_end_time">选择结束时间</string>
     <string name="select_start_point">选择起点</string>
+    <string name="select_start_time">选择开始时间</string>
+    <string name="select_time_area">选择时间区域</string>
     <string name="setting">设置</string>
     <string name="setting_build">黑龙江省气象局简介</string>
     <string name="setting_clearcache">清除缓存</string>
@@ -1063,6 +1073,7 @@
     <string name="seven">日</string>
     <string name="share">分享</string>
     <string name="six">六</string>
+    <string name="start_big_end">开始时间不能大于或等于结束时间</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="submit">提交</string>
     <string name="submit_success">提交成功，感谢您的宝贵建议！</string>

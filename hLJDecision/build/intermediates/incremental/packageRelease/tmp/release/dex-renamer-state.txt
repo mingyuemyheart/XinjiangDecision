@@ -1,4 +1,4 @@
-#Fri Nov 30 16:56:37 CST 2018
-base.0=/Users/shawn/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dexMerger/release/0
+#Tue Oct 15 18:16:13 CST 2019
+base.0=/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dexMerger/release/0
 path.0=classes.dex
 renamed.0=classes.dex

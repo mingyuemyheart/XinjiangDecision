@@ -4,14 +4,20 @@ package com.hlj.activity;
  * 主界面
  */
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
@@ -33,6 +39,7 @@ import com.hlj.fragment.HPersonInfuluceFragment;
 import com.hlj.fragment.HWeatherForecastFragment;
 import com.hlj.fragment.ShawnTourFragment;
 import com.hlj.fragment.ShawnWarningFragment;
+import com.hlj.utils.AuthorityUtil;
 import com.hlj.utils.AutoUpdateUtil;
 import com.hlj.utils.CommonUtil;
 import com.hlj.view.MainViewPager;
@@ -63,9 +70,13 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
         setContentView(R.layout.hactivity_main);
         mContext = this;
         instance = this;
+        checkMultiAuthority();
+    }
+
+    private void init() {
 		initWidget();
 		initViewPager();
-    }
+	}
     
 	/**
 	 * 初始化控件
@@ -380,6 +391,68 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
 			default:
 				break;
 			}
+		}
+	}
+
+	//需要申请的所有权限
+	private String[] allPermissions = new String[] {
+			Manifest.permission.ACCESS_COARSE_LOCATION,
+			Manifest.permission.READ_PHONE_STATE,
+			Manifest.permission.WRITE_EXTERNAL_STORAGE,
+			Manifest.permission.CALL_PHONE
+	};
+
+	//拒绝的权限集合
+	private static List<String> deniedList = new ArrayList<>();
+	/**
+	 * 申请定位权限
+	 */
+	private void checkMultiAuthority() {
+		if (Build.VERSION.SDK_INT < 23) {
+			init();
+		}else {
+			deniedList.clear();
+			for (String permission : allPermissions) {
+				if (ContextCompat.checkSelfPermission(mContext, permission) != PackageManager.PERMISSION_GRANTED) {
+					deniedList.add(permission);
+				}
+			}
+			if (deniedList.isEmpty()) {//所有权限都授予
+				init();
+			}else {
+				String[] permissions = deniedList.toArray(new String[deniedList.size()]);//将list转成数组
+				ActivityCompat.requestPermissions(this, permissions, AuthorityUtil.AUTHOR_MULTI);
+			}
+		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		switch (requestCode) {
+			case AuthorityUtil.AUTHOR_MULTI:
+				if (grantResults.length > 0) {
+					boolean isAllGranted = true;//是否全部授权
+					for (int gResult : grantResults) {
+						if (gResult != PackageManager.PERMISSION_GRANTED) {
+							isAllGranted = false;
+							break;
+						}
+					}
+					if (isAllGranted) {//所有权限都授予
+						init();
+					}else {//只要有一个没有授权，就提示进入设置界面设置
+						AuthorityUtil.intentAuthorSetting(mContext, "\""+getString(R.string.app_name)+"\""+"需要使用您的位置权限、设备信息权限、存储权限、电话权限，是否前往设置？");
+					}
+				}else {
+					for (String permission : permissions) {
+						if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
+							AuthorityUtil.intentAuthorSetting(mContext, "\""+getString(R.string.app_name)+"\""+"需要使用您的位置权限、设备信息权限、存储权限、电话权限，是否前往设置？");
+							break;
+						}
+					}
+				}
+				break;
 		}
 	}
 

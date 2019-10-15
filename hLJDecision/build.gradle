@@ -12,9 +12,9 @@ android {
         applicationId "shawn.cxwl.com.hlj"
 //        applicationId "shawn.cxwl.com.hlj.decision"
         minSdkVersion 19
-        targetSdkVersion 22
-        versionCode 67
-        versionName "2.4.4"
+        targetSdkVersion 27
+        versionCode 68
+        versionName "2.4.5"
 
         ndk {
             abiFilters 'armeabi-v7a'
@@ -52,11 +52,11 @@ dependencies {
     implementation files('libs/alicloud-android-sdk-httpdns-1.0.7.jar')
     implementation files('libs/com.umeng.message_3.1.5a.jar')
     implementation files('libs/utdid4all-1.1.5.3_proguard.jar')
-    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
-    implementation 'com.squareup.okio:okio:1.14.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.0.1'
+    implementation 'com.squareup.okio:okio:2.2.2'
     implementation 'com.amap.api:3dmap:5.7.0'
     implementation 'com.amap.api:search:5.7.0'
-    implementation 'com.amap.api:location:3.7.0'
+    implementation 'com.amap.api:location:4.7.0'
     implementation files('libs/scene-final.jar')
     implementation files('libs/exoplayer_lib.jar')
     implementation 'com.squareup.picasso:picasso:2.71828'

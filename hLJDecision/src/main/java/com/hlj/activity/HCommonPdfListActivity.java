@@ -168,8 +168,13 @@ public class HCommonPdfListActivity extends BaseActivity implements OnClickListe
 											JSONArray array = obj.getJSONArray("info");
 											for (int i = 0; i < array.length(); i++) {
 												AgriDto tempDto = new AgriDto();
-												tempDto.title = dto.name;
 												tempDto.dataUrl = array.getString(i);
+												String title = "-因无业务需求,暂停发布本产品";
+												if (tempDto.dataUrl.contains(title)) {
+													tempDto.title = dto.name+title;
+												}else {
+													tempDto.title = dto.name;
+												}
 												tempDto.time = time(tempDto.dataUrl);
 												mList.add(tempDto);
 											}
