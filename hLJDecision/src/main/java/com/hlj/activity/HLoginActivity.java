@@ -20,6 +20,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.model.LatLng;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
 import com.hlj.utils.OkHttpUtil;
@@ -38,15 +44,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
-public class HLoginActivity extends BaseActivity implements OnClickListener{
+public class HLoginActivity extends BaseActivity implements OnClickListener, AMapLocationListener {
 	
 	private Context mContext = null;
 	private EditText etUserName = null;//用户名
 	private EditText etPwd = null;//密码
 	private LinearLayout llLogin = null;//登陆
 	private TextView tvForgetPwd = null;//忘记密码
-	private String lat = "0";
-	private String lon = "0";
+	private double lat,lng;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,33 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 		setContentView(R.layout.hactivity_login);
 		mContext = this;
 		initWidget();
+	}
+
+	/**
+	 * 开始定位
+	 */
+	private void startLocation() {
+		AMapLocationClientOption mLocationOption = new AMapLocationClientOption();//初始化定位参数
+		AMapLocationClient mLocationClient = new AMapLocationClient(mContext);//初始化定位
+		mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
+		mLocationOption.setNeedAddress(true);//设置是否返回地址信息（默认返回地址信息）
+		mLocationOption.setOnceLocation(true);//设置是否只定位一次,默认为false
+		mLocationOption.setWifiActiveScan(true);//设置是否强制刷新WIFI，默认为强制刷新
+		mLocationOption.setMockEnable(false);//设置是否允许模拟位置,默认为false，不允许模拟位置
+		mLocationOption.setInterval(2000);//设置定位间隔,单位毫秒,默认为2000ms
+		mLocationClient.setLocationOption(mLocationOption);//给定位客户端对象设置定位参数
+		mLocationClient.setLocationListener(this);
+		mLocationClient.startLocation();//启动定位
+	}
+
+	@Override
+	public void onLocationChanged(AMapLocation amapLocation) {
+		if (amapLocation != null && amapLocation.getErrorCode() == 0) {
+			if (amapLocation.getLongitude() != 0 && amapLocation.getLatitude() != AMapLocation.LOCATION_SUCCESS) {
+				lat = amapLocation.getLatitude();
+				lng = amapLocation.getLongitude();
+			}
+		}
 	}
 	
 	/**
@@ -66,6 +98,8 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 		llLogin.setOnClickListener(this);
 		tvForgetPwd = (TextView) findViewById(R.id.tvForgetPwd);
 		tvForgetPwd.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+
+		startLocation();
 		
 		SharedPreferences sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE);
 		String uid = sharedPreferences.getString(CONST.UserInfo.uId, null);
@@ -138,8 +172,8 @@ public class HLoginActivity extends BaseActivity implements OnClickListener{
 		builder.add("software_version", getVersion());
 		builder.add("mobile_type", android.os.Build.MODEL);
 		builder.add("address", "");
-		builder.add("lat", lat);
-		builder.add("lon", lon);
+		builder.add("lat", lat+"");
+		builder.add("lon", lng+"");
 		final RequestBody body = builder.build();
 		new Thread(new Runnable() {
 			@Override

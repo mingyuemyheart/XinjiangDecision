@@ -70,12 +70,12 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
         setContentView(R.layout.hactivity_main);
         mContext = this;
         instance = this;
+		initViewPager();
         checkMultiAuthority();
     }
 
     private void init() {
 		initWidget();
-		initViewPager();
 	}
     
 	/**
