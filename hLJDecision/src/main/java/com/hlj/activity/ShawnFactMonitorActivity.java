@@ -471,12 +471,6 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                                                 }
                                             }
 
-                                            if (!obj.isNull("dataUrl")) {
-                                                String dataUrl = obj.getString("dataUrl");
-                                                if (!TextUtils.isEmpty(dataUrl)) {
-                                                    OkHttpJson(dataUrl);
-                                                }
-                                            }
                                             OkHttpFactBitmap();
 
                                             //详情开始
@@ -703,54 +697,7 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
             factOverlay.setImage(fromView);
         }
 
-        drawDataToMap("");
-    }
-
-    /**
-     * 请求图层数据
-     * @param url
-     */
-    private void OkHttpJson(final String url) {
-        if (TextUtils.isEmpty(url)) {
-            return;
-        }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (!response.isSuccessful()) {
-                            return;
-                        }
-                        final String result = response.body().string();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (result != null) {
-                                    drawDataToMap(result);
-                                }else {
-                                    removePolygons();
-                                    progressBar.setVisibility(View.GONE);
-                                    tvToast.setVisibility(View.VISIBLE);
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            tvToast.setVisibility(View.GONE);
-                                        }
-                                    }, 1000);
-                                }
-                            }
-                        });
-                    }
-                });
-            }
-        }).start();
+        drawDataToMap();
     }
 
     private void removeTexts() {
@@ -813,8 +760,8 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
     /**
      * 绘制图层
      */
-    private void drawDataToMap(String result) {
-        if (TextUtils.isEmpty(result) || aMap == null) {
+    private void drawDataToMap() {
+        if (aMap == null) {
             return;
         }
         removeTexts();
@@ -823,61 +770,6 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
         removeCityTexts();
         removeAutoTexts();
         removeAutoTextsH();
-
-//        try {
-//            JSONObject obj = new JSONObject(result);
-//            JSONArray array = obj.getJSONArray("l");
-//            int length = array.length();
-////			if (length > 200) {
-////				length = 200;
-////			}
-//            for (int i = 0; i < length; i++) {
-//                JSONObject itemObj = array.getJSONObject(i);
-//                JSONArray c = itemObj.getJSONArray("c");
-//                int r = c.getInt(0);
-//                int g = c.getInt(1);
-//                int b = c.getInt(2);
-//                int a = (int) (c.getInt(3)*255*1.0);
-//
-//                double centerLat = 0;
-//                double centerLng = 0;
-//                String p = itemObj.getString("p");
-//                if (!TextUtils.isEmpty(p)) {
-//                    String[] points = p.split(";");
-//                    PolygonOptions polygonOption = new PolygonOptions();
-//                    polygonOption.fillColor(Color.argb(a, r, g, b));
-//                    polygonOption.strokeColor(0xffd9d9d9);
-//                    polygonOption.strokeWidth(1);
-//                    for (int j = 0; j < points.length; j++) {
-//                        String[] value = points[j].split(",");
-//                        double lat = Double.valueOf(value[1]);
-//                        double lng = Double.valueOf(value[0]);
-//                        polygonOption.add(new LatLng(lat, lng));
-//                        if (j == points.length/2) {
-//                            centerLat = lat;
-//                            centerLng = lng;
-//                        }
-//                    }
-//                    Polygon polygon = aMap.addPolygon(polygonOption);
-//                    polygons.add(polygon);
-//                }
-//
-////                if (!itemObj.isNull("v")) {
-////                    double v = itemObj.getDouble("v");
-////                    TextOptions options = new TextOptions();
-////                    options.position(new LatLng(centerLat, centerLng));
-////                    options.fontColor(Color.BLACK);
-////                    options.fontSize(30);
-////                    options.text(v+"");
-////                    options.backgroundColor(Color.TRANSPARENT);
-////                    Text text = aMap.addText(options);
-////                    texts.add(text);
-////                }
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
         drawAllDistrict();
         progressBar.setVisibility(View.GONE);
     }
