@@ -213,6 +213,54 @@ public class HSettingActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 	}
+
+	/**
+	 * 温馨提示对话框
+	 */
+	private void promptDialog() {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.prompt_dialog, null);
+		TextView tvProtocal = view.findViewById(R.id.tvProtocal);
+		TextView tvPolicy = view.findViewById(R.id.tvPolicy);
+		TextView tvNegtive = view.findViewById(R.id.tvNegtive);
+		TextView tvPositive = view.findViewById(R.id.tvPositive);
+
+		final Dialog dialog = new Dialog(mContext, R.style.CustomProgressDialog);
+		dialog.setContentView(view);
+		dialog.show();
+
+		tvProtocal.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(mContext, Url2Activity.class);
+				intent.putExtra(CONST.ACTIVITY_NAME, "用户协议");
+				intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yhxy.html");
+				startActivity(intent);
+			}
+		});
+		tvPolicy.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(mContext, Url2Activity.class);
+				intent.putExtra(CONST.ACTIVITY_NAME, "隐私政策");
+				intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yscl.html");
+				startActivity(intent);
+			}
+		});
+		tvNegtive.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				dialog.dismiss();
+			}
+		});
+		tvPositive.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				dialog.dismiss();
+				startActivity(new Intent(mContext, HLoginActivity.class));
+			}
+		});
+	}
 	
 	@Override
 	public void onClick(View v) {
@@ -222,7 +270,7 @@ public class HSettingActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.ivPortrait:
 		case R.id.tvUserName:
-			startActivity(new Intent(mContext, HLoginActivity.class));
+			promptDialog();
 			break;
 		case R.id.llFeedBack:
 			Intent intent = new Intent(mContext, HFeedbackActivity.class);
