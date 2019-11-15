@@ -3,7 +3,6 @@ package com.hlj.activity;
 /**
  * 主界面
  */
-
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
@@ -72,7 +71,7 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
         mContext = this;
         instance = this;
 		initViewPager();
-        checkMultiAuthority();
+		checkMultiAuthority();
     }
 
     private void init() {

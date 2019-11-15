@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -40,6 +41,7 @@ import com.hlj.activity.HMinuteFallActivity;
 import com.hlj.adapter.WeeklyForecastAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.MyApplication;
+import com.hlj.dto.CityDto;
 import com.hlj.dto.WarningDto;
 import com.hlj.dto.WeatherDto;
 import com.hlj.manager.DBManager;
@@ -73,6 +75,8 @@ import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
+
+import static android.app.Activity.RESULT_OK;
 
 public class HForecastFragment extends Fragment implements OnClickListener, AMapLocationListener{
 	
@@ -247,7 +251,14 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 			llDay2.setBackgroundColor(0xff2867ad);
 		}
 
-		startLocation();
+		if (CommonUtil.isLocationOpen(getActivity())) {
+			startLocation();
+		} else {
+			Toast.makeText(getActivity(), "未开启定位，请选择城市", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(getActivity(), HCityActivity.class);
+			intent.putExtra("selectCity", "selectCity");
+			startActivityForResult(intent, 1001);
+		}
 
 		String columnId = getArguments().getString(CONST.COLUMN_ID);
 		String title = getArguments().getString(CONST.ACTIVITY_NAME);
@@ -877,4 +888,62 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 		}
 	}
 
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+				case 1001:
+					if (data != null) {
+						CityDto dto = data.getParcelableExtra("data");
+						tvPosition.setText(dto.areaName);
+						if (dto.lng == 0 || dto.lat == 0) {
+							getLatlngByCityid(dto.cityId);
+						}else {
+							OkHttpHourRain(dto.lng, dto.lat);
+							getWeatherInfo(dto.lng, dto.lat);
+						}
+					}
+					break;
+			}
+		}
+	}
+
+	private void getLatlngByCityid(final String cityId) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				WeatherAPI.getWeather2(getActivity(), cityId, Language.ZH_CN, new AsyncResponseHandler() {
+					@Override
+					public void onComplete(final Weather content) {
+						super.onComplete(content);
+						getActivity().runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								String result = content.toString();
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (!obj.isNull("c")) {
+											JSONObject c = obj.getJSONObject("c");
+											double lng = c.getDouble("c13");
+											double lat = c.getDouble("c14");
+											OkHttpHourRain(lng, lat);
+											getWeatherInfo(lng, lat);
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
+					}
+					@Override
+					public void onError(Throwable error, String content) {
+						super.onError(error, content);
+					}
+				});
+			}
+		}).start();
+	}
 }

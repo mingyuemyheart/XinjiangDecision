@@ -131,7 +131,12 @@ public class HCityActivity extends BaseActivity implements OnClickListener{
 			intent.putExtras(bundle);
 			setResult(RESULT_OK, intent);
 			finish();
-		}else {
+		} else if (getIntent().hasExtra("selectCity")) {//首页定位失败，手动选择
+			intent = new Intent();
+			intent.putExtras(bundle);
+			setResult(RESULT_OK, intent);
+			finish();
+		} else {
 			intent = new Intent(mContext, HWeatherDetailActivity.class);
 			intent.putExtras(bundle);
 			startActivity(intent);
