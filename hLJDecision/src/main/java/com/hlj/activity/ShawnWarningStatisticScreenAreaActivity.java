@@ -59,7 +59,7 @@ public class ShawnWarningStatisticScreenAreaActivity extends BaseActivity implem
         TextView tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText("选择区域");
 
-        OkHttpArea("http://decision.tianqi.cn/alarm12379/hisgrepcityclild.php?k="+"黑龙江");
+        OkHttpArea("http://testdecision.tianqi.cn/alarm12379/hisgrepcityclild.php?k="+"黑龙江");
     }
 
     /**

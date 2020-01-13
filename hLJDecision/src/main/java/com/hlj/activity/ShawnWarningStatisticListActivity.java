@@ -46,7 +46,7 @@ public class ShawnWarningStatisticListActivity extends BaseActivity implements V
     private ShawnWarningStatisticListGroupAdapter mAdapter;
     private List<WarningDto> groupList = new ArrayList<>();
     private List<List<WarningDto>> childList = new ArrayList<>();
-    private String baseUrl = "http://decision.tianqi.cn/alarm12379/hisalarm.php?format=1";
+    private String baseUrl = "http://testdecision.tianqi.cn/alarm12379/hisalarm.php?format=1";
     private int page = 1, pageSize = 20;
     private TextView tvTime;
     private boolean isDesc = false;//默认为升序
