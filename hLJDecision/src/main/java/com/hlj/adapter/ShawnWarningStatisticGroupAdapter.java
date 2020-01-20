@@ -33,6 +33,15 @@ public class ShawnWarningStatisticGroupAdapter extends BaseExpandableListAdapter
     private List<List<WarningDto>> childList;
     private LayoutInflater mInflater;
     private ExpandableListView listView;
+    private String startTime, endTime;
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
     public ShawnWarningStatisticGroupAdapter(Context context, List<WarningDto> groupList, List<List<WarningDto>> childList, ExpandableListView listView){
         mContext = context;
@@ -162,6 +171,8 @@ public class ShawnWarningStatisticGroupAdapter extends BaseExpandableListAdapter
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("data", dto);
                     intent.putExtras(bundle);
+                    intent.putExtra("startTime", startTime);
+                    intent.putExtra("endTime", endTime);
                     mContext.startActivity(intent);
                 }
             }

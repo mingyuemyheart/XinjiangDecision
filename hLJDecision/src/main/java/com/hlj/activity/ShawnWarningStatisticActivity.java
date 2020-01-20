@@ -38,7 +38,7 @@ import shawn.cxwl.com.hlj.R;
 public class ShawnWarningStatisticActivity extends BaseActivity implements View.OnClickListener {
 
     private Context mContext;
-    private TextView tvTitle,tvTime;
+    private TextView tvTitle, tvTime;
     private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
     private SimpleDateFormat sdf3 = new SimpleDateFormat("MM月dd日", Locale.CHINA);
@@ -48,7 +48,7 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
     private ShawnWarningStatisticGroupAdapter mAdapter;
     private List<WarningDto> groupList = new ArrayList<>();
     private List<List<WarningDto>> childList = new ArrayList<>();
-    private String areaName = "全国",areaId,startTime, endTime;
+    private String areaName = "全国", areaId, startTime, endTime;
     private String baseUrl = "http://testdecision.tianqi.cn/alarm12379/hisalarmcount.php?format=1";
 
     @Override
@@ -64,38 +64,54 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
         LinearLayout llBack = findViewById(R.id.llBack);
         llBack.setOnClickListener(this);
         tvTitle = findViewById(R.id.tvTitle);
-        tvTitle.setText(areaName+"预警统计");
+        tvTitle.setText(areaName + "预警统计");
         TextView tvControl = findViewById(R.id.tvControl);
         tvControl.setOnClickListener(this);
         tvControl.setText("筛选");
         tvControl.setVisibility(View.VISIBLE);
         tvTime = findViewById(R.id.tvTime);
 
-        startTime = sdf4.format(new Date());
-        endTime = sdf5.format(new Date());
+        if (getIntent().hasExtra("startTime")) {
+            startTime = getIntent().getStringExtra("startTime");
+        } else {
+            startTime = sdf4.format(new Date());
+        }
+        if (getIntent().hasExtra("endTime")) {
+            endTime = getIntent().getStringExtra("endTime");
+        } else {
+            endTime = sdf5.format(new Date());
+        }
+        try {
+            tvTime.setText(sdf2.format(sdf6.parse(startTime)) + " - " + sdf3.format(sdf6.parse(endTime)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         String url = baseUrl;
         if (getIntent().hasExtra("data")) {
             WarningDto data = getIntent().getExtras().getParcelable("data");
             if (data != null) {
                 areaName = data.areaName;
-                tvTitle.setText(areaName+"预警统计");
+                tvTitle.setText(areaName + "预警统计");
                 if (!TextUtils.isEmpty(data.areaKey)) {
                     areaId = data.areaKey;
-                    url = String.format(baseUrl+"&areaid=%s&starttime=%s&endtime=%s", data.areaKey, startTime, endTime);
+                    url = String.format(baseUrl + "&areaid=%s&starttime=%s&endtime=%s", data.areaKey, startTime, endTime);
                 }
             }
-        }else {
+        } else {
             areaName = "黑龙江";
-            tvTitle.setText(areaName+"预警统计");
+            tvTitle.setText(areaName + "预警统计");
             areaId = "23";
-            url = String.format(baseUrl+"&areaid=%s&starttime=%s&endtime=%s", areaId, startTime, endTime);
+            url = String.format(baseUrl + "&areaid=%s&starttime=%s&endtime=%s", areaId, startTime, endTime);
         }
-        OkHttpStatistic(url, true);
+        OkHttpStatistic(url);
     }
 
     private void initListView() {
         ExpandableListView listView = findViewById(R.id.listView);
         mAdapter = new ShawnWarningStatisticGroupAdapter(mContext, groupList, childList, listView);
+        mAdapter.setStartTime(startTime);
+        mAdapter.setEndTime(endTime);
         listView.setAdapter(mAdapter);
         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -132,9 +148,10 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
 
     /**
      * 获取预警统计信息
+     *
      * @param url
      */
-    private void OkHttpStatistic(final String url, final boolean isParseTime) {
+    private void OkHttpStatistic(final String url) {
         showDialog();
         if (TextUtils.isEmpty(url)) {
             return;
@@ -147,6 +164,7 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
                     @Override
                     public void onFailure(Call call, IOException e) {
                     }
+
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         if (!response.isSuccessful()) {
@@ -159,18 +177,6 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
                                 if (!TextUtils.isEmpty(result)) {
                                     try {
                                         JSONObject object = new JSONObject(result);
-                                        if (isParseTime) {
-                                            if (!object.isNull("time")) {
-                                                String time = object.getString("time");
-                                                if (!TextUtils.isEmpty(time)) {
-                                                    try {
-                                                        tvTime.setText(sdf2.format(sdf1.parse(time))+" - "+sdf3.format(new Date()));
-                                                    } catch (ParseException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            }
-                                        }
                                         if (!object.isNull("data")) {
                                             groupList.clear();
                                             childList.clear();
@@ -206,7 +212,7 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
                                                         d.areaKey = dto.areaKey;
                                                         if (!itemObj.isNull("name")) {
                                                             d.shortName = itemObj.getString("name");
-                                                            d.areaName = dto.areaName+d.shortName;
+                                                            d.areaName = dto.areaName + d.shortName;
                                                         }
                                                         if (!itemObj.isNull("type")) {
                                                             d.type = itemObj.getString("type");
@@ -272,19 +278,21 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
                     areaName = data.getExtras().getString("areaName");
                     startTime = data.getExtras().getString("startTime");
                     endTime = data.getExtras().getString("endTime");
-                    tvTitle.setText(areaName+"预警统计");
+                    mAdapter.setStartTime(startTime);
+                    mAdapter.setEndTime(endTime);
+                    tvTitle.setText(areaName + "预警统计");
                     try {
-                        tvTime.setText(sdf2.format(sdf6.parse(startTime))+" - "+sdf3.format(sdf6.parse(endTime)));
+                        tvTime.setText(sdf2.format(sdf6.parse(startTime)) + " - " + sdf3.format(sdf6.parse(endTime)));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     String url;
                     if (!TextUtils.isEmpty(areaId)) {
-                        url = String.format(baseUrl+"&areaid=%s&starttime=%s&endtime=%s", areaId, startTime, endTime);
-                    }else {
-                        url = String.format(baseUrl+"&starttime=%s&endtime=%s", startTime, endTime);
+                        url = String.format(baseUrl + "&areaid=%s&starttime=%s&endtime=%s", areaId, startTime, endTime);
+                    } else {
+                        url = String.format(baseUrl + "&starttime=%s&endtime=%s", startTime, endTime);
                     }
-                    OkHttpStatistic(url, false);
+                    OkHttpStatistic(url);
                     break;
             }
         }
