@@ -9,11 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -22,7 +19,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +27,8 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.hlj.adapter.ReserveCityAdapter;
-import com.hlj.common.CONST;
-import com.hlj.common.MyApplication;
 import com.hlj.dto.CityDto;
 import com.hlj.dto.WarningDto;
-import com.hlj.dto.WeatherDto;
 import com.hlj.manager.DBManager;
 import com.hlj.swipemenulistview.SwipeMenu;
 import com.hlj.swipemenulistview.SwipeMenuCreator;
@@ -44,9 +37,8 @@ import com.hlj.swipemenulistview.SwipeMenuListView;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
 import com.hlj.utils.WeatherUtil;
-import com.hlj.view.CubicView;
-import com.hlj.view.WeeklyView;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -301,7 +293,7 @@ public class HReserveCityActivity extends BaseActivity implements View.OnClickLi
         SharedPreferences sharedPreferences = getSharedPreferences("RESERVE_CITY", Context.MODE_PRIVATE);
         String cityInfo = sharedPreferences.getString("cityInfo", "");
         cityList.clear();
-        List<String> cityIds = new ArrayList<>();
+        final List<String> cityIds = new ArrayList<>();
         cityIds.add(locationCityId);
         CityDto dto = new CityDto();
         dto.cityId = locationCityId;
@@ -320,65 +312,85 @@ public class HReserveCityActivity extends BaseActivity implements View.OnClickLi
                 cityIds.add(itemArray[0]);
             }
         }
-        WeatherAPI.getWeathers2(mContext, cityIds, Constants.Language.ZH_CN, new AsyncResponseHandler() {
+
+        new Thread(new Runnable() {
             @Override
-            public void onComplete(final List<Weather> contentList) {
-                super.onComplete(contentList);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (int i = 0; i < contentList.size(); i++) {
-                            Weather content = contentList.get(i);
-                            if (content != null) {
-                                //实况信息
-                                JSONObject object = content.getWeatherFactInfo();
-                                try {
-                                    CityDto dto = cityList.get(i);
-                                    if (!object.isNull("l5")) {
-                                        String weatherCode = WeatherUtil.lastValue(object.getString("l5"));
-                                        if (!TextUtils.isEmpty(weatherCode)) {
-                                            dto.highPheCode = Integer.parseInt(weatherCode);
-                                        }
-                                    }
-                                    if (!object.isNull("l1")) {
-                                        String factTemp = WeatherUtil.lastValue(object.getString("l1"));
-                                        dto.highTemp = factTemp;
-                                    }
-
-                                    List<WarningDto> list = new ArrayList<>();
-                                    for (int j = 0; j < warningList.size(); j++) {
-                                        WarningDto data = warningList.get(j);
-                                        if (TextUtils.equals(data.item0, dto.warningId)) {
-                                            list.add(data);
-                                        }
-                                    }
-                                    dto.warningList.addAll(list);
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+            public void run() {
+                for (int i = 0; i < cityIds.size(); i++) {
+                    final CityDto dto = cityList.get(i);
+                    final String cityId = cityIds.get(i);
+                    final String url = String.format("http://api.weatherdt.com/common/?area=%s&type=forecast|observe|alarm|air&key=eca9a6c9ee6fafe74ac6bc81f577a680", cityId);
+                    OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+                        @Override
+                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        }
+                        @Override
+                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                            if (!response.isSuccessful()) {
+                                return;
                             }
-                        }
+                            final String result = response.body().string();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    cancelDialog();
+                                    if (cityList.size() > 1) {
+                                        tvPrompt.setVisibility(View.VISIBLE);
+                                    }else {
+                                        tvPrompt.setVisibility(View.GONE);
+                                    }
 
-                        if (cityList.size() > 1) {
-                            tvPrompt.setVisibility(View.VISIBLE);
-                        }else {
-                            tvPrompt.setVisibility(View.GONE);
-                        }
+                                    if (!TextUtils.isEmpty(result)) {
+                                        try {
+                                            JSONObject obj = new JSONObject(result);
 
-                        if (mAdapter != null) {
-                            mAdapter.notifyDataSetChanged();
+                                            //实况信息
+                                            if (!obj.isNull("observe")) {
+                                                JSONObject observe = obj.getJSONObject("observe");
+                                                if (!observe.isNull(cityId)) {
+                                                    JSONObject object = observe.getJSONObject(cityId);
+                                                    if (!object.isNull("1001002")) {
+                                                        JSONObject o = object.getJSONObject("1001002");
+
+                                                        if (!o.isNull("001")) {
+                                                            String weatherCode = o.getString("001");
+                                                            if (!TextUtils.isEmpty(weatherCode)) {
+                                                                dto.highPheCode = Integer.parseInt(weatherCode);
+                                                            }
+                                                        }
+                                                        if (!o.isNull("002")) {
+                                                            String factTemp = o.getString("002");
+                                                            dto.highTemp = factTemp;
+                                                        }
+
+                                                        List<WarningDto> list = new ArrayList<>();
+                                                        for (int j = 0; j < warningList.size(); j++) {
+                                                            WarningDto data = warningList.get(j);
+                                                            if (TextUtils.equals(data.item0, dto.warningId)) {
+                                                                list.add(data);
+                                                            }
+                                                        }
+                                                        dto.warningList.addAll(list);
+                                                    }
+                                                }
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    if (mAdapter != null) {
+                                        mAdapter.notifyDataSetChanged();
+                                    }
+                                    llAdd.setVisibility(View.VISIBLE);
+
+                                }
+                            });
                         }
-                        llAdd.setVisibility(View.VISIBLE);
-                        cancelDialog();
-                    }
-                });
+                    });
+                }
             }
-            @Override
-            public void onError(Throwable error, String content) {
-                super.onError(error, content);
-            }
-        });
+        }).start();
     }
 
     /**

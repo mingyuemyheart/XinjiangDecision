@@ -82,8 +82,8 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "41", getString(R.string.app_name), true);//黑龙江气象
-//		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "53", getString(R.string.app_name), true);//决策气象服务
+//		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "41", getString(R.string.app_name), true);//黑龙江气象
+		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "53", getString(R.string.app_name), true);//决策气象服务
 
 		ivSetting = (ImageView) findViewById(R.id.ivSetting);
 		ivSetting.setOnClickListener(this);
@@ -445,7 +445,7 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
 
 	//需要申请的所有权限
 	private String[] allPermissions = new String[] {
-			Manifest.permission.ACCESS_COARSE_LOCATION,
+			Manifest.permission.ACCESS_FINE_LOCATION,
 			Manifest.permission.READ_PHONE_STATE,
 			Manifest.permission.WRITE_EXTERNAL_STORAGE,
 			Manifest.permission.CALL_PHONE

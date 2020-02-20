@@ -39,6 +39,7 @@ import com.hlj.utils.OkHttpUtil;
 import com.hlj.utils.WeatherUtil;
 import com.hlj.view.ExpandableTextView;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -308,41 +309,63 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 	 * 获取多个城市天气信息
 	 */
 	private void getWeatherInfos(final CityDto dto, final List<Marker> markers, final boolean isVisible) {
-		WeatherAPI.getWeather2(mContext, dto.areaId, Language.ZH_CN, new AsyncResponseHandler() {
+		new Thread(new Runnable() {
 			@Override
-			public void onComplete(Weather content) {
-				super.onComplete(content);
-				String result = content.toString();
-				if (!TextUtils.isEmpty(result)) {
-					try {
-						JSONObject obj = new JSONObject(result);
-
-						//获取明天预报信息
-						if (!obj.isNull("f")) {
-							JSONObject f = obj.getJSONObject("f");
-							JSONArray f1 = f.getJSONArray("f1");
-							JSONObject weeklyObj = f1.getJSONObject(1);
-
-							dto.lowPheCode = Integer.valueOf(weeklyObj.getString("fb"));
-							dto.highPheCode = Integer.valueOf(weeklyObj.getString("fa"));
-							dto.lowTemp = weeklyObj.getString("fd");
-							dto.highTemp = weeklyObj.getString("fc");
-
-							addMarker(dto, markers, isVisible);
-						}
-
-					} catch (JSONException e) {
-						e.printStackTrace();
+			public void run() {
+				final String url = String.format("http://api.weatherdt.com/common/?area=%s&type=forecast&key=eca9a6c9ee6fafe74ac6bc81f577a680", dto.areaId);
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(@NotNull Call call, @NotNull IOException e) {
 					}
-				}
+					@Override
+					public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
 
-			}
+										//获取明天预报信息
+										if (!obj.isNull("forecast")) {
+											JSONObject forecast = obj.getJSONObject("forecast");
 
-			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
+											//15天预报信息
+											if (!forecast.isNull("24h")) {
+												JSONObject object = forecast.getJSONObject("24h");
+												if (!object.isNull(dto.areaId)) {
+													JSONObject object1 = object.getJSONObject(dto.areaId);
+													if (!object1.isNull("1001001")) {
+														JSONArray f1 = object1.getJSONArray("1001001");
+
+														//预报内容
+														JSONObject weeklyObj = f1.getJSONObject(1);
+
+														dto.lowPheCode = Integer.valueOf(weeklyObj.getString("002"));
+														dto.highPheCode = Integer.valueOf(weeklyObj.getString("001"));
+														dto.lowTemp = weeklyObj.getString("004");
+														dto.highTemp = weeklyObj.getString("003");
+
+														addMarker(dto, markers, isVisible);
+													}
+												}
+											}
+										}
+
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
+					}
+				});
 			}
-		});
+		}).start();
 	}
 
 	private void removeMarkers() {

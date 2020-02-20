@@ -1,9 +1,11 @@
 package com.hlj.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
@@ -37,6 +39,9 @@ public class Url2Activity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			WebView.enableSlowWholeDocumentDraw();
+		}
 		setContentView(R.layout.url2);
 		initWidget();
 		initWebView();
@@ -68,7 +73,10 @@ public class Url2Activity extends BaseActivity implements OnClickListener{
 		webSettings = webView.getSettings();
 		
 		//支持javascript
-		webSettings.setJavaScriptEnabled(true); 
+		webSettings.setJavaScriptEnabled(true);
+		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+		webSettings.setDomStorageEnabled(true);
+		webSettings.setGeolocationEnabled(true);
 		// 设置可以支持缩放 
 		webSettings.setSupportZoom(true); 
 		// 设置出现缩放工具 
@@ -85,26 +93,28 @@ public class Url2Activity extends BaseActivity implements OnClickListener{
 		Map<String, String> extraHeaders = new HashMap<String, String>();
 		extraHeaders.put("Referer", CommonUtil.getRequestHeader());
 		webView.loadUrl(url, extraHeaders);
-		
+
 		webView.setWebChromeClient(new WebChromeClient() {
 			@Override
 			public void onReceivedTitle(WebView view, String title) {
 				super.onReceivedTitle(view, title);
-//				if (title != null) {
-//					tvTitle.setText(title);
-//				}
 			}
 		});
+
+		webView.setWebChromeClient(new WebChromeClient() {
+			public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+				callback.invoke(origin, true, false);
+			}});
 		
 		webView.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String itemUrl) {
 				url = itemUrl;
-//				webView.loadUrl(url);
-				//添加请求头
-				Map<String, String> extraHeaders = new HashMap<String, String>();
-				extraHeaders.put("Referer", CommonUtil.getRequestHeader());
-				webView.loadUrl(url, extraHeaders);
+				webView.loadUrl(url);
+//				//添加请求头
+//				Map<String, String> extraHeaders = new HashMap<String, String>();
+//				extraHeaders.put("Referer", CommonUtil.getRequestHeader());
+//				webView.loadUrl(url, extraHeaders);
 				return true;
 			}
 			

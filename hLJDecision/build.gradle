@@ -9,12 +9,12 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "shawn.cxwl.com.hlj"
-//        applicationId "shawn.cxwl.com.hlj.decision"
+//        applicationId "shawn.cxwl.com.hlj"
+        applicationId "shawn.cxwl.com.hlj.decision"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 73
-        versionName "2.5.0"
+        versionCode 75
+        versionName "2.5.2"
 
         ndk {
             abiFilters 'armeabi-v7a'
@@ -32,7 +32,7 @@ android {
     android.applicationVariants.all {
         variant ->
             variant.outputs.all {
-                outputFileName = "HLJ" + "_" + "${defaultConfig.versionCode}" + "_V" + "${defaultConfig.versionName}" + "_" + buildType.name + ".apk"
+                outputFileName = "HLJDecision" + "_" + "${defaultConfig.versionCode}" + "_V" + "${defaultConfig.versionName}" + "_" + buildType.name + ".apk"
             }
     }
 
