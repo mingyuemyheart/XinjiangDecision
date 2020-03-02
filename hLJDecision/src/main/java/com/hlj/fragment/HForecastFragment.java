@@ -526,6 +526,7 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 
 											//15天预报信息
 											if (!forecast.isNull("24h")) {
+												weeklyList.clear();
 												JSONObject object = forecast.getJSONObject("24h");
 												if (!object.isNull(cityId)) {
 													JSONObject object1 = object.getJSONObject(cityId);
@@ -540,7 +541,11 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 													}
 													if (!object1.isNull("1001001")) {
 														JSONArray f1 = object1.getJSONArray("1001001");
-														for (int i = 0; i < f1.length(); i++) {
+														int length = f1.length();
+														if (length >= 15) {
+															length = 15;
+														}
+														for (int i = 0; i < length; i++) {
 															WeatherDto dto = new WeatherDto();
 
 															//预报时间

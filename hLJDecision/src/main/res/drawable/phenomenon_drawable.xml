@@ -41,4 +41,6 @@
     <item android:maxLevel="56" android:drawable="@drawable/day53_mini" />
     <item android:maxLevel="57" android:drawable="@drawable/day18_mini" />
     <item android:maxLevel="58" android:drawable="@drawable/day18_mini" />
+    <item android:maxLevel="301" android:drawable="@drawable/day07_mini" />
+    <item android:maxLevel="302" android:drawable="@drawable/day14_mini" />
 </level-list>
