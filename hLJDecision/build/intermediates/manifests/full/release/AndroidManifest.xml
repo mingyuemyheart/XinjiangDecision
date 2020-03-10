@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="shawn.cxwl.com.hlj"
-    android:versionCode="70"
-    android:versionName="2.4.7" >
+    android:versionCode="80"
+    android:versionName="2.5.7" >
 
     <uses-sdk
-        android:minSdkVersion="19"
-        android:targetSdkVersion="27" />
+        android:minSdkVersion="21"
+        android:targetSdkVersion="28" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -44,6 +44,7 @@
     <application
         android:name="com.hlj.common.MyApplication"
         android:allowBackup="true"
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:icon="@drawable/iv_icon"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -81,7 +82,6 @@
         <!-- 4.shawn_activity_welcome界面welcome_icon2、hactivity_main界面iv_logo2、fragment_contact_us界面qrcode2 -->
         <!-- 5.更换HMainActivity、HSettingActivity自动更新app_id -->
         <!-- 6.gradle 修改打包名称 -->
-        <!-- 7.修改umeng推送的authorities -->
 
 
         <!-- 普通版本 -->

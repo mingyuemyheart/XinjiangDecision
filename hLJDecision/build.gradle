@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     //png图片命名带有数字则编译不通过使用一下声明
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
@@ -9,12 +9,12 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-//        applicationId "shawn.cxwl.com.hlj"
-        applicationId "shawn.cxwl.com.hlj.decision"
-        minSdkVersion 19
-        targetSdkVersion 27
-        versionCode 78
-        versionName "2.5.5"
+        applicationId "shawn.cxwl.com.hlj"
+//        applicationId "shawn.cxwl.com.hlj.decision"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 80
+        versionName "2.5.7"
 
         ndk {
             abiFilters 'armeabi-v7a'
@@ -32,7 +32,7 @@ android {
     android.applicationVariants.all {
         variant ->
             variant.outputs.all {
-                outputFileName = "HLJDecision" + "_" + "${defaultConfig.versionCode}" + "_V" + "${defaultConfig.versionName}" + "_" + buildType.name + ".apk"
+                outputFileName = "HLJ" + "_" + "${defaultConfig.versionCode}" + "_V" + "${defaultConfig.versionName}" + "_" + buildType.name + ".apk"
             }
     }
 
@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation project(':indicatorlibrary')
     implementation files('libs/ChinaWeatherAPI.jar')
     implementation files('libs/vudroid-pdfview-1.0.jar')

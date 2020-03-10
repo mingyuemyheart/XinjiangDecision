@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HLJDecision.iml" filepath="$PROJECT_DIR$/HLJDecision.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hLJDecision/hLJDecision.iml" filepath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" />
-      <module fileurl="file://$PROJECT_DIR$/indicatorlibrary/indicatorlibrary.iml" filepath="$PROJECT_DIR$/indicatorlibrary/indicatorlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HLJDecision.iml" filepath="$PROJECT_DIR$/HLJDecision.iml" group="HLJDecision" />
+      <module fileurl="file://$PROJECT_DIR$/hLJDecision/hLJDecision.iml" filepath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" group="HLJDecision/hLJDecision" />
+      <module fileurl="file://$PROJECT_DIR$/indicatorlibrary/indicatorlibrary.iml" filepath="$PROJECT_DIR$/indicatorlibrary/indicatorlibrary.iml" group="HLJDecision/indicatorlibrary" />
     </modules>
   </component>
 </project>
