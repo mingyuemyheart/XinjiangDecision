@@ -19,6 +19,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -304,7 +305,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                     llViewPager.setVisibility(View.GONE);
                     scrollView.setVisibility(View.VISIBLE);
                     dataUrl = itemDto.dataUrl;
-                    OkHttpFact(itemDto.dataUrl);
+                    OkHttpFact(itemDto.dataUrl, false, "");
                 }
                 tvName.setTextColor(getResources().getColor(R.color.title_bg));
                 tvBar.setBackgroundColor(getResources().getColor(R.color.title_bg));
@@ -369,7 +370,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                                     llViewPager.setVisibility(View.GONE);
                                     scrollView.setVisibility(View.VISIBLE);
                                     dataUrl = tags[0];
-                                    OkHttpFact(tags[0]);
+                                    OkHttpFact(tags[0], false, "");
                                 }
                             }else {
                                 tvName.setTextColor(getResources().getColor(R.color.text_color4));
@@ -387,7 +388,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
      * 获取实况信息
      * @param url
      */
-    private void OkHttpFact(final String url) {
+    private void OkHttpFact(final String url, final boolean isHistory, final String timeParams) {
         if (TextUtils.isEmpty(url)) {
             return;
         }
@@ -466,7 +467,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                                                 cityInfos.add(f);
                                             }
                                         }
-                                        OkHttpLayer();
+                                        OkHttpLayer(isHistory, timeParams);
 
                                         //详情开始
                                         if (!obj.isNull("th")) {
@@ -615,7 +616,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         }).start();
     }
 
-    private void OkHttpLayer() {
+    private void OkHttpLayer(final boolean isHistory, final String timeParams) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -629,6 +630,10 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                             final double minlat = obj.getDouble("minlat");
                             final double minlon = obj.getDouble("minlon");
                             String imgurl = obj.getString("imgurl");
+                            if (isHistory) {
+                                imgurl = String.format("https://app.tianqi.cn/tile_img/weatherLayerDatas/out/hlj/%s/%s.png", childId, timeParams);
+                                Log.e("imgUrl", imgurl);
+                            }
                             OkHttpUtil.enqueue(new Request.Builder().url(imgurl).build(), new Callback() {
                                 @Override
                                 public void onFailure(Call call, IOException e) {
@@ -1053,7 +1058,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 dialog.dismiss();
                 FactDto dto = timeList.get(arg2);
-                OkHttpFact(dataUrl+dto.timeParams);
+                OkHttpFact(dataUrl+dto.timeParams, true, dto.timeParams);
             }
         });
 
