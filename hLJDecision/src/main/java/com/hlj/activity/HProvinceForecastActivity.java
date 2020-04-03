@@ -569,7 +569,7 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 							int i = 1;
 							JSONObject weeklyObj = f1.getJSONObject(i);
 
-							String week = CommonUtil.getWeek(i);//星期几
+							String week = CommonUtil.getWeek(f0, i);//星期几
 							String date = CommonUtil.getDate(f0, i);//日期
 							try {
 								factContent = factContent + sdf2.format(sdf1.parse(date)) + "（"+week+"），";

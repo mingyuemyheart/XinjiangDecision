@@ -641,20 +641,17 @@ public class CommonUtil {
 	 * @return
 	 */
 	public static String getDate(String time, int i) {
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA);
 		Calendar c = Calendar.getInstance();
-
-		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmm");
 		try {
 			Date date = sdf2.parse(time);
 			c.setTime(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 		c.add(Calendar.DAY_OF_MONTH, i);
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-		String date = sdf1.format(c.getTime());
-		return date;
+		return sdf1.format(c.getTime());
 	}
 
 	/**
@@ -662,12 +659,18 @@ public class CommonUtil {
 	 * @param i (+1为后一天，-1为前一天，0表示当天)
 	 * @return
 	 */
-	public static String getWeek(int i) {
-		String week = "";
-
+	public static String getWeek(String time, int i) {
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA);
 		Calendar c = Calendar.getInstance();
+		try {
+			Date date = sdf2.parse(time);
+			c.setTime(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		c.add(Calendar.DAY_OF_WEEK, i);
 
+		String week = "";
 		switch (c.get(Calendar.DAY_OF_WEEK)) {
 			case Calendar.SUNDAY:
 				week = "周日";
@@ -691,7 +694,6 @@ public class CommonUtil {
 				week = "周六";
 				break;
 		}
-
 		return week;
 	}
 

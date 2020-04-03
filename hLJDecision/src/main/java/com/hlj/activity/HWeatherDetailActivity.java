@@ -481,7 +481,7 @@ public class HWeatherDetailActivity extends BaseActivity implements OnClickListe
 
 															//预报时间
 															dto.date = CommonUtil.getDate(f0, i);//日期
-															dto.week = CommonUtil.getWeek(i);//星期几
+															dto.week = CommonUtil.getWeek(f0, i);//星期几
 
 															//预报内容
 															JSONObject weeklyObj = f1.getJSONObject(i);
