@@ -12,10 +12,12 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.media.ThumbnailUtils;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.hlj.common.MyApplication;
 import com.hlj.dto.WeatherDto;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.WeatherUtil;
@@ -164,7 +166,11 @@ public class CubicView extends View{
 			Path pathLow = new Path();
 			pathLow.moveTo(x1, y1);
 			pathLow.cubicTo(x3, y3, x4, y4, x2, y2);
-			lineP.setColor(getResources().getColor(R.color.cubic_color));
+			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
+				lineP.setColor(Color.WHITE);
+			} else {
+				lineP.setColor(getResources().getColor(R.color.cubic_color));
+			}
 			lineP.setStrokeWidth(3.0f);
 			canvas.drawPath(pathLow, lineP);
 		}
@@ -174,7 +180,11 @@ public class CubicView extends View{
 			WeatherDto dto = tempList.get(i);
 
 			//绘制曲线上每个时间点marker
-			lineP.setColor(getResources().getColor(R.color.cubic_color));
+			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
+				lineP.setColor(Color.WHITE);
+			} else {
+				lineP.setColor(getResources().getColor(R.color.cubic_color));
+			}
 			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 5));
 			canvas.drawPoint(dto.x, dto.y, lineP);
 
@@ -189,7 +199,11 @@ public class CubicView extends View{
 					b = WeatherUtil.getNightBitmap(mContext, dto.hourlyCode);
 				}
 				Bitmap newBit = ThumbnailUtils.extractThumbnail(b, (int)(CommonUtil.dip2px(mContext, 18)), (int)(CommonUtil.dip2px(mContext, 18)));
-				canvas.drawBitmap(newBit, dto.x-newBit.getWidth()/2, dto.y-CommonUtil.dip2px(mContext, 25f), textP);
+				if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
+					canvas.drawBitmap(CommonUtil.grayScaleImage(newBit), dto.x-newBit.getWidth()/2, dto.y-CommonUtil.dip2px(mContext, 25f), textP);
+				} else {
+					canvas.drawBitmap(newBit, dto.x-newBit.getWidth()/2, dto.y-CommonUtil.dip2px(mContext, 25f), textP);
+				}
 				textP.setColor(getResources().getColor(R.color.white));
 				textP.setTextSize(CommonUtil.dip2px(mContext, 10));
 				float tempWidth = textP.measureText(String.valueOf(dto.hourlyTemp)+"℃");

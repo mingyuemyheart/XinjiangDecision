@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,11 +28,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
+import com.hlj.common.MyApplication;
 import com.hlj.fragment.ContactUsFragment;
 import com.hlj.fragment.HAgriWeatherFragment;
 import com.hlj.fragment.HDecisionServiceFragment;
@@ -63,6 +67,7 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
 //	private ChannelsManager manager = null;
 	private int position = 0;//用于存放下标
 	static HMainActivity instance;
+	private RelativeLayout reTitle, reBar;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +87,21 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "41", getString(R.string.app_name), true);//黑龙江气象
-//		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "53", getString(R.string.app_name), true);//决策气象服务
+//		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "41", getString(R.string.app_name), true);//黑龙江气象
+		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "53", getString(R.string.app_name), true);//决策气象服务
 
+		reTitle = findViewById(R.id.reTitle);
+		reBar = findViewById(R.id.reBar);
 		ivSetting = (ImageView) findViewById(R.id.ivSetting);
 		ivSetting.setOnClickListener(this);
 		ivAdd = (ImageView) findViewById(R.id.ivAdd);
 		ivAdd.setOnClickListener(this);
+
+		if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
+			reTitle.setBackgroundColor(Color.BLACK);
+			reBar.setBackgroundColor(Color.BLACK);
+			ivSetting.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(getResources(), R.drawable.iv_setting)));
+		}
 
 		//是否显示登录对话框
 		SharedPreferences sp = getSharedPreferences("LOGINDIALOG", Context.MODE_PRIVATE);

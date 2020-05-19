@@ -15,9 +15,11 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
+import com.hlj.common.MyApplication;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,21 +44,7 @@ public class ShawnWelcomeActivity extends BaseActivity implements AMapLocationLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.shawn_activity_welcome);
 		mContext = this;
-		startLocation();
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				SharedPreferences sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE);
-				String userName = sharedPreferences.getString(CONST.UserInfo.userName, null);
-				String pwd = sharedPreferences.getString(CONST.UserInfo.passWord, null);
-
-				if (!TextUtils.isEmpty(userName) && !TextUtils.equals(userName, CONST.publicUser)) {//决策用户
-					OkHttpLogin(userName, pwd);
-				}else {
-					OkHttpLogin(CONST.publicUser, CONST.publicPwd);
-				}
-			}
-		}, 1500);
+		okHttpTheme();
 	}
 
 	/**
@@ -264,6 +252,7 @@ public class ShawnWelcomeActivity extends BaseActivity implements AMapLocationLi
 														if (msg != null) {
 															Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
 														}
+														OkHttpLogin(CONST.publicUser, CONST.publicPwd);
 													}
 												}
 											}
@@ -286,6 +275,57 @@ public class ShawnWelcomeActivity extends BaseActivity implements AMapLocationLi
 			return true;
 		}
 		return super.onKeyDown(KeyCode, event);
+	}
+
+	/**
+	 * 获取主题
+	 */
+	private void okHttpTheme() {
+		final String url = "https://decision-admin.tianqi.cn/Home/work2019/decision_theme_flag";
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(@NotNull Call call, @NotNull IOException e) {
+					}
+					@Override
+					public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						String result = response.body().string();
+						if (!TextUtils.isEmpty(result)) {
+							try {
+								JSONObject obj = new JSONObject(result);
+								if (!obj.isNull("flag")) {
+									MyApplication.setTheme(obj.getString("flag"));
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				});
+			}
+		}).start();
+
+
+		startLocation();
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				SharedPreferences sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE);
+				String userName = sharedPreferences.getString(CONST.UserInfo.userName, null);
+				String pwd = sharedPreferences.getString(CONST.UserInfo.passWord, null);
+
+				if (!TextUtils.isEmpty(userName) && !TextUtils.equals(userName, CONST.publicUser)) {//决策用户
+					OkHttpLogin(userName, pwd);
+				}else {
+					OkHttpLogin(CONST.publicUser, CONST.publicPwd);
+				}
+			}
+		}, 1500);
 	}
 	
 }

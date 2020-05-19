@@ -4,7 +4,6 @@
     android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_forecast_day_big"
     android:orientation="vertical">
 
     <ScrollView
@@ -440,6 +439,7 @@
                     android:paddingRight="10dp">
 
                     <ImageView
+                        android:id="@+id/ivHourly"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:src="@drawable/pic_fzjs"/>

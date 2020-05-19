@@ -10,7 +10,7 @@ INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJ
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:61:13-37
 	android:name
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:59:13-67
-action#shawn.cxwl.com.hlj.intent.action.COMMAND
+action#shawn.cxwl.com.hlj.decision.intent.action.COMMAND
 INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:416:17-81
 	android:name
 		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
@@ -234,11 +234,11 @@ ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDec
 	android:name
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:55:25-77
 meta-data#com.amap.api.v2.apikey
-ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:78:9-80:59
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:82:9-84:64
 	android:value
-		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:80:9-57
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:84:13-61
 	android:name
-		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:79:9-46
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:83:13-50
 service#com.amap.api.location.APSService
 ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:86:9-68
 	android:name
@@ -753,7 +753,7 @@ ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDec
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:414:13-36
 	android:name
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:413:13-63
-intent-filter#action:name:shawn.cxwl.com.hlj.intent.action.COMMAND
+intent-filter#action:name:shawn.cxwl.com.hlj.decision.intent.action.COMMAND
 ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:415:13-417:29
 receiver#com.umeng.message.NotificationProxyBroadcastReceiver
 ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:424:9-426:40

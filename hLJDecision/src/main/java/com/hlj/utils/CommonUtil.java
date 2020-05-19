@@ -885,4 +885,110 @@ public class CommonUtil {
 		}).start();
 	}
 
+	/**
+	 * 图片二值化处理
+	 * @param graymap
+	 * @return
+	 */
+	public static Bitmap gray2Binary(Bitmap graymap, int color) {
+		//得到图形的宽度和长度
+		int width = graymap.getWidth();
+		int height = graymap.getHeight();
+		//创建二值化图像
+		Bitmap binarymap = null;
+		binarymap = graymap.copy(Config.ARGB_8888, true);
+		//依次循环，对图像的像素进行处理
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				//得到当前像素的值
+				int col = binarymap.getPixel(i, j);
+				//得到alpha通道的值
+				int alpha = col & 0xFF000000;
+				//得到图像的像素RGB的值
+				int red = (col & 0x00FF0000) >> 16;
+				int green = (col & 0x0000FF00) >> 8;
+				int blue = (col & 0x000000FF);
+				// 用公式X = 0.3×R+0.59×G+0.11×B计算出X代替原来的RGB
+//				int gray = (int) ((float) red * 0.3 + (float) green * 0.59 + (float) blue * 0.11);
+				int gray = color;
+				//对图像进行二值化处理
+				if (gray <= 95) {
+					gray = 0;
+				} else {
+					gray = 255;
+				}
+				// 新的ARGB
+				int newColor = alpha | (gray << 16) | (gray << 8) | gray;
+				//设置新图像的当前像素值
+				binarymap.setPixel(i, j, newColor);
+			}
+		}
+		return binarymap;
+	}
+
+	public static Bitmap grayScaleImage(Bitmap bm) {
+//		int width = bitmap.getWidth();
+//		int height = bitmap.getHeight();
+//		Bitmap grayImg = null;
+//		try {
+//			float a = 1;
+//			float b = 1;
+//			float c = 2;
+//			float lum = 0;
+//			ColorMatrix colorMatrix = new ColorMatrix();
+//			colorMatrix.setSaturation(0);
+////			colorMatrix.set(new float[]
+////							{a, b, c, 0, lum,
+////							a, b, c, 0, lum,
+////							a, b, c, 0, lum,
+////							0, 0, 0, 1, 0});
+//
+//			grayImg = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+//			Canvas canvas = new Canvas(grayImg);
+//			Paint paint = new Paint();
+//			ColorMatrixColorFilter colorMatrixFilter = new ColorMatrixColorFilter(colorMatrix);
+//			paint.setColorFilter(colorMatrixFilter);
+//			canvas.drawBitmap(bitmap, 0, 0, paint);
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return grayImg;
+
+
+		Bitmap bitmap = null;
+		// 获取图片的宽和高
+		int width = bm.getWidth();
+		int height = bm.getHeight();
+		// 创建二值化图像
+		bitmap = bm.copy(Config.ARGB_8888, true);
+		// 遍历原始图像像素,并进行二值化处理
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				// 得到当前的像素值
+				int pixel = bitmap.getPixel(i, j);
+				// 得到Alpha通道的值
+				int alpha = pixel & 0xFF000000;
+				// 得到Red的值
+				int red = (pixel & 0x00FF0000) >> 16;
+				// 得到Green的值
+				int green = (pixel & 0x0000FF00) >> 8;
+				// 得到Blue的值
+				int blue = pixel & 0x000000FF;
+				// 通过加权平均算法,计算出最佳像素值
+				int gray = (int) ((float) red * 0.3 + (float) green * 0.59 + (float) blue * 0.11);
+				// 对图像设置黑白图
+				if (gray <= 95) {
+					gray = 0;
+				} else {
+					gray = 255;
+				}
+				// 得到新的像素值
+				int newPiexl = alpha | (gray << 16) | (gray << 8) | gray;
+				// 赋予新图像的像素
+				bitmap.setPixel(i, j, newPiexl);
+			}
+		}
+		return bitmap;
+	}
+
 }

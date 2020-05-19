@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -230,6 +232,8 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 		llFifteenContent = (LinearLayout) view.findViewById(R.id.llFifteenContent);
 		tvInfo = view.findViewById(R.id.tvInfo);
 		tvInfo.setOnClickListener(this);
+		ImageView ivHourly = view.findViewById(R.id.ivHourly);
+		ImageView ivLabel = view.findViewById(R.id.ivLabel);
 
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -256,6 +260,19 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 			tvWind.setBackgroundColor(0x602867ad);
 			llDay1.setBackgroundColor(0xff2867ad);
 			llDay2.setBackgroundColor(0xff2867ad);
+		}
+
+		if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
+			refreshLayout.setBackgroundColor(Color.BLACK);
+			llDay1.setBackgroundColor(Color.BLACK);
+			llDay2.setBackgroundColor(Color.BLACK);
+			reMinuteTitle.setBackgroundColor(Color.BLACK);
+			llHourlyTitle.setBackgroundColor(Color.BLACK);
+			reFifteenTitle.setBackgroundColor(Color.BLACK);
+			ivHourly.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(getResources(), R.drawable.pic_fzjs)));
+			ivLabel.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(getResources(), R.drawable.pic_15yb)));
+		} else {
+			refreshLayout.setBackgroundResource(R.drawable.bg_forecast_day_big);
 		}
 
 		if (CommonUtil.isLocationOpen(getActivity())) {
@@ -434,7 +451,11 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 															drawable = getResources().getDrawable(R.drawable.phenomenon_drawable_night);
 														}
 														drawable.setLevel(Integer.valueOf(weatherCode));
-														ivPhe.setBackground(drawable);
+														if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
+															ivPhe.setImageBitmap(CommonUtil.grayScaleImage(CommonUtil.drawableToBitmap(drawable)));
+														} else {
+															ivPhe.setBackground(drawable);
+														}
 													}
 													if (!o.isNull("002")) {
 														String factTemp = o.getString("002");
@@ -465,6 +486,11 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 															}else if (TextUtils.equals(dir, "西北风")) {
 																ivWind.setRotation(315);
 															}
+															if (TextUtils.equals("1", MyApplication.getAppTheme())) {
+																ivAqi.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(getResources(), R.drawable.iv_wind)));
+															} else {
+																ivAqi.setImageResource(R.drawable.iv_wind);
+															}
 														}
 													}
 												}
@@ -482,7 +508,11 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 														String aqi = k.getString("002");
 														if (!TextUtils.isEmpty(aqi)) {
 															tvAqi.setText(aqi+" "+WeatherUtil.getAqi(getActivity(), Integer.valueOf(aqi)));
-															ivAqi.setImageResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)));
+															if (TextUtils.equals("1", MyApplication.getAppTheme())) {
+																ivAqi.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(getResources(), R.drawable.aqi_level1)));
+															} else {
+																ivAqi.setImageResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)));
+															}
 														}
 													}
 												}
@@ -594,6 +624,15 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 																}else {
 																	ivPhe1.setBackgroundDrawable(drawable);
 																}
+																if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
+																	ivPhe1.setImageBitmap(CommonUtil.grayScaleImage(CommonUtil.drawableToBitmap(drawable)));
+																} else {
+																	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+																		ivPhe1.setBackground(drawable);
+																	}else {
+																		ivPhe1.setBackgroundDrawable(drawable);
+																	}
+																}
 																tvTemp1.setText(dto.highTemp+"/"+dto.lowTemp);
 															}
 															if (i == 1) {
@@ -608,10 +647,14 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 																	drawable.setLevel(dto.lowPheCode);
 																	tvPhe2.setText(getString(WeatherUtil.getWeatherId(dto.lowPheCode)));
 																}
-																if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-																	ivPhe2.setBackground(drawable);
-																}else {
-																	ivPhe2.setBackgroundDrawable(drawable);
+																if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
+																	ivPhe2.setImageBitmap(CommonUtil.grayScaleImage(CommonUtil.drawableToBitmap(drawable)));
+																} else {
+																	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+																		ivPhe2.setBackground(drawable);
+																	}else {
+																		ivPhe2.setBackgroundDrawable(drawable);
+																	}
 																}
 																tvTemp2.setText(dto.highTemp+"/"+dto.lowTemp);
 															}
@@ -787,7 +830,11 @@ public class HForecastFragment extends Fragment implements OnClickListener, AMap
 															bitmap = CommonUtil.getImageFromAssetsFile(getActivity(),"warning/"+"default"+CONST.red[1]+CONST.imageSuffix);
 														}
 													}
-													ivWarning.setImageBitmap(bitmap);
+													if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
+														ivWarning.setImageBitmap(CommonUtil.grayScaleImage(bitmap));
+													} else {
+														ivWarning.setImageBitmap(bitmap);
+													}
 													ivWarning.setVisibility(View.VISIBLE);
 												}
 
