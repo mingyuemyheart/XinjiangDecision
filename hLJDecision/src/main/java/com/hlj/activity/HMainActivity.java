@@ -87,8 +87,8 @@ public class HMainActivity extends BaseFragmentActivity implements OnClickListen
 	 * 初始化控件
 	 */
 	private void initWidget() {
-//		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "41", getString(R.string.app_name), true);//黑龙江气象
-		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "53", getString(R.string.app_name), true);//决策气象服务
+		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "41", getString(R.string.app_name), true);//黑龙江气象
+//		AutoUpdateUtil.checkUpdate(HMainActivity.this, mContext, "53", getString(R.string.app_name), true);//决策气象服务
 
 		reTitle = findViewById(R.id.reTitle);
 		reBar = findViewById(R.id.reBar);
