@@ -70,9 +70,7 @@ import shawn.cxwl.com.hlj.R;
 /**
  * 空气污染
  * @author shawn_sun
- *
  */
-
 public class HAirPolutionActivity extends BaseActivity implements OnClickListener, OnMarkerClickListener,
         OnMapClickListener, OnCameraChangeListener, AMapLocationListener {
 	
@@ -504,29 +502,6 @@ public class HAirPolutionActivity extends BaseActivity implements OnClickListene
 	}
 	
 	/**
-	 * 根据aqi值获取aqi的描述（优、良等）
-	 * @param value
-	 * @return
-	 */
-	private String getAqiDes(int value) {
-		String aqi = null;
-		if (value >= 0 && value <= 50) {
-			aqi = getString(R.string.aqi_level1);
-		}else if (value >= 51 && value < 100) {
-			aqi = getString(R.string.aqi_level2);
-		}else if (value >= 101 && value < 150) {
-			aqi = getString(R.string.aqi_level3);
-		}else if (value >= 151 && value < 200) {
-			aqi = getString(R.string.aqi_level4);
-		}else if (value >= 201 && value < 300) {
-			aqi = getString(R.string.aqi_level5);
-		}else if (value >= 301) {
-			aqi = getString(R.string.aqi_level6);
-		}
-		return aqi;
-	}
-	
-	/**
 	 * 根据aqi值获取aqi的提示信息
 	 * @param value
 	 * @return
@@ -572,29 +547,6 @@ public class HAirPolutionActivity extends BaseActivity implements OnClickListene
 		return drawable;
 	}
 	
-	/**
-	 * 根据aqi数据获取相对应的背景图标
-	 * @param value
-	 * @return
-	 */
-	private int getCornerBackground(int value) {
-		int drawable = -1;
-		if (value >= 0 && value <= 50) {
-			drawable = R.drawable.corner_aqi_one;
-		}else if (value >= 51 && value < 100) {
-			drawable = R.drawable.corner_aqi_two;
-		}else if (value >= 101 && value < 150) {
-			drawable = R.drawable.corner_aqi_three;
-		}else if (value >= 151 && value < 200) {
-			drawable = R.drawable.corner_aqi_four;
-		}else if (value >= 201 && value < 300) {
-			drawable = R.drawable.corner_aqi_five;
-		}else if (value >= 301) {
-			drawable = R.drawable.corner_aqi_six;
-		}
-		return drawable;
-	}
-	
 	private void setValue(String areaId, List<AirPolutionDto> list) {
 		for (int i = 0; i < list.size(); i++) {
 			if (TextUtils.equals(areaId, list.get(i).areaId)) {
@@ -602,8 +554,8 @@ public class HAirPolutionActivity extends BaseActivity implements OnClickListene
 				tvCity.setText(list.get(i).name+"空气质量指数（AQI）");
 				tvAqiCount.setText(list.get(i).aqi);
 				int value = Integer.valueOf(list.get(i).aqi);
-				tvAqi.setText(getAqiDes(value));
-				tvAqi.setBackgroundResource(getCornerBackground(value));
+				tvAqi.setText(CommonUtil.getAqiDes(this, value));
+				tvAqi.setBackgroundResource(CommonUtil.getCornerBackground(value));
 				if (value > 150) {
 					tvAqi.setTextColor(getResources().getColor(R.color.white));
 				}else {

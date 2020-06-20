@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
-import com.hlj.activity.HWebviewActivity;
+import com.hlj.activity.WebviewCssActivity;
 import shawn.cxwl.com.hlj.R;
 
 public class WarningSignalAdapter extends BaseAdapter implements OnClickListener{
@@ -94,7 +94,7 @@ public class WarningSignalAdapter extends BaseAdapter implements OnClickListener
 		int index = (Integer) v.getTag();
 		AgriDto data = mArrayList.get(index);
 		String baseUrl = data.dataUrl.substring(0, data.dataUrl.length()-9);
-		Intent intent = new Intent(mContext, HWebviewActivity.class);
+		Intent intent = new Intent(mContext, WebviewCssActivity.class);
 		switch (v.getId()) {
 		case R.id.tvBlue:
 			if (!TextUtils.isEmpty(data.blue)) {

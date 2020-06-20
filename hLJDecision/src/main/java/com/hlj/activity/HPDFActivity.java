@@ -1,9 +1,5 @@
 package com.hlj.activity;
 
-/**
- * PDF文档
- */
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +32,9 @@ import java.net.URLEncoder;
 
 import shawn.cxwl.com.hlj.R;
 
+/**
+ * PDF文档
+ */
 public class HPDFActivity extends BaseActivity implements OnPageChangeListener, OnLoadCompleteListener, OnClickListener {
 	
 	private Context mContext = null;

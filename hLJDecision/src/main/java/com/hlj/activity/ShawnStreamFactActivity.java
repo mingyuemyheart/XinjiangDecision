@@ -103,7 +103,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 	private int lightingType = 1;//1、2、3、4、5、6分别对应每10分钟，6为最新
 
 	//彩云
-	private List<MinuteFallDto> caiyunList = new ArrayList<>();
+	private ArrayList<MinuteFallDto> caiyunList = new ArrayList<>();
 	private GroundOverlay radarOverlay;
 	private CaiyunManager caiyunManager;
 	private CaiyunThread caiyunThread;
@@ -1189,14 +1189,14 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 	 * 下载图片
 	 * @param list
 	 */
-	private void startDownloadCaiyunImgs(List<MinuteFallDto> list) {
+	private void startDownloadCaiyunImgs(ArrayList<MinuteFallDto> list) {
 		if (caiyunThread != null) {
 			caiyunThread.cancel();
 			caiyunThread = null;
 		}
 		caiyunManager.loadImagesAsyn(list, new CaiyunManager.RadarListener() {
 			@Override
-			public void onResult(int result, List<MinuteFallDto> images) {
+			public void onResult(int result, ArrayList<MinuteFallDto> images) {
 				mHandler.sendEmptyMessage(HANDLER_LOAD_FINISHED);
 				if (result == CaiyunManager.RadarListener.RESULT_SUCCESSED) {
 //			if (mRadarThread != null) {

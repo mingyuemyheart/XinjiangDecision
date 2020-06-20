@@ -1,4 +1,0 @@
-#Tue May 19 13:35:58 CST 2020
-base.0=/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/transforms/dexMerger/release/0
-path.0=classes.dex
-renamed.0=classes.dex

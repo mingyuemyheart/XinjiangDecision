@@ -16,9 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hlj.utils.CommonUtil;
 import com.hlj.dto.RangeDto;
 import com.hlj.dto.TrendDto;
+import com.hlj.utils.CommonUtil;
 import com.hlj.view.HumidityView;
 import com.hlj.view.PressureView;
 import com.hlj.view.RainFallView;
@@ -27,9 +27,6 @@ import com.hlj.view.WindSpeedView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import cn.com.weather.api.WeatherAPI;
 import cn.com.weather.beans.Weather;
@@ -61,9 +58,7 @@ public class TrendDetailActivity extends BaseActivity implements OnClickListener
 	private HorizontalScrollView hScroll3 = null;
 	private HorizontalScrollView hScroll4 = null;
 	private HorizontalScrollView hScroll5 = null;
-	private LinearLayout llContent = null;
-	private SimpleDateFormat sdf1 = new SimpleDateFormat("HH");
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,15 +91,7 @@ public class TrendDetailActivity extends BaseActivity implements OnClickListener
 		hScroll3 = (HorizontalScrollView) findViewById(R.id.hScroll3);
 		hScroll4 = (HorizontalScrollView) findViewById(R.id.hScroll4);
 		hScroll5 = (HorizontalScrollView) findViewById(R.id.hScroll5);
-		llContent = (LinearLayout) findViewById(R.id.llContent);
 
-		int hour = Integer.valueOf(sdf1.format(new Date()));
-		if (hour >= 5 && hour < 18) {
-			llContent.setBackgroundResource(R.drawable.bg_forecast_day_big);
-		}else {
-			llContent.setBackgroundResource(R.drawable.bg_forecast_night_big);
-		}
-		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		width = dm.widthPixels;

@@ -41,7 +41,7 @@
         android:allowBackup="true"
         android:icon="@drawable/iv_icon"
         android:label="@string/app_name"
-        android:theme="@style/StyledIndicators"
+        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:networkSecurityConfig="@xml/network_security_config">
 
@@ -77,7 +77,7 @@
         <!-- 普通版本-->
         <meta-data
         android:name="com.amap.api.v2.apikey"
-        android:value="41cb6e240846b9f30207a9e6ac79fdc2"/>
+        android:value="73b2c0712f2bd50304be05686b4220af"/>
 
 <!--        <meta-data-->
 <!--            android:name="com.amap.api.v2.apikey"-->
@@ -85,7 +85,9 @@
 
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name="com.hlj.activity.ShawnWelcomeActivity">
+        <activity
+            android:name="com.hlj.activity.WelcomeActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -94,16 +96,16 @@
         </activity>
 
         <activity
-            android:name="com.hlj.activity.HMainActivity"
+            android:name="com.hlj.activity.MainActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HLoginActivity"
+            android:name="com.hlj.activity.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HSettingActivity"
+            android:name="com.hlj.activity.SettingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
@@ -118,15 +120,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HChannelManageActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name="com.hlj.activity.TrendDetailActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hlj.activity.HAgriWeatherDetailActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -142,11 +136,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.Url2Activity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hlj.activity.SinggleUrlActivity"
+            android:name="com.hlj.activity.WebviewActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -154,19 +144,15 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HPdfListActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name="com.hlj.activity.HWeatherRadarActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HCommonPdfListActivity"
+            android:name="com.hlj.activity.CommonPdfListActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HSixHourRainfallActivity"
+            android:name="com.hlj.activity.SixHourRainActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -211,7 +197,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HReserveCityActivity"
+            android:name="com.hlj.activity.ReserveCityActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -227,11 +213,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.ShawnAgriActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hlj.activity.HFeedbackActivity"
+            android:name="com.hlj.activity.FeedbackActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
@@ -247,7 +229,7 @@
             android:screenOrientation="sensor" />
 
         <activity
-            android:name="com.hlj.activity.HMinuteFallActivity"
+            android:name="com.hlj.activity.MinuteFallActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
@@ -257,7 +239,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HWebviewActivity"
+            android:name="com.hlj.activity.WebviewCssActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
@@ -268,16 +250,6 @@
 
         <activity
             android:name="com.hlj.activity.SinglePDFActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hlj.activity.NewsActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hlj.activity.ProductActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
@@ -314,7 +286,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.ShawnProductActivity2"
+            android:name="com.hlj.activity.ProductActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -331,6 +303,22 @@
 
         <activity
             android:name="com.hlj.activity.ShawnWaitWindActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.CommonListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ThunderForeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.ThunderStatisticActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.WarningStatisticActivity"
             android:screenOrientation="portrait" />
 
 

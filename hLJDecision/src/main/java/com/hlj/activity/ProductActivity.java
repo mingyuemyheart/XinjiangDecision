@@ -1,9 +1,5 @@
 package com.hlj.activity;
 
-/**
- * 热点新闻
- */
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,11 +12,12 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hlj.adapter.ProductFragmentAdapter;
+import com.hlj.adapter.ProductAdapter;
 import com.hlj.common.CONST;
-import com.hlj.dto.NewsDto;
+import com.hlj.common.ColumnData;
+import com.hlj.dto.AgriDto;
+import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
-import com.hlj.view.RefreshLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,133 +33,100 @@ import okhttp3.Request;
 import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
-public class ProductActivity extends BaseActivity implements OnClickListener, RefreshLayout.OnRefreshListener, RefreshLayout.OnLoadListener {
+/**
+ * 农业气象等
+ */
+public class ProductActivity extends BaseActivity implements OnClickListener {
 	
-	private Context mContext = null;
-	private LinearLayout llBack = null;
-	private TextView tvTitle = null;
-	private GridView gridView = null;
-	private ProductFragmentAdapter mAdapter = null;
-	private List<NewsDto> mList = new ArrayList<>();
-	private int countpage = 0;//总页数
-	private int page = 1;
-	private int pageSize = 20;
-	private RefreshLayout refreshLayout = null;//下拉刷新布局
-	private String appid = null;
-	private String url = null;
-	
+	private Context mContext;
+	private ProductAdapter mAdapter;
+	private List<ColumnData> dataList = new ArrayList<>();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.product);
+		setContentView(R.layout.activity_product);
 		mContext = this;
-		showDialog();
-		initRefreshLayout();
 		initWidget();
 		initListView();
 	}
-	
-	/**
-	 * 初始化下拉刷新布局
-	 */
-	private void initRefreshLayout() {
-		refreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
-		refreshLayout.setColor(com.hlj.common.CONST.color1, com.hlj.common.CONST.color2, com.hlj.common.CONST.color3, com.hlj.common.CONST.color4);
-		refreshLayout.setMode(RefreshLayout.Mode.BOTH);
-		refreshLayout.setLoadNoFull(false);
-		refreshLayout.setOnRefreshListener(this);
-		refreshLayout.setOnLoadListener(this);
-	}
-	
-	@Override
-	public void onRefresh() {
-		page = 1;
-		pageSize = 20;
-		mList.clear();
-		operate();
-	}
-	
-	@Override
-	public void onLoad() {
-		if (page >= countpage) {
-			refreshLayout.setLoading(false);
-			return;
+
+	private void initWidget() {
+		LinearLayout llBack = findViewById(R.id.llBack);
+		llBack.setOnClickListener(this);
+		TextView tvTitle = findViewById(R.id.tvTitle);
+
+		String title = getIntent().getStringExtra(CONST.ACTIVITY_NAME);
+		if (!TextUtils.isEmpty(title)) {
+			tvTitle.setText(title);
+		}
+
+		dataList.clear();
+		String dataUrl = getIntent().getStringExtra(CONST.WEB_URL);
+		if (!TextUtils.isEmpty(dataUrl)) {
+			showDialog();
+			OkHttpList(dataUrl);
 		}else {
-			if (!TextUtils.isEmpty(url)) {
-				page += 1;
-				
-				String url2 = url;
-				if (url2.contains("pagesize")) {
-					url2 = CONST.GUIZHOU_BASE+"/Work/getnewslist/p/"+page+"/pagesize/"+pageSize+"/type/";
-					
-					String[] urls = url2.split("/");
-					asyncQuery(url2 + urls[urls.length-1]);
-				}
+			AgriDto data = getIntent().getExtras().getParcelable("data");
+			if (data != null) {
+				tvTitle.setText(data.name);
+				dataList.clear();
+				dataList.addAll(data.child);
 			}
 		}
-	}
 
-	
-	private void initWidget() {
-		llBack = (LinearLayout) findViewById(R.id.llBack);
-		llBack.setOnClickListener(this);
-		tvTitle = (TextView) findViewById(R.id.tvTitle);
-		tvTitle.setText(getIntent().getStringExtra(CONST.ACTIVITY_NAME));
-		
-		appid = getIntent().getStringExtra(CONST.INTENT_APPID);
-		
-		operate();
-	}
-	
-	private void operate() {
-		url = getIntent().getStringExtra(CONST.WEB_URL);
-		if (!TextUtils.isEmpty(url)) {
-			asyncQuery(url);
-		}
+		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+		CommonUtil.submitClickCount(columnId, title);
 	}
 	
 	/**
 	 * 初始化listview
 	 */
 	private void initListView() {
-		gridView = (GridView) findViewById(R.id.gridView);
-		mAdapter = new ProductFragmentAdapter(mContext, mList, appid);
+		GridView gridView = findViewById(R.id.gridView);
+		mAdapter = new ProductAdapter(mContext, dataList);
 		gridView.setAdapter(mAdapter);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				NewsDto dto = mList.get(arg2);
-				Intent intent = null;
-				if (TextUtils.equals(dto.showType, CONST.URL)) {//url
-					intent = new Intent(mContext, HWebviewActivity.class);
-				}else if (TextUtils.equals(dto.showType, CONST.PDF)) {//pdf
-					intent = new Intent(mContext, HPDFActivity.class);
-				}else if (TextUtils.equals(dto.showType, CONST.NEWS)) {//news
-					intent = new Intent(mContext, NewsActivity.class);
-				}else if (TextUtils.equals(dto.showType, CONST.PRODUCT)) {//product
-					intent = new Intent(mContext, ProductActivity.class);
-				}
-				if (intent != null) {
-					intent.putExtra(CONST.ACTIVITY_NAME, dto.title);
-					intent.putExtra(CONST.WEB_URL, dto.detailUrl);
-					intent.putExtra(CONST.INTENT_APPID, appid);
-					intent.putExtra(CONST.INTENT_IMGURL, dto.imgUrl);
+				ColumnData dto = dataList.get(arg2);
+				Intent intent;
+				if (TextUtils.isEmpty(dto.showType) || TextUtils.equals(dto.showType, CONST.NEWS)) {//专业气象预报、中期旬报
+					intent = new Intent(mContext, CommonListActivity.class);
+					intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+					intent.putExtra(CONST.WEB_URL, dto.dataUrl);
+					Bundle bundle = new Bundle();
+					bundle.putParcelable("data", dto);
+					intent.putExtras(bundle);
 					startActivity(intent);
+				}else {
+					if (!TextUtils.isEmpty(dto.dataUrl)) {
+						if (dto.dataUrl.contains(".pdf") || dto.dataUrl.contains(".PDF")) {//pdf格式
+							intent = new Intent(mContext, HPDFActivity.class);
+							intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+							intent.putExtra(CONST.WEB_URL, dto.dataUrl);
+							startActivity(intent);
+						}else {//网页、图片
+							intent = new Intent(mContext, HUrlActivity.class);
+							intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
+							intent.putExtra(CONST.WEB_URL, dto.dataUrl);
+							startActivity(intent);
+						}
+					}
 				}
+
 			}
 		});
 	}
 	
-	private void asyncQuery(final String url) {
+	private void OkHttpList(final String url) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
 					@Override
 					public void onFailure(Call call, IOException e) {
-
 					}
-
 					@Override
 					public void onResponse(Call call, Response response) throws IOException {
 						if (!response.isSuccessful()) {
@@ -172,39 +136,28 @@ public class ProductActivity extends BaseActivity implements OnClickListener, Re
 						runOnUiThread(new Runnable() {
 							@Override
 							public void run() {
-								cancelDialog();
-								refreshLayout.setRefreshing(false);
-								refreshLayout.setLoading(false);
 								if (!TextUtils.isEmpty(result)) {
 									try {
 										JSONObject obj = new JSONObject(result);
-										if (!obj.isNull("count")) {
-											String num = obj.getString("countpage");
-											if (!TextUtils.isEmpty(num)) {
-												countpage = Integer.valueOf(obj.getString("countpage"));
-											}
-										}
-										if (!obj.isNull("info")) {
-											JSONArray array = new JSONArray(obj.getString("info"));
+										if (!obj.isNull("l")) {
+											JSONArray array = new JSONArray(obj.getString("l"));
 											for (int i = 0; i < array.length(); i++) {
 												JSONObject itemObj = array.getJSONObject(i);
-												NewsDto dto = new NewsDto();
-												dto.imgUrl = itemObj.getString("icon");
-												dto.title = itemObj.getString("name");
-												dto.time = itemObj.getString("addtime");
-												dto.detailUrl = itemObj.getString("urladdress");
-												dto.showType = itemObj.getString("showtype");
-												mList.add(dto);
+												ColumnData dto = new ColumnData();
+												dto.name = itemObj.getString("l1");
+												dto.dataUrl = itemObj.getString("l2");
+												dto.icon = itemObj.getString("l4");
+												dataList.add(dto);
 											}
-
-											if (mAdapter != null) {
-												mAdapter.notifyDataSetChanged();
-											}
+										}
+										if (mAdapter != null) {
+											mAdapter.notifyDataSetChanged();
 										}
 									} catch (JSONException e1) {
 										e1.printStackTrace();
 									}
 								}
+								cancelDialog();
 							}
 						});
 					}
@@ -212,12 +165,14 @@ public class ProductActivity extends BaseActivity implements OnClickListener, Re
 			}
 		}).start();
 	}
-	
+
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.llBack) {
-			finish();
+		switch (v.getId()) {
+			case R.id.llBack:
+				finish();
+				break;
 		}
 	}
-	
+
 }

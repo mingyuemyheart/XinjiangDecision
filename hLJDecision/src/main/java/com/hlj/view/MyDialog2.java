@@ -7,10 +7,8 @@ import android.view.Window;
 
 import shawn.cxwl.com.hlj.R;
 
-
 public class MyDialog2 extends Dialog {
 
-	
 	public MyDialog2(Context context) {
 		super(context);
 	}
@@ -18,7 +16,7 @@ public class MyDialog2 extends Dialog {
 	public MyDialog2(Context context, String msg) {
 		super(context);
 	}
-	
+
 	public void setStyle(int featureId) {
 		requestWindowFeature(featureId);
 	}
@@ -28,7 +26,7 @@ public class MyDialog2 extends Dialog {
 		super.onCreate(savedInstanceState);
 		setStyle(Window.FEATURE_NO_TITLE);
 		getWindow().setBackgroundDrawableResource(R.color.transparent);
-		setContentView(R.layout.hdialog_loading2);
+		setContentView(R.layout.dialog_loading);
 	}
 	
 }

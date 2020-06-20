@@ -1,5 +1,11 @@
 package com.hlj.manager;
 
+import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.hlj.dto.MinuteFallDto;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,13 +13,7 @@ import java.io.FilenameFilter;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
-
-import android.content.Context;
-import android.text.TextUtils;
-import android.util.Log;
-
-import com.hlj.dto.MinuteFallDto;
+import java.util.ArrayList;
 
 public class CaiyunManager {
 	
@@ -23,7 +23,7 @@ public class CaiyunManager {
 	public interface RadarListener {
 		public static final int RESULT_SUCCESSED = 1;
 		public static final int RESULT_FAILED = 2;
-		void onResult(int result, List<MinuteFallDto> images);
+		void onResult(int result, ArrayList<MinuteFallDto> images);
 		void onProgress(String url, int progress);
 	}
 	
@@ -31,7 +31,7 @@ public class CaiyunManager {
 		mContext = context.getApplicationContext();
 	}
 	
-	public void loadImagesAsyn(List<MinuteFallDto> radars, RadarListener listener) {
+	public void loadImagesAsyn(ArrayList<MinuteFallDto> radars, RadarListener listener) {
 		if (mLoadThread != null) {
 			mLoadThread.cancel();
 			mLoadThread = null;
@@ -41,11 +41,11 @@ public class CaiyunManager {
 	}
 	
 	private class LoadThread extends Thread {
-		private List<MinuteFallDto> radars;
+		private ArrayList<MinuteFallDto> radars;
 		private RadarListener listener;
 		private int count;
 		
-		public LoadThread(List<MinuteFallDto> radars, RadarListener listener) {
+		public LoadThread(ArrayList<MinuteFallDto> radars, RadarListener listener) {
 			this.radars = radars;
 			this.listener = listener;
 		}
@@ -61,7 +61,7 @@ public class CaiyunManager {
 			}
 		}
 		
-		private void loadImage(final int index, final String url, final List<MinuteFallDto> radars) {
+		private void loadImage(final int index, final String url, final ArrayList<MinuteFallDto> radars) {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -102,7 +102,7 @@ public class CaiyunManager {
 		    return null;
 		}
 		
-		private synchronized void finished(String path, List<MinuteFallDto> radars) {
+		private synchronized void finished(String path, ArrayList<MinuteFallDto> radars) {
 			int max = radars.size();
 			count -- ;
 			int progress = (int) (((max - count) * 1.0 / max) * 100);

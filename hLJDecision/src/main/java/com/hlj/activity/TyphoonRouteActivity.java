@@ -144,7 +144,7 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 	private boolean isCloudOn = false;
 	private boolean isWindOn = false;
 	private CaiyunManager mRadarManager = null;
-	private List<MinuteFallDto> radarList = new ArrayList<>();
+	private ArrayList<MinuteFallDto> radarList = new ArrayList<>();
 	private RadarThread mRadarThread = null;
 	private static final int HANDLER_SHOW_RADAR = 1;
 	private static final int HANDLER_LOAD_FINISHED = 3;
@@ -1670,7 +1670,7 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 		}).start();
 	}
 
-	private void startDownLoadImgs(List<MinuteFallDto> list) {
+	private void startDownLoadImgs(ArrayList<MinuteFallDto> list) {
 		if (mRadarThread != null) {
 			mRadarThread.cancel();
 			mRadarThread = null;
@@ -1679,7 +1679,7 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 	}
 
 	@Override
-	public void onResult(int result, List<MinuteFallDto> images) {
+	public void onResult(int result, ArrayList<MinuteFallDto> images) {
 		if (result == CaiyunManager.RadarListener.RESULT_SUCCESSED) {
 			mHandler.sendEmptyMessage(HANDLER_LOAD_FINISHED);
 		}

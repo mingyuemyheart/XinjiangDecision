@@ -4,15 +4,9 @@
 
     <item>
         <shape>
-            <solid android:color="@color/white" />
-
-        </shape>
-    </item>
-    <item
-        android:bottom="0.5dp"
-        android:right="0.5dp">
-        <shape>
-            <solid android:color="@color/light_gray" />
+            <solid android:color="@color/title_bg" />
+            <stroke android:width="0.2dp"
+                android:color="#c0ffffff"/>
         </shape>
     </item>
 

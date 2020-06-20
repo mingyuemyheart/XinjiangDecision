@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#899ADC</color>
+    <color name="colorPrimaryDark">#899ADC</color>
+    <color name="colorAccent">#899ADC</color>
 
     <color name="aqi0">#abd338</color>
     <color name="aqi1">#ffc739</color>
@@ -32,7 +35,7 @@
     <color name="shachen">#FD6801</color>
     <color name="mai">#C99B14</color>
     <color name="typhoon_bg">#f3758c97</color>
-    <color name="title_bg">#01699f</color>
+    <color name="title_bg">#859DE8</color>
     <color name="detail_bg_color">#3d45ca</color>
     <color name="list_double_bg_color">#f1f5f8</color>
     <color name="text_color1">#CBCBCB</color>
@@ -41,8 +44,8 @@
     <color name="text_color4">#8A8A8A</color>
     <color name="divider_color">#8021E40C</color>
     <color name="cubic_color">#12ADEF</color>
-    <color name="low_color">#15ADF2</color>
-    <color name="high_color">#C07C7A</color>
+    <color name="low_color">#47baf9</color>
+    <color name="high_color">#eb6876</color>
     <color name="green">#00ff00</color>
     <color name="start">#ff4cd964</color>
     <color name="end">#ffef7171</color>

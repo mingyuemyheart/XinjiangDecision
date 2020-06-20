@@ -53,19 +53,19 @@ public class WeatherUtil {
 	 * @return
 	 */
 	public static int getAqiIcon(int aqi) {
-		int id = R.drawable.aqi_level1;
+		int id = R.drawable.bg_aqi_one;
 		if (aqi <= 50) {
-			id = R.drawable.aqi_level1;
+			id = R.drawable.bg_aqi_one;
 		} else if (aqi >= 51 && aqi <= 100)  {
-			id = R.drawable.aqi_level2;
+			id = R.drawable.bg_aqi_two;
 		} else if (aqi >= 101 && aqi <= 150)  {
-			id = R.drawable.aqi_level3;
+			id = R.drawable.bg_aqi_three;
 		} else if (aqi >= 151 && aqi <= 200)  {
-			id = R.drawable.aqi_level4;
+			id = R.drawable.bg_aqi_four;
 		} else if (aqi >= 201 && aqi <= 300)  {
-			id = R.drawable.aqi_level5;
+			id = R.drawable.bg_aqi_five;
 		} else if (aqi >= 301)  {
-			id = R.drawable.aqi_level6;
+			id = R.drawable.bg_aqi_six;
 		}
 		return id;
 	}

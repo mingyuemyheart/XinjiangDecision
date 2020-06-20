@@ -40,9 +40,7 @@ import shawn.cxwl.com.hlj.R;
 /**
  * 普通url，处理网页界面
  * @author shawn_sun
- *
  */
-
 public class HUrlActivity extends BaseActivity implements OnClickListener{
 	
 	private LinearLayout llBack = null;

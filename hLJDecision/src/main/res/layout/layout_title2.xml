@@ -2,54 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/title_bg" >
+    android:background="@color/colorPrimary">
 
-    <RelativeLayout
-        android:id="@+id/reBlank"
-        android:layout_width="match_parent"
-        android:layout_height="24dp" >
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/llBack"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reBlank" >
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="12dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="12dp">
 
-        <LinearLayout
-            android:id="@+id/llBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:gravity="center_vertical" >
-
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@drawable/iv_back" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="@string/back"
-                android:textColor="@color/white"
-                android:textSize="@dimen/level_4" />
-        </LinearLayout>
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/iv_back" />
 
         <TextView
-            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:layout_toEndOf="@+id/llBack"
-            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/back"
             android:textColor="@color/white"
-            android:textSize="@dimen/level_3" />
+            android:textSize="@dimen/level_4" />
+    </LinearLayout>
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/llBack"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/level_3" />
 
 </RelativeLayout>

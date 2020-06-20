@@ -1,13 +1,7 @@
 package com.hlj.view;
 
-/**
- * 一周预报曲线图
- */
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -27,24 +21,24 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import shawn.cxwl.com.hlj.R;
 
-
-@SuppressLint({ "SimpleDateFormat", "DrawAllocation" })
+/**
+ * 一周预报曲线图
+ */
 public class WeeklyView extends View{
 
-	private Context mContext = null;
+	private Context mContext;
 	private List<WeatherDto> tempList = new ArrayList<>();
 	private int maxTemp = 0;//最高温度
 	private int minTemp = 0;//最低温度
 	private Paint lineP = null;//画线画笔
 	private Paint textP = null;//写字画笔
 	private Paint roundP = null;//aqi背景颜色画笔
-	private Bitmap lowBit = null;//低温图标
-	private Bitmap highBit = null;//高温图标
-	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-	private SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
+	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
+	private SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd", Locale.CHINA);
 	private int totalDivider = 0;
 	private int itemDivider = 1;
 	private long foreDate = 0, currentDate = 0;
@@ -80,11 +74,6 @@ public class WeeklyView extends View{
 		roundP.setStyle(Paint.Style.FILL);
 		roundP.setStrokeCap(Paint.Cap.ROUND);
 		roundP.setAntiAlias(true);
-
-		lowBit = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(getResources(), R.drawable.iv_low),
-				(int)(CommonUtil.dip2px(mContext, 20)), (int)(CommonUtil.dip2px(mContext, 25)));
-		highBit = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(getResources(), R.drawable.iv_high),
-				(int)(CommonUtil.dip2px(mContext, 20)), (int)(CommonUtil.dip2px(mContext, 25)));
 	}
 
 	/**
@@ -117,18 +106,17 @@ public class WeeklyView extends View{
 			}
 			if (totalDivider <= 5) {
 				itemDivider = 1;
-			}else if (totalDivider > 5 && totalDivider <= 15) {
+			}else if (totalDivider <= 15) {
 				itemDivider = 2;
-			}else if (totalDivider > 15 && totalDivider <= 25) {
+			}else if (totalDivider <= 25) {
 				itemDivider = 3;
-			}else if (totalDivider > 25 && totalDivider <= 40) {
+			}else if (totalDivider <= 40) {
 				itemDivider = 4;
 			}else {
 				itemDivider = 5;
 			}
 //			maxTemp = maxTemp+itemDivider*3/2;
 //			minTemp = minTemp-itemDivider;
-
 		}
 	}
 
@@ -202,7 +190,7 @@ public class WeeklyView extends View{
 			}
 
 			float highPheText = textP.measureText(dto.highPhe);//天气现象字符串占像素宽度
-			canvas.drawText(dto.highPhe, dto.highX-highPheText/2, CommonUtil.dip2px(mContext, 70), textP);
+			canvas.drawText(dto.highPhe, dto.highX-highPheText/2, CommonUtil.dip2px(mContext, 60), textP);
 
 			Bitmap b = WeatherUtil.getBitmap(mContext, dto.highPheCode);
 			Bitmap newBit = ThumbnailUtils.extractThumbnail(b, (int)(CommonUtil.dip2px(mContext, 20)), (int)(CommonUtil.dip2px(mContext, 20)));
@@ -210,12 +198,23 @@ public class WeeklyView extends View{
 			Bitmap lb = WeatherUtil.getNightBitmap(mContext, dto.lowPheCode);
 			Bitmap newLbit = ThumbnailUtils.extractThumbnail(lb, (int)(CommonUtil.dip2px(mContext, 20)), (int)(CommonUtil.dip2px(mContext, 20)));
 			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				canvas.drawBitmap(CommonUtil.grayScaleImage(newBit), dto.highX-newBit.getWidth()/2, CommonUtil.dip2px(mContext, 80), textP);
+				canvas.drawBitmap(CommonUtil.grayScaleImage(newBit), dto.highX-newBit.getWidth()/2, CommonUtil.dip2px(mContext, 68), textP);
 				canvas.drawBitmap(CommonUtil.grayScaleImage(newLbit), dto.lowX-newLbit.getWidth()/2, h-CommonUtil.dip2px(mContext, 85), textP);
 			} else {
+				canvas.drawBitmap(newBit, dto.highX-newBit.getWidth()/2, CommonUtil.dip2px(mContext, 68), textP);
 				canvas.drawBitmap(newLbit, dto.lowX-newLbit.getWidth()/2, h-CommonUtil.dip2px(mContext, 85), textP);
-				canvas.drawBitmap(newBit, dto.highX-newBit.getWidth()/2, CommonUtil.dip2px(mContext, 80), textP);
 			}
+
+			//绘制曲线上每个时间点的温度值
+			textP.setColor(getResources().getColor(R.color.white));
+			textP.setTextSize(CommonUtil.dip2px(mContext, 13));
+			float highText = textP.measureText(String.valueOf(tempList.get(i).highTemp));//高温字符串占像素宽度
+			canvas.drawText(tempList.get(i).highTemp+"℃", dto.highX-highText/2, CommonUtil.dip2px(mContext, 103), textP);
+
+			textP.setColor(getResources().getColor(R.color.white));
+			textP.setTextSize(CommonUtil.dip2px(mContext, 13));
+			float lowText = textP.measureText(String.valueOf(tempList.get(i).lowTemp));//低温字符串所占的像素宽度
+			canvas.drawText(tempList.get(i).lowTemp+"℃", dto.lowX-lowText/2, h-CommonUtil.dip2px(mContext, 90), textP);
 
 			float lowPheText = textP.measureText(dto.lowPhe);//天气现象字符串占像素宽度
 			canvas.drawText(dto.lowPhe, dto.lowX-lowPheText/2, h-CommonUtil.dip2px(mContext, 45), textP);
@@ -233,36 +232,15 @@ public class WeeklyView extends View{
 			} else {
 				lineP.setColor(getResources().getColor(R.color.low_color));
 			}
-			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 5));
+			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 8));
 			canvas.drawPoint(dto.lowX, dto.lowY, lineP);
 			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
 				lineP.setColor(Color.WHITE);
 			} else {
 				lineP.setColor(getResources().getColor(R.color.high_color));
 			}
-			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 5));
+			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 8));
 			canvas.drawPoint(dto.highX, dto.highY, lineP);
-
-			//绘制曲线上每个时间点的温度值
-			textP.setColor(getResources().getColor(R.color.white));
-			textP.setTextSize(CommonUtil.dip2px(mContext, 12));
-			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				canvas.drawBitmap(CommonUtil.grayScaleImage(highBit), dto.highX-highBit.getWidth()/2, dto.highY-highBit.getHeight()-CommonUtil.dip2px(mContext, 2.5f), textP);
-			} else {
-				canvas.drawBitmap(highBit, dto.highX-highBit.getWidth()/2, dto.highY-highBit.getHeight()-CommonUtil.dip2px(mContext, 2.5f), textP);
-			}
-			float highText = textP.measureText(String.valueOf(tempList.get(i).highTemp));//高温字符串占像素宽度
-			canvas.drawText(String.valueOf(tempList.get(i).highTemp), dto.highX-highText/2, dto.highY-highBit.getHeight()/2, textP);
-
-			textP.setColor(getResources().getColor(R.color.white));
-			textP.setTextSize(CommonUtil.dip2px(mContext, 12));
-			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				canvas.drawBitmap(CommonUtil.grayScaleImage(lowBit), dto.lowX-lowBit.getWidth()/2, dto.lowY+CommonUtil.dip2px(mContext, 2.5f), textP);
-			} else {
-				canvas.drawBitmap(lowBit, dto.lowX-lowBit.getWidth()/2, dto.lowY+CommonUtil.dip2px(mContext, 2.5f), textP);
-			}
-			float lowText = textP.measureText(String.valueOf(tempList.get(i).lowTemp));//低温字符串所占的像素宽度
-			canvas.drawText(String.valueOf(tempList.get(i).lowTemp), dto.lowX-lowText/2, dto.lowY+lowBit.getHeight()/2+CommonUtil.dip2px(mContext, 10), textP);
 
 			//绘制风力风向
 			textP.setColor(getResources().getColor(R.color.white));
@@ -296,7 +274,7 @@ public class WeeklyView extends View{
 			} else {
 				lineP.setColor(getResources().getColor(R.color.low_color));
 			}
-			lineP.setStrokeWidth(3.0f);
+			lineP.setStrokeWidth(5.0f);
 			canvas.drawPath(pathLow, lineP);
 		}
 
@@ -321,7 +299,7 @@ public class WeeklyView extends View{
 			} else {
 				lineP.setColor(getResources().getColor(R.color.high_color));
 			}
-			lineP.setStrokeWidth(3.0f);
+			lineP.setStrokeWidth(5.0f);
 			canvas.drawPath(pathHigh, lineP);
 		}
 

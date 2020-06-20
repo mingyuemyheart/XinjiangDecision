@@ -32,6 +32,7 @@ public class WeatherDto implements Parcelable{
 	public int windDir = 0;//风向编号
 	public int windForce = 0;//风力编号
 	public String windForceString;
+	public String aqi;
 
 	public WeatherDto() {
 	}
@@ -66,6 +67,7 @@ public class WeatherDto implements Parcelable{
 		dest.writeInt(this.windDir);
 		dest.writeInt(this.windForce);
 		dest.writeString(this.windForceString);
+		dest.writeString(this.aqi);
 	}
 
 	protected WeatherDto(Parcel in) {
@@ -92,6 +94,7 @@ public class WeatherDto implements Parcelable{
 		this.windDir = in.readInt();
 		this.windForce = in.readInt();
 		this.windForceString = in.readString();
+		this.aqi = in.readString();
 	}
 
 	public static final Creator<WeatherDto> CREATOR = new Creator<WeatherDto>() {

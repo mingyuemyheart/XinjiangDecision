@@ -10,22 +10,12 @@ import shawn.cxwl.com.hlj.R;
 
 public class MyDialog extends Dialog {
 
-	private Context mContext = null;
-	private String message = null;
-	private TextView tvPercent = null;
-	private TextView tvContent = null;// message
-	
+	private TextView tvPercent;
+
 	public MyDialog(Context context) {
 		super(context);
-		mContext = context;
 	}
-	
-	public MyDialog(Context context, String msg) {
-		super(context);
-		mContext = context;
-		message = msg;
-	}
-	
+
 	public void setStyle(int featureId) {
 		requestWindowFeature(featureId);
 	}
@@ -43,17 +33,7 @@ public class MyDialog extends Dialog {
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		tvContent = (TextView) findViewById(R.id.content);
-		tvPercent = (TextView) findViewById(R.id.tvPercent);
-
-		if (tvContent != null) {
-			if (message == null) {
-				tvContent.setText(mContext.getResources().getString(R.string.is_loading));
-			} else {
-				tvContent.setText(message);
-			}
-		}
-		
+		tvPercent = findViewById(R.id.tvPercent);
 	}
 	
 	public void setPercent(int percent) {

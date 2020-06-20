@@ -38,12 +38,15 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,6 +98,16 @@ public class CommonUtil {
         final float scale = context.getResources().getDisplayMetrics().density;  
         return pxValue / scale;
     }
+
+	public static int widthPixels(Context context) {
+		DisplayMetrics dm = context.getResources().getDisplayMetrics();
+		return dm.widthPixels;
+	}
+
+	public static int heightPixels(Context context) {
+		DisplayMetrics dm = context.getResources().getDisplayMetrics();
+		return dm.heightPixels;
+	}
 
 	/**
 	 * 获取版本号
@@ -989,6 +1002,69 @@ public class CommonUtil {
 			}
 		}
 		return bitmap;
+	}
+
+	/**
+	 * 获取当前网络连接的类型信息
+	 * 没有网络0：WIFI网络1：3G网络2：2G网络3
+	 * @param context
+	 * @return
+	 */
+	public static int getConnectedType(Context context) {
+		if (context != null) {
+			ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+			if (mNetworkInfo != null && mNetworkInfo.isAvailable()) {
+				return mNetworkInfo.getType();
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * 根据aqi值获取aqi的描述（优、良等）
+	 * @param value
+	 * @return
+	 */
+	public static String getAqiDes(Context context, int value) {
+		String aqi = null;
+		if (value >= 0 && value <= 50) {
+			aqi = context.getString(R.string.aqi_level1);
+		}else if (value >= 51 && value < 100) {
+			aqi = context.getString(R.string.aqi_level2);
+		}else if (value >= 101 && value < 150) {
+			aqi = context.getString(R.string.aqi_level3);
+		}else if (value >= 151 && value < 200) {
+			aqi = context.getString(R.string.aqi_level4);
+		}else if (value >= 201 && value < 300) {
+			aqi = context.getString(R.string.aqi_level5);
+		}else if (value >= 301) {
+			aqi = context.getString(R.string.aqi_level6);
+		}
+		return aqi;
+	}
+
+	/**
+	 * 根据aqi数据获取相对应的背景图标
+	 * @param value
+	 * @return
+	 */
+	public static int getCornerBackground(int value) {
+		int drawable = -1;
+		if (value >= 0 && value <= 50) {
+			drawable = R.drawable.corner_aqi_one;
+		}else if (value >= 51 && value < 100) {
+			drawable = R.drawable.corner_aqi_two;
+		}else if (value >= 101 && value < 150) {
+			drawable = R.drawable.corner_aqi_three;
+		}else if (value >= 151 && value < 200) {
+			drawable = R.drawable.corner_aqi_four;
+		}else if (value >= 201 && value < 300) {
+			drawable = R.drawable.corner_aqi_five;
+		}else if (value >= 301) {
+			drawable = R.drawable.corner_aqi_six;
+		}
+		return drawable;
 	}
 
 }

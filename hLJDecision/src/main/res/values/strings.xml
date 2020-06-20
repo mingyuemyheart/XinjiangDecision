@@ -14,8 +14,6 @@
     <string name="login_deng">登</string>
     <string name="login_lu">录</string>
     <string name="forget_pwd">忘记密码</string>
-    <string name="input_username">请输入账号</string>
-    <string name="input_password">请输入密码</string>
     <string name="humidity">相对湿度</string>
     <string name="rainfall">降水量</string>
     <string name="pressure">气压</string>

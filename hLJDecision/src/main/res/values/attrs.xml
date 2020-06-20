@@ -13,7 +13,6 @@
         <attr name="android:gravity" />
     </declare-styleable>
 
-
     <declare-styleable name="ExpandableTextView">
         <attr name="maxCollapsedLines" format="integer"/>
         <attr name="animDuration" format="integer"/>

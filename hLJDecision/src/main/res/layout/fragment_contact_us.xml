@@ -1,33 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_contact_us"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:background="@drawable/fragment_bg">
+
+    <ImageView
+        android:id="@+id/ivMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/icon_contact_us"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivData"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginBottom="5dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/icon_contact_data"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMap"
+        app:layout_constraintEnd_toEndOf="@+id/ivMap" />
 
     <TextView
-        android:id="@+id/tvData"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:id="@+id/tvDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:lineSpacingExtra="5dp"
+        android:text="如果您需要更多精细化气象服务，请与黑龙江省气象服务中心洽谈合作事宜。"
+        android:textColor="@color/white"
+        android:textSize="@dimen/level_3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivMap" />
+
+    <ImageView
+        android:id="@+id/ivPhone"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/icon_phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDes" />
 
     <TextView
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:lineSpacingExtra="5dp"
+        android:layout_marginStart="10dp"
         android:autoLink="phone"
-        android:textColorLink="@color/title_bg"
-        android:padding="15dp"
-        android:text="如果您需要更多精细化气象服务、专业气象服务，请致电4006000121，与黑龙江省气象服务中心洽谈合作事宜。"
-        android:textColor="@color/text_color3"
-        android:textSize="@dimen/level_3" />
-
+        android:text="4006000121"
+        android:textColor="#95E3FA"
+        android:textColorLink="#95E3FA"
+        android:textSize="@dimen/level_1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPhone"
+        app:layout_constraintStart_toEndOf="@+id/ivPhone"
+        app:layout_constraintTop_toTopOf="@+id/ivPhone" />
 
     <ImageView
-        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/qrcode1"/>
+        android:layout_marginTop="30dp"
+        android:src="@drawable/qrcode1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPhone" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

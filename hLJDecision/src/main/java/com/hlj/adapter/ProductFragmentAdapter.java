@@ -1,10 +1,5 @@
 package com.hlj.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.tsz.afinal.FinalBitmap;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,6 +12,11 @@ import android.widget.TextView;
 import com.hlj.dto.NewsDto;
 import com.hlj.utils.CommonUtil;
 
+import net.tsz.afinal.FinalBitmap;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import shawn.cxwl.com.hlj.R;
 
 public class ProductFragmentAdapter extends BaseAdapter{
@@ -24,8 +24,7 @@ public class ProductFragmentAdapter extends BaseAdapter{
 	private Context mContext = null;
 	private LayoutInflater mInflater = null;
 	private List<NewsDto> mArrayList = new ArrayList<NewsDto>();
-	private String appid = null;
-	
+
 	private final class ViewHolder{
 		ImageView imageView;
 		TextView tvTitle;
@@ -33,9 +32,8 @@ public class ProductFragmentAdapter extends BaseAdapter{
 	
 	private ViewHolder mHolder = null;
 	
-	public ProductFragmentAdapter(Context context, List<NewsDto> mArrayList, String appId) {
+	public ProductFragmentAdapter(Context context, List<NewsDto> mArrayList) {
 		mContext = context;
-		this.appid = appId;
 		this.mArrayList = mArrayList;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -71,13 +69,7 @@ public class ProductFragmentAdapter extends BaseAdapter{
 		mHolder.tvTitle.setText(dto.title);
 		
 		if (TextUtils.isEmpty(dto.imgUrl)) {
-			if (appid.equals("15")) {//贵州
-				mHolder.imageView.setImageResource(R.drawable.iv_guizhou);
-			}else if (appid.equals("14")) {//津南
-				mHolder.imageView.setImageResource(R.drawable.iv_jinnan);
-			}else if (appid.equals("13")) {//西藏
-				mHolder.imageView.setImageResource(R.drawable.iv_xizang);
-			}
+			mHolder.imageView.setImageResource(R.drawable.iv_no_pic);
 		}else {
 			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
 			finalBitmap.display(mHolder.imageView, dto.imgUrl, null, (int)(CommonUtil.dip2px(mContext, 5)));
