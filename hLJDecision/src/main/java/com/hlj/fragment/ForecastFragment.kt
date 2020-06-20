@@ -853,7 +853,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                         temperatureText = "最高气温"+dto.highTemp+"摄氏度，"+"最低气温"+dto.lowTemp+"摄氏度"
                                                         windDirText = getString(WeatherUtil.getWindDirection(dto.windDir))
                                                         windForceText = WeatherUtil.getDayWindForce(dto.windForce)
-                                                        weatherText = "，"+getString(R.string.app_name)+"现在为您播报"+cityName+"天气预报。今天白天到今天夜间，"+pheText+"，"+temperatureText+"，"+windDirText+windForceText
+                                                        weatherText = "，今天白天到今天夜间，"+pheText+"，"+temperatureText+"，"+windDirText+windForceText
 
 
                                                         tvDay1!!.text = "今天"
@@ -1215,7 +1215,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                     val audioAnimation = ivAudio.drawable as AnimationDrawable
                     audioAnimation.start()
                     val currentTime = sdf2.format(Date())
-                    val audioText = "亲爱的用户您好，现在是北京时间$currentTime$weatherText，感谢您的收听！"
+                    val audioText = "现在是北京时间$currentTime$weatherText"
                     mTts!!.startSpeaking(audioText, object : SynthesizerListener {
                         override fun onBufferProgress(percent: Int, p1: Int, p2: Int, p3: String?) {
                             // 合成进度
