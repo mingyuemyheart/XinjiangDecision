@@ -2,8 +2,10 @@ package com.hlj.fragment;
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -78,6 +80,7 @@ import kotlin.collections.ArrayList
  */
 class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, CaiyunManager.RadarListener{
 
+    private var mReceiver: MyBroadCastReceiver? = null
     private var mAdapter: WeeklyForecastAdapter? = null
     private val weeklyList: MutableList<WeatherDto> = ArrayList()
     private val sdf1 = SimpleDateFormat("HH", Locale.CHINA)
@@ -108,8 +111,28 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        initBroadCast()
         initRefreshLayout()
         initMap(savedInstanceState)
+        initWidget()
+        initListView()
+    }
+
+    private fun initBroadCast() {
+        mReceiver = MyBroadCastReceiver()
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(arguments!!.getString(CONST.BROADCAST_ACTION))
+        activity!!.registerReceiver(mReceiver, intentFilter)
+    }
+
+    private inner class MyBroadCastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            refresh()
+        }
+    }
+
+    private fun refresh() {
+        initRefreshLayout()
         initWidget()
         initListView()
     }
@@ -277,6 +300,10 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
 
     override fun onDestroy() {
         super.onDestroy()
+        if (mReceiver != null) {
+            activity!!.unregisterReceiver(mReceiver)
+        }
+
         mTts!!.stopSpeaking()
         mTts!!.destroy()
 

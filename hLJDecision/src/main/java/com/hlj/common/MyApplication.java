@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.hlj.activity.HWarningDetailActivity;
 import com.hlj.dto.WarningDto;
+import com.hlj.utils.CrashHandler;
 import com.iflytek.cloud.SpeechUtility;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.IUmengRegisterCallback;
@@ -50,6 +51,9 @@ public class MyApplication extends Application{
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		CrashHandler crashHandler = CrashHandler.getInstance();
+		crashHandler.init(getApplicationContext());
+
 		//科大讯飞
 		SpeechUtility.createUtility(this, "appid=" + "5983c375");
 

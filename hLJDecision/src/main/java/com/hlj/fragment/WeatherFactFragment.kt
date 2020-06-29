@@ -1,6 +1,9 @@
-package com.hlj.fragment;
+package com.hlj.fragment
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.TextUtils
@@ -30,15 +33,40 @@ import java.io.IOException
  */
 class WeatherFactFragment : Fragment() {
 
+    private var mReceiver: MyBroadCastReceiver? = null
     private var mAdapter: CommonFragmentAdapter? = null
     private val dataList: ArrayList<AgriDto> = ArrayList()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_weather_fact, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initBroadCast()
+    }
+
+    private fun initBroadCast() {
+        mReceiver = MyBroadCastReceiver()
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(arguments!!.getString(CONST.BROADCAST_ACTION))
+        activity!!.registerReceiver(mReceiver, intentFilter)
+    }
+
+    private inner class MyBroadCastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            refresh()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mReceiver != null) {
+            activity!!.unregisterReceiver(mReceiver)
+        }
+    }
+
+    private fun refresh() {
         initGridView()
         val columnId = arguments!!.getString(CONST.COLUMN_ID)
         val title = arguments!!.getString(CONST.ACTIVITY_NAME)

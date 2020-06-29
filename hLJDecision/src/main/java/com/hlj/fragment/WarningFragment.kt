@@ -2,8 +2,10 @@ package com.hlj.fragment
 
 import android.animation.IntEvaluator
 import android.animation.ValueAnimator
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Parcelable
@@ -55,6 +57,7 @@ import java.util.*
  */
 class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarkerClickListener, InfoWindowAdapter {
 
+    private var mReceiver: MyBroadCastReceiver? = null
     private var aMap: AMap? = null
     private var blue = true
     private var yellow = true
@@ -76,7 +79,24 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initBroadCast()
         initAmap(savedInstanceState)
+    }
+
+    private fun initBroadCast() {
+        mReceiver = MyBroadCastReceiver()
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(arguments!!.getString(CONST.BROADCAST_ACTION))
+        activity!!.registerReceiver(mReceiver, intentFilter)
+    }
+
+    private inner class MyBroadCastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            init()
+        }
+    }
+
+    private fun init() {
         initWidget()
         initListView()
         val columnId = arguments!!.getString(CONST.COLUMN_ID)
@@ -569,6 +589,9 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
         super.onDestroy()
         if (mapView != null) {
             mapView!!.onDestroy()
+        }
+        if (mReceiver != null) {
+            activity!!.unregisterReceiver(mReceiver)
         }
     }
 

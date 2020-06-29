@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -61,6 +62,7 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 	private List<Fragment> fragments = new ArrayList<>();
 	private long mExitTime;//记录点击完返回按钮后的long型时间
 	private int columnWidth = 0;
+	private String BROADCAST_ACTION_NAME = "";//所有fragment广播名字
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -283,6 +285,7 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 			}
 
 			Bundle bundle = new Bundle();
+			bundle.putString(CONST.BROADCAST_ACTION, fragment.getClass().getName()+channel.name);
 			bundle.putString(CONST.COLUMN_ID, channel.columnId);
 			bundle.putString(CONST.ACTIVITY_NAME, channel.name);
 			bundle.putString(CONST.WEB_URL, channel.dataUrl);
@@ -304,6 +307,18 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 		public void onPageSelected(int arg0) {
 			if (llContainer != null) {
 				hScrollView1.smoothScrollTo(columnWidth/llContainer.getChildCount()*arg0, 0);
+				for (int i = 0; i < llContainer.getChildCount(); i++) {
+					TextView tvName = (TextView) llContainer.getChildAt(i);
+					if (i == arg0) {
+						String actionName = fragments.get(arg0).getClass().getName()+tvName.getText().toString();
+						if (!BROADCAST_ACTION_NAME.contains(actionName)) {
+							Intent intent = new Intent();
+							intent.setAction(actionName);
+							sendBroadcast(intent);
+							BROADCAST_ACTION_NAME += actionName;
+						}
+					}
+				}
 			}
 			if (llContainer1 != null) {
 				for (int i = 0; i < llContainer1.getChildCount(); i++) {

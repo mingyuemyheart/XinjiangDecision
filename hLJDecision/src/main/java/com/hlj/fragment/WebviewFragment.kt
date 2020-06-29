@@ -1,5 +1,9 @@
 package com.hlj.fragment
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -23,12 +27,38 @@ import shawn.cxwl.com.hlj.R
  */
 class WebviewFragment : Fragment(), AMapLocationListener {
 
+    private var mReceiver: MyBroadCastReceiver? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_webview, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initBroadCast()
+    }
+
+    private fun initBroadCast() {
+        mReceiver = MyBroadCastReceiver()
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(arguments!!.getString(CONST.BROADCAST_ACTION))
+        activity!!.registerReceiver(mReceiver, intentFilter)
+    }
+
+    private inner class MyBroadCastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            refresh()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mReceiver != null) {
+            activity!!.unregisterReceiver(mReceiver)
+        }
+    }
+
+    private fun refresh() {
         initWebView()
         startLocation()
     }

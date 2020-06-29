@@ -53,7 +53,7 @@ import com.iflytek.cloud.SpeechConstant
 import com.iflytek.cloud.SpeechError
 import com.iflytek.cloud.SpeechSynthesizer
 import com.iflytek.cloud.SynthesizerListener
-import kotlinx.android.synthetic.main.fragment_forecast.*
+import kotlinx.android.synthetic.main.activity_weather_detail.*
 import kotlinx.android.synthetic.main.layout_title.*
 import okhttp3.Call
 import okhttp3.Callback

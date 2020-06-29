@@ -1,0 +1,58 @@
+[
+    {
+        "lat": "50.1789",
+        "lon": "127.31917",
+        "type": "CC",
+        "id": "JC_RADAR_AZ9456_JB",
+        "name": "黑河"
+    },
+    {
+        "lat": "47.6999",
+        "lon": "128.91442",
+        "type": "CC",
+        "id": "JC_RADAR_AZ9458_JB",
+        "name": "伊春"
+    },
+    {
+        "lat": "47.2680",
+        "lon": "132.62688",
+        "type": "CC",
+        "id": "JC_RADAR_AZ9085_JB",
+        "name": "建三江"
+    },
+    {
+       "lat": "46.7962",
+       "lon": "130.31807",
+       "type": "CC",
+       "id": "JC_RADAR_AZ9454_JB",
+       "name": "佳木斯"
+   },
+   {
+       "lat": "50.4086",
+       "lon": "124.117955",
+       "type": "CC",
+       "id": "JC_RADAR_AZ9457_JB",
+       "name": "加格达奇"
+   },
+   {
+       "lat": "47.3666",
+       "lon": "123.93456",
+       "type": "CC",
+       "id": "JC_RADAR_AZ9452_JB",
+       "name": "齐齐哈尔"
+   },
+   {
+       "lat": "45.7240",
+       "lon": "126.72821",
+       "type": "CC",
+       "id": "JC_RADAR_AZ9451_JB",
+       "name": "哈尔滨"
+   },
+   {
+        "lat": "44.5914",
+        "lon": "129.599513",
+        "type": "CC",
+        "id": "JC_RADAR_AZ9453_JB",
+        "name": "牡丹江"
+    },
+]

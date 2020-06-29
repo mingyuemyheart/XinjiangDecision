@@ -1,0 +1,892 @@
+-- Merging decision tree log ---
+provider#android.support.v4.content.FileProvider
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:60:9-68:20
+	android:grantUriPermissions
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:64:13-47
+	android:authorities
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:62:13-64
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:63:13-37
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:61:13-67
+action#shawn.cxwl.com.hlj.upgrade.intent.action.COMMAND
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:402:17-81
+	android:name
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:402:25-78
+provider#com.umeng.message.provider.MessageProvider
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:442:9-447:20
+	android:authorities
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:444:13-65
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:445:13-37
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:443:13-70
+manifest
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-452:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-452:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-452:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-452:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d38ee2a06cea28bf109c2baccd44b5df/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/42b997719d3b93e61cd6ff68faf068db/AndroidManifest.xml:17:1-22:12
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:2:1-14:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/5c125fd85ff678ea407d7b8a391f0b96/AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.zcweng:switch-button:0.0.3] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/switch-button-0.0.3.aar/bd4475b182f9dbeda6227fb507a96a69/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/af5be746f885ebee2fe399e1809c694c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/bfee90f167642e001c870d9ad98fd928/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/d71c6a5b9c00d412bc44c1ddf5ad2adc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/7277459d09a21c9a38e798d14dbcdee5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/b688fd237e81eac2329f0c342d658bc0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/b1fb6f0f4a927c95b027f09153c53d2b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/58a8b606153ffe7acf22c98a58229a96/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/f6e67a26dec4ed316b6bf94bf9343784/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/ae2603a79d89d6611a8b9dd64712214e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/0014147c4d1ba58925b038f4b4ffcbc1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/63f4b573f8abb3be1cba1c5a7a6e82e4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/6bc79204108cfa23d657a2f5f43b1acf/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/f2e5e9dd824c153483803a28c1415c8e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/7673956ca3254f40537dc9836944a88b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/95e2a2acabd2892976e952b63596aac3/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/fe5a4558d93327e77913cffaaf58b136/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/1d09207870f9dc3945ef6dfde8eb6ccb/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:exifinterface:27.1.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/3b07d874c5d4dfa4e31868c11086fb39/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/56d576de779846e50b01ea8f306172f7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/765c92b5223b0dd6ccef5e4c8f3149cc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/796f8879b2588821b24c99bd67db9bfc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/352a8864aa122c8d15167ddb21488ce7/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/2c00aabfd6e624bfb4e4ca375d0f82e2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/c13a652b4868ce531e2781e2ae9f3d6e/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/725ef320d3a80e834a7dca63788c9166/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/65d7bfab193cf0fd679533516743d9da/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/d74f7d4c31de229e4b0eed4167aec523/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-452:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-452:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-452:12
+	package
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:4:5-33
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-452:12
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:3:5-51
+	android:versionCode
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-452:12
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:6:5-67
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:6:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:7:22-78
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:8:22-78
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:9:5-79
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:9:22-76
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:10:5-79
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:10:22-76
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:11:5-75
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:11:22-72
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:12:5-76
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:12:22-73
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:13:5-76
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:13:22-73
+uses-permission#android.permission.CHANGE_CONFIGURATION
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:14:5-79
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:14:22-76
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:15:5-68
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:15:22-65
+uses-permission#android.permission.WRITE_SETTINGS
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:16:5-73
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:16:22-70
+uses-permission#android.permission.CALL_PHONE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:17:5-69
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:17:22-66
+uses-permission#android.permission.REQUEST_INSTALL_PACKAGES
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:19:5-83
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:19:22-80
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:22:5-80
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:22:22-77
+uses-permission#android.permission.READ_LOGS
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:23:5-68
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:23:22-65
+uses-permission#android.permission.GET_TASKS
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:24:5-68
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:24:22-65
+uses-permission#android.permission.SET_DEBUG_APP
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:25:5-72
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:25:22-69
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:26:5-78
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:26:22-75
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:27:5-71
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:27:22-68
+uses-permission#android.permission.USE_CREDENTIALS
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:28:5-74
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:28:22-71
+uses-permission#android.permission.MANAGE_ACCOUNTS
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:29:5-74
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:29:22-71
+uses-permission#android.permission.BROADCAST_PACKAGE_ADDED
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:30:5-82
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:30:22-79
+uses-permission#android.permission.BROADCAST_PACKAGE_CHANGED
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:31:5-84
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:31:22-81
+uses-permission#android.permission.BROADCAST_PACKAGE_INSTALL
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:32:5-84
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:32:22-81
+uses-permission#android.permission.BROADCAST_PACKAGE_REPLACED
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:33:5-85
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:33:22-82
+uses-permission#android.permission.RESTART_PACKAGES
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:34:5-75
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:34:22-72
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:35:5-81
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:35:22-78
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:36:5-79
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:36:22-76
+application
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:39:5-450:19
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:7:5-12:19
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:7:5-12:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/5c125fd85ff678ea407d7b8a391f0b96/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/5c125fd85ff678ea407d7b8a391f0b96/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/95e2a2acabd2892976e952b63596aac3/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/95e2a2acabd2892976e952b63596aac3/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/fe5a4558d93327e77913cffaaf58b136/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/fe5a4558d93327e77913cffaaf58b136/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/95e2a2acabd2892976e952b63596aac3/AndroidManifest.xml:22:18-91
+	android:label
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:43:9-41
+	android:hardwareAccelerated
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:46:9-44
+	tools:ignore
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:45:9-48
+	android:largeHeap
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:47:9-33
+	android:icon
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:42:9-41
+	android:allowBackup
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:41:9-35
+	android:theme
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:44:9-40
+	android:networkSecurityConfig
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:48:9-69
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:40:9-52
+uses-library#org.apache.http.legacy
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:51:9-87
+	android:required
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:51:61-85
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:51:23-60
+receiver#com.hlj.utils.AutoUpdateBroadcastReceiver
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:54:9-59:20
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:54:19-75
+intent-filter#action:name:android.intent.action.DOWNLOAD_COMPLETE+action:name:android.intent.action.PACKAGE_INSTALL
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:55:13-58:29
+action#android.intent.action.DOWNLOAD_COMPLETE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:56:17-82
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:56:25-79
+action#android.intent.action.PACKAGE_INSTALL
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:57:17-80
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:57:25-77
+meta-data#com.amap.api.v2.apikey
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:80:9-82:59
+	android:value
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:82:9-57
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:81:9-46
+service#com.amap.api.location.APSService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:88:9-68
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:88:18-65
+activity#com.hlj.activity.WelcomeActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:90:9-98:20
+	android:theme
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:92:13-47
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:91:13-60
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:93:13-97:29
+action#android.intent.action.MAIN
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:94:17-69
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:94:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:96:17-77
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:96:27-74
+activity#com.hlj.activity.MainActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:100:9-102:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:102:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:101:13-57
+activity#com.hlj.activity.LoginActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:104:9-107:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:107:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:106:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:105:13-58
+activity#com.hlj.activity.SettingActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:109:9-112:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:112:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:111:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:110:13-60
+activity#com.hlj.activity.HCityActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:114:9-117:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:117:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:116:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:115:13-58
+activity#com.hlj.activity.HWeatherDetailActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:119:9-122:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:122:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:121:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:120:13-67
+activity#com.hlj.activity.TrendDetailActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:124:9-126:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:126:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:125:13-64
+activity#com.hlj.activity.WeatherKepuDetailActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:128:9-130:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:130:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:129:13-70
+activity#com.hlj.activity.WarningSignalActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:132:9-134:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:134:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:133:13-66
+activity#com.hlj.activity.HUrlActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:136:9-138:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:138:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:137:13-57
+activity#com.hlj.activity.WebviewActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:140:9-142:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:142:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:141:13-60
+activity#com.hlj.activity.HTempratureForecastActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:144:9-146:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:146:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:145:13-72
+activity#com.hlj.activity.HWeatherRadarActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:148:9-150:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:150:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:149:13-66
+activity#com.hlj.activity.SixHourRainActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:152:9-154:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:154:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:153:13-64
+activity#com.hlj.activity.HAirPolutionActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:156:9-159:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:159:13-49
+	android:configChanges
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:158:13-83
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:157:13-65
+activity#com.hlj.activity.HProvinceForecastActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:161:9-163:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:163:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:162:13-70
+activity#com.hlj.activity.HWeatherStaticsActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:165:9-167:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:167:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:166:13-68
+activity#com.hlj.activity.HHeadWarningActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:169:9-171:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:171:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:170:13-65
+activity#com.hlj.activity.HWeatherChartAnalysisActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:173:9-175:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:175:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:174:13-74
+activity#com.hlj.activity.FactActivity2
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:177:9-179:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:179:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:178:13-58
+activity#com.hlj.activity.ShawnFactMonitorActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:181:9-183:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:183:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:182:13-69
+activity#com.hlj.activity.FactDetailActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:185:9-187:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:187:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:186:13-63
+activity#com.hlj.activity.FactDetailChartActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:189:9-191:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:191:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:190:13-68
+activity#com.hlj.activity.TyphoonRouteActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:193:9-195:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:195:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:194:13-65
+activity#com.hlj.activity.ReserveCityActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:197:9-199:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:199:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:198:13-64
+activity#com.hlj.activity.HWarningListActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:201:9-203:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:203:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:202:13-65
+activity#com.hlj.activity.ShawnPointForeActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:205:9-207:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:207:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:206:13-67
+activity#com.hlj.activity.ShawnPointForeDetailActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:209:9-211:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:211:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:210:13-73
+activity#com.hlj.activity.FeedbackActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:213:9-216:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:216:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:215:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:214:13-61
+activity#com.hlj.activity.WeatherRadarDetailActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:218:9-221:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:221:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:220:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:219:13-71
+activity#com.hlj.activity.RadarZoomActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:223:9-227:50
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:227:13-47
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:226:13-44
+	android:configChanges
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:225:13-83
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:224:13-62
+activity#com.hlj.activity.MinuteFallActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:229:9-232:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:232:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:231:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:230:13-63
+activity#com.hlj.activity.HWarningDetailActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:234:9-237:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:237:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:236:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:235:13-67
+activity#com.hlj.activity.WebviewCssActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:239:9-242:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:242:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:241:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:240:13-63
+activity#com.hlj.activity.HPDFActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:244:9-247:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:247:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:246:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:245:13-57
+activity#com.hlj.activity.SinglePDFActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:249:9-252:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:252:13-49
+	android:launchMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:251:13-44
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:250:13-62
+activity#com.hlj.activity.ShawnWeatherMeetingActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:254:9-256:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:256:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:255:13-72
+activity#com.hlj.activity.ShawnWeatherMeetingDetailActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:258:9-262:58
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:260:13-47
+	android:windowSoftInputMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:262:13-55
+	android:configChanges
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:261:13-83
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:259:13-78
+activity#com.hlj.activity.ShawnWeatherMeetingVideoActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:264:9-268:58
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:266:13-47
+	android:windowSoftInputMode
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:268:13-55
+	android:configChanges
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:267:13-83
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:265:13-77
+activity#com.hlj.activity.ShawnWarningStatisticActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:270:9-272:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:272:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:271:13-74
+activity#com.hlj.activity.ShawnWarningStatisticListActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:274:9-276:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:276:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:275:13-78
+activity#com.hlj.activity.ShawnWarningStatisticScreenActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:278:9-280:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:280:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:279:13-80
+activity#com.hlj.activity.ShawnWarningStatisticScreenAreaActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:282:9-284:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:284:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:283:13-84
+activity#com.hlj.activity.ProductActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:286:9-288:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:288:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:287:13-60
+activity#com.hlj.activity.ShawnStreamFactActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:290:9-292:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:292:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:291:13-68
+activity#com.hlj.activity.ShawnStreamFactListActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:294:9-296:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:296:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:295:13-72
+activity#com.hlj.activity.ShawnStrongStreamActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:298:9-300:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:300:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:299:13-70
+activity#com.hlj.activity.ShawnWaitWindActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:302:9-304:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:304:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:303:13-66
+activity#com.hlj.activity.CommonListActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:306:9-308:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:308:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:307:13-63
+activity#com.hlj.activity.ThunderForeActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:310:9-312:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:312:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:311:13-64
+activity#com.hlj.activity.ThunderStatisticActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:314:9-316:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:316:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:315:13-69
+activity#com.hlj.activity.WarningStatisticActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:318:9-320:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:320:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:319:13-69
+meta-data#UMENG_APPKEY
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:324:9-326:56
+	android:value
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:326:13-53
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:325:13-40
+meta-data#UMENG_MESSAGE_SECRET
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:327:9-329:64
+	android:value
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:329:13-61
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:328:13-48
+service#com.taobao.accs.ChannelService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:332:9-342:19
+	android:process
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:335:13-39
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:334:13-36
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:333:13-58
+intent-filter#action:name:com.taobao.accs.intent.action.SERVICE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:336:13-338:29
+action#com.taobao.accs.intent.action.SERVICE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:337:17-80
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:337:25-77
+intent-filter#action:name:com.taobao.accs.intent.action.ELECTION
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:339:13-341:29
+action#com.taobao.accs.intent.action.ELECTION
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:340:17-81
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:340:25-78
+service#com.taobao.accs.data.MsgDistributeService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:343:9-349:19
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:345:13-36
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:344:13-69
+intent-filter#action:name:com.taobao.accs.intent.action.RECEIVE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:346:13-348:29
+action#com.taobao.accs.intent.action.RECEIVE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:347:17-80
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:347:25-77
+receiver#com.taobao.accs.EventReceiver
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:351:9-368:20
+	android:process
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:353:13-39
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:352:13-57
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:354:13-356:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:355:17-79
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:355:25-76
+intent-filter#action:name:android.net.conn.CONNECTIVITY_CHANGE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:357:13-359:29
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:358:17-79
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:358:25-76
+intent-filter#action:name:android.intent.action.PACKAGE_REMOVED+data:scheme:package
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:360:13-364:29
+action#android.intent.action.PACKAGE_REMOVED
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:361:17-80
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:361:25-77
+data
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:363:17-50
+	android:scheme
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:363:23-47
+intent-filter#action:name:android.intent.action.USER_PRESENT
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:365:13-367:29
+action#android.intent.action.USER_PRESENT
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:366:17-77
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:366:25-74
+receiver#com.taobao.accs.ServiceReceiver
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:369:9-378:20
+	android:process
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:371:13-39
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:370:13-59
+intent-filter#action:name:com.taobao.accs.intent.action.COMMAND
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:372:13-374:29
+action#com.taobao.accs.intent.action.COMMAND
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:373:17-80
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:373:25-77
+intent-filter#action:name:com.taobao.accs.intent.action.START_FROM_AGOO
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:375:13-377:29
+action#com.taobao.accs.intent.action.START_FROM_AGOO
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:376:17-88
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:376:25-85
+service#com.taobao.accs.ChannelService$KernelService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:380:9-382:41
+	android:process
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:382:13-39
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:381:13-72
+service#org.android.agoo.accs.AgooService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:383:9-389:19
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:385:13-36
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:384:13-61
+service#com.umeng.message.UmengIntentService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:390:9-396:19
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:392:13-36
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:391:13-64
+intent-filter#action:name:org.agoo.android.intent.action.RECEIVE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:393:13-395:29
+action#org.agoo.android.intent.action.RECEIVE
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:394:17-81
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:394:25-78
+receiver#com.taobao.agoo.AgooCommondReceiver
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:398:9-409:20
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:400:13-36
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:399:13-63
+intent-filter#action:name:shawn.cxwl.com.hlj.upgrade.intent.action.COMMAND
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:401:13-403:29
+receiver#com.umeng.message.NotificationProxyBroadcastReceiver
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:410:9-412:40
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:412:13-37
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:411:13-80
+service#com.umeng.message.UmengMessageCallbackHandlerService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:414:9-429:19
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:416:13-37
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:415:13-80
+intent-filter#action:name:com.umeng.messge.registercallback.action
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:417:13-419:29
+action#com.umeng.messge.registercallback.action
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:418:17-83
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:418:25-80
+intent-filter#action:name:com.umeng.message.enablecallback.action
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:420:13-422:29
+action#com.umeng.message.enablecallback.action
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:421:17-82
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:421:25-79
+intent-filter#action:name:com.umeng.message.disablecallback.action
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:423:13-425:29
+action#com.umeng.message.disablecallback.action
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:424:17-83
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:424:25-80
+intent-filter#action:name:com.umeng.message.message.handler.action
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:426:13-428:29
+action#com.umeng.message.message.handler.action
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:427:17-83
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:427:25-80
+service#com.umeng.message.UmengDownloadResourceService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:430:9-432:40
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:432:13-37
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:431:13-74
+service#com.umeng.message.UmengMessageIntentReceiverService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:433:9-440:19
+	android:process
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:436:13-39
+	android:exported
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:435:13-36
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:434:13-79
+intent-filter#action:name:org.android.agoo.client.MessageReceiverService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:437:13-439:29
+action#org.android.agoo.client.MessageReceiverService
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:438:17-89
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:438:25-86
+uses-sdk
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d38ee2a06cea28bf109c2baccd44b5df/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d38ee2a06cea28bf109c2baccd44b5df/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/42b997719d3b93e61cd6ff68faf068db/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/42b997719d3b93e61cd6ff68faf068db/AndroidManifest.xml:20:5-44
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:5:5-44
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:5:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/5c125fd85ff678ea407d7b8a391f0b96/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/5c125fd85ff678ea407d7b8a391f0b96/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.zcweng:switch-button:0.0.3] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/switch-button-0.0.3.aar/bd4475b182f9dbeda6227fb507a96a69/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.zcweng:switch-button:0.0.3] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/switch-button-0.0.3.aar/bd4475b182f9dbeda6227fb507a96a69/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/af5be746f885ebee2fe399e1809c694c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/af5be746f885ebee2fe399e1809c694c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/bfee90f167642e001c870d9ad98fd928/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/bfee90f167642e001c870d9ad98fd928/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/d71c6a5b9c00d412bc44c1ddf5ad2adc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/d71c6a5b9c00d412bc44c1ddf5ad2adc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/7277459d09a21c9a38e798d14dbcdee5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/7277459d09a21c9a38e798d14dbcdee5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/b688fd237e81eac2329f0c342d658bc0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/b688fd237e81eac2329f0c342d658bc0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/b1fb6f0f4a927c95b027f09153c53d2b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/b1fb6f0f4a927c95b027f09153c53d2b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/58a8b606153ffe7acf22c98a58229a96/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/58a8b606153ffe7acf22c98a58229a96/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/f6e67a26dec4ed316b6bf94bf9343784/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/f6e67a26dec4ed316b6bf94bf9343784/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/ae2603a79d89d6611a8b9dd64712214e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/ae2603a79d89d6611a8b9dd64712214e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/0014147c4d1ba58925b038f4b4ffcbc1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/0014147c4d1ba58925b038f4b4ffcbc1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/63f4b573f8abb3be1cba1c5a7a6e82e4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/63f4b573f8abb3be1cba1c5a7a6e82e4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/6bc79204108cfa23d657a2f5f43b1acf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/6bc79204108cfa23d657a2f5f43b1acf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/f2e5e9dd824c153483803a28c1415c8e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/f2e5e9dd824c153483803a28c1415c8e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/7673956ca3254f40537dc9836944a88b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/7673956ca3254f40537dc9836944a88b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/95e2a2acabd2892976e952b63596aac3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/95e2a2acabd2892976e952b63596aac3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/fe5a4558d93327e77913cffaaf58b136/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/fe5a4558d93327e77913cffaaf58b136/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/1d09207870f9dc3945ef6dfde8eb6ccb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/1d09207870f9dc3945ef6dfde8eb6ccb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:exifinterface:27.1.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/3b07d874c5d4dfa4e31868c11086fb39/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:exifinterface:27.1.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/3b07d874c5d4dfa4e31868c11086fb39/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/56d576de779846e50b01ea8f306172f7/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/56d576de779846e50b01ea8f306172f7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/765c92b5223b0dd6ccef5e4c8f3149cc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/765c92b5223b0dd6ccef5e4c8f3149cc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/796f8879b2588821b24c99bd67db9bfc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/796f8879b2588821b24c99bd67db9bfc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/352a8864aa122c8d15167ddb21488ce7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/352a8864aa122c8d15167ddb21488ce7/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/2c00aabfd6e624bfb4e4ca375d0f82e2/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/2c00aabfd6e624bfb4e4ca375d0f82e2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/c13a652b4868ce531e2781e2ae9f3d6e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/c13a652b4868ce531e2781e2ae9f3d6e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/725ef320d3a80e834a7dca63788c9166/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/725ef320d3a80e834a7dca63788c9166/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/65d7bfab193cf0fd679533516743d9da/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/65d7bfab193cf0fd679533516743d9da/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/d74f7d4c31de229e4b0eed4167aec523/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/d74f7d4c31de229e4b0eed4167aec523/AndroidManifest.xml:20:5-44
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:65:13-67:53
+	android:resource
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:67:17-51
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:66:17-67
+grant-uri-permission
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:446:13-62
+	android:pathPattern
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:446:35-59
+provider#com.squareup.picasso.PicassoProvider
+ADDED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:8:9-11:40
+	android:authorities
+		ADDED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:10:13-72
+	android:exported
+		ADDED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:11:13-37
+	android:name
+		ADDED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:9:13-64

@@ -63,8 +63,8 @@
             android:textSize="@dimen/level_4"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:background="@drawable/iv_arrow"/>
     </LinearLayout>
 
@@ -94,8 +94,8 @@
             android:textSize="@dimen/level_4"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:background="@drawable/iv_arrow"/>
     </LinearLayout>
 
@@ -125,8 +125,8 @@
             android:textSize="@dimen/level_4"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:background="@drawable/iv_arrow"/>
     </LinearLayout>
 
@@ -148,8 +148,8 @@
             android:textSize="@dimen/level_4"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:background="@drawable/iv_arrow"/>
     </LinearLayout>
 
@@ -180,8 +180,8 @@
             android:textSize="@dimen/level_4"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:background="@drawable/iv_arrow"/>
     </LinearLayout>
 
@@ -203,8 +203,8 @@
             android:textSize="@dimen/level_4"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
             android:background="@drawable/iv_arrow"/>
     </LinearLayout>
 
