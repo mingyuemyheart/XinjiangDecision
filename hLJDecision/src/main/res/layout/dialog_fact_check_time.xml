@@ -26,11 +26,13 @@
             android:background="@color/light_gray" />
 
         <DatePicker
+            android:theme="@android:style/Theme.NoTitleBar"
             android:id="@+id/datePickr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TimePicker
+            android:theme="@android:style/Theme.NoTitleBar"
             android:id="@+id/timePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

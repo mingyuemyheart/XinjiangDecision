@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
 import android.text.TextUtils
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
@@ -19,6 +21,7 @@ import com.hlj.common.MyApplication
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_welcome.*
 import okhttp3.*
 import org.json.JSONArray
@@ -244,6 +247,9 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 									for (j in 0 until childArray.length()) {
 										val childObj = childArray.getJSONObject(j)
 										val dto = ColumnData()
+										if (!childObj.isNull("id")) {
+											dto.columnId = childObj.getString("id")
+										}
 										if (!childObj.isNull("localviewid")) {
 											dto.id = childObj.getString("localviewid")
 										}
@@ -270,6 +276,9 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 											for (k in 0 until child2Array.length()) {
 												val child2Obj = child2Array.getJSONObject(k)
 												val child2 = ColumnData()
+												if (!child2Obj.isNull("id")) {
+													child2.columnId = child2Obj.getString("id")
+												}
 												if (!child2Obj.isNull("localviewid")) {
 													child2.id = child2Obj.getString("localviewid")
 												}
@@ -309,13 +318,32 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 											val sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE)
 											val editor = sharedPreferences.edit()
 											editor.putString(CONST.UserInfo.uId, uid)
-											editor.putString(CONST.UserInfo.userName, CONST.USERNAME)
-											editor.putString(CONST.UserInfo.passWord, CONST.PASSWORD)
-											editor.putString(CONST.UserInfo.token, CONST.TOKEN)
+											editor.putString(CONST.UserInfo.userName, obj.getString("username"))
+											if (!obj.isNull("token")) {
+												editor.putString(CONST.UserInfo.token, obj.getString("token"))
+												CONST.TOKEN = obj.getString("token")
+											} else {
+												CONST.TOKEN = ""
+											}
+											Log.e("token", CONST.TOKEN)
+											if (!obj.isNull("usergroup")) {
+												editor.putString(CONST.UserInfo.groupId, obj.getString("usergroup"))
+												CONST.GROUPID = obj.getString("usergroup")
+											} else {
+												CONST.GROUPID = ""
+											}
+											if (!obj.isNull("usergroup_name")) {
+												editor.putString(CONST.UserInfo.uGroupName, obj.getString("usergroup_name"))
+												CONST.UGROUPNAME = obj.getString("usergroup_name")
+											} else {
+												CONST.UGROUPNAME = ""
+											}
 											editor.apply()
 											CONST.UID = uid
+
+											okHttpPushToken()
 										}
-										val intent = Intent(this@WelcomeActivity, MainActivity::class.java)
+										val intent = Intent(this, MainActivity::class.java)
 										intent.putParcelableArrayListExtra("dataList", dataList)
 										startActivity(intent)
 										finish()
@@ -338,6 +366,33 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 				}
 			}
 		}
+	}
+
+	private fun okHttpPushToken() {
+		val url = "https://decision-admin.tianqi.cn/Home/extra/savePushToken"
+		val builder = FormBody.Builder()
+		val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+		val serial = Build.SERIAL
+		builder.add("uuid", androidId+serial)
+		builder.add("uid", CONST.UID)
+		builder.add("groupid", CONST.GROUPID)
+		builder.add("pushtoken", MyApplication.DEVICETOKEN)
+		builder.add("platform", "android")
+		builder.add("um_key", MyApplication.appKey)
+		val body = builder.build()
+		Thread(Runnable {
+			OkHttpUtil.enqueue(Request.Builder().url(url).post(body).build(), object : Callback {
+				override fun onFailure(call: Call, e: IOException) {
+				}
+				override fun onResponse(call: Call, response: Response) {
+					if (!response.isSuccessful) {
+						return
+					}
+					val result = response.body!!.string()
+					Log.e("result", result)
+				}
+			})
+		}).start()
 	}
 
 	override fun onKeyDown(KeyCode: Int, event: KeyEvent?): Boolean {

@@ -54,12 +54,13 @@ class SettingActivity : BaseActivity(), OnClickListener {
         tvUserName!!.setOnClickListener(this)
         ivPushNews!!.setOnClickListener(this)
         val sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE)
-        val userName = sharedPreferences.getString(CONST.UserInfo.userName, null)
+        val userName = sharedPreferences.getString(CONST.UserInfo.userName, "")
+        val uGroupName = sharedPreferences.getString(CONST.UserInfo.uGroupName, "")
         if (TextUtils.equals(userName, CONST.publicUser) || TextUtils.isEmpty(userName)) { //公众用户或为空
-            tvUserName!!.text = "点击登录"
+            tvUserName!!.text = "点击登录\n非注册用户"
             tvLogout!!.visibility = View.GONE
         } else {
-            tvUserName!!.text = userName
+            tvUserName!!.text = "$userName\n分组：$uGroupName"
             tvLogout!!.visibility = View.VISIBLE
         }
         tvCache!!.text = DataCleanManager.getCacheSize(this)
@@ -131,6 +132,10 @@ class SettingActivity : BaseActivity(), OnClickListener {
      * 温馨提示对话框
      */
     private fun promptDialog() {
+        if (!TextUtils.isEmpty(CONST.USERNAME) && !TextUtils.equals(CONST.publicUser, CONST.USERNAME)) {
+            return
+        }
+
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.dialog_prompt, null)
         val dialog = Dialog(this, R.style.CustomProgressDialog)
@@ -166,7 +171,7 @@ class SettingActivity : BaseActivity(), OnClickListener {
             }
             R.id.llVersion -> {
                 AutoUpdateUtil.checkUpdate(this@SettingActivity, this, "41", getString(R.string.app_name), false) //黑龙江气象
-                AutoUpdateUtil.checkUpdate(this@SettingActivity, this, "53", getString(R.string.app_name), false) //决策气象服务
+//                AutoUpdateUtil.checkUpdate(this@SettingActivity, this, "53", getString(R.string.app_name), false) //决策气象服务
             }
             R.id.llClearCache -> deleteDialog(true, getString(R.string.delete_cache), getString(R.string.sure_delete_cache), tvCache)
             R.id.llClearData -> deleteDialog(false, getString(R.string.delete_data), getString(R.string.sure_delete_data), tvData)

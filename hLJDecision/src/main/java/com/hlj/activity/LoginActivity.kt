@@ -7,8 +7,10 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.provider.Settings
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
@@ -275,6 +277,9 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 									for (j in 0 until childArray.length()) {
 										val childObj = childArray.getJSONObject(j)
 										val dto = ColumnData()
+										if (!childObj.isNull("id")) {
+											dto.columnId = childObj.getString("id")
+										}
 										if (!childObj.isNull("localviewid")) {
 											dto.id = childObj.getString("localviewid")
 										}
@@ -301,6 +306,9 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 											for (k in 0 until child2Array.length()) {
 												val child2Obj = child2Array.getJSONObject(k)
 												val child2 = ColumnData()
+												if (!child2Obj.isNull("id")) {
+													child2.columnId = child2Obj.getString("id")
+												}
 												if (!child2Obj.isNull("localviewid")) {
 													child2.id = child2Obj.getString("localviewid")
 												}
@@ -344,6 +352,21 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 										if (!obj.isNull("token")) {
 											editor.putString(CONST.UserInfo.token, obj.getString("token"))
 											CONST.TOKEN = obj.getString("token")
+										} else {
+											CONST.TOKEN = ""
+										}
+										Log.e("token", CONST.TOKEN)
+										if (!obj.isNull("usergroup")) {
+											editor.putString(CONST.UserInfo.groupId, obj.getString("usergroup"))
+											CONST.GROUPID = obj.getString("usergroup")
+										} else {
+											CONST.GROUPID = ""
+										}
+										if (!obj.isNull("usergroup_name")) {
+											editor.putString(CONST.UserInfo.uGroupName, obj.getString("usergroup_name"))
+											CONST.UGROUPNAME = obj.getString("usergroup_name")
+										} else {
+											CONST.UGROUPNAME = ""
 										}
 										editor.apply()
 
@@ -351,6 +374,9 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 										CONST.UID = uid
 										CONST.USERNAME = etUserName!!.text.toString()
 										CONST.PASSWORD = etPwd!!.text.toString()
+
+										okHttpPushToken()
+
 										MyApplication.destoryActivity()
 										val intent = Intent(this@LoginActivity, MainActivity::class.java)
 										intent.putParcelableArrayListExtra("dataList", dataList)
@@ -375,6 +401,33 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 				}
 			}
 		}
+	}
+
+	private fun okHttpPushToken() {
+		val url = "https://decision-admin.tianqi.cn/Home/extra/savePushToken"
+		val builder = FormBody.Builder()
+		val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+		val serial = Build.SERIAL
+		builder.add("uuid", androidId+serial)
+		builder.add("uid", CONST.UID)
+		builder.add("groupid", CONST.GROUPID)
+		builder.add("pushtoken", MyApplication.DEVICETOKEN)
+		builder.add("platform", "android")
+		builder.add("um_key", MyApplication.appKey)
+		val body = builder.build()
+		Thread(Runnable {
+			OkHttpUtil.enqueue(Request.Builder().url(url).post(body).build(), object : Callback {
+				override fun onFailure(call: Call, e: IOException) {
+				}
+				override fun onResponse(call: Call, response: Response) {
+					if (!response.isSuccessful) {
+						return
+					}
+					val result = response.body!!.string()
+					Log.e("result", result)
+				}
+			})
+		}).start()
 	}
 
 	override fun onClick(v: View) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="shawn.cxwl.com.hlj.upgrade"
-    android:versionCode="312"
-    android:versionName="3.1.2" >
+    android:versionCode="313"
+    android:versionName="3.1.3" >
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -24,11 +24,8 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <!-- umeng -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.SET_DEBUG_APP" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
@@ -37,10 +34,10 @@
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_INSTALL" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED" />
     <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
-    <!-- umeng -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- umeng -->
     <application
         android:name="com.hlj.common.MyApplication"
         android:allowBackup="true"
@@ -145,9 +142,6 @@
             android:name="com.hlj.activity.HWeatherRadarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hlj.activity.CommonPdfListActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.hlj.activity.SixHourRainActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -185,7 +179,7 @@
             android:name="com.hlj.activity.ReserveCityActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hlj.activity.HWarningListActivity"
+            android:name="com.hlj.activity.WarningListActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.ShawnPointForeActivity"
@@ -278,16 +272,15 @@
         <activity
             android:name="com.hlj.activity.WarningStatisticActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.WebviewVideoActivity"
+            android:screenOrientation="portrait" />
 
-        <!-- umeng -->
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="5755277767e58e5ca4000e07" />
-        <meta-data
-            android:name="UMENG_MESSAGE_SECRET"
-            android:value="3464bbdf388960ddcea9c5cebf46cd66" />
+        <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:authorities="shawn.cxwl.com.hlj.upgrade.com.squareup.picasso"
+            android:exported="false" />
 
-        <!-- umeng推送 -->
         <service
             android:name="com.taobao.accs.ChannelService"
             android:exported="true"
@@ -337,6 +330,10 @@
         </receiver>
 
         <service
+            android:name="com.taobao.accs.internal.AccsJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":channel" />
+        <service
             android:name="com.taobao.accs.ChannelService$KernelService"
             android:process=":channel" />
         <service
@@ -348,7 +345,16 @@
         </service>
         <service
             android:name="com.umeng.message.UmengIntentService"
-            android:exported="true" >
+            android:exported="true"
+            android:process=":channel" >
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.umeng.message.XiaomiIntentService"
+            android:exported="true"
+            android:process=":channel" >
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.RECEIVE" />
             </intent-filter>
@@ -356,7 +362,8 @@
 
         <receiver
             android:name="com.taobao.agoo.AgooCommondReceiver"
-            android:exported="true" >
+            android:exported="true"
+            android:process=":channel" >
             <intent-filter>
                 <action android:name="shawn.cxwl.com.hlj.upgrade.intent.action.COMMAND" />
             </intent-filter>
@@ -366,6 +373,16 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name="com.umeng.message.UmengMessageIntentReceiverService"
+            android:exported="true"
+            android:process=":channel" >
+            <intent-filter>
+                <action android:name="org.android.agoo.client.MessageReceiverService" />
+            </intent-filter>
+        </service>
+
         <receiver
             android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
             android:exported="false" />
@@ -385,18 +402,13 @@
             <intent-filter>
                 <action android:name="com.umeng.message.message.handler.action" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.message.sendmessage.action" />
+            </intent-filter>
         </service>
         <service
             android:name="com.umeng.message.UmengDownloadResourceService"
             android:exported="false" />
-        <service
-            android:name="com.umeng.message.UmengMessageIntentReceiverService"
-            android:exported="true"
-            android:process=":channel" >
-            <intent-filter>
-                <action android:name="org.android.agoo.client.MessageReceiverService" />
-            </intent-filter>
-        </service>
 
         <provider
             android:name="com.umeng.message.provider.MessageProvider"
@@ -404,12 +416,6 @@
             android:exported="false" >
             <grant-uri-permission android:pathPattern=".*" />
         </provider>
-        <!-- umeng -->
-
-        <provider
-            android:name="com.squareup.picasso.PicassoProvider"
-            android:authorities="shawn.cxwl.com.hlj.upgrade.com.squareup.picasso"
-            android:exported="false" />
     </application>
 
 </manifest>

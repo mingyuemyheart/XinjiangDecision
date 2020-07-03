@@ -1,4 +1,4 @@
-package com.hlj.activity;
+package com.hlj.activity
 
 import android.os.Build
 import android.os.Bundle

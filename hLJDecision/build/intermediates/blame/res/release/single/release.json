@@ -52,6 +52,10 @@
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/fragment_bg.jpg"
     },
     {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_upush_notification.xml.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/upush_notification.xml"
+    },
+    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_btn_login_press.png.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/btn_login_press.png"
     },
@@ -344,10 +348,6 @@
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/umeng_socialize_light_bar_bg.9.png"
     },
     {
-        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_hadapter_warning_marker_info.xml.flat",
-        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hadapter_warning_marker_info.xml"
-    },
-    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_shawn_icon_more_ydddon.png.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/shawn_icon_more_ydddon.png"
     },
@@ -520,6 +520,10 @@
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/iv_xizang.png"
     },
     {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_adapter_warning_map.xml.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_warning_map.xml"
+    },
+    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_shawn_marker_petrol.png.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/shawn_marker_petrol.png"
     },
@@ -632,6 +636,10 @@
         "source": "/Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d38ee2a06cea28bf109c2baccd44b5df/res/drawable-mdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_icon_video.png.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/icon_video.png"
+    },
+    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_iv_logo2.png.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/iv_logo2.png"
     },
@@ -678,10 +686,6 @@
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_iv_marker_point.png.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/iv_marker_point.png"
-    },
-    {
-        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_hactivity_warning_list.xml.flat",
-        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hactivity_warning_list.xml"
     },
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_hs_icon_sj.png.flat",
@@ -1488,10 +1492,6 @@
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/iv_marker_blue.png"
     },
     {
-        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_fragment_fact_detail.xml.flat",
-        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/fragment_fact_detail.xml"
-    },
-    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_warning_signal.xml.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/warning_signal.xml"
     },
@@ -1982,6 +1982,10 @@
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_shawn_icon_arc_red_press.png.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/shawn_icon_arc_red_press.png"
+    },
+    {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_adapter_warning.xml.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_warning.xml"
     },
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable-mdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
@@ -2660,6 +2664,10 @@
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/corner_live.xml"
     },
     {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_activity_warning_list.xml.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/activity_warning_list.xml"
+    },
+    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_shawn_activity_point_fore.xml.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/shawn_activity_point_fore.xml"
     },
@@ -2730,6 +2738,10 @@
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_layout_date.xml.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/layout_date.xml"
+    },
+    {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_upush_bar_image_notification.xml.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/upush_bar_image_notification.xml"
     },
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable-xhdpi-v4_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
@@ -3038,6 +3050,10 @@
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_corner_pro_bg.xml.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/corner_pro_bg.xml"
+    },
+    {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_adapter_warning_list_screen.xml.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_warning_list_screen.xml"
     },
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout-watch-v20_abc_alert_dialog_title_material.xml.flat",
@@ -4650,10 +4666,6 @@
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_tab2_channel2.png.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/tab2_channel2.png"
-    },
-    {
-        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_hadapter_warning.xml.flat",
-        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/hadapter_warning.xml"
     },
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_default_orange.png.flat",

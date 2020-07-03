@@ -82,7 +82,7 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
             endTime = sdf5.format(new Date());
         }
         try {
-            tvTime.setText(sdf2.format(sdf6.parse(startTime)) + " - " + sdf3.format(sdf6.parse(endTime)));
+            tvTime.setText(sdf2.format(sdf6.parse(startTime)) + " - " + sdf2.format(sdf6.parse(endTime)));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -282,7 +282,7 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
                     mAdapter.setEndTime(endTime);
                     tvTitle.setText(areaName + "预警统计");
                     try {
-                        tvTime.setText(sdf2.format(sdf6.parse(startTime)) + " - " + sdf3.format(sdf6.parse(endTime)));
+                        tvTime.setText(sdf2.format(sdf6.parse(startTime)) + " - " + sdf2.format(sdf6.parse(endTime)));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

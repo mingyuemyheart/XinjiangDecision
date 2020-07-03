@@ -497,7 +497,7 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
      * 获取疫情
      */
     private fun okHttpInfo(pro: String, city: String) {
-        val url = String.format("http://warn-wx.tianqi.cn/Test/getwhqydata?pro=%s&city=%s", pro, city)
+        val url = String.format("http://warn-wx.tianqi.cn/Test/getwhqydata?pro=%s&city=%s&appid=%s", pro, city, CONST.APPID)
         OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
 

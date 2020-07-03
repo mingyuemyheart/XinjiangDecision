@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hlj.activity.HWarningDetailActivity;
-import com.hlj.activity.HWarningListActivity;
+import com.hlj.activity.WarningListActivity;
 import com.hlj.common.CONST;
 import com.hlj.dto.CityDto;
 import com.hlj.dto.WarningDto;
@@ -179,7 +179,7 @@ public class ReserveCityAdapter extends BaseAdapter{
 			mHolder.tvCount.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(mContext, HWarningListActivity.class);
+					Intent intent = new Intent(mContext, WarningListActivity.class);
 					Bundle bundle = new Bundle();
 					bundle.putParcelableArrayList("warningList", (ArrayList<? extends Parcelable>) dto.warningList);
 					intent.putExtras(bundle);

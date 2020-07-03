@@ -126,6 +126,24 @@
 		<item>134.013872,46.798164,101051304,饶河,2,双鸭山</item>
 		<item>131.808064,46.767299,101051305,友谊,2,双鸭山</item>
     </string-array>
+
+	<!-- 发布区域-->
+	<string-array name="warningDis">
+		<item>23,全部</item>
+		<item>2301,哈尔滨</item>
+		<item>2302,齐齐哈尔</item>
+		<item>2310,牡丹江</item>
+		<item>2308,佳木斯</item>
+		<item>2312,绥化</item>
+		<item>2311,黑河</item>
+		<item>2327,大兴安岭</item>
+		<item>2307,伊春</item>
+		<item>2306,大庆</item>
+		<item>2309,七台河</item>
+		<item>2303,鸡西</item>
+		<item>2304,鹤岗</item>
+		<item>2305,双鸭山</item>
+	</string-array>
     
     <!-- 预警类型 -->
     <string-array name="warningType">

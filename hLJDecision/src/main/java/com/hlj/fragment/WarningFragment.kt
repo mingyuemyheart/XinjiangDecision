@@ -28,13 +28,12 @@ import com.amap.api.maps.model.BitmapDescriptorFactory
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Marker
 import com.amap.api.maps.model.MarkerOptions
-import com.hlj.activity.HWarningDetailActivity
-import com.hlj.activity.HWarningListActivity
-import com.hlj.activity.ShawnWarningStatisticActivity
-import com.hlj.activity.WarningStatisticActivity
-import com.hlj.adapter.HWarningAdapter
+import com.hlj.activity.*
 import com.hlj.adapter.ShawnWarningStatisticAdapter
+import com.hlj.adapter.WarningAdapter
 import com.hlj.common.CONST
+import com.hlj.common.ColumnData
+import com.hlj.dto.AgriDto
 import com.hlj.dto.WarningDto
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
@@ -131,9 +130,18 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
         ivRefresh.setOnClickListener(this)
         ivList.setOnClickListener(this)
         ivHistory.setOnClickListener(this)
-        ivStatistic.setOnClickListener(this)
         clWarning.setOnClickListener(this)
         ivArrow.setOnClickListener(this)
+
+        val data: ColumnData = arguments!!.getParcelable("data")
+        for (i in data.child.indices) {
+            val dto = data.child[i]
+            if (TextUtils.equals(dto.columnId, "652")) {//预警统计
+                ivStatistic.visibility = View.VISIBLE
+                ivStatistic.setOnClickListener(this)
+            }
+        }
+
         refresh()
     }
 
@@ -426,7 +434,7 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val mView = inflater.inflate(R.layout.shawn_warning_marker_icon_info, null)
         val infoList = addInfoList(marker)
-        val mAdapter = HWarningAdapter(activity, infoList, true)
+        val mAdapter = WarningAdapter(activity, infoList, true)
         mView.listView.adapter = mAdapter
         val params = mView.listView.layoutParams
         if (infoList.size == 1) {
@@ -550,7 +558,7 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
             R.id.clWarning, R.id.ivArrow -> clickPromptWarning()
             R.id.ivRefresh -> refresh()
             R.id.ivList -> {
-                val intent = Intent(activity, HWarningListActivity::class.java)
+                val intent = Intent(activity, WarningListActivity::class.java)
                 intent.putExtra("isVisible", true)
                 val bundle = Bundle()
                 bundle.putParcelableArrayList("warningList", warningList as ArrayList<out Parcelable?>)

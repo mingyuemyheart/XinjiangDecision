@@ -19,6 +19,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -401,6 +402,7 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                 try {
                     JSONObject obj = new JSONObject(layerMap.get(childId));
                     final String url = obj.getString("dataurl")+timeParams;
+                    Log.e("urlurl", url);
                     OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {

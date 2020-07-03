@@ -20,11 +20,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.text.TextUtils
 import android.util.TypedValue
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.View.OnClickListener
-import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import cn.com.weather.api.WeatherAPI
@@ -170,6 +167,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         clHour.setOnClickListener(this)
         tvInfo.setOnClickListener(this)
         ivClimate.setOnClickListener(this)
+        clVideo.setOnClickListener(this)
         ivAudio.setOnClickListener(this)
         ivPlay2!!.setOnClickListener(this)
         hour = sdf1.format(Date()).toInt()
@@ -328,6 +326,15 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         aMap!!.setOnMapLoadedListener {
             mRadarManager = CaiyunManager(activity)
             okHttpMinuteImage()
+        }
+        aMap!!.setOnMapTouchListener { arg0 ->
+            if (scrollView != null) {
+                if (arg0.action == MotionEvent.ACTION_UP) {
+                    scrollView.requestDisallowInterceptTouchEvent(false)
+                } else {
+                    scrollView.requestDisallowInterceptTouchEvent(true)
+                }
+            }
         }
     }
 
@@ -566,7 +573,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
      * 获取疫情
      */
     private fun okHttpInfo(pro: String, city: String) {
-        val url = String.format("http://warn-wx.tianqi.cn/Test/getwhqydata?pro=%s&city=%s", pro, city)
+        val url = String.format("http://warn-wx.tianqi.cn/Test/getwhqydata?pro=%s&city=%s&appid=%s", pro, city, CONST.APPID)
         OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
 
@@ -1229,6 +1236,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
+            R.id.clVideo -> startActivity(Intent(activity, WebviewVideoActivity::class.java))
             R.id.tvInfo -> {
                 val intent = Intent(activity, WebviewActivity::class.java)
                 intent.putExtra(CONST.ACTIVITY_NAME, "实时更新：新型冠状病毒肺炎疫情实时大数据报告")

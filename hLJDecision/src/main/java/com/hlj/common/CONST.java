@@ -42,12 +42,16 @@ public class CONST {
 		public static final String userName = "uName";
 		public static final String passWord = "pwd";
 		public static final String token = "token";
+		public static final String groupId = "groupId";
+		public static final String uGroupName = "uGroupName";
 	}
 
-	public static String UID = null;//用户id
+	public static String UID = "2606";//用户id
 	public static String USERNAME = null;//用户名
 	public static String PASSWORD = null;//用户密码
 	public static String TOKEN = null;//token
+	public static String GROUPID = "50";
+	public static String UGROUPNAME = null;//uGroupName
 
 	//预警颜色对应规则
 	public static String[] blue = {"01", "_blue"};
