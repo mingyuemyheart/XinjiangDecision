@@ -15,7 +15,8 @@ public class WarningDto implements Parcelable {
 	public double lng;// 经度
 	public String type;//预警类型，如11B09
 	public String color;// 预警颜色,红橙黄蓝，id的后两位
-	public String provinceId;//省份id
+	public String provinceId;
+	public String warningId;
 	public String item0;
 	public int count;
 	public String colorName;
@@ -23,6 +24,10 @@ public class WarningDto implements Parcelable {
 	public String proCount;
 	public String cityCount;
 	public String disCount;
+
+	public String colorHex;
+	public String typeHex,typeName;
+	public boolean isSelected;
 
 	//预警统计
 	public String areaName;//省、市、县（区）对应的名称
@@ -38,6 +43,12 @@ public class WarningDto implements Parcelable {
 	public String time2;//预警解除时间
 	public String content;//预警详情内容
 	public String unit;//发布单位
+
+
+	public int section;
+	public String sectionName = null;
+	public String cityId = null;//城市id
+	public String level;
 
 	public WarningDto() {
 	}
@@ -57,6 +68,7 @@ public class WarningDto implements Parcelable {
 		dest.writeString(this.type);
 		dest.writeString(this.color);
 		dest.writeString(this.provinceId);
+		dest.writeString(this.warningId);
 		dest.writeString(this.item0);
 		dest.writeInt(this.count);
 		dest.writeString(this.colorName);
@@ -64,6 +76,10 @@ public class WarningDto implements Parcelable {
 		dest.writeString(this.proCount);
 		dest.writeString(this.cityCount);
 		dest.writeString(this.disCount);
+		dest.writeString(this.colorHex);
+		dest.writeString(this.typeHex);
+		dest.writeString(this.typeName);
+		dest.writeByte(this.isSelected ? (byte) 1 : (byte) 0);
 		dest.writeString(this.areaName);
 		dest.writeString(this.areaId);
 		dest.writeString(this.shortName);
@@ -77,6 +93,10 @@ public class WarningDto implements Parcelable {
 		dest.writeString(this.time2);
 		dest.writeString(this.content);
 		dest.writeString(this.unit);
+		dest.writeInt(this.section);
+		dest.writeString(this.sectionName);
+		dest.writeString(this.cityId);
+		dest.writeString(this.level);
 	}
 
 	protected WarningDto(Parcel in) {
@@ -88,6 +108,7 @@ public class WarningDto implements Parcelable {
 		this.type = in.readString();
 		this.color = in.readString();
 		this.provinceId = in.readString();
+		this.warningId = in.readString();
 		this.item0 = in.readString();
 		this.count = in.readInt();
 		this.colorName = in.readString();
@@ -95,6 +116,10 @@ public class WarningDto implements Parcelable {
 		this.proCount = in.readString();
 		this.cityCount = in.readString();
 		this.disCount = in.readString();
+		this.colorHex = in.readString();
+		this.typeHex = in.readString();
+		this.typeName = in.readString();
+		this.isSelected = in.readByte() != 0;
 		this.areaName = in.readString();
 		this.areaId = in.readString();
 		this.shortName = in.readString();
@@ -108,6 +133,10 @@ public class WarningDto implements Parcelable {
 		this.time2 = in.readString();
 		this.content = in.readString();
 		this.unit = in.readString();
+		this.section = in.readInt();
+		this.sectionName = in.readString();
+		this.cityId = in.readString();
+		this.level = in.readString();
 	}
 
 	public static final Creator<WarningDto> CREATOR = new Creator<WarningDto>() {

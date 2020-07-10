@@ -718,8 +718,8 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                             }
                                             if (!o.isNull("002")) {
                                                 val factTemp = o.getString("002")
-                                                tvTemp!!.text = "$factTemp°"
-                                                tvFact.tag = "$factTemp°"
+                                                tvTemp!!.text = "$factTemp"
+                                                tvFact.tag = "$factTemp"
                                             }
                                             if (!o.isNull("002")) {
                                                 val bodyTemp = o.getString("002")

@@ -35,7 +35,8 @@ import java.util.Set;
 
 public class MyApplication extends Application{
 
-	public static String appKey = "5755277767e58e5ca4000e07", msgSecret = "3464bbdf388960ddcea9c5cebf46cd66";
+//	public static String appKey = "5755277767e58e5ca4000e07", msgSecret = "3464bbdf388960ddcea9c5cebf46cd66";//旧
+	public static String appKey = "5efe98800cafb240580000e2", msgSecret = "a03a519f1e2867391368d006baefd69f";//新
     private static PushAgent mPushAgent = null;
     private static TagManager tagManager = null;
 	public static String DEVICETOKEN = "";
@@ -76,6 +77,8 @@ public class MyApplication extends Application{
 	 */
 	private void registerUmengPush() {
 		mPushAgent = PushAgent.getInstance(this);
+		//manifest里面的package最好与build.gradle中的applicationId保持一 致，如不一致，需调用setResourcePackageName设置资源文件包名
+		mPushAgent.setResourcePackageName("shawn.cxwl.com.hlj");
 
 		//参数number可以设置为0~10之间任意整数。当参数为0时，表示不合并通知
 		mPushAgent.setDisplayNotificationNumber(0);

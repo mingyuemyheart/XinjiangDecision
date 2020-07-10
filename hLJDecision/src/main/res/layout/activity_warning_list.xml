@@ -61,7 +61,7 @@
             android:scrollbars="none"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <GridView
+        <com.hlj.stickygridheaders.StickyGridHeadersGridView
             android:id="@+id/gridView3"
             android:layout_width="match_parent"
             android:layout_height="0dp"

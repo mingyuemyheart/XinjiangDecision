@@ -44,6 +44,8 @@ public class WarningListActivity extends BaseActivity implements OnClickListener
 	private GridView gridView3;
 	private WarningListScreenAdapter adapter3;
 	private List<WarningDto> list3 = new ArrayList<>();
+	private int section = 1;
+	private HashMap<String, Integer> sectionMap = new HashMap<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,14 +94,6 @@ public class WarningListActivity extends BaseActivity implements OnClickListener
 		public void afterTextChanged(Editable arg0) {
 			searchList.clear();
 			if (!TextUtils.isEmpty(arg0.toString().trim())) {
-				for (int i = 0; i < list3.size(); i++) {
-					if (i == 0) {
-						adapter3.isSelected.put(i, true);
-					}else {
-						adapter3.isSelected.put(i, false);
-					}
-				}
-				adapter3.notifyDataSetChanged();
 				closeList(gridView3);
 				
 				for (int i = 0; i < warningList.size(); i++) {
@@ -144,6 +138,7 @@ public class WarningListActivity extends BaseActivity implements OnClickListener
 	 */
 	private void initGridView3() {
 		list3.clear();
+
 		String[] array3 = getResources().getStringArray(R.array.warningDis);
 		for (int i = 0; i < array3.length; i++) {
 			HashMap<String, Integer> map = new HashMap<>();
@@ -152,45 +147,46 @@ public class WarningListActivity extends BaseActivity implements OnClickListener
 			for (int j = 0; j < warningList.size(); j++) {
 				WarningDto dto2 = warningList.get(j);
 				String[] array = dto2.html.split("-");
-				String provinceId = array[0].substring(0, 2);
-				String cityId = array[0].substring(0, 4);
-				if (TextUtils.equals(provinceId, value[0])) {
-					map.put(provinceId, count++);
-				}
-				if (TextUtils.equals(cityId, value[0])) {
-					map.put(cityId, count++);
+				String warningId = array[0];
+				if (TextUtils.equals(warningId, value[3])) {
+					map.put(warningId, count++);
 				}
 			}
 
 			WarningDto dto = new WarningDto();
-			dto.name = value[1];
-			dto.provinceId = value[0];
+			dto.sectionName = value[0];
+			dto.areaName = value[1];
+			dto.warningId = value[3];
 			dto.count = count;
 			if (i == 0 || count != 0) {
 				list3.add(dto);
 			}
 		}
-		
+
+		for (int i = 0; i < list3.size(); i++) {
+			WarningDto sectionDto = list3.get(i);
+			if (!sectionMap.containsKey(sectionDto.sectionName)) {
+				sectionDto.section = section;
+				sectionMap.put(sectionDto.sectionName, section);
+				section++;
+			}else {
+				sectionDto.section = sectionMap.get(sectionDto.sectionName);
+			}
+			list3.set(i, sectionDto);
+		}
+
 		gridView3 = findViewById(R.id.gridView3);
-		adapter3 = new WarningListScreenAdapter(mContext, list3, 3);
+		adapter3 = new WarningListScreenAdapter(mContext, list3);
 		gridView3.setAdapter(adapter3);
 		gridView3.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 				WarningDto dto = list3.get(arg2);
-				for (int i = 0; i < list3.size(); i++) {
-					if (i == arg2) {
-						adapter3.isSelected.put(i, true);
-					}else {
-						adapter3.isSelected.put(i, false);
-					}
-				}
-				adapter3.notifyDataSetChanged();
 				closeList(gridView3);
-				
+
 				selecteList.clear();
 				for (int i = 0; i < warningList.size(); i++) {
-					if (warningList.get(i).html.startsWith(dto.provinceId)) {
+					if (warningList.get(i).html.startsWith(dto.warningId)) {
 						selecteList.add(warningList.get(i));
 					}
 				}

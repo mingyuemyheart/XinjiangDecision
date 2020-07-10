@@ -784,6 +784,10 @@
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/shawn_bg_qdl_bb.xml"
     },
     {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_icon_warning_statistic_legend.jpg.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/icon_warning_statistic_legend.jpg"
+    },
+    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable-xxxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
         "source": "/Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d38ee2a06cea28bf109c2baccd44b5df/res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png"
     },
@@ -2560,6 +2564,10 @@
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/iv_empty_map.png"
     },
     {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_adapter_warning_type.xml.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_warning_type.xml"
+    },
+    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable-hdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
         "source": "/Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d38ee2a06cea28bf109c2baccd44b5df/res/drawable-hdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png"
     },
@@ -2996,6 +3004,10 @@
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/com_humidity.png"
     },
     {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_icon_calendar.png.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/icon_calendar.png"
+    },
+    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_corner_edittext.xml.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/corner_edittext.xml"
     },
@@ -3052,10 +3064,6 @@
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/corner_pro_bg.xml"
     },
     {
-        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout_adapter_warning_list_screen.xml.flat",
-        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/layout/adapter_warning_list_screen.xml"
-    },
-    {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/layout-watch-v20_abc_alert_dialog_title_material.xml.flat",
         "source": "/Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d38ee2a06cea28bf109c2baccd44b5df/res/layout-watch-v20/abc_alert_dialog_title_material.xml"
     },
@@ -3098,6 +3106,10 @@
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_icon_next.png.flat",
         "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/icon_next.png"
+    },
+    {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_bg_warning_type.xml.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/bg_warning_type.xml"
     },
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_abc_ratingbar_indicator_material.xml.flat",
@@ -4378,6 +4390,10 @@
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable-ldrtl-mdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "/Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d38ee2a06cea28bf109c2baccd44b5df/res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_bg_warning_type_press.xml.flat",
+        "source": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/res/drawable/bg_warning_type_press.xml"
     },
     {
         "merged": "/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/build/intermediates/res/merged/release/drawable_tab2_channel1.png.flat",

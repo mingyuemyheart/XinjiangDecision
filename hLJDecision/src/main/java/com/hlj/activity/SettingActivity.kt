@@ -122,6 +122,13 @@ class SettingActivity : BaseActivity(), OnClickListener {
             val editor = sharedPreferences.edit()
             editor.clear()
             editor.apply()
+            CONST.UID = "2606" //用户id
+            CONST.USERNAME = null //用户名
+            CONST.PASSWORD = null //用户密码
+            CONST.TOKEN = null //token
+            CONST.GROUPID = "50"
+            CONST.UGROUPNAME = null //uGroupName
+
             MyApplication.destoryActivity()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
@@ -132,7 +139,7 @@ class SettingActivity : BaseActivity(), OnClickListener {
      * 温馨提示对话框
      */
     private fun promptDialog() {
-        if (!TextUtils.isEmpty(CONST.USERNAME) && !TextUtils.equals(CONST.publicUser, CONST.USERNAME)) {
+        if (!TextUtils.equals(CONST.publicUser, CONST.USERNAME)) {
             return
         }
 

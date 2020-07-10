@@ -151,14 +151,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvFact" />
 
             <TextView
-                android:id="@+id/tvPhe"
+                android:id="@+id/tvTempStr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:textColor="@color/white"
+                android:text="℃"
                 android:textSize="@dimen/level_3"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTemp"
                 app:layout_constraintStart_toEndOf="@+id/tvTemp" />
+
+            <TextView
+                android:id="@+id/tvPhe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="15dp"
+                android:textSize="@dimen/level_3"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTempStr"
+                app:layout_constraintStart_toEndOf="@+id/tvTempStr" />
 
             <TextView
                 android:id="@+id/tvAqiCount"

@@ -1,9 +1,5 @@
 package com.hlj.activity;
 
-/**
- * 城市选择
- */
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -34,6 +30,9 @@ import java.util.List;
 
 import shawn.cxwl.com.hlj.R;
 
+/**
+ * 城市选择
+ */
 public class HCityActivity extends BaseActivity implements OnClickListener{
 	
 	private Context mContext = null;

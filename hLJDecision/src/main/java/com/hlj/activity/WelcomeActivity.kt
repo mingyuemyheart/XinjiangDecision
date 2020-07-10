@@ -21,7 +21,6 @@ import com.hlj.common.MyApplication
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_welcome.*
 import okhttp3.*
 import org.json.JSONArray
@@ -171,6 +170,8 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 	 * 账号密码登录
 	 */
 	private fun okHttpLogin(userName: String, pwd: String) {
+		CONST.USERNAME = userName
+		CONST.PASSWORD = pwd
 		val url = "http://decision-admin.tianqi.cn/Home/Work/login"
 		val builder = FormBody.Builder()
 		builder.add("username", userName)
@@ -357,6 +358,17 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 								if (msg != null) {
 									Toast.makeText(this@WelcomeActivity, msg, Toast.LENGTH_SHORT).show()
 								}
+								val sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE)
+								val editor = sharedPreferences.edit()
+								editor.clear()
+								editor.apply()
+								CONST.UID = "2606" //用户id
+								CONST.USERNAME = CONST.publicUser //用户名
+								CONST.PASSWORD = CONST.publicPwd //用户密码
+								CONST.TOKEN = null //token
+								CONST.GROUPID = "50"
+								CONST.UGROUPNAME = null //uGroupName
+
 								okHttpLogin(CONST.publicUser, CONST.publicPwd)
 							}
 						}
