@@ -50,24 +50,6 @@
                 app:layout_constraintStart_toEndOf="@+id/tvPosition"
                 app:layout_constraintTop_toTopOf="@+id/tvPosition" />
 
-            <com.hlj.view.WaveView
-                android:id="@+id/waveView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
-
-            <ImageView
-                android:id="@+id/ivAudio"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/home_pic_syoff"
-                app:layout_constraintBottom_toBottomOf="@+id/waveView"
-                app:layout_constraintEnd_toEndOf="@+id/waveView"
-                app:layout_constraintStart_toStartOf="@+id/waveView"
-                app:layout_constraintTop_toTopOf="@+id/waveView" />
-
             <TextView
                 android:id="@+id/tvDisWarning"
                 android:layout_width="wrap_content"
@@ -81,7 +63,7 @@
                 android:textSize="@dimen/level_4"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/waveView" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
 
             <TextView
                 android:id="@+id/tvCityWarning"
@@ -155,8 +137,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:textColor="@color/white"
                 android:text="℃"
+                android:textColor="@color/white"
                 android:textSize="@dimen/level_3"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTemp"
                 app:layout_constraintStart_toEndOf="@+id/tvTemp" />
@@ -165,8 +147,8 @@
                 android:id="@+id/tvPhe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_marginStart="15dp"
+                android:textColor="@color/white"
                 android:textSize="@dimen/level_3"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTempStr"
                 app:layout_constraintStart_toEndOf="@+id/tvTempStr" />
@@ -218,6 +200,73 @@
                 app:layout_constraintStart_toEndOf="@+id/ivWind"
                 app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clAudio"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_audio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAqiCount">
+
+                <ImageView
+                    android:id="@+id/ivAudio"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/icon_audio"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="语音"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/level_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivAudio" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clVideo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_audio"
+                app:layout_constraintStart_toEndOf="@+id/clAudio"
+                app:layout_constraintTop_toTopOf="@+id/clAudio"
+                app:layout_constraintBottom_toBottomOf="@+id/clAudio"
+                android:layout_marginStart="10dp">
+
+                <ImageView
+                    android:id="@+id/ivVideo"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/icon_video"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="视频"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/level_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivVideo"/>
+
+            </android.support.constraint.ConstraintLayout>
+
             <ImageView
                 android:id="@+id/ivClimate"
                 android:layout_width="30dp"
@@ -228,41 +277,6 @@
                 android:src="@drawable/icon_climate"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvAqi" />
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/clVideo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:background="@drawable/bg_seek_info"
-                android:paddingStart="15dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="5dp"
-                app:layout_constraintBottom_toTopOf="@+id/tvInfo"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="5dp"
-                    android:src="@drawable/icon_video"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvVideo"
-                    app:layout_constraintEnd_toStartOf="@+id/tvVideo"
-                    app:layout_constraintTop_toTopOf="@+id/tvVideo" />
-
-                <TextView
-                    android:id="@+id/tvVideo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="视频"
-                    android:textSize="@dimen/level_4"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </android.support.constraint.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tvInfo"

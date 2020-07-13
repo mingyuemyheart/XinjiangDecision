@@ -135,7 +135,7 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
         clHour.setOnClickListener(this)
         tvInfo.setOnClickListener(this)
         ivClimate.setOnClickListener(this)
-        ivAudio.setOnClickListener(this)
+        clAudio.setOnClickListener(this)
         ivPlay2!!.setOnClickListener(this)
         hour = sdf1.format(Date()).toInt()
         if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
@@ -187,17 +187,6 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
     }
 
     private fun initSpeech() {
-        waveView.setDuration(5000)
-        waveView.setStyle(Paint.Style.FILL)
-        waveView.setColor(Color.WHITE)
-        waveView.setInterpolator(LinearOutSlowInInterpolator())
-        waveView.start()
-        waveView.postDelayed({
-            if (waveView != null) {
-                waveView.stop()
-            }
-        }, 25000)
-
         // 初始化合成对象
         mTts = SpeechSynthesizer.createSynthesizer(this) { code ->
 
@@ -1155,9 +1144,8 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
                 intent.putExtra(CONST.WEB_URL, "https://voice.baidu.com/act/newpneumonia/newpneumonia?fraz=partner&paaz=gjyj")
                 startActivity(intent)
             }
-            R.id.ivAudio -> {
+            R.id.clAudio -> {
                 if (!mTts!!.isSpeaking) {
-                    waveView.stop()
                     ivAudio.setImageResource(R.drawable.audio_animation)
                     val audioAnimation = ivAudio.drawable as AnimationDrawable
                     audioAnimation.start()
@@ -1193,13 +1181,13 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
 
                         override fun onCompleted(error: SpeechError?) {
                             if (error == null) {
-                                ivAudio.setImageResource(R.drawable.home_pic_syoff)
+                                ivAudio.setImageResource(R.drawable.icon_audio)
                             } else {
                             }
                         }
                     })
                 }else {
-                    ivAudio.setImageResource(R.drawable.home_pic_syoff)
+                    ivAudio.setImageResource(R.drawable.icon_audio)
                     mTts!!.stopSpeaking()
                 }
             }

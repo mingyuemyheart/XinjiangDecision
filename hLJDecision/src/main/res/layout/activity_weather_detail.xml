@@ -59,24 +59,6 @@
                     app:layout_constraintStart_toEndOf="@+id/tvPosition"
                     app:layout_constraintTop_toTopOf="@+id/tvPosition" />
 
-                <com.hlj.view.WaveView
-                    android:id="@+id/waveView"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="15dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
-
-                <ImageView
-                    android:id="@+id/ivAudio"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/home_pic_syoff"
-                    app:layout_constraintBottom_toBottomOf="@+id/waveView"
-                    app:layout_constraintEnd_toEndOf="@+id/waveView"
-                    app:layout_constraintStart_toStartOf="@+id/waveView"
-                    app:layout_constraintTop_toTopOf="@+id/waveView" />
-
                 <TextView
                     android:id="@+id/tvDisWarning"
                     android:layout_width="wrap_content"
@@ -90,7 +72,7 @@
                     android:textSize="@dimen/level_4"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/waveView" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
 
                 <TextView
                     android:id="@+id/tvCityWarning"
@@ -215,6 +197,39 @@
                     app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
                     app:layout_constraintStart_toEndOf="@+id/ivWind"
                     app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clAudio"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_audio"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAqiCount">
+
+                    <ImageView
+                        android:id="@+id/ivAudio"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/icon_audio"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="语音"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/level_5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivAudio" />
+
+                </android.support.constraint.ConstraintLayout>
 
                 <ImageView
                     android:id="@+id/ivClimate"
