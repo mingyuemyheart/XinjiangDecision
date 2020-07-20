@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="shawn.cxwl.com.hlj.upgrade"
-    android:versionCode="314"
-    android:versionName="3.1.4" >
+    android:versionCode="316"
+    android:versionName="3.1.6" >
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -274,6 +274,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hlj.activity.WebviewVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hlj.activity.DataIntroActivity"
             android:screenOrientation="portrait" />
 
         <provider

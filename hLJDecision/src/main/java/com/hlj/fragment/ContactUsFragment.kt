@@ -12,8 +12,10 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.hlj.activity.DataIntroActivity
 import com.hlj.activity.HPDFActivity
 import com.hlj.common.CONST
+import com.hlj.common.ColumnData
 import com.hlj.utils.CommonUtil
 import kotlinx.android.synthetic.main.dialog_delete.view.*
 import kotlinx.android.synthetic.main.fragment_contact_us.*
@@ -26,6 +28,7 @@ import shawn.cxwl.com.hlj.R
 class ContactUsFragment : Fragment() {
 
     private var mReceiver: MyBroadCastReceiver? = null
+    private var desc = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_contact_us, null)
@@ -33,7 +36,22 @@ class ContactUsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setDesc()
         initBroadCast()
+    }
+
+    private fun setDesc() {
+        val dataList: ArrayList<ColumnData> = arguments!!.getParcelableArrayList("dataList")
+        for (i in 0 until dataList.size) {
+            val dto1 = dataList[i]
+            var desc1 = "${(i+1)}.${dto1.name}：${dto1.desc}\n"
+            for (j in 0 until dto1.child.size) {
+                val dto2 = dto1.child[j]
+                val desc2 = "   ${(i+1)}.${(j+1)}.${dto2.name}：${dto2.desc}\n"
+                desc1 += desc2
+            }
+            desc+=desc1
+        }
     }
 
     private fun initBroadCast() {
@@ -58,9 +76,9 @@ class ContactUsFragment : Fragment() {
 
     private fun refresh() {
         ivData!!.setOnClickListener {
-            val intent = Intent(activity, HPDFActivity::class.java)
-            intent.putExtra(CONST.ACTIVITY_NAME, "部分产品数据说明")
-            intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/data/%E9%BB%91%E9%BE%99%E6%B1%9F%E6%B0%94%E8%B1%A1%E6%89%8B%E6%9C%BAAPP%E9%83%A8%E5%88%86%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E8%AF%B4%E6%98%8E.pdf")
+            val intent = Intent(activity, DataIntroActivity::class.java)
+            intent.putExtra(CONST.ACTIVITY_NAME, "客户端产品数据说明")
+            intent.putExtra("desc", desc)
             startActivity(intent)
         }
 //        tvPhone.setOnClickListener {

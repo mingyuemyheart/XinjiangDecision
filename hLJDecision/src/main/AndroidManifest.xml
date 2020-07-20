@@ -316,6 +316,10 @@
             android:name="com.hlj.activity.WebviewVideoActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.hlj.activity.DataIntroActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

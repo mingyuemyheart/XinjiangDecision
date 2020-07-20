@@ -11,10 +11,10 @@ INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJ
 	android:name
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:54:13-67
 manifest
-ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12
-INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12
-INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12
-INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d38ee2a06cea28bf109c2baccd44b5df/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-v4:28.0.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/42b997719d3b93e61cd6ff68faf068db/AndroidManifest.xml:17:1-22:12
 MERGED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:2:1-14:12
@@ -48,22 +48,22 @@ MERGED from [com.android.support:interpolator:28.0.0] /Users/sunxiaoming/.gradle
 MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/725ef320d3a80e834a7dca63788c9166/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/65d7bfab193cf0fd679533516743d9da/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/d74f7d4c31de229e4b0eed4167aec523/AndroidManifest.xml:17:1-22:12
-INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12
-INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12
-INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12
+INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12
 	package
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:4:5-33
 		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
-		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12
 		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 	xmlns:tools
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
-		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12
 		INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:11-69
@@ -184,7 +184,7 @@ MERGED from [com.umeng.sdk:push:4.2.0] /Users/sunxiaoming/.gradle/caches/transfo
 	android:name
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:31:22-72
 application
-ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:34:5-319:19
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:34:5-323:19
 MERGED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:7:5-12:19
 MERGED from [com.squareup.picasso:picasso:2.71828] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/97eec22ed26bc9e8a6fdc784845f787c/AndroidManifest.xml:7:5-12:19
 MERGED from [com.umeng.sdk:push:4.2.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/push-4.2.0.aar/905ab0c3741ffd978adb4b1402f36800/AndroidManifest.xml:27:5-163:19
@@ -605,6 +605,12 @@ ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDec
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:317:13-49
 	android:name
 		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:316:13-65
+activity#com.hlj.activity.DataIntroActivity
+ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:319:9-321:52
+	android:screenOrientation
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:321:13-49
+	android:name
+		ADDED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:320:13-62
 uses-sdk
 INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml
@@ -932,4 +938,4 @@ ADDED from [com.umeng.sdk:push:4.2.0] /Users/sunxiaoming/.gradle/caches/transfor
 	android:pathPattern
 		ADDED from [com.umeng.sdk:push:4.2.0] /Users/sunxiaoming/.gradle/caches/transforms-1/files-1.1/push-4.2.0.aar/905ab0c3741ffd978adb4b1402f36800/AndroidManifest.xml:161:35-59
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-321:12 reason: com.umeng.message.lib requested WRITE_EXTERNAL_STORAGE
+IMPLIED from /Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/hLJDecision/src/main/AndroidManifest.xml:2:1-325:12 reason: com.umeng.message.lib requested WRITE_EXTERNAL_STORAGE

@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/level_4"
         android:textColor="@color/black"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

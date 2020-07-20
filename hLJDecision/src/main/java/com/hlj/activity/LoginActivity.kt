@@ -451,10 +451,10 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 				tvPhoneLine.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
 				clUser.visibility = View.GONE
 				clPhone.visibility = View.VISIBLE
-				tvLogin.text = "下一步"
+				tvLogin.text = "获取验证码登录"
 			}
 			R.id.tvLogin -> {
-				if (TextUtils.equals(tvLogin.text.toString(), "下一步")) {
+				if (TextUtils.equals(tvLogin.text.toString(), "获取验证码登录")) {
 					okHttpNext()
 				} else {
 					okHttpLogin()

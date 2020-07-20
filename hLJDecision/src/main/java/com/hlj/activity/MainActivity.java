@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
@@ -291,6 +292,7 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 			bundle.putString(CONST.WEB_URL, channel.dataUrl);
 			bundle.putString(CONST.LOCAL_ID, channel.id);
 			bundle.putParcelable("data", channel);
+			bundle.putParcelableArrayList("dataList", (ArrayList<? extends Parcelable>) columnList);
 			fragment.setArguments(bundle);
 			fragments.add(fragment);
 		}
