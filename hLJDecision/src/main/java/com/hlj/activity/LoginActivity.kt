@@ -39,7 +39,7 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 	private var lat = 0.0
 	private var lng = 0.0
 	private var dataList : ArrayList<ColumnData> = ArrayList()
-	private var isMobileLogin = false
+	private var isMobileLogin = true
 	private var seconds:Int = 60
 	private var timer: Timer? = null
 
