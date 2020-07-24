@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -79,6 +80,7 @@ public class ShawnStrongStreamActivity extends BaseActivity implements OnClickLi
 	private static final int HANDLER_PAUSE = 4;
 	private HashMap<String, JSONObject> hashMap = new HashMap<>();//强对流数据
 	private List<Polyline> polylines = new ArrayList<>();
+	private TextView tvLighting, tvRadar;
 	private ImageView ivRadar,ivLighting,ivLegend;
 	private HashMap<String, JSONObject> lightingMap = new HashMap<>();//闪电数据
 	private List<Marker> lightingMarkers = new ArrayList<>();//闪电markers
@@ -88,7 +90,6 @@ public class ShawnStrongStreamActivity extends BaseActivity implements OnClickLi
 	private int width = 0;
 	private MyBroadCastReceiver mReceiver;
 	private String BROAD_CLICKMENU = "broad_clickMenu";//点击播放或暂停
-	private RelativeLayout reShare;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -156,12 +157,15 @@ public class ShawnStrongStreamActivity extends BaseActivity implements OnClickLi
 		ivRadar.setOnClickListener(this);
 		ivLighting = findViewById(R.id.ivLighting);
 		ivLighting.setOnClickListener(this);
+		tvLighting = findViewById(R.id.tvLighting);
+		tvLighting.setOnClickListener(this);
+		tvRadar = findViewById(R.id.tvRadar);
+		tvRadar.setOnClickListener(this);
 		llLegend = findViewById(R.id.llLegend);
 		ImageView ivRank = findViewById(R.id.ivRank);
 		ivRank.setOnClickListener(this);
 		ivLegend = findViewById(R.id.ivLegend);
 		llContainer = findViewById(R.id.llContainer);
-		reShare = findViewById(R.id.reShare);
 
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -408,7 +412,9 @@ public class ShawnStrongStreamActivity extends BaseActivity implements OnClickLi
 				break;
 			case HANDLER_LOAD_FINISHED:
 				cancelDialog();
+				tvRadar.setVisibility(View.VISIBLE);
 				ivRadar.setVisibility(View.VISIBLE);
+				tvLighting.setVisibility(View.VISIBLE);
 				ivLighting.setVisibility(View.VISIBLE);
 				llLegend.setVisibility(View.VISIBLE);
 				llContainer.removeAllViews();
@@ -710,26 +716,36 @@ public class ShawnStrongStreamActivity extends BaseActivity implements OnClickLi
 		case R.id.llBack:
 			finish();
 			break;
+		case R.id.tvRadar:
 		case R.id.ivRadar:
 			if (mOverlay != null) {
 				if (mOverlay.isVisible()) {
 					mOverlay.setVisible(false);
-					ivRadar.setImageResource(R.drawable.shawn_icon_radar_off);
+					ivRadar.setImageResource(R.drawable.shawn_icon_radar);
+					tvRadar.setTextColor(getResources().getColor(R.color.text_color4));
+					tvRadar.setBackgroundResource(R.drawable.bg_map_btn);
 				}else {
 					mOverlay.setVisible(true);
-					ivRadar.setImageResource(R.drawable.shawn_icon_radar_on);
+					ivRadar.setImageResource(R.drawable.shawn_icon_radaron);
+					tvRadar.setTextColor(Color.WHITE);
+					tvRadar.setBackgroundResource(R.drawable.bg_map_btn_press);
 				}
 			}
 			break;
+		case R.id.tvLighting:
 		case R.id.ivLighting:
 			if (isShowLightingMarkers) {
 				hideLightingMarkers();
 				isShowLightingMarkers = false;
-				ivLighting.setImageResource(R.drawable.shawn_icon_lighting_offf);
+				ivLighting.setImageResource(R.drawable.icon_lighting_off);
+				tvLighting.setTextColor(getResources().getColor(R.color.text_color4));
+				tvLighting.setBackgroundResource(R.drawable.bg_map_btn);
 			}else {
 				showLightingMarkers();
 				isShowLightingMarkers = true;
-				ivLighting.setImageResource(R.drawable.shawn_icon_lighting_onn);
+				ivLighting.setImageResource(R.drawable.icon_lighting_on);
+				tvLighting.setTextColor(Color.WHITE);
+				tvLighting.setBackgroundResource(R.drawable.bg_map_btn_press);
 			}
 			break;
 			case R.id.ivRank:

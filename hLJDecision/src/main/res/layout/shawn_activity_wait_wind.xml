@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
 
     <include
         android:id="@+id/reTitle"
@@ -11,23 +12,26 @@
     <com.amap.api.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/reTitle"/>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle"/>
 
     <TextView
         android:id="@+id/tvMapNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_alignBottom="@+id/mapView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:textColor="#6990A9"
         android:textSize="@dimen/level_5" />
 
     <RelativeLayout
         android:id="@+id/reShare"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/reTitle">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle">
 
         <RelativeLayout
             android:id="@+id/container"
@@ -50,13 +54,21 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvFileTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5"
+                android:visibility="gone"/>
+
+            <TextView
                 android:id="@+id/tvWindFore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="未来24小时风速预报"
-                android:textColor="#f4f4f4"
+                android:textColor="@color/white"
                 android:textSize="@dimen/level_4"/>
 
             <TextView
@@ -64,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="#cbcbcb"
+                android:textColor="@color/white"
                 android:textSize="@dimen/level_5"/>
 
             <LinearLayout
@@ -83,30 +95,13 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvFileTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/llDetail"
-            android:layout_margin="10dp"
-            android:background="@drawable/shawn_bg_corner_left_right_black"
-            android:gravity="center"
-            android:paddingBottom="3dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="3dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/level_5"
-            android:visibility="gone"/>
-
         <LinearLayout
             android:id="@+id/llHeight"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_above="@+id/ivSwitch"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/shawn_bg_corner_switch_height"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -158,6 +153,7 @@
             android:src="@drawable/shawn_icon_height_off"/>
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/ivSwitch"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -173,9 +169,9 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
-            android:src="@drawable/shawn_icon_location_off"
+            android:src="@drawable/icon_location_off"
             android:visibility="invisible"/>
 
     </RelativeLayout>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

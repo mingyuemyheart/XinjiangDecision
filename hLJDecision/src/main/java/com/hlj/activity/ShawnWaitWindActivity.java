@@ -75,7 +75,6 @@ public class ShawnWaitWindActivity extends BaseActivity implements OnClickListen
     private LinearLayout llHeight,llContainer1;
     private TextView tvTitle,tvFileTime,tvHeight200,tvHeight500,tvHeight1000,tvLocation;
     private ImageView ivArrow, ivHeight,ivSwitch,ivLocation;
-    private RelativeLayout reShare;
     private MapView mapView;
     private AMap aMap;
     private float zoom = 3.7f;
@@ -127,7 +126,6 @@ public class ShawnWaitWindActivity extends BaseActivity implements OnClickListen
         LinearLayout llBack = findViewById(R.id.llBack);
         llBack.setOnClickListener(this);
         tvTitle = findViewById(R.id.tvTitle);
-        reShare = findViewById(R.id.reShare);
         tvFileTime = findViewById(R.id.tvFileTime);
         container = findViewById(R.id.container);
         container2 = findViewById(R.id.container2);
@@ -625,11 +623,11 @@ public class ShawnWaitWindActivity extends BaseActivity implements OnClickListen
                 break;
             case R.id.ivLocation:
                 if (zoom >= 12.f) {
-                    ivLocation.setImageResource(R.drawable.shawn_icon_location_off);
+                    ivLocation.setImageResource(R.drawable.icon_location_off);
                     zoom = 3.7f;
                     aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locationLat, locationLng), zoom));
                 }else {
-                    ivLocation.setImageResource(R.drawable.shawn_icon_location_on);
+                    ivLocation.setImageResource(R.drawable.icon_location_on);
                     zoom = 12.0f;
                     aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locationLat, locationLng), zoom));
                 }

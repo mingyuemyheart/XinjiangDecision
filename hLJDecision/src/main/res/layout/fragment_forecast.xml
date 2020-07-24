@@ -284,7 +284,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_seek_info"
                 android:lineSpacingExtra="1dp"
-                android:paddingStart="20dp"
+                android:paddingStart="30dp"
                 android:paddingTop="6dp"
                 android:paddingEnd="5dp"
                 android:paddingBottom="6dp"

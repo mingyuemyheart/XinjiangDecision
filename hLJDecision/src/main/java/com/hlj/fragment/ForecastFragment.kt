@@ -590,7 +590,8 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                     cityCount = cityObj.getString("confirm")
                                 }
                             }
-                            tvInfo!!.text = String.format("今日疫情\n%s累计确诊%s例\n%s累计确诊%s例", city, cityCount, pro, proCount)
+//                            tvInfo!!.text = String.format("今日疫情\n%s累计确诊%s例\n%s累计确诊%s例", city, cityCount, pro, proCount)
+                            tvInfo!!.text = "新冠肺炎\n疫情实时\n动态"
                             tvInfo!!.visibility = View.VISIBLE
                         } catch (e: JSONException) {
                             e.printStackTrace()

@@ -247,13 +247,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/bg_check_detai"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/selector_check_detail"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:text="开始查询"
-                android:textColor="@color/title_bg"
+                android:textColor="@color/white"
                 android:textSize="@dimen/level_5" />
         </RelativeLayout>
 
@@ -263,7 +264,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/reTime"
-            android:background="#a6c4e0"
+            android:background="#EAEFF7"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="5dp" >
@@ -281,7 +282,7 @@
                     android:id="@+id/tv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color4"
                     android:textSize="@dimen/level_5" />
 
                 <ImageView
@@ -303,7 +304,7 @@
                     android:id="@+id/tv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color4"
                     android:textSize="@dimen/level_5" />
 
                 <ImageView
@@ -325,7 +326,7 @@
                     android:id="@+id/tv3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color4"
                     android:textSize="@dimen/level_5" />
 
                 <ImageView

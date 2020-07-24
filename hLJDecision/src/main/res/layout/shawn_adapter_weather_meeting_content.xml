@@ -7,11 +7,6 @@
     android:orientation="horizontal"
     android:padding="10dp">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/hs_icon_sj" />
-
     <TextView
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
@@ -34,10 +29,10 @@
         android:id="@+id/tvLive"
         android:layout_width="50dp"
         android:layout_height="25dp"
-        android:background="@drawable/corner_live"
+        android:background="@drawable/selector_check_detail"
         android:gravity="center"
         android:text="直播"
-        android:textColor="@color/blue"
+        android:textColor="@color/white"
         android:textSize="@dimen/level_5" />
 
 </LinearLayout>

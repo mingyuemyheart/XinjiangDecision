@@ -84,7 +84,7 @@
             android:visibility="invisible"
             android:layout_below="@+id/tvThunder"
             android:padding="5dp"
-            android:src="@drawable/shawn_icon_play"/>
+            android:src="@drawable/icon_play"/>
 
         <TextView
             android:id="@+id/tvSeekbarTime"
@@ -227,7 +227,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/shawn_icon_location"/>
+        android:src="@drawable/icon_location_off"/>
 
     <ImageView
         android:id="@+id/ivLg"
@@ -236,7 +236,7 @@
         android:layout_above="@+id/llLegendQdl"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
-        android:src="@drawable/shawn_icon_legend"/>
+        android:src="@drawable/icon_map_legend"/>
 
     <ImageView
         android:id="@+id/ivLegend"

@@ -126,6 +126,11 @@ public class ShawnWeatherMeetingActivity extends BaseActivity implements OnClick
 			if (!TextUtils.isEmpty(dto.columnName)) {
 				tvName.setText(dto.columnName);
 			}
+			if (i == 0) {
+				tvName.setTextColor(getResources().getColor(R.color.colorPrimary));
+			}else {
+				tvName.setTextColor(getResources().getColor(R.color.text_color4));
+			}
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 			params.weight = 1.0f;
 			tvName.setLayoutParams(params);
@@ -135,15 +140,15 @@ public class ShawnWeatherMeetingActivity extends BaseActivity implements OnClick
 			tvBar.setGravity(Gravity.CENTER);
 			tvBar.setOnClickListener(new MyOnClickListener(i));
 			if (i == 0) {
-				tvBar.setBackgroundColor(Color.WHITE);
+				tvBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 			}else {
 				tvBar.setBackgroundColor(getResources().getColor(R.color.transparent));
 			}
 			LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 			params1.weight = 1.0f;
 			params1.height = (int) (dm.density*2);
-			params1.leftMargin = (int) (dm.density*30);
-			params1.rightMargin = (int) (dm.density*30);
+			params1.leftMargin = (int) (dm.density*50);
+			params1.rightMargin = (int) (dm.density*50);
 			tvBar.setLayoutParams(params1);
 			llContainer1.addView(tvBar, i);
 
@@ -169,7 +174,11 @@ public class ShawnWeatherMeetingActivity extends BaseActivity implements OnClick
 			if (llContainer != null) {
 				for (int i = 0; i < llContainer.getChildCount(); i++) {
 					TextView tvName = (TextView) llContainer.getChildAt(i);
-					tvName.setTextColor(Color.WHITE);
+					if (i == arg0) {
+						tvName.setTextColor(getResources().getColor(R.color.colorPrimary));
+					}else {
+						tvName.setTextColor(getResources().getColor(R.color.transparent));
+					}
 				}
 			}
 
@@ -177,7 +186,7 @@ public class ShawnWeatherMeetingActivity extends BaseActivity implements OnClick
 				for (int i = 0; i < llContainer1.getChildCount(); i++) {
 					TextView tvBar = (TextView) llContainer1.getChildAt(i);
 					if (i == arg0) {
-						tvBar.setBackgroundColor(Color.WHITE);
+						tvBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 					}else {
 						tvBar.setBackgroundColor(getResources().getColor(R.color.transparent));
 					}

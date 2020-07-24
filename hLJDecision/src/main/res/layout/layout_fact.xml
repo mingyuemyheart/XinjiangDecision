@@ -53,12 +53,11 @@
             android:id="@+id/tvLayerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#60000000"
             android:gravity="center"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
-            android:textColor="#ffffff"
-            android:textSize="@dimen/level_5"
+            android:textColor="@color/text_color3"
+            android:textSize="@dimen/level_4"
             android:visibility="gone" />
 
     </RelativeLayout>
@@ -67,20 +66,18 @@
         android:id="@+id/tvIntro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:lineSpacingExtra="2dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
-        android:textColor="@color/text_color3"
-        android:textSize="@dimen/level_5" />
+        android:padding="5dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/level_4" />
 
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/listTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#a6c4e0"
+        android:background="#EAEFF7"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="5dp" >
@@ -91,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color4"
             android:textSize="@dimen/level_5" />
 
         <TextView
@@ -100,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color4"
             android:textSize="@dimen/level_5" />
 
         <TextView
@@ -109,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.7"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color4"
             android:textSize="@dimen/level_5" />
     </LinearLayout>
 
@@ -139,14 +136,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_check_detai"
+            android:background="@drawable/selector_check_detail"
             android:gravity="center"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="5dp"
             android:text="详细数据>>"
-            android:textColor="@color/title_bg"
+            android:textColor="@color/white"
             android:textSize="@dimen/level_4" />
 
         <TextView
@@ -155,14 +152,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_check_detai"
+            android:background="@drawable/selector_check_detail"
             android:gravity="center"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="5dp"
             android:text="历史数据查询>>"
-            android:textColor="@color/title_bg"
+            android:textColor="@color/white"
             android:textSize="@dimen/level_4" />
 
     </LinearLayout>

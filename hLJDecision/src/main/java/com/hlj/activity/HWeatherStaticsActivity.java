@@ -12,6 +12,7 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -92,8 +93,7 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 	private TextView tvBar4 = null;
 	private TextView tvBar5 = null;
 	private TextView tvDetail = null;
-	private RelativeLayout reDetail = null;
-	private RelativeLayout reContent = null;
+	private ConstraintLayout clDetail = null;
 	private ProgressBar progressBar = null;
 	public final static String SANX_DATA_99 = "sanx_data_99";//加密秘钥名称
 	public final static String APPID = "f63d329270a44900";//机密需要用到的AppId
@@ -136,8 +136,7 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 		mCircularProgressBar3 = (CircularProgressBar) findViewById(R.id.bar3);
 		mCircularProgressBar4 = (CircularProgressBar) findViewById(R.id.bar4);
 		mCircularProgressBar5 = (CircularProgressBar) findViewById(R.id.bar5);
-		reDetail = (RelativeLayout) findViewById(R.id.reDetail);
-		reContent = (RelativeLayout) findViewById(R.id.reContent);
+		clDetail = findViewById(R.id.clDetail);
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
 		String title = getIntent().getStringExtra(CONST.ACTIVITY_NAME);
@@ -361,10 +360,7 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 		if (view == null) {
 			return null;
 		}
-		TextView tvName = (TextView) view.findViewById(R.id.tvName);
-		if (!TextUtils.isEmpty(name) && name.length() > 2) {
-			name = name.substring(0, 2)+"\n"+name.substring(2, name.length());
-		}
+		TextView tvName = view.findViewById(R.id.tvName);
 		tvName.setText(name);
 		return view;
 	}
@@ -446,8 +442,8 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 	
 	@Override
 	public void onMapClick(LatLng arg0) {
-		if (reDetail.getVisibility() == View.VISIBLE) {
-			hideAnimation(reDetail);
+		if (clDetail.getVisibility() == View.VISIBLE) {
+			hideAnimation(clDetail);
 		}
 	}
 	
@@ -488,7 +484,7 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 	}
 
 	private void clickMarker(String cityId) {
-		showAnimation(reDetail);
+		showAnimation(clDetail);
 		String name = null;
 		String areaId = null;
 		String stationId = null;
@@ -521,7 +517,6 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 		tvName.setText(name + " " + stationId);
 		tvDetail.setText("");
 		progressBar.setVisibility(View.VISIBLE);
-		reContent.setVisibility(View.INVISIBLE);
 
 		OkHttpStatisticDetail(getSecretUrl2(stationId, areaId));
 	}
@@ -573,7 +568,6 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 					@Override
 					public void run() {
 						progressBar.setVisibility(View.INVISIBLE);
-						reContent.setVisibility(View.VISIBLE);
 						if (result != null) {
 							try {
 								JSONObject obj = new JSONObject(result.toString());
@@ -788,8 +782,8 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (reDetail.getVisibility() == View.VISIBLE) {
-				hideAnimation(reDetail);
+			if (clDetail.getVisibility() == View.VISIBLE) {
+				hideAnimation(clDetail);
 				return false;
 			} else {
 				finish();
@@ -802,8 +796,8 @@ public class HWeatherStaticsActivity extends BaseActivity implements OnClickList
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.llBack:
-			if (reDetail.getVisibility() == View.VISIBLE) {
-				hideAnimation(reDetail);
+			if (clDetail.getVisibility() == View.VISIBLE) {
+				hideAnimation(clDetail);
 			} else {
 				finish();
 			}

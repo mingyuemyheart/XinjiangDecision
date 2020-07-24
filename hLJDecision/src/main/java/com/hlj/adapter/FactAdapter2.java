@@ -100,7 +100,7 @@ public class FactAdapter2 extends BaseAdapter{
 						TextView tvArea = new TextView(mContext);
 						tvArea.setGravity(Gravity.CENTER);
 						tvArea.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
-						tvArea.setTextColor(mContext.getResources().getColor(R.color.title_bg));
+						tvArea.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
 						tvArea.setPadding(10, 0, 10, 0);
 						tvArea.setText(data.area);
 						tvArea.setTag(data.area);
@@ -153,7 +153,7 @@ public class FactAdapter2 extends BaseAdapter{
 							TextView tvArea = new TextView(mContext);
 							tvArea.setGravity(Gravity.CENTER);
 							tvArea.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
-							tvArea.setTextColor(mContext.getResources().getColor(R.color.title_bg));
+							tvArea.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
 							tvArea.setPadding(10, 0, 10, 0);
 							tvArea.setText(data.area);
 							tvArea.setTag(data.area);
@@ -203,9 +203,9 @@ public class FactAdapter2 extends BaseAdapter{
 		}
 		
 		if (position % 2 == 0) {
-			convertView.setBackgroundColor(0xffeaeaea);
-		}else {
 			convertView.setBackgroundColor(0xfff5f5f5);
+		}else {
+			convertView.setBackgroundColor(0xffeaeaea);
 		}
 		
 		return convertView;

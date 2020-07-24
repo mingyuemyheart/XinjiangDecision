@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <ImageView
-        android:layout_width="30dip"
-        android:layout_height="30dip"
-        android:layout_centerInParent="true"
-        android:background="@drawable/iv_red_circle" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="8dip" />
+        android:textColor="#7EB362"
+        android:textSize="@dimen/level_5" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/ivPoint"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"
+        android:src="@drawable/bg_statistic_marker" />
+
+    <ImageView
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        app:layout_constraintStart_toStartOf="@+id/ivPoint"
+        app:layout_constraintEnd_toEndOf="@+id/ivPoint"
+        app:layout_constraintTop_toTopOf="@+id/ivPoint"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPoint"
+        android:src="@drawable/bg_statistic_marker2" />
+
+</android.support.constraint.ConstraintLayout>

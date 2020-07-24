@@ -116,7 +116,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="1.5dp"
-            android:src="@drawable/iv_map_legend"/>
+            android:src="@drawable/icon_map_legend"/>
 
         <ImageView
             android:id="@+id/ivLegend"

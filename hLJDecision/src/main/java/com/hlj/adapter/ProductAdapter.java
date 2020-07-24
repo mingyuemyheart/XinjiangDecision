@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hlj.common.ColumnData;
+import com.hlj.dto.AgriDto;
 import com.hlj.utils.CommonUtil;
 import com.hlj.view.RoundTransform;
 import com.squareup.picasso.Picasso;
@@ -26,14 +27,14 @@ public class ProductAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private LayoutInflater mInflater;
-	private List<ColumnData> mArrayList;
+	private List<AgriDto> mArrayList;
 
 	private final class ViewHolder {
 		TextView tvName;
 		ImageView icon;
 	}
 	
-	public ProductAdapter(Context context, List<ColumnData> mArrayList) {
+	public ProductAdapter(Context context, List<AgriDto> mArrayList) {
 		mContext = context;
 		this.mArrayList = mArrayList;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -66,8 +67,8 @@ public class ProductAdapter extends BaseAdapter {
 		}else {
 			mHolder = (ViewHolder) convertView.getTag();
 		}
-		
-		ColumnData dto = mArrayList.get(position);
+
+		AgriDto dto = mArrayList.get(position);
 
 		if (!TextUtils.isEmpty(dto.name)) {
 			mHolder.tvName.setText(dto.name);

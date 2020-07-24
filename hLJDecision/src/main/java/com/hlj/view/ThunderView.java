@@ -118,9 +118,9 @@ public class ThunderView extends View {
 
 		//绘制横向分割线、刻度
 		lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 0.5f));
-		lineP.setColor(0xffd7d8d8);
+		lineP.setColor(0xff6ED9D9);
 		lineP.setStyle(Style.STROKE);
-		textP.setColor(getResources().getColor(R.color.text_color2));
+		textP.setColor(getResources().getColor(R.color.white));
 		textP.setTextSize(CommonUtil.dip2px(mContext, 10));
 		for (int i = minValue; i <= maxValue; i+=itemDivider) {
 			float dividerY = chartH - chartH*(i-minValue)/(maxValue-minValue) + topMargin;
@@ -144,9 +144,9 @@ public class ThunderView extends View {
 
 
 		lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 0.5f));
-		lineP.setColor(0xffd7d8d8);
+		lineP.setColor(0xff6ED9D9);
 		lineP.setStyle(Style.STROKE);
-		textP.setColor(getResources().getColor(R.color.text_color2));
+		textP.setColor(getResources().getColor(R.color.white));
 		for (int i = 0; i < size; i++) {
 			StrongStreamDto dto = dataList.get(i);
 
@@ -181,7 +181,7 @@ public class ThunderView extends View {
 
 		//绘制区域
 		lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 1));
-		lineP.setColor(0x608BA5F7);
+		lineP.setColor(0x606ED9D9);
 		lineP.setStyle(Style.FILL);
 		for (int i = 0; i < size-1; i++) {
 			float x1 = dataList.get(i).x;
@@ -202,7 +202,7 @@ public class ThunderView extends View {
 
 		//绘制曲线
 		lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 1));
-		lineP.setColor(0xff274AB2);
+		lineP.setColor(0xff6ED9D9);
 		lineP.setStyle(Style.STROKE);
 		for (int i = 0; i < size-1; i++) {
 			float x1 = dataList.get(i).x;
@@ -216,7 +216,7 @@ public class ThunderView extends View {
 			canvas.drawPath(linePath, lineP);
 		}
 
-		textP.setColor(getResources().getColor(R.color.text_color3));
+		textP.setColor(0xff6ED9D9);
 		textP.setTextSize(CommonUtil.dip2px(mContext, 10));
 		for (int i = 0; i < size; i++) {
 			StrongStreamDto dto = dataList.get(i);

@@ -29,6 +29,7 @@ import com.hlj.manager.CaiyunManager
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import com.hlj.view.MinuteFallView
+import com.hlj.view.MinuteFallView2
 import kotlinx.android.synthetic.main.activity_minute_fall.*
 import kotlinx.android.synthetic.main.layout_title.*
 import okhttp3.Call
@@ -157,7 +158,7 @@ class MinuteFallActivity : BaseActivity(), View.OnClickListener, CaiyunManager.R
                                                     //										dto.minuteFall = new Random().nextFloat();
                                                     minuteList.add(dto)
                                                 }
-                                                val minuteFallView = MinuteFallView(this@MinuteFallActivity)
+                                                val minuteFallView = MinuteFallView2(this@MinuteFallActivity)
                                                 minuteFallView.setData(minuteList, tvRain!!.text.toString())
                                                 llContainer3!!.removeAllViews()
                                                 llContainer3!!.addView(minuteFallView, CommonUtil.widthPixels(this@MinuteFallActivity), CommonUtil.dip2px(this@MinuteFallActivity, 120f).toInt())
@@ -519,12 +520,12 @@ class MinuteFallActivity : BaseActivity(), View.OnClickListener, CaiyunManager.R
             R.id.ivPlay -> {
                 if (mRadarThread != null && mRadarThread!!.currentState == STATE_PLAYING) {
                     mRadarThread!!.pause()
-                    ivPlay!!.setImageResource(R.drawable.iv_play2)
+                    ivPlay!!.setImageResource(R.drawable.icon_play)
                 } else if (mRadarThread != null && mRadarThread!!.currentState == STATE_PAUSE) {
                     mRadarThread!!.play()
-                    ivPlay!!.setImageResource(R.drawable.iv_pause2)
+                    ivPlay!!.setImageResource(R.drawable.icon_pause)
                 } else if (mRadarThread == null) {
-                    ivPlay!!.setImageResource(R.drawable.iv_pause2)
+                    ivPlay!!.setImageResource(R.drawable.icon_pause)
                     if (mRadarThread != null) {
                         mRadarThread!!.cancel()
                         mRadarThread = null

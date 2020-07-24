@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -12,174 +13,244 @@
     <com.amap.api.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/reTitle" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle" />
 
     <TextView
         android:id="@+id/tvMapNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_alignBottom="@+id/mapView"
         android:textColor="#6990A9"
-        android:textSize="@dimen/level_5" />
+        android:textSize="@dimen/level_5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/reShare"
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_4"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle" />
+
+    <TextView
+        android:id="@+id/tvLighting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="闪电"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="@dimen/level_4"
+        android:background="@drawable/bg_map_btn_press"
+        android:layout_marginStart="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="5dp"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"/>
+
+    <ImageView
+        android:id="@+id/ivLighting"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/icon_lighting_on"
+        android:visibility="gone"
+        android:layout_marginStart="5dp"
+        app:layout_constraintTop_toTopOf="@+id/tvLighting"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLighting"
+        app:layout_constraintStart_toStartOf="@+id/tvLighting"/>
+
+    <TextView
+        android:id="@+id/tvRain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="短时强降水"
+        android:gravity="center_vertical"
+        android:textColor="@color/text_color4"
+        android:textSize="@dimen/level_4"
+        android:background="@drawable/bg_map_btn"
+        android:layout_marginStart="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="5dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/tvLighting"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLighting"
+        app:layout_constraintStart_toEndOf="@+id/tvLighting"/>
+
+    <ImageView
+        android:id="@+id/ivRain"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/fzj_butn_rainoff"
+        android:visibility="gone"
+        android:layout_marginStart="5dp"
+        app:layout_constraintTop_toTopOf="@+id/tvRain"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRain"
+        app:layout_constraintStart_toStartOf="@+id/tvRain"/>
+
+    <TextView
+        android:id="@+id/tvWind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="大风"
+        android:gravity="center_vertical"
+        android:textColor="@color/text_color4"
+        android:textSize="@dimen/level_4"
+        android:background="@drawable/bg_map_btn"
+        android:layout_marginStart="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="5dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/tvRain"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRain"
+        app:layout_constraintStart_toEndOf="@+id/tvRain"/>
+
+    <ImageView
+        android:id="@+id/ivWind"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/fzj_butn_windoff"
+        android:visibility="gone"
+        android:layout_marginStart="5dp"
+        app:layout_constraintTop_toTopOf="@+id/tvWind"
+        app:layout_constraintBottom_toBottomOf="@+id/tvWind"
+        app:layout_constraintStart_toStartOf="@+id/tvWind"/>
+
+    <TextView
+        android:id="@+id/tvHail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="冰雹"
+        android:gravity="center_vertical"
+        android:textColor="@color/text_color4"
+        android:textSize="@dimen/level_4"
+        android:background="@drawable/bg_map_btn"
+        android:layout_marginStart="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="5dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/tvWind"
+        app:layout_constraintBottom_toBottomOf="@+id/tvWind"
+        app:layout_constraintStart_toEndOf="@+id/tvWind"/>
+
+    <ImageView
+        android:id="@+id/ivHail"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/fzj_butn_hailoff"
+        android:visibility="gone"
+        android:layout_marginStart="5dp"
+        app:layout_constraintTop_toTopOf="@+id/tvHail"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHail"
+        app:layout_constraintStart_toStartOf="@+id/tvHail"/>
+
+    <ImageView
+        android:id="@+id/ivRadar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/shawn_icon_radar_off"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/ivData"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivData"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/fzj_butn_dataoff"
+        app:layout_constraintBottom_toTopOf="@+id/ivLocation"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLocation"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/icon_location_off"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/ivLegendPrompt"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLegendPrompt"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/icon_map_legend"
+        app:layout_constraintBottom_toTopOf="@+id/llSeekBar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/fzj_stream_legend"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/llSeekBar"
+        app:layout_constraintStart_toEndOf="@+id/ivLegendPrompt" />
+
+    <LinearLayout
+        android:id="@+id/llSeekBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/reTitle">
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/level_4" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_seekbar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
-            android:id="@+id/ivLighting"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_below="@+id/tvName"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/shawn_icon_lighting_onn"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/ivRain"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_below="@+id/ivLighting"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/fzj_butn_rainoff"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/ivWind"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_below="@+id/ivRain"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/fzj_butn_windoff"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/ivHail"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_below="@+id/ivWind"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/fzj_butn_hailoff"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/ivRadar"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_above="@+id/ivData"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/shawn_icon_radar_off"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/ivData"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_above="@+id/ivLocation"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/fzj_butn_dataoff" />
-
-        <ImageView
-            android:id="@+id/ivLocation"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_above="@+id/ivLegendPrompt"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/shawn_icon_location_off"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/ivLegendPrompt"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_above="@+id/llSeekBar"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/shawn_icon_map_legend_off" />
-
-        <ImageView
-            android:id="@+id/ivLegend"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/llSeekBar"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/ivLegendPrompt"
-            android:adjustViewBounds="true"
-            android:src="@drawable/fzj_stream_legend"
-            android:visibility="invisible" />
+            android:id="@+id/ivPlay"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/icon_play" />
 
         <LinearLayout
-            android:id="@+id/llSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/translucent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="invisible">
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/ivPlay"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="#90000000"
-                android:padding="5dp"
-                android:src="@drawable/shawn_icon_play" />
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="10dp"
+                android:maxHeight="2dp"
+                android:minHeight="2dp"
+                android:progressDrawable="@drawable/shawn_seekbar_drawable"
+                android:thumb="@drawable/shawn_seekbar_thumb"
+                android:thumbOffset="0dp" />
 
             <LinearLayout
+                android:id="@+id/llContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:orientation="vertical">
-
-                <SeekBar
-                    android:id="@+id/seekBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="10dp"
-                    android:maxHeight="2dp"
-                    android:minHeight="2dp"
-                    android:progressDrawable="@drawable/shawn_seekbar_drawable"
-                    android:thumb="@drawable/shawn_seekbar_thumb"
-                    android:thumbOffset="0dp" />
-
-                <LinearLayout
-                    android:id="@+id/llContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"></LinearLayout>
-            </LinearLayout>
+                android:gravity="center_vertical"
+                android:orientation="horizontal" />
         </LinearLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

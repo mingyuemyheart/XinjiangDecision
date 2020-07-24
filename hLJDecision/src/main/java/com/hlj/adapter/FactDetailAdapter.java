@@ -84,9 +84,9 @@ public class FactDetailAdapter extends BaseAdapter{
 		mHolder.tvValue.setText(dto.val+"");
 		
 		if (position % 2 == 0) {
-			convertView.setBackgroundColor(0xffeaeaea);
-		}else {
 			convertView.setBackgroundColor(0xfff5f5f5);
+		}else {
+			convertView.setBackgroundColor(0xffeaeaea);
 		}
 		
 		return convertView;

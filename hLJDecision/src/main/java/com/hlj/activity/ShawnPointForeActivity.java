@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
@@ -64,6 +65,7 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 	
 	private Context mContext;
 	private TextView tvName,tvDataSource,tvTime;
+	private TextView tvTemp,tvHumidity,tvWind,tvCloud;
 	private ImageView ivTemp,ivHumidity,ivWind,ivCloud,ivSwitch,ivDataSource,ivPlay,ivLegend;
 	private MapView mMapView;
 	private AMap aMap;
@@ -112,6 +114,14 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 		ivWind.setOnClickListener(this);
 		ivCloud = findViewById(R.id.ivCloud);
 		ivCloud.setOnClickListener(this);
+		tvTemp = findViewById(R.id.tvTemp);
+		tvTemp.setOnClickListener(this);
+		tvHumidity = findViewById(R.id.tvHumidity);
+		tvHumidity.setOnClickListener(this);
+		tvWind = findViewById(R.id.tvWind);
+		tvWind.setOnClickListener(this);
+		tvCloud = findViewById(R.id.tvCloud);
+		tvCloud.setOnClickListener(this);
 		ImageView ivLocation = findViewById(R.id.ivLocation);
 		ivLocation.setOnClickListener(this);
 		ivSwitch = findViewById(R.id.ivSwitch);
@@ -365,26 +375,33 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 		mRadarThread = new RadarThread();
 
 		PointForeDto data = null;
-		if (dataType == 1) {
-			mRadarThread.setDataList(pointForeDto.tems);
-			data = pointForeDto.tems.get(currentIndex);
-			changeProgress(data.time, currentIndex, pointForeDto.tems.size()-1);
-		}else if (dataType == 2) {
-			mRadarThread.setDataList(pointForeDto.humiditys);
-			data = pointForeDto.humiditys.get(currentIndex);
-			changeProgress(data.time, currentIndex, pointForeDto.humiditys.size()-1);
-		}else if (dataType == 3) {
-			mRadarThread.setDataList(pointForeDto.winds);
-			data = pointForeDto.winds.get(currentIndex);
-			changeProgress(data.time, currentIndex, pointForeDto.winds.size()-1);
-		}else if (dataType == 5) {
-			mRadarThread.setDataList(pointForeDto.clouds);
-			data = pointForeDto.clouds.get(currentIndex);
-			changeProgress(data.time, currentIndex, pointForeDto.clouds.size()-1);
+		try {
+			if (dataType == 1) {
+				mRadarThread.setDataList(pointForeDto.tems);
+				data = pointForeDto.tems.get(currentIndex);
+				changeProgress(data.time, currentIndex, pointForeDto.tems.size()-1);
+			}else if (dataType == 2) {
+				mRadarThread.setDataList(pointForeDto.humiditys);
+				data = pointForeDto.humiditys.get(currentIndex);
+				changeProgress(data.time, currentIndex, pointForeDto.humiditys.size()-1);
+			}else if (dataType == 3) {
+				mRadarThread.setDataList(pointForeDto.winds);
+				data = pointForeDto.winds.get(currentIndex);
+				changeProgress(data.time, currentIndex, pointForeDto.winds.size()-1);
+			}else if (dataType == 5) {
+				mRadarThread.setDataList(pointForeDto.clouds);
+				data = pointForeDto.clouds.get(currentIndex);
+				changeProgress(data.time, currentIndex, pointForeDto.clouds.size()-1);
+			}
+		} catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
 		}
-		OkHttpBitmap(data.imgUrl);
-		Picasso.get().load(data.legendUrl).into(ivLegend);
-		mRadarThread.start();
+
+		if (data != null) {
+			OkHttpBitmap(data.imgUrl);
+			Picasso.get().load(data.legendUrl).into(ivLegend);
+			mRadarThread.start();
+		}
 	}
 
 	private void OkHttpBitmap(final String url) {
@@ -577,38 +594,74 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 			case R.id.llBack:
 				finish();
 				break;
+			case R.id.tvTemp:
 			case R.id.ivTemp:
 				ivTemp.setImageResource(R.drawable.com_temp_press);
 				ivHumidity.setImageResource(R.drawable.com_humidity);
-				ivWind.setImageResource(R.drawable.com_wind);
+				ivWind.setImageResource(R.drawable.fzj_butn_windoff);
 				ivCloud.setImageResource(R.drawable.com_cloud);
+				tvTemp.setBackgroundResource(R.drawable.bg_map_btn_press);
+				tvHumidity.setBackgroundResource(R.drawable.bg_map_btn);
+				tvWind.setBackgroundResource(R.drawable.bg_map_btn);
+				tvCloud.setBackgroundResource(R.drawable.bg_map_btn);
+				tvTemp.setTextColor(Color.WHITE);
+				tvHumidity.setTextColor(getResources().getColor(R.color.text_color4));
+				tvWind.setTextColor(getResources().getColor(R.color.text_color4));
+				tvCloud.setTextColor(getResources().getColor(R.color.text_color4));
 
 				dataType = 1;
 				switchElement();
 				break;
+			case R.id.tvHumidity:
 			case R.id.ivHumidity:
 				ivTemp.setImageResource(R.drawable.com_temp);
 				ivHumidity.setImageResource(R.drawable.com_humidity_press);
-				ivWind.setImageResource(R.drawable.com_wind);
+				ivWind.setImageResource(R.drawable.fzj_butn_windoff);
 				ivCloud.setImageResource(R.drawable.com_cloud);
+				tvTemp.setBackgroundResource(R.drawable.bg_map_btn);
+				tvHumidity.setBackgroundResource(R.drawable.bg_map_btn_press);
+				tvWind.setBackgroundResource(R.drawable.bg_map_btn);
+				tvCloud.setBackgroundResource(R.drawable.bg_map_btn);
+				tvTemp.setTextColor(getResources().getColor(R.color.text_color4));
+				tvHumidity.setTextColor(Color.WHITE);
+				tvWind.setTextColor(getResources().getColor(R.color.text_color4));
+				tvCloud.setTextColor(getResources().getColor(R.color.text_color4));
 
 				dataType = 2;
 				switchElement();
 				break;
+			case R.id.tvWind:
 			case R.id.ivWind:
 				ivTemp.setImageResource(R.drawable.com_temp);
 				ivHumidity.setImageResource(R.drawable.com_humidity);
-				ivWind.setImageResource(R.drawable.com_wind_press);
+				ivWind.setImageResource(R.drawable.fzj_butn_wind);
 				ivCloud.setImageResource(R.drawable.com_cloud);
+				tvTemp.setBackgroundResource(R.drawable.bg_map_btn);
+				tvHumidity.setBackgroundResource(R.drawable.bg_map_btn);
+				tvWind.setBackgroundResource(R.drawable.bg_map_btn_press);
+				tvCloud.setBackgroundResource(R.drawable.bg_map_btn);
+				tvTemp.setTextColor(getResources().getColor(R.color.text_color4));
+				tvHumidity.setTextColor(getResources().getColor(R.color.text_color4));
+				tvWind.setTextColor(Color.WHITE);
+				tvCloud.setTextColor(getResources().getColor(R.color.text_color4));
 
 				dataType = 3;
 				switchElement();
 				break;
+			case R.id.tvCloud:
 			case R.id.ivCloud:
 				ivTemp.setImageResource(R.drawable.com_temp);
 				ivHumidity.setImageResource(R.drawable.com_humidity);
-				ivWind.setImageResource(R.drawable.com_wind);
+				ivWind.setImageResource(R.drawable.fzj_butn_windoff);
 				ivCloud.setImageResource(R.drawable.com_cloud_press);
+				tvTemp.setBackgroundResource(R.drawable.bg_map_btn);
+				tvHumidity.setBackgroundResource(R.drawable.bg_map_btn);
+				tvWind.setBackgroundResource(R.drawable.bg_map_btn);
+				tvCloud.setBackgroundResource(R.drawable.bg_map_btn_press);
+				tvTemp.setTextColor(getResources().getColor(R.color.text_color4));
+				tvHumidity.setTextColor(getResources().getColor(R.color.text_color4));
+				tvWind.setTextColor(getResources().getColor(R.color.text_color4));
+				tvCloud.setTextColor(Color.WHITE);
 
 				dataType = 5;
 				switchElement();
@@ -657,10 +710,10 @@ public class ShawnPointForeActivity extends BaseActivity implements OnClickListe
 			case R.id.ivPlay:
 				if (mRadarThread != null && mRadarThread.getCurrentState() == RadarThread.STATE_PLAYING) {
 					mRadarThread.pause();
-					ivPlay.setImageResource(R.drawable.shawn_icon_play);
+					ivPlay.setImageResource(R.drawable.icon_play);
 				} else if (mRadarThread != null && mRadarThread.getCurrentState() == RadarThread.STATE_PAUSE) {
 					mRadarThread.play();
-					ivPlay.setImageResource(R.drawable.shawn_icon_pause);
+					ivPlay.setImageResource(R.drawable.icon_pause);
 				}
 				break;
 

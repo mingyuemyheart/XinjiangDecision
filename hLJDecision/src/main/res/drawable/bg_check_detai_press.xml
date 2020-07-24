@@ -3,17 +3,12 @@
 
     <item>
         <shape>
-            <solid android:color="@color/light_gray" />
-
+            <solid android:color="@color/refresh_color3" />
             <corners
                 android:radius="5dp" />
             <size 
                 android:width="30dp"
                 android:height="20dp"/>
-            <stroke 
-                android:width="0.5dp"
-                android:color="#6001699f"/>
-
         </shape>
     </item>
 

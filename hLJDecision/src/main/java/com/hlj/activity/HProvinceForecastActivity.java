@@ -446,7 +446,7 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		tvTemp.setText(dto.highTemp+" | "+dto.lowTemp+"℃");
+		tvTemp.setText(dto.lowTemp+"~"+dto.highTemp+"℃");
 		
 		return view;
 	}

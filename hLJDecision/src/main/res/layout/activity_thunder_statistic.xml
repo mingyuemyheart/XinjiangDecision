@@ -15,61 +15,27 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reTitle"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintTop_toBottomOf="@+id/reTitle" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clList"
-        app:layout_constraintTop_toBottomOf="@+id/reTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/shawn_bg_corner_white"
         android:clickable="true"
         android:focusable="true"
-        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/ivLoc"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="3dp"
-            android:src="@drawable/shawn_icon_location_black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvPosition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/ivLoc"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/level_4"
-            app:layout_constraintStart_toEndOf="@+id/ivLoc"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvStreet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color2"
-            android:textSize="@dimen/level_4"
-            app:layout_constraintStart_toEndOf="@+id/ivLoc"
-            app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle">
 
         <LinearLayout
             android:id="@+id/llContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:background="#ffE5E5E5"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvStreet" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/llContainer1"
@@ -81,47 +47,85 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llContainer" />
 
-        <TextView
-            android:id="@+id/tvThunder"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/level_4"
-            app:layout_constraintStart_toEndOf="@+id/ivLoc"
-            app:layout_constraintTop_toBottomOf="@+id/llContainer1" />
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_corner_black"
+            app:layout_constraintTop_toBottomOf="@+id/llContainer1">
 
-        <LinearLayout
-            android:id="@+id/llContainer2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvThunder" />
+            <ImageView
+                android:id="@+id/ivLoc"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/icon_location_white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/ivLoc"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4"
+                app:layout_constraintStart_toEndOf="@+id/ivLoc"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvStreet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4"
+                app:layout_constraintStart_toEndOf="@+id/ivLoc"
+                app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
+
+            <TextView
+                android:id="@+id/tvThunder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4"
+                app:layout_constraintStart_toEndOf="@+id/ivLoc"
+                app:layout_constraintTop_toBottomOf="@+id/tvStreet" />
+
+            <LinearLayout
+                android:id="@+id/llContainer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvThunder" />
+
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clChart"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/reTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffE5E5E5"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle">
 
         <LinearLayout
             android:id="@+id/llContainer3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -146,8 +150,9 @@
                 android:id="@+id/ivPre"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/icon_pre"
+                android:layout_marginStart="5dp"
                 android:background="@drawable/shawn_selector_btn_back"
+                android:src="@drawable/icon_pre"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -156,8 +161,9 @@
                 android:id="@+id/ivNext"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/icon_next"
+                android:layout_marginEnd="5dp"
                 android:background="@drawable/shawn_selector_btn_back"
+                android:src="@drawable/icon_next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -166,8 +172,8 @@
                 android:id="@+id/tvTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color3"
                 android:gravity="center"
+                android:textColor="@color/text_color3"
                 android:textSize="@dimen/level_4"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -184,28 +190,28 @@
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/shawn_icon_location"
+        android:src="@drawable/icon_location_off"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/ivLegend"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:adjustViewBounds="true"/>
+        android:adjustViewBounds="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <include
         android:id="@+id/layoutDate"
-        android:visibility="gone"
         layout="@layout/layout_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

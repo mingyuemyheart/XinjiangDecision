@@ -1,64 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <include
         android:id="@+id/reTitle"
         layout="@layout/layout_title" />
 
-    <RelativeLayout
+    <com.amap.api.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/reTitle"
-        android:background="@color/white"
-        android:orientation="vertical" >
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle"/>
 
-        <com.amap.api.maps.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/tvMapNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#6990A9"
+        android:textSize="@dimen/level_5" />
 
-        <TextView
-            android:id="@+id/tvMapNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_alignBottom="@+id/mapView"
-            android:textColor="#6990A9"
-            android:textSize="@dimen/level_5" />
-
-        <RelativeLayout
-            android:id="@+id/reLegend"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/iv_air_polution" />
-        </RelativeLayout>
+    <ImageView
+        android:id="@+id/ivLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:adjustViewBounds="true"
+        android:src="@drawable/legend_polution" />
 
         <LinearLayout
             android:id="@+id/llContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_alignParentBottom="true"
             android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/bg_corner_black"
             android:visibility="gone" >
 
             <LinearLayout
                 android:id="@+id/llTop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/hScrollView"
-                android:background="@color/white"
-                android:clickable="true"
                 android:orientation="vertical" >
 
                 <RelativeLayout
@@ -70,20 +65,12 @@
                     android:paddingRight="10dp"
                     android:paddingTop="5dp" >
 
-                    <ImageView
-                        android:id="@+id/ivIcon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/iv_location" />
-
                     <TextView
                         android:id="@+id/tvName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/ivIcon"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/level_4" />
 
                     <TextView
@@ -92,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:textColor="@color/text_color4"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/level_5" />
                 </RelativeLayout>
 
@@ -109,7 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="50dp" />
 
                     <LinearLayout
@@ -124,7 +111,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:text="AQI"
-                            android:textColor="@color/text_color4"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/level_5" />
 
                         <TextView
@@ -136,7 +123,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/level_4" />
                     </LinearLayout>
 
@@ -162,7 +149,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
-                                    android:textColor="@color/text_color4"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/level_4" />
                             </RelativeLayout>
 
@@ -171,7 +158,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="全国AQI排名"
-                                android:textColor="@color/text_color4"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/level_5" />
                         </LinearLayout>
 
@@ -192,7 +179,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerHorizontal="true"
-                                    android:textColor="@color/text_color4"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/level_4" />
 
                                 <TextView
@@ -201,7 +188,7 @@
                                     android:layout_below="@+id/tvPm2_5"
                                     android:layout_centerHorizontal="true"
                                     android:text="ug/m³"
-                                    android:textColor="@color/text_color4"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/level_5" />
                             </RelativeLayout>
 
@@ -210,7 +197,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="PM2.5"
-                                android:textColor="@color/text_color4"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/level_5" />
                         </LinearLayout>
 
@@ -232,7 +219,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerHorizontal="true"
-                                    android:textColor="@color/text_color4"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/level_4" />
 
                                 <TextView
@@ -241,7 +228,7 @@
                                     android:layout_below="@+id/tvPm10"
                                     android:layout_centerHorizontal="true"
                                     android:text="ug/m³"
-                                    android:textColor="@color/text_color4"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/level_5" />
                             </RelativeLayout>
 
@@ -250,7 +237,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="PM10"
-                                android:textColor="@color/text_color4"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/level_5" />
                         </LinearLayout>
                     </LinearLayout>
@@ -263,7 +250,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:lineSpacingExtra="3dp"
-                    android:textColor="@color/text_color4"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/level_5" />
             </LinearLayout>
 
@@ -271,7 +258,6 @@
                 android:id="@+id/llCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:visibility="gone" >
@@ -280,7 +266,7 @@
                     android:id="@+id/tvCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_color3"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/level_4" />
 
                 <TextView
@@ -288,7 +274,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:text="实况（过去24小时）和预报（未来24小时）"
-                    android:textColor="@color/text_color3"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/level_5" />
             </LinearLayout>
 
@@ -303,7 +289,6 @@
                     android:id="@+id/llContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="horizontal" >
                 </LinearLayout>
             </HorizontalScrollView>
@@ -314,13 +299,12 @@
             android:id="@+id/ivExpand"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="30dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:src="@drawable/iv_expand_black"
             android:visibility="gone" />
 
-    </RelativeLayout>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

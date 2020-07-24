@@ -118,7 +118,7 @@
                 android:layout_height="35dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/iv_typhoon_cj_on"
+                android:src="@drawable/icon_distance_on"
                 android:visibility="gone" />
 
             <ImageView
@@ -127,7 +127,7 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/tf_icon_wz" />
+                android:src="@drawable/icon_location_off" />
 
             <ImageView
                 android:id="@+id/ivTyphoonPlay"
@@ -135,7 +135,7 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/iv_typhoon_play"
+                android:src="@drawable/icon_typhoon_play"
                 android:visibility="gone" />
 
             <ImageView
@@ -144,14 +144,14 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/iv_typhoon_list" />
+                android:src="@drawable/icon_typhoon_list" />
 
             <ImageView
                 android:id="@+id/ivLegend"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/iv_map_legend" />
+                android:src="@drawable/icon_map_legend" />
 
             <TextView
                 android:id="@+id/tvNews1"

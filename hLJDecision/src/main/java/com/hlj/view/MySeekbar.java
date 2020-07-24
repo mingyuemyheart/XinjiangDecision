@@ -91,10 +91,10 @@ public class MySeekbar extends View {
         textP = new Paint();
         textP.setAntiAlias(true);
 
-        playBit = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(getResources(), R.drawable.shawn_icon_play),
+        playBit = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(getResources(), R.drawable.icon_play),
                 (int)(CommonUtil.dip2px(mContext, 40)), (int)(CommonUtil.dip2px(mContext, 40)));
 
-        pauseBit = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(getResources(), R.drawable.shawn_icon_pause),
+        pauseBit = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(getResources(), R.drawable.icon_pause),
                 (int)(CommonUtil.dip2px(mContext, 40)), (int)(CommonUtil.dip2px(mContext, 40)));
     }
 
@@ -141,7 +141,7 @@ public class MySeekbar extends View {
         float w = canvas.getWidth();
         float h = canvas.getHeight();
         float leftMargin = CommonUtil.dip2px(mContext, 10);//左边距
-        float rightMargin = CommonUtil.dip2px(mContext, 20);//右边距
+        float rightMargin = CommonUtil.dip2px(mContext, 50);//右边距
         float margin1 = CommonUtil.dip2px(mContext, 10);//滑块距离播放按钮距离
         margin2 = leftMargin+playBit.getWidth()+margin1;//seekbar距离左边长度
         float seekBarWidth = w-margin2-rightMargin;//seekbar宽度
@@ -201,19 +201,19 @@ public class MySeekbar extends View {
         canvas.drawPath(path, dashP);
 
         //绘制开始时间
-        textP.setColor(Color.WHITE);
+        textP.setColor(getResources().getColor(R.color.text_color4));
         textP.setTextSize(CommonUtil.dip2px(mContext, 12));
         float startTimeWidth = textP.measureText(startTime);
         canvas.drawText(startTime, margin2-startTimeWidth/2, h/2+CommonUtil.dip2px(mContext, 23), textP);
 
         //绘制结束时间
-        textP.setColor(Color.WHITE);
+        textP.setColor(getResources().getColor(R.color.text_color4));
         textP.setTextSize(CommonUtil.dip2px(mContext, 12));
         float entTimeWidth = textP.measureText(endTime);
         canvas.drawText(endTime, w-rightMargin-entTimeWidth/2, h/2+CommonUtil.dip2px(mContext, 23), textP);
 
         //绘制当前时间
-        textP.setColor(Color.WHITE);
+        textP.setColor(getResources().getColor(R.color.text_color4));
         textP.setTextSize(CommonUtil.dip2px(mContext, 12));
         float currentTimeWidth = textP.measureText("现在");
         canvas.drawText("现在", margin2+itemWidth*currentIndex-currentTimeWidth/2, h/2+CommonUtil.dip2px(mContext, 23), textP);
@@ -224,7 +224,7 @@ public class MySeekbar extends View {
 
             if (isDraggingThumb == false) {
                 //线程暂停时，绘制当前时间对应滑块
-                lineP.setColor(Color.WHITE);
+                lineP.setColor(getResources().getColor(R.color.text_color4));
                 lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 12));
                 canvas.drawPoint(margin2+itemWidth*currentIndex, h/2, lineP);
                 lineP.setColor(0xffffba00);
@@ -234,7 +234,7 @@ public class MySeekbar extends View {
                 //绘制滑块滑动对应的时间
                 if (!TextUtils.isEmpty(currentTime)) {
                     try {
-                        textP.setColor(Color.WHITE);
+                        textP.setColor(getResources().getColor(R.color.text_color4));
                         textP.setTextSize(CommonUtil.dip2px(mContext, 12));
                         float timeWidth = textP.measureText(sdf2.format(sdf1.parse(currentTime)));
                         canvas.drawText(sdf2.format(sdf1.parse(currentTime)), margin2+itemWidth*currentIndex-timeWidth/2, h/2-CommonUtil.dip2px(mContext, 15), textP);
@@ -248,7 +248,7 @@ public class MySeekbar extends View {
 
             if (isDraggingThumb == false) {
                 //线程播放时，绘制变动时间对应滑块
-                lineP.setColor(Color.WHITE);
+                lineP.setColor(getResources().getColor(R.color.text_color4));
                 lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 12));
                 canvas.drawPoint(margin2+itemWidth*playingIndex, h/2, lineP);
                 lineP.setColor(0xffffba00);
@@ -258,7 +258,7 @@ public class MySeekbar extends View {
                 //绘制滑块滑动对应的时间
                 if (!TextUtils.isEmpty(playingTime)) {
                     try {
-                        textP.setColor(Color.WHITE);
+                        textP.setColor(getResources().getColor(R.color.text_color4));
                         textP.setTextSize(CommonUtil.dip2px(mContext, 12));
                         float timeWidth = textP.measureText(sdf2.format(sdf1.parse(playingTime)));
                         canvas.drawText(sdf2.format(sdf1.parse(playingTime)), margin2+itemWidth*playingIndex-timeWidth/2, h/2-CommonUtil.dip2px(mContext, 15), textP);
@@ -272,7 +272,7 @@ public class MySeekbar extends View {
 
             if (isDraggingThumb == false) {
                 //线程播放时，绘制变动时间对应滑块
-                lineP.setColor(Color.WHITE);
+                lineP.setColor(getResources().getColor(R.color.text_color4));
                 lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 12));
                 canvas.drawPoint(margin2+itemWidth*playingIndex, h/2, lineP);
                 lineP.setColor(0xffffba00);
@@ -282,7 +282,7 @@ public class MySeekbar extends View {
                 //绘制滑块滑动对应的时间
                 if (!TextUtils.isEmpty(playingTime)) {
                     try {
-                        textP.setColor(Color.WHITE);
+                        textP.setColor(getResources().getColor(R.color.text_color4));
                         textP.setTextSize(CommonUtil.dip2px(mContext, 12));
                         float timeWidth = textP.measureText(sdf2.format(sdf1.parse(playingTime)));
                         canvas.drawText(sdf2.format(sdf1.parse(playingTime)), margin2+itemWidth*playingIndex-timeWidth/2, h/2-CommonUtil.dip2px(mContext, 15), textP);

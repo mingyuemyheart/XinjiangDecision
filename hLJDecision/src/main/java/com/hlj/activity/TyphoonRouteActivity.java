@@ -802,7 +802,7 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 		public void handleMessage(Message msg) {
 			if (msg.what == MSG_PAUSETYPHOON) {
 				if (ivTyphoonPlay != null) {
-					ivTyphoonPlay.setImageResource(R.drawable.iv_typhoon_play);
+					ivTyphoonPlay.setImageResource(R.drawable.icon_typhoon_play);
 				}
 				List<TyphoonDto> mPoints = (ArrayList<TyphoonDto>)msg.obj;
 				LatLngBounds.Builder builder = LatLngBounds.builder();
@@ -2252,7 +2252,7 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 				infoMarkers.get(i).remove();
 			}
 			infoMarkers.clear();
-			ivTyphoonPlay.setImageResource(R.drawable.iv_typhoon_pause);
+			ivTyphoonPlay.setImageResource(R.drawable.icon_typhoon_pause);
 			container.removeAllViews();
 			container2.removeAllViews();
 			tvFileTime.setVisibility(View.GONE);
@@ -2281,7 +2281,7 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 		}else if (v.getId() == R.id.ivTyphoonRange) {
 			if (isRanging) {
 				isRanging = false;
-				ivTyphoonRange.setImageResource(R.drawable.iv_typhoon_cj_off);
+				ivTyphoonRange.setImageResource(R.drawable.icon_distance_off);
 
 				for (int i = 0; i < rangeMarkers.size(); i++) {
 					rangeMarkers.get(i).remove();
@@ -2292,7 +2292,7 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 				}
 			}else {
 				isRanging = true;
-				ivTyphoonRange.setImageResource(R.drawable.iv_typhoon_cj_on);
+				ivTyphoonRange.setImageResource(R.drawable.icon_distance_on);
 
 				ranging();
 

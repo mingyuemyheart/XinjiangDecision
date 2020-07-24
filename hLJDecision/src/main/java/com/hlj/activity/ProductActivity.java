@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.hlj.adapter.ProductAdapter;
 import com.hlj.common.CONST;
-import com.hlj.common.ColumnData;
 import com.hlj.dto.AgriDto;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.OkHttpUtil;
@@ -40,7 +39,7 @@ public class ProductActivity extends BaseActivity implements OnClickListener {
 	
 	private Context mContext;
 	private ProductAdapter mAdapter;
-	private List<ColumnData> dataList = new ArrayList<>();
+	private List<AgriDto> dataList = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,18 @@ public class ProductActivity extends BaseActivity implements OnClickListener {
 			if (data != null) {
 				tvTitle.setText(data.name);
 				dataList.clear();
-				dataList.addAll(data.child);
+				for (int i = 0; i < data.child.size(); i++) {
+					AgriDto dto = new AgriDto();
+					dto.columnId = data.child.get(i).columnId;
+					dto.id = data.child.get(i).id;
+					dto.icon = data.child.get(i).icon;
+					dto.icon2 = data.child.get(i).icon2;
+					dto.showType = data.child.get(i).showType;
+					dto.name = data.child.get(i).name;
+					dto.dataUrl = data.child.get(i).dataUrl;
+					dto.child = data.child.get(i).child;
+					dataList.add(dto);
+				}
 			}
 		}
 
@@ -89,7 +99,7 @@ public class ProductActivity extends BaseActivity implements OnClickListener {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				ColumnData dto = dataList.get(arg2);
+				AgriDto dto = dataList.get(arg2);
 				Intent intent;
 				if (TextUtils.isEmpty(dto.showType) || TextUtils.equals(dto.showType, CONST.NEWS)) {//专业气象预报、中期旬报
 					intent = new Intent(mContext, CommonListActivity.class);
@@ -143,7 +153,7 @@ public class ProductActivity extends BaseActivity implements OnClickListener {
 											JSONArray array = new JSONArray(obj.getString("l"));
 											for (int i = 0; i < array.length(); i++) {
 												JSONObject itemObj = array.getJSONObject(i);
-												ColumnData dto = new ColumnData();
+												AgriDto dto = new AgriDto();
 												dto.name = itemObj.getString("l1");
 												dto.dataUrl = itemObj.getString("l2");
 												dto.icon = itemObj.getString("l4");

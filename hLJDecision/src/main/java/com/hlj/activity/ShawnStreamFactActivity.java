@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -75,11 +74,11 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 	
 	private Context mContext;
 	private TextView tvTitle;
+	private TextView tvLighting, tvRain, tvWind, tvHail;
 	private ImageView ivLighting,ivRain,ivWind,ivHail,ivRadar,ivLocation,ivLegend;
 	private MapView mMapView;
 	private AMap aMap;
 	private float zoom = 3.7f;
-	private RelativeLayout reShare;
 	private SimpleDateFormat sdf1 = new SimpleDateFormat("HH", Locale.CHINA);
 	private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHH", Locale.CHINA);
 	private SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm", Locale.CHINA);
@@ -131,7 +130,6 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 		llBack.setOnClickListener(this);
 		tvTitle = findViewById(R.id.tvTitle);
 		TextView tvName = findViewById(R.id.tvName);
-		reShare = findViewById(R.id.reShare);
 		ivLighting = findViewById(R.id.ivLighting);
 		ivLighting.setOnClickListener(this);
 		ivRain = findViewById(R.id.ivRain);
@@ -140,6 +138,14 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 		ivWind.setOnClickListener(this);
 		ivHail = findViewById(R.id.ivHail);
 		ivHail.setOnClickListener(this);
+		tvLighting = findViewById(R.id.tvLighting);
+		tvLighting.setOnClickListener(this);
+		tvRain = findViewById(R.id.tvRain);
+		tvRain.setOnClickListener(this);
+		tvWind = findViewById(R.id.tvWind);
+		tvWind.setOnClickListener(this);
+		tvHail = findViewById(R.id.tvHail);
+		tvHail.setOnClickListener(this);
 		ImageView ivData = findViewById(R.id.ivData);
 		ivData.setOnClickListener(this);
 		ivRadar = findViewById(R.id.ivRadar);
@@ -252,43 +258,63 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 			case R.id.llBack:
 				finish();
 				break;
+			case R.id.tvLighting:
 			case R.id.ivLighting:
 				if (!isShowLighting) {
-					ivLighting.setImageResource(R.drawable.shawn_icon_lighting_onn);
+					tvLighting.setBackgroundResource(R.drawable.bg_map_btn_press);
+					tvLighting.setTextColor(getResources().getColor(R.color.white));
+					ivLighting.setImageResource(R.drawable.icon_lighting_on);
 					addLightingMarkers();
 					llSeekBar.setVisibility(View.VISIBLE);
 				}else {
-					ivLighting.setImageResource(R.drawable.shawn_icon_lighting_offf);
+					tvLighting.setBackgroundResource(R.drawable.bg_map_btn);
+					tvLighting.setTextColor(getResources().getColor(R.color.text_color4));
+					ivLighting.setImageResource(R.drawable.icon_lighting_off);
 					removeLightingMarkers();
 					llSeekBar.setVisibility(View.INVISIBLE);
 				}
 				isShowLighting = !isShowLighting;
 				break;
+			case R.id.tvRain:
 			case R.id.ivRain:
 				if (!isShowRain) {
+					tvRain.setBackgroundResource(R.drawable.bg_map_btn_press);
+					tvRain.setTextColor(getResources().getColor(R.color.white));
 					ivRain.setImageResource(R.drawable.fzj_butn_rain);
 					addRainMarkers();
 				}else {
+					tvRain.setBackgroundResource(R.drawable.bg_map_btn);
+					tvRain.setTextColor(getResources().getColor(R.color.text_color4));
 					ivRain.setImageResource(R.drawable.fzj_butn_rainoff);
 					removeRainMarkers();
 				}
 				isShowRain = !isShowRain;
 				break;
+			case R.id.tvWind:
 			case R.id.ivWind:
 				if (!isShowWind) {
+					tvWind.setBackgroundResource(R.drawable.bg_map_btn_press);
+					tvWind.setTextColor(getResources().getColor(R.color.white));
 					ivWind.setImageResource(R.drawable.fzj_butn_wind);
 					addWindMarkers();
 				}else {
+					tvWind.setBackgroundResource(R.drawable.bg_map_btn);
+					tvWind.setTextColor(getResources().getColor(R.color.text_color4));
 					ivWind.setImageResource(R.drawable.fzj_butn_windoff);
 					removeWindMarkers();
 				}
 				isShowWind = !isShowWind;
 				break;
+			case R.id.tvHail:
 			case R.id.ivHail:
 				if (!isShowHail) {
+					tvHail.setBackgroundResource(R.drawable.bg_map_btn_press);
+					tvHail.setTextColor(getResources().getColor(R.color.white));
 					ivHail.setImageResource(R.drawable.fzj_butn_hail);
 					addHailMarkers();
 				}else {
+					tvHail.setBackgroundResource(R.drawable.bg_map_btn);
+					tvHail.setTextColor(getResources().getColor(R.color.text_color4));
 					ivHail.setImageResource(R.drawable.fzj_butn_hailoff);
 					removeHailMarkers();
 				}
@@ -350,10 +376,10 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 			case R.id.ivPlay:
 				if (seekbarThread != null && seekbarThread.getCurrentState() == SeekbarThread.STATE_PLAYING) {
 					seekbarThread.pause();
-					ivPlay.setImageResource(R.drawable.shawn_icon_play);
+					ivPlay.setImageResource(R.drawable.icon_play);
 				} else if (seekbarThread != null && seekbarThread.getCurrentState() == SeekbarThread.STATE_PAUSE) {
 					seekbarThread.play();
-					ivPlay.setImageResource(R.drawable.shawn_icon_pause);
+					ivPlay.setImageResource(R.drawable.icon_pause);
 				} else {
 					if (seekbarThread != null) {
 						seekbarThread.cancel();
@@ -362,7 +388,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 					if (llContainer.getChildCount() > 0) {
 						seekbarThread = new SeekbarThread();
 						seekbarThread.start();
-						ivPlay.setImageResource(R.drawable.shawn_icon_pause);
+						ivPlay.setImageResource(R.drawable.icon_pause);
 					}
 				}
 				break;
@@ -802,6 +828,10 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 								ivRain.setVisibility(View.VISIBLE);
 								ivWind.setVisibility(View.VISIBLE);
 								ivHail.setVisibility(View.VISIBLE);
+								tvLighting.setVisibility(View.VISIBLE);
+								tvRain.setVisibility(View.VISIBLE);
+								tvWind.setVisibility(View.VISIBLE);
+								tvHail.setVisibility(View.VISIBLE);
 
 							} catch (JSONException e) {
 								e.printStackTrace();
@@ -822,9 +852,9 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 			tvName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
 			tvName.setPadding(0, 0, 0, 0);
 			if (i == 0) {
-				tvName.setTextColor(0xff0097d4);
+				tvName.setTextColor(getResources().getColor(R.color.colorPrimary));
 			}else {
-				tvName.setTextColor(getResources().getColor(R.color.white));
+				tvName.setTextColor(getResources().getColor(R.color.text_color2));
 			}
 			try {
 				String time = sdf1.format(new Date().getTime()-1000*60*60);
@@ -841,11 +871,11 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 						TextView tvName = (TextView) llContainer.getChildAt(j);
 						if (tvName.getTag() == arg0.getTag()) {
 							lightingType = (Integer)arg0.getTag();
-							tvName.setTextColor(0xff0097d4);
+							tvName.setTextColor(getResources().getColor(R.color.colorPrimary));
 							addLightingMarkers();
 							changeSeekbarProgress(lightingType-1, llContainer.getChildCount()-1);
 						}else {
-							tvName.setTextColor(getResources().getColor(R.color.white));
+							tvName.setTextColor(getResources().getColor(R.color.text_color2));
 						}
 					}
 				}
@@ -922,7 +952,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 					runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
-							ivPlay.setImageResource(R.drawable.shawn_icon_play);
+							ivPlay.setImageResource(R.drawable.icon_play);
 						}
 					});
 				}
@@ -969,9 +999,9 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 		for (int j = 0; j < llContainer.getChildCount(); j++) {
 			TextView tvName = (TextView) llContainer.getChildAt(j);
 			if (lightingType == (Integer)tvName.getTag()) {
-				tvName.setTextColor(0xff0097d4);
+				tvName.setTextColor(getResources().getColor(R.color.colorPrimary));
 			}else {
-				tvName.setTextColor(getResources().getColor(R.color.white));
+				tvName.setTextColor(getResources().getColor(R.color.text_color2));
 			}
 		}
 	}

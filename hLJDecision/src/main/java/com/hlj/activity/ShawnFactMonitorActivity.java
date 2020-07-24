@@ -324,8 +324,8 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
             tvBar.setPadding((int)(density*10), 0, (int)(density*10), 0);
 
             if (i == 0) {
-                tvName.setTextColor(getResources().getColor(R.color.title_bg));
-                tvBar.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvName.setTextColor(getResources().getColor(R.color.colorPrimary));
+                tvBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 tvName.setText("降水");
                 tvName.setTag("1151");
 
@@ -374,8 +374,8 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                             TextView tvName = (TextView) llContainer.getChildAt(i);
                             TextView tvBar = (TextView) llContainer1.getChildAt(i);
                             if (TextUtils.equals(tag, (String) tvName.getTag())) {
-                                tvName.setTextColor(getResources().getColor(R.color.title_bg));
-                                tvBar.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                                tvName.setTextColor(getResources().getColor(R.color.colorPrimary));
+                                tvBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                             }else {
                                 tvName.setTextColor(getResources().getColor(R.color.text_color4));
                                 tvBar.setBackgroundColor(getResources().getColor(R.color.transparent));
@@ -585,6 +585,7 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                                                     factAdapter.realDatas.addAll(realDatas);
                                                     factAdapter.notifyDataSetChanged();
                                                     tvIntro.setVisibility(View.VISIBLE);
+                                                    tvIntro.setBackgroundResource(R.drawable.bg_corner_black);
                                                     listTitle.setVisibility(View.VISIBLE);
                                                     listView.setVisibility(View.VISIBLE);
                                                     llBottom.setVisibility(View.VISIBLE);
@@ -1210,7 +1211,7 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
             case R.id.tvRain1:
                 childId = (String) tvRain1.getTag();
                 tvRain1.setTextColor(getResources().getColor(R.color.white));
-                tvRain1.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvRain1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 tvRain24.setTextColor(getResources().getColor(R.color.text_color3));
                 tvRain24.setBackgroundColor(getResources().getColor(R.color.white));
                 tvRainStatic.setTextColor(getResources().getColor(R.color.text_color3));
@@ -1222,7 +1223,7 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                 tvRain1.setTextColor(getResources().getColor(R.color.text_color3));
                 tvRain1.setBackgroundColor(getResources().getColor(R.color.white));
                 tvRain24.setTextColor(getResources().getColor(R.color.white));
-                tvRain24.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvRain24.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 tvRainStatic.setTextColor(getResources().getColor(R.color.text_color3));
                 tvRainStatic.setBackgroundColor(getResources().getColor(R.color.white));
                 OkHttpFact("");
@@ -1234,13 +1235,13 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                 tvRain24.setTextColor(getResources().getColor(R.color.text_color3));
                 tvRain24.setBackgroundColor(getResources().getColor(R.color.white));
                 tvRainStatic.setTextColor(getResources().getColor(R.color.white));
-                tvRainStatic.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvRainStatic.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 OkHttpFact("");
                 break;
             case R.id.tvTemp1:
                 childId = (String) tvTemp1.getTag();
                 tvTemp1.setTextColor(getResources().getColor(R.color.white));
-                tvTemp1.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvTemp1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 tvHighTemp.setTextColor(getResources().getColor(R.color.text_color3));
                 tvHighTemp.setBackgroundColor(getResources().getColor(R.color.white));
                 tvLowTemp.setTextColor(getResources().getColor(R.color.text_color3));
@@ -1252,7 +1253,7 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                 tvTemp1.setTextColor(getResources().getColor(R.color.text_color3));
                 tvTemp1.setBackgroundColor(getResources().getColor(R.color.white));
                 tvHighTemp.setTextColor(getResources().getColor(R.color.white));
-                tvHighTemp.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvHighTemp.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 tvLowTemp.setTextColor(getResources().getColor(R.color.text_color3));
                 tvLowTemp.setBackgroundColor(getResources().getColor(R.color.white));
                 OkHttpFact("");
@@ -1264,13 +1265,13 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                 tvHighTemp.setTextColor(getResources().getColor(R.color.text_color3));
                 tvHighTemp.setBackgroundColor(getResources().getColor(R.color.white));
                 tvLowTemp.setTextColor(getResources().getColor(R.color.white));
-                tvLowTemp.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvLowTemp.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 OkHttpFact("");
                 break;
             case R.id.tvWind1:
                 childId = (String) tvWind1.getTag();
                 tvWind1.setTextColor(getResources().getColor(R.color.white));
-                tvWind1.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvWind1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 tvWind24.setTextColor(getResources().getColor(R.color.text_color3));
                 tvWind24.setBackgroundColor(getResources().getColor(R.color.white));
                 OkHttpFact("");
@@ -1280,13 +1281,13 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                 tvWind1.setTextColor(getResources().getColor(R.color.text_color3));
                 tvWind1.setBackgroundColor(getResources().getColor(R.color.white));
                 tvWind24.setTextColor(getResources().getColor(R.color.white));
-                tvWind24.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvWind24.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 OkHttpFact("");
                 break;
             case R.id.tvHumidity1:
                 childId = (String) tvHumidity1.getTag();
                 tvHumidity1.setTextColor(getResources().getColor(R.color.white));
-                tvHumidity1.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvHumidity1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 tvHumidity24.setTextColor(getResources().getColor(R.color.text_color3));
                 tvHumidity24.setBackgroundColor(getResources().getColor(R.color.white));
                 OkHttpFact("");
@@ -1296,7 +1297,7 @@ public class ShawnFactMonitorActivity extends BaseFragmentActivity implements Vi
                 tvHumidity1.setTextColor(getResources().getColor(R.color.text_color3));
                 tvHumidity1.setBackgroundColor(getResources().getColor(R.color.white));
                 tvHumidity24.setTextColor(getResources().getColor(R.color.white));
-                tvHumidity24.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvHumidity24.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 OkHttpFact("");
                 break;
             case R.id.ivCheck:

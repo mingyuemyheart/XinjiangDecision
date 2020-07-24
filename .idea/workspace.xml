@@ -6,7 +6,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="result" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -58,8 +57,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15ab3c4b-28f1-4ec7-90ce-56991a316228" name="Default" comment="1.修改决策登录对话框提示逻辑&#10;2.适配天气详情逐小时预报和分钟级降水UI&#10;3.增加预警推送功能">
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/MinuteFallView2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_map_btn.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_map_btn_press.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_seekbar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_statistic_marker.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_statistic_marker2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_distance_off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_distance_on.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_location_off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_location_on.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_location_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_map_legend.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_typhoon_list.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_typhoon_pause.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_typhoon_play.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterDir="false" />
@@ -69,8 +84,99 @@
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/LoginActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/FactActivity2.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/FactActivity2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HProvinceForecastActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HProvinceForecastActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HWeatherStaticsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HWeatherStaticsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MinuteFallActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MinuteFallActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ProductActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ProductActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnFactMonitorActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnFactMonitorActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnPointForeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnPointForeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnStreamFactActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnStreamFactActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnStrongStreamActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnStrongStreamActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWaitWindActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWaitWindActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWeatherMeetingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWeatherMeetingActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ThunderForeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ThunderForeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/TyphoonRouteActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/TyphoonRouteActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/FactAdapter2.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/FactAdapter2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/FactDetailAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/FactDetailAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/ProductAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/ProductAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/ForecastFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/ForecastFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/AqiQualityView.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/AqiQualityView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/MySeekbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/MySeekbar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/ThunderView.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/ThunderView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_check_detai.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_check_detai.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_check_detai_press.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_check_detai_press.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_five.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_five.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_four.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_four.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_one.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_one.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_six.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_six.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_three.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_three.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_two.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/circle_aqi_two.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_cloud.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_cloud.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_cloud_press.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_cloud_press.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_data_source.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_data_source.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_data_source_press.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_data_source_press.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_humidity.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_humidity.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_humidity_press.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_humidity_press.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_switch_map.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_switch_map.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_switch_map_press.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_switch_map_press.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_temp.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_temp.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_temp_press.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/com_temp_press.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/corner_black.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/bg_corner_black.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_data.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_data.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_dataoff.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_dataoff.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_hail.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_hail.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_hailoff.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_hailoff.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_rain.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_rain.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_rainoff.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_rainoff.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_wind.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_wind.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_windoff.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/fzj_butn_windoff.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_next.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_next.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_pre.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_pre.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/iv_air_polution.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/legend_polution.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/iv_map_legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/iv_red_circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/iv_typhoon_cj_off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/iv_typhoon_cj_on.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/iv_typhoon_list.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/iv_typhoon_pause.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/iv_typhoon_play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_bg_corner_switch_height.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_bg_corner_switch_height.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_height_off.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_height_off.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_height_on.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_height_on.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_lighting_offf.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_lighting_off.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_lighting_onn.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_lighting_on.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_pause.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_pause.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_play.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/icon_play.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_radar_off.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_radar_off.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_radar_on.png" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_icon_radar_on.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_seekbar_bacground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_seekbar_bacground.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_seekbar_progress.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_seekbar_progress.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_seekbar_thumb.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/shawn_seekbar_thumb.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/drawable/tf_icon_wz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_fact2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_fact2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_minute_fall.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_minute_fall.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_thunder_fore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_thunder_fore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_thunder_statistic.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_thunder_statistic.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_typhoon_route.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_typhoon_route.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/fragment_fact_check.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/fragment_fact_check.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/fragment_forecast.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/fragment_forecast.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/hactivity_air_polution.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/hactivity_air_polution.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/hactivity_province_forecast.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/hactivity_province_forecast.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/hactivity_weather_chart_analysis.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/hactivity_weather_chart_analysis.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/hactivity_weather_statics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/hactivity_weather_statics.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/layout_fact.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/layout_fact.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/layout_marker_statistic.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/layout_marker_statistic.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/layout_weather1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/layout_weather1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_fact_monitor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_fact_monitor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_point_fore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_point_fore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_stream_fact.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_stream_fact.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_strong_stream.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_strong_stream.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_wait_wind.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_wait_wind.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_weather_meeting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_weather_meeting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_adapter_weather_meeting_content.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_adapter_weather_meeting_content.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_fragment_weather_meeting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_fragment_weather_meeting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/values/colors.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -161,7 +267,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536661182344" />
     <property name="device.picker.selection" value="66J5T19318007315" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
@@ -180,17 +286,17 @@
       <recent name="com.hlj.activity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets/echarts" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/jniLibs/armeabi-v7a" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.hlj.view" />
       <recent name="com.hlj.adapter" />
       <recent name="com.hlj.activity" />
       <recent name="com.hlj.utils" />
-      <recent name="com.hlj.view" />
       <recent name="com.hlj.view.wheelview" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -907,11 +1013,6 @@
           <url>file://$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWarningStatisticScreenActivity.java</url>
           <line>323</line>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HProvinceForecastActivity.java</url>
-          <line>315</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HProvinceForecastActivity.java</url>

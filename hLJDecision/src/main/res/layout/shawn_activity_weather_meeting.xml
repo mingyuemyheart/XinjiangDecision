@@ -13,7 +13,7 @@
         android:id="@+id/llContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#005086"
+        android:background="@color/light_gray"
         android:gravity="center_vertical"
         android:orientation="horizontal" />
 
@@ -21,14 +21,8 @@
         android:id="@+id/llContainer1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#005086"
         android:gravity="center_vertical"
         android:orientation="horizontal" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray" />
 
     <com.hlj.view.MainViewPager
         android:id="@+id/viewPager"

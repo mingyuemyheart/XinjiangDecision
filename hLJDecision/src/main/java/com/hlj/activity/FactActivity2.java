@@ -307,8 +307,8 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                     dataUrl = itemDto.dataUrl;
                     OkHttpFact(itemDto.dataUrl, false, "");
                 }
-                tvName.setTextColor(getResources().getColor(R.color.title_bg));
-                tvBar.setBackgroundColor(getResources().getColor(R.color.title_bg));
+                tvName.setTextColor(getResources().getColor(R.color.colorPrimary));
+                tvBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             }else {
                 tvName.setTextColor(getResources().getColor(R.color.text_color3));
                 tvBar.setBackgroundColor(getResources().getColor(R.color.transparent));
@@ -579,6 +579,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                                                 factAdapter.realDatas.addAll(realDatas);
                                                 factAdapter.notifyDataSetChanged();
                                                 tvIntro.setVisibility(View.VISIBLE);
+                                                tvIntro.setBackgroundResource(R.drawable.bg_corner_black);
                                                 listTitle.setVisibility(View.VISIBLE);
                                                 listView.setVisibility(View.VISIBLE);
                                                 llBottom.setVisibility(View.VISIBLE);

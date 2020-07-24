@@ -43,9 +43,9 @@
     <TextView
         android:id="@+id/d"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="5dp"
         android:layout_below="@+id/hScrollView2"
-        android:background="@color/title_bg"/>
+        android:background="@color/light_gray"/>
 
     <LinearLayout
         android:visibility="gone"

@@ -167,18 +167,18 @@ public class AqiQualityView extends View{
 		for (int i = 0; i < tempList.size(); i++) {
 			AqiDto dto = tempList.get(i);
 			
-			//绘制实况的背景颜色
-			if (i < divider) {
-				lineP.setColor(0xffefefef);
-				lineP.setStyle(Style.FILL);
-				lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 1));
-				canvas.drawRect(dto.x, topMargin, tempList.get(i+1).x, h-bottomMargin, lineP);
-			}
+//			//绘制实况的背景颜色
+//			if (i < divider) {
+//				lineP.setColor(0xffefefef);
+//				lineP.setStyle(Style.FILL);
+//				lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 1));
+//				canvas.drawRect(dto.x, topMargin, tempList.get(i+1).x, h-bottomMargin, lineP);
+//			}
 			
 			//绘制纵向分割线
 			lineP.setStyle(Style.STROKE);
 			lineP.setColor(0xffdfdfdf);
-			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 1));
+			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 0.5f));
 			canvas.drawLine(dto.x, topMargin, dto.x, chartH+topMargin, lineP);
 		}
 		
@@ -188,7 +188,7 @@ public class AqiQualityView extends View{
 			float dividerY = chartH - chartH*Math.abs(i)/(300) + topMargin;
 			
 			//绘制横向刻度线对应的值
-			textP.setColor(0xff205868);
+			textP.setColor(Color.WHITE);
 			textP.setTextSize(CommonUtil.dip2px(mContext, 12));
 			int value = i;
 			if (i == 250) {
@@ -200,10 +200,10 @@ public class AqiQualityView extends View{
 			
 			//绘制横向刻度线
 			lineP.setColor(0xffdfdfdf);
-			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 1));
+			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 0.5f));
 			canvas.drawLine(CommonUtil.dip2px(mContext, 5), dividerY, w-CommonUtil.dip2px(mContext, 5), dividerY, lineP);
 			
-			textP.setColor(0xff205868);
+			textP.setColor(Color.WHITE);
 			if (i == 50) {
 				canvas.drawText(getResources().getString(R.string.aqi0), chartW+CommonUtil.dip2px(mContext, 55), dividerY+CommonUtil.dip2px(mContext, 15), textP);
 			}else if (i == 100) {
@@ -272,9 +272,6 @@ public class AqiQualityView extends View{
 			if (i > divider) {
 				//绘制曲线上每个时间点marker
 				lineP.setColor(Color.WHITE);
-				lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 10));
-				canvas.drawPoint(dto.x, dto.y, lineP);
-				lineP.setColor(0xffdfdfdf);
 				lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 8));
 				canvas.drawPoint(dto.x, dto.y, lineP);
 			}
@@ -318,11 +315,7 @@ public class AqiQualityView extends View{
 			}
 			
 			//绘制每个时间点上的时间值
-			if (i <= divider) {
-				textP.setColor(0xff585858);
-			}else {
-				textP.setColor(0xffee6c09);
-			}
+			textP.setColor(Color.WHITE);
 			textP.setTextSize(CommonUtil.dip2px(mContext, 12));
 			float hourWidth = textP.measureText(String.valueOf(time)+"时");
 			if (i %2 == 0) {
@@ -339,7 +332,7 @@ public class AqiQualityView extends View{
 		
 		//绘制时间点一行的直线
 		lineP.setColor(0xffdfdfdf);
-		lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 2));
+		lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 1));
 		canvas.drawLine(CommonUtil.dip2px(mContext, 5), h-bottomMargin, w-CommonUtil.dip2px(mContext, 5), h-bottomMargin, lineP);
 	}
 	

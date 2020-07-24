@@ -925,7 +925,7 @@ public class ThunderForeActivity extends BaseActivity implements View.OnClickLis
                                                     radarThread.index = currentIndex;
                                                 }
 
-                                                ivPlay.setImageResource(R.drawable.shawn_icon_play);
+                                                ivPlay.setImageResource(R.drawable.icon_play);
                                                 ivPlay.setVisibility(View.VISIBLE);
                                                 tvSeekbarTime.setVisibility(View.VISIBLE);
                                                 seekBar.setVisibility(View.VISIBLE);
@@ -2508,13 +2508,13 @@ public class ThunderForeActivity extends BaseActivity implements View.OnClickLis
                 if (radarThread != null) {
                     if (radarThread.getCurrentState() == RadarThread.STATE_NONE) {
                         radarThread.start();
-                        ivPlay.setImageResource(R.drawable.shawn_icon_pause);
+                        ivPlay.setImageResource(R.drawable.icon_pause);
                     }else if (radarThread.getCurrentState() == RadarThread.STATE_PLAYING) {
                         radarThread.pause();
-                        ivPlay.setImageResource(R.drawable.shawn_icon_play);
+                        ivPlay.setImageResource(R.drawable.icon_play);
                     }else if (radarThread.getCurrentState() == RadarThread.STATE_PAUSE) {
                         radarThread.play();
-                        ivPlay.setImageResource(R.drawable.shawn_icon_pause);
+                        ivPlay.setImageResource(R.drawable.icon_pause);
                     }
                 }
                 break;
