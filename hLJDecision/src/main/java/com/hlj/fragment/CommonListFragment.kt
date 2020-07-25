@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
 import com.hlj.activity.HPDFActivity
+import com.hlj.activity.SurfaceViewActivity
 import com.hlj.activity.WebviewActivity
 import com.hlj.adapter.CommonPdfListAdapter
 import com.hlj.common.CONST
@@ -98,10 +99,16 @@ class CommonListFragment : Fragment() {
         listView!!.adapter = mAdapter
         listView!!.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
             val dto = dataList[arg2]
-            val intent = if (TextUtils.equals(dto.type, CONST.PDF)) {
-                Intent(activity, HPDFActivity::class.java)
-            } else {
-                Intent(activity, WebviewActivity::class.java)
+            val intent = when {
+                TextUtils.equals(dto.type, CONST.PDF) -> {
+                    Intent(activity, HPDFActivity::class.java)
+                }
+                TextUtils.equals(dto.type, CONST.MP4) -> {
+                    Intent(activity, SurfaceViewActivity::class.java)
+                }
+                else -> {
+                    Intent(activity, WebviewActivity::class.java)
+                }
             }
             intent.putExtra(CONST.ACTIVITY_NAME, dto.title)
             intent.putExtra(CONST.WEB_URL, dto.dataUrl)

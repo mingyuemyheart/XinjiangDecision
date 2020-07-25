@@ -80,6 +80,7 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 	private fun initWidget() {
 		llBack.setOnClickListener(this)
 		tvTitle.text = "用户登录"
+		tvSend.setOnClickListener(this)
 		tvUser.setOnClickListener(this)
 		tvPhone.setOnClickListener(this)
 		tvLogin.setOnClickListener(this)
@@ -452,6 +453,11 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 				clUser.visibility = View.GONE
 				clPhone.visibility = View.VISIBLE
 				tvLogin.text = "获取验证码登录"
+			}
+			R.id.tvSend -> {
+				if (TextUtils.equals(tvSend.text.toString(), "获取验证码")) {
+					okHttpNext()
+				}
 			}
 			R.id.tvLogin -> {
 				if (TextUtils.equals(tvLogin.text.toString(), "获取验证码登录")) {

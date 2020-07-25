@@ -1226,7 +1226,9 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
-            R.id.clVideo -> startActivity(Intent(activity, WebviewVideoActivity::class.java))
+            R.id.clVideo -> {
+                startActivity(Intent(activity, SurfaceViewActivity::class.java))
+            }
             R.id.tvInfo -> {
                 val intent = Intent(activity, WebviewActivity::class.java)
                 intent.putExtra(CONST.ACTIVITY_NAME, "实时更新：新型冠状病毒肺炎疫情实时大数据报告")

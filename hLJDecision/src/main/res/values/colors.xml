@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4F47F5</color>
-    <color name="colorPrimaryDark">#4F47F5</color>
-    <color name="colorAccent">#4F47F5</color>
+    <color name="colorPrimary">#889BE8</color>
+    <color name="colorPrimaryDark">#889BE8</color>
+    <color name="colorAccent">#889BE8</color>
 
-    <color name="refresh_color1">#4F47F5</color>
-    <color name="refresh_color2">#A04F47F5</color>
-    <color name="refresh_color3">#804F47F5</color>
-    <color name="refresh_color4">#404F47F5</color>
+    <color name="refresh_color1">#889BE8</color>
+    <color name="refresh_color2">#A0889BE8</color>
+    <color name="refresh_color3">#80889BE8</color>
+    <color name="refresh_color4">#40889BE8</color>
 
     <color name="aqi0">#abd338</color>
     <color name="aqi1">#ffc739</color>
@@ -24,7 +24,6 @@
     <color name="light_gray">#f0eff5</color>
     <color name="transparent">#00000000</color>
     <color name="translucent">#60000000</color>
-    <color name="indicator_bar">#5754FD</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="gray">#d9d9d9</color>
@@ -40,7 +39,7 @@
     <color name="shachen">#FD6801</color>
     <color name="mai">#232440</color>
     <color name="typhoon_bg">#f3758c97</color>
-    <color name="title_bg">#4F47F5</color>
+    <color name="title_bg">#889BE8</color>
     <color name="detail_bg_color">#3d45ca</color>
     <color name="list_double_bg_color">#f1f5f8</color>
     <color name="text_color1">#CBCBCB</color>

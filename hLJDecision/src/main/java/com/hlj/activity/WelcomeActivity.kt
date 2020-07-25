@@ -357,6 +357,7 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 								val msg = obje.getString("msg")
 								if (msg != null) {
 									Toast.makeText(this@WelcomeActivity, msg, Toast.LENGTH_SHORT).show()
+									Log.e("msg", msg)
 								}
 								val sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE)
 								val editor = sharedPreferences.edit()

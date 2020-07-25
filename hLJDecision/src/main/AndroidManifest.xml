@@ -317,6 +317,12 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name="com.hlj.activity.SurfaceViewActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity
             android:name="com.hlj.activity.DataIntroActivity"
             android:screenOrientation="portrait" />
 
