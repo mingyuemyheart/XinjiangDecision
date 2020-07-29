@@ -7,11 +7,18 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.hlj.common.CONST;
+import com.hlj.common.MyApplication;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -21,7 +28,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
@@ -40,10 +56,10 @@ public class CrashHandler implements UncaughtExceptionHandler {
     //程序的Context对象
     private Context mContext;
     //用来存储设备信息和异常信息
-    private Map<String, String> infos = new HashMap<String, String>();
+    private Map<String, String> infos = new HashMap<>();
 
     //用于格式化日期,作为日志文件名的一部分
-    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.CHINA);
 
     /**
      * 保证只有一个CrashHandler实例
@@ -154,7 +170,6 @@ public class CrashHandler implements UncaughtExceptionHandler {
      * @return 返回文件名称, 便于将文件传送到服务器
      */
     private String saveCrashInfo2File(Throwable ex) {
-
         StringBuffer sb = new StringBuffer();
         for (Map.Entry<String, String> entry : infos.entrySet()) {
             String key = entry.getKey();
@@ -176,7 +191,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         try {
             long timestamp = System.currentTimeMillis();
             String time = formatter.format(new Date());
-            String fileName = "crash-" + time + "-" + timestamp + ".log";
+            String fileName = "crash-" + time + "-" + timestamp + ".txt";
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 String path = Environment.getExternalStorageDirectory()+"/hlj/crash/";
                 File dir = new File(path);
@@ -186,6 +201,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 FileOutputStream fos = new FileOutputStream(path + fileName);
                 fos.write(sb.toString().getBytes());
                 fos.close();
+
+                okHttpCrash(path + fileName);
             }
             return fileName;
         } catch (Exception e) {
@@ -193,4 +210,46 @@ public class CrashHandler implements UncaughtExceptionHandler {
         }
         return null;
     }
+
+    /**
+     * 上传错误日志
+     */
+    private void okHttpCrash(final String filePath) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final String url = "http://decision-admin.tianqi.cn/home/work2019/app_crash_upload";
+                MultipartBody.Builder builder = new MultipartBody.Builder();
+                builder.setType(MultipartBody.FORM);
+                builder.addFormDataPart("appid", CONST.APPID);
+                builder.addFormDataPart("platform", "Android");
+                builder.addFormDataPart("other_param", CommonUtil.getVersion(mContext));
+                builder.addFormDataPart("other_param1", CONST.USERNAME);
+                builder.addFormDataPart("other_param2", CONST.TOKEN);
+                if (!TextUtils.isEmpty(filePath)) {
+                    File file = new File(filePath);
+                    if (file.exists()) {
+                        builder.addFormDataPart("file_path", file.getName(), RequestBody.create(MediaType.parse("text/x-markdown; charset=utf-8"), file));
+                    }
+                }
+                RequestBody body = builder.build();
+                OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    }
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            return;
+                        }
+                        final String result = response.body().string();
+                        if (!TextUtils.isEmpty(result)) {
+                            Log.e("crashResult", result);
+                        }
+                    }
+                });
+            }
+        }).start();
+    }
+
 }
