@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
@@ -18,7 +17,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -217,8 +215,7 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 	 * 初始化viewpager
 	 */
 	private void initViewPager() {
-		List<ColumnData> columnList = getIntent().getParcelableArrayListExtra("dataList");
-		int columnSize = columnList.size();
+		int columnSize = MyApplication.columnDataList.size();
 		if (columnSize <= 1) {
 			llContainer.setVisibility(View.GONE);
 			llContainer1.setVisibility(View.GONE);
@@ -227,7 +224,7 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 		llContainer.removeAllViews();
 		llContainer1.removeAllViews();
 		for (int i = 0; i < columnSize; i++) {
-			ColumnData channel = columnList.get(i);
+			ColumnData channel = MyApplication.columnDataList.get(i);
 
 			TextView tvName = new TextView(mContext);
 			tvName.setGravity(Gravity.CENTER);
@@ -292,7 +289,6 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 			bundle.putString(CONST.WEB_URL, channel.dataUrl);
 			bundle.putString(CONST.LOCAL_ID, channel.id);
 			bundle.putParcelable("data", channel);
-			bundle.putParcelableArrayList("dataList", (ArrayList<? extends Parcelable>) columnList);
 			fragment.setArguments(bundle);
 			fragments.add(fragment);
 		}

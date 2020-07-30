@@ -33,7 +33,6 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 
 	private var lat = 0.0
 	private var lng = 0.0
-	private var dataList : ArrayList<ColumnData> = ArrayList()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -147,8 +146,8 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 		builder.add("software_version", CommonUtil.getVersion(this))
 		builder.add("mobile_type", Build.MODEL)
 		builder.add("address", "")
-		builder.add("lat", lat.toString() + "")
-		builder.add("lon", lng.toString() + "")
+		builder.add("lat", lat.toString())
+		builder.add("lon", lng.toString())
 		val body: RequestBody = builder.build()
 		Thread(Runnable {
 			OkHttpUtil.enqueue(Request.Builder().post(body).url(url).build(), object : Callback {
@@ -212,7 +211,7 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 						val status = obje.getInt("status")
 						if (status == 1) { //成功
 							val array = JSONArray(obje.getString("column"))
-							dataList.clear()
+							MyApplication.columnDataList.clear()
 							for (i in 0 until array.length()) {
 								val obj = array.getJSONObject(i)
 								val data = ColumnData()
@@ -307,7 +306,7 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 										data.child.add(dto)
 									}
 								}
-								dataList.add(data)
+								MyApplication.columnDataList.add(data)
 							}
 							if (!obje.isNull("info")) {
 								val obj = JSONObject(obje.getString("info"))
@@ -321,12 +320,12 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 											editor.putString(CONST.UserInfo.uId, uid)
 											editor.putString(CONST.UserInfo.userName, obj.getString("username"))
 											if (!obj.isNull("token")) {
+												editor.putString(CONST.UserInfo.userName, obj.getString("mobile"))
 												editor.putString(CONST.UserInfo.token, obj.getString("token"))
 												CONST.TOKEN = obj.getString("token")
 											} else {
 												CONST.TOKEN = ""
 											}
-											Log.e("token", CONST.TOKEN)
 											if (!obj.isNull("usergroup")) {
 												editor.putString(CONST.UserInfo.groupId, obj.getString("usergroup"))
 												CONST.GROUPID = obj.getString("usergroup")
@@ -344,9 +343,7 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 
 											okHttpPushToken()
 										}
-										val intent = Intent(this, MainActivity::class.java)
-										intent.putParcelableArrayListExtra("dataList", dataList)
-										startActivity(intent)
+										startActivity(Intent(this, MainActivity::class.java))
 										finish()
 									}
 								}
@@ -357,7 +354,6 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 								val msg = obje.getString("msg")
 								if (msg != null) {
 									Toast.makeText(this@WelcomeActivity, msg, Toast.LENGTH_SHORT).show()
-									Log.e("msg", msg)
 								}
 								val sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE)
 								val editor = sharedPreferences.edit()
@@ -366,9 +362,9 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 								CONST.UID = "2606" //用户id
 								CONST.USERNAME = CONST.publicUser //用户名
 								CONST.PASSWORD = CONST.publicPwd //用户密码
-								CONST.TOKEN = null //token
+								CONST.TOKEN = "" //token
 								CONST.GROUPID = "50"
-								CONST.UGROUPNAME = null //uGroupName
+								CONST.UGROUPNAME = "" //uGroupName
 
 								okHttpLogin(CONST.publicUser, CONST.publicPwd)
 							}

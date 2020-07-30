@@ -123,11 +123,11 @@ class SettingActivity : BaseActivity(), OnClickListener {
             editor.clear()
             editor.apply()
             CONST.UID = "2606" //用户id
-            CONST.USERNAME = null //用户名
-            CONST.PASSWORD = null //用户密码
-            CONST.TOKEN = null //token
+            CONST.USERNAME = CONST.publicUser //用户名
+            CONST.PASSWORD = CONST.publicPwd //用户密码
+            CONST.TOKEN = "" //token
             CONST.GROUPID = "50"
-            CONST.UGROUPNAME = null //uGroupName
+            CONST.UGROUPNAME = "" //uGroupName
 
             MyApplication.destoryActivity()
             startActivity(Intent(this, LoginActivity::class.java))

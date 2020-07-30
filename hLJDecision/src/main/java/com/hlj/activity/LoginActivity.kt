@@ -32,13 +32,11 @@ import org.json.JSONObject
 import shawn.cxwl.com.hlj.R
 import java.io.IOException
 import java.util.*
-import kotlin.collections.ArrayList
 
 class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 
 	private var lat = 0.0
 	private var lng = 0.0
-	private var dataList : ArrayList<ColumnData> = ArrayList()
 	private var isMobileLogin = true
 	private var seconds:Int = 60
 	private var timer: Timer? = null
@@ -242,7 +240,7 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 						val status = obje.getInt("status")
 						if (status == 1) { //成功
 							val array = JSONArray(obje.getString("column"))
-							dataList.clear()
+							MyApplication.columnDataList.clear()
 							for (i in 0 until array.length()) {
 								val obj = array.getJSONObject(i)
 								val data = ColumnData()
@@ -337,7 +335,7 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 										data.child.add(dto)
 									}
 								}
-								dataList.add(data)
+								MyApplication.columnDataList.add(data)
 							}
 							if (!obje.isNull("info")) {
 								val obj = JSONObject(obje.getString("info"))
@@ -348,7 +346,11 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 										val sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE)
 										val editor = sharedPreferences.edit()
 										editor.putString(CONST.UserInfo.uId, uid)
-										editor.putString(CONST.UserInfo.userName, obj.getString("username"))
+										if (isMobileLogin) {
+											editor.putString(CONST.UserInfo.userName, obj.getString("mobile"))
+										} else {
+											editor.putString(CONST.UserInfo.userName, obj.getString("username"))
+										}
 										editor.putString(CONST.UserInfo.passWord, etPwd!!.text.toString())
 										if (!obj.isNull("token")) {
 											editor.putString(CONST.UserInfo.token, obj.getString("token"))
@@ -356,7 +358,6 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 										} else {
 											CONST.TOKEN = ""
 										}
-										Log.e("token", CONST.TOKEN)
 										if (!obj.isNull("usergroup")) {
 											editor.putString(CONST.UserInfo.groupId, obj.getString("usergroup"))
 											CONST.GROUPID = obj.getString("usergroup")
@@ -379,9 +380,7 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 										okHttpPushToken()
 
 										MyApplication.destoryActivity()
-										val intent = Intent(this@LoginActivity, MainActivity::class.java)
-										intent.putParcelableArrayListExtra("dataList", dataList)
-										startActivity(intent)
+										startActivity(Intent(this@LoginActivity, MainActivity::class.java))
 										finish()
 									}
 								}

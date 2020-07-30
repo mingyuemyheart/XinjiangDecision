@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.hlj.common.ColumnData;
 import com.hlj.view.MyDialog2;
+
+import java.util.ArrayList;
 
 public class BaseActivity extends Activity{
 

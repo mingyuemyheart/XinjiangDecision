@@ -49,9 +49,9 @@ public class CONST {
 	public static String UID = "2606";//用户id
 	public static String USERNAME = publicUser;//用户名
 	public static String PASSWORD = publicPwd;//用户密码
-	public static String TOKEN = null;//token
+	public static String TOKEN = "";//token
 	public static String GROUPID = "50";
-	public static String UGROUPNAME = null;//uGroupName
+	public static String UGROUPNAME = "";//uGroupName
 
 	//预警颜色对应规则
 	public static String[] blue = {"01", "_blue"};

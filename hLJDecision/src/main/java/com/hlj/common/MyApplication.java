@@ -29,6 +29,7 @@ import com.umeng.message.tag.TagManager.TCallBack;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -48,6 +49,8 @@ public class MyApplication extends Application{
 	public static void setTheme(String theme) {
 		appTheme = theme;
 	}
+
+	public static ArrayList<ColumnData> columnDataList = new ArrayList<>();
 
 	@Override
 	public void onCreate() {

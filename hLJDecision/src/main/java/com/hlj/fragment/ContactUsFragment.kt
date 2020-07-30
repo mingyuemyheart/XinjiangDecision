@@ -8,14 +8,12 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hlj.activity.DataIntroActivity
-import com.hlj.activity.HPDFActivity
 import com.hlj.common.CONST
-import com.hlj.common.ColumnData
+import com.hlj.common.MyApplication
 import com.hlj.utils.CommonUtil
 import kotlinx.android.synthetic.main.dialog_delete.view.*
 import kotlinx.android.synthetic.main.fragment_contact_us.*
@@ -41,9 +39,8 @@ class ContactUsFragment : Fragment() {
     }
 
     private fun setDesc() {
-        val dataList: ArrayList<ColumnData> = arguments!!.getParcelableArrayList("dataList")
-        for (i in 0 until dataList.size) {
-            val dto1 = dataList[i]
+        for (i in 0 until MyApplication.columnDataList.size) {
+            val dto1 = MyApplication.columnDataList[i]
             var desc1 = "${(i+1)}.${dto1.name}：${dto1.desc}\n"
             for (j in 0 until dto1.child.size) {
                 val dto2 = dto1.child[j]
