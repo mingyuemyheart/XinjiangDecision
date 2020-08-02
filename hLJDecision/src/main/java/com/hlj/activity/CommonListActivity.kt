@@ -90,7 +90,7 @@ class CommonListActivity : BaseActivity(), View.OnClickListener {
                 ivArrow.visibility = View.GONE
             }
 
-            if (TextUtils.isEmpty(dto.showType)) {
+            if (TextUtils.isEmpty(dto.showType) || TextUtils.isEmpty(dto.dataUrl)) {
                 if (!TextUtils.isEmpty(dto.child[0].dataUrl)) {
                     okHttpList(dto.child[0].dataUrl)
                 }

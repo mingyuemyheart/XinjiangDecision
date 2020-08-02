@@ -268,6 +268,9 @@ public class SurfaceViewActivity extends BaseActivity implements View.OnClickLis
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.llBack:
+				finish();
+				break;
 			case R.id.surfaceView:
 				if (ivPlay.getVisibility() == View.VISIBLE) {
 					ivPlay.setVisibility(View.GONE);

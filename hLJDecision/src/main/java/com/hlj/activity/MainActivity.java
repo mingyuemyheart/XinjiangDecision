@@ -269,7 +269,7 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 				} else if (TextUtils.equals(id, "2") || TextUtils.equals(id, "3") || TextUtils.equals(id, "4")
 						|| TextUtils.equals(id, "10") || TextUtils.equals(id, "7")
 						|| TextUtils.equals(id, "8") || TextUtils.equals(id, "13")
-						|| TextUtils.equals(id, "11") || TextUtils.equals(id, "14")) {
+						|| TextUtils.equals(id, "11") || TextUtils.equals(id, "14") || TextUtils.equals(id, "15")) {
 					fragment = new WeatherFactFragment();//天气实况、天气预报、科普宣传、电力气象服务、铁路气象服务、人工影响天气、森林防火、农业气象
 				} else if (TextUtils.equals(id, "106")) {
 					fragment = new WebviewFragment();//旅游气象
@@ -282,15 +282,17 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 				fragment = new CommonListFragment();
 			}
 
-			Bundle bundle = new Bundle();
-			bundle.putString(CONST.BROADCAST_ACTION, fragment.getClass().getName()+channel.name);
-			bundle.putString(CONST.COLUMN_ID, channel.columnId);
-			bundle.putString(CONST.ACTIVITY_NAME, channel.name);
-			bundle.putString(CONST.WEB_URL, channel.dataUrl);
-			bundle.putString(CONST.LOCAL_ID, channel.id);
-			bundle.putParcelable("data", channel);
-			fragment.setArguments(bundle);
-			fragments.add(fragment);
+			if (fragment != null) {
+				Bundle bundle = new Bundle();
+				bundle.putString(CONST.BROADCAST_ACTION, fragment.getClass().getName()+channel.name);
+				bundle.putString(CONST.COLUMN_ID, channel.columnId);
+				bundle.putString(CONST.ACTIVITY_NAME, channel.name);
+				bundle.putString(CONST.WEB_URL, channel.dataUrl);
+				bundle.putString(CONST.LOCAL_ID, channel.id);
+				bundle.putParcelable("data", channel);
+				fragment.setArguments(bundle);
+				fragments.add(fragment);
+			}
 		}
 
 		viewPager = findViewById(R.id.viewPager);
