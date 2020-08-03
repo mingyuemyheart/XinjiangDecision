@@ -113,52 +113,36 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 			ivSetting.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(getResources(), R.drawable.iv_setting)));
 		}
 
-//		//是否显示登录对话框
-//		SharedPreferences sp = getSharedPreferences("LOGINDIALOG", Context.MODE_PRIVATE);
-//		String versionCode = sp.getString("versionCode", "");
-//		//获取保存的用户信息
-//		SharedPreferences sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE);
-//		String userName = sharedPreferences.getString(CONST.UserInfo.userName, null);
-//		if (!TextUtils.equals(versionCode, CommonUtil.getVersion(mContext))) {
-//			if (TextUtils.equals(userName, CONST.publicUser) || TextUtils.isEmpty(userName)) {//公众用户或为空
-//				decisionLoginDialog(sp);
-//			}
-//		}
+		//是否显示登录对话框
+		SharedPreferences sp = getSharedPreferences("LOGINDIALOG", Context.MODE_PRIVATE);
+		boolean isFirst = sp.getBoolean("isFirst", true);
+		if (isFirst) {
+			firstLoginDialog(sp);
+		}
 	}
 
 	/**
-	 * 决策用户登录对话框
+	 * 第一次登陆
 	 */
-	private void decisionLoginDialog(final SharedPreferences sp) {
+	private void firstLoginDialog(final SharedPreferences sp) {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.dialog_decision_login, null);
-		LinearLayout llNegative = view.findViewById(R.id.llNegative);
-		LinearLayout llPositive = view.findViewById(R.id.llPositive);
+		View view = inflater.inflate(R.layout.dialog_first_login, null);
+		TextView tvSure = view.findViewById(R.id.tvSure);
 
 		final Dialog dialog = new Dialog(mContext, R.style.CustomProgressDialog);
 		dialog.setContentView(view);
 		dialog.setCanceledOnTouchOutside(false);
 		dialog.show();
 
-		llNegative.setOnClickListener(new OnClickListener() {
+		tvSure.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				dialog.dismiss();
 				SharedPreferences.Editor editor = sp.edit();
-				editor.putString("versionCode", CommonUtil.getVersion(mContext));
-				editor.apply();
-			}
-		});
-
-		llPositive.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				dialog.dismiss();
-				SharedPreferences.Editor editor = sp.edit();
-				editor.putString("versionCode", CommonUtil.getVersion(mContext));
+				editor.putBoolean("isFirst", false);
 				editor.apply();
 
-				promptDialog();
+//				promptDialog();
 			}
 		});
 	}
