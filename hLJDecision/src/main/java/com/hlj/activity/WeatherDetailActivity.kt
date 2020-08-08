@@ -727,7 +727,7 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
                                                 val cubicView = CubicView2(this@HWeatherDetailActivity)
                                                 cubicView.setData(hourlyList)
                                                 llContainerHour!!.removeAllViews()
-                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(this@HWeatherDetailActivity) * 2, CommonUtil.dip2px(this@HWeatherDetailActivity, 200f).toInt())
+                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(this@HWeatherDetailActivity) * 2, CommonUtil.dip2px(this@HWeatherDetailActivity, 300f).toInt())
                                             }
                                         }
                                     }

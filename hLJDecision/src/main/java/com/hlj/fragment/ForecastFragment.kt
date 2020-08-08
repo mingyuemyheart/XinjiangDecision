@@ -807,7 +807,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                 val cubicView = CubicView2(activity)
                                                 cubicView.setData(hourlyList)
                                                 llContainerHour!!.removeAllViews()
-                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(activity) * 2, CommonUtil.dip2px(activity, 200f).toInt())
+                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(activity) * 2, CommonUtil.dip2px(activity, 300f).toInt())
                                             }
                                         }
                                     }
