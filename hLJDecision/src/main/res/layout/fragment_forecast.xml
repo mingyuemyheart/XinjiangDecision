@@ -51,10 +51,22 @@
                 app:layout_constraintTop_toTopOf="@+id/tvPosition" />
 
             <TextView
+                android:id="@+id/tvRiseTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4"
+                android:layout_marginEnd="10dp"
+                android:lineSpacingExtra="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/tvPosition"/>
+
+            <TextView
                 android:id="@+id/tvDisWarning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/bg_warning2"
                 android:gravity="center"
                 android:paddingStart="15dp"
@@ -63,7 +75,7 @@
                 android:textSize="@dimen/level_4"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
+                app:layout_constraintTop_toBottomOf="@+id/tvRiseTime" />
 
             <TextView
                 android:id="@+id/tvCityWarning"
@@ -555,7 +567,7 @@
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
                 android:scrollbars="none"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/clHour">
 
@@ -603,7 +615,7 @@
                     android:id="@+id/tvChart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_chart"
+                    android:background="@drawable/bg_chart_press"
                     android:gravity="center"
                     android:text="趋势"
                     android:textColor="@color/white"
@@ -616,7 +628,7 @@
                     android:id="@+id/tvList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_list_press"
+                    android:background="@drawable/bg_list"
                     android:gravity="center"
                     android:text="列表"
                     android:textColor="@color/white"
@@ -639,6 +651,7 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:scrollbars="none"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/clFifteen" />
 
             <HorizontalScrollView
@@ -647,7 +660,6 @@
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
                 android:scrollbars="none"
-                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/clFifteen">
 
                 <LinearLayout

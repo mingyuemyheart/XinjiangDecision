@@ -594,7 +594,7 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
 
     private fun getWeatherInfo(cityId: String) {
         Thread(Runnable {
-            val url = String.format("http://api.weatherdt.com/common/?area=%s&type=forecast|observe|alarm|air&key=eca9a6c9ee6fafe74ac6bc81f577a680", cityId)
+            val url = String.format("http://api.weatherdt.com/common/?area=%s&type=forecast|observe|alarm|air|rise&key=eca9a6c9ee6fafe74ac6bc81f577a680", cityId)
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -673,6 +673,27 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
                                                     } else {
                                                         ivWind!!.setImageResource(R.drawable.iv_winddir)
                                                     }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (!obj.isNull("rise")) {
+                                    val rise = obj.getJSONObject("rise")
+                                    if (!rise.isNull(cityId)) {
+                                        val obj1 = rise.getJSONObject(cityId)
+                                        if (!obj1.isNull("1001008")) {
+                                            val riseArray = obj1.getJSONArray("1001008")
+                                            if (riseArray.length() > 0) {
+                                                val itemObj: JSONObject = riseArray.getJSONObject(0)
+                                                if (!itemObj.isNull("001") && !itemObj.isNull("002")) {
+                                                    val riseTime = itemObj.getString("001")
+                                                    val setTime = itemObj.getString("002")
+                                                    val diviTime = sdf6.parse(setTime).time-sdf6.parse(riseTime).time
+                                                    val hour = diviTime/(1000*60*60)
+                                                    val minute = (diviTime-hour*1000*60*60)/(1000*60)
+                                                    tvRiseTime.text = "日出时间：$riseTime\n日落时间：$setTime\n日照时间：$hour:$minute"
                                                 }
                                             }
                                         }
