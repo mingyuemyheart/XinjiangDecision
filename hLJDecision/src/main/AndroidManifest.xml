@@ -196,7 +196,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.ShawnPointForeActivity"
+            android:name="com.hlj.activity.PointForeActivity"
             android:screenOrientation="portrait" />
 
         <activity

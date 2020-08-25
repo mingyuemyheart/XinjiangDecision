@@ -150,7 +150,7 @@ class WeatherFactFragment : Fragment() {
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                     startActivity(intent)
                 } else if (TextUtils.equals(dto.id, "207")) { //格点预报
-                    intent = Intent(activity, ShawnPointForeActivity::class.java)
+                    intent = Intent(activity, PointForeActivity::class.java)
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                     startActivity(intent)
