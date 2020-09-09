@@ -772,8 +772,18 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                     val setTime = itemObj.getString("002")
                                                     val diviTime = sdf6.parse(setTime).time-sdf6.parse(riseTime).time
                                                     val hour = diviTime/(1000*60*60)
+                                                    val hourStr = if (hour < 10) {
+                                                        "0$hour"
+                                                    } else {
+                                                        "$hour"
+                                                    }
                                                     val minute = (diviTime-hour*1000*60*60)/(1000*60)
-                                                    tvRiseTime.text = "日出时间：$riseTime\n日落时间：$setTime\n日照时间：$hour:$minute"
+                                                    val minuteStr = if (minute < 10) {
+                                                        "0$minute"
+                                                    } else {
+                                                        "$minute"
+                                                    }
+                                                    tvRiseTime.text = "日出时间：$riseTime\n日落时间：$setTime\n日照时间：$hourStr:$minuteStr"
                                                 }
                                             }
                                         }

@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -2074,6 +2075,8 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 
 	@Override
 	public void onCameraChangeFinish(CameraPosition arg0) {
+		zoom = arg0.zoom;
+		Log.e("zoom", zoom+"");
 		if (isWindOn && isHaveWindData) {
 			reloadWind();
 		}
@@ -2097,9 +2100,11 @@ public class TyphoonRouteActivity extends BaseActivity implements OnClickListene
 		if (waitWindView == null) {
 			waitWindView = new WaitWindView(mContext);
 			waitWindView.init(TyphoonRouteActivity.this);
-			waitWindView.setData(windData);
+			waitWindView.setData(windData, zoom);
 			waitWindView.start();
 			waitWindView.invalidate();
+		} else {
+			waitWindView.setData(windData, zoom);
 		}
 
 		container.removeAllViews();

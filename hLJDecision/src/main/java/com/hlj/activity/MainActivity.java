@@ -141,60 +141,10 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 				SharedPreferences.Editor editor = sp.edit();
 				editor.putBoolean("isFirst", false);
 				editor.apply();
-
-//				promptDialog();
 			}
 		});
 	}
 
-	/**
-	 * 温馨提示对话框
-	 */
-	private void promptDialog() {
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.dialog_prompt, null);
-		TextView tvProtocal = view.findViewById(R.id.tvProtocal);
-		TextView tvPolicy = view.findViewById(R.id.tvPolicy);
-		TextView tvNegtive = view.findViewById(R.id.tvNegtive);
-		TextView tvPositive = view.findViewById(R.id.tvPositive);
-
-		final Dialog dialog = new Dialog(mContext, R.style.CustomProgressDialog);
-		dialog.setContentView(view);
-		dialog.show();
-
-		tvProtocal.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Intent intent = new Intent(mContext, WebviewActivity.class);
-				intent.putExtra(CONST.ACTIVITY_NAME, "用户协议");
-				intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yhxy.html");
-				startActivity(intent);
-			}
-		});
-		tvPolicy.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Intent intent = new Intent(mContext, WebviewActivity.class);
-				intent.putExtra(CONST.ACTIVITY_NAME, "隐私政策");
-				intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yscl.html");
-				startActivity(intent);
-			}
-		});
-		tvNegtive.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				dialog.dismiss();
-			}
-		});
-		tvPositive.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				dialog.dismiss();
-				startActivity(new Intent(mContext, LoginActivity.class));
-			}
-		});
-	}
-	
 	/**
 	 * 初始化viewpager
 	 */

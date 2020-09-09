@@ -463,6 +463,7 @@ public class ShawnWaitWindActivity extends BaseActivity implements OnClickListen
 
     @Override
     public void onCameraChangeFinish(CameraPosition arg0) {
+        zoom = arg0.zoom;
         if (isGfs) {
             reloadWind(true);
         }else {
@@ -495,17 +496,17 @@ public class ShawnWaitWindActivity extends BaseActivity implements OnClickListen
             waitWindView = new WaitWindView2(mContext);
             waitWindView.init(ShawnWaitWindActivity.this);
             if (isGfs) {
-                waitWindView.setData(windDataGFS);
+                waitWindView.setData(windDataGFS, zoom);
             }else {
-                waitWindView.setData(windDataT639);
+                waitWindView.setData(windDataT639, zoom);
             }
             waitWindView.start();
             waitWindView.invalidate();
         }else {
             if (isGfs) {
-                waitWindView.setData(windDataGFS);
+                waitWindView.setData(windDataGFS, zoom);
             }else {
-                waitWindView.setData(windDataT639);
+                waitWindView.setData(windDataT639, zoom);
             }
         }
 

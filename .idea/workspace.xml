@@ -6,6 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="zoom" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -57,7 +58,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15ab3c4b-28f1-4ec7-90ce-56991a316228" name="Default" comment="1.修改决策登录对话框提示逻辑&#10;2.适配天气详情逐小时预报和分钟级降水UI&#10;3.增加预警推送功能">
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/PointForeActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -71,11 +71,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnPointForeActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/dto/PointForeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/dto/PointForeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_point_fore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_point_fore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWaitWindActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWaitWindActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/TyphoonRouteActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/TyphoonRouteActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/ForecastFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/ForecastFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/WaitWindView.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/WaitWindView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/WaitWindView2.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/WaitWindView2.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -166,7 +167,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536661182344" />
     <property name="device.picker.selection" value="66J5T19318007315" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
@@ -181,15 +182,15 @@
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets/echarts" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/anim" />
+    </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="com.hlj.activity" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets/echarts" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/jniLibs/armeabi-v7a" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.hlj.view" />
@@ -198,12 +199,12 @@
       <recent name="com.hlj.utils" />
       <recent name="com.hlj.view.wheelview" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets/echarts" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/anim" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets/echarts" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/jniLibs/armeabi-v7a" />
     </key>
   </component>
   <component name="RunDashboard">
