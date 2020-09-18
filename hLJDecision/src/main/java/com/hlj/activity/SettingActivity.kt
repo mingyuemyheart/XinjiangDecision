@@ -47,6 +47,8 @@ class SettingActivity : BaseActivity(), OnClickListener {
         llClearData!!.setOnClickListener(this)
         llBuild!!.setOnClickListener(this)
         llCity!!.setOnClickListener(this)
+        llProtocal!!.setOnClickListener(this)
+        llPolicy!!.setOnClickListener(this)
         tvTitle!!.text = getString(R.string.setting)
         tvLogout!!.setOnClickListener(this)
         tvVersion!!.text = CommonUtil.getVersion(this)
@@ -205,6 +207,18 @@ class SettingActivity : BaseActivity(), OnClickListener {
                     ivPushNews!!.setImageResource(R.drawable.setting_checkbox_on)
                     MyApplication.enablePush()
                 }
+            }
+            R.id.llProtocal -> {
+                val intent = Intent(this, WebviewActivity::class.java)
+                intent.putExtra(CONST.ACTIVITY_NAME, "用户协议")
+                intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yhxy.html")
+                startActivity(intent)
+            }
+            R.id.llPolicy -> {
+                val intent = Intent(this, WebviewActivity::class.java)
+                intent.putExtra(CONST.ACTIVITY_NAME, "隐私政策")
+                intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yscl.html")
+                startActivity(intent)
             }
         }
     }

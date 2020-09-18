@@ -71,12 +71,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWaitWindActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWaitWindActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/TyphoonRouteActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/TyphoonRouteActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/ForecastFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/ForecastFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/WaitWindView.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/WaitWindView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/WaitWindView2.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view/WaitWindView2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/SettingActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/SettingActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_setting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_setting.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +84,6 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="66J5T19318007315" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
