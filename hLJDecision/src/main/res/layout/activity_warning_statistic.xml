@@ -44,7 +44,7 @@
                 android:textColor="@color/text_color3"
                 android:textSize="@dimen/level_4"
                 app:layout_constraintBottom_toBottomOf="@+id/startStr"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvCheck"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toEndOf="@+id/startStr"
                 app:layout_constraintTop_toTopOf="@+id/startStr" />
@@ -77,6 +77,7 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/bg_select_time"
                 android:gravity="center_vertical"
+                app:layout_constraintEnd_toStartOf="@+id/tvCheck"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/text_color3"
@@ -97,7 +98,24 @@
                 app:layout_constraintTop_toTopOf="@+id/tvEndTime" />
 
             <TextView
-                android:id="@+id/divider1"
+                android:id="@+id/tvCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/selector_check_detail"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="开始查询"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5" />
+
+            <TextView
+                android:id="@+id/divider0"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:layout_marginTop="15dp"
@@ -105,9 +123,98 @@
                 app:layout_constraintTop_toBottomOf="@+id/endStr" />
 
             <com.hlj.echart.EchartView
-                android:id="@+id/echartView1"
+                android:id="@+id/echartView0"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider0" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/pro"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#4063B5"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toTopOf="@+id/tvPro"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPro"
+                app:layout_constraintEnd_toStartOf="@+id/tvPro"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvPro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/echartView0"
+                app:layout_constraintEnd_toStartOf="@+id/tvCity"
+                android:layout_marginEnd="30dp"
+                android:text="省"
+                android:textColor="@color/text_color3"
+                android:gravity="center"
+                android:textSize="@dimen/level_4"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/city"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#E7BE64"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toTopOf="@+id/tvCity"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCity"
+                app:layout_constraintEnd_toStartOf="@+id/tvCity"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/echartView0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="市"
+                android:textColor="@color/text_color3"
+                android:gravity="center"
+                android:textSize="@dimen/level_4"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/dis"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#DC8E4F"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toTopOf="@+id/tvDis"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDis"
+                app:layout_constraintEnd_toStartOf="@+id/tvDis"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvDis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/echartView0"
+                app:layout_constraintStart_toEndOf="@+id/tvCity"
+                android:layout_marginStart="30dp"
+                android:text="县"
+                android:textColor="@color/text_color3"
+                android:gravity="center"
+                android:textSize="@dimen/level_4"/>
+
+            <TextView
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/light_gray"
+                app:layout_constraintTop_toBottomOf="@+id/tvCity" />
+
+            <com.hlj.echart.EchartView
+                android:id="@+id/echartView1"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
                 android:layout_gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

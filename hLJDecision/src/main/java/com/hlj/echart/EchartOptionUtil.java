@@ -1,6 +1,7 @@
 package com.hlj.echart;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
@@ -25,12 +26,90 @@ import java.util.Map;
 public class EchartOptionUtil {
 
     /**
+     * 饼图
+     * @param dataList
+     * @return
+     */
+    public static GsonOption pieOption(ArrayList<WarningDto> dataList) {
+        int pro = 0,city = 0,dis = 0;
+        for (int i = 0; i < dataList.size(); i++) {
+            WarningDto dto = dataList.get(i);
+            if (TextUtils.equals(dto.item0.substring(2,6), "0000")) {
+                pro++;
+            } else if (TextUtils.equals(dto.item0.substring(2,4), "00") && !TextUtils.equals(dto.item0.substring(4,6), "00")) {
+                city++;
+            } else {
+                dis++;
+            }
+        }
+
+        String title = "";
+        List<WarningDto> list = new ArrayList<>();
+        WarningDto dto;
+        if (pro > 0) {
+            dto = new WarningDto();
+            dto.name = "省";
+            dto.color = "#4063B5";
+            dto.count = pro;
+            list.add(dto);
+        }
+        if (city > 0) {
+            dto = new WarningDto();
+            dto.name = "市";
+            dto.color = "#E7BE64";
+            dto.count = city;
+            list.add(dto);
+        }
+        if (dis > 0) {
+            dto = new WarningDto();
+            dto.name = "县";
+            dto.color = "#DC8E4F";
+            dto.count = dis;
+            list.add(dto);
+        }
+        String[] levelNames = new String[list.size()];
+        String[] levelColors = new String[list.size()];
+        int[] levelCounts = new int[list.size()];
+//        String[] levelNames = {"省","市","县"};
+//        String[] levelColors = {"#4063B5","#E7BE64","#DC8E4F"};
+//        int[] levelCounts = {pro,city,dis};
+
+        for (int i = 0; i < list.size(); i++) {
+            WarningDto data = list.get(i);
+            levelNames[i] = data.name;
+            levelColors[i] = data.color;
+            levelCounts[i] = data.count;
+        }
+
+        GsonOption option = new GsonOption();//创建option对象
+        option.color(levelColors);
+        option.title().text(title).subtext("").x("center");//设置标题  二级标题  标题位置
+        option.toolbox().show(true).feature(Tool.mark);//设置工具栏 展示  能标记
+        option.tooltip().show(true).formatter("{c}  {d}%");//设置显示工具格式
+//        option.legend().data(levelNames).y("bottom").orient(Orient.horizontal);//设置图例  图例位置  图例对齐方式 竖列对齐
+
+        Pie innerPie = new Pie();//创建饼图对象
+//        ItemStyle itemStyle = new ItemStyle();
+//        itemStyle.normal().position(Position.inside).show(false);
+        innerPie.name(title).radius("0","60%").center("50%","50%");//设置饼图的标题 半径、位置
+        //填充数据
+        for(int i = 0; i < levelNames.length; i++){
+            Map<String,Object> map = new HashMap<>();
+            map.put("value",levelCounts[i]);//填充饼图数据
+            map.put("name",levelNames[i]);//填充饼图数据对应的搜索引擎
+            innerPie.data(map);
+        }
+        option.series(innerPie); //设置数据
+
+        return option;
+    }
+
+    /**
      * 嵌套饼图
      * @param dataList
      * @return
      */
     public static GsonOption nestedPieOption(ArrayList<WarningDto> dataList) {
-
         int blue = 0,yellow = 0,orange = 0,red = 0,cother = 0;
         int b03 = 0, b04 = 0, b05 = 0, b06 = 0, b15 = 0, b17 = 0, b19 = 0, b20 = 0, b21 = 0, b25 = 0, b14 = 0, tother = 0;
         for (int i = 0; i < dataList.size(); i++) {
@@ -103,9 +182,106 @@ public class EchartOptionUtil {
 
         //外圈数据
         title = "";
-        String[] typeNames = {"暴雨预警","暴雪预警","寒潮预警","大风预警","冰雹预警","大雾预警","霾预警","雷雨大风","道路结冰","森林火险","雷电预警","其它"};
-        String[] typeColors = {"#4383AE","#8E59B2","#554EAD","#C77B2D","#7CC0A7","#6B6C6D","#814E4F","#9DC093","#D3B2B3","#C32E30","#D4765E","#BEBEBE"};
-        int[] typeCounts = {b03,b04,b05,b06,b15,b17,b19,b20,b21,b25,b14,tother};
+        List<WarningDto> list = new ArrayList<>();
+        WarningDto dto;
+        if (b03 > 0) {
+            dto = new WarningDto();
+            dto.name = "暴雨预警";
+            dto.color = "#4383AE";
+            dto.count = b03;
+            list.add(dto);
+        }
+        if (b04 > 0) {
+            dto = new WarningDto();
+            dto.name = "暴雪预警";
+            dto.color = "#8E59B2";
+            dto.count = b04;
+            list.add(dto);
+        }
+        if (b05 > 0) {
+            dto = new WarningDto();
+            dto.name = "寒潮预警";
+            dto.color = "#554EAD";
+            dto.count = b05;
+            list.add(dto);
+        }
+        if (b06 > 0) {
+            dto = new WarningDto();
+            dto.name = "大风预警";
+            dto.color = "#C77B2D";
+            dto.count = b06;
+            list.add(dto);
+        }
+        if (b15 > 0) {
+            dto = new WarningDto();
+            dto.name = "冰雹预警";
+            dto.color = "#7CC0A7";
+            dto.count = b15;
+            list.add(dto);
+        }
+        if (b17 > 0) {
+            dto = new WarningDto();
+            dto.name = "大雾预警";
+            dto.color = "#6B6C6D";
+            dto.count = b17;
+            list.add(dto);
+        }
+        if (b19 > 0) {
+            dto = new WarningDto();
+            dto.name = "霾预警";
+            dto.color = "#814E4F";
+            dto.count = b19;
+            list.add(dto);
+        }
+        if (b20 > 0) {
+            dto = new WarningDto();
+            dto.name = "雷雨大风";
+            dto.color = "#9DC093";
+            dto.count = b20;
+            list.add(dto);
+        }
+        if (b21 > 0) {
+            dto = new WarningDto();
+            dto.name = "道路结冰";
+            dto.color = "#D3B2B3";
+            dto.count = b21;
+            list.add(dto);
+        }
+        if (b25 > 0) {
+            dto = new WarningDto();
+            dto.name = "森林火险";
+            dto.color = "#C32E30";
+            dto.count = b25;
+            list.add(dto);
+        }
+        if (b14 > 0) {
+            dto = new WarningDto();
+            dto.name = "雷电预警";
+            dto.color = "#D4765E";
+            dto.count = b14;
+            list.add(dto);
+        }
+        if (tother > 0) {
+            dto = new WarningDto();
+            dto.name = "其它";
+            dto.color = "#BEBEBE";
+            dto.count = tother;
+            list.add(dto);
+        }
+
+        String[] typeNames = new String[list.size()];
+        String[] typeColors = new String[list.size()];
+        int[] typeCounts = new int[list.size()];
+//        String[] typeNames = {"暴雨预警","暴雪预警","寒潮预警","大风预警","冰雹预警","大雾预警","霾预警","雷雨大风","道路结冰","森林火险","雷电预警","其它"};
+//        String[] typeColors = {"#4383AE","#8E59B2","#554EAD","#C77B2D","#7CC0A7","#6B6C6D","#814E4F","#9DC093","#D3B2B3","#C32E30","#D4765E","#BEBEBE"};
+//        int[] typeCounts = {b03,b04,b05,b06,b15,b17,b19,b20,b21,b25,b14,tother};
+
+        for (int i = 0; i < list.size(); i++) {
+            WarningDto data = list.get(i);
+            typeNames[i] = data.name;
+            typeColors[i] = data.color;
+            typeCounts[i] = data.count;
+        }
 
         option.color(typeColors);
         option.tooltip().show(true).formatter("{c}  {d}%");//设置显示工具格式
@@ -344,6 +520,7 @@ public class EchartOptionUtil {
         bar5.name(title).type(SeriesType.bar).stack("总量").label(itemStyle);
         for(int i = 0; i < levelNames.length; i++){
             int total = levelCounts.get(i)[0]+levelCounts.get(i)[1]+levelCounts.get(i)[2]+levelCounts.get(i)[3]+levelCounts.get(i)[4];
+            Log.e("total", total+"");
             bar1.data(levelCounts.get(i)[0]);
             bar2.data(levelCounts.get(i)[1]);
             bar3.data(levelCounts.get(i)[2]);

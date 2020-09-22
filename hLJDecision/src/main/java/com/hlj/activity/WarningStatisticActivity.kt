@@ -38,10 +38,13 @@ import kotlin.collections.ArrayList
 class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
 
     private var isStart = true
-    private val sdf1 = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
+    private val sdf1 = SimpleDateFormat("yyyy-MM-dd HH时", Locale.CHINA)
+    private val sdf2 = SimpleDateFormat("yyyyMMddHH0000", Locale.CHINA)
     private val warningList: ArrayList<WarningDto?> = ArrayList()
     private var mAdapter: WarningTypeAdapter? = null
     private val typeList: ArrayList<WarningDto?> = ArrayList()
+    private var startTime = ""
+    private var endTime = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +60,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         tvControl.setOnClickListener(this)
         tvStartTime.setOnClickListener(this)
         tvEndTime.setOnClickListener(this)
+        tvCheck.setOnClickListener(this)
         tvNegtive.setOnClickListener(this)
         tvPositive.setOnClickListener(this)
 
@@ -64,6 +68,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         year.visibility = View.VISIBLE
         month.visibility = View.VISIBLE
         day.visibility = View.VISIBLE
+        hour.visibility = View.VISIBLE
         xunyear.visibility = View.GONE
         xunmonth.visibility = View.GONE
         xun.visibility = View.GONE
@@ -74,6 +79,8 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
 
         tvStartTime.text = sdf1.format(Date().time+1000*60*60*24*30)
         tvEndTime.text = sdf1.format(Date())
+        startTime = sdf2.format(sdf1.parse(tvStartTime.text.toString()))
+        endTime = sdf2.format(sdf1.parse(tvEndTime.text.toString()))
 
         initWheelView()
 
@@ -81,12 +88,13 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
                 //最好在h5页面加载完毕后再加载数据，防止html的标签还未加载完成，不能正常显示
-                okHttpList()
+//                okHttpList()
             }
         }
     }
 
     private fun refreshPie() {
+        echartView0.refreshEchartsWithOption(EchartOptionUtil.pieOption(warningList))
         echartView1.refreshEchartsWithOption(EchartOptionUtil.nestedPieOption(warningList))
     }
 
@@ -134,7 +142,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
     private fun okHttpList() {
         showDialog()
         Thread(Runnable {
-            val url = "http://warn-wx.tianqi.cn/Test/getHistoryWarns?areaid=23&st=${tvStartTime.text}000000&et=${tvEndTime.text}000000"
+            val url = "http://warn-wx.tianqi.cn/Test/getHistoryWarns?areaid=23&st=${startTime}&et=${endTime}"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                 }
@@ -145,6 +153,12 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                     val result = response.body!!.string()
                     runOnUiThread {
                         cancelDialog()
+                        pro.visibility = View.VISIBLE
+                        tvPro.visibility = View.VISIBLE
+                        city.visibility = View.VISIBLE
+                        tvCity.visibility = View.VISIBLE
+                        dis.visibility = View.VISIBLE
+                        tvDis.visibility = View.VISIBLE
                         ivLegend.visibility = View.VISIBLE
                         gridView.visibility = View.VISIBLE
                         tvControl.visibility = View.VISIBLE
@@ -197,30 +211,23 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.tvNegtive -> bootTimeLayoutAnimation()
             R.id.tvPositive -> {
+                setTextViewValue()
                 bootTimeLayoutAnimation()
-                if (isStart) {
-                    val start = sdf1.parse(setTextViewValue())
-                    val end = sdf1.parse(tvEndTime.text.toString())
-                    if (start > end) {
-                        Toast.makeText(this, "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show()
-                    } else {
-                        tvStartTime.text = setTextViewValue()
-                        okHttpList()
-                    }
-                } else {
-                    val start = sdf1.parse(tvStartTime.text.toString())
-                    val end = sdf1.parse(setTextViewValue())
-                    if (start > end) {
-                        Toast.makeText(this, "结束时间不能小于开始时间", Toast.LENGTH_SHORT).show()
-                    } else {
-                        tvEndTime.text = setTextViewValue()
-                        okHttpList()
-                    }
-                }
             }
             R.id.tvEndTime -> {
                 isStart = false
                 bootTimeLayoutAnimation()
+            }
+            R.id.tvCheck -> {
+                val start = sdf1.parse(tvStartTime.text.toString())
+                val end = sdf1.parse(tvEndTime.text.toString())
+                if (start > end) {
+                    Toast.makeText(this, "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show()
+                } else {
+                    startTime = sdf2.format(sdf1.parse(tvStartTime.text.toString()))
+                    endTime = sdf2.format(sdf1.parse(tvEndTime.text.toString()))
+                    okHttpList()
+                }
             }
         }
     }
@@ -230,6 +237,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         val curYear = c[Calendar.YEAR]
         val curMonth = c[Calendar.MONTH] + 1 //通过Calendar算出的月数要+1
         val curDate = c[Calendar.DATE]
+        val curHour = c[Calendar.HOUR_OF_DAY]
         val numericWheelAdapter1 = NumericWheelAdapter(this, 1950, curYear)
         numericWheelAdapter1.setLabel("年")
         year.viewAdapter = numericWheelAdapter1
@@ -245,9 +253,18 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         initDay(curYear, curMonth)
         day.isCyclic = false
         day.visibleItems = 7
+
+        val numericWheelAdapter3 = NumericWheelAdapter(this, 1, 23, "%02d")
+        numericWheelAdapter3.setLabel("时")
+        hour.viewAdapter = numericWheelAdapter3
+        hour.isCyclic = false
+        hour.addScrollingListener(scrollListener)
+        hour.visibleItems = 7
+
         year.currentItem = curYear - 1950
         month.currentItem = curMonth - 1
         day.currentItem = curDate - 1
+        hour.currentItem = curHour - 1
     }
 
     private val scrollListener: OnWheelScrollListener = object : OnWheelScrollListener {
@@ -290,11 +307,16 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
 
     /**
      */
-    private fun setTextViewValue(): String? {
+    private fun setTextViewValue() {
         val yearStr = (year!!.currentItem + 1950).toString()
         val monthStr = if (month.currentItem + 1 < 10) "0" + (month.currentItem + 1) else (month.currentItem + 1).toString()
         val dayStr = if (day.currentItem + 1 < 10) "0" + (day.currentItem + 1) else (day.currentItem + 1).toString()
-        return "$yearStr-$monthStr-$dayStr"
+        val hourStr = if (hour.currentItem + 1 < 10) "0" + (hour.currentItem + 1) else (hour.currentItem + 1).toString()
+        if (isStart) {
+            tvStartTime.text = "$yearStr-$monthStr-$dayStr ${hourStr}时"
+        } else {
+            tvEndTime.text = "$yearStr-$monthStr-$dayStr ${hourStr}时"
+        }
     }
 
     private fun bootTimeLayoutAnimation() {
