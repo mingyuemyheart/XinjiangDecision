@@ -1,4 +1,4 @@
-package com.hlj.fragment;
+package com.hlj.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -10,14 +10,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.Drawable
 import android.media.ThumbnailUtils
 import android.os.*
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.*
@@ -49,6 +47,7 @@ import com.hlj.manager.DBManager
 import com.hlj.manager.XiangJiManager
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
+import com.hlj.utils.SecretUrlUtil
 import com.hlj.utils.WeatherUtil
 import com.hlj.view.CubicView2
 import com.hlj.view.MinuteFallView
@@ -656,6 +655,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                             if (!geoObj.isNull("id")) {
                                 val cityId = geoObj.getString("id")
                                 if (!TextUtils.isEmpty(cityId)) {
+                                    okHttpBody(cityId)
                                     getWeatherInfo(cityId)
                                 }
                             }
@@ -667,6 +667,40 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
 
                 override fun onError(error: Throwable, content: String) {
                     super.onError(error, content)
+                }
+            })
+        }).start()
+    }
+
+    private fun okHttpBody(cityId: String) {
+        Thread(Runnable {
+            OkHttpUtil.enqueue(Request.Builder().url(SecretUrlUtil.bodyTemp(cityId)).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    activity!!.runOnUiThread {
+                        if (!TextUtils.isEmpty(result)) {
+                            try {
+                                val array = JSONArray(result)
+                                val obj = array.getJSONObject(1)
+                                //实况信息
+                                if (!obj.isNull("l")) {
+                                    val itemObj = obj.getJSONObject("l")
+                                    if (!itemObj.isNull("l12")) {
+                                        val bodyTemp = itemObj.getString("l12")
+                                        tvBody.tag = "$bodyTemp"
+                                    }
+                                }
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
                 }
             })
         }).start()
@@ -710,10 +744,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                 val factTemp = o.getString("002")
                                                 tvTemp!!.text = "$factTemp"
                                                 tvFact.tag = "$factTemp"
-                                            }
-                                            if (!o.isNull("002")) {
-                                                val bodyTemp = o.getString("002")
-                                                tvBody.tag = "$bodyTemp"
                                             }
                                             if (!o.isNull("004")) {
                                                 val windDir = o.getString("004")

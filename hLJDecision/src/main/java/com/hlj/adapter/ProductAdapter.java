@@ -75,7 +75,9 @@ public class ProductAdapter extends BaseAdapter {
 		}
 
 		if (!TextUtils.isEmpty(dto.icon)) {
-			Picasso.get().load(dto.icon).transform(new RoundTransform((int) CommonUtil.dip2px(mContext, 5f))).into(mHolder.icon);
+			Picasso.get().load(dto.icon).transform(new RoundTransform((int) CommonUtil.dip2px(mContext, 2f))).into(mHolder.icon);
+		} else {
+			mHolder.icon.setImageResource(R.drawable.icon_default_pdf);
 		}
 		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mHolder.icon.getLayoutParams();
 		params.width = (CommonUtil.widthPixels(mContext)-(int)CommonUtil.dip2px(mContext, 30))/2;

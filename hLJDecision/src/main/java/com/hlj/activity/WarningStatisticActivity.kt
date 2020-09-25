@@ -11,6 +11,7 @@ import android.view.animation.TranslateAnimation
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import com.hlj.adapter.WarningLegendAdapter
 import com.hlj.adapter.WarningTypeAdapter
 import com.hlj.dto.WarningDto
 import com.hlj.echart.EchartOptionUtil
@@ -45,11 +46,14 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
     private val typeList: ArrayList<WarningDto?> = ArrayList()
     private var startTime = ""
     private var endTime = ""
+    private var legendAdapter: WarningLegendAdapter? = null
+    private val legendList: ArrayList<WarningDto?> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_warning_statistic)
         initWidget()
+        initGridViewLegend()
         initGridView()
     }
 
@@ -100,6 +104,42 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
 
     private fun refreshBar(list: ArrayList<WarningDto?>) {
         echartView2.refreshEchartsWithOption(EchartOptionUtil.stackedBarOption(list))
+    }
+
+    private fun initGridViewLegend() {
+        legendList.clear()
+        val array = resources.getStringArray(R.array.warningType2)
+        for (i in 1 until array.size) {
+            val result = array[i].split(",")
+            val dto = WarningDto()
+            dto.type = result[0]
+            dto.name = result[1]
+            legendList.add(dto)
+        }
+        var dto = WarningDto()
+        dto.type = "other"
+        dto.name = "其它"
+        legendList.add(dto)
+
+        dto = WarningDto()
+        dto.type = "01"
+        dto.name = "蓝"
+        legendList.add(dto)
+        dto = WarningDto()
+        dto.type = "02"
+        dto.name = "黄"
+        legendList.add(dto)
+        dto = WarningDto()
+        dto.type = "03"
+        dto.name = "橙"
+        legendList.add(dto)
+        dto = WarningDto()
+        dto.type = "04"
+        dto.name = "红"
+        legendList.add(dto)
+
+        legendAdapter = WarningLegendAdapter(this, legendList)
+        gridViewLegend.adapter = legendAdapter
     }
 
     private fun initGridView() {
@@ -159,9 +199,12 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                         tvCity.visibility = View.VISIBLE
                         dis.visibility = View.VISIBLE
                         tvDis.visibility = View.VISIBLE
-                        ivLegend.visibility = View.VISIBLE
+                        gridViewLegend.visibility = View.VISIBLE
                         gridView.visibility = View.VISIBLE
                         tvControl.visibility = View.VISIBLE
+                        var pro = 0
+                        var city = 0
+                        var dis = 0
                         if (!TextUtils.isEmpty(result)) {
                             warningList.clear()
                             val jsonArray = JSONArray(result)
@@ -183,7 +226,28 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                                 dto.name = tempArray.getString(0)
                                 if (!dto.name.contains("解除")) {
                                     warningList.add(dto)
+                                    if (dto.item0.endsWith("0000")) {
+                                        pro++
+                                    } else if (dto.item0.substring(2,4) == "00" && dto.item0.substring(4,6) != "00") {
+                                        city++
+                                    } else {
+                                        dis++
+                                    }
+
+                                    for (j in legendList.indices) {
+                                        val legend = legendList[j]
+                                        if (TextUtils.equals(legend!!.type, dto.type) || TextUtils.equals(legend!!.type, dto.color)) {
+                                            legend.count++
+                                        }
+                                    }
                                 }
+                            }
+                            tvPro.text = "省($pro)"
+                            tvCity.text = "市($city)"
+                            tvDis.text = "县($dis)"
+
+                            if (legendAdapter != null) {
+                                legendAdapter!!.notifyDataSetChanged()
                             }
 
                             refreshPie()

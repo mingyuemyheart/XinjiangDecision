@@ -367,6 +367,34 @@ public class SecretUrlUtil {
     }
 
     /**
+     * 获取体感温度
+     */
+    public static String bodyTemp(String cityId) {
+        String URL = "http://webapi.weather.com.cn/data/";
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA);
+        String sysdate = sdf1.format(new Date());
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(URL);
+        buffer.append("?");
+        buffer.append("areaid=").append(cityId);
+        buffer.append("&");
+        buffer.append("type=").append("observe");
+        buffer.append("&");
+        buffer.append("date=").append(sysdate);
+        buffer.append("&");
+        buffer.append("appid=").append("f63d329270a44900");
+
+        String key = getKey("sanx_data_99", buffer.toString());
+        buffer.delete(buffer.lastIndexOf("&"), buffer.length());
+
+        buffer.append("&");
+        buffer.append("appid=").append("f63d329270a44900".substring(0, 6));
+        buffer.append("&");
+        buffer.append("key=").append(key.substring(0, key.length() - 3));
+        return buffer.toString();
+    }
+
+    /**
      * 获取秘钥
      * @param key
      * @param src

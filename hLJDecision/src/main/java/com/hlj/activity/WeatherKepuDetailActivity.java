@@ -23,7 +23,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hlj.adapter.HFactTableAdapter;
 import com.hlj.dto.AgriDto;
 import com.hlj.utils.OkHttpUtil;
 import com.hlj.view.RefreshLayout;
@@ -48,11 +47,6 @@ public class WeatherKepuDetailActivity extends BaseActivity implements OnClickLi
 	private Context mContext = null;
 	private LinearLayout llBack = null;
 	private TextView tvTitle = null;
-	private ImageView ivArrow = null;
-	private RelativeLayout reContainer = null;
-	private ListView tableListView = null;
-	private HFactTableAdapter tableAdapter = null;
-	private List<AgriDto> tableList = new ArrayList<>();
 	private WebView webView = null;
 	private WebSettings webSettings = null;
 	private String url = null;
@@ -65,7 +59,6 @@ public class WeatherKepuDetailActivity extends BaseActivity implements OnClickLi
 		mContext = this;
 		initRefreshLayout();
 		initWidget();
-		initTableListView();
 	}
 	
 	/**
@@ -89,10 +82,7 @@ public class WeatherKepuDetailActivity extends BaseActivity implements OnClickLi
 		llBack.setOnClickListener(this);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 		tvTitle.setOnClickListener(this);
-		ivArrow = (ImageView) findViewById(R.id.ivArrow);
-		ivArrow.setOnClickListener(this);
-		reContainer = (RelativeLayout) findViewById(R.id.reContainer);
-		
+
 		refresh();
 	}
 	
@@ -100,71 +90,9 @@ public class WeatherKepuDetailActivity extends BaseActivity implements OnClickLi
 		AgriDto dto = getIntent().getExtras().getParcelable("dto");
 		if (dto != null) {
 			if (!TextUtils.isEmpty(dto.dataUrl)) {
-				OkHttpList(dto.dataUrl);
+//				OkHttpList(dto.dataUrl);
 			}
 		}
-	}
-	
-	/**
-	 * 获取详情
-	 */
-	private void OkHttpList(final String requestUrl) {
-		refreshLayout.setRefreshing(true);
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				OkHttpUtil.enqueue(new Request.Builder().url(requestUrl).build(), new Callback() {
-					@Override
-					public void onFailure(Call call, IOException e) {
-
-					}
-
-					@Override
-					public void onResponse(Call call, Response response) throws IOException {
-						if (!response.isSuccessful()) {
-							return;
-						}
-						final String result = response.body().string();
-						runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								if (!TextUtils.isEmpty(result)) {
-									try {
-										JSONObject obj = new JSONObject(result);
-										if (!obj.isNull("info")) {
-											tableList.clear();
-											JSONArray array = obj.getJSONArray("info");
-											for (int i = 0; i < array.length(); i++) {
-												JSONObject itemObj = array.getJSONObject(i);
-												AgriDto dto = new AgriDto();
-												dto.title = itemObj.getString("name");
-												dto.dataUrl = itemObj.getString("urladdress");
-												dto.time = itemObj.getString("addtime");
-												dto.showType = itemObj.getString("showtype");
-												tableList.add(dto);
-
-												if (i == 0) {
-													url = dto.dataUrl;
-													tvTitle.setText(dto.title);
-													ivArrow.setVisibility(View.VISIBLE);
-													initWebView();
-												}
-											}
-										}
-
-										if (tableAdapter != null) {
-											tableAdapter.notifyDataSetChanged();
-										}
-									} catch (JSONException e) {
-										e.printStackTrace();
-									}
-								}
-							}
-						});
-					}
-				});
-			}
-		}).start();
 	}
 	
 	/**
@@ -216,108 +144,11 @@ public class WeatherKepuDetailActivity extends BaseActivity implements OnClickLi
 		});
 	}
 	
-	private void initTableListView() {
-		tableListView = (ListView) findViewById(R.id.tableListView);
-		tableAdapter = new HFactTableAdapter(mContext, tableList);
-		tableListView.setAdapter(tableAdapter);
-		tableListView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				AgriDto dto = tableList.get(arg2);
-				if (!TextUtils.isEmpty(dto.dataUrl)) {
-					tvTitle.setText(dto.title);
-					switchData();
-					if (webView != null) {
-						refreshLayout.setRefreshing(true);
-						webView.loadUrl(dto.dataUrl);
-					}
-				}
-			}
-		});
-	}
-	
-	/**
-	 * 切换数据
-	 */
-	private void switchData() {
-		if (reContainer.getVisibility() == View.GONE) {
-			startAnimation(false, reContainer);
-			reContainer.setVisibility(View.VISIBLE);
-			ivArrow.setImageResource(R.drawable.iv_arrow_up);
-		}else {
-			startAnimation(true, reContainer);
-			reContainer.setVisibility(View.GONE);
-			ivArrow.setImageResource(R.drawable.iv_arrow_down);
-		}
-	}
-	
-	/**
-	 * @param flag false为显示map，true为显示list
-	 */
-	private void startAnimation(final boolean flag, final RelativeLayout reContainer) {
-		//列表动画
-		AnimationSet animationSet = new AnimationSet(true);
-		TranslateAnimation animation = null;
-		if (flag == false) {
-			animation = new TranslateAnimation(
-					Animation.RELATIVE_TO_SELF,0f,
-					Animation.RELATIVE_TO_SELF,0f,
-					Animation.RELATIVE_TO_SELF,-1.0f,
-					Animation.RELATIVE_TO_SELF,0f);
-		}else {
-			animation = new TranslateAnimation(
-					Animation.RELATIVE_TO_SELF,0f,
-					Animation.RELATIVE_TO_SELF,0f,
-					Animation.RELATIVE_TO_SELF,0f,
-					Animation.RELATIVE_TO_SELF,-1.0f);
-		}
-		animation.setDuration(400);
-		animationSet.addAnimation(animation);
-		animationSet.setFillAfter(true);
-		reContainer.startAnimation(animationSet);
-		animationSet.setAnimationListener(new AnimationListener() {
-			@Override
-			public void onAnimationStart(Animation arg0) {
-			}
-			@Override
-			public void onAnimationRepeat(Animation arg0) {
-			}
-			@Override
-			public void onAnimationEnd(Animation arg0) {
-				reContainer.clearAnimation();
-			}
-		});
-	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (reContainer.getVisibility() == View.GONE) {
-				finish();
-			}else {
-				startAnimation(true, reContainer);
-				reContainer.setVisibility(View.GONE);
-				ivArrow.setImageResource(R.drawable.iv_arrow_down);
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.llBack:
-			if (reContainer.getVisibility() == View.GONE) {
-				finish();
-			}else {
-				startAnimation(true, reContainer);
-				reContainer.setVisibility(View.GONE);
-				ivArrow.setImageResource(R.drawable.iv_arrow_down);
-			}
-			break;
-		case R.id.tvTitle:
-		case R.id.ivArrow:
-			switchData();
+			finish();
 			break;
 
 		default:

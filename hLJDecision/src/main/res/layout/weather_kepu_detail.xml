@@ -5,6 +5,10 @@
     android:background="@color/white"
     android:orientation="vertical" >
 
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title" />
+
     <com.hlj.view.RefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
@@ -20,29 +24,5 @@
             android:overScrollMode="never"
             android:scrollbars="none" />
     </com.hlj.view.RefreshLayout>
-
-    <RelativeLayout
-        android:id="@+id/reContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/reTitle"
-        android:background="@color/white"
-        android:visibility="gone" >
-
-        <ListView
-            android:id="@+id/tableListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:cacheColorHint="@color/transparent"
-            android:divider="@color/text_color1"
-            android:dividerHeight="0.5dip"
-            android:listSelector="@color/transparent"
-            android:overScrollMode="never"
-            android:scrollbars="none" />
-    </RelativeLayout>
-
-    <include
-        android:id="@+id/reTitle"
-        layout="@layout/layout_title" />
 
 </RelativeLayout>

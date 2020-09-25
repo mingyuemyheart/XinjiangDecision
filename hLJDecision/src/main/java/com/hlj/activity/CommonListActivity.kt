@@ -3,20 +3,13 @@ package com.hlj.activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.KeyEvent
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.TranslateAnimation
 import android.widget.AdapterView.OnItemClickListener
 import com.hlj.adapter.CommonPdfListAdapter
-import com.hlj.adapter.HFactTableAdapter
 import com.hlj.common.CONST
 import com.hlj.dto.AgriDto
 import com.hlj.utils.OkHttpUtil
-import kotlinx.android.synthetic.main.activity_common_list.*
-import kotlinx.android.synthetic.main.fragment_common_list.listView
-import kotlinx.android.synthetic.main.fragment_common_list.refreshLayout
+import kotlinx.android.synthetic.main.fragment_common_list.*
 import kotlinx.android.synthetic.main.layout_title.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -40,22 +33,17 @@ class CommonListActivity : BaseActivity(), View.OnClickListener {
     private var mAdapter: CommonPdfListAdapter? = null
     private val dataList: ArrayList<AgriDto> = ArrayList()
 
-    private var tableAdapter: HFactTableAdapter? = null
-    private val tableList: ArrayList<AgriDto> = ArrayList()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_common_list)
         initRefreshLayout()
         initWidget()
         initListView()
-        initTableListView()
     }
 
     private fun initWidget() {
         llBack.setOnClickListener(this)
         tvTitle.setOnClickListener(this)
-        ivArrow.setOnClickListener(this)
 
         val title: String = intent.getStringExtra(CONST.ACTIVITY_NAME)
         if (!TextUtils.isEmpty(title)) {
@@ -69,26 +57,7 @@ class CommonListActivity : BaseActivity(), View.OnClickListener {
         if (intent.hasExtra("data")) {
             val dto: AgriDto = intent.extras.getParcelable("data")
 
-            if (dto.child.size > 0) {
-                if (dto.child[0].name != null) {
-                    tvTitle.text = dto.child[0].name
-                }
-                tvTitle.isClickable = true
-                ivArrow.visibility = View.VISIBLE
-
-                tableList.clear()
-                for (i in dto.child.indices) {
-                    val data = AgriDto()
-                    data.title = dto.child[i].name
-                    data.showType = dto.child[i].showType
-                    data.dataUrl = dto.child[i].dataUrl
-                    tableList.add(data)
-                }
-            } else {
-                tvTitle.text = dto.name
-                tvTitle.isClickable = false
-                ivArrow.visibility = View.GONE
-            }
+            tvTitle.text = dto.name
 
             if (TextUtils.isEmpty(dto.showType) || TextUtils.isEmpty(dto.dataUrl)) {
                 if (!TextUtils.isEmpty(dto.child[0].dataUrl)) {
@@ -276,92 +245,9 @@ class CommonListActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.llBack -> {
-                if (tableListView!!.visibility == View.GONE) {
-                    finish()
-                } else {
-                    startAnimation(true, tableListView!!)
-                    tableListView!!.visibility = View.GONE
-                    ivArrow.setImageResource(R.drawable.iv_arrow_down)
-                }
-            }
-            R.id.tvTitle, R.id.ivArrow -> {
-                switchData()
-            }
-        }
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (tableListView!!.visibility == View.GONE) {
                 finish()
-            } else {
-                startAnimation(true, tableListView!!)
-                tableListView!!.visibility = View.GONE
-                ivArrow.setImageResource(R.drawable.iv_arrow_down)
             }
         }
-        return false
-    }
-
-    private fun initTableListView() {
-        tableAdapter = HFactTableAdapter(this, tableList)
-        tableListView.adapter = tableAdapter
-        tableListView.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
-            val dto = tableList[arg2]
-            if (!TextUtils.isEmpty(dto.dataUrl)) {
-                tvTitle.text = dto.title
-                switchData()
-                okHttpList(dto.dataUrl)
-            }
-        }
-    }
-
-    /**
-     * 切换数据
-     */
-    private fun switchData() {
-        if (tableListView!!.visibility == View.GONE) {
-            startAnimation(false, tableListView!!)
-            tableListView!!.visibility = View.VISIBLE
-            ivArrow.setImageResource(R.drawable.iv_arrow_up)
-        } else {
-            startAnimation(true, tableListView!!)
-            tableListView!!.visibility = View.GONE
-            ivArrow.setImageResource(R.drawable.iv_arrow_down)
-        }
-    }
-
-    /**
-     * @param flag false为显示map，true为显示list
-     */
-    private fun startAnimation(flag: Boolean, view: View) {
-        //列表动画
-        val animationSet = AnimationSet(true)
-        var animation: TranslateAnimation? = null
-        animation = if (!flag) {
-            TranslateAnimation(
-                    Animation.RELATIVE_TO_SELF, 0f,
-                    Animation.RELATIVE_TO_SELF, 0f,
-                    Animation.RELATIVE_TO_SELF, -1.0f,
-                    Animation.RELATIVE_TO_SELF, 0f)
-        } else {
-            TranslateAnimation(
-                    Animation.RELATIVE_TO_SELF, 0f,
-                    Animation.RELATIVE_TO_SELF, 0f,
-                    Animation.RELATIVE_TO_SELF, 0f,
-                    Animation.RELATIVE_TO_SELF, -1.0f)
-        }
-        animation.duration = 400
-        animationSet.addAnimation(animation)
-        animationSet.fillAfter = true
-        view.startAnimation(animationSet)
-        animationSet.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(arg0: Animation) {}
-            override fun onAnimationRepeat(arg0: Animation) {}
-            override fun onAnimationEnd(arg0: Animation) {
-                view.clearAnimation()
-            }
-        })
     }
 
 }

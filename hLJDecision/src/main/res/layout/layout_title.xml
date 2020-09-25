@@ -37,17 +37,6 @@
         android:textColor="@color/white"
         android:textSize="@dimen/level_3" />
 
-    <ImageView
-        android:id="@+id/ivArrow"
-        android:layout_width="16dp"
-        android:layout_height="8dp"
-        android:adjustViewBounds="true"
-        android:layout_marginStart="5dp"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/tvTitle"
-        android:src="@drawable/iv_arrow_down"
-        android:visibility="gone" />
-
     <TextView
         android:id="@+id/tvControl"
         android:layout_width="wrap_content"

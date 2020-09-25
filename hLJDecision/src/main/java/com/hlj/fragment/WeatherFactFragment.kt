@@ -234,6 +234,15 @@ class WeatherFactFragment : Fragment() {
                     intent.putExtra(CONST.WEB_URL, dto.dataUrl)
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     startActivity(intent)
+                } else if (TextUtils.equals(dto.id, "13")) {
+                    intent = Intent(activity, ProductActivity::class.java)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    intent.putExtra(CONST.WEB_URL, dto.dataUrl)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    val bundle = Bundle()
+                    bundle.putParcelable("data", dto)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
                 } else {
                     intent = Intent(activity, CommonListActivity::class.java)
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
