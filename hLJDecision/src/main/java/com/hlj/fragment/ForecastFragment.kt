@@ -655,7 +655,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                             if (!geoObj.isNull("id")) {
                                 val cityId = geoObj.getString("id")
                                 if (!TextUtils.isEmpty(cityId)) {
-                                    okHttpBody(cityId)
                                     getWeatherInfo(cityId)
                                 }
                             }
@@ -667,40 +666,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
 
                 override fun onError(error: Throwable, content: String) {
                     super.onError(error, content)
-                }
-            })
-        }).start()
-    }
-
-    private fun okHttpBody(cityId: String) {
-        Thread(Runnable {
-            OkHttpUtil.enqueue(Request.Builder().url(SecretUrlUtil.bodyTemp(cityId)).build(), object : Callback {
-                override fun onFailure(call: Call, e: IOException) {}
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    if (!response.isSuccessful) {
-                        return
-                    }
-                    val result = response.body!!.string()
-                    activity!!.runOnUiThread {
-                        if (!TextUtils.isEmpty(result)) {
-                            try {
-                                val array = JSONArray(result)
-                                val obj = array.getJSONObject(1)
-                                //实况信息
-                                if (!obj.isNull("l")) {
-                                    val itemObj = obj.getJSONObject("l")
-                                    if (!itemObj.isNull("l12")) {
-                                        val bodyTemp = itemObj.getString("l12")
-                                        tvBody.tag = "$bodyTemp"
-                                    }
-                                }
-                            } catch (e: JSONException) {
-                                e.printStackTrace()
-                            }
-                        }
-                    }
                 }
             })
         }).start()
@@ -785,6 +750,8 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                     }
                                                 }
                                             }
+
+                                            okHttpBody(cityId,o.getString("002"), o.getString("005"),o.getString("012"))
                                         }
                                     }
                                 }
@@ -1005,6 +972,37 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                             if (!TextUtils.isEmpty(warningId)) {
                                 setPushTags(warningId)
                                 OkHttpWarning("http://decision-admin.tianqi.cn/Home/extra/getwarns?order=0&areaid=" + warningId!!.substring(0, 2), warningId)
+                            }
+                        }
+                    }
+                }
+            })
+        }).start()
+    }
+
+    private fun okHttpBody(cityId: String, l1: String, l2: String, l11: String) {
+        Thread(Runnable {
+            val url = "http://decision-admin.tianqi.cn/home/work2019/getBodyTem?cityId=$cityId&l1=$l1&l2=$l2&l11=$l11"
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    activity!!.runOnUiThread {
+                        if (!TextUtils.isEmpty(result)) {
+                            try {
+                                val obj = JSONObject(result)
+                                //实况信息
+                                if (!obj.isNull("l12")) {
+                                    val bodyTemp = obj.getString("l12")
+                                    tvBody.tag = "$bodyTemp"
+                                }
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
                             }
                         }
                     }
