@@ -8,7 +8,6 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.TranslateAnimation
-import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import com.hlj.adapter.WarningLegendAdapter
@@ -20,7 +19,16 @@ import com.hlj.view.wheelview.NumericWheelAdapter
 import com.hlj.view.wheelview.OnWheelScrollListener
 import com.hlj.view.wheelview.WheelView
 import kotlinx.android.synthetic.main.activity_warning_statistic.*
+import kotlinx.android.synthetic.main.activity_warning_statistic.tvCheck
+import kotlinx.android.synthetic.main.activity_warning_statistic.tvEndTime
+import kotlinx.android.synthetic.main.activity_warning_statistic.tvStartTime
 import kotlinx.android.synthetic.main.layout_date.*
+import kotlinx.android.synthetic.main.layout_date.day
+import kotlinx.android.synthetic.main.layout_date.hour
+import kotlinx.android.synthetic.main.layout_date.month
+import kotlinx.android.synthetic.main.layout_date.tvNegtive
+import kotlinx.android.synthetic.main.layout_date.tvPositive
+import kotlinx.android.synthetic.main.layout_date.year
 import kotlinx.android.synthetic.main.layout_title.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -39,8 +47,8 @@ import kotlin.collections.ArrayList
 class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
 
     private var isStart = true
-    private val sdf1 = SimpleDateFormat("yyyy-MM-dd HH时", Locale.CHINA)
-    private val sdf2 = SimpleDateFormat("yyyyMMddHH0000", Locale.CHINA)
+    private val sdf1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+    private val sdf2 = SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA)
     private val warningList: ArrayList<WarningDto?> = ArrayList()
     private var mAdapter: WarningTypeAdapter? = null
     private val typeList: ArrayList<WarningDto?> = ArrayList()
@@ -73,6 +81,8 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         month.visibility = View.VISIBLE
         day.visibility = View.VISIBLE
         hour.visibility = View.VISIBLE
+        minute.visibility = View.VISIBLE
+        second.visibility = View.VISIBLE
         xunyear.visibility = View.GONE
         xunmonth.visibility = View.GONE
         xun.visibility = View.GONE
@@ -89,11 +99,6 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         initWheelView()
 
         echartView1.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView, url: String) {
-                super.onPageFinished(view, url)
-                //最好在h5页面加载完毕后再加载数据，防止html的标签还未加载完成，不能正常显示
-//                okHttpList()
-            }
         }
     }
 
@@ -164,7 +169,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
             for (i in 0 until warningList.size) {
                 if (TextUtils.equals(data!!.type, "*****")) {
                     dataList.addAll(warningList)
-                } else if (TextUtils.equals(data!!.type, warningList[i]!!.type)) {
+                } else if (TextUtils.equals(data.type, warningList[i]!!.type)) {
                     dataList.add(warningList[i])
                 }
             }
@@ -236,7 +241,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
 
                                     for (j in legendList.indices) {
                                         val legend = legendList[j]
-                                        if (TextUtils.equals(legend!!.type, dto.type) || TextUtils.equals(legend!!.type, dto.color)) {
+                                        if (TextUtils.equals(legend!!.type, dto.type) || TextUtils.equals(legend.type, dto.color)) {
                                             legend.count++
                                         }
                                     }
@@ -302,33 +307,54 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         val curMonth = c[Calendar.MONTH] + 1 //通过Calendar算出的月数要+1
         val curDate = c[Calendar.DATE]
         val curHour = c[Calendar.HOUR_OF_DAY]
+        val curMinute = c[Calendar.MINUTE]
+        val curSecond = c[Calendar.SECOND]
+
         val numericWheelAdapter1 = NumericWheelAdapter(this, 1950, curYear)
         numericWheelAdapter1.setLabel("年")
         year.viewAdapter = numericWheelAdapter1
         year.isCyclic = false //是否可循环滑动
         year.addScrollingListener(scrollListener)
         year.visibleItems = 7
+
         val numericWheelAdapter2 = NumericWheelAdapter(this, 1, 12, "%02d")
         numericWheelAdapter2.setLabel("月")
         month.viewAdapter = numericWheelAdapter2
         month.isCyclic = false
         month.addScrollingListener(scrollListener)
         month.visibleItems = 7
+
         initDay(curYear, curMonth)
         day.isCyclic = false
         day.visibleItems = 7
 
-        val numericWheelAdapter3 = NumericWheelAdapter(this, 1, 23, "%02d")
+        val numericWheelAdapter3 = NumericWheelAdapter(this, 0, 23, "%02d")
         numericWheelAdapter3.setLabel("时")
         hour.viewAdapter = numericWheelAdapter3
         hour.isCyclic = false
         hour.addScrollingListener(scrollListener)
         hour.visibleItems = 7
 
+        val numericWheelAdapter4 = NumericWheelAdapter(this, 0, 59, "%02d")
+        numericWheelAdapter4.setLabel("分")
+        minute.viewAdapter = numericWheelAdapter4
+        minute.isCyclic = false
+        minute.addScrollingListener(scrollListener)
+        minute.visibleItems = 7
+
+        val numericWheelAdapter5 = NumericWheelAdapter(this, 0, 59, "%02d")
+        numericWheelAdapter5.setLabel("秒")
+        second.viewAdapter = numericWheelAdapter5
+        second.isCyclic = false
+        second.addScrollingListener(scrollListener)
+        second.visibleItems = 7
+
         year.currentItem = curYear - 1950
         month.currentItem = curMonth - 1
         day.currentItem = curDate - 1
         hour.currentItem = curHour - 1
+        minute.currentItem = curMinute
+        second.currentItem = curSecond
     }
 
     private val scrollListener: OnWheelScrollListener = object : OnWheelScrollListener {
@@ -375,11 +401,13 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         val yearStr = (year!!.currentItem + 1950).toString()
         val monthStr = if (month.currentItem + 1 < 10) "0" + (month.currentItem + 1) else (month.currentItem + 1).toString()
         val dayStr = if (day.currentItem + 1 < 10) "0" + (day.currentItem + 1) else (day.currentItem + 1).toString()
-        val hourStr = if (hour.currentItem + 1 < 10) "0" + (hour.currentItem + 1) else (hour.currentItem + 1).toString()
+        val hourStr = if (hour.currentItem + 1 < 10) "0" + (hour.currentItem) else (hour.currentItem).toString()
+        val minuteStr = if (minute.currentItem + 1 < 10) "0" + (minute.currentItem) else (minute.currentItem).toString()
+        val secondStr = if (second.currentItem + 1 < 10) "0" + (second.currentItem) else (second.currentItem).toString()
         if (isStart) {
-            tvStartTime.text = "$yearStr-$monthStr-$dayStr ${hourStr}时"
+            tvStartTime.text = "$yearStr-$monthStr-$dayStr ${hourStr}:${minuteStr}:${secondStr}"
         } else {
-            tvEndTime.text = "$yearStr-$monthStr-$dayStr ${hourStr}时"
+            tvEndTime.text = "$yearStr-$monthStr-$dayStr ${hourStr}:${minuteStr}:${secondStr}"
         }
     }
 
