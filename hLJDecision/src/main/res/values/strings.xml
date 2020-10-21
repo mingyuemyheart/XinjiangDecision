@@ -2,10 +2,7 @@
 <resources>
 
     <string name="app_name">黑龙江气象</string>
-<!--    <string name="app_name">决策气象服务</string>-->
     <string name="province_name">黑龙江</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="copyright">黑龙江省气象局\n黑龙江省气象服务中心</string>
     <string name="logout">退出登录</string>
     <string name="login_prompt">账号登陆</string>

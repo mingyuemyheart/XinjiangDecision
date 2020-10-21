@@ -233,7 +233,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                                     warningList.add(dto)
                                     if (dto.item0.endsWith("0000")) {
                                         pro++
-                                    } else if (dto.item0.substring(2,4) == "00" && dto.item0.substring(4,6) != "00") {
+                                    } else if (dto.item0.substring(2,4) != "00" && dto.item0.substring(4,6) == "00") {
                                         city++
                                     } else {
                                         dis++

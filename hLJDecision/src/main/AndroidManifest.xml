@@ -64,8 +64,6 @@
         <!-- 决策气象服务-->
         <!--1.包名为shawn.cxwl.com.hlj.decision-->
         <!--2.高德地图key-->
-        <!--3.appname-->
-        <!--4.shawn_activity_welcome界面welcome_icon2、hactivity_main界面iv_logo2、fragment_contact_us界面qrcode2-->
         <!--5.更换HMainActivity、HSettingActivity自动更新app_id-->
         <!--6.gradle 修改打包名称-->
 

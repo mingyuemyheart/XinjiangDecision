@@ -36,7 +36,7 @@ public class EchartOptionUtil {
             WarningDto dto = dataList.get(i);
             if (TextUtils.equals(dto.item0.substring(2,6), "0000")) {
                 pro++;
-            } else if (TextUtils.equals(dto.item0.substring(2,4), "00") && !TextUtils.equals(dto.item0.substring(4,6), "00")) {
+            } else if (!TextUtils.equals(dto.item0.substring(2,4), "00") && TextUtils.equals(dto.item0.substring(4,6), "00")) {
                 city++;
             } else {
                 dis++;
