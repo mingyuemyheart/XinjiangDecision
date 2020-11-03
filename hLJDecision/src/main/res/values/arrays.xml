@@ -239,22 +239,6 @@
 		<item>99,冰冻</item>
     </string-array>
 
-	<!-- 预警类型 -->
-	<string-array name="warningType2">
-		<item>*****,全部</item>
-		<item>11B03,暴雨预警</item>
-		<item>11B04,暴雪预警</item>
-		<item>11B05,寒潮预警</item>
-		<item>11B06,大风预警</item>
-		<item>11B15,冰雹预警</item>
-		<item>11B17,大雾预警</item>
-		<item>11B19,霾预警</item>
-		<item>11B20,雷雨大风</item>
-		<item>11B21,道路结冰</item>
-		<item>11B25,森林火险</item>
-		<item>11B14,雷电预警</item>
-	</string-array>
-    
 	<!-- 预警颜色 -->
 	<string-array name="warningColor">
         <item>01,蓝色</item>

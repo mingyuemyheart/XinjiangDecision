@@ -219,8 +219,30 @@
 
             <com.hlj.view.ScrollviewGridview
                 android:id="@+id/gridViewLegend"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:cacheColorHint="@color/transparent"
+                android:fadingEdge="none"
+                android:gravity="center"
+                android:horizontalSpacing="0dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="4"
+                android:overScrollMode="never"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="15dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/echartView1" />
+
+            <com.hlj.view.ScrollviewGridview
+                android:id="@+id/gridViewColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:cacheColorHint="@color/transparent"
                 android:fadingEdge="none"
                 android:gravity="center"
@@ -236,7 +258,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/echartView1" />
+                app:layout_constraintTop_toBottomOf="@+id/gridViewLegend" />
 
             <TextView
                 android:id="@+id/divider2"
@@ -244,7 +266,7 @@
                 android:layout_height="5dp"
                 android:layout_marginTop="15dp"
                 android:background="@color/light_gray"
-                app:layout_constraintTop_toBottomOf="@+id/gridViewLegend" />
+                app:layout_constraintTop_toBottomOf="@+id/gridViewColor" />
 
             <com.hlj.view.ScrollviewGridview
                 android:id="@+id/gridView"

@@ -19,16 +19,7 @@ import com.hlj.view.wheelview.NumericWheelAdapter
 import com.hlj.view.wheelview.OnWheelScrollListener
 import com.hlj.view.wheelview.WheelView
 import kotlinx.android.synthetic.main.activity_warning_statistic.*
-import kotlinx.android.synthetic.main.activity_warning_statistic.tvCheck
-import kotlinx.android.synthetic.main.activity_warning_statistic.tvEndTime
-import kotlinx.android.synthetic.main.activity_warning_statistic.tvStartTime
 import kotlinx.android.synthetic.main.layout_date.*
-import kotlinx.android.synthetic.main.layout_date.day
-import kotlinx.android.synthetic.main.layout_date.hour
-import kotlinx.android.synthetic.main.layout_date.month
-import kotlinx.android.synthetic.main.layout_date.tvNegtive
-import kotlinx.android.synthetic.main.layout_date.tvPositive
-import kotlinx.android.synthetic.main.layout_date.year
 import kotlinx.android.synthetic.main.layout_title.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -40,6 +31,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 /**
  * 预警统计
@@ -56,12 +48,16 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
     private var endTime = ""
     private var legendAdapter: WarningLegendAdapter? = null
     private val legendList: ArrayList<WarningDto?> = ArrayList()
+    private var colorAdapter: WarningLegendAdapter? = null
+    private val colorList: ArrayList<WarningDto?> = ArrayList()
+    private val warningTypes: HashMap<String, WarningDto?> = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_warning_statistic)
         initWidget()
         initGridViewLegend()
+        initGridViewColor()
         initGridView()
     }
 
@@ -112,55 +108,34 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initGridViewLegend() {
-        legendList.clear()
-        val array = resources.getStringArray(R.array.warningType2)
-        for (i in 1 until array.size) {
-            val result = array[i].split(",")
-            val dto = WarningDto()
-            dto.type = result[0]
-            dto.name = result[1]
-            legendList.add(dto)
-        }
-        var dto = WarningDto()
-        dto.type = "other"
-        dto.name = "其它"
-        legendList.add(dto)
-
-        dto = WarningDto()
-        dto.type = "01"
-        dto.name = "蓝"
-        legendList.add(dto)
-        dto = WarningDto()
-        dto.type = "02"
-        dto.name = "黄"
-        legendList.add(dto)
-        dto = WarningDto()
-        dto.type = "03"
-        dto.name = "橙"
-        legendList.add(dto)
-        dto = WarningDto()
-        dto.type = "04"
-        dto.name = "红"
-        legendList.add(dto)
-
         legendAdapter = WarningLegendAdapter(this, legendList)
         gridViewLegend.adapter = legendAdapter
     }
 
-    private fun initGridView() {
-        typeList.clear()
-        val array = resources.getStringArray(R.array.warningType2)
-        for (i in array.indices) {
-            val result = array[i].split(",")
-            val dto = WarningDto()
-            dto.type = result[0]
-            dto.name = result[1]
-            if (i == 0) {
-                dto.isSelected = true
-            }
-            typeList.add(dto)
-        }
+    private fun initGridViewColor() {
+        colorList.clear()
+        var dto = WarningDto()
+        dto.type = "01"
+        dto.name = "蓝色预警"
+        colorList.add(dto)
+        dto = WarningDto()
+        dto.type = "02"
+        dto.name = "黄色预警"
+        colorList.add(dto)
+        dto = WarningDto()
+        dto.type = "03"
+        dto.name = "橙色预警"
+        colorList.add(dto)
+        dto = WarningDto()
+        dto.type = "04"
+        dto.name = "红色预警"
+        colorList.add(dto)
 
+        colorAdapter = WarningLegendAdapter(this, colorList)
+        gridViewColor.adapter = colorAdapter
+    }
+
+    private fun initGridView() {
         mAdapter = WarningTypeAdapter(this, typeList)
         gridView.adapter = mAdapter
         gridView.setOnItemClickListener { parent, view, position, id ->
@@ -174,7 +149,6 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                 }
             }
             refreshBar(dataList)
-
 
             for (i in 0 until typeList.size) {
                 val dto = typeList[i]
@@ -205,6 +179,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                         dis.visibility = View.VISIBLE
                         tvDis.visibility = View.VISIBLE
                         gridViewLegend.visibility = View.VISIBLE
+                        gridViewColor.visibility = View.VISIBLE
                         gridView.visibility = View.VISIBLE
                         tvControl.visibility = View.VISIBLE
                         var pro = 0
@@ -212,6 +187,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                         var dis = 0
                         if (!TextUtils.isEmpty(result)) {
                             warningList.clear()
+                            warningTypes.clear()
                             val jsonArray = JSONArray(result)
                             for (i in 0 until jsonArray.length()) {
                                 val tempArray = jsonArray.getJSONArray(i)
@@ -239,20 +215,108 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                                         dis++
                                     }
 
-                                    for (j in legendList.indices) {
-                                        val legend = legendList[j]
-                                        if (TextUtils.equals(legend!!.type, dto.type) || TextUtils.equals(legend.type, dto.color)) {
-                                            legend.count++
+                                    //获取所有的预警类型
+                                    val typeDto = WarningDto()
+                                    typeDto.type = dto.type
+                                    var name = dto.name
+                                    if (!TextUtils.isEmpty(dto.name)) {
+                                        if (dto.name.contains("发布") && dto.name.contains("预警")) {
+                                            name = dto.name.substring(dto.name.indexOf("发布")+2, dto.name.indexOf("预警")-2) + "预警"
                                         }
                                     }
+                                    if (dto.name.contains("暴雨")) {
+                                        typeDto.color = "#4383AE"
+                                    } else if (dto.name.contains("暴雪")) {
+                                        typeDto.color = "#8E59B2"
+                                    } else if (dto.name.contains("寒潮")) {
+                                        typeDto.color = "#554EAD"
+                                    } else if (dto.name.contains("大风")) {
+                                        typeDto.color = "#86B978"
+                                    } else if (dto.name.contains("霾预警")) {
+                                        typeDto.color = "#814E4F"
+                                    } else if (dto.name.contains("雷电")) {
+                                        typeDto.color = "#D4765E"
+                                    } else if (dto.name.contains("霜冻")) {
+                                        typeDto.color = "#859ED9"
+                                    } else if (dto.name.contains("高温")) {
+                                        typeDto.color = "#729ACE"
+                                    } else if (dto.name.contains("大雾")) {
+                                        typeDto.color = "#C49CB0"
+                                    } else if (dto.name.contains("冰雹")) {
+                                        typeDto.color = "#8EABED"
+                                    } else if (dto.name.contains("森林火险")) {
+                                        name = "森林火险"
+                                        typeDto.color = "#C32E30"
+                                    } else if (dto.name.contains("道路结冰")) {
+                                        name = "道路结冰"
+                                        typeDto.color = "#D3B2B3"
+                                    } else if (dto.name.contains("雷雨大风")) {
+                                        name = "雷雨大风"
+                                        typeDto.color = "#A85BC9"
+                                    } else if (dto.name.contains("强对流")) {
+                                        name = "强对流"
+                                        typeDto.color = "#E3DF78"
+                                    } else if (dto.name.contains("山洪灾害")) {
+                                        name = "山洪灾害"
+                                        typeDto.color = "#D78B81"
+                                    } else if (dto.name.contains("地质灾害")) {
+                                        name = "地质灾害"
+                                        typeDto.color = "#78D4C2"
+                                    } else if (dto.name.contains("洪水气象")) {
+                                        typeDto.color = "#73F4AC"
+                                    } else {
+                                        typeDto.color = "#BEBEBE"
+                                    }
+                                    typeDto.name = name
+                                    warningTypes[dto.type] = typeDto
                                 }
                             }
                             tvPro.text = "省($pro)"
                             tvCity.text = "市($city)"
                             tvDis.text = "县($dis)"
 
+                            //填充图例表格数据
+                            legendList.clear()
+                            for (entry in warningTypes.entries) {
+                                val legend = entry.value
+                                legendList.add(legend)
+                            }
+                            for (i in warningList.indices) {
+                                val dto = warningList[i]
+                                for (j in legendList.indices) {
+                                    val legend = legendList[j]
+                                    if (TextUtils.equals(legend!!.type, dto!!.type)) {
+                                        legend.count++
+                                    }
+                                }
+
+                                for (j in colorList.indices) {
+                                    val color = colorList[j]
+                                    if (TextUtils.equals(color!!.type, dto!!.color)) {
+                                        color.count++
+                                    }
+                                }
+                            }
                             if (legendAdapter != null) {
                                 legendAdapter!!.notifyDataSetChanged()
+                            }
+                            if (colorAdapter != null) {
+                                colorAdapter!!.notifyDataSetChanged()
+                            }
+                            //填充图例表格数据
+
+                            typeList.clear()
+                            val typeDto = WarningDto()
+                            typeDto.type = "*****"
+                            typeDto.name = "全部"
+                            typeDto.isSelected = true
+                            typeList.add(typeDto)
+                            for (entry in warningTypes.entries) {
+                                val legend = entry.value
+                                typeList.add(legend)
+                            }
+                            if (mAdapter != null) {
+                                mAdapter!!.notifyDataSetChanged()
                             }
 
                             refreshPie()

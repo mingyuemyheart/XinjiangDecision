@@ -1218,9 +1218,9 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                 tvBody.setBackgroundResource(R.drawable.bg_body_temp_press)
             }
             R.id.tvAqiCount, R.id.tvAqi -> {
-                val intent = Intent(activity, HAirPolutionActivity::class.java)
-                intent.putExtra(CONST.ACTIVITY_NAME, "空气质量")
-                startActivity(intent)
+//                val intent = Intent(activity, HAirPolutionActivity::class.java)
+//                intent.putExtra(CONST.ACTIVITY_NAME, "空气质量")
+//                startActivity(intent)
             }
             R.id.ivClimate -> {
                 val intent = Intent(activity, WebviewActivity::class.java)

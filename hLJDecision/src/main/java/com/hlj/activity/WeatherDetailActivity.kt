@@ -68,7 +68,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.RadarListener {
+class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.RadarListener {
 
     private var mAdapter: WeeklyForecastAdapter? = null
     private val weeklyList: MutableList<WeatherDto> = ArrayList()
@@ -712,7 +712,7 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
                                                 if (!TextUtils.isEmpty(aqi)) {
                                                     tvAqiCount!!.text = aqi
                                                     tvAqiCount!!.setBackgroundResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)))
-                                                    tvAqi.text = WeatherUtil.getAqi(this@HWeatherDetailActivity, Integer.valueOf(aqi))
+                                                    tvAqi.text = WeatherUtil.getAqi(this@WeatherDetailActivity, Integer.valueOf(aqi))
                                                 }
                                             }
                                         }
@@ -745,10 +745,10 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
                                                 }
 
                                                 //逐小时预报信息
-                                                val cubicView = CubicView2(this@HWeatherDetailActivity)
+                                                val cubicView = CubicView2(this@WeatherDetailActivity)
                                                 cubicView.setData(hourlyList)
                                                 llContainerHour!!.removeAllViews()
-                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(this@HWeatherDetailActivity) * 2, CommonUtil.dip2px(this@HWeatherDetailActivity, 300f).toInt())
+                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(this@WeatherDetailActivity) * 2, CommonUtil.dip2px(this@WeatherDetailActivity, 300f).toInt())
                                             }
                                         }
                                     }
@@ -834,7 +834,7 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
                                                         }
                                                         tvTemp1!!.text = dto.lowTemp.toString() + "/" + dto.highTemp + "℃"
                                                         val value: Int = tvAqiCount.text.toString().toInt()
-                                                        tvAqi1.text = CommonUtil.getAqiDes(this@HWeatherDetailActivity, value)
+                                                        tvAqi1.text = CommonUtil.getAqiDes(this@WeatherDetailActivity, value)
                                                         tvAqi1.setBackgroundResource(CommonUtil.getCornerBackground(value))
                                                     }
                                                     if (i == 1) {
@@ -852,7 +852,7 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
                                                         tvTemp2!!.text = dto.lowTemp.toString() + "/" + dto.highTemp + "℃"
                                                         if (aqiList.size > 1) {
                                                             val value: Int = aqiList[1].aqi.toInt()
-                                                            tvAqi2.text = CommonUtil.getAqiDes(this@HWeatherDetailActivity, value)
+                                                            tvAqi2.text = CommonUtil.getAqiDes(this@WeatherDetailActivity, value)
                                                             tvAqi2.setBackgroundResource(CommonUtil.getCornerBackground(value))
                                                         }
                                                     }
@@ -866,10 +866,10 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
                                                 }
 
                                                 //一周预报曲线
-                                                val weeklyView = WeeklyView(this@HWeatherDetailActivity)
+                                                val weeklyView = WeeklyView(this@WeatherDetailActivity)
                                                 weeklyView.setData(weeklyList, foreDate, currentDate)
                                                 llContainerFifteen!!.removeAllViews()
-                                                llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(this@HWeatherDetailActivity) * 2, CommonUtil.dip2px(this@HWeatherDetailActivity, 320f).toInt())
+                                                llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(this@WeatherDetailActivity) * 2, CommonUtil.dip2px(this@WeatherDetailActivity, 320f).toInt())
                                             }
                                         }
                                     }
@@ -922,7 +922,7 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
      * 获取预警id
      */
     private fun queryWarningIdByCityId(cityId: String): String? {
-        val dbManager = DBManager(this@HWeatherDetailActivity)
+        val dbManager = DBManager(this@WeatherDetailActivity)
         dbManager.openDateBase()
         dbManager.closeDatabase()
         val database = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null)
@@ -1062,10 +1062,10 @@ class HWeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Ra
                                                 dto.minuteFall = array.getDouble(i).toFloat()
                                                 minuteList.add(dto)
                                             }
-                                            val minuteFallView = MinuteFallView(this@HWeatherDetailActivity)
+                                            val minuteFallView = MinuteFallView(this@WeatherDetailActivity)
                                             minuteFallView.setData(minuteList, tvRain!!.text.toString())
                                             llContainerRain!!.removeAllViews()
-                                            llContainerRain!!.addView(minuteFallView, CommonUtil.widthPixels(this@HWeatherDetailActivity), CommonUtil.dip2px(this@HWeatherDetailActivity, 150f).toInt())
+                                            llContainerRain!!.addView(minuteFallView, CommonUtil.widthPixels(this@WeatherDetailActivity), CommonUtil.dip2px(this@WeatherDetailActivity, 150f).toInt())
                                         }
                                     }
                                 }

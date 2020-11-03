@@ -9,6 +9,7 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:singleLine="true"
         android:background="@drawable/bg_warning_type"
         android:textColor="@color/white"
         android:textSize="@dimen/level_5" />

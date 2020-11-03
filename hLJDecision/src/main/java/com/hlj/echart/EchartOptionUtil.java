@@ -110,54 +110,129 @@ public class EchartOptionUtil {
      * @return
      */
     public static GsonOption nestedPieOption(ArrayList<WarningDto> dataList) {
-        int blue = 0,yellow = 0,orange = 0,red = 0,cother = 0;
-        int b03 = 0, b04 = 0, b05 = 0, b06 = 0, b15 = 0, b17 = 0, b19 = 0, b20 = 0, b21 = 0, b25 = 0, b14 = 0, tother = 0;
+        //获取所有的预警类型
+        HashMap<String, WarningDto> warningTypes = new HashMap<>();
+        List<WarningDto> legendList = new ArrayList<>();
+        List<WarningDto> colorList = new ArrayList<>();
         for (int i = 0; i < dataList.size(); i++) {
             WarningDto dto = dataList.get(i);
-            if (TextUtils.equals(dto.color, "01")) {
-                blue++;
-            } else if (TextUtils.equals(dto.color, "02")) {
-                yellow++;
-            } else if (TextUtils.equals(dto.color, "03")) {
-                orange++;
-            } else if (TextUtils.equals(dto.color, "04")) {
-                red++;
+            WarningDto typeDto = new WarningDto();
+            typeDto.type = dto.type;
+            String name = dto.name;
+            if (!TextUtils.isEmpty(dto.name)) {
+                if (dto.name.contains("发布") && dto.name.contains("预警")) {
+                    name = dto.name.substring(dto.name.indexOf("发布")+2, dto.name.indexOf("预警")-2) + "预警";
+                }
+            }
+            if (dto.name.contains("暴雨")) {
+                typeDto.color = "#4383AE";
+            } else if (dto.name.contains("暴雪")) {
+                typeDto.color = "#8E59B2";
+            } else if (dto.name.contains("寒潮")) {
+                typeDto.color = "#554EAD";
+            } else if (dto.name.contains("大风")) {
+                typeDto.color = "#86B978";
+            } else if (dto.name.contains("霾预警")) {
+                typeDto.color = "#814E4F";
+            } else if (dto.name.contains("雷电")) {
+                typeDto.color = "#D4765E";
+            } else if (dto.name.contains("霜冻")) {
+                typeDto.color = "#859ED9";
+            } else if (dto.name.contains("高温")) {
+                typeDto.color = "#729ACE";
+            } else if (dto.name.contains("大雾")) {
+                typeDto.color = "#C49CB0";
+            } else if (dto.name.contains("冰雹")) {
+                typeDto.color = "#8EABED";
+            } else if (dto.name.contains("森林火险")) {
+                name = "森林火险";
+                typeDto.color = "#C32E30";
+            } else if (dto.name.contains("道路结冰")) {
+                name = "道路结冰";
+                typeDto.color = "#D3B2B3";
+            } else if (dto.name.contains("雷雨大风")) {
+                name = "雷雨大风";
+                typeDto.color = "#A85BC9";
+            } else if (dto.name.contains("强对流")) {
+                name = "强对流";
+                typeDto.color = "#E3DF78";
+            } else if (dto.name.contains("山洪灾害")) {
+                name = "山洪灾害";
+                typeDto.color = "#D78B81";
+            } else if (dto.name.contains("地质灾害")) {
+                name = "地质灾害";
+                typeDto.color = "#78D4C2";
+            } else if (dto.name.contains("洪水气象")) {
+                typeDto.color = "#73F4AC";
             } else {
-                cother++;
+                typeDto.color = "#BEBEBE";
+            }
+            typeDto.name = name;
+            warningTypes.put(dto.type, typeDto);
+        }
+
+        //填充图例表格数据
+        legendList.clear();
+        for (Map.Entry<String, WarningDto> entry : warningTypes.entrySet()) {
+            WarningDto legend = entry.getValue();
+            legendList.add(legend);
+        }
+
+        colorList.clear();
+        WarningDto color = new WarningDto();
+        color.type = "01";
+        color.name = "蓝色预警";
+        color.color = "#1D67C1";
+        colorList.add(color);
+        color = new WarningDto();
+        color.type = "02";
+        color.name = "黄色预警";
+        color.color = "#F7BA34";
+        colorList.add(color);
+        color = new WarningDto();
+        color.type = "03";
+        color.name = "橙色预警";
+        color.color = "#F98227";
+        colorList.add(color);
+        color = new WarningDto();
+        color.type = "04";
+        color.name = "红色预警";
+        color.color = "#D4292A";
+        colorList.add(color);
+
+
+        for (int i = 0; i < dataList.size(); i++) {
+            WarningDto dto = dataList.get(i);
+
+            for (int j = 0; j < legendList.size(); j++) {
+                WarningDto legend = legendList.get(j);
+                if (TextUtils.equals(legend.type, dto.type)) {
+                    legend.count++;
+                }
             }
 
-            if (TextUtils.equals(dto.type, "11B03")) {
-                b03++;
-            } else if (TextUtils.equals(dto.type, "11B04")) {
-                b04++;
-            } else if (TextUtils.equals(dto.type, "11B05")) {
-                b05++;
-            } else if (TextUtils.equals(dto.type, "11B06")) {
-                b06++;
-            } else if (TextUtils.equals(dto.type, "11B15")) {
-                b15++;
-            } else if (TextUtils.equals(dto.type, "11B17")) {
-                b17++;
-            } else if (TextUtils.equals(dto.type, "11B19")) {
-                b19++;
-            } else if (TextUtils.equals(dto.type, "11B20")) {
-                b20++;
-            } else if (TextUtils.equals(dto.type, "11B21")) {
-                b21++;
-            } else if (TextUtils.equals(dto.type, "11B25")) {
-                b25++;
-            } else if (TextUtils.equals(dto.type, "11B14")) {
-                b14++;
-            } else {
-                tother++;
+            for (int j = 0; j < colorList.size(); j++) {
+                WarningDto c = colorList.get(j);
+                if (TextUtils.equals(c.type, dto.color)) {
+                    c.count++;
+                }
             }
         }
 
         //内圈数据
         String title = "";
-        String[] levelNames = {"蓝色预警","黄色预警","橙色预警","红色预警","其它"};
-        String[] levelColors = {"#1D67C1","#F7BA34","#F98227","#D4292A","#B4B6B7"};
-        int[] levelCounts = {blue,yellow,orange,red,cother};
+        String[] levelNames = new String[colorList.size()];
+        String[] levelColors = new String[colorList.size()];
+        int[] levelCounts = new int[colorList.size()];
+//        String[] levelNames = {"蓝色预警","黄色预警","橙色预警","红色预警","其它"};
+//        String[] levelColors = {"#1D67C1","#F7BA34","#F98227","#D4292A","#B4B6B7"};
+//        int[] levelCounts = {blue,yellow,orange,red,cother};
+        for (int i = 0; i < colorList.size(); i++) {
+            WarningDto data = colorList.get(i);
+            levelNames[i] = data.name;
+            levelColors[i] = data.color;
+            levelCounts[i] = data.count;
+        }
 
         GsonOption option = new GsonOption();//创建option对象
         option.color(levelColors);
@@ -171,10 +246,11 @@ public class EchartOptionUtil {
         itemStyle.normal().position(Position.inside).show(false);
         innerPie.name(title).radius("0","40%").center("50%","50%").label(itemStyle);//设置饼图的标题 半径、位置
         //填充数据
-        for(int i = 0; i < levelNames.length; i++){
+        for(int i = 0; i < colorList.size(); i++){
+            WarningDto c = colorList.get(i);
             Map<String,Object> map = new HashMap<>();
-            map.put("value",levelCounts[i]);//填充饼图数据
-            map.put("name",levelNames[i]);//填充饼图数据对应的搜索引擎
+            map.put("value",c.count);//填充饼图数据
+            map.put("name",c.name);//填充饼图数据对应的搜索引擎
             innerPie.data(map);
         }
         option.series(innerPie); //设置数据
@@ -182,102 +258,15 @@ public class EchartOptionUtil {
 
         //外圈数据
         title = "";
-        List<WarningDto> list = new ArrayList<>();
-        WarningDto dto;
-        if (b03 > 0) {
-            dto = new WarningDto();
-            dto.name = "暴雨预警";
-            dto.color = "#4383AE";
-            dto.count = b03;
-            list.add(dto);
-        }
-        if (b04 > 0) {
-            dto = new WarningDto();
-            dto.name = "暴雪预警";
-            dto.color = "#8E59B2";
-            dto.count = b04;
-            list.add(dto);
-        }
-        if (b05 > 0) {
-            dto = new WarningDto();
-            dto.name = "寒潮预警";
-            dto.color = "#554EAD";
-            dto.count = b05;
-            list.add(dto);
-        }
-        if (b06 > 0) {
-            dto = new WarningDto();
-            dto.name = "大风预警";
-            dto.color = "#C77B2D";
-            dto.count = b06;
-            list.add(dto);
-        }
-        if (b15 > 0) {
-            dto = new WarningDto();
-            dto.name = "冰雹预警";
-            dto.color = "#7CC0A7";
-            dto.count = b15;
-            list.add(dto);
-        }
-        if (b17 > 0) {
-            dto = new WarningDto();
-            dto.name = "大雾预警";
-            dto.color = "#6B6C6D";
-            dto.count = b17;
-            list.add(dto);
-        }
-        if (b19 > 0) {
-            dto = new WarningDto();
-            dto.name = "霾预警";
-            dto.color = "#814E4F";
-            dto.count = b19;
-            list.add(dto);
-        }
-        if (b20 > 0) {
-            dto = new WarningDto();
-            dto.name = "雷雨大风";
-            dto.color = "#9DC093";
-            dto.count = b20;
-            list.add(dto);
-        }
-        if (b21 > 0) {
-            dto = new WarningDto();
-            dto.name = "道路结冰";
-            dto.color = "#D3B2B3";
-            dto.count = b21;
-            list.add(dto);
-        }
-        if (b25 > 0) {
-            dto = new WarningDto();
-            dto.name = "森林火险";
-            dto.color = "#C32E30";
-            dto.count = b25;
-            list.add(dto);
-        }
-        if (b14 > 0) {
-            dto = new WarningDto();
-            dto.name = "雷电预警";
-            dto.color = "#D4765E";
-            dto.count = b14;
-            list.add(dto);
-        }
-        if (tother > 0) {
-            dto = new WarningDto();
-            dto.name = "其它";
-            dto.color = "#BEBEBE";
-            dto.count = tother;
-            list.add(dto);
-        }
-
-        String[] typeNames = new String[list.size()];
-        String[] typeColors = new String[list.size()];
-        int[] typeCounts = new int[list.size()];
+        String[] typeNames = new String[legendList.size()];
+        String[] typeColors = new String[legendList.size()];
+        int[] typeCounts = new int[legendList.size()];
 //        String[] typeNames = {"暴雨预警","暴雪预警","寒潮预警","大风预警","冰雹预警","大雾预警","霾预警","雷雨大风","道路结冰","森林火险","雷电预警","其它"};
 //        String[] typeColors = {"#4383AE","#8E59B2","#554EAD","#C77B2D","#7CC0A7","#6B6C6D","#814E4F","#9DC093","#D3B2B3","#C32E30","#D4765E","#BEBEBE"};
 //        int[] typeCounts = {b03,b04,b05,b06,b15,b17,b19,b20,b21,b25,b14,tother};
 
-        for (int i = 0; i < list.size(); i++) {
-            WarningDto data = list.get(i);
+        for (int i = 0; i < legendList.size(); i++) {
+            WarningDto data = legendList.get(i);
             typeNames[i] = data.name;
             typeColors[i] = data.color;
             typeCounts[i] = data.count;

@@ -250,7 +250,7 @@ public class ReserveCityActivity extends BaseActivity implements View.OnClickLis
                 CityDto data = cityList.get(arg2);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("data", data);
-                Intent intent = new Intent(mContext, HWeatherDetailActivity.class);
+                Intent intent = new Intent(mContext, WeatherDetailActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

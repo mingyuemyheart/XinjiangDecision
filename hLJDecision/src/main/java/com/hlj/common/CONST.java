@@ -25,6 +25,8 @@ public class CONST {
 	public static final String LOCAL_ID = "local_id";//栏目id
 	public static final String COLUMN_ID = "column_id";//栏目id
 	public static final String WEB_URL = "web_Url";//网页地址的标示
+	public static final String LAT = "lat";
+	public static final String LNG = "lng";
 	public static final String ACTIVITY_NAME = "activity_name";//界面名称
 	public static final String INTENT_IMGURL = "intent_imgurl";//分享时分享的图片
 	public static final String BROADCAST_ACTION = "broadcast_action";//不同fragment区分广播，解决性能问题

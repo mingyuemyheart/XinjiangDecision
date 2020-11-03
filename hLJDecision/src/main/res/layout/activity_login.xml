@@ -22,6 +22,7 @@
         app:layout_constraintTop_toBottomOf="@+id/reTitle" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,6 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvPhoneLine"
         android:layout_width="100dp"
         android:layout_height="2dp"
@@ -46,6 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,6 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvUserLine"
         android:layout_width="100dp"
         android:layout_height="2dp"

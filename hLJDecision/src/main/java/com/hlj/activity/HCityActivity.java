@@ -136,7 +136,7 @@ public class HCityActivity extends BaseActivity implements OnClickListener{
 			setResult(RESULT_OK, intent);
 			finish();
 		} else {
-			intent = new Intent(mContext, HWeatherDetailActivity.class);
+			intent = new Intent(mContext, WeatherDetailActivity.class);
 			intent.putExtras(bundle);
 			startActivity(intent);
 		}

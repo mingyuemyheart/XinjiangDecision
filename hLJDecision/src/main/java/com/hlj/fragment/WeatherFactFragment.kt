@@ -213,6 +213,12 @@ class WeatherFactFragment : Fragment() {
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                     intent.putExtra(CONST.WEB_URL, dto.dataUrl)
                     startActivity(intent)
+                } else if (TextUtils.equals(dto.id, "211")) { //航化作业
+                    intent = Intent(activity, HanghuaActivity::class.java)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    intent.putExtra(CONST.WEB_URL, dto.dataUrl)
+                    startActivity(intent)
                 } else if (TextUtils.equals(dto.id, "131")) {//森林火险等级预报
                     okHttpDetail(dto.dataUrl)
                 } else if (TextUtils.equals(dto.id, "132")) {//林场站气象要素

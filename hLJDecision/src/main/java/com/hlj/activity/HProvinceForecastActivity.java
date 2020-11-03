@@ -481,7 +481,7 @@ public class HProvinceForecastActivity extends BaseActivity implements OnClickLi
 				CityDto data = new CityDto();
 				data.areaName = marker.getSnippet();
 				data.cityId = marker.getTitle();
-				Intent intent = new Intent(mContext, HWeatherDetailActivity.class);
+				Intent intent = new Intent(mContext, WeatherDetailActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putParcelable("data", data);
 				intent.putExtras(bundle);
