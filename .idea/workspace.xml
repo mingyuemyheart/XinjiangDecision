@@ -57,17 +57,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15ab3c4b-28f1-4ec7-90ce-56991a316228" name="Default" comment="1.修改决策登录对话框提示逻辑&#10;2.适配天气详情逐小时预报和分钟级降水UI&#10;3.增加预警推送功能">
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HanghuaActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HanghuaDetailActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HanghuaListActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/HanghuaDetailAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/HanghuaListAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_hanghua.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_hanghua_detail.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_hanghua_list.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/adapter_hanghua_detail.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/adapter_hanghua_list.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/dialog_add_land.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -80,25 +69,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HCityActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HCityActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HProvinceForecastActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/HProvinceForecastActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ReserveCityActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ReserveCityActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/SettingActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/SettingActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningStatisticActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningStatisticActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/WarningLegendAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/adapter/WarningLegendAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/common/CONST.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/common/CONST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/echart/EchartOptionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/echart/EchartOptionUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/ForecastFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/ForecastFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/utils/CommonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/utils/CommonUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_warning_statistic.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_warning_statistic.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/adapter_warning_legend.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/adapter_warning_legend.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/adapter_warning_type.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/adapter_warning_type.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/values/arrays.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/values/arrays.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

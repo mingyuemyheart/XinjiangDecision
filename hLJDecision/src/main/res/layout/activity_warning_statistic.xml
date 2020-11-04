@@ -232,7 +232,7 @@
                 android:paddingEnd="5dp"
                 android:scrollbars="none"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="15dp"
+                android:verticalSpacing="5dp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
