@@ -70,8 +70,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_warning_statistic.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_warning_statistic.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/adapter_warning_legend.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/adapter_warning_legend.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningStatisticActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningStatisticActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/echart/EchartOptionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/echart/EchartOptionUtil.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

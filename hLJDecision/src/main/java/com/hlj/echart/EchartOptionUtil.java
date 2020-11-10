@@ -165,6 +165,9 @@ public class EchartOptionUtil {
             } else if (dto.name.contains("洪水气象")) {
                 typeDto.color = "#73F4AC";
             } else {
+                name = "未知";
+                dto.type = "未知";
+                typeDto.type = "未知";
                 typeDto.color = "#BEBEBE";
             }
             typeDto.name = name;
@@ -198,6 +201,10 @@ public class EchartOptionUtil {
         color.type = "04";
         color.name = "红色预警";
         color.color = "#D4292A";
+        colorList.add(color);
+        color = new WarningDto();
+        color.type = "05";
+        color.name = "未知颜色";
         colorList.add(color);
 
 
@@ -445,7 +452,7 @@ public class EchartOptionUtil {
                 } else {
                     num12[4]++;
                 }
-            }else if (TextUtils.equals(cityWarningId, "2317")) {
+            }else if (TextUtils.equals(cityWarningId, "2327")) {
                 if (TextUtils.equals(dto.color, "01")) {
                     num13[0]++;
                 } else if (TextUtils.equals(dto.color, "02")) {
