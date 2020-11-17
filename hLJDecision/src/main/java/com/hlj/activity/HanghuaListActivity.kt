@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
@@ -17,7 +16,6 @@ import com.hlj.dto.StationMonitorDto
 import com.hlj.utils.OkHttpUtil
 import kotlinx.android.synthetic.main.activity_hanghua_list.*
 import kotlinx.android.synthetic.main.dialog_add_land.view.*
-import kotlinx.android.synthetic.main.dialog_add_land.view.tvContent
 import kotlinx.android.synthetic.main.dialog_add_land.view.tvNegtive
 import kotlinx.android.synthetic.main.dialog_add_land.view.tvPositive
 import kotlinx.android.synthetic.main.dialog_delete.view.*
@@ -31,7 +29,7 @@ import shawn.cxwl.com.hlj.R
 import java.io.IOException
 
 /**
- * 分钟级降水
+ * 航化作业列表
  */
 class HanghuaListActivity : BaseActivity(), View.OnClickListener {
 

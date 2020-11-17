@@ -50,6 +50,7 @@ class HanghuaActivity : BaseActivity(), View.OnClickListener, AMap.OnMapClickLis
     private fun initWidget() {
         llBack!!.setOnClickListener(this)
         ivList.setOnClickListener(this)
+        ivClear.setOnClickListener(this)
         val title = intent.getStringExtra(CONST.ACTIVITY_NAME)
         if (!TextUtils.isEmpty(title)) {
             tvTitle!!.text = title
@@ -233,6 +234,7 @@ class HanghuaActivity : BaseActivity(), View.OnClickListener, AMap.OnMapClickLis
                 intent.putExtra(CONST.ACTIVITY_NAME, "我的地块")
                 startActivity(intent)
             }
+            R.id.ivClear -> clContent.visibility = View.GONE
         }
     }
 
