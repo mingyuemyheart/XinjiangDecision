@@ -46,7 +46,6 @@
             android:textColor="@color/text_color3"
             android:textSize="@dimen/level_4"
             android:hint="请输入经度"
-            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etName" />
 
@@ -57,7 +56,6 @@
             android:textColor="@color/text_color3"
             android:textSize="@dimen/level_4"
             android:hint="请输入纬度"
-            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etLng" />
 

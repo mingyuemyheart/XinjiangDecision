@@ -36,6 +36,7 @@ class HanghuaActivity : BaseActivity(), View.OnClickListener, AMap.OnMapClickLis
     private val dataList: ArrayList<StationMonitorDto> = ArrayList()
     private var mAdapter: HanghuaDetailAdapter? = null
     private val dataList2: ArrayList<StationMonitorDto> = ArrayList()
+    private var clickMarker: Marker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,21 +75,19 @@ class HanghuaActivity : BaseActivity(), View.OnClickListener, AMap.OnMapClickLis
         tvMapNumber.text = aMap!!.mapContentApprovalNumber
     }
 
-    private fun addMarkerToMap(latLng: LatLng, isAdd: Boolean) {
+    private fun addMarkerToMap(latLng: LatLng) {
+        if (clickMarker != null) {
+            clickMarker!!.remove()
+        }
         val options = MarkerOptions()
         options.position(latLng)
         options.anchor(0.5f, 1.0f)
-        val bitmap = if (isAdd) {
-            ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(resources, R.drawable.sz_icon_locat),
-                    CommonUtil.dip2px(this, 25f).toInt(), CommonUtil.dip2px(this, 25f).toInt())
-        } else {
-            ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(resources, R.drawable.iv_location),
-                    CommonUtil.dip2px(this, 25f).toInt(), CommonUtil.dip2px(this, 25f).toInt())
-        }
+        val bitmap = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(resources, R.drawable.iv_location),
+                CommonUtil.dip2px(this, 25f).toInt(), CommonUtil.dip2px(this, 25f).toInt())
         if (bitmap != null) {
             options.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
         }
-        aMap!!.addMarker(options)
+        clickMarker = aMap!!.addMarker(options)
     }
 
     override fun onMarkerClick(p0: Marker?): Boolean {
@@ -97,7 +96,8 @@ class HanghuaActivity : BaseActivity(), View.OnClickListener, AMap.OnMapClickLis
     }
 
     override fun onMapClick(arg0: LatLng) {
-        addMarkerToMap(arg0, false)
+        addMarkerToMap(arg0)
+        okHttpList2(arg0.latitude, arg0.longitude)
     }
 
     private fun okHttpList() {
@@ -141,7 +141,15 @@ class HanghuaActivity : BaseActivity(), View.OnClickListener, AMap.OnMapClickLis
                                     }
                                     dataList.add(dto)
                                     if (dto.lat != 0.0 && dto.lng != 0.0) {
-                                        addMarkerToMap(LatLng(dto.lat, dto.lng), true)
+                                        val options = MarkerOptions()
+                                        options.position(LatLng(dto.lat, dto.lng))
+                                        options.anchor(0.5f, 1.0f)
+                                        val bitmap = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(resources, R.drawable.sz_icon_locat),
+                                                CommonUtil.dip2px(this@HanghuaActivity, 25f).toInt(), CommonUtil.dip2px(this@HanghuaActivity, 25f).toInt())
+                                        if (bitmap != null) {
+                                            options.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                                        }
+                                        clickMarker = aMap!!.addMarker(options)
                                     }
                                 }
                             }

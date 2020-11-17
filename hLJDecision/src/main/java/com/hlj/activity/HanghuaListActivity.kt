@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
@@ -88,7 +89,7 @@ class HanghuaListActivity : BaseActivity(), View.OnClickListener {
         listView.onItemLongClickListener = OnItemLongClickListener { parent, view, position, id ->
             val data = dataList[position]
             deleteDialog(data.stationId)
-            false
+            true
         }
     }
 
@@ -153,6 +154,8 @@ class HanghuaListActivity : BaseActivity(), View.OnClickListener {
         val dialog = Dialog(this, R.style.CustomProgressDialog)
         dialog.setContentView(view)
         dialog.show()
+        view.etLng.hint = "请输入经度(126.55或126°34'54\")"
+        view.etLat.hint = "请输入纬度(40.55或40°34'54\")"
         view.tvNegtive.setOnClickListener { dialog.dismiss() }
         view.tvPositive.setOnClickListener {
             if (TextUtils.isEmpty(view.etName.text)) {
@@ -160,11 +163,11 @@ class HanghuaListActivity : BaseActivity(), View.OnClickListener {
                 return@setOnClickListener
             }
             if (TextUtils.isEmpty(view.etLng.text)) {
-                Toast.makeText(this, "请输入经度", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "请输入经度(126.55或126°34'54\")", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (TextUtils.isEmpty(view.etLat.text)) {
-                Toast.makeText(this, "请输入纬度", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "请输入纬度(40.55或40°34'54\")", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             dialog.dismiss()
