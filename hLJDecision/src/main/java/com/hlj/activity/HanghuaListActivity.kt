@@ -173,7 +173,7 @@ class HanghuaListActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun okHttpAdd(name: String, lng: String, lat: String) {
+    private fun okHttpAdd(name: String, lat: String, lng: String) {
         Thread(Runnable {
             val url = "http://decision-admin.tianqi.cn/Home/work2019/hlj_addmyhanghuoData?uid=${CONST.UID}&name=$name&lat=$lat&lon=$lng"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {

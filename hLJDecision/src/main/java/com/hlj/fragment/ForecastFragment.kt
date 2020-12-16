@@ -183,10 +183,11 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         if (CommonUtil.isLocationOpen(activity)) {
             startLocation()
         } else {
-            Toast.makeText(activity, "未开启定位，请选择城市", Toast.LENGTH_LONG).show()
-            val intent = Intent(activity, HCityActivity::class.java)
-            intent.putExtra("selectCity", "selectCity")
-            startActivityForResult(intent, 1001)
+//            Toast.makeText(activity, "未开启定位，请选择城市", Toast.LENGTH_LONG).show()
+//            val intent = Intent(activity, HCityActivity::class.java)
+//            intent.putExtra("selectCity", "selectCity")
+//            startActivityForResult(intent, 1001)
+            locationComplete()
         }
 
         initSpeech()
@@ -219,18 +220,25 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
             val street = amapLocation.street + amapLocation.streetNum
             cityName = district+street
             tvPosition!!.text = cityName
-
             addMarkerToMap(LatLng(amapLocation.latitude, amapLocation.longitude))
 
-            val pro = amapLocation.province
             if (amapLocation.province.contains(amapLocation.city)) {
                 okHttpInfo(amapLocation.city, amapLocation.district)
             } else {
                 okHttpInfo(amapLocation.province, amapLocation.city)
             }
-            OkHttpHourRain(amapLocation.longitude, amapLocation.latitude)
-            getWeatherInfo(amapLocation.longitude, amapLocation.latitude)
+            OkHttpHourRain(amapLocation.longitude,amapLocation.latitude)
+            getWeatherInfo(amapLocation.longitude,amapLocation.latitude)
         }
+    }
+
+    private fun locationComplete() {
+        cityName = "哈尔滨市"
+        tvPosition!!.text = cityName
+        addMarkerToMap(LatLng(45.803775, 126.534967))
+        okHttpInfo("黑龙江省", cityName!!)
+        OkHttpHourRain(126.534967,45.803775)
+        getWeatherInfo(126.534967,45.803775)
     }
 
     private fun addMarkerToMap(latLng: LatLng) {

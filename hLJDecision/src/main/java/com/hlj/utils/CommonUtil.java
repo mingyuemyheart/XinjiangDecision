@@ -1028,13 +1028,13 @@ public class CommonUtil {
 		String aqi = null;
 		if (value >= 0 && value <= 50) {
 			aqi = context.getString(R.string.aqi_level1);
-		}else if (value >= 51 && value < 100) {
+		}else if (value >= 51 && value <= 100) {
 			aqi = context.getString(R.string.aqi_level2);
-		}else if (value >= 101 && value < 150) {
+		}else if (value >= 101 && value <= 150) {
 			aqi = context.getString(R.string.aqi_level3);
-		}else if (value >= 151 && value < 200) {
+		}else if (value >= 151 && value <= 200) {
 			aqi = context.getString(R.string.aqi_level4);
-		}else if (value >= 201 && value < 300) {
+		}else if (value >= 201 && value <= 300) {
 			aqi = context.getString(R.string.aqi_level5);
 		}else if (value >= 301) {
 			aqi = context.getString(R.string.aqi_level6);
@@ -1051,13 +1051,13 @@ public class CommonUtil {
 		int drawable = -1;
 		if (value >= 0 && value <= 50) {
 			drawable = R.drawable.corner_aqi_one;
-		}else if (value >= 51 && value < 100) {
+		}else if (value >= 51 && value <= 100) {
 			drawable = R.drawable.corner_aqi_two;
-		}else if (value >= 101 && value < 150) {
+		}else if (value >= 101 && value <= 150) {
 			drawable = R.drawable.corner_aqi_three;
-		}else if (value >= 151 && value < 200) {
+		}else if (value >= 151 && value <= 200) {
 			drawable = R.drawable.corner_aqi_four;
-		}else if (value >= 201 && value < 300) {
+		}else if (value >= 201 && value <= 300) {
 			drawable = R.drawable.corner_aqi_five;
 		}else if (value >= 301) {
 			drawable = R.drawable.corner_aqi_six;

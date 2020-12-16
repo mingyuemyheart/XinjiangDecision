@@ -117,6 +117,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
      * 初始化控件
      */
     private fun initWidget() {
+        llBack.setOnClickListener(this)
         //解决scrollView嵌套listview，动态计算listview高度后，自动滚动到屏幕底部
         tvPosition!!.isFocusable = true
         tvPosition!!.isFocusableInTouchMode = true
@@ -1081,6 +1082,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
 
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.llBack -> finish()
             R.id.tvPosition -> startActivity(Intent(this, HCityActivity::class.java))
             R.id.tvFact -> {
                 tvTemp.text = tvFact.tag.toString() + ""
