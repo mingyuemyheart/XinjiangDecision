@@ -171,7 +171,7 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 	private fun okHttpLogin(userName: String, pwd: String) {
 		CONST.USERNAME = userName
 		CONST.PASSWORD = pwd
-		val url = "http://decision-admin.tianqi.cn/Home/Work/login"
+		val url = "http://decision-admin.tianqi.cn/Home/Work/login_1"
 		val builder = FormBody.Builder()
 		builder.add("username", userName)
 		builder.add("password", pwd)

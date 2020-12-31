@@ -258,7 +258,7 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
                 finish();
                 break;
             case R.id.tvControl:
-                Intent intent = new Intent(mContext, ShawnWarningStatisticScreenActivity.class);
+                Intent intent = new Intent(mContext, WarningHistoryScreenActivity.class);
                 intent.putExtra("startTime", startTime);
                 intent.putExtra("endTime", endTime);
                 intent.putExtra("areaName", areaName);

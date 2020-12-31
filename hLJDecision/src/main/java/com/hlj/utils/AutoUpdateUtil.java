@@ -233,7 +233,7 @@ public class AutoUpdateUtil {
 					intent = new Intent(Intent.ACTION_VIEW);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 						intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						Uri contentUri = FileProvider.getUriForFile(context, context.getPackageName()+".fileprovider", new File(filePath));
+						Uri contentUri = FileProvider.getUriForFile(context, context.getPackageName()+".FileProvider", new File(filePath));
 						intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
 					} else {
 						intent.setDataAndType(Uri.fromFile(new File(filePath)), "application/vnd.android.package-archive");

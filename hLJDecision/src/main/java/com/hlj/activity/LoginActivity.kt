@@ -197,7 +197,7 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 				Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show()
 				return
 			}
-			url = "http://decision-admin.tianqi.cn/Home/Work/login"
+			url = "http://decision-admin.tianqi.cn/Home/Work/login_1"
 			builder.add("username", etUserName!!.text.toString())
 			builder.add("password", etPwd!!.text.toString())
 		}
