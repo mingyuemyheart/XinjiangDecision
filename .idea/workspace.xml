@@ -6,6 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="statisticurl" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
@@ -70,18 +71,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/hLJDecision.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/LoginActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/SettingActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/SettingActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWarningStatisticActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWarningStatisticActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWarningStatisticScreenActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningHistoryScreenActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/ShawnWarningStatisticScreenAreaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningHistoryScreenAreaActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WelcomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WelcomeActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/utils/AutoUpdateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/utils/AutoUpdateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/utils/CommonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/utils/CommonUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_warning_statistic_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_warning_history_screen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/shawn_activity_warning_statistic_screen_area.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/res/layout/activity_warning_history_screen_area.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningHistoryScreenActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningHistoryScreenActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningStatisticActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/activity/WarningStatisticActivity.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

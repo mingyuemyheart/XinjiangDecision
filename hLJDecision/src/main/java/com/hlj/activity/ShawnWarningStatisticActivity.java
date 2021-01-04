@@ -39,7 +39,7 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
 
     private Context mContext;
     private TextView tvTitle, tvTime;
-    private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy年MM月dd HH:mm:ss", Locale.CHINA);
     private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
     private SimpleDateFormat sdf3 = new SimpleDateFormat("MM月dd日", Locale.CHINA);
     private SimpleDateFormat sdf4 = new SimpleDateFormat("yyyy0101000000", Locale.CHINA);
@@ -82,7 +82,7 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
             endTime = sdf5.format(new Date());
         }
         try {
-            tvTime.setText(sdf2.format(sdf6.parse(startTime)) + " - " + sdf2.format(sdf6.parse(endTime)));
+            tvTime.setText(sdf1.format(sdf6.parse(startTime)) + " - " + sdf1.format(sdf6.parse(endTime)));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -282,7 +282,7 @@ public class ShawnWarningStatisticActivity extends BaseActivity implements View.
                     mAdapter.setEndTime(endTime);
                     tvTitle.setText(areaName + "预警统计");
                     try {
-                        tvTime.setText(sdf2.format(sdf6.parse(startTime)) + " - " + sdf2.format(sdf6.parse(endTime)));
+                        tvTime.setText(sdf1.format(sdf6.parse(startTime)) + " - " + sdf1.format(sdf6.parse(endTime)));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

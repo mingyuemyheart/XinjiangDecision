@@ -173,8 +173,10 @@ class WarningHistoryScreenActivity : BaseActivity(), OnClickListener {
         val minuteStr = if (minute.currentItem + 1 < 10) "0" + (minute.currentItem) else (minute.currentItem).toString()
         val secondStr = if (second.currentItem + 1 < 10) "0" + (second.currentItem) else (second.currentItem).toString()
         if (isStart) {
+            startTime = "$yearStr$monthStr$dayStr${hourStr}${minuteStr}${secondStr}"
             tvStartTime.text = "$yearStr-$monthStr-$dayStr ${hourStr}:${minuteStr}:${secondStr}"
         } else {
+            endTime = "$yearStr$monthStr$dayStr${hourStr}${minuteStr}${secondStr}"
             tvEndTime.text = "$yearStr-$monthStr-$dayStr ${hourStr}:${minuteStr}:${secondStr}"
         }
     }

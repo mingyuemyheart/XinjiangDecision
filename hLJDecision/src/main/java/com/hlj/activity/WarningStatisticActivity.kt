@@ -112,7 +112,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         gridViewLegend.adapter = legendAdapter
     }
 
-    private fun initGridViewColor() {
+    private fun setColorDatas() {
         colorList.clear()
         var dto = WarningDto()
         dto.type = "01"
@@ -134,7 +134,10 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         dto.type = "05"
         dto.name = "未知颜色"
         colorList.add(dto)
+    }
 
+    private fun initGridViewColor() {
+        setColorDatas()
         colorAdapter = WarningLegendAdapter(this, colorList)
         gridViewColor.adapter = colorAdapter
     }
@@ -292,6 +295,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                                 val legend = entry.value
                                 legendList.add(legend)
                             }
+                            setColorDatas()
                             for (i in warningList.indices) {
                                 val dto = warningList[i]
                                 for (j in legendList.indices) {
