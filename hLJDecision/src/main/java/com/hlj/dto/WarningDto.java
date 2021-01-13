@@ -28,6 +28,7 @@ public class WarningDto implements Parcelable {
 	public String colorHex;
 	public String typeHex,typeName;
 	public boolean isSelected;
+	public String typeColor;
 
 	//预警统计
 	public String areaName;//省、市、县（区）对应的名称
@@ -80,6 +81,7 @@ public class WarningDto implements Parcelable {
 		dest.writeString(this.typeHex);
 		dest.writeString(this.typeName);
 		dest.writeByte(this.isSelected ? (byte) 1 : (byte) 0);
+		dest.writeString(this.typeColor);
 		dest.writeString(this.areaName);
 		dest.writeString(this.areaId);
 		dest.writeString(this.shortName);
@@ -120,6 +122,7 @@ public class WarningDto implements Parcelable {
 		this.typeHex = in.readString();
 		this.typeName = in.readString();
 		this.isSelected = in.readByte() != 0;
+		this.typeColor = in.readString();
 		this.areaName = in.readString();
 		this.areaId = in.readString();
 		this.shortName = in.readString();

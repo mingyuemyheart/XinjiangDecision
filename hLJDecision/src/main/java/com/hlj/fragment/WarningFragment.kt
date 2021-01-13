@@ -33,7 +33,6 @@ import com.hlj.adapter.ShawnWarningStatisticAdapter
 import com.hlj.adapter.WarningAdapter
 import com.hlj.common.CONST
 import com.hlj.common.ColumnData
-import com.hlj.dto.AgriDto
 import com.hlj.dto.WarningDto
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
@@ -565,7 +564,7 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
-            R.id.ivHistory -> startActivity(Intent(activity, ShawnWarningStatisticActivity::class.java))
+            R.id.ivHistory -> startActivity(Intent(activity, WarningHistoryActivity::class.java))
             R.id.ivStatistic -> startActivity(Intent(activity, WarningStatisticActivity::class.java))
         }
     }

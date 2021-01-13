@@ -1,6 +1,7 @@
 package com.hlj.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.TextUtils
@@ -14,6 +15,7 @@ import com.hlj.adapter.WarningLegendAdapter
 import com.hlj.adapter.WarningTypeAdapter
 import com.hlj.dto.WarningDto
 import com.hlj.echart.EchartOptionUtil
+import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import com.hlj.view.wheelview.NumericWheelAdapter
 import com.hlj.view.wheelview.OnWheelScrollListener
@@ -198,92 +200,42 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
                             val jsonArray = JSONArray(result)
                             for (i in 0 until jsonArray.length()) {
                                 val tempArray = jsonArray.getJSONArray(i)
-//                                val lng = tempArray.get(2)
-//                                val lat = tempArray.get(3)
-//                                if (!TextUtils.isEmpty(lng.toString()) && !TextUtils.equals(lng.toString(), "null")) {
-                                    val dto = WarningDto()
-                                    dto.html = tempArray.getString(1)
-                                    val array = dto.html.split("-").toTypedArray()
-                                    val item0 = array[0]
-                                    val item1 = array[1]
-                                    val item2 = array[2]
-                                    dto.item0 = item0
-                                    dto.provinceId = item0.substring(0, 2)
-                                    dto.type = item2.substring(0, 5)
-                                    dto.color = item2.substring(5, 7)
-                                    dto.time = item1
-//                                    dto.lng = tempArray.getDouble(2)
-//                                    dto.lat = tempArray.getDouble(3)
-                                    dto.name = tempArray.getString(0)
-                                    if (!dto.name.contains("解除")) {
-                                        warningList.add(dto)
-                                        if (dto.item0.endsWith("0000")) {
-                                            pro++
-                                        } else if (dto.item0.substring(2,4) != "00" && dto.item0.substring(4,6) == "00") {
-                                            city++
-                                        } else {
-                                            dis++
-                                        }
-
-                                        //获取所有的预警类型
-                                        val typeDto = WarningDto()
-                                        typeDto.type = dto.type
-                                        var name = dto.name
-                                        if (!TextUtils.isEmpty(dto.name)) {
-                                            if (dto.name.contains("发布") && dto.name.contains("预警")) {
-                                                name = dto.name.substring(dto.name.indexOf("发布")+2, dto.name.indexOf("预警")-2) + "预警"
-                                            }
-                                        }
-                                        if (dto.name.contains("暴雨")) {
-                                            typeDto.color = "#4383AE"
-                                        } else if (dto.name.contains("暴雪")) {
-                                            typeDto.color = "#8E59B2"
-                                        } else if (dto.name.contains("寒潮")) {
-                                            typeDto.color = "#554EAD"
-                                        } else if (dto.name.contains("大风")) {
-                                            typeDto.color = "#86B978"
-                                        } else if (dto.name.contains("霾预警")) {
-                                            typeDto.color = "#814E4F"
-                                        } else if (dto.name.contains("雷电")) {
-                                            typeDto.color = "#D4765E"
-                                        } else if (dto.name.contains("霜冻")) {
-                                            typeDto.color = "#859ED9"
-                                        } else if (dto.name.contains("高温")) {
-                                            typeDto.color = "#729ACE"
-                                        } else if (dto.name.contains("大雾")) {
-                                            typeDto.color = "#C49CB0"
-                                        } else if (dto.name.contains("冰雹")) {
-                                            typeDto.color = "#8EABED"
-                                        } else if (dto.name.contains("森林火险")) {
-                                            name = "森林火险"
-                                            typeDto.color = "#C32E30"
-                                        } else if (dto.name.contains("道路结冰")) {
-                                            name = "道路结冰"
-                                            typeDto.color = "#D3B2B3"
-                                        } else if (dto.name.contains("雷雨大风")) {
-                                            name = "雷雨大风"
-                                            typeDto.color = "#A85BC9"
-                                        } else if (dto.name.contains("强对流")) {
-                                            name = "强对流"
-                                            typeDto.color = "#E3DF78"
-                                        } else if (dto.name.contains("山洪灾害")) {
-                                            name = "山洪灾害"
-                                            typeDto.color = "#D78B81"
-                                        } else if (dto.name.contains("地质灾害")) {
-                                            name = "地质灾害"
-                                            typeDto.color = "#78D4C2"
-                                        } else if (dto.name.contains("洪水气象")) {
-                                            typeDto.color = "#73F4AC"
-                                        } else {
-                                            name = "未知"
-                                            dto.type = "未知"
-                                            typeDto.type = "未知"
-                                            typeDto.color = "#BEBEBE"
-                                        }
-                                        typeDto.name = name
-                                        warningTypes[dto.type] = typeDto
+                                val dto = WarningDto()
+                                dto.html = tempArray.getString(1)
+                                val array = dto.html.split("-").toTypedArray()
+                                val item0 = array[0]
+                                val item1 = array[1]
+                                val item2 = array[2]
+                                dto.item0 = item0
+                                dto.provinceId = item0.substring(0, 2)
+                                dto.type = item2.substring(0, 5)
+                                dto.color = item2.substring(5, 7)
+                                dto.typeColor = CommonUtil.randomColor()
+                                dto.time = item1
+                                dto.name = tempArray.getString(0)
+                                if (!dto.name.contains("解除")) {
+                                    warningList.add(dto)
+                                    if (dto.item0.endsWith("0000")) {
+                                        pro++
+                                    } else if (dto.item0.substring(2,4) != "00" && dto.item0.substring(4,6) == "00") {
+                                        city++
+                                    } else {
+                                        dis++
                                     }
-//                                }
+
+                                    //获取所有的预警类型
+                                    val typeDto = WarningDto()
+                                    typeDto.type = dto.type
+                                    var name = dto.name
+                                    if (!TextUtils.isEmpty(dto.name)) {
+                                        if (dto.name.contains("发布") && dto.name.contains("预警")) {
+                                            name = dto.name.substring(dto.name.indexOf("发布")+2, dto.name.indexOf("预警")-2) + "预警"
+                                        }
+                                    }
+                                    typeDto.color = dto.typeColor
+                                    typeDto.name = name
+                                    warningTypes[dto.type] = typeDto
+                                }
                             }
                             tvPro.text = "省($pro)"
                             tvCity.text = "市($city)"

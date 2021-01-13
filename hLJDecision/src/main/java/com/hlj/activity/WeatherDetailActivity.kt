@@ -625,7 +625,13 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                             }
                                             if (!o.isNull("001")) {
                                                 val weatherCode = o.getString("001")
-                                                tvPhe!!.text = getString(WeatherUtil.getWeatherId(Integer.valueOf(weatherCode)))
+                                                if (TextUtils.isEmpty(weatherCode) && !TextUtils.equals(weatherCode, "?") && !TextUtils.equals(weatherCode, "null")) {
+                                                    try {
+                                                        tvPhe!!.text = getString(WeatherUtil.getWeatherId(Integer.valueOf(weatherCode)))
+                                                    } catch (e: Exception) {
+                                                        e.printStackTrace()
+                                                    }
+                                                }
                                             }
                                             if (!o.isNull("002")) {
                                                 val factTemp = o.getString("002")
@@ -638,41 +644,45 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                             }
                                             if (!o.isNull("004")) {
                                                 val windDir = o.getString("004")
-                                                val dir = getString(WeatherUtil.getWindDirection(Integer.valueOf(windDir)))
-                                                if (!o.isNull("003")) {
-                                                    val windForce = o.getString("003")
-                                                    val force = WeatherUtil.getFactWindForce(Integer.valueOf(windForce))
-                                                    tvWind!!.text = force
-                                                    when {
-                                                        TextUtils.equals(dir, "北风") -> {
-                                                            ivWind!!.rotation = 0f
+                                                if (TextUtils.isEmpty(windDir) && !TextUtils.equals(windDir, "?") && !TextUtils.equals(windDir, "null")) {
+                                                    val dir = getString(WeatherUtil.getWindDirection(Integer.valueOf(windDir)))
+                                                    if (!o.isNull("003")) {
+                                                        val windForce = o.getString("003")
+                                                        if (TextUtils.isEmpty(windForce) && !TextUtils.equals(windForce, "?") && !TextUtils.equals(windForce, "null")) {
+                                                            val force = WeatherUtil.getFactWindForce(Integer.valueOf(windForce))
+                                                            tvWind!!.text = "$dir $force"
+                                                            when {
+                                                                TextUtils.equals(dir, "北风") -> {
+                                                                    ivWind!!.rotation = 0f
+                                                                }
+                                                                TextUtils.equals(dir, "东北风") -> {
+                                                                    ivWind!!.rotation = 45f
+                                                                }
+                                                                TextUtils.equals(dir, "东风") -> {
+                                                                    ivWind!!.rotation = 90f
+                                                                }
+                                                                TextUtils.equals(dir, "东南风") -> {
+                                                                    ivWind!!.rotation = 135f
+                                                                }
+                                                                TextUtils.equals(dir, "南风") -> {
+                                                                    ivWind!!.rotation = 180f
+                                                                }
+                                                                TextUtils.equals(dir, "西南风") -> {
+                                                                    ivWind!!.rotation = 225f
+                                                                }
+                                                                TextUtils.equals(dir, "西风") -> {
+                                                                    ivWind!!.rotation = 270f
+                                                                }
+                                                                TextUtils.equals(dir, "西北风") -> {
+                                                                    ivWind!!.rotation = 315f
+                                                                }
+                                                            }
+                                                            if (TextUtils.equals("1", MyApplication.getAppTheme())) {
+                                                                ivWind!!.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(resources, R.drawable.iv_winddir)))
+                                                            } else {
+                                                                ivWind!!.setImageResource(R.drawable.iv_winddir)
+                                                            }
                                                         }
-                                                        TextUtils.equals(dir, "东北风") -> {
-                                                            ivWind!!.rotation = 45f
-                                                        }
-                                                        TextUtils.equals(dir, "东风") -> {
-                                                            ivWind!!.rotation = 90f
-                                                        }
-                                                        TextUtils.equals(dir, "东南风") -> {
-                                                            ivWind!!.rotation = 135f
-                                                        }
-                                                        TextUtils.equals(dir, "南风") -> {
-                                                            ivWind!!.rotation = 180f
-                                                        }
-                                                        TextUtils.equals(dir, "西南风") -> {
-                                                            ivWind!!.rotation = 225f
-                                                        }
-                                                        TextUtils.equals(dir, "西风") -> {
-                                                            ivWind!!.rotation = 270f
-                                                        }
-                                                        TextUtils.equals(dir, "西北风") -> {
-                                                            ivWind!!.rotation = 315f
-                                                        }
-                                                    }
-                                                    if (TextUtils.equals("1", MyApplication.getAppTheme())) {
-                                                        ivWind!!.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(resources, R.drawable.iv_winddir)))
-                                                    } else {
-                                                        ivWind!!.setImageResource(R.drawable.iv_winddir)
                                                     }
                                                 }
                                             }
@@ -710,10 +720,14 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                             val k = object1.getJSONObject("2001006")
                                             if (!k.isNull("002")) {
                                                 val aqi = k.getString("002")
-                                                if (!TextUtils.isEmpty(aqi)) {
+                                                if (!TextUtils.isEmpty(aqi) && !TextUtils.equals(aqi, "?") && !TextUtils.equals(aqi, "null")) {
                                                     tvAqiCount!!.text = aqi
-                                                    tvAqiCount!!.setBackgroundResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)))
-                                                    tvAqi.text = WeatherUtil.getAqi(this@WeatherDetailActivity, Integer.valueOf(aqi))
+                                                    try {
+                                                        tvAqiCount!!.setBackgroundResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)))
+                                                        tvAqi.text = "空气质量 "+WeatherUtil.getAqi(this@WeatherDetailActivity, Integer.valueOf(aqi))
+                                                    } catch (e: Exception) {
+                                                        e.printStackTrace()
+                                                    }
                                                 }
                                             }
                                         }
@@ -737,11 +751,27 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                 for (i in 0 until length) {
                                                     val itemObj = array.getJSONObject(i)
                                                     val dto = WeatherDto()
-                                                    dto.hourlyCode = Integer.valueOf(itemObj.getString("001"))
-                                                    dto.hourlyTemp = Integer.valueOf(itemObj.getString("002"))
                                                     dto.hourlyTime = itemObj.getString("000")
-                                                    dto.hourlyWindDirCode = Integer.valueOf(itemObj.getString("004"))
-                                                    dto.hourlyWindForceCode = Integer.valueOf(itemObj.getString("003"))
+                                                    try {
+                                                        val one = itemObj.getString("001")
+                                                        if (!TextUtils.isEmpty(one) && !TextUtils.equals(one, "?") && !TextUtils.equals(one, "null")) {
+                                                            dto.hourlyCode = Integer.valueOf(one)
+                                                        }
+                                                        val two = itemObj.getString("002")
+                                                        if (!TextUtils.isEmpty(two) && !TextUtils.equals(two, "?") && !TextUtils.equals(two, "null")) {
+                                                            dto.hourlyTemp = Integer.valueOf(two)
+                                                        }
+                                                        val four = itemObj.getString("004")
+                                                        if (!TextUtils.isEmpty(four) && !TextUtils.equals(four, "?") && !TextUtils.equals(four, "null")) {
+                                                            dto.hourlyWindDirCode = Integer.valueOf(four)
+                                                        }
+                                                        val three = itemObj.getString("003")
+                                                        if (!TextUtils.isEmpty(three) && !TextUtils.equals(three, "?") && !TextUtils.equals(three, "null")) {
+                                                            dto.hourlyWindForceCode = Integer.valueOf(three)
+                                                        }
+                                                    } catch (e: Exception) {
+                                                        e.printStackTrace()
+                                                    }
                                                     hourlyList.add(dto)
                                                 }
 
@@ -787,22 +817,46 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                     val weeklyObj = f1.getJSONObject(i)
 
                                                     //晚上
-                                                    dto.lowPheCode = Integer.valueOf(weeklyObj.getString("002"))
-                                                    dto.lowPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("002"))))
-                                                    dto.lowTemp = Integer.valueOf(weeklyObj.getString("004"))
+                                                    val two = weeklyObj.getString("002")
+                                                    if (!TextUtils.isEmpty(two) && !TextUtils.equals(two, "?") && !TextUtils.equals(two, "null")) {
+                                                        dto.lowPheCode = Integer.valueOf(two)
+                                                        dto.lowPhe = getString(WeatherUtil.getWeatherId(dto.lowPheCode))
+                                                    }
+                                                    val four = weeklyObj.getString("004")
+                                                    if (!TextUtils.isEmpty(two) && !TextUtils.equals(two, "?") && !TextUtils.equals(two, "null")) {
+                                                        dto.lowTemp = Integer.valueOf(four)
+                                                    }
 
                                                     //白天
-                                                    dto.highPheCode = Integer.valueOf(weeklyObj.getString("001"))
-                                                    dto.highPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("001"))))
-                                                    dto.highTemp = Integer.valueOf(weeklyObj.getString("003"))
+                                                    val one = weeklyObj.getString("001")
+                                                    if (!TextUtils.isEmpty(one) && !TextUtils.equals(one, "?") && !TextUtils.equals(one, "null")) {
+                                                        dto.highPheCode = Integer.valueOf(one)
+                                                        dto.highPhe = getString(WeatherUtil.getWeatherId(dto.highPheCode))
+                                                    }
+                                                    val three = weeklyObj.getString("003")
+                                                    if (!TextUtils.isEmpty(three) && !TextUtils.equals(three, "?") && !TextUtils.equals(three, "null")) {
+                                                        dto.highTemp = Integer.valueOf(three)
+                                                    }
                                                     if (hour in 5..17) {
-                                                        dto.windDir = Integer.valueOf(weeklyObj.getString("007"))
-                                                        dto.windForce = Integer.valueOf(weeklyObj.getString("005"))
-                                                        dto.windForceString = WeatherUtil.getDayWindForce(Integer.valueOf(dto.windForce))
+                                                        val seven = weeklyObj.getString("007")
+                                                        if (!TextUtils.isEmpty(seven) && !TextUtils.equals(seven, "?") && !TextUtils.equals(seven, "null")) {
+                                                            dto.windDir = Integer.valueOf(seven)
+                                                        }
+                                                        val five = weeklyObj.getString("005")
+                                                        if (!TextUtils.isEmpty(five) && !TextUtils.equals(five, "?") && !TextUtils.equals(five, "null")) {
+                                                            dto.windForce = Integer.valueOf(five)
+                                                            dto.windForceString = WeatherUtil.getDayWindForce(dto.windForce)
+                                                        }
                                                     } else {
-                                                        dto.windDir = Integer.valueOf(weeklyObj.getString("008"))
-                                                        dto.windForce = Integer.valueOf(weeklyObj.getString("006"))
-                                                        dto.windForceString = WeatherUtil.getDayWindForce(Integer.valueOf(dto.windForce))
+                                                        val eight = weeklyObj.getString("008")
+                                                        if (!TextUtils.isEmpty(eight) && !TextUtils.equals(eight, "?") && !TextUtils.equals(eight, "null")) {
+                                                            dto.windDir = Integer.valueOf(eight)
+                                                        }
+                                                        val six = weeklyObj.getString("006")
+                                                        if (!TextUtils.isEmpty(six) && !TextUtils.equals(six, "?") && !TextUtils.equals(six, "null")) {
+                                                            dto.windForce = Integer.valueOf(six)
+                                                            dto.windForceString = WeatherUtil.getDayWindForce(dto.windForce)
+                                                        }
                                                     }
                                                     weeklyList.add(dto)
                                                     if (i == 0) {
@@ -834,9 +888,11 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                             tvPhe1!!.text = getString(WeatherUtil.getWeatherId(dto.lowPheCode))
                                                         }
                                                         tvTemp1!!.text = dto.lowTemp.toString() + "/" + dto.highTemp + "℃"
-                                                        val value: Int = tvAqiCount.text.toString().toInt()
-                                                        tvAqi1.text = CommonUtil.getAqiDes(this@WeatherDetailActivity, value)
-                                                        tvAqi1.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                                        if (!TextUtils.isEmpty(tvAqiCount.text.toString()) && !TextUtils.equals(tvAqiCount.text.toString(), "?") && !TextUtils.equals(tvAqiCount.text.toString(), "null")) {
+                                                            val value: Int = tvAqiCount.text.toString().toInt()
+                                                            tvAqi1.text = CommonUtil.getAqiDes(this@WeatherDetailActivity, value)
+                                                            tvAqi1.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                                        }
                                                     }
                                                     if (i == 1) {
                                                         tvDay2!!.text = "明天"
@@ -852,9 +908,11 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                         }
                                                         tvTemp2!!.text = dto.lowTemp.toString() + "/" + dto.highTemp + "℃"
                                                         if (aqiList.size > 1) {
-                                                            val value: Int = aqiList[1].aqi.toInt()
-                                                            tvAqi2.text = CommonUtil.getAqiDes(this@WeatherDetailActivity, value)
-                                                            tvAqi2.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                                            if (!TextUtils.isEmpty(aqiList[1].aqi) && !TextUtils.equals(aqiList[1].aqi, "?") && !TextUtils.equals(aqiList[1].aqi, "null")) {
+                                                                val value: Int = aqiList[1].aqi.toInt()
+                                                                tvAqi2.text = CommonUtil.getAqiDes(this@WeatherDetailActivity, value)
+                                                                tvAqi2.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -1083,7 +1141,11 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
     override fun onClick(v: View) {
         when (v.id) {
             R.id.llBack -> finish()
-            R.id.tvPosition -> startActivity(Intent(this, HCityActivity::class.java))
+            R.id.tvPosition -> {
+                val intent = Intent(this, HCityActivity::class.java)
+                intent.putExtra("selectCity", "selectCity")
+                startActivityForResult(intent, 1001)
+            }
             R.id.tvFact -> {
                 tvTemp.text = tvFact.tag.toString() + ""
                 tvFact.setTextColor(Color.WHITE)

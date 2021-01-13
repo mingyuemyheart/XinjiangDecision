@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
 import com.hlj.activity.HPDFActivity
-import com.hlj.activity.SurfaceViewActivity
 import com.hlj.activity.WebviewActivity
 import com.hlj.adapter.CommonPdfListAdapter
 import com.hlj.common.CONST
@@ -104,7 +103,7 @@ class CommonListFragment : Fragment() {
                     Intent(activity, HPDFActivity::class.java)
                 }
                 TextUtils.equals(dto.type, CONST.MP4) -> {
-                    Intent(activity, SurfaceViewActivity::class.java)
+                    Intent(activity, WebviewActivity::class.java)
                 }
                 else -> {
                     Intent(activity, WebviewActivity::class.java)

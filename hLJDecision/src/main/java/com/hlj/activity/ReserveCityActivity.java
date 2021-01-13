@@ -57,7 +57,7 @@ import shawn.cxwl.com.hlj.R;
  * 城市预定
  */
 public class ReserveCityActivity extends BaseActivity implements View.OnClickListener, AMapLocationListener {
-    
+
     private Context mContext;
     private LinearLayout llBack = null;
     private TextView tvTitle = null;
@@ -79,7 +79,7 @@ public class ReserveCityActivity extends BaseActivity implements View.OnClickLis
         initWidget();
         initListView();
     }
-    
+
     private void initWidget() {
         llBack = (LinearLayout) findViewById(R.id.llBack);
         llBack.setOnClickListener(this);
@@ -353,7 +353,7 @@ public class ReserveCityActivity extends BaseActivity implements View.OnClickLis
 
                                                         if (!o.isNull("001")) {
                                                             String weatherCode = o.getString("001");
-                                                            if (!TextUtils.isEmpty(weatherCode)) {
+                                                            if (!TextUtils.isEmpty(weatherCode) && !TextUtils.equals(weatherCode, "?") && !TextUtils.equals(weatherCode, "null")) {
                                                                 dto.highPheCode = Integer.parseInt(weatherCode);
                                                             }
                                                         }

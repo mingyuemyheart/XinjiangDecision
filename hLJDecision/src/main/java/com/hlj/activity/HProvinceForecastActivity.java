@@ -64,576 +64,591 @@ import shawn.cxwl.com.hlj.R;
 
 public class HProvinceForecastActivity extends BaseActivity implements OnClickListener, OnMarkerClickListener, OnMapClickListener,
         InfoWindowAdapter, OnCameraChangeListener {
-	
-	private Context mContext = null;
-	private LinearLayout llBack = null;
-	private TextView tvTitle = null;
-	private MapView mapView = null;//高德地图
-	private AMap aMap = null;//高德地图
-	private float zoom = 5.5f;
-	private Marker selectMarker = null;
-	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-	private SimpleDateFormat sdf2 = new SimpleDateFormat("MM月dd日");
-	private SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
-	private ExpandableTextView llContainer = null;
 
-	private List<CityDto> cityList = new ArrayList<>();//市级
-	private List<CityDto> districtList = new ArrayList<>();//县级
-	private List<Marker> cityMarkers = new ArrayList<>();
-	private List<Marker> disMarkers = new ArrayList<>();
+    private Context mContext = null;
+    private LinearLayout llBack = null;
+    private TextView tvTitle = null;
+    private MapView mapView = null;//高德地图
+    private AMap aMap = null;//高德地图
+    private float zoom = 5.5f;
+    private Marker selectMarker = null;
+    private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+    private SimpleDateFormat sdf2 = new SimpleDateFormat("MM月dd日");
+    private SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
+    private ExpandableTextView llContainer = null;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.hactivity_province_forecast);
-		mContext = this;
-		showDialog();
-		initAmap(savedInstanceState);
-		initWidget();
-	}
-	
-	/**
-	 * 初始化控件
-	 */
-	private void initWidget() {
-		llBack = (LinearLayout) findViewById(R.id.llBack);
-		llBack.setOnClickListener(this);
-		tvTitle = (TextView) findViewById(R.id.tvTitle);
-		llContainer = (ExpandableTextView) findViewById(R.id.llContainer);
+    private List<CityDto> cityList = new ArrayList<>();//市级
+    private List<CityDto> districtList = new ArrayList<>();//县级
+    private List<Marker> cityMarkers = new ArrayList<>();
+    private List<Marker> disMarkers = new ArrayList<>();
 
-		String title = getIntent().getStringExtra(CONST.ACTIVITY_NAME);
-		if (title != null) {
-			tvTitle.setText(title);
-		}
-
-		//获取全省预报文字
-		String url = getIntent().getStringExtra(CONST.WEB_URL);
-		if (!TextUtils.isEmpty(url)) {
-			OkHttpText(url);
-		}
-
-		//获取站点信息
-		OkHttpRank();
-
-		String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
-		CommonUtil.submitClickCount(columnId, title);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.hactivity_province_forecast);
+        mContext = this;
+        showDialog();
+        initAmap(savedInstanceState);
+        initWidget();
     }
-	
-	/**
-	 * 初始化高德地图
-	 */
-	private void initAmap(Bundle bundle) {
-		mapView = (MapView) findViewById(R.id.mapView);
-		mapView.onCreate(bundle);
-		if (aMap == null) {
-			aMap = mapView.getMap();
-		}
 
-		LatLng guizhouLatLng = new LatLng(49.302915,128.121040);
-		aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(guizhouLatLng, zoom));
-		aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
-		aMap.getUiSettings().setZoomControlsEnabled(false);
-		aMap.getUiSettings().setRotateGesturesEnabled(false);
-		aMap.setOnMarkerClickListener(this);
-		aMap.setOnMapClickListener(this);
-		aMap.setInfoWindowAdapter(this);
-		aMap.setOnCameraChangeListener(this);
+    /**
+     * 初始化控件
+     */
+    private void initWidget() {
+        llBack = (LinearLayout) findViewById(R.id.llBack);
+        llBack.setOnClickListener(this);
+        tvTitle = (TextView) findViewById(R.id.tvTitle);
+        llContainer = (ExpandableTextView) findViewById(R.id.llContainer);
 
-		TextView tvMapNumber = findViewById(R.id.tvMapNumber);
-		tvMapNumber.setText(aMap.getMapContentApprovalNumber());
+        String title = getIntent().getStringExtra(CONST.ACTIVITY_NAME);
+        if (title != null) {
+            tvTitle.setText(title);
+        }
 
-		CommonUtil.drawHLJJson(mContext, aMap);
-	}
-	
-	/**
-	 * 异步请求
-	 */
-	private void OkHttpText(String url) {
-		OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
-			@Override
-			public void onFailure(Call call, IOException e) {
+        //获取全省预报文字
+        String url = getIntent().getStringExtra(CONST.WEB_URL);
+        if (!TextUtils.isEmpty(url)) {
+            OkHttpText(url);
+        }
 
-			}
+        //获取站点信息
+        OkHttpRank();
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (!TextUtils.isEmpty(result)) {
-					try {
-						JSONObject obj = new JSONObject(result);
-						String c1 = obj.getString("c1");
-						c1 = c1.replace("<p>", "");
-						c1 = c1.replace("</p>", "")+"    ";
-						String c2 = obj.getString("c2");
-						c2 = c2.replace("<p>", "");
-						c2 = c2.replace("</p>", "")+"\n";
-						String c3 = obj.getString("c3");
-						c3 = c3.replace("<p>", "");
-						c3 = c3.replace("</p>", "").trim()+"\n";
+        String columnId = getIntent().getStringExtra(CONST.COLUMN_ID);
+        CommonUtil.submitClickCount(columnId, title);
+    }
 
-						final String content = "发布单位：黑龙江省气象台\n"+c1+c3+c2;
+    /**
+     * 初始化高德地图
+     */
+    private void initAmap(Bundle bundle) {
+        mapView = (MapView) findViewById(R.id.mapView);
+        mapView.onCreate(bundle);
+        if (aMap == null) {
+            aMap = mapView.getMap();
+        }
 
-						runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								llContainer.setText(content);
-								llContainer.setVisibility(View.VISIBLE);
-							}
-						});
+        LatLng guizhouLatLng = new LatLng(49.302915,128.121040);
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(guizhouLatLng, zoom));
+        aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
+        aMap.getUiSettings().setZoomControlsEnabled(false);
+        aMap.getUiSettings().setRotateGesturesEnabled(false);
+        aMap.setOnMarkerClickListener(this);
+        aMap.setOnMapClickListener(this);
+        aMap.setInfoWindowAdapter(this);
+        aMap.setOnCameraChangeListener(this);
 
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-	}
+        TextView tvMapNumber = findViewById(R.id.tvMapNumber);
+        tvMapNumber.setText(aMap.getMapContentApprovalNumber());
 
-	/**
-	 * 加密请求字符串
-	 * @return
-	 */
-	private String getSecretUrl() {
-		String SANX_DATA_99 = "sanx_data_99";//加密秘钥名称
-		String APPID = "f63d329270a44900";//机密需要用到的AppId
-		String URL = "http://scapi.weather.com.cn/weather/getaqiobserve";//空气污染
-		String sysdate = RainManager.getDate(Calendar.getInstance(), "yyyyMMddHHmm");//系统时间
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(URL);
-		buffer.append("?");
-		buffer.append("date=").append(sysdate);
-		buffer.append("&");
-		buffer.append("appid=").append(APPID);
+        CommonUtil.drawHLJJson(mContext, aMap);
+    }
 
-		String key = RainManager.getKey(SANX_DATA_99, buffer.toString());
-		buffer.delete(buffer.lastIndexOf("&"), buffer.length());
+    /**
+     * 异步请求
+     */
+    private void OkHttpText(String url) {
+        OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
-		buffer.append("&");
-		buffer.append("appid=").append(APPID.substring(0, 6));
-		buffer.append("&");
-		buffer.append("key=").append(key.substring(0, key.length() - 3));
-		String result = buffer.toString();
-		return result;
-	}
+            }
 
-	/**
-	 * 获取空气质量排行
-	 */
-	private void OkHttpRank() {
-		OkHttpUtil.enqueue(new Request.Builder().url(getSecretUrl()).build(), new Callback() {
-			@Override
-			public void onFailure(Call call, IOException e) {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                String result = response.body().string();
+                if (!TextUtils.isEmpty(result)) {
+                    try {
+                        JSONObject obj = new JSONObject(result);
+                        String c1 = obj.getString("c1");
+                        c1 = c1.replace("<p>", "");
+                        c1 = c1.replace("</p>", "")+"    ";
+                        String c2 = obj.getString("c2");
+                        c2 = c2.replace("<p>", "");
+                        c2 = c2.replace("</p>", "")+"\n";
+                        String c3 = obj.getString("c3");
+                        c3 = c3.replace("<p>", "");
+                        c3 = c3.replace("</p>", "").trim()+"\n";
 
-			}
+                        final String content = "发布单位：黑龙江省气象台\n"+c1+c3+c2;
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (result != null) {
-					cityList.clear();
-					parseStationInfo(result, "level1", cityList);
-					parseStationInfo(result, "level2", cityList);
-					districtList.clear();
-					parseStationInfo(result, "level3", districtList);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                llContainer.setText(content);
+                                llContainer.setVisibility(View.VISIBLE);
+                            }
+                        });
 
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							removeMarkers();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 
-							for (int i = 0; i < cityList.size(); i++) {
-								CityDto dto = cityList.get(i);
-								getWeatherInfos(dto, cityMarkers, true);
-							}
+    /**
+     * 加密请求字符串
+     * @return
+     */
+    private String getSecretUrl() {
+        String SANX_DATA_99 = "sanx_data_99";//加密秘钥名称
+        String APPID = "f63d329270a44900";//机密需要用到的AppId
+        String URL = "http://scapi.weather.com.cn/weather/getaqiobserve";//空气污染
+        String sysdate = RainManager.getDate(Calendar.getInstance(), "yyyyMMddHHmm");//系统时间
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(URL);
+        buffer.append("?");
+        buffer.append("date=").append(sysdate);
+        buffer.append("&");
+        buffer.append("appid=").append(APPID);
 
-							for (int i = 0; i < districtList.size(); i++) {
-								CityDto dto = districtList.get(i);
-								getWeatherInfos(dto, disMarkers, false);
-							}
+        String key = RainManager.getKey(SANX_DATA_99, buffer.toString());
+        buffer.delete(buffer.lastIndexOf("&"), buffer.length());
 
-							cancelDialog();
-						}
-					});
-				}
-			}
-		});
-	}
+        buffer.append("&");
+        buffer.append("appid=").append(APPID.substring(0, 6));
+        buffer.append("&");
+        buffer.append("key=").append(key.substring(0, key.length() - 3));
+        String result = buffer.toString();
+        return result;
+    }
 
-	/**
-	 * 解析数据
-	 */
-	private void parseStationInfo(String result, String level, List<CityDto> list) {
-		try {
-			JSONObject obj = new JSONObject(result.toString());
-			if (!obj.isNull("data")) {
-				JSONObject dataObj = obj.getJSONObject("data");
-				if (!dataObj.isNull(level)) {
-					JSONArray array = new JSONArray(dataObj.getString(level));
-					for (int i = 0; i < array.length(); i++) {
-						CityDto dto = new CityDto();
-						JSONObject itemObj = array.getJSONObject(i);
-						if (!itemObj.isNull("name")) {
-							dto.areaName = itemObj.getString("name");
-						}
-						if (!itemObj.isNull("level")) {
-							dto.level = itemObj.getString("level");
-						}
-						if (!itemObj.isNull("areaid")) {
-							dto.areaId = itemObj.getString("areaid");
-						}
-						if (!itemObj.isNull("lat")) {
-							dto.lat = Double.valueOf(itemObj.getString("lat"));
-						}
-						if (!itemObj.isNull("lon")) {
-							dto.lng = Double.valueOf(itemObj.getString("lon"));
-						}
+    /**
+     * 获取空气质量排行
+     */
+    private void OkHttpRank() {
+        OkHttpUtil.enqueue(new Request.Builder().url(getSecretUrl()).build(), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
-						if (dto.areaId.startsWith("10105")) {
-							list.add(dto);
-						}
-					}
-				}
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
+            }
 
-	/**
-	 * 获取多个城市天气信息
-	 */
-	private void getWeatherInfos(final CityDto dto, final List<Marker> markers, final boolean isVisible) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				final String url = String.format("http://api.weatherdt.com/common/?area=%s&type=forecast&key=eca9a6c9ee6fafe74ac6bc81f577a680", dto.areaId);
-				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
-					@Override
-					public void onFailure(@NotNull Call call, @NotNull IOException e) {
-					}
-					@Override
-					public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-						if (!response.isSuccessful()) {
-							return;
-						}
-						final String result = response.body().string();
-						runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								if (!TextUtils.isEmpty(result)) {
-									try {
-										JSONObject obj = new JSONObject(result);
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                String result = response.body().string();
+                if (result != null) {
+                    cityList.clear();
+                    parseStationInfo(result, "level1", cityList);
+                    parseStationInfo(result, "level2", cityList);
+                    districtList.clear();
+                    parseStationInfo(result, "level3", districtList);
 
-										//获取明天预报信息
-										if (!obj.isNull("forecast")) {
-											JSONObject forecast = obj.getJSONObject("forecast");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            removeMarkers();
 
-											//15天预报信息
-											if (!forecast.isNull("24h")) {
-												JSONObject object = forecast.getJSONObject("24h");
-												if (!object.isNull(dto.areaId)) {
-													JSONObject object1 = object.getJSONObject(dto.areaId);
-													if (!object1.isNull("1001001")) {
-														JSONArray f1 = object1.getJSONArray("1001001");
+                            for (int i = 0; i < cityList.size(); i++) {
+                                CityDto dto = cityList.get(i);
+                                getWeatherInfos(dto, cityMarkers, true);
+                            }
 
-														//预报内容
-														JSONObject weeklyObj = f1.getJSONObject(1);
+                            for (int i = 0; i < districtList.size(); i++) {
+                                CityDto dto = districtList.get(i);
+                                getWeatherInfos(dto, disMarkers, false);
+                            }
 
-														dto.lowPheCode = Integer.valueOf(weeklyObj.getString("002"));
-														dto.highPheCode = Integer.valueOf(weeklyObj.getString("001"));
-														dto.lowTemp = weeklyObj.getString("004");
-														dto.highTemp = weeklyObj.getString("003");
+                            cancelDialog();
+                        }
+                    });
+                }
+            }
+        });
+    }
 
-														addMarker(dto, markers, isVisible);
-													}
-												}
-											}
-										}
+    /**
+     * 解析数据
+     */
+    private void parseStationInfo(String result, String level, List<CityDto> list) {
+        try {
+            JSONObject obj = new JSONObject(result.toString());
+            if (!obj.isNull("data")) {
+                JSONObject dataObj = obj.getJSONObject("data");
+                if (!dataObj.isNull(level)) {
+                    JSONArray array = new JSONArray(dataObj.getString(level));
+                    for (int i = 0; i < array.length(); i++) {
+                        CityDto dto = new CityDto();
+                        JSONObject itemObj = array.getJSONObject(i);
+                        if (!itemObj.isNull("name")) {
+                            dto.areaName = itemObj.getString("name");
+                        }
+                        if (!itemObj.isNull("level")) {
+                            dto.level = itemObj.getString("level");
+                        }
+                        if (!itemObj.isNull("areaid")) {
+                            dto.areaId = itemObj.getString("areaid");
+                        }
+                        if (!itemObj.isNull("lat")) {
+                            dto.lat = Double.valueOf(itemObj.getString("lat"));
+                        }
+                        if (!itemObj.isNull("lon")) {
+                            dto.lng = Double.valueOf(itemObj.getString("lon"));
+                        }
 
-									} catch (JSONException e) {
-										e.printStackTrace();
-									}
-								}
-							}
-						});
-					}
-				});
-			}
-		}).start();
-	}
+                        if (dto.areaId.startsWith("10105")) {
+                            list.add(dto);
+                        }
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-	private void removeMarkers() {
-		for (int i = 0; i < cityMarkers.size(); i++) {
-			Marker m = cityMarkers.get(i);
-			markerColloseAnimation(m);
-			m.remove();
-		}
-		cityMarkers.clear();
+    /**
+     * 获取多个城市天气信息
+     */
+    private void getWeatherInfos(final CityDto dto, final List<Marker> markers, final boolean isVisible) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final String url = String.format("http://api.weatherdt.com/common/?area=%s&type=forecast&key=eca9a6c9ee6fafe74ac6bc81f577a680", dto.areaId);
+                OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    }
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            return;
+                        }
+                        final String result = response.body().string();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (!TextUtils.isEmpty(result)) {
+                                    try {
+                                        JSONObject obj = new JSONObject(result);
 
-		for (int i = 0; i < disMarkers.size(); i++) {
-			Marker m = disMarkers.get(i);
-			markerColloseAnimation(m);
-			m.remove();
-		}
-		disMarkers.clear();
-	}
-	
-	private void addMarker(CityDto dto, List<Marker> markers, boolean isVisible) {
-		MarkerOptions options = new MarkerOptions();
-		options.title(dto.areaId);
-		options.snippet(dto.areaName);
-		options.anchor(0.5f, 0.5f);
-		options.position(new LatLng(dto.lat, dto.lng));
-		options.icon(BitmapDescriptorFactory.fromView(getTextBitmap1(dto)));
-		Marker marker = aMap.addMarker(options);
-		if (marker != null) {
-			marker.setVisible(isVisible);
-			markers.add(marker);
-			markerExpandAnimation(marker);
-		}
-	}
+                                        //获取明天预报信息
+                                        if (!obj.isNull("forecast")) {
+                                            JSONObject forecast = obj.getJSONObject("forecast");
 
-	private void markerExpandAnimation(Marker marker) {
-		ScaleAnimation animation = new ScaleAnimation(0,1,0,1);
-		animation.setInterpolator(new LinearInterpolator());
-		animation.setDuration(300);
-		marker.setAnimation(animation);
-		marker.startAnimation();
-	}
+                                            //15天预报信息
+                                            if (!forecast.isNull("24h")) {
+                                                JSONObject object = forecast.getJSONObject("24h");
+                                                if (!object.isNull(dto.areaId)) {
+                                                    JSONObject object1 = object.getJSONObject(dto.areaId);
+                                                    if (!object1.isNull("1001001")) {
+                                                        JSONArray f1 = object1.getJSONArray("1001001");
 
-	private void markerColloseAnimation(Marker marker) {
-		ScaleAnimation animation = new ScaleAnimation(1,0,1,0);
-		animation.setInterpolator(new LinearInterpolator());
-		animation.setDuration(300);
-		marker.setAnimation(animation);
-		marker.startAnimation();
-	}
-	
-	/**
-	 * 给marker添加文字
-	 * @return
-	 */
-	private View getTextBitmap1(CityDto dto) {      
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.layout_weather1, null);
-		if (view == null) {
-			return null;
-		}
-		TextView tvName = (TextView) view.findViewById(R.id.tvName);
-		ImageView ivPhe = (ImageView) view.findViewById(R.id.ivPhe);
-		TextView tvTemp = (TextView) view.findViewById(R.id.tvTemp);
-		
-		tvName.setText(dto.areaName);
-		Drawable drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
-		try {
-			long zao8 = sdf3.parse("06").getTime();
-			long wan8 = sdf3.parse("18").getTime();
-			long current = sdf3.parse(sdf3.format(new Date())).getTime();
-			if (current >= zao8 && current < wan8) {
-				drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
-				drawable.setLevel(dto.highPheCode);
-			}else {
-				drawable = getResources().getDrawable(R.drawable.phenomenon_drawable_night);
-				drawable.setLevel(dto.lowPheCode);
-			}
-			ivPhe.setBackground(drawable);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		tvTemp.setText(dto.lowTemp+"~"+dto.highTemp+"℃");
-		
-		return view;
-	}
-	
-	@Override
-	public void onMapClick(LatLng arg0) {
-		if (selectMarker != null) {
-			selectMarker.hideInfoWindow();
-		}
-	}
-	
-	@Override
-	public boolean onMarkerClick(Marker marker) {
-		if (marker != null) {
-			selectMarker = marker;
-			selectMarker.showInfoWindow();
-		}
-		return true;
-	}
-	
-	@Override
-	public View getInfoContents(final Marker marker) {
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.weather_marker_info, null);
-		TextView tvContent = (TextView) view.findViewById(R.id.tvContent);
-		ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-		TextView tvDetail = (TextView) view.findViewById(R.id.tvDetail);
-		
-		tvDetail.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				CityDto data = new CityDto();
-				data.areaName = marker.getSnippet();
-				data.cityId = marker.getTitle();
-				Intent intent = new Intent(mContext, WeatherDetailActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putParcelable("data", data);
-				intent.putExtras(bundle);
-				startActivity(intent);
-			}
-		});
-		tvContent.setText("");
-		getWeatherInfo(marker.getTitle(), marker.getSnippet(), tvContent, progressBar, tvDetail);
-		return view;
-	}
+                                                        //预报内容
+                                                        JSONObject weeklyObj = f1.getJSONObject(1);
 
-	@Override
-	public View getInfoWindow(Marker arg0) {
-		return null;
-	}
-	
-	@Override
-	public void onCameraChange(CameraPosition arg0) {
-	}
+                                                        //晚上
+                                                        String two = weeklyObj.getString("002");
+                                                        if (!TextUtils.isEmpty(two) && !TextUtils.equals(two, "?") && !TextUtils.equals(two, "null")) {
+                                                            dto.lowPheCode = Integer.valueOf(two);
+                                                        }
+                                                        String four = weeklyObj.getString("004");
+                                                        if (!TextUtils.isEmpty(two) && !TextUtils.equals(two, "?") && !TextUtils.equals(two, "null")) {
+                                                            dto.lowTemp = four;
+                                                        }
 
-	@Override
-	public void onCameraChangeFinish(CameraPosition arg0) {
-		if (zoom == arg0.zoom) {//如果是地图缩放级别不变，并且点击就不做处理
-			return;
-		}
+                                                        //白天
+                                                        String one = weeklyObj.getString("001");
+                                                        if (!TextUtils.isEmpty(one) && !TextUtils.equals(one, "?") && !TextUtils.equals(one, "null")) {
+                                                            dto.highPheCode = Integer.valueOf(one);
+                                                        }
+                                                        String three = weeklyObj.getString("003");
+                                                        if (!TextUtils.isEmpty(three) && !TextUtils.equals(three, "?") && !TextUtils.equals(three, "null")) {
+                                                            dto.highTemp = three;
+                                                        }
 
-		zoom = arg0.zoom;
-		if (arg0.zoom <= 8.0f) {
-			for (int i = 0; i < cityMarkers.size(); i++) {
-				Marker m = cityMarkers.get(i);
-				m.setVisible(true);
-				markerExpandAnimation(m);
-			}
-			for (int i = 0; i < disMarkers.size(); i++) {
-				Marker m = disMarkers.get(i);
-				m.setVisible(false);
-				markerColloseAnimation(m);
-			}
-		}if (arg0.zoom > 8.0f) {
-			for (int i = 0; i < cityMarkers.size(); i++) {
-				Marker m = cityMarkers.get(i);
-				m.setVisible(true);
-				markerExpandAnimation(m);
-			}
-			for (int i = 0; i < disMarkers.size(); i++) {
-				Marker m = disMarkers.get(i);
-				m.setVisible(true);
-				markerExpandAnimation(m);
-			}
-		}
+                                                        addMarker(dto, markers, isVisible);
+                                                    }
+                                                }
+                                            }
+                                        }
 
-	}
-	
-	/**
-	 * 获取天气数据
-	 */
-	private void getWeatherInfo(String cityId, final String cityName, final TextView tvContent, final ProgressBar progressBar, final TextView tvDetail) {
-		WeatherAPI.getWeather2(mContext, cityId, Language.ZH_CN, new AsyncResponseHandler() {
-			@Override
-			public void onComplete(Weather content) {
-				super.onComplete(content);
-				String result = content.toString();
-				if (!TextUtils.isEmpty(result)) {
-					try {
-						JSONObject obj = new JSONObject(result);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }).start();
+    }
 
-						String factContent = cityName+"预报";
+    private void removeMarkers() {
+        for (int i = 0; i < cityMarkers.size(); i++) {
+            Marker m = cityMarkers.get(i);
+            markerColloseAnimation(m);
+            m.remove();
+        }
+        cityMarkers.clear();
 
-						//实况信息
-						if (!obj.isNull("l")) {
-							JSONObject l = obj.getJSONObject("l");
-							if (!l.isNull("l7")) {
-								String time = l.getString("l7");
-								if (time != null) {
-									factContent = factContent + "（"+time+"）"+"发布：\n";
-								}
-							}
-						}
+        for (int i = 0; i < disMarkers.size(); i++) {
+            Marker m = disMarkers.get(i);
+            markerColloseAnimation(m);
+            m.remove();
+        }
+        disMarkers.clear();
+    }
 
-						//获取明天预报信息
-						if (!obj.isNull("f")) {
-							JSONObject f = obj.getJSONObject("f");
-							String f0 = f.getString("f0");
-							JSONArray f1 = f.getJSONArray("f1");
-							int i = 1;
-							JSONObject weeklyObj = f1.getJSONObject(i);
+    private void addMarker(CityDto dto, List<Marker> markers, boolean isVisible) {
+        MarkerOptions options = new MarkerOptions();
+        options.title(dto.areaId);
+        options.snippet(dto.areaName);
+        options.anchor(0.5f, 0.5f);
+        options.position(new LatLng(dto.lat, dto.lng));
+        options.icon(BitmapDescriptorFactory.fromView(getTextBitmap1(dto)));
+        Marker marker = aMap.addMarker(options);
+        if (marker != null) {
+            marker.setVisible(isVisible);
+            markers.add(marker);
+            markerExpandAnimation(marker);
+        }
+    }
 
-							String week = CommonUtil.getWeek(f0, i);//星期几
-							String date = CommonUtil.getDate(f0, i);//日期
-							try {
-								factContent = factContent + sdf2.format(sdf1.parse(date)) + "（"+week+"），";
-							} catch (ParseException e) {
-								e.printStackTrace();
-							}
+    private void markerExpandAnimation(Marker marker) {
+        ScaleAnimation animation = new ScaleAnimation(0,1,0,1);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setDuration(300);
+        marker.setAnimation(animation);
+        marker.startAnimation();
+    }
 
-							String lowPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fb"))));
-							String highPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fa"))));
-							if (highPhe != null && lowPhe != null) {
-								String phe = lowPhe;
-								if (!TextUtils.equals(highPhe, lowPhe)) {
-									phe = lowPhe + "转" + highPhe;
-								}else {
-									phe = lowPhe;
-								}
-								factContent = factContent + phe + "，";
-							}
+    private void markerColloseAnimation(Marker marker) {
+        ScaleAnimation animation = new ScaleAnimation(1,0,1,0);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setDuration(300);
+        marker.setAnimation(animation);
+        marker.startAnimation();
+    }
 
-							String lowTemp = weeklyObj.getString("fd");
-							String highTemp = weeklyObj.getString("fc");
-							if (lowTemp != null && highTemp != null) {
-								factContent = factContent + lowTemp + " ~ " + highTemp + "℃，";
-							}
+    /**
+     * 给marker添加文字
+     * @return
+     */
+    private View getTextBitmap1(CityDto dto) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.layout_weather1, null);
+        if (view == null) {
+            return null;
+        }
+        TextView tvName = (TextView) view.findViewById(R.id.tvName);
+        ImageView ivPhe = (ImageView) view.findViewById(R.id.ivPhe);
+        TextView tvTemp = (TextView) view.findViewById(R.id.tvTemp);
 
-							String lowDir = getString(WeatherUtil.getWindDirection(Integer.valueOf(weeklyObj.getString("ff"))));
-							String lowForce = WeatherUtil.getDayWindForce(Integer.valueOf(weeklyObj.getString("fh")));
-							String highDir = getString(WeatherUtil.getWindDirection(Integer.valueOf(weeklyObj.getString("fe"))));
-							String highForce = WeatherUtil.getDayWindForce(Integer.valueOf(weeklyObj.getString("fg")));
-							if (!TextUtils.equals(lowDir+lowForce, highDir+highForce)) {
-								factContent = factContent + lowDir + lowForce + "转" + highDir + highForce;
-							}else {
-								factContent = factContent + lowDir + lowForce;
-							}
+        tvName.setText(dto.areaName);
+        Drawable drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
+        try {
+            long zao8 = sdf3.parse("06").getTime();
+            long wan8 = sdf3.parse("18").getTime();
+            long current = sdf3.parse(sdf3.format(new Date())).getTime();
+            if (current >= zao8 && current < wan8) {
+                drawable = getResources().getDrawable(R.drawable.phenomenon_drawable);
+                drawable.setLevel(dto.highPheCode);
+            }else {
+                drawable = getResources().getDrawable(R.drawable.phenomenon_drawable_night);
+                drawable.setLevel(dto.lowPheCode);
+            }
+            ivPhe.setBackground(drawable);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        tvTemp.setText(dto.lowTemp+"~"+dto.highTemp+"℃");
 
-							tvContent.setText(factContent);
-							tvDetail.setVisibility(View.VISIBLE);
-							progressBar.setVisibility(View.GONE);
-						}
+        return view;
+    }
 
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-				}
+    @Override
+    public void onMapClick(LatLng arg0) {
+        if (selectMarker != null) {
+            selectMarker.hideInfoWindow();
+        }
+    }
 
-			}
-			
-			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
-			}
-		});
-	}
-	
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.llBack:
-			finish();
-			break;
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if (marker != null) {
+            selectMarker = marker;
+            selectMarker.showInfoWindow();
+        }
+        return true;
+    }
 
-		default:
-			break;
-		}
-	}
+    @Override
+    public View getInfoContents(final Marker marker) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.weather_marker_info, null);
+        TextView tvContent = (TextView) view.findViewById(R.id.tvContent);
+        ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        TextView tvDetail = (TextView) view.findViewById(R.id.tvDetail);
+
+        tvDetail.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                CityDto data = new CityDto();
+                data.areaName = marker.getSnippet();
+                data.cityId = marker.getTitle();
+                Intent intent = new Intent(mContext, WeatherDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("data", data);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        tvContent.setText("");
+        getWeatherInfo(marker.getTitle(), marker.getSnippet(), tvContent, progressBar, tvDetail);
+        return view;
+    }
+
+    @Override
+    public View getInfoWindow(Marker arg0) {
+        return null;
+    }
+
+    @Override
+    public void onCameraChange(CameraPosition arg0) {
+    }
+
+    @Override
+    public void onCameraChangeFinish(CameraPosition arg0) {
+        if (zoom == arg0.zoom) {//如果是地图缩放级别不变，并且点击就不做处理
+            return;
+        }
+
+        zoom = arg0.zoom;
+        if (arg0.zoom <= 8.0f) {
+            for (int i = 0; i < cityMarkers.size(); i++) {
+                Marker m = cityMarkers.get(i);
+                m.setVisible(true);
+                markerExpandAnimation(m);
+            }
+            for (int i = 0; i < disMarkers.size(); i++) {
+                Marker m = disMarkers.get(i);
+                m.setVisible(false);
+                markerColloseAnimation(m);
+            }
+        }if (arg0.zoom > 8.0f) {
+            for (int i = 0; i < cityMarkers.size(); i++) {
+                Marker m = cityMarkers.get(i);
+                m.setVisible(true);
+                markerExpandAnimation(m);
+            }
+            for (int i = 0; i < disMarkers.size(); i++) {
+                Marker m = disMarkers.get(i);
+                m.setVisible(true);
+                markerExpandAnimation(m);
+            }
+        }
+
+    }
+
+    /**
+     * 获取天气数据
+     */
+    private void getWeatherInfo(String cityId, final String cityName, final TextView tvContent, final ProgressBar progressBar, final TextView tvDetail) {
+        WeatherAPI.getWeather2(mContext, cityId, Language.ZH_CN, new AsyncResponseHandler() {
+            @Override
+            public void onComplete(Weather content) {
+                super.onComplete(content);
+                String result = content.toString();
+                if (!TextUtils.isEmpty(result)) {
+                    try {
+                        JSONObject obj = new JSONObject(result);
+
+                        String factContent = cityName+"预报";
+
+                        //实况信息
+                        if (!obj.isNull("l")) {
+                            JSONObject l = obj.getJSONObject("l");
+                            if (!l.isNull("l7")) {
+                                String time = l.getString("l7");
+                                if (time != null) {
+                                    factContent = factContent + "（"+time+"）"+"发布：\n";
+                                }
+                            }
+                        }
+
+                        //获取明天预报信息
+                        if (!obj.isNull("f")) {
+                            JSONObject f = obj.getJSONObject("f");
+                            String f0 = f.getString("f0");
+                            JSONArray f1 = f.getJSONArray("f1");
+                            int i = 1;
+                            JSONObject weeklyObj = f1.getJSONObject(i);
+
+                            String week = CommonUtil.getWeek(f0, i);//星期几
+                            String date = CommonUtil.getDate(f0, i);//日期
+                            try {
+                                factContent = factContent + sdf2.format(sdf1.parse(date)) + "（"+week+"），";
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            String lowPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fb"))));
+                            String highPhe = getString(WeatherUtil.getWeatherId(Integer.valueOf(weeklyObj.getString("fa"))));
+                            if (highPhe != null && lowPhe != null) {
+                                String phe = lowPhe;
+                                if (!TextUtils.equals(highPhe, lowPhe)) {
+                                    phe = lowPhe + "转" + highPhe;
+                                }else {
+                                    phe = lowPhe;
+                                }
+                                factContent = factContent + phe + "，";
+                            }
+
+                            String lowTemp = weeklyObj.getString("fd");
+                            String highTemp = weeklyObj.getString("fc");
+                            if (lowTemp != null && highTemp != null) {
+                                factContent = factContent + lowTemp + " ~ " + highTemp + "℃，";
+                            }
+
+                            String lowDir = getString(WeatherUtil.getWindDirection(Integer.valueOf(weeklyObj.getString("ff"))));
+                            String lowForce = WeatherUtil.getDayWindForce(Integer.valueOf(weeklyObj.getString("fh")));
+                            String highDir = getString(WeatherUtil.getWindDirection(Integer.valueOf(weeklyObj.getString("fe"))));
+                            String highForce = WeatherUtil.getDayWindForce(Integer.valueOf(weeklyObj.getString("fg")));
+                            if (!TextUtils.equals(lowDir+lowForce, highDir+highForce)) {
+                                factContent = factContent + lowDir + lowForce + "转" + highDir + highForce;
+                            }else {
+                                factContent = factContent + lowDir + lowForce;
+                            }
+
+                            tvContent.setText(factContent);
+                            tvDetail.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable error, String content) {
+                super.onError(error, content);
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.llBack:
+                finish();
+                break;
+
+            default:
+                break;
+        }
+    }
 
 }

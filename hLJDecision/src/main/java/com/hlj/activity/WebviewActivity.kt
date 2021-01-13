@@ -1,26 +1,35 @@
 package com.hlj.activity
 
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.WindowManager
 import android.webkit.GeolocationPermissions
 import android.webkit.WebChromeClient
+import android.webkit.WebChromeClient.CustomViewCallback
 import android.webkit.WebSettings.LayoutAlgorithm
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.hlj.common.CONST
 import com.hlj.utils.CommonUtil
 import kotlinx.android.synthetic.main.activity_webview.*
+import kotlinx.android.synthetic.main.fact_weather_detail.*
 import kotlinx.android.synthetic.main.layout_title2.*
 import shawn.cxwl.com.hlj.R
 import java.util.*
+
 
 /**
  * 普通网页
  */
 class WebviewActivity : BaseActivity(), OnClickListener{
+
+    private var mCustomView: View? = null //用于全屏渲染视频的View
+    private var mCustomViewCallback: CustomViewCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +89,41 @@ class WebviewActivity : BaseActivity(), OnClickListener{
             override fun onGeolocationPermissionsShowPrompt(origin: String, callback: GeolocationPermissions.Callback) {
                 callback.invoke(origin, true, false)
             }
+
+            override fun onShowCustomView(view: View, callback: CustomViewCallback) {
+                super.onShowCustomView(view, callback)
+                //如果view 已经存在，则隐藏
+                if (mCustomView != null) {
+                    callback.onCustomViewHidden()
+                    return
+                }
+                mCustomView = view
+                mCustomView!!.visibility = View.VISIBLE
+                mCustomViewCallback = callback
+                mLayout.addView(mCustomView)
+                mLayout.visibility = View.VISIBLE
+                mLayout.bringToFront()
+
+                //设置横屏
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            }
+
+            override fun onHideCustomView() {
+                super.onHideCustomView()
+                if (mCustomView == null) {
+                    return
+                }
+                mCustomView!!.visibility = View.GONE
+                mLayout.removeView(mCustomView)
+                mCustomView = null
+                mLayout.visibility = View.GONE
+                try {
+                    mCustomViewCallback!!.onCustomViewHidden()
+                } catch (e: Exception) {
+                }
+                //                titleView.setVisibility(View.VISIBLE);
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //竖屏
+            }
         }
         webView!!.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, itemUrl: String): Boolean {
@@ -108,6 +152,25 @@ class WebviewActivity : BaseActivity(), OnClickListener{
     override fun onClick(v: View) {
         if (v.id == R.id.llBack) {
             finish()
+        }
+    }
+
+    /**
+     * 横竖屏切换监听
+     */
+    override fun onConfigurationChanged(config: Configuration) {
+        super.onConfigurationChanged(config)
+        when (config.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+                window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+//                mToolbar.setVisibility(View.GONE)
+            }
+            Configuration.ORIENTATION_PORTRAIT -> {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+//                mToolbar.setVisibility(View.VISIBLE)
+            }
         }
     }
 	

@@ -69,6 +69,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -1063,6 +1064,28 @@ public class CommonUtil {
 			drawable = R.drawable.corner_aqi_six;
 		}
 		return drawable;
+	}
+
+	/**
+	 * 获取随机颜色
+	 * @return
+	 */
+	public static String randomColor() {
+		Random rnd = new Random();
+		String r = Integer.toHexString(rnd.nextInt(256));
+		if (r.length() <= 1) {
+			r = "0"+r;
+		}
+		String g = Integer.toHexString(rnd.nextInt(256));
+		if (g.length() <= 1) {
+			g = "0"+g;
+		}
+		String b = Integer.toHexString(rnd.nextInt(256));
+		if (b.length() <= 1) {
+			b = "0"+b;
+		}
+		Log.e("colorcolor", "#"+r+g+b);
+		return "#"+r+g+b;
 	}
 
 }
