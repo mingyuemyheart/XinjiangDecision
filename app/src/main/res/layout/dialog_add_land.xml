@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_top_white"
+        android:gravity="center"
+        android:minWidth="240dp"
+        android:minHeight="50dp"
+        android:padding="10dp"
+        android:text="添加地块"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="240dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/tvContent">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color3"
+            android:hint="请输入地块名"
+            android:textSize="@dimen/level_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etLng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color3"
+            android:textSize="@dimen/level_4"
+            android:hint="请输入经度"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+        <EditText
+            android:id="@+id/etLat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color3"
+            android:textSize="@dimen/level_4"
+            android:hint="请输入纬度"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etLng" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvNegtive"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/dialog_left_btn"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_4"
+        app:layout_constraintEnd_toStartOf="@+id/tvPositive"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl" />
+
+    <TextView
+        android:id="@+id/tvPositive"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/dialog_right_btn"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvNegtive"
+        app:layout_constraintTop_toBottomOf="@+id/cl" />
+
+</android.support.constraint.ConstraintLayout>
+

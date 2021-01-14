@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title" />
+
+    <com.amap.api.maps.TextureMapView
+        android:id="@+id/mapView"
+        android:layout_below="@+id/reTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:id="@+id/reTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reTitle"
+        android:clickable="true"
+        android:background="@drawable/shawn_bg_corner_white"
+        android:layout_margin="5dp"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/ivLoc"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/shawn_icon_location_black"/>
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/text_color2"
+            android:textSize="@dimen/level_5"/>
+
+        <TextView
+            android:id="@+id/tvPosition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ivLoc"
+            android:textColor="@color/text_color3"
+            android:textSize="@dimen/level_4"/>
+
+        <TextView
+            android:id="@+id/tvStreet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPosition"
+            android:layout_toEndOf="@+id/ivLoc"
+            android:textColor="@color/text_color2"
+            android:textSize="@dimen/level_4"/>
+
+        <TextView
+            android:id="@+id/tvFact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvStreet"
+            android:layout_toEndOf="@+id/ivLoc"
+            android:textColor="@color/text_color2"
+            android:textSize="@dimen/level_4"/>
+
+        <TextView
+            android:id="@+id/tvThunder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_below="@+id/tvFact"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/text_color3"
+            android:textSize="@dimen/level_4"/>
+
+        <ImageView
+            android:id="@+id/ivPlay"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:visibility="invisible"
+            android:layout_below="@+id/tvThunder"
+            android:padding="5dp"
+            android:src="@drawable/icon_play"/>
+
+        <TextView
+            android:id="@+id/tvSeekbarTime"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color3"
+            android:layout_below="@+id/tvThunder"
+            android:textSize="@dimen/level_6"/>
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvSeekbarTime"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/ivPlay"
+            android:maxHeight="15dp"
+            android:minHeight="15dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:progressDrawable="@drawable/shawn_seekbar_drawable"
+            android:thumb="@drawable/shawn_seekbar_thumb"
+            android:thumbOffset="0dp"/>
+
+        <LinearLayout
+            android:id="@+id/llTimeContainer"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekBar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llLegendQdl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llThunder"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/shawn_bg_corner_black"
+        android:gravity="center_vertical|center"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/shawn_bg_qdl_bb"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="冰雹"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"/>
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/shawn_bg_qdl_lydf"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="雷雨大风"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"/>
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/shawn_bg_qdl_qjs"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="强降雨"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llThunder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/shawn_bg_corner_black"
+        android:gravity="center_vertical|center"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/shawn_icon_thunder_luji"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="风四雷电"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/shawn_icon_thunder_diji"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="地基雷电"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivLocation"
+        android:layout_above="@+id/ivLg"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/icon_location_off"/>
+
+    <ImageView
+        android:id="@+id/ivLg"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_above="@+id/llLegendQdl"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/icon_map_legend"/>
+
+    <ImageView
+        android:id="@+id/ivLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llLegendQdl"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_toEndOf="@+id/ivLg"
+        android:adjustViewBounds="true"/>
+
+    <LinearLayout
+        android:id="@+id/llRight"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reTop"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/shawn_bg_corner_white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp">
+
+            <ImageView
+                android:id="@+id/iv1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/shawn_icon_radar"/>
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="雷达"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_5"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp">
+
+            <ImageView
+                android:id="@+id/iv2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/shawn_icon_rain"/>
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="降水"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_5"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp">
+
+            <ImageView
+                android:id="@+id/ivMore"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/shawn_icon_more"/>
+
+            <TextView
+                android:id="@+id/tvMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更多"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_5"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/reMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/llRight"
+        android:layout_marginEnd="5dp"
+        android:layout_toStartOf="@+id/llRight"
+        android:background="@drawable/shawn_bg_corner_white"
+        android:clickable="true"
+        android:padding="5dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/ivMore1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/shawn_icon_more_radar"/>
+
+        <ImageView
+            android:id="@+id/ivMore2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/ivMore1"
+            android:src="@drawable/shawn_icon_more_rain"/>
+
+        <ImageView
+            android:id="@+id/ivMore3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/ivMore2"
+            android:src="@drawable/shawn_icon_more_visible"/>
+
+        <ImageView
+            android:id="@+id/ivMore4"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/ivMore1"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/shawn_icon_more_ydgd"/>
+
+        <ImageView
+            android:id="@+id/ivMore5"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/ivMore2"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/ivMore4"
+            android:src="@drawable/shawn_icon_more_yddd"/>
+
+        <ImageView
+            android:id="@+id/ivMore6"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/ivMore3"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/ivMore5"
+            android:src="@drawable/shawn_icon_more_lb"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivSetting"
+        android:layout_marginEnd="5dp"
+        android:layout_toStartOf="@+id/ivSetting"
+        android:background="@drawable/shawn_bg_corner_white"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主题"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/level_4"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivMapType1"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/shawn_map_type_sitelite"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="卫星地图"
+                    android:textColor="@color/text_color3"
+                    android:textSize="@dimen/level_5"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivMapType2"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/shawn_bg_corner_map_press"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/shawn_map_type_normal"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="标准地图"
+                    android:textColor="@color/text_color3"
+                    android:textSize="@dimen/level_5"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:text="显示内容"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/level_4"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivPetrol"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="2dp"
+                android:src="@drawable/shawn_icon_petrol"/>
+
+            <ImageView
+                android:id="@+id/ivScenic"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
+                android:src="@drawable/shawn_icon_scenic"/>
+
+            <ImageView
+                android:id="@+id/ivPark"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
+                android:src="@drawable/shawn_icon_park"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:text="闪电发生概率"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/level_4"/>
+
+        <com.suke.widget.SwitchButton
+            android:visibility="gone"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/sbMinute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sb_checked="false"
+            app:sb_checked_color="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivSetting"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/llRight"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/shawn_icon_setting"/>
+
+</RelativeLayout>

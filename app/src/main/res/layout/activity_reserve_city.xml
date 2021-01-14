@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/light_gray"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title"/>
+
+    <LinearLayout
+        android:id="@+id/llListView"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reTitle"
+        android:layout_above="@+id/divider">
+
+    <com.hlj.swipemenulistview.SwipeMenuListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@color/light_gray"
+        android:dividerHeight="0.5dip"
+        android:listSelector="@color/transparent"
+        android:scrollbars="none" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="左滑删除订阅城市"
+            android:gravity="right"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/text_color4"
+            android:textSize="@dimen/level_4"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_above="@+id/llAdd"
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#3001699f"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/llAdd"
+        android:layout_alignParentBottom="true"
+        android:background="#1001699f"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/zjcs_icon_add"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加城市"
+            android:layout_marginLeft="5dp"
+            android:textSize="@dimen/level_4"
+            android:textColor="@color/text_color3"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

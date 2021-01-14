@@ -7,6 +7,6 @@
 /.idea/workspace.xml
 .DS_Store
 /build
-/hLJDecision/build
+/app/build
 /captures
 .externalNativeBuild

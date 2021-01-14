@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#889BE8</color>
+    <color name="colorPrimaryDark">#889BE8</color>
+    <color name="colorAccent">#889BE8</color>
+
+    <color name="refresh_color1">#889BE8</color>
+    <color name="refresh_color2">#A0889BE8</color>
+    <color name="refresh_color3">#80889BE8</color>
+    <color name="refresh_color4">#40889BE8</color>
+
+    <color name="aqi0">#abd338</color>
+    <color name="aqi1">#ffc739</color>
+    <color name="aqi2">#faa531</color>
+    <color name="aqi3">#e2574c</color>
+    <color name="aqi4">#98374a</color>
+    <color name="aqi5">#57252e</color>
+
+    <color name="route_search_location">#ff098edb</color>
+    <color name="route_search_input">#ff474747</color>
+
+    <color name="light_pink">#ffd5d5</color>
+    <color name="light_blue">#c1e7ff</color>
+    <color name="light_gray">#f0eff5</color>
+    <color name="transparent">#00000000</color>
+    <color name="translucent">#60000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#d9d9d9</color>
+    <color name="blue">#5172b9</color>
+    <color name="yellow">#fff139</color>
+    <color name="orange">#fd8612</color>
+    <color name="red">#FF0033</color>
+    <color name="cell_pressed">#353C48</color>
+    <color name="builder">#d87a80</color>
+    <color name="snow">#90EAFB</color>
+    <color name="rain">#5286F6</color>
+    <color name="fog">#95FBD6</color>
+    <color name="shachen">#FD6801</color>
+    <color name="mai">#232440</color>
+    <color name="typhoon_bg">#f3758c97</color>
+    <color name="title_bg">#889BE8</color>
+    <color name="detail_bg_color">#3d45ca</color>
+    <color name="list_double_bg_color">#f1f5f8</color>
+    <color name="text_color1">#CBCBCB</color>
+    <color name="text_color2">#A3A7AC</color>
+    <color name="text_color3">#f0000000</color>
+    <color name="text_color4">#8A8A8A</color>
+    <color name="divider_color">#8021E40C</color>
+    <color name="cubic_color">#12ADEF</color>
+    <color name="low_color">#47baf9</color>
+    <color name="high_color">#eb6876</color>
+    <color name="green">#00ff00</color>
+    <color name="start">#ff4cd964</color>
+    <color name="end">#ffef7171</color>
+
+    <!-- 添加频道的gridview -->
+    <color name="subscribe_item_drag_stroke">#ffd2d2d2</color>
+    <color name="subscribe_item_drag_bg">#fff5f5f5</color>
+    <color name="subscribe_item_selected_bg">#ffffffff</color>
+    <color name="subscribe_item_selected_stroke">#ffcc3131</color>
+    <color name="subscribe_item_disabled_stroke">#ffd9d9d9</color>
+    <color name="subscribe_item_disabled_bg">#fffafafa</color>
+    <color name="subscribe_item_pressed_stroke">#ffcdcdcd</color>
+    <color name="subscribe_item_pressed_bg">#fff9f9f9</color>
+    <color name="subscribe_item_normal_stroke">#ffcdcdcd</color>
+    <color name="subscribe_item_normal_bg">#fff5f5f5</color>
+    
+</resources>
