@@ -19,7 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hlj.activity.HWarningDetailActivity;
+import com.hlj.activity.WarningDetailActivity;
 import com.hlj.activity.WarningListActivity;
 import com.hlj.common.CONST;
 import com.hlj.dto.CityDto;
@@ -164,7 +164,7 @@ public class ReserveCityAdapter extends BaseAdapter{
 			mHolder.ivWarning.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intentDetail = new Intent(mContext, HWarningDetailActivity.class);
+					Intent intentDetail = new Intent(mContext, WarningDetailActivity.class);
 					Bundle bundle = new Bundle();
 					bundle.putParcelable("data", data);
 					intentDetail.putExtras(bundle);

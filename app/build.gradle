@@ -12,12 +12,12 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "shawn.cxwl.com.hlj"
-//        applicationId "shawn.cxwl.com.hlj.decision"
+//        applicationId "shawn.cxwl.com.hlj"
+        applicationId "shawn.cxwl.com.hlj.decision"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 342
-        versionName "3.1.7"
+        versionCode 343
+        versionName "3.1.8"
 
         ndk {
             abiFilters 'armeabi-v7a'
@@ -35,7 +35,7 @@ android {
     android.applicationVariants.all {
         variant ->
             variant.outputs.all {
-                outputFileName = "HLJ_" + "${defaultConfig.versionCode}" + "_V" + "${defaultConfig.versionName}" + "_" + buildType.name + ".apk"
+                outputFileName = "HLJDecision_" + "${defaultConfig.versionCode}" + "_V" + "${defaultConfig.versionName}" + "_" + buildType.name + ".apk"
             }
     }
 
@@ -69,4 +69,5 @@ dependencies {
     implementation files('libs/Msc.jar')
     implementation 'com.github.abel533:ECharts:3.0.0.2'
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
 }

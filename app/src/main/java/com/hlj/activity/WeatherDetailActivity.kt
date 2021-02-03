@@ -12,13 +12,11 @@ import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.Drawable
 import android.media.ThumbnailUtils
 import android.os.*
 import android.support.v4.content.ContextCompat
-import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Gravity
@@ -1142,7 +1140,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
         when (v.id) {
             R.id.llBack -> finish()
             R.id.tvPosition -> {
-                val intent = Intent(this, HCityActivity::class.java)
+                val intent = Intent(this, CityActivity::class.java)
                 intent.putExtra("selectCity", "selectCity")
                 startActivityForResult(intent, 1001)
             }
@@ -1203,21 +1201,21 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                 ivClose2.setImageResource(R.drawable.iv_close)
             }
             R.id.tvDisWarning -> {
-                val intent = Intent(this, HHeadWarningActivity::class.java)
+                val intent = Intent(this, HeadWarningActivity::class.java)
                 val bundle = Bundle()
                 bundle.putParcelableArrayList("warningList", disWarnings as ArrayList<out Parcelable?>)
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
             R.id.tvCityWarning -> {
-                val intent = Intent(this, HHeadWarningActivity::class.java)
+                val intent = Intent(this, HeadWarningActivity::class.java)
                 val bundle = Bundle()
                 bundle.putParcelableArrayList("warningList", cityWarnings as ArrayList<out Parcelable?>)
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
             R.id.tvProWarning -> {
-                val intent = Intent(this, HHeadWarningActivity::class.java)
+                val intent = Intent(this, HeadWarningActivity::class.java)
                 val bundle = Bundle()
                 bundle.putParcelableArrayList("warningList", proWarnings as ArrayList<out Parcelable?>)
                 intent.putExtras(bundle)

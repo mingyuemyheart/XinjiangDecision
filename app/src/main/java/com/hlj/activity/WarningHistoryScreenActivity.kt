@@ -265,14 +265,16 @@ class WarningHistoryScreenActivity : BaseActivity(), OnClickListener {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 1000 -> {
-                    areaName = data.extras.getString("areaName")
-                    tvArea.text = areaName
-                    areaId = data.extras.getString("areaId")
+                    if (data != null) {
+                        areaName = data.extras.getString("areaName")
+                        tvArea.text = areaName
+                        areaId = data.extras.getString("areaId")
+                    }
                 }
             }
         }

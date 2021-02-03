@@ -99,7 +99,7 @@ class WeatherFactFragment : Fragment() {
             val intent: Intent
             if (TextUtils.equals(dto.showType, CONST.LOCAL)) { //气温预报、雾霾预报、降温大风沙尘预报
                 if (TextUtils.equals(dto.id, "111")) { //天气雷达
-                    intent = Intent(activity, HWeatherRadarActivity::class.java)
+                    intent = Intent(activity, WeatherRadarActivity::class.java)
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     val bundle = Bundle()
                     bundle.putParcelable("data", dto)

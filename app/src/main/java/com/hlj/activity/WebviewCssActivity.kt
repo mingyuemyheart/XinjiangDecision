@@ -11,10 +11,7 @@ import com.hlj.common.CONST
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import kotlinx.android.synthetic.main.activity_webview.*
-import kotlinx.android.synthetic.main.layout_title.*
 import kotlinx.android.synthetic.main.layout_title2.*
-import kotlinx.android.synthetic.main.layout_title2.llBack
-import kotlinx.android.synthetic.main.layout_title2.tvTitle
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Request
@@ -59,9 +56,9 @@ class WebviewCssActivity : BaseActivity(), OnClickListener {
     /**
      * 获取详情
      */
-    private fun okHttpDetail(requestUrl: String) {
+    private fun okHttpDetail(url: String) {
         Thread(Runnable {
-            OkHttpUtil.enqueue(Request.Builder().url(requestUrl).build(), object : Callback {
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
                 @Throws(IOException::class)

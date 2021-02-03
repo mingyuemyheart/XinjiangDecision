@@ -34,8 +34,8 @@ import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
-import com.hlj.activity.HCityActivity
-import com.hlj.activity.HHeadWarningActivity
+import com.hlj.activity.CityActivity
+import com.hlj.activity.HeadWarningActivity
 import com.hlj.activity.MinuteFallActivity
 import com.hlj.activity.WebviewActivity
 import com.hlj.adapter.WeeklyForecastAdapter
@@ -166,6 +166,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         tvProWarning!!.setOnClickListener(this)
         tvRain.setOnClickListener(this)
         clHour.setOnClickListener(this)
+        tvDivPolicy.setOnClickListener(this)
         tvInfo.setOnClickListener(this)
         ivClimate.setOnClickListener(this)
         clVideo.setOnClickListener(this)
@@ -186,7 +187,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
             startLocation()
         } else {
             Toast.makeText(activity, "未开启定位，请选择城市", Toast.LENGTH_LONG).show()
-            val intent = Intent(activity, HCityActivity::class.java)
+            val intent = Intent(activity, CityActivity::class.java)
             intent.putExtra("selectCity", "selectCity")
             startActivityForResult(intent, 1001)
 //            locationComplete()
@@ -600,7 +601,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                 }
                             }
 //                            tvInfo!!.text = String.format("今日疫情\n%s累计确诊%s例\n%s累计确诊%s例", city, cityCount, pro, proCount)
-                            tvInfo!!.text = "新冠肺炎\n疫情实时\n动态"
+                            tvInfo!!.text = "新冠肺炎疫\n情实时动态"
                             tvInfo!!.visibility = View.VISIBLE
                         } catch (e: JSONException) {
                             e.printStackTrace()
@@ -1314,7 +1315,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.tvPosition -> startActivity(Intent(activity, HCityActivity::class.java))
+            R.id.tvPosition -> startActivity(Intent(activity, CityActivity::class.java))
             R.id.tvFact -> {
                 tvTemp.text = tvFact.tag.toString() + ""
                 tvFact.setTextColor(Color.WHITE)
@@ -1377,21 +1378,21 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                 ivClose2.setImageResource(R.drawable.iv_close)
             }
             R.id.tvDisWarning -> {
-                val intent = Intent(activity, HHeadWarningActivity::class.java)
+                val intent = Intent(activity, HeadWarningActivity::class.java)
                 val bundle = Bundle()
                 bundle.putParcelableArrayList("warningList", disWarnings as ArrayList<out Parcelable?>)
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
             R.id.tvCityWarning -> {
-                val intent = Intent(activity, HHeadWarningActivity::class.java)
+                val intent = Intent(activity, HeadWarningActivity::class.java)
                 val bundle = Bundle()
                 bundle.putParcelableArrayList("warningList", cityWarnings as ArrayList<out Parcelable?>)
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
             R.id.tvProWarning -> {
-                val intent = Intent(activity, HHeadWarningActivity::class.java)
+                val intent = Intent(activity, HeadWarningActivity::class.java)
                 val bundle = Bundle()
                 bundle.putParcelableArrayList("warningList", proWarnings as ArrayList<out Parcelable?>)
                 intent.putExtras(bundle)
@@ -1399,6 +1400,12 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
             }
             R.id.clVideo -> {
                 okHttpVideoList()
+            }
+            R.id.tvDivPolicy -> {
+                val intent = Intent(activity, WebviewActivity::class.java)
+                intent.putExtra(CONST.ACTIVITY_NAME, "各地隔离政策查询")
+                intent.putExtra(CONST.WEB_URL, "http://m.heb.bendibao.com/news/gelizhengce/all.php?leavecity=&src=12379")
+                startActivity(intent)
             }
             R.id.tvInfo -> {
                 val intent = Intent(activity, WebviewActivity::class.java)

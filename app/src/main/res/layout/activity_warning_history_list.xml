@@ -1,0 +1,161 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ExpandableListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:cacheColorHint="@color/transparent"
+        android:childDivider="@color/light_gray"
+        android:divider="@color/light_gray"
+        android:dividerHeight="0.5dp"
+        android:groupIndicator="@null"
+        android:listSelector="@color/transparent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime" />
+
+    <LinearLayout
+        android:id="@+id/llContainer1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#90000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:text="预警级别"
+            android:textColor="@color/black"
+            android:textSize="@dimen/level_4" />
+
+        <GridView
+            android:id="@+id/gridView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:cacheColorHint="@color/transparent"
+            android:columnWidth="100dp"
+            android:fadingEdge="none"
+            android:gravity="center"
+            android:horizontalSpacing="0dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="5"
+            android:overScrollMode="never"
+            android:padding="10dp"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:text="预警种类"
+            android:textColor="@color/black"
+            android:textSize="@dimen/level_4" />
+
+        <GridView
+            android:id="@+id/gridView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:cacheColorHint="@color/transparent"
+            android:columnWidth="100dip"
+            android:fadingEdge="none"
+            android:gravity="center"
+            android:horizontalSpacing="0dip"
+            android:listSelector="@color/transparent"
+            android:numColumns="5"
+            android:overScrollMode="never"
+            android:padding="10dp"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dip" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/tvNegtive"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shawn_bg_warning_unselected"
+                android:gravity="center"
+                android:text="清除筛选"
+                android:textColor="@color/text_color4"
+                android:textSize="@dimen/level_4" />
+
+            <TextView
+                android:id="@+id/tvPositive"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shawn_bg_warning_selected"
+                android:gravity="center"
+                android:text="完成"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#949ea5"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="按发布时间⬇︎"
+        android:textColor="@color/white"
+        android:textSize="@dimen/level_4"
+        app:layout_constraintEnd_toStartOf="@+id/tvSelect"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle" />
+
+    <TextView
+        android:id="@+id/tvSelect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#949ea5"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="筛选"
+        android:textColor="@color/white"
+        android:textSize="@dimen/level_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTime"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle" />
+
+</android.support.constraint.ConstraintLayout>

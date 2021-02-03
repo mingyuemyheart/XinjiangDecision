@@ -36,7 +36,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 /**
- * 预警统计
+ * 天气预警-预警统计
  */
 class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
 

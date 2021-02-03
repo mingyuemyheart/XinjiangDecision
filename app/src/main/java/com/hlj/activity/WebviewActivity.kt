@@ -1,9 +1,13 @@
 package com.hlj.activity
 
+import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
+import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.View
 import android.view.View.OnClickListener
@@ -14,14 +18,22 @@ import android.webkit.WebChromeClient.CustomViewCallback
 import android.webkit.WebSettings.LayoutAlgorithm
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import com.hlj.common.CONST
 import com.hlj.utils.CommonUtil
+import com.hlj.utils.OkHttpUtil
 import kotlinx.android.synthetic.main.activity_webview.*
-import kotlinx.android.synthetic.main.fact_weather_detail.*
 import kotlinx.android.synthetic.main.layout_title2.*
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Request
+import okhttp3.Response
 import shawn.cxwl.com.hlj.R
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
 import java.util.*
-
 
 /**
  * 普通网页
@@ -125,6 +137,7 @@ class WebviewActivity : BaseActivity(), OnClickListener{
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //竖屏
             }
         }
+
         webView!!.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, itemUrl: String): Boolean {
                 webView!!.loadUrl(itemUrl)
@@ -135,6 +148,12 @@ class WebviewActivity : BaseActivity(), OnClickListener{
                 super.onPageFinished(view, url)
             }
         }
+
+        webView.setDownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
+            val fileName = contentDisposition.substring(contentDisposition.indexOf("\"") + 1, contentDisposition.lastIndexOf("\""))
+            OkHttpFile(url, fileName)
+        }
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -170,6 +189,81 @@ class WebviewActivity : BaseActivity(), OnClickListener{
                 window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
                 window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
 //                mToolbar.setVisibility(View.VISIBLE)
+            }
+        }
+    }
+
+    private fun OkHttpFile(url: String, fileName: String) {
+        if (TextUtils.isEmpty(url)) {
+            return
+        }
+        showDialog()
+        Thread(Runnable {
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    var filePath: String? = null
+                    var inputStream: InputStream? = null
+                    var fos: FileOutputStream? = null
+                    try {
+                        inputStream = response.body!!.byteStream() //获取输入流
+                        val total = response.body!!.contentLength().toFloat() //获取文件大小
+                        if (inputStream != null) {
+                            val files = File("${getExternalFilesDir(null)}/HLJ")
+                            if (!files.exists()) {
+                                files.mkdirs()
+                            }
+                            filePath = files.absolutePath + "/" + fileName
+                            fos = FileOutputStream(filePath)
+                            val buf = ByteArray(1024)
+                            var ch = -1
+                            var process = 0
+                            while (inputStream.read(buf).also { ch = it } != -1) {
+                                fos.write(buf, 0, ch)
+                                process += ch
+
+//									int percent = (int) Math.floor((process / total * 100));
+//									Log.e("percent", process+"--"+total+"--"+percent);
+//									Message msg = handler.obtainMessage(1001);
+//									msg.what = 1001;
+//									msg.obj = filePath;
+//									msg.arg1 = percent;
+//									handler.sendMessage(msg);
+                            }
+                        }
+                        fos!!.flush()
+                        fos.close() // 下载完成
+                        val msg = handler.obtainMessage(1001)
+                        msg.what = 1001
+                        msg.obj = filePath
+                        handler.sendMessage(msg)
+                    } catch (e: java.lang.Exception) {
+                        e.printStackTrace()
+                    } finally {
+                        inputStream?.close()
+                        fos?.close()
+                    }
+                }
+            })
+        }).start()
+    }
+
+    @SuppressLint("HandlerLeak")
+    private val handler: Handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            if (msg.what == 1001) {
+                cancelDialog()
+                val filePath = msg.obj.toString()
+                if (TextUtils.isEmpty(filePath)) {
+                    Toast.makeText(this@WebviewActivity, "文件下载失败，请点击重新下载", Toast.LENGTH_LONG).show()
+                } else {
+                    CommonUtil.intentWPSOffice(this@WebviewActivity, filePath)
+                }
             }
         }
     }

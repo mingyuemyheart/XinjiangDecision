@@ -117,7 +117,7 @@ public class ProductActivity extends BaseActivity implements OnClickListener {
 							intent.putExtra(CONST.WEB_URL, dto.dataUrl);
 							startActivity(intent);
 						}else {//网页、图片
-							intent = new Intent(mContext, HUrlActivity.class);
+							intent = new Intent(mContext, WebviewActivity.class);
 							intent.putExtra(CONST.ACTIVITY_NAME, dto.name);
 							intent.putExtra(CONST.WEB_URL, dto.dataUrl);
 							startActivity(intent);

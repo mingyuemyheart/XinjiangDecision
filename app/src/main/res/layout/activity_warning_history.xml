@@ -1,28 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:orientation="vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/reTitle"
-        layout="@layout/layout_title"/>
+        layout="@layout/layout_title" />
 
     <TextView
         android:id="@+id/tvTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_below="@+id/reTitle"
         android:background="#949ea5"
+        android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/level_5"/>
+        android:textSize="@dimen/level_5"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle" />
 
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:background="#949ea5"
@@ -138,8 +138,7 @@
     <ExpandableListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll"
+        android:layout_height="0dp"
         android:cacheColorHint="@color/transparent"
         android:childDivider="@color/light_gray"
         android:divider="@color/light_gray"
@@ -147,6 +146,8 @@
         android:groupIndicator="@null"
         android:listSelector="@color/transparent"
         android:overScrollMode="never"
-        android:scrollbars="none"/>
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

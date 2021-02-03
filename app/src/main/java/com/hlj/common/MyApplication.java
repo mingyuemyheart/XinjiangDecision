@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.hlj.activity.HWarningDetailActivity;
+import com.hlj.activity.WarningDetailActivity;
 import com.hlj.activity.WebviewActivity;
 import com.hlj.dto.WarningDto;
 import com.hlj.utils.CrashHandler;
@@ -145,7 +145,7 @@ public class MyApplication extends Application{
 									if (!TextUtils.isEmpty(url)) {
 										WarningDto data = new WarningDto();
 										data.html = url;
-										Intent intentDetail = new Intent(getApplicationContext(), HWarningDetailActivity.class);
+										Intent intentDetail = new Intent(getApplicationContext(), WarningDetailActivity.class);
 										intentDetail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 										Bundle bundle = new Bundle();
 										bundle.putParcelable("data", data);

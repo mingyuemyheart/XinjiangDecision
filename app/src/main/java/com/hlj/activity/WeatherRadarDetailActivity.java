@@ -1,9 +1,5 @@
 package com.hlj.activity;
 
-/**
- * 天气雷达详情
- */
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +23,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.hlj.adapter.WeatherRadarDetailAdpater;
+import com.hlj.common.CONST;
 import com.hlj.dto.AgriDto;
 import com.hlj.dto.RadarDto;
 import com.hlj.manager.RadarManager;
@@ -57,11 +54,12 @@ import okhttp3.Request;
 import okhttp3.Response;
 import shawn.cxwl.com.hlj.R;
 
+/**
+ * 天气雷达详情
+ */
 public class WeatherRadarDetailActivity extends BaseActivity implements OnClickListener, RadarListener{
 	
 	private Context mContext = null;
-	private LinearLayout llBack = null;//返回按钮
-	private TextView tvTitle = null;
 	private List<RadarDto> radarList = new ArrayList<>();
 	private ImageView imageView = null;
 	private RadarManager mRadarManager = null;
@@ -74,14 +72,9 @@ public class WeatherRadarDetailActivity extends BaseActivity implements OnClickL
 	private ImageView ivPlay = null;
 	private SeekBar seekBar = null;
 	private TextView tvTime = null;
-	private GridView mGridView = null;
 	private WeatherRadarDetailAdpater mAdapter = null;
-//	private SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
-//	private SimpleDateFormat sdf2 = new SimpleDateFormat("MM月dd日HH时mm分");
 	private String selected = "1";//选中
 	private String unselected = "0";//未选中
-	private AgriDto data = null;
-	private String baseUrl = "http://hfapi.tianqi.cn/data/";
 	private final static String APPID = "fec60dca880595d7";//机密需要用到的AppId
 	private final static String LEID_DATA = "leid_data";//加密秘钥名称
 	private SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
@@ -116,9 +109,9 @@ public class WeatherRadarDetailActivity extends BaseActivity implements OnClickL
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		llBack = (LinearLayout) findViewById(R.id.llBack);
+		LinearLayout llBack = (LinearLayout) findViewById(R.id.llBack);
 		llBack.setOnClickListener(this);
-		tvTitle = (TextView) findViewById(R.id.tvTitle);
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
 		imageView = (ImageView) findViewById(R.id.imageView);
 		imageView.setOnClickListener(this);
 		ivPlay = (ImageView) findViewById(R.id.ivPlay);
@@ -130,7 +123,7 @@ public class WeatherRadarDetailActivity extends BaseActivity implements OnClickL
 		
 		mRadarManager = new RadarManager(mContext);
 		
-		data = getIntent().getExtras().getParcelable("data");
+		AgriDto data = getIntent().getExtras().getParcelable("data");
 		if (data != null) {
 			if (data.name != null) {
 				tvTitle.setText(data.name);
@@ -206,7 +199,7 @@ public class WeatherRadarDetailActivity extends BaseActivity implements OnClickL
 	 */
 	private void getRadarData(String radarCode, String currentTime) {
 		initDialog();
-		final String url = getRadarUrl(baseUrl, radarCode, "product", currentTime);
+		final String url = getRadarUrl("http://hfapi.tianqi.cn/data/", radarCode, "product", currentTime);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -299,7 +292,7 @@ public class WeatherRadarDetailActivity extends BaseActivity implements OnClickL
 	 * 初始化gridview
 	 */
 	private void initGridView() {
-		mGridView = (GridView) findViewById(R.id.gridView);
+		GridView mGridView = (GridView) findViewById(R.id.gridView);
 		mAdapter = new WeatherRadarDetailAdpater(mContext, radarList);
 		mGridView.setAdapter(mAdapter);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
@@ -558,10 +551,8 @@ public class WeatherRadarDetailActivity extends BaseActivity implements OnClickL
 						ivPlay.setImageResource(R.drawable.iv_play);
 					}
 					
-					Intent intent = new Intent(mContext, RadarZoomActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putParcelable("data", radarList.get(i));
-					intent.putExtras(bundle);
+					Intent intent = new Intent(mContext, DisplayPictureActivity.class);
+					intent.putExtra(CONST.WEB_URL, radarList.get(i).url);
 					startActivity(intent);
 					break;
 				}

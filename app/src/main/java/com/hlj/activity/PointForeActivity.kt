@@ -15,7 +15,6 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
-import android.widget.TextView
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -657,7 +656,7 @@ class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener,
                 ivDataSource.setImageResource(R.drawable.com_data_source_press)
             }
             R.id.tvDataSource -> {
-                val intent = Intent(this, HUrlActivity::class.java)
+                val intent = Intent(this, WebviewActivity::class.java)
                 intent.putExtra(CONST.ACTIVITY_NAME, "中央气象台智能网格预报产品")
                 intent.putExtra(CONST.WEB_URL, "http://www.cma.gov.cn/2011xzt/2017zt/2017qmt/20170728/")
                 startActivity(intent)

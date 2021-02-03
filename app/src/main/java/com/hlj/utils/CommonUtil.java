@@ -34,6 +34,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -1086,6 +1089,53 @@ public class CommonUtil {
 		}
 		Log.e("colorcolor", "#"+r+g+b);
 		return "#"+r+g+b;
+	}
+
+	public static void topToBottom(View view) {
+		startAnimation(false, view);
+		view.setVisibility(View.VISIBLE);
+	}
+
+	public static void bottomToTop(View view) {
+		startAnimation(true, view);
+		view.setVisibility(View.GONE);
+	}
+
+	/**
+	 * @param flag false为显示map，true为显示list
+	 */
+	private static void startAnimation(boolean flag, final View view) {
+		AnimationSet animationSet = new AnimationSet(true);
+		TranslateAnimation animation;
+		if (!flag) {
+			animation = new TranslateAnimation(
+					Animation.RELATIVE_TO_SELF,0f,
+					Animation.RELATIVE_TO_SELF,0f,
+					Animation.RELATIVE_TO_SELF,-1.0f,
+					Animation.RELATIVE_TO_SELF,0f);
+		}else {
+			animation = new TranslateAnimation(
+					Animation.RELATIVE_TO_SELF,0f,
+					Animation.RELATIVE_TO_SELF,0f,
+					Animation.RELATIVE_TO_SELF,0f,
+					Animation.RELATIVE_TO_SELF,-1.0f);
+		}
+		animation.setDuration(400);
+		animationSet.addAnimation(animation);
+		animationSet.setFillAfter(true);
+		view.startAnimation(animationSet);
+		animationSet.setAnimationListener(new Animation.AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation arg0) {
+			}
+			@Override
+			public void onAnimationRepeat(Animation arg0) {
+			}
+			@Override
+			public void onAnimationEnd(Animation arg0) {
+				view.clearAnimation();
+			}
+		});
 	}
 
 }

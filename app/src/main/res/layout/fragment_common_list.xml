@@ -2,9 +2,7 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/fragment_bg"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <ListView
         android:id="@+id/listView"
@@ -16,5 +14,6 @@
         android:listSelector="@color/transparent"
         android:overScrollMode="never"
         android:scrollbars="none" />
+
 </android.support.v4.widget.SwipeRefreshLayout>
 

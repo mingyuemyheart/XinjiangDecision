@@ -291,14 +291,30 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvAqi" />
 
             <TextView
+                android:id="@+id/tvDivPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="各地隔离政策查询"
+                android:background="@drawable/bg_warning2"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tvInfo"/>
+
+            <TextView
                 android:id="@+id/tvInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:background="@drawable/bg_seek_info"
                 android:lineSpacingExtra="1dp"
                 android:paddingStart="30dp"
                 android:paddingTop="6dp"
-                android:paddingEnd="5dp"
+                android:paddingEnd="10dp"
                 android:paddingBottom="6dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/level_5"

@@ -28,7 +28,10 @@ import com.amap.api.maps.model.BitmapDescriptorFactory
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Marker
 import com.amap.api.maps.model.MarkerOptions
-import com.hlj.activity.*
+import com.hlj.activity.WarningDetailActivity
+import com.hlj.activity.WarningHistoryActivity
+import com.hlj.activity.WarningListActivity
+import com.hlj.activity.WarningStatisticActivity
 import com.hlj.adapter.ShawnWarningStatisticAdapter
 import com.hlj.adapter.WarningAdapter
 import com.hlj.common.CONST
@@ -460,7 +463,7 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
     }
 
     private fun intentDetail(data: WarningDto?) {
-        val intentDetail = Intent(activity, HWarningDetailActivity::class.java)
+        val intentDetail = Intent(activity, WarningDetailActivity::class.java)
         val bundle = Bundle()
         bundle.putParcelable("data", data)
         intentDetail.putExtras(bundle)

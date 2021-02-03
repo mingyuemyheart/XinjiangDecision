@@ -494,7 +494,7 @@ public class ReserveCityActivity extends BaseActivity implements View.OnClickLis
                     Toast.makeText(mContext, "最多只能关注10个城市", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent = new Intent(mContext, HCityActivity.class);
+                Intent intent = new Intent(mContext, CityActivity.class);
                 intent.putExtra("reserveCity", "reserveCity");
                 startActivityForResult(intent, 1000);
                 break;
