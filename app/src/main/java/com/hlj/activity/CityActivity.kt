@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import android.view.View.OnClickListener
@@ -66,11 +67,8 @@ class CityActivity : BaseActivity(), OnClickListener {
         override fun onTextChanged(arg0: CharSequence, arg1: Int, arg2: Int, arg3: Int) {}
         override fun beforeTextChanged(arg0: CharSequence, arg1: Int, arg2: Int, arg3: Int) {}
         override fun afterTextChanged(arg0: Editable) {
-            if (arg0.toString() == null) {
-                return
-            }
             cityList.clear()
-            if (arg0.toString().trim { it <= ' ' } == "") {
+            if (TextUtils.isEmpty(arg0.toString())) {
                 listView!!.visibility = View.GONE
                 tvProvince!!.visibility = View.VISIBLE
                 tvNational!!.visibility = View.VISIBLE
@@ -82,7 +80,7 @@ class CityActivity : BaseActivity(), OnClickListener {
                 tvNational!!.visibility = View.GONE
                 pGridView!!.visibility = View.GONE
                 nGridView!!.visibility = View.GONE
-                getCityInfo(arg0.toString().trim { it <= ' ' })
+                getCityInfo(arg0.toString())
             }
         }
     }

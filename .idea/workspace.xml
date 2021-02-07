@@ -57,103 +57,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15ab3c4b-28f1-4ec7-90ce-56991a316228" name="Default" comment="1.修改决策登录对话框提示逻辑&#10;2.适配天气详情逐小时预报和分钟级降水UI&#10;3.增加预警推送功能">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/DisplayPictureActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/BaseViewPagerAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/CitySearchAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WarningHistoryScreenAreaAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_display_picture.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_warning_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HCityActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/CityActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HHeadWarningActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HeadWarningActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HUrlActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HWarningDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningDetailActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HWeatherRadarActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherRadarActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/city_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/city_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/CityActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/CityActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/PointForeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/PointForeActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ProductActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ProductActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/RadarZoomActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ReserveCityActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ReserveCityActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/SettingActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/SettingActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ShawnWarningStatisticListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningHistoryListActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/SinglePDFActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/SinglePDFActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningHistoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningHistoryActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningHistoryScreenActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningHistoryScreenActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningHistoryScreenAreaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningHistoryScreenAreaActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningListActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningSignalActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningStatisticActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningStatisticActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherRadarDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherRadarDetailActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WebviewActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WebviewActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WebviewCssActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WebviewCssActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WebviewVideoActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/HCityAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/HCityLocalAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/CityProAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/HCityNationAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/CityNationAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/ProductFragmentAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/ReserveCityAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/ReserveCityAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/ShawnWarningStatisticGroupAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WarningHistoryAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/ShawnWarningStatisticListGroupAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WarningHistoryListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/ShawnWarningStatisticListSelectAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WarningHistoryListScreenAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/ShawnWarningStatisticScreenAreaAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WarningListScreenAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WarningListScreenAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WarningSignalAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WeatherRadarAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WeatherRadarAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/common/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/common/MyApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ForecastFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ForecastFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/HWarningDetailFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WarningDetailFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WarningFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WarningFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/utils/CommonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/utils/CommonUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bg_seek_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_seek_info.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/iv_guizhou.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_warning_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_warning_history.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_weather_radar_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_weather_radar_detail.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/adapter_weather_radar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_weather_radar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_common_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_common_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bg_seek_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bg_warning2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_warning2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_weather_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_weather_detail.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forecast.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forecast.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_weather_fact.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_weather_fact.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hactivity_city.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_city.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hactivity_heading_warning.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_heading_warning.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hactivity_warning_detail.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hactivity_weather_radar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_weather_radar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hadapter_city.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_city_search.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hadapter_city_content.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_city_pro_content.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hadapter_city_header.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_city_pro_header.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hadapter_city_nation.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hfragment_warning_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_warning_detail.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/index.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/index_cell.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/product_item.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/radar_zoom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_activity_warning_statistic_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_warning_history_list.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_adapter_warning_statistic_child.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_history_child.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_adapter_warning_statistic_group.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_history_group.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_adapter_warning_statistic_list_child.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_history_list_child.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_adapter_warning_statistic_list_group.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_history_list_group.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_adapter_warning_statistic_list_select.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_history_list_screen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_adapter_warning_statistic_screen_area.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_statistic_screen_area.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/url.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/warning_signal.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/warning_signal_cell.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/stations.db" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/raw/stations.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -227,7 +154,7 @@
   <component name="ProjectId" id="1Yh2z4qNQwDdQCZrdpFC61j0WMX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$/../../创新网络/打包/黑龙江气象/release/HLJ_310_V3.1.0_release.apk" />
+    <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$/../../创新网络/打包/黑龙江气象/release/HLJDecision_343_V3.1.8_release.apk" />
     <property name="ApkExportedModule" value="app" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="66J5T19318007315" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-07-19T13:31:19.620Z" />
@@ -244,7 +171,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536661182344" />
     <property name="device.picker.selection" value="66J5T19318007315" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/raw" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
@@ -259,15 +186,15 @@
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets/echarts" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/anim" />
-    </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="com.hlj.activity" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/raw" />
+      <recent name="$PROJECT_DIR$/app/src/main/assets" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.hlj.adapter" />
@@ -276,12 +203,12 @@
       <recent name="com.hlj.utils" />
       <recent name="com.hlj.view.wheelview" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/java/com/hlj/view" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets/echarts" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/anim" />
     </key>
   </component>
   <component name="RunDashboard">
