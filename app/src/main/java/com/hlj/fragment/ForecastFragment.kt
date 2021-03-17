@@ -1094,13 +1094,18 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         val cityInfo = sharedPreferences.getString("cityInfo", "")
         if (!TextUtils.isEmpty(cityInfo)) {
             tags = "$tags,"
-            val array = cityInfo.split(";").toTypedArray()
-            for (i in array.indices) {
-                val itemArray = array[i].split(",").toTypedArray()
-                tags = if (i == array.size - 1) {
-                    tags + itemArray[2]
-                } else {
-                    tags + itemArray[2] + ","
+            if (cityInfo.contains(";")) {
+                val array = cityInfo.split(";").toTypedArray()
+                for (i in array.indices) {
+                    val item = array[i]
+                    if (!TextUtils.isEmpty(item) && item.contains(",")) {
+                        val itemArray = item.split(",").toTypedArray()
+                        tags = if (i == array.size - 1) {
+                            tags + itemArray[2]
+                        } else {
+                            tags + itemArray[2] + ","
+                        }
+                    }
                 }
             }
         }

@@ -302,13 +302,16 @@ public class ReserveCityActivity extends BaseActivity implements View.OnClickLis
         if (!TextUtils.isEmpty(cityInfo)) {
             String[] array = cityInfo.split(";");
             for (int i = 0; i < array.length; i++) {
-                String[] itemArray = array[i].split(",");
-                dto = new CityDto();
-                dto.cityId = itemArray[0];
-                dto.areaName = itemArray[1];
-                dto.warningId = itemArray[2];
-                cityList.add(dto);
-                cityIds.add(itemArray[0]);
+                String item = array[i];
+                if (!TextUtils.isEmpty(item) && item.contains(",")) {
+                    String[] itemArray = item.split(",");
+                    dto = new CityDto();
+                    dto.cityId = itemArray[0];
+                    dto.areaName = itemArray[1];
+                    dto.warningId = itemArray[2];
+                    cityList.add(dto);
+                    cityIds.add(itemArray[0]);
+                }
             }
         }
 
@@ -472,7 +475,7 @@ public class ReserveCityActivity extends BaseActivity implements View.OnClickLis
         SharedPreferences sharedPreferences = getSharedPreferences("RESERVE_CITY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("cityInfo", cityInfo);
-        editor.commit();
+        editor.apply();
         Log.e("cityInfo", cityInfo);
     }
 
