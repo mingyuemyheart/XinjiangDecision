@@ -167,17 +167,17 @@ public class WarningHistoryListAdapter extends BaseExpandableListAdapter {
             }
         }
 
-        String type = null;
-        if (!TextUtils.isEmpty(dto.type)) {
-            for (int i = 0; i < typeList.size(); i++) {
-                if (TextUtils.equals(typeList.get(i).type, dto.type)) {
-                    type = typeList.get(i).name;
-                    break;
-                }
-            }
-        }
-        if (!TextUtils.isEmpty(type)) {
-            childHolder.tvType.setText("预警种类："+type);
+//        String type = null;
+//        if (!TextUtils.isEmpty(dto.type)) {
+//            for (int i = 0; i < typeList.size(); i++) {
+//                if (TextUtils.equals(typeList.get(i).type, dto.type)) {
+//                    type = typeList.get(i).name;
+//                    break;
+//                }
+//            }
+//        }
+        if (!TextUtils.isEmpty(dto.eventTypeCn)) {
+            childHolder.tvType.setText("预警种类："+dto.eventTypeCn);
         }else {
             childHolder.tvType.setText("预警种类："+"未知类型");
         }

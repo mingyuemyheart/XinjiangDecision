@@ -29,7 +29,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -98,8 +102,9 @@ public class WarningHistoryListActivity extends BaseActivity implements View.OnC
         }
     }
 
+    private ExpandableListView listView;
     private void initListView() {
-        ExpandableListView listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
         mAdapter = new WarningHistoryListAdapter(mContext, groupList, childList);
         listView.setAdapter(mAdapter);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -164,6 +169,12 @@ public class WarningHistoryListActivity extends BaseActivity implements View.OnC
                                                 if (!obj.isNull("eventType")) {
                                                     dto.type = obj.getString("eventType");
                                                 }
+                                                if (!obj.isNull("eventType")) {
+                                                    dto.type = obj.getString("eventType");
+                                                }
+                                                if (!obj.isNull("eventTypeCn")) {
+                                                    dto.eventTypeCn = obj.getString("eventTypeCn");
+                                                }
                                                 if (!obj.isNull("description")) {
                                                     dto.content = obj.getString("description");
                                                 }
@@ -176,6 +187,7 @@ public class WarningHistoryListActivity extends BaseActivity implements View.OnC
                                                 d.name = dto.name;
                                                 d.color = dto.color;
                                                 d.type = dto.type;
+                                                d.eventTypeCn = dto.eventTypeCn;
                                                 d.content = dto.content;
                                                 list.add(d);
                                                 childList.add(list);
@@ -374,6 +386,12 @@ public class WarningHistoryListActivity extends BaseActivity implements View.OnC
                             return b.time.compareTo(a.time);
                         }
                     });
+                    Collections.sort(childList, new Comparator<List<WarningDto>>() {
+                        @Override
+                        public int compare(List<WarningDto> a, List<WarningDto> b) {
+                            return b.get(0).time.compareTo(a.get(0).time);
+                        }
+                    });
                 }else {
                     isDesc = false;
                     tvTime.setText("按发布时间⬇︎");
@@ -381,6 +399,12 @@ public class WarningHistoryListActivity extends BaseActivity implements View.OnC
                         @Override
                         public int compare(WarningDto a, WarningDto b) {
                             return a.time.compareTo(b.time);
+                        }
+                    });
+                    Collections.sort(childList, new Comparator<List<WarningDto>>() {
+                        @Override
+                        public int compare(List<WarningDto> a, List<WarningDto> b) {
+                            return a.get(0).time.compareTo(b.get(0).time);
                         }
                     });
                 }

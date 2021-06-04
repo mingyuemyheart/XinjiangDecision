@@ -14,6 +14,7 @@ public class WarningDto implements Parcelable {
 	public double lat;// 纬度
 	public double lng;// 经度
 	public String type;//预警类型，如11B09
+	public String eventTypeCn;//预警类型，如11B09
 	public String color;// 预警颜色,红橙黄蓝，id的后两位
 	public String provinceId;
 	public String warningId;
@@ -67,6 +68,7 @@ public class WarningDto implements Parcelable {
 		dest.writeDouble(this.lat);
 		dest.writeDouble(this.lng);
 		dest.writeString(this.type);
+		dest.writeString(this.eventTypeCn);
 		dest.writeString(this.color);
 		dest.writeString(this.provinceId);
 		dest.writeString(this.warningId);
@@ -108,6 +110,7 @@ public class WarningDto implements Parcelable {
 		this.lat = in.readDouble();
 		this.lng = in.readDouble();
 		this.type = in.readString();
+		this.eventTypeCn = in.readString();
 		this.color = in.readString();
 		this.provinceId = in.readString();
 		this.warningId = in.readString();

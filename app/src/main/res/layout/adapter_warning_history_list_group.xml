@@ -33,6 +33,7 @@
         android:textSize="@dimen/level_5"/>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvTime2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
