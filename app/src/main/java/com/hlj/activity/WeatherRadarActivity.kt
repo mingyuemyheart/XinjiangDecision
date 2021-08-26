@@ -91,7 +91,7 @@ class WeatherRadarActivity : BaseActivity(), OnClickListener, OnMarkerClickListe
      * 获取雷达图片集信息
      */
     private fun okHttpList() {
-        val url = "http://decision-admin.tianqi.cn/Home/extra/getHljRadarData"
+        val url = "http://xinjiangdecision.tianqi.cn:81/Home/Work/getXjRadarData"
         dataList.clear()
         val d = AgriDto()
         d.name = "东北"

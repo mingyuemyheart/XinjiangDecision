@@ -68,7 +68,7 @@ import shawn.cxwl.com.hlj.R;
 /**
  * 等风来
  */
-public class ShawnWaitWindActivity extends BaseActivity implements OnClickListener, OnCameraChangeListener,
+public class WaitWindActivity extends BaseActivity implements OnClickListener, OnCameraChangeListener,
         AMap.OnMapClickListener, AMapLocationListener {
 
     private Context mContext;
@@ -97,7 +97,7 @@ public class ShawnWaitWindActivity extends BaseActivity implements OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.shawn_activity_wait_wind);
+        setContentView(R.layout.activity_wait_wind);
         mContext = this;
         showDialog();
         initAmap(savedInstanceState);
@@ -494,7 +494,7 @@ public class ShawnWaitWindActivity extends BaseActivity implements OnClickListen
         }
         if (waitWindView == null) {
             waitWindView = new WaitWindView2(mContext);
-            waitWindView.init(ShawnWaitWindActivity.this);
+            waitWindView.init(WaitWindActivity.this);
             if (isGfs) {
                 waitWindView.setData(windDataGFS, zoom);
             }else {

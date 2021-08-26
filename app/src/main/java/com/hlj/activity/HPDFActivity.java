@@ -180,7 +180,7 @@ public class HPDFActivity extends BaseActivity implements OnPageChangeListener, 
 	private File downLoadPdf(String pdfUrl) {
 		try {
 			URL u = new URL(pdfUrl);
-			File file = new File(Environment.getExternalStorageDirectory()+"/HLJ");
+			File file = new File(Environment.getExternalStorageDirectory()+"/XinjiangDecision");
 			if (!file.exists()) {
 				file.mkdirs();
 			}

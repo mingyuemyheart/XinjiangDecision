@@ -9,6 +9,7 @@ import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.hlj.adapter.BaseViewPagerAdapter
+import com.hlj.common.CONST
 import com.hlj.dto.WarningDto
 import com.hlj.fragment.WarningDetailFragment
 import kotlinx.android.synthetic.main.activity_heading_warning.*
@@ -32,6 +33,7 @@ class HeadWarningActivity : BaseFragmentActivity(), OnClickListener {
     }
 
     private fun initWidget() {
+        tvTitle.text = "预警信息"
         llBack!!.setOnClickListener(this)
     }
 

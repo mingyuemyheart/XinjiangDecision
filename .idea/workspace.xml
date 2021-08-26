@@ -6,6 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="pointFore" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
@@ -60,25 +61,82 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15ab3c4b-28f1-4ec7-90ce-56991a316228" name="Default" comment="1.修改决策登录对话框提示逻辑&#10;2.适配天气详情逐小时预报和分钟级降水UI&#10;3.增加预警推送功能">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/JueceListAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_main.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/com_rain.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/com_rain_press.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/corner_left_right_blue.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/corner_left_right_gray.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_app.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_juece_list.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HLJDecision.iml" beforeDir="false" afterPath="$PROJECT_DIR$/HLJDecision.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HLJDecision.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningHistoryListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningHistoryListActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WarningHistoryListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WarningHistoryListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/WarningDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/WarningDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_history_list_child.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_history_list_child.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_history_list_group.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_warning_history_list_group.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/hlj_radar.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/CityActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/CityActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/CommonListActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/CommonListActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactActivity2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactActivity2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactDetailActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactDetailChartActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactDetailChartActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HPDFActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HPDFActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HProvinceForecastActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HProvinceForecastActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HeadWarningActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/HeadWarningActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/LoginActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/PointForeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/PointForeActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ReserveCityActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ReserveCityActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/SettingActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/SettingActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ShawnFactMonitorActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactMonitorActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ShawnPointForeDetailActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/ShawnWaitWindActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WaitWindActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningDetailActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningDetailActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningListActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningListActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherRadarActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherRadarActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WebviewActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WebviewActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WelcomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WelcomeActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/FactAdapter2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/FactMonitorAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/common/CONST.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/common/CONST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/StationMonitorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/StationMonitorDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/CommonListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/CommonListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/FactCheckFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/FactCheckFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ForecastFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ForecastFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WarningFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WarningFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/utils/AutoUpdateBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/utils/AutoUpdateBroadcastReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/utils/CommonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/utils/CommonUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/WaitWindView2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/WaitWindView2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bg_welcome.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_welcome.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/com_cloud.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/com_cloud.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/com_cloud_press.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/com_cloud_press.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/com_humidity.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/com_humidity.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/com_humidity_press.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/com_humidity_press.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/com_temp.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/com_temp.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/com_temp_press.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/com_temp_press.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/icon_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/iv_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/iv_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/iv_logo2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/main_bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_fact_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_fact_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_point_fore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_point_fore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_weather_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_weather_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/adapter_fact2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_fact_monitor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fact_check.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fact_check.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forecast.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forecast.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hactivity_trend_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/hactivity_trend_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_activity_fact_monitor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_fact_monitor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_activity_point_fore_detail.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shawn_activity_wait_wind.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_wait_wind.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,18 +163,17 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="HLJDecision" type="f1a62948:ProjectNode" />
+                <item name="XinjiangDecision" type="f1a62948:ProjectNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="HLJDecision" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="XinjiangDecision" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="HLJDecision" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="android" type="c8890929:TasksNode$1" />
+                <item name="XinjiangDecision" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
               </path>
             </expand>
             <select />
@@ -137,8 +194,8 @@
     </option>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="$PROJECT_DIR$/../../创新网络/打包/黑龙江气象/HLJDecision.keystore" />
-    <option name="KEY_ALIAS" value="hljdecision" />
+    <option name="KEY_STORE_PATH" value="$PROJECT_DIR$/../../创新网络/打包/新疆气象/xinjiangdecision.keystore" />
+    <option name="KEY_ALIAS" value="xinjiangdecision" />
     <option name="REMEMBER_PASSWORDS" value="true" />
     <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
@@ -153,23 +210,24 @@
   </component>
   <component name="PropertiesComponent">
     <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$/../../创新网络/打包/黑龙江气象/release/HLJDecision_343_V3.1.8_release.apk" />
-    <property name="ApkExportedModule" value="HLJDecision.app" />
+    <property name="ApkExportedModule" value="XinjiangDecision.app" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="66J5T19318007315" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-07-19T13:31:19.620Z" />
-    <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/../../创新网络/打包/黑龙江气象" />
+    <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/../../创新网络/打包/新疆气象" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android-custom-view/Users/sunxiaoming/Downloads/AndroidStudioProjects/HLJDecision/app/src/main/java/com/hlj/view/wheelview/WheelView.java_SELECTED" value="WheelView" />
     <property name="android.profiler.active" value="true" />
     <property name="android.project.structure.last.selected" value="hLJDecision" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536661182344" />
     <property name="device.picker.selection" value="66J5T19318007315" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/raw" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
@@ -185,21 +243,22 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.hlj.fragment" />
       <recent name="com.hlj.activity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/raw" />
-      <recent name="$PROJECT_DIR$/app/src/main/assets" />
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/main/assets" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/raw" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.hlj.adapter" />
+      <recent name="com.hlj.dto" />
       <recent name="com.hlj.view" />
       <recent name="com.hlj.activity" />
       <recent name="com.hlj.utils" />
-      <recent name="com.hlj.view.wheelview" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
@@ -291,7 +350,7 @@
       </method>
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="HLJDecision.app" />
+      <module name="XinjiangDecision.app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -336,65 +395,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
-        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
-        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
-      </Profilers>
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
-      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
-      <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="hLJDecision" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="hLJDecision" />
-      <option name="DEPLOY" value="true" />
-      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
-      <option name="DEPLOY_AS_INSTANT" value="false" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ALL_USERS" value="false" />
-      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
-      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Hybrid>
-      <Java />
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Native>
-      <Profilers>
-        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
         <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
@@ -526,6 +527,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Android App.app" />
+      <item itemvalue="Gradle.HLJDecision [signingReport]" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.HLJDecision [signingReport]" />
@@ -972,31 +977,68 @@
     <option name="LAST_COMMIT_MESSAGE" value="替换天气数据" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2142" y="217" key="#com.intellij.ide.util.MemberChooser" timestamp="1622767279600">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state x="357" y="181" width="880" height="605" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1625822453945">
+      <screen x="50" y="23" width="1390" height="877" />
+    </state>
+    <state x="1864" y="213" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1625817621605" />
+    <state x="357" y="181" width="880" height="605" key="#com.intellij.execution.impl.EditConfigurationsDialog/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1625822453945" />
+    <state x="558" y="184" key="#com.intellij.ide.util.MemberChooser" timestamp="1629897440167">
+      <screen x="50" y="23" width="1390" height="877" />
     </state>
     <state x="2142" y="217" key="#com.intellij.ide.util.MemberChooser/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1622767279600" />
-    <state x="558" y="184" key="#com.intellij.ide.util.MemberChooser/50.23.1390.877@50.23.1390.877" timestamp="1622730153737" />
-    <state width="1348" height="273" key="GridCell.Tab.0.bottom" timestamp="1622729956932">
+    <state x="558" y="184" key="#com.intellij.ide.util.MemberChooser/50.23.1390.877@50.23.1390.877" timestamp="1629897440167" />
+    <state x="483" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1627205567455">
       <screen x="50" y="23" width="1390" height="877" />
     </state>
-    <state width="1348" height="273" key="GridCell.Tab.0.bottom/50.23.1390.877@50.23.1390.877" timestamp="1622729956932" />
-    <state width="1348" height="273" key="GridCell.Tab.0.center" timestamp="1622729956932">
+    <state x="2038" y="254" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1626164359052" />
+    <state x="483" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1625820060297" />
+    <state x="483" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/50.23.1390.877@50.23.1390.877" timestamp="1627205567455" />
+    <state width="1878" height="340" key="GridCell.Tab.0.bottom" timestamp="1629899776546">
       <screen x="50" y="23" width="1390" height="877" />
     </state>
-    <state width="1348" height="273" key="GridCell.Tab.0.center/50.23.1390.877@50.23.1390.877" timestamp="1622729956932" />
-    <state width="1348" height="273" key="GridCell.Tab.0.left" timestamp="1622729956931">
+    <state width="1349" height="270" key="GridCell.Tab.0.bottom/47.23.1393.877@47.23.1393.877" timestamp="1629602842993" />
+    <state width="1878" height="392" key="GridCell.Tab.0.bottom/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1627377804882" />
+    <state width="1348" height="320" key="GridCell.Tab.0.bottom/49.23.1391.877@49.23.1391.877" timestamp="1629725869935" />
+    <state width="1878" height="340" key="GridCell.Tab.0.bottom/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1629882396387" />
+    <state width="1878" height="340" key="GridCell.Tab.0.bottom/50.23.1390.877@50.23.1390.877" timestamp="1629899776546" />
+    <state width="1878" height="340" key="GridCell.Tab.0.center" timestamp="1629899776546">
       <screen x="50" y="23" width="1390" height="877" />
     </state>
-    <state width="1348" height="273" key="GridCell.Tab.0.left/50.23.1390.877@50.23.1390.877" timestamp="1622729956931" />
-    <state width="1348" height="273" key="GridCell.Tab.0.right" timestamp="1622729956932">
+    <state width="1349" height="270" key="GridCell.Tab.0.center/47.23.1393.877@47.23.1393.877" timestamp="1629602842992" />
+    <state width="1878" height="392" key="GridCell.Tab.0.center/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1627377804881" />
+    <state width="1348" height="320" key="GridCell.Tab.0.center/49.23.1391.877@49.23.1391.877" timestamp="1629725869934" />
+    <state width="1878" height="340" key="GridCell.Tab.0.center/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1629882396385" />
+    <state width="1878" height="340" key="GridCell.Tab.0.center/50.23.1390.877@50.23.1390.877" timestamp="1629899776546" />
+    <state width="1878" height="340" key="GridCell.Tab.0.left" timestamp="1629899776545">
       <screen x="50" y="23" width="1390" height="877" />
     </state>
-    <state width="1348" height="273" key="GridCell.Tab.0.right/50.23.1390.877@50.23.1390.877" timestamp="1622729956932" />
-    <state x="443" y="216" width="604" height="490" key="find.popup" timestamp="1622729584668">
+    <state width="1349" height="270" key="GridCell.Tab.0.left/47.23.1393.877@47.23.1393.877" timestamp="1629602842992" />
+    <state width="1878" height="392" key="GridCell.Tab.0.left/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1627377804879" />
+    <state width="1348" height="320" key="GridCell.Tab.0.left/49.23.1391.877@49.23.1391.877" timestamp="1629725869934" />
+    <state width="1878" height="340" key="GridCell.Tab.0.left/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1629882396384" />
+    <state width="1878" height="340" key="GridCell.Tab.0.left/50.23.1390.877@50.23.1390.877" timestamp="1629899776545" />
+    <state width="1878" height="340" key="GridCell.Tab.0.right" timestamp="1629899776546">
       <screen x="50" y="23" width="1390" height="877" />
     </state>
-    <state x="443" y="216" width="604" height="490" key="find.popup/50.23.1390.877@50.23.1390.877" timestamp="1622729584668" />
+    <state width="1349" height="270" key="GridCell.Tab.0.right/47.23.1393.877@47.23.1393.877" timestamp="1629602842992" />
+    <state width="1878" height="392" key="GridCell.Tab.0.right/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1627377804881" />
+    <state width="1348" height="320" key="GridCell.Tab.0.right/49.23.1391.877@49.23.1391.877" timestamp="1629725869935" />
+    <state width="1878" height="340" key="GridCell.Tab.0.right/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1629882396386" />
+    <state width="1878" height="340" key="GridCell.Tab.0.right/50.23.1390.877@50.23.1390.877" timestamp="1629899776546" />
+    <state x="150" y="123" width="1190" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1629896890497">
+      <screen x="50" y="23" width="1390" height="877" />
+    </state>
+    <state x="58" y="25" width="1422" height="871" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1629875417482" />
+    <state x="150" y="123" width="1190" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog/50.23.1390.877@50.23.1390.877" timestamp="1629896890497" />
+    <state x="443" y="216" width="604" height="518" key="find.popup" timestamp="1629896654103">
+      <screen x="50" y="23" width="1390" height="877" />
+    </state>
+    <state x="441" y="216" width="606" height="518" key="find.popup/47.23.1393.877@47.23.1393.877" timestamp="1629602187173" />
+    <state x="1983" y="256" width="835" height="591" key="find.popup/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1627376984393" />
+    <state x="511" y="345" width="606" height="518" key="find.popup/49.23.1391.877@49.23.1391.877" timestamp="1629724220125" />
+    <state x="1983" y="256" width="835" height="591" key="find.popup/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1629881682846" />
+    <state x="443" y="216" width="605" height="491" key="find.popup/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1626052928770" />
+    <state x="443" y="216" width="604" height="518" key="find.popup/50.23.1390.877@50.23.1390.877" timestamp="1629896654103" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1005,6 +1047,11 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/hlj/echart/EchartOptionUtil.java</url>
           <line>119</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactActivity2.java</url>
+          <line>390</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -17,266 +17,171 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reTitle" />
 
-    <TextView
-        android:id="@+id/tvMapNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:textColor="#6990A9"
-        android:textSize="@dimen/level_5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/text_color3"
-        android:textSize="@dimen/level_4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reTitle" />
-
-    <TextView
-        android:id="@+id/tvTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="5dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/bg_map_btn_press"
-        android:text="温度"
-        android:textSize="@dimen/level_4"
-        android:textColor="@color/white"/>
-
-    <ImageView
-        android:id="@+id/ivTemp"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintTop_toTopOf="@+id/tvTemp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTemp"
-        app:layout_constraintStart_toStartOf="@+id/tvTemp"
-        android:src="@drawable/com_temp_press" />
-
-    <TextView
-        android:id="@+id/tvHumidity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/tvTemp"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="5dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/bg_map_btn"
-        android:text="相对湿度"
-        android:textSize="@dimen/level_4"
-        android:textColor="@color/text_color4"/>
-
-    <ImageView
-        android:id="@+id/ivHumidity"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintTop_toTopOf="@+id/tvHumidity"
-        app:layout_constraintBottom_toBottomOf="@+id/tvHumidity"
-        app:layout_constraintStart_toStartOf="@+id/tvHumidity"
-        android:src="@drawable/com_humidity" />
-
-    <TextView
-        android:id="@+id/tvWind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/tvHumidity"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="5dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/bg_map_btn"
-        android:text="风速"
-        android:textSize="@dimen/level_4"
-        android:textColor="@color/text_color4"/>
-
-    <ImageView
-        android:id="@+id/ivWind"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintTop_toTopOf="@+id/tvWind"
-        app:layout_constraintBottom_toBottomOf="@+id/tvWind"
-        app:layout_constraintStart_toStartOf="@+id/tvWind"
-        android:src="@drawable/fzj_butn_windoff" />
-
-    <TextView
-        android:id="@+id/tvCloud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/tvWind"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="5dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/bg_map_btn"
-        android:text="云量"
-        android:textSize="@dimen/level_4"
-        android:textColor="@color/text_color4"/>
-
-    <ImageView
-        android:id="@+id/ivCloud"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintTop_toTopOf="@+id/tvCloud"
-        app:layout_constraintBottom_toBottomOf="@+id/tvCloud"
-        app:layout_constraintStart_toStartOf="@+id/tvCloud"
-        android:src="@drawable/com_cloud" />
-
-    <TextView
-        android:id="@+id/tvRain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/tvCloud"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="5dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/bg_map_btn"
-        android:text="降水"
-        android:textSize="@dimen/level_4"
-        android:textColor="@color/text_color4"/>
-
-    <ImageView
-        android:id="@+id/ivRain"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintTop_toTopOf="@+id/tvRain"
-        app:layout_constraintBottom_toBottomOf="@+id/tvRain"
-        app:layout_constraintStart_toStartOf="@+id/tvRain"
-        android:src="@drawable/fzj_butn_rainoff" />
-
-    <ImageView
-        android:id="@+id/ivSwitch"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="5dp"
-        android:src="@drawable/com_switch_map"
-        app:layout_constraintBottom_toTopOf="@+id/ivDataSource"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivDataSource"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="5dp"
-        android:src="@drawable/com_data_source"
-        app:layout_constraintBottom_toTopOf="@+id/ivLocation"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvDataSource"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shawn_bg_corner_switch_height"
-        android:gravity="center_vertical"
-        android:paddingStart="40dp"
-        android:paddingEnd="10dp"
-        android:text="中央气象台智能网格预报产品"
-        android:textColor="@color/blue"
-        android:textSize="@dimen/level_5"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/ivDataSource"
-        app:layout_constraintStart_toEndOf="@+id/ivDataSource"
-        app:layout_constraintTop_toTopOf="@+id/ivDataSource" />
-
-    <ImageView
-        android:id="@+id/ivLocation"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="5dp"
-        android:src="@drawable/icon_location_off"
-        app:layout_constraintBottom_toTopOf="@+id/ivLegendPrompt"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivLegendPrompt"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/icon_map_legend"
-        app:layout_constraintBottom_toTopOf="@+id/llSeekBar"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivLegend"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/llSeekBar"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="10dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/fzj_stream_legend"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/llSeekBar"
-        app:layout_constraintStart_toEndOf="@+id/ivLegendPrompt" />
-
-    <LinearLayout
-        android:id="@+id/llSeekBar"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clShare"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_seekbar"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <ImageView
-            android:id="@+id/ivPlay"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="15dp"
-            android:src="@drawable/icon_play" />
-
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_weight="1"
-            android:maxHeight="2dp"
-            android:minHeight="2dp"
-            android:progress="0"
-            android:progressDrawable="@drawable/shawn_seekbar_drawable"
-            android:thumb="@drawable/shawn_seekbar_thumb"
-            android:thumbOffset="0dp" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle">
 
         <TextView
-            android:id="@+id/tvTime"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/level_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPublishTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/level_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <ImageView
+            android:id="@+id/ivTemp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/level_5" />
-    </LinearLayout>
+            android:src="@drawable/com_temp_press"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPublishTime" />
+
+        <ImageView
+            android:id="@+id/ivHumidity"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/com_humidity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivTemp" />
+
+        <ImageView
+            android:id="@+id/ivWind"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/com_wind"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivHumidity" />
+
+        <ImageView
+            android:id="@+id/ivCloud"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/com_cloud"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivWind" />
+
+        <ImageView
+            android:id="@+id/ivRain"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/com_rain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivCloud" />
+
+        <ImageView
+            android:id="@+id/ivSwitch"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/com_switch_map"
+            app:layout_constraintBottom_toTopOf="@+id/ivDataSource"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDataSource"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/shawn_bg_corner_switch_height"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_marginStart="40dp"
+            android:text="中央气象台智能网格预报产品"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/level_5"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/ivDataSource"
+            app:layout_constraintTop_toTopOf="@+id/ivDataSource" />
+
+        <ImageView
+            android:id="@+id/ivDataSource"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/com_data_source"
+            app:layout_constraintBottom_toTopOf="@+id/ivLocation"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivLocation"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/icon_location_off"
+            app:layout_constraintBottom_toTopOf="@+id/llSeekBar"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/llSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f9f9f7"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/ivPlay"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/icon_play" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxHeight="2dp"
+                android:minHeight="2dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/shawn_seekbar_bacground_minute"
+                android:thumb="@drawable/seekbar_thumb"
+                android:thumbOffset="0dp" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_5" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -49,7 +49,7 @@ import com.amap.api.maps.model.Polygon;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.maps.model.Text;
-import com.hlj.adapter.FactAdapter2;
+import com.hlj.adapter.FactMonitorAdapter;
 import com.hlj.adapter.FactTimeAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
@@ -82,7 +82,6 @@ import shawn.cxwl.com.hlj.R;
 /**
  * 实况资料
  */
-
 public class FactActivity2 extends BaseFragmentActivity implements View.OnClickListener, AMap.OnCameraChangeListener {
 
     private Context mContext = null;
@@ -96,7 +95,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
     private float zoom = 5.5f;
     private ScrollView scrollView = null;
     private ListView listView = null;
-    private FactAdapter2 factAdapter = null;
+    private FactMonitorAdapter factAdapter = null;
     private List<FactDto> factList = new ArrayList<>();
     private LinearLayout listTitle = null;
     private TextView tv1, tv2, tv3;
@@ -219,12 +218,12 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
 
     private void initListView() {
         listView = (ListView) findViewById(R.id.listView);
-        factAdapter = new FactAdapter2(mContext, factList);
+        factAdapter = new FactMonitorAdapter(mContext, factList);
         listView.setAdapter(factAdapter);
     }
 
     private void OkHttpLayer(final AgriDto data) {
-        final String url = "https://decision-admin.tianqi.cn/Home/work2019/getHljSKImages";
+        final String url = "http://xinjiangdecision.tianqi.cn:81/Home/Work/getXinjiangSKImages";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -632,7 +631,7 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                             final double minlon = obj.getDouble("minlon");
                             String imgurl = obj.getString("imgurl");
                             if (isHistory) {
-                                imgurl = String.format("https://app.tianqi.cn/tile_img/weatherLayerDatas/out/hlj/%s/%s.png", childId, timeParams);
+                                imgurl = String.format("http://hf-sos.tianqi.cn/layer_out/xinjiang/%s/%s.png", childId, timeParams);
                                 Log.e("imgUrl", imgurl);
                             }
                             OkHttpUtil.enqueue(new Request.Builder().url(imgurl).build(), new Callback() {
@@ -773,44 +772,6 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
                 JSONArray array = obj.getJSONArray("features");
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject itemObj = array.getJSONObject(i);
-
-//					JSONObject properties = itemObj.getJSONObject("properties");
-//                    String value = "数值";
-//					String name = properties.getString("name");
-//                    if (name.contains("市")) {
-//                        name = name.replace("市", "");
-//                    }
-//                    JSONArray cp = properties.getJSONArray("cp");
-//                    for (int m = 0; m < cp.length(); m++) {
-//                        double lat = cp.getDouble(1);
-//                        double lng = cp.getDouble(0);
-////                        TextOptions options = new TextOptions();
-////                        options.position(new LatLng(lat, lng));
-////                        options.fontColor(Color.BLACK);
-////                        options.fontSize(20);
-////                        options.text(name);
-////                        options.backgroundColor(Color.TRANSPARENT);
-////                        Text text = aMap.addText(options);
-////                        cityTexts.add(text);
-//
-//                        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                        View view = inflater.inflate(R.layout.layout_fact_value, null);
-//                        TextView tvValue = (TextView) view.findViewById(R.id.tvValue);
-//                        TextView tvName = (TextView) view.findViewById(R.id.tvName);
-//                        if (!TextUtils.isEmpty(value)) {
-//                            tvValue.setText(value);
-//                        }
-//                        if (!TextUtils.isEmpty(name)) {
-//                            tvName.setText(name);
-//                        }
-//                        MarkerOptions options = new MarkerOptions();
-//                        options.anchor(0.5f, 0.5f);
-//                        options.position(new LatLng(lat, lng));
-//                        options.icon(BitmapDescriptorFactory.fromView(view));
-//                        Marker marker = aMap.addMarker(options);
-//                        cityTexts.add(marker);
-//                    }
-
                     JSONObject geometry = itemObj.getJSONObject("geometry");
                     JSONArray coordinates = geometry.getJSONArray("coordinates");
                     for (int m = 0; m < coordinates.length(); m++) {
@@ -837,7 +798,6 @@ public class FactActivity2 extends BaseFragmentActivity implements View.OnClickL
         msg.what = 1001;
         msg.obj = zoom;
         handler.sendMessageDelayed(msg, 1000);
-
     }
 
     @Override

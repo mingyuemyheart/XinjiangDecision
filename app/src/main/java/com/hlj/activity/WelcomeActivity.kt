@@ -1,4 +1,4 @@
-package com.hlj.activity;
+package com.hlj.activity
 
 import android.content.Context
 import android.content.Intent
@@ -48,8 +48,8 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 	 */
 	private fun okHttpTheme() {
 		var delayMillis : Long = 0
-		val url = "https://decision-admin.tianqi.cn/Home/work2019/decision_theme_data?appid=${CONST.APPID}"
-		Thread(Runnable {
+		val url = "http://xinjiangdecision.tianqi.cn:81/Home/Work/decision_theme_data?appid=${CONST.APPID}"
+		Thread {
 			OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
 				override fun onFailure(call: Call, e: IOException) {}
 
@@ -82,7 +82,7 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 					}
 				}
 			})
-		}).start()
+		}.start()
 
 		Handler().postDelayed({
 			imageView.visibility = View.VISIBLE
@@ -135,7 +135,7 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 	 * 手机号刷新token登录
 	 */
 	private fun okHttpTokenLogin() {
-		val url = "http://decision-admin.tianqi.cn/Home/work2019/hlgRefreshLogin"
+		val url = "http://xinjiangdecision.tianqi.cn:81/Home/api/RefreshLogin"
 		val builder = FormBody.Builder()
 		builder.add("mobile", CONST.USERNAME)
 		builder.add("token", CONST.TOKEN)
@@ -171,7 +171,7 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 	private fun okHttpLogin(userName: String, pwd: String) {
 		CONST.USERNAME = userName
 		CONST.PASSWORD = pwd
-		val url = "http://decision-admin.tianqi.cn/Home/Work/login_1"
+		val url = "http://xinjiangdecision.tianqi.cn:81/home/work/login"
 		val builder = FormBody.Builder()
 		builder.add("username", userName)
 		builder.add("password", pwd)
@@ -299,6 +299,38 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 												}
 												if (!child2Obj.isNull("showtype")) {
 													child2.showType = child2Obj.getString("showtype")
+												}
+												if (!child2Obj.isNull("child")) {
+													val child3Array = JSONArray(child2Obj.getString("child"))
+													for (m in 0 until child3Array.length()) {
+														val child3Obj = child3Array.getJSONObject(m)
+														val child3 = ColumnData()
+														if (!child3Obj.isNull("id")) {
+															child3.columnId = child3Obj.getString("id")
+														}
+														if (!child3Obj.isNull("localviewid")) {
+															child3.id = child3Obj.getString("localviewid")
+														}
+														if (!child3Obj.isNull("name")) {
+															child3.name = child3Obj.getString("name")
+														}
+														if (!child3Obj.isNull("desc")) {
+															child3.desc = child3Obj.getString("desc")
+														}
+														if (!child3Obj.isNull("icon")) {
+															child3.icon = child3Obj.getString("icon")
+														}
+														if (!child3Obj.isNull("icon2")) {
+															child3.icon2 = child3Obj.getString("icon2")
+														}
+														if (!child3Obj.isNull("dataurl")) {
+															child3.dataUrl = child3Obj.getString("dataurl")
+														}
+														if (!child3Obj.isNull("showtype")) {
+															child3.showType = child3Obj.getString("showtype")
+														}
+														child2.child.add(child3)
+													}
 												}
 												dto.child.add(child2)
 											}

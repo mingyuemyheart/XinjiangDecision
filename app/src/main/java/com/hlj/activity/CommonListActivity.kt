@@ -60,8 +60,12 @@ class CommonListActivity : BaseActivity(), View.OnClickListener {
             tvTitle.text = dto.name
 
             if (TextUtils.isEmpty(dto.showType) || TextUtils.isEmpty(dto.dataUrl)) {
-                if (!TextUtils.isEmpty(dto.child[0].dataUrl)) {
-                    okHttpList(dto.child[0].dataUrl)
+                try {
+                    if (!TextUtils.isEmpty(dto.child[0].dataUrl)) {
+                        okHttpList(dto.child[0].dataUrl)
+                    }
+                } catch (e: IndexOutOfBoundsException) {
+                    e.printStackTrace()
                 }
             } else {
                 if (!TextUtils.isEmpty(dto.dataUrl)) {
@@ -186,6 +190,9 @@ class CommonListActivity : BaseActivity(), View.OnClickListener {
                                                 dto.icon = itemObj.getString("l4")
                                             }
                                             dto.type = type
+                                            if (dto.dataUrl.endsWith(".pdf") || dto.dataUrl.endsWith(".PDF")) {
+                                                dto.type = CONST.PDF
+                                            }
                                             dataList.add(dto)
                                         }
                                     }

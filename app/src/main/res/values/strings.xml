@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">黑龙江气象</string>
+    <string name="app_name">新疆气象</string>
     <string name="province_name">黑龙江</string>
     <string name="copyright">黑龙江省气象局\n黑龙江省气象服务中心</string>
     <string name="logout">退出登录</string>
@@ -138,7 +137,6 @@
     <string name="update_later">以后再说</string>
     <string name="already_new_version">已经是最新版本！</string>
 
-
     <!-- 新闻类 -->
     <string name="last_page">已经是最后一页</string>
 
@@ -187,7 +185,6 @@
     <string name="chart_haotaifeng">号台风</string>
     <string name="chart_propt">提示</string>
 
-
     <!-- 天气上报 -->
     <string name="current_position">当前位置：</string>
     <string name="actual_weather">您看到的天气是：</string>
@@ -198,7 +195,6 @@
     <string name="is_uploading">正在上传...</string>
     <string name="upload_failed">上传失败</string>
     <string name="upload_current_weather">上传现在的天空</string>
-
 
     <!-- 单位符号 -->
     <string name="unit_percent">%</string>
@@ -305,7 +301,6 @@
     <string name="trend_wind">过去24小时风速实况（m/s）</string>
     <string name="trend_pressure">过去24小时气压实况（hPa）</string>
     <string name="current_fact">当前实况</string>
-
 
     <!-- 预警 -->
     <string name="tianjin_city">天津市</string>

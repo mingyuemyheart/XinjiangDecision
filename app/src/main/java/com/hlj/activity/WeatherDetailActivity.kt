@@ -1,9 +1,5 @@
 package com.hlj.activity
 
-/**
- * 天气详情
- */
-
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -66,6 +62,9 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * 天气详情
+ */
 class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.RadarListener {
 
     private var mAdapter: WeeklyForecastAdapter? = null
@@ -134,6 +133,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
         clHour.setOnClickListener(this)
         tvInfo.setOnClickListener(this)
         ivClimate.setOnClickListener(this)
+        ivClimate.visibility = View.INVISIBLE
         clAudio.setOnClickListener(this)
         ivPlay2!!.setOnClickListener(this)
         hour = sdf1.format(Date()).toInt()
@@ -157,14 +157,18 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
             tvTitle.text = data.areaName
             cityName = data.areaName
             tvPosition.text = data.areaName
-            addMarkerToMap(LatLng(data.lat, data.lng))
 //            if (data.provinceName.contains(data.cityName)) {
 //                okHttpInfo(data.cityName, data.areaName)
 //            } else {
 //                okHttpInfo(data.provinceName, data.cityName)
 //            }
-            OkHttpHourRain(data.lng, data.lat)
-            getWeatherInfo(data.cityId)
+            if (data.lng == 0.0 || data.lat == 0.0) {
+                getLatlngByCityid(data.cityId)
+            } else {
+                addMarkerToMap(LatLng(data.lat, data.lng))
+                OkHttpHourRain(data.lng, data.lat)
+                getWeatherInfo(data.lng, data.lat)
+            }
         }
 
         initSpeech()
@@ -593,7 +597,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
 
     private fun getWeatherInfo(cityId: String) {
         Thread(Runnable {
-            val url = String.format("http://api.weatherdt.com/common/?area=%s&type=forecast|observe|alarm|air|rise&key=eca9a6c9ee6fafe74ac6bc81f577a680", cityId)
+            val url = String.format("https://hfapi.tianqi.cn/getweatherdata.php?area=%s&type=forecast|observe|alarm|air|rise&key=AErLsfoKBVCsU8hs", cityId)
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -1333,6 +1337,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                     val c = obj.getJSONObject("c")
                                     val lng = c.getDouble("c13")
                                     val lat = c.getDouble("c14")
+                                    addMarkerToMap(LatLng(lat, lng))
                                     OkHttpHourRain(lng, lat)
                                     getWeatherInfo(lng, lat)
                                 }

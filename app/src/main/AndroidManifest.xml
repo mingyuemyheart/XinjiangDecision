@@ -34,7 +34,7 @@
     <application
         android:name="com.hlj.common.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/iv_icon"
+        android:icon="@drawable/icon_app"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:ignore="LockedOrientationActivity"
@@ -61,20 +61,9 @@
         </provider>
         <!-- 自动更新 -->
 
-        <!-- 决策气象服务-->
-        <!--1.包名为shawn.cxwl.com.hlj.decision-->
-        <!--2.高德地图key-->
-        <!--5.更换MainActivity、SettingActivity自动更新app_id-->
-        <!--6.gradle 修改打包名称-->
-
-        <!-- 普通版本-->
-<!--        <meta-data-->
-<!--        android:name="com.amap.api.v2.apikey"-->
-<!--        android:value="41cb6e240846b9f30207a9e6ac79fdc2"/>-->
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="51096dda8deea179e4a980f74d38c4d6" />
+            android:value="fe2dccccf82ba30789420bad46dda63f" />
 
         <service android:name="com.amap.api.location.APSService" />
 
@@ -83,7 +72,6 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -164,7 +152,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.ShawnFactMonitorActivity"
+            android:name="com.hlj.activity.FactMonitorActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -192,7 +180,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.ShawnPointForeDetailActivity"
+            android:name="com.hlj.activity.PointForeDetailActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -283,7 +271,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.ShawnWaitWindActivity"
+            android:name="com.hlj.activity.WaitWindActivity"
             android:screenOrientation="portrait" />
 
         <activity

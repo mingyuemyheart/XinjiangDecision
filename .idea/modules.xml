@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HLJDecision.iml" filepath="$PROJECT_DIR$/HLJDecision.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/HLJDecision.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/HLJDecision.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/XinjiangDecision.iml" filepath="$PROJECT_DIR$/.idea/modules/XinjiangDecision.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/XinjiangDecision.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/XinjiangDecision.app.iml" />
     </modules>
   </component>
 </project>

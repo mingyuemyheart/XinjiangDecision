@@ -130,12 +130,10 @@ class CityActivity : BaseActivity(), OnClickListener {
         for (i in stations.indices) {
             val value = stations[i].split(",").toTypedArray()
             val dto = CityDto()
-            dto.cityId = value[2]
-            dto.areaName = value[3]
-            dto.lat = java.lang.Double.valueOf(value[1])
-            dto.lng = java.lang.Double.valueOf(value[0])
-            dto.level = value[4]
-            dto.sectionName = value[5]
+            dto.cityId = value[0]
+            dto.areaName = value[1]
+            dto.level = value[2]
+            dto.sectionName = value[3]
             pList.add(dto)
         }
         for (i in pList.indices) {

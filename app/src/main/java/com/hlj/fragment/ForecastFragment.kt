@@ -167,9 +167,13 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         tvRain.setOnClickListener(this)
         clHour.setOnClickListener(this)
         tvDivPolicy.setOnClickListener(this)
+        tvDivPolicy.visibility = View.GONE
         tvInfo.setOnClickListener(this)
+        tvInfo.visibility = View.GONE
         ivClimate.setOnClickListener(this)
+        ivClimate.visibility = View.INVISIBLE
         clVideo.setOnClickListener(this)
+        clVideo.visibility = View.GONE
         clAudio.setOnClickListener(this)
         ivPlay2!!.setOnClickListener(this)
         hour = sdf1.format(Date()).toInt()
@@ -225,11 +229,11 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
             tvPosition!!.text = cityName
             addMarkerToMap(LatLng(amapLocation.latitude, amapLocation.longitude))
 
-            if (amapLocation.province.contains(amapLocation.city)) {
-                okHttpInfo(amapLocation.city, amapLocation.district)
-            } else {
-                okHttpInfo(amapLocation.province, amapLocation.city)
-            }
+//            if (amapLocation.province.contains(amapLocation.city)) {
+//                okHttpInfo(amapLocation.city, amapLocation.district)
+//            } else {
+//                okHttpInfo(amapLocation.province, amapLocation.city)
+//            }
             OkHttpHourRain(amapLocation.longitude,amapLocation.latitude)
             getWeatherInfo(amapLocation.longitude,amapLocation.latitude)
         }
@@ -325,6 +329,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         aMap!!.setOnMapLoadedListener {
             mRadarManager = CaiyunManager(activity)
             okHttpMinuteImage()
+            CommonUtil.drawHLJJson(activity, aMap)
         }
         aMap!!.setOnMapTouchListener { arg0 ->
             if (scrollView != null) {
@@ -684,7 +689,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
 
     private fun getWeatherInfo(cityId: String) {
         Thread(Runnable {
-            val url = String.format("http://api.weatherdt.com/common/?area=%s&type=forecast|observe|alarm|air|rise&key=eca9a6c9ee6fafe74ac6bc81f577a680", cityId)
+            val url = String.format("https://hfapi.tianqi.cn/getweatherdata.php?area=%s&type=forecast|observe|alarm|air|rise&key=AErLsfoKBVCsU8hs", cityId)
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -801,7 +806,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                     } else {
                                                         "$minute"
                                                     }
-                                                    tvRiseTime.text = "日出时间：$riseTime\n日落时间：$setTime\n日照时间：$hourStr:$minuteStr"
+                                                    tvRiseTime.text = "日出时间：$riseTime\n日落时间：$setTime\n日照时长：${hourStr}时${minuteStr}分"
                                                 }
                                             }
                                         }

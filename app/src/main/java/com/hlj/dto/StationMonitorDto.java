@@ -31,6 +31,7 @@ public class StationMonitorDto implements Parcelable{
 	public String pointTemp;//露点温度
 	public String visibility;//能见度
 	public String cloud;//云量
+	public String rain;//降水
 	public String value;
 
 	public String partition;
@@ -39,14 +40,14 @@ public class StationMonitorDto implements Parcelable{
 	public String districtName;
 	public String addr;
 	public List<String> areaList = new ArrayList<>();//华北、华东、华中、华南、东北、西北、西南
-	
+
 	public String currentTemp;//当前温度
 	public String current1hRain;//当前1h降水量
 	public String currentHumidity;//当前湿度
 	public String currentWindSpeed;//当前风速
 	public String currentPressure;//当前气压
 	public String currentVisible;//当前能见度
-	
+
 	public String statisHighTemp;//24h最高气温
 	public String statisLowTemp;//24h最低气温
 	public String statisAverTemp;//24h平巨额气温
@@ -63,6 +64,10 @@ public class StationMonitorDto implements Parcelable{
 	public List<StationMonitorDto> dataList = new ArrayList<>();//24h数据list
 	public float x = 0;//x轴坐标点
 	public float y = 0;//y轴坐标点
+
+	//5天降水量统计
+	public String imgUrl,startTime,endTime;
+	public double leftLat = 0,leftLng = 0,rightLat = 0,rightLng = 0;
 
 
 	//格点预报用到
@@ -101,6 +106,7 @@ public class StationMonitorDto implements Parcelable{
 		dest.writeString(this.pointTemp);
 		dest.writeString(this.visibility);
 		dest.writeString(this.cloud);
+		dest.writeString(this.rain);
 		dest.writeString(this.value);
 		dest.writeString(this.partition);
 		dest.writeString(this.provinceName);
@@ -130,6 +136,13 @@ public class StationMonitorDto implements Parcelable{
 		dest.writeTypedList(this.dataList);
 		dest.writeFloat(this.x);
 		dest.writeFloat(this.y);
+		dest.writeString(this.imgUrl);
+		dest.writeString(this.startTime);
+		dest.writeString(this.endTime);
+		dest.writeDouble(this.leftLat);
+		dest.writeDouble(this.leftLng);
+		dest.writeDouble(this.rightLat);
+		dest.writeDouble(this.rightLng);
 		dest.writeTypedList(this.itemList);
 	}
 
@@ -157,6 +170,7 @@ public class StationMonitorDto implements Parcelable{
 		this.pointTemp = in.readString();
 		this.visibility = in.readString();
 		this.cloud = in.readString();
+		this.rain = in.readString();
 		this.value = in.readString();
 		this.partition = in.readString();
 		this.provinceName = in.readString();
@@ -186,6 +200,13 @@ public class StationMonitorDto implements Parcelable{
 		this.dataList = in.createTypedArrayList(StationMonitorDto.CREATOR);
 		this.x = in.readFloat();
 		this.y = in.readFloat();
+		this.imgUrl = in.readString();
+		this.startTime = in.readString();
+		this.endTime = in.readString();
+		this.leftLat = in.readDouble();
+		this.leftLng = in.readDouble();
+		this.rightLat = in.readDouble();
+		this.rightLng = in.readDouble();
 		this.itemList = in.createTypedArrayList(StationMonitorDto.CREATOR);
 	}
 
@@ -201,3 +222,4 @@ public class StationMonitorDto implements Parcelable{
 		}
 	};
 }
+

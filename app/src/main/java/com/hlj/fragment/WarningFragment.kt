@@ -132,6 +132,7 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
         ivRefresh.setOnClickListener(this)
         ivList.setOnClickListener(this)
         ivHistory.setOnClickListener(this)
+        ivHistory.visibility = View.GONE
         clWarning.setOnClickListener(this)
         ivArrow.setOnClickListener(this)
 
@@ -155,7 +156,7 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
      * 获取预警信息
      */
     private fun okHttpWarning() {
-        val url = "https://decision-admin.tianqi.cn/Home/work2019/getwarns?areaid=23"
+        val url = "https://decision-admin.tianqi.cn/Home/work2019/getwarns?areaid=65"
         OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
 

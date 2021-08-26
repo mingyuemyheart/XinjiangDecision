@@ -7,9 +7,9 @@ public class CONST {
 	public static String noValue = "--";
 	public static final String imageSuffix = ".png";//图标后缀名
 	public static final String publicUser = "publicuser";//公众账号
-	public static final String publicPwd = "123456";//公众密码
-	public static String APPID = "18";//贵州客户端对应服务器的appid
-	public static final LatLng guizhouLatLng = new LatLng(48.602915,128.121040);//贵州中点
+	public static final String publicPwd = "publicuser@2021";//公众密码
+	public static String APPID = "1";
+	public static final LatLng guizhouLatLng = new LatLng(48.602915,128.121040);
 	public static boolean isDelete = false;//判断是否可以删除
 	public static String BUILD_URL = "http://decision-admin.tianqi.cn/infomes/data/heilongjiang/about_heilongjiang.html";//企业信息地址
 

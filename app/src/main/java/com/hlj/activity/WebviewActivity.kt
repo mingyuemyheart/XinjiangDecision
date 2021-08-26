@@ -150,8 +150,12 @@ class WebviewActivity : BaseActivity(), OnClickListener{
         }
 
         webView.setDownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
-            val fileName = contentDisposition.substring(contentDisposition.indexOf("\"") + 1, contentDisposition.lastIndexOf("\""))
-            OkHttpFile(url, fileName)
+            try {
+                val fileName = contentDisposition.substring(contentDisposition.indexOf("\"") + 1, contentDisposition.lastIndexOf("\""))
+                OkHttpFile(url, fileName)
+            } catch (e: StringIndexOutOfBoundsException) {
+                e.printStackTrace()
+            }
         }
 
     }

@@ -39,6 +39,7 @@ import com.hlj.common.MyApplication;
 import com.hlj.fragment.CommonListFragment;
 import com.hlj.fragment.ContactUsFragment;
 import com.hlj.fragment.ForecastFragment;
+import com.hlj.fragment.JueceListFragment;
 import com.hlj.fragment.WarningFragment;
 import com.hlj.fragment.WeatherFactFragment;
 import com.hlj.fragment.WebviewFragment;
@@ -99,8 +100,7 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 	 * 初始化控件
 	 */
 	private void initWidget() {
-//		AutoUpdateUtil.checkUpdate(MainActivity.this, mContext, "41", getString(R.string.app_name), true);//黑龙江气象
-		AutoUpdateUtil.checkUpdate(MainActivity.this, mContext, "53", getString(R.string.app_name), true);//决策气象服务
+		AutoUpdateUtil.checkUpdate(MainActivity.this, mContext, "140", getString(R.string.app_name), true);
 
 		ConstraintLayout clMain = findViewById(R.id.clMain);
 		ImageView ivSetting = findViewById(R.id.ivSetting);
@@ -199,22 +199,21 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 				String id = channel.id;
 				if (TextUtils.equals(id, "1")) {
 					fragment = new ForecastFragment();//首页
-				} else if (TextUtils.equals(id, "5")) {
+				} else if (TextUtils.equals(id, "4")) {
 					fragment = new WarningFragment();//天气预警
-				} else if (TextUtils.equals(id, "2") || TextUtils.equals(id, "3") || TextUtils.equals(id, "4")
-						|| TextUtils.equals(id, "10") || TextUtils.equals(id, "7")
-						|| TextUtils.equals(id, "8") || TextUtils.equals(id, "13")
-						|| TextUtils.equals(id, "11") || TextUtils.equals(id, "14") || TextUtils.equals(id, "15")) {
-					fragment = new WeatherFactFragment();//天气实况、天气预报、科普宣传、电力气象服务、铁路气象服务、人工影响天气、森林防火、农业气象
-				} else if (TextUtils.equals(id, "106")) {
-					fragment = new WebviewFragment();//旅游气象
+				} else if (TextUtils.equals(id, "5")) {
+					fragment = new JueceListFragment();//决策服务
+				} else if (TextUtils.equals(id, "2") || TextUtils.equals(id, "3") || TextUtils.equals(id, "6")
+						|| TextUtils.equals(id, "7") || TextUtils.equals(id, "8") || TextUtils.equals(id, "9")
+						|| TextUtils.equals(id, "10") ) {
+					fragment = new WeatherFactFragment();//天气实况、天气预报、农业气象、旅游气象、人工影响天气、专业服务、科普宣传
 				} else if (TextUtils.equals(id, "12")) {
 					fragment = new ContactUsFragment();//联系我们
 				}
 			} else if (TextUtils.equals(showType, CONST.NEWS)) {
 				fragment = new CommonListFragment();
 			} else {
-				fragment = new CommonListFragment();
+				fragment = new WebviewFragment();
 			}
 
 			if (fragment != null) {

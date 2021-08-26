@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.Toast
 import com.hlj.activity.*
 import com.hlj.adapter.CommonFragmentAdapter
 import com.hlj.common.CONST
@@ -29,7 +30,7 @@ import shawn.cxwl.com.hlj.R
 import java.io.IOException
 
 /**
- * 天气预报、天气实况、电力气象服务、铁路气象服务
+ * 天气实况、天气预报、农业气象、旅游气象、人工影响天气、专业服务、科普宣传
  */
 class WeatherFactFragment : Fragment() {
 
@@ -97,16 +98,63 @@ class WeatherFactFragment : Fragment() {
         gridView!!.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
             val dto = dataList[arg2]
             val intent: Intent
-            if (TextUtils.equals(dto.showType, CONST.LOCAL)) { //气温预报、雾霾预报、降温大风沙尘预报
-                if (TextUtils.equals(dto.id, "111")) { //天气雷达
-                    intent = Intent(activity, WeatherRadarActivity::class.java)
+            if (TextUtils.equals(dto.showType, CONST.LOCAL)) {
+                if (TextUtils.equals(dto.id, "101")) { //自动站实况监测
+                    intent = Intent(activity, FactMonitorActivity::class.java)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    intent.putExtra(CONST.WEB_URL, dto.dataUrl)
+                    val bundle = Bundle()
+                    bundle.putParcelable("data", dto)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                } else if (TextUtils.equals(dto.id, "104")) { //强对流天气实况（新）
+                    intent = Intent(activity, ShawnStreamFactActivity::class.java)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    startActivity(intent)
+                } else if (TextUtils.equals(dto.id, "105")) { //格点实况
+//                    intent = Intent(activity, PointForeActivity::class.java)
+//                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+//                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+//                    startActivity(intent)
+                    Toast.makeText(activity, "开发中，敬请期待！", Toast.LENGTH_SHORT).show()
+                } else if (TextUtils.equals(dto.id, "106")) { //天气统计
+                    intent = Intent(activity, HWeatherStaticsActivity::class.java)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    startActivity(intent)
+                } else if (TextUtils.equals(dto.id, "107")) { //天气图分析
+                    intent = Intent(activity, HWeatherChartAnalysisActivity::class.java)
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     val bundle = Bundle()
                     bundle.putParcelable("data", dto)
                     intent.putExtras(bundle)
                     startActivity(intent)
-                } else if (TextUtils.equals(dto.id, "106")) { //天气图分析
-                    intent = Intent(activity, HWeatherChartAnalysisActivity::class.java)
+                } else if (TextUtils.equals(dto.id, "203")) { //城市天气预报
+                    intent = Intent(activity, CityActivity::class.java)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    startActivity(intent)
+                } else if (TextUtils.equals(dto.id, "204")) { //格点预报
+                    intent = Intent(activity, PointForeActivity::class.java)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    startActivity(intent)
+                } else if (TextUtils.equals(dto.id, "205")) { //分钟级降水
+                    intent = Intent(activity, MinuteFallActivity::class.java)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    startActivity(intent)
+                } else if (TextUtils.equals(dto.id, "206")) { //等风来
+                    intent = Intent(activity, WaitWindActivity::class.java)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    startActivity(intent)
+                }
+
+                else if (TextUtils.equals(dto.id, "111")) { //天气雷达
+                    intent = Intent(activity, WeatherRadarActivity::class.java)
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     val bundle = Bundle()
                     bundle.putParcelable("data", dto)
@@ -117,18 +165,8 @@ class WeatherFactFragment : Fragment() {
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                     startActivity(intent)
-                } else if (TextUtils.equals(dto.id, "112")) { //天气统计
-                    intent = Intent(activity, HWeatherStaticsActivity::class.java)
-                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
-                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
-                    startActivity(intent)
                 } else if (TextUtils.equals(dto.id, "117")) { //台风路径
                     intent = Intent(activity, TyphoonRouteActivity::class.java)
-                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
-                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
-                    startActivity(intent)
-                } else if (TextUtils.equals(dto.id, "120")) { //强对流天气实况（新）
-                    intent = Intent(activity, ShawnStreamFactActivity::class.java)
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                     startActivity(intent)
@@ -138,21 +176,6 @@ class WeatherFactFragment : Fragment() {
                     val bundle = Bundle()
                     bundle.putParcelable("data", dto)
                     intent.putExtras(bundle)
-                    startActivity(intent)
-                } else if (TextUtils.equals(dto.id, "203")) { //分钟级降水
-                    intent = Intent(activity, MinuteFallActivity::class.java)
-                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
-                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
-                    startActivity(intent)
-                } else if (TextUtils.equals(dto.id, "205")) { //等风来
-                    intent = Intent(activity, ShawnWaitWindActivity::class.java)
-                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
-                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
-                    startActivity(intent)
-                } else if (TextUtils.equals(dto.id, "207")) { //格点预报
-                    intent = Intent(activity, PointForeActivity::class.java)
-                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
-                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                     startActivity(intent)
                 } else if (TextUtils.equals(dto.id, "208")) { //分钟降水与强对流
                     intent = Intent(activity, ShawnStrongStreamActivity::class.java)
@@ -194,12 +217,6 @@ class WeatherFactFragment : Fragment() {
                     intent = Intent(activity, ShawnWeatherMeetingActivity::class.java)
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
-                    startActivity(intent)
-                } else if (TextUtils.equals(dto.id, "119")) { //自动站实况监测
-                    intent = Intent(activity, ShawnFactMonitorActivity::class.java)
-                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
-                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
-                    intent.putExtra(CONST.WEB_URL, dto.dataUrl)
                     startActivity(intent)
                 } else if (TextUtils.equals(dto.id, "209")) { //雷电预报
                     intent = Intent(activity, ThunderForeActivity::class.java)

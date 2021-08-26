@@ -13,6 +13,7 @@ import com.hlj.manager.DBManager
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import kotlinx.android.synthetic.main.fragment_warning_detail.*
+import kotlinx.android.synthetic.main.layout_title.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Request
@@ -40,6 +41,9 @@ class WarningDetailActivity : BaseActivity(), OnClickListener{
 	 * 初始化控件
 	 */
 	private fun initWidget() {
+		tvTitle.text = "预警详情"
+		llBack.setOnClickListener(this)
+
 		if (intent.hasExtra("data")) {
 			data = intent.getParcelableExtra("data")
 			okHttpWarningDetail()

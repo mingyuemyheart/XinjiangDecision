@@ -29,24 +29,21 @@ import shawn.cxwl.com.hlj.R;
 /**
  * 实况资料
  */
+public class FactMonitorAdapter extends BaseAdapter {
 
-public class FactAdapter2 extends BaseAdapter{
-	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<FactDto> mArrayList = new ArrayList<>();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<FactDto> mArrayList;
 	public String stationName = "", area = "", val = "", timeString = "";
 	public List<FactDto> realDatas = new ArrayList<>();
-	
-	private final class ViewHolder{
+
+	private final class ViewHolder {
 		TextView tvRailLevel;
 		TextView tvCount;
 		LinearLayout llContainer;
 	}
-	
-	private ViewHolder mHolder = null;
-	
-	public FactAdapter2(Context context, List<FactDto> mArrayList) {
+
+	public FactMonitorAdapter(Context context, List<FactDto> mArrayList) {
 		mContext = context;
 		this.mArrayList = mArrayList;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -69,8 +66,9 @@ public class FactAdapter2 extends BaseAdapter{
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+		ViewHolder mHolder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.adapter_fact2, null);
+			convertView = mInflater.inflate(R.layout.adapter_fact_monitor, null);
 			mHolder = new ViewHolder();
 			mHolder.tvRailLevel = (TextView) convertView.findViewById(R.id.tvRailLevel);
 			mHolder.tvCount = (TextView) convertView.findViewById(R.id.tvCount);
@@ -79,17 +77,17 @@ public class FactAdapter2 extends BaseAdapter{
 		}else {
 			mHolder = (ViewHolder) convertView.getTag();
 		}
-		
+
 		FactDto dto = mArrayList.get(position);
-		
+
 		if (!TextUtils.isEmpty(dto.rainLevel)) {
 			mHolder.tvRailLevel.setText(dto.rainLevel);
 		}
-		
+
 		if (!TextUtils.isEmpty(dto.count)) {
 			mHolder.tvCount.setText(dto.count);
 		}
-		
+
 		mHolder.llContainer.removeAllViews();
 		if (dto.areaList.size() > 0) {
 			if (dto.areaList.size() <= 4) {
@@ -128,7 +126,7 @@ public class FactAdapter2 extends BaseAdapter{
 						});
 					}
 				}
-			}else {
+			} else {
 				mHolder.llContainer.setOrientation(LinearLayout.VERTICAL);
 				mHolder.llContainer.setGravity(Gravity.CENTER|Gravity.CENTER_VERTICAL);
 				int containerCount = 0;
@@ -141,7 +139,7 @@ public class FactAdapter2 extends BaseAdapter{
 					LinearLayout llItem = new LinearLayout(mContext);
 					llItem.setOrientation(LinearLayout.HORIZONTAL);
 					llItem.setGravity(Gravity.CENTER|Gravity.CENTER_VERTICAL);
-					
+
 					int i = 0;
 					int size = j*4+4;
 					if (size >= dto.areaList.size()) {
@@ -185,14 +183,10 @@ public class FactAdapter2 extends BaseAdapter{
 							});
 						}
 					}
-					
 					mHolder.llContainer.addView(llItem);
 				}
-				
-				
-				
 			}
-		}else {
+		} else {
 			TextView tvArea = new TextView(mContext);
 			tvArea.setGravity(Gravity.CENTER);
 			tvArea.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
@@ -201,13 +195,13 @@ public class FactAdapter2 extends BaseAdapter{
 			tvArea.setText("无");
 			mHolder.llContainer.addView(tvArea);
 		}
-		
+
 		if (position % 2 == 0) {
 			convertView.setBackgroundColor(0xfff5f5f5);
 		}else {
 			convertView.setBackgroundColor(0xffeaeaea);
 		}
-		
+
 		return convertView;
 	}
 

@@ -117,6 +117,9 @@ class CommonListFragment : Fragment() {
 
     private fun okHttpList() {
         val url = arguments!!.getString(CONST.WEB_URL)
+        if (TextUtils.isEmpty(url)) {
+            return
+        }
         Thread(Runnable {
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}

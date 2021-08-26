@@ -47,14 +47,14 @@ class WarningListActivity : BaseActivity(), OnClickListener {
         tvTitle.text = "预警列表"
         etSearch.addTextChangedListener(watcher)
 
-        if (intent.hasExtra("isVisible")) {
-            val isVisible = intent.getBooleanExtra("isVisible", false)
-            if (isVisible) {
-                tvControl.text = "选择地区"
-                tvControl.visibility = View.VISIBLE
-                tvControl.setOnClickListener(this)
-            }
-        }
+//        if (intent.hasExtra("isVisible")) {
+//            val isVisible = intent.getBooleanExtra("isVisible", false)
+//            if (isVisible) {
+//                tvControl.text = "选择地区"
+//                tvControl.visibility = View.VISIBLE
+//                tvControl.setOnClickListener(this)
+//            }
+//        }
         warningList.addAll(intent.extras.getParcelableArrayList("warningList"))
         showList.addAll(warningList)
     }

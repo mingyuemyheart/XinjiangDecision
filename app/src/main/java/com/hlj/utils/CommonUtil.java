@@ -548,96 +548,27 @@ public class CommonUtil {
 	}
 	
 	/**
-	 * 回执区域
-	 * @param context
-	 * @param aMap
-	 */
-	public static void drawDistrict(Context context, AMap aMap) {
-		if (aMap == null) {
-			return;
-		}
-		String result = CommonUtil.getFromAssets(context, "heilongjiang.json");
-		if (!TextUtils.isEmpty(result)) {
-			try {
-				JSONObject obj = new JSONObject(result);
-				JSONArray array = obj.getJSONArray("features");
-				int transparency = 255;
-				for (int i = 0; i < array.length(); i++) {
-					JSONObject itemObj = array.getJSONObject(i);
-					
-					JSONObject properties = itemObj.getJSONObject("properties");
-					String name = properties.getString("name");
-					JSONArray cp = properties.getJSONArray("cp");
-					for (int m = 0; m < cp.length(); m++) {
-						double lat = cp.getDouble(1);
-						double lng = cp.getDouble(0);
-						
-						LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-						View view = inflater.inflate(R.layout.rainfall_fact_marker_view2, null);
-						TextView tvName = (TextView) view.findViewById(R.id.tvName);
-						if (!TextUtils.isEmpty(name)) {
-							tvName.setText(name);
-						}
-						MarkerOptions options = new MarkerOptions();
-						options.anchor(0.5f, 0.5f);
-						options.position(new LatLng(lat, lng));
-						options.icon(BitmapDescriptorFactory.fromView(view));
-						aMap.addMarker(options);
-					}
-					
-					JSONObject geometry = itemObj.getJSONObject("geometry");
-					JSONArray coordinates = geometry.getJSONArray("coordinates");
-					JSONArray array2 = coordinates.getJSONArray(0);
-					PolygonOptions polylineOption = new PolygonOptions();
-					transparency = 255-(i+1)*15;
-					polylineOption.fillColor(Color.argb(transparency, 0, 97, 194));
-					polylineOption.strokeColor(Color.TRANSPARENT);
-					for (int j = 0; j < array2.length(); j++) {
-						JSONArray itemArray = array2.getJSONArray(j);
-						double lng = itemArray.getDouble(0);
-						double lat = itemArray.getDouble(1);
-						polylineOption.add(new LatLng(lat, lng));
-					}
-					aMap.addPolygon(polylineOption);
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	/**
 	 * 绘制黑龙江
 	 */
 	public static void drawHLJJson(Context context, AMap aMap) {
 		if (aMap == null) {
 			return;
 		}
-		String result = CommonUtil.getFromAssets(context, "heilongjiang.json");
+		String result = CommonUtil.getFromAssets(context, "xinjiang.json");
 		if (!TextUtils.isEmpty(result)) {
 			try {
                 LatLngBounds.Builder builder = LatLngBounds.builder();
-				JSONObject obj = new JSONObject(result);
-				JSONArray array = obj.getJSONArray("features");
-				for (int i = 0; i < array.length(); i++) {
-					JSONObject itemObj = array.getJSONObject(i);
-
-					JSONObject properties = itemObj.getJSONObject("properties");
-					String name = properties.getString("name");
-					JSONObject geometry = itemObj.getJSONObject("geometry");
-					JSONArray coordinates = geometry.getJSONArray("coordinates");
-					JSONArray array2 = coordinates.getJSONArray(0);
+				JSONArray array = new JSONArray(result);
+				if (array.length() > 0) {
+					String[] item = array.get(0).toString().split(";");
 					PolylineOptions polylineOption = new PolylineOptions();
-					if (name.contains("加格达奇")) {
-						polylineOption.setDottedLine(true);
-					}
 					polylineOption.width(5).color(0xff406bbf);
-					for (int j = 0; j < array2.length(); j++) {
-						JSONArray itemArray = array2.getJSONArray(j);
-						double lng = itemArray.getDouble(0);
-						double lat = itemArray.getDouble(1);
+					for (int i = 0; i < item.length; i++) {
+						String[] latLng = item[i].split(",");
+						double lng = Double.parseDouble(latLng[0]);
+						double lat = Double.parseDouble(latLng[1]);
 						polylineOption.add(new LatLng(lat, lng));
-                        builder.include(new LatLng(lat, lng));
+						builder.include(new LatLng(lat, lng));
 					}
 					aMap.addPolyline(polylineOption);
 				}
@@ -883,7 +814,7 @@ public class CommonUtil {
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH", Locale.CHINA);
 		String addtime = sdf.format(new Date());
-		final String clickUrl = String.format("http://decision-admin.tianqi.cn/Home/Count/clickCount?addtime=%s&appid=%s&eventid=menuClick_%s&eventname=%s&userid=%s&username=%s",
+		final String clickUrl = String.format("http://xinjiangdecision.tianqi.cn:81/home/work/clickCount?addtime=%s&appid=%s&eventid=menuClick_%s&eventname=%s&userid=%s&username=%s",
 				addtime, CONST.APPID, columnId, name, CONST.UID, CONST.USERNAME);
 		new Thread(new Runnable() {
 			@Override

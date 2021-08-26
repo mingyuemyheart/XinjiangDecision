@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:orientation="vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/reTitle"
-        layout="@layout/layout_title"/>
+        layout="@layout/layout_title" />
 
     <TextView
-        android:layout_below="@+id/reTitle"
         android:id="@+id/tvName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"
-        android:textSize="@dimen/level_4"/>
+        android:textSize="@dimen/level_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle" />
 
     <TextView
         android:id="@+id/tvPublishTime"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvName"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/text_color3"
-        android:textSize="@dimen/level_5"/>
+        android:textSize="@dimen/level_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <ScrollView
-        android:visibility="gone"
         android:id="@+id/scrollView"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/tvPublishTime"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:scrollbars="none"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPublishTime">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,77 +52,77 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:background="#be3C4144"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:paddingTop="5dp"
+                android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
                 android:text="逐3小时气温预报(单位:℃)"
-                android:textSize="@dimen/level_5"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5" />
 
             <LinearLayout
                 android:id="@+id/llContainerTemp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:background="#be3C4144"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:paddingTop="5dp"
+                android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
                 android:text="逐3小时相对湿度预报(单位:%)"
-                android:textSize="@dimen/level_5"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5" />
 
             <LinearLayout
                 android:id="@+id/llContainerHumidity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:background="#be3C4144"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:paddingTop="5dp"
+                android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
                 android:text="逐3小时风速预报(单位:m/s)"
-                android:textSize="@dimen/level_5"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5" />
 
             <LinearLayout
                 android:id="@+id/llContainerWind"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:background="#be3C4144"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:paddingTop="5dp"
+                android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
                 android:text="逐3小时云量预报(单位:%)"
-                android:textSize="@dimen/level_5"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5" />
 
             <LinearLayout
                 android:id="@+id/llContainerCloud"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal" />
 
         </LinearLayout>
 
     </ScrollView>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
