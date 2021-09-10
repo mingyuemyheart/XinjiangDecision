@@ -52,9 +52,9 @@ class WarningHistoryActivity : BaseActivity(), View.OnClickListener {
     private fun initWidget() {
         llBack.setOnClickListener(this)
         tvTitle.text = "${areaName}预警统计"
-        tvControl.setOnClickListener(this)
-        tvControl.text = "筛选"
-        tvControl.visibility = View.VISIBLE
+        ivControl.setOnClickListener(this)
+        ivControl.setImageResource(R.drawable.icon_screen)
+        ivControl.visibility = View.VISIBLE
         startTime = if (intent.hasExtra("startTime")) {
             intent.getStringExtra("startTime")
         } else {
@@ -82,9 +82,9 @@ class WarningHistoryActivity : BaseActivity(), View.OnClickListener {
                 }
             }
         } else {
-            areaName = "黑龙江"
+            areaName = "新疆"
             tvTitle.text = "${areaName}预警统计"
-            areaId = "23"
+            areaId = "65"
             url = String.format("$baseUrl&areaid=%s&starttime=%s&endtime=%s", areaId, startTime, endTime)
         }
         okHttpStatistic(url)
@@ -215,7 +215,7 @@ class WarningHistoryActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.llBack -> finish()
-            R.id.tvControl -> {
+            R.id.ivControl -> {
                 val intent = Intent(this, WarningHistoryScreenActivity::class.java)
                 intent.putExtra("startTime", startTime)
                 intent.putExtra("endTime", endTime)

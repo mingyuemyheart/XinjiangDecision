@@ -73,11 +73,11 @@ class MinuteFallActivity : BaseActivity(), View.OnClickListener, CaiyunManager.R
         ivPlay!!.setOnClickListener(this)
         ivRank!!.setOnClickListener(this)
         seekBar!!.setOnSeekBarChangeListener(seekbarListener)
+
         val title = intent.getStringExtra(CONST.ACTIVITY_NAME)
         if (!TextUtils.isEmpty(title)) {
             tvTitle!!.text = title
         }
-        CommonUtil.drawHLJJson(this, aMap)
         geocoderSearch = GeocodeSearch(this)
         geocoderSearch!!.setOnGeocodeSearchListener(this)
         mRadarManager = CaiyunManager(this)
@@ -202,7 +202,10 @@ class MinuteFallActivity : BaseActivity(), View.OnClickListener, CaiyunManager.R
         aMap!!.uiSettings.isZoomControlsEnabled = false
         aMap!!.uiSettings.isRotateGesturesEnabled = false
         aMap!!.setOnMapClickListener(this)
-        tvMapNumber.text = aMap!!.mapContentApprovalNumber
+        aMap!!.setOnMapLoadedListener {
+            tvMapNumber.text = aMap!!.mapContentApprovalNumber
+            CommonUtil.drawHLJJson(this, aMap)
+        }
     }
 
     private fun addMarkerToMap(latLng: LatLng) {

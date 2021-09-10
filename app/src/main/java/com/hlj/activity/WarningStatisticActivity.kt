@@ -347,6 +347,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         year.isCyclic = false //是否可循环滑动
         year.addScrollingListener(scrollListener)
         year.visibleItems = 7
+        year.visibility = View.VISIBLE
 
         val numericWheelAdapter2 = NumericWheelAdapter(this, 1, 12, "%02d")
         numericWheelAdapter2.setLabel("月")
@@ -354,10 +355,12 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         month.isCyclic = false
         month.addScrollingListener(scrollListener)
         month.visibleItems = 7
+        year.visibility = View.VISIBLE
 
         initDay(curYear, curMonth)
         day.isCyclic = false
         day.visibleItems = 7
+        day.visibility = View.VISIBLE
 
         val numericWheelAdapter3 = NumericWheelAdapter(this, 0, 23, "%02d")
         numericWheelAdapter3.setLabel("时")
@@ -365,6 +368,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         hour.isCyclic = false
         hour.addScrollingListener(scrollListener)
         hour.visibleItems = 7
+        hour.visibility = View.VISIBLE
 
         val numericWheelAdapter4 = NumericWheelAdapter(this, 0, 59, "%02d")
         numericWheelAdapter4.setLabel("分")
@@ -372,6 +376,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         minute.isCyclic = false
         minute.addScrollingListener(scrollListener)
         minute.visibleItems = 7
+        minute.visibility = View.VISIBLE
 
         val numericWheelAdapter5 = NumericWheelAdapter(this, 0, 59, "%02d")
         numericWheelAdapter5.setLabel("秒")
@@ -379,6 +384,7 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
         second.isCyclic = false
         second.addScrollingListener(scrollListener)
         second.visibleItems = 7
+        second.visibility = View.VISIBLE
 
         year.currentItem = curYear - 1950
         month.currentItem = curMonth - 1

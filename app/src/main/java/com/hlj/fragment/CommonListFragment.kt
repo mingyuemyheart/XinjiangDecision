@@ -11,7 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
-import com.hlj.activity.HPDFActivity
+import com.hlj.activity.PDFActivity
 import com.hlj.activity.WebviewActivity
 import com.hlj.adapter.CommonPdfListAdapter
 import com.hlj.common.CONST
@@ -100,7 +100,7 @@ class CommonListFragment : Fragment() {
             val dto = dataList[arg2]
             val intent = when {
                 TextUtils.equals(dto.type, CONST.PDF) -> {
-                    Intent(activity, HPDFActivity::class.java)
+                    Intent(activity, PDFActivity::class.java)
                 }
                 TextUtils.equals(dto.type, CONST.MP4) -> {
                     Intent(activity, WebviewActivity::class.java)

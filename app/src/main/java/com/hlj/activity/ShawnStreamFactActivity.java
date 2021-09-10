@@ -115,7 +115,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.shawn_activity_stream_fact);
+		setContentView(R.layout.activity_stream_fact);
 		mContext = this;
 		showDialog();
 		initMap(savedInstanceState);
@@ -508,7 +508,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 												dto.lighting = itemObj.getString("Lit_Current");
 											}
 											dto.lightingType = 1;
-											if (!dto.lighting.contains("99999") && !TextUtils.isEmpty(dto.province) && dto.province.startsWith("黑龙江")) {
+											if (!dto.lighting.contains("99999")) {
 												lightingList.add(dto);
 											}
 										}
@@ -544,7 +544,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 												dto.lighting = itemObj.getString("Lit_Current");
 											}
 											dto.lightingType = 2;
-											if (!dto.lighting.contains("99999") && !TextUtils.isEmpty(dto.province) && dto.province.startsWith("黑龙江")) {
+											if (!dto.lighting.contains("99999")) {
 												lightingList.add(dto);
 											}
 										}
@@ -580,7 +580,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 												dto.lighting = itemObj.getString("Lit_Current");
 											}
 											dto.lightingType = 3;
-											if (!dto.lighting.contains("99999") && !TextUtils.isEmpty(dto.province) && dto.province.startsWith("黑龙江")) {
+											if (!dto.lighting.contains("99999")) {
 												lightingList.add(dto);
 											}
 										}
@@ -616,7 +616,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 												dto.lighting = itemObj.getString("Lit_Current");
 											}
 											dto.lightingType = 4;
-											if (!dto.lighting.contains("99999") && !TextUtils.isEmpty(dto.province) && dto.province.startsWith("黑龙江")) {
+											if (!dto.lighting.contains("99999")) {
 												lightingList.add(dto);
 											}
 										}
@@ -652,7 +652,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 												dto.lighting = itemObj.getString("Lit_Current");
 											}
 											dto.lightingType = 5;
-											if (!dto.lighting.contains("99999") && !TextUtils.isEmpty(dto.province) && dto.province.startsWith("黑龙江")) {
+											if (!dto.lighting.contains("99999")) {
 												lightingList.add(dto);
 											}
 										}
@@ -688,7 +688,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 												dto.lighting = itemObj.getString("Lit_Current");
 											}
 											dto.lightingType = 6;
-											if (!dto.lighting.contains("99999") && !TextUtils.isEmpty(dto.province) && dto.province.startsWith("黑龙江")) {
+											if (!dto.lighting.contains("99999")) {
 												lightingList.add(dto);
 											}
 										}
@@ -730,7 +730,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 											if (!itemObj.isNull("PRE_1h")) {
 												dto.pre1h = itemObj.getString("PRE_1h");
 											}
-											if (!dto.pre1h.contains("99999") && !TextUtils.isEmpty(dto.province) && dto.province.startsWith("黑龙江")) {
+											if (!dto.pre1h.contains("99999")) {
 												double pre1h = Double.parseDouble(dto.pre1h);
 												if (pre1h <= 300) {//过滤掉300mm以上
 													rainList.add(dto);
@@ -775,7 +775,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 											if (!itemObj.isNull("WIN_D_S_Max")) {
 												dto.windD = itemObj.getString("WIN_D_S_Max");
 											}
-											if (!dto.windS.contains("99999") && !TextUtils.isEmpty(dto.province) && dto.province.startsWith("黑龙江")) {
+											if (!dto.windS.contains("99999")) {
 												double windS = Double.parseDouble(dto.windS);
 												if (windS > 17 && windS < 60) {//过滤掉17m/s以下、60m/s以上
 													windList.add(dto);
@@ -817,7 +817,7 @@ public class ShawnStreamFactActivity extends BaseActivity implements OnClickList
 											if (!itemObj.isNull("HAIL_Diam_Max")) {
 												dto.hail = itemObj.getString("HAIL_Diam_Max");
 											}
-											if (!dto.hail.contains("99999") && !TextUtils.isEmpty(dto.province) && dto.province.startsWith("黑龙江")) {
+											if (!dto.hail.contains("99999")) {
 												hailList.add(dto);
 											}
 										}

@@ -19,7 +19,6 @@ import shawn.cxwl.com.hlj.R;
 /**
  * 实况资料详情
  */
-
 public class FactDetailAdapter extends BaseAdapter{
 	
 	private Context mContext = null;
@@ -31,8 +30,6 @@ public class FactDetailAdapter extends BaseAdapter{
 		TextView tvArea;
 		TextView tvValue;
 	}
-	
-	private ViewHolder mHolder = null;
 	
 	public FactDetailAdapter(Context context, List<FactDto> mArrayList) {
 		mContext = context;
@@ -57,6 +54,7 @@ public class FactDetailAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder mHolder;
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.adapter_fact_detail, null);
 			mHolder = new ViewHolder();
@@ -83,11 +81,11 @@ public class FactDetailAdapter extends BaseAdapter{
 		
 		mHolder.tvValue.setText(dto.val+"");
 		
-		if (position % 2 == 0) {
-			convertView.setBackgroundColor(0xfff5f5f5);
-		}else {
-			convertView.setBackgroundColor(0xffeaeaea);
-		}
+//		if (position % 2 == 0) {
+//			convertView.setBackgroundColor(0xfff5f5f5);
+//		}else {
+//			convertView.setBackgroundColor(0xffeaeaea);
+//		}
 		
 		return convertView;
 	}

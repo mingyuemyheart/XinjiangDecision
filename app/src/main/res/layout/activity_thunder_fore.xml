@@ -107,8 +107,8 @@
             android:minHeight="15dp"
             android:paddingStart="0dp"
             android:paddingEnd="0dp"
-            android:progressDrawable="@drawable/shawn_seekbar_drawable"
-            android:thumb="@drawable/shawn_seekbar_thumb"
+            android:progressDrawable="@drawable/seekbar_drawable"
+            android:thumb="@drawable/seekbar_thumb"
             android:thumbOffset="0dp"/>
 
         <LinearLayout

@@ -1,7 +1,6 @@
 package com.hlj.activity
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -375,40 +374,15 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 									val uid = obj.getString("id")
 									if (uid != null) {
 										//把用户信息保存在sharedPreferance里
-										val sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE)
-										val editor = sharedPreferences.edit()
-										editor.putString(CONST.UserInfo.uId, uid)
-										if (isMobileLogin) {
-											editor.putString(CONST.UserInfo.userName, obj.getString("mobile"))
-										} else {
-											editor.putString(CONST.UserInfo.userName, obj.getString("username"))
-										}
-										editor.putString(CONST.UserInfo.passWord, etPwd!!.text.toString())
-										if (!obj.isNull("token")) {
-											editor.putString(CONST.UserInfo.token, obj.getString("token"))
-											CONST.TOKEN = obj.getString("token")
-										} else {
-											CONST.TOKEN = ""
-										}
-										if (!obj.isNull("usergroup")) {
-											editor.putString(CONST.UserInfo.groupId, obj.getString("usergroup"))
-											CONST.GROUPID = obj.getString("usergroup")
-										} else {
-											CONST.GROUPID = ""
-										}
-										if (!obj.isNull("usergroup_name")) {
-											editor.putString(CONST.UserInfo.uGroupName, obj.getString("usergroup_name"))
-											CONST.UGROUPNAME = obj.getString("usergroup_name")
-										} else {
-											CONST.UGROUPNAME = ""
-										}
-										editor.apply()
+										MyApplication.UID = uid
+										MyApplication.USERNAME = obj.getString("username")
+										MyApplication.TOKEN = obj.getString("token")
+										MyApplication.GROUPID = obj.getString("usergroup")
+										MyApplication.MOBILE = obj.getString("mobile")
+										MyApplication.DEPARTMENT = obj.getString("department")
+										MyApplication.saveUserInfo(this)
 
 										resetTimer()
-										CONST.UID = uid
-										CONST.USERNAME = etUserName!!.text.toString()
-										CONST.PASSWORD = etPwd!!.text.toString()
-
 										okHttpPushToken()
 
 										MyApplication.destoryActivity()
@@ -441,8 +415,8 @@ class LoginActivity : BaseActivity(), OnClickListener, AMapLocationListener {
 		val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 		val serial = Build.SERIAL
 		builder.add("uuid", androidId+serial)
-		builder.add("uid", CONST.UID)
-		builder.add("groupid", CONST.GROUPID)
+		builder.add("uid", MyApplication.UID)
+		builder.add("groupid", MyApplication.GROUPID)
 		builder.add("pushtoken", MyApplication.DEVICETOKEN)
 		builder.add("platform", "android")
 		builder.add("um_key", MyApplication.appKey)

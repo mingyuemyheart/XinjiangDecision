@@ -9,7 +9,7 @@ public class CONST {
 	public static final String publicUser = "publicuser";//公众账号
 	public static final String publicPwd = "publicuser@2021";//公众密码
 	public static String APPID = "1";
-	public static final LatLng guizhouLatLng = new LatLng(48.602915,128.121040);
+	public static final LatLng guizhouLatLng = new LatLng(43.766288715991074,87.62225858867168);
 	public static boolean isDelete = false;//判断是否可以删除
 	public static String BUILD_URL = "http://decision-admin.tianqi.cn/infomes/data/heilongjiang/about_heilongjiang.html";//企业信息地址
 
@@ -36,24 +36,6 @@ public class CONST {
 	public static final int color2 = android.R.color.holo_blue_light;
 	public static final int color3 = android.R.color.holo_blue_bright;
 	public static final int color4 = android.R.color.holo_blue_light;
-
-	//本地保存用户信息参数
-	public static String USERINFO = "userInfo";//userInfo sharedPreferance名称
-	public static class UserInfo {
-		public static final String uId = "uId";
-		public static final String userName = "uName";
-		public static final String passWord = "pwd";
-		public static final String token = "token";
-		public static final String groupId = "groupId";
-		public static final String uGroupName = "uGroupName";
-	}
-
-	public static String UID = "2606";//用户id
-	public static String USERNAME = publicUser;//用户名
-	public static String PASSWORD = publicPwd;//用户密码
-	public static String TOKEN = "";//token
-	public static String GROUPID = "50";
-	public static String UGROUPNAME = "";//uGroupName
 
 	//预警颜色对应规则
 	public static String[] blue = {"01", "_blue"};

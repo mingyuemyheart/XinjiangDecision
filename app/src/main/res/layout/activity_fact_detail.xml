@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_gray">
 
     <include
         android:id="@+id/reTitle"
         layout="@layout/layout_title" />
 
-    <TextView
-        android:id="@+id/tvPrompt"
+    <HorizontalScrollView
+        android:id="@+id/hScrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:textColor="@color/text_color3"
-        android:textSize="@dimen/level_5" />
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle">
+
+        <LinearLayout
+            android:id="@+id/llContainer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#a6c4e0"
+        android:visibility="gone"
+        android:id="@+id/llItemTitle"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hScrollView1"
         android:orientation="horizontal"
+        android:background="@drawable/corner_top_light_blue"
         android:paddingTop="5dp"
         android:paddingBottom="5dp">
 
@@ -41,8 +55,8 @@
                 android:id="@+id/tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/level_5" />
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_4" />
 
             <ImageView
                 android:id="@+id/iv1"
@@ -63,8 +77,8 @@
                 android:id="@+id/tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/level_5" />
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_4" />
 
             <ImageView
                 android:id="@+id/iv2"
@@ -85,8 +99,8 @@
                 android:id="@+id/tv3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/level_5" />
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_4" />
 
             <ImageView
                 android:id="@+id/iv3"
@@ -97,14 +111,53 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
+        android:id="@+id/listViewRank"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white"
         android:cacheColorHint="@color/transparent"
-        android:divider="@null"
-        android:dividerHeight="0.0dp"
+        android:divider="@color/light_gray"
+        android:dividerHeight="0.5dp"
         android:listSelector="@color/transparent"
-        android:overScrollMode="never"
-        android:scrollbars="none" />
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/llItemTitle" />
 
-</LinearLayout>
+    <android.support.constraint.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/clNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hScrollView1">
+
+        <ImageView
+            android:id="@+id/ivNoData"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/icon_no_warning"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="暂无数据"
+            android:textColor="@color/text_color4"
+            android:textSize="@dimen/level_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivNoData" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

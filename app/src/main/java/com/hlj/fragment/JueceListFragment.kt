@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -17,7 +18,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.hlj.activity.HPDFActivity
+import com.hlj.activity.PDFActivity
 import com.hlj.activity.WebviewActivity
 import com.hlj.adapter.JueceListAdapter
 import com.hlj.common.CONST
@@ -32,6 +33,8 @@ import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONArray
 import org.json.JSONException
+import org.json.JSONObject
+import org.json.JSONTokener
 import shawn.cxwl.com.hlj.R
 import java.io.IOException
 
@@ -94,18 +97,29 @@ class JueceListFragment : Fragment() {
         val data: ColumnData = arguments!!.getParcelable("data")
         if (data != null) {
             llContainer.removeAllViews()
-            for (i in 0 until data.child.size) {
-                val dto = data.child[i]
+            val dataList: ArrayList<ColumnData> = ArrayList()
+            if (data.child.isEmpty()) {
+                dataList.add(data)
+            } else {
+                dataList.addAll(data.child)
+            }
+
+            for (i in 0 until dataList.size) {
+                val dto = dataList[i]
                 val tv = TextView(activity)
                 tv.text = dto.name
-                tv.tag = dto.dataUrl
+                if (dto.dataUrl != null) {
+                    tv.tag = dto.dataUrl
+                }
                 tv.gravity = Gravity.CENTER
-                tv.setPadding(15, 0, 15, 0)
+                tv.setPadding(25, 0, 25, 0)
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
                 if (i == 0) {
                     tv.setTextColor(Color.WHITE)
                     tv.setBackgroundResource(R.drawable.corner_left_right_blue)
-                    dataUrl = dto.dataUrl
+                    if (dto.dataUrl != null) {
+                        dataUrl = dto.dataUrl
+                    }
                     okHttpList()
                 } else {
                     tv.setTextColor(ContextCompat.getColor(activity!!, R.color.text_color4))
@@ -117,13 +131,15 @@ class JueceListFragment : Fragment() {
                 llContainer.addView(tv)
 
                 tv.setOnClickListener { v ->
-                    val tag = v!!.tag.toString()
+                    val name: String = (v!! as TextView).text.toString()
                     for (j in 0 until llContainer.childCount) {
                         val tvName = llContainer.getChildAt(j) as TextView
-                        if (TextUtils.equals(tvName.tag.toString(), tag)) {
+                        if (TextUtils.equals(tvName.text.toString(), name)) {
                             tvName.setTextColor(Color.WHITE)
                             tvName.setBackgroundResource(R.drawable.corner_left_right_blue)
-                            dataUrl = tag
+                            if (dto.dataUrl != null) {
+                                dataUrl = v.tag.toString()
+                            }
                             okHttpList()
                         } else {
                             tvName.setTextColor(ContextCompat.getColor(activity!!, R.color.text_color4))
@@ -142,7 +158,7 @@ class JueceListFragment : Fragment() {
             val dto = dataList[arg2]
             val intent = when {
                 TextUtils.equals(dto.type, CONST.PDF) -> {
-                    Intent(activity, HPDFActivity::class.java)
+                    Intent(activity, PDFActivity::class.java)
                 }
                 TextUtils.equals(dto.type, CONST.MP4) -> {
                     Intent(activity, WebviewActivity::class.java)
@@ -164,6 +180,7 @@ class JueceListFragment : Fragment() {
             return
         }
         Thread {
+            Log.e("dataUrl", dataUrl)
             OkHttpUtil.enqueue(Request.Builder().url(dataUrl).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -178,26 +195,59 @@ class JueceListFragment : Fragment() {
                         if (!TextUtils.isEmpty(result)) {
                             try {
                                 dataList.clear()
-                                val array = JSONArray(result)
-                                for (i in 0 until array.length()) {
-                                    val dto = AgriDto()
-                                    val itemObj = array.getJSONObject(i)
-                                    if (!itemObj.isNull("destfile")) {
-                                        dto.dataUrl = itemObj.getString("destfile")
+                                val ob = JSONTokener(result).nextValue()
+                                if (ob is JSONObject) {
+                                    val obj = JSONObject(result)
+                                    var type: String? = null
+                                    if (!obj.isNull("type")) {
+                                        type = obj.getString("type")
                                     }
-                                    if (!itemObj.isNull("filetime")) {
-                                        dto.time = itemObj.getString("filetime")
+                                    if (!obj.isNull("l")) {
+                                        val array = obj.getJSONArray("l")
+                                        for (i in 0 until array.length()) {
+                                            val itemObj = array.getJSONObject(i)
+                                            val dto = AgriDto()
+                                            if (!itemObj.isNull("l1")) {
+                                                dto.title = itemObj.getString("l1")
+                                            }
+                                            if (!itemObj.isNull("l2")) {
+                                                dto.dataUrl = itemObj.getString("l2")
+                                            }
+                                            if (!itemObj.isNull("l3")) {
+                                                dto.time = itemObj.getString("l3")
+                                            }
+                                            if (!itemObj.isNull("l5")) {
+                                                dto.icon = itemObj.getString("l5")
+                                            }
+                                            dto.type = type
+                                            if (dto.dataUrl.endsWith(".pdf") || dto.dataUrl.endsWith(".PDF")) {
+                                                dto.type = CONST.PDF
+                                            }
+                                            dataList.add(dto)
+                                        }
                                     }
-                                    if (!itemObj.isNull("icon")) {
-                                        dto.icon = itemObj.getString("icon")
+                                } else if (ob is JSONArray) {
+                                    val array = JSONArray(result)
+                                    for (i in 0 until array.length()) {
+                                        val dto = AgriDto()
+                                        val itemObj = array.getJSONObject(i)
+                                        if (!itemObj.isNull("destfile")) {
+                                            dto.dataUrl = itemObj.getString("destfile")
+                                        }
+                                        if (!itemObj.isNull("filetime")) {
+                                            dto.time = itemObj.getString("filetime")
+                                        }
+                                        if (!itemObj.isNull("icon")) {
+                                            dto.icon = itemObj.getString("icon")
+                                        }
+                                        if (!itemObj.isNull("title")) {
+                                            dto.title = itemObj.getString("title")
+                                        }
+                                        if (dto.dataUrl.endsWith(".pdf") || dto.dataUrl.endsWith(".PDF")) {
+                                            dto.type = CONST.PDF
+                                        }
+                                        dataList.add(dto)
                                     }
-                                    if (!itemObj.isNull("title")) {
-                                        dto.title = itemObj.getString("title")
-                                    }
-                                    if (dto.dataUrl.endsWith(".pdf") || dto.dataUrl.endsWith(".PDF")) {
-                                        dto.type = CONST.PDF
-                                    }
-                                    dataList.add(dto)
                                 }
                                 if (mAdapter != null) {
                                     mAdapter!!.notifyDataSetChanged()

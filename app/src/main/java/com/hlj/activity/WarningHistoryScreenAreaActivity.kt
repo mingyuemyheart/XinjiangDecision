@@ -65,7 +65,7 @@ class WarningHistoryScreenAreaActivity : BaseActivity(), OnClickListener {
 
     private fun okHttpArea() {
         Thread(Runnable {
-            val url = "http://testdecision.tianqi.cn/alarm12379/hisgrepcityclild.php?k=黑龙江"
+            val url = "http://testdecision.tianqi.cn/alarm12379/hisgrepcityclild.php?k=新疆"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 

@@ -41,10 +41,9 @@ class SettingActivity : BaseActivity(), OnClickListener {
      */
     private fun initWidget() {
         llBack!!.setOnClickListener(this)
-        llFeedBack!!.setOnClickListener(this)
+        tvEmail!!.setOnClickListener(this)
         llVersion!!.setOnClickListener(this)
         llClearCache!!.setOnClickListener(this)
-        llClearData!!.setOnClickListener(this)
         llBuild!!.setOnClickListener(this)
         llCity!!.setOnClickListener(this)
         llProtocal!!.setOnClickListener(this)
@@ -54,25 +53,19 @@ class SettingActivity : BaseActivity(), OnClickListener {
         tvVersion!!.text = CommonUtil.getVersion(this)
         ivPortrait!!.setOnClickListener(this)
         tvUserName!!.setOnClickListener(this)
-        ivPushNews!!.setOnClickListener(this)
-        val sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE)
-        val userName = sharedPreferences.getString(CONST.UserInfo.userName, "")
-        val uGroupName = sharedPreferences.getString(CONST.UserInfo.uGroupName, "")
-        if (TextUtils.equals(userName, CONST.publicUser) || TextUtils.isEmpty(userName)) { //公众用户或为空
-            tvUserName!!.text = "点击登录\n非注册用户"
+
+        if (TextUtils.equals(MyApplication.USERNAME, CONST.publicUser) || TextUtils.isEmpty(MyApplication.USERNAME)) { //公众用户或为空
+            tvUserName!!.text = "点击登录"
             tvLogout!!.visibility = View.GONE
+            clUnit.visibility = View.GONE
         } else {
-            tvUserName!!.text = "$userName\n分组：$uGroupName"
+            tvUserName!!.text = MyApplication.USERNAME
+            tvNumber!!.text = MyApplication.MOBILE
+            tvUnit!!.text = MyApplication.DEPARTMENT
             tvLogout!!.visibility = View.VISIBLE
+            clUnit.visibility = View.VISIBLE
         }
         tvCache!!.text = DataCleanManager.getCacheSize(this)
-        val push = getSharedPreferences("PUSH_STATE", Context.MODE_PRIVATE)
-        val pushState = push.getBoolean("state", true)
-        if (pushState) {
-            ivPushNews!!.setImageResource(R.drawable.setting_checkbox_on)
-        } else {
-            ivPushNews!!.setImageResource(R.drawable.setting_checkbox_off)
-        }
     }
 
     /**
@@ -120,17 +113,7 @@ class SettingActivity : BaseActivity(), OnClickListener {
         view.llNegative.setOnClickListener { dialog.dismiss() }
         view.llPositive.setOnClickListener {
             dialog.dismiss()
-            val sharedPreferences = getSharedPreferences(CONST.USERINFO, Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.clear()
-            editor.apply()
-            CONST.UID = "2606" //用户id
-            CONST.USERNAME = CONST.publicUser //用户名
-            CONST.PASSWORD = CONST.publicPwd //用户密码
-            CONST.TOKEN = "" //token
-            CONST.GROUPID = "50"
-            CONST.UGROUPNAME = "" //uGroupName
-
+            MyApplication.clearUserInfo(this)
             MyApplication.destoryActivity()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
@@ -141,7 +124,7 @@ class SettingActivity : BaseActivity(), OnClickListener {
      * 温馨提示对话框
      */
     private fun promptDialog() {
-        if (!TextUtils.equals(CONST.publicUser, CONST.USERNAME)) {
+        if (!TextUtils.equals(CONST.publicUser, MyApplication.USERNAME)) {
             return
         }
 
@@ -173,7 +156,7 @@ class SettingActivity : BaseActivity(), OnClickListener {
         when (v.id) {
             R.id.llBack -> finish()
             R.id.ivPortrait, R.id.tvUserName -> promptDialog()
-            R.id.llFeedBack -> {
+            R.id.tvEmail -> {
                 val intent = Intent(this, FeedbackActivity::class.java)
                 intent.putExtra(CONST.ACTIVITY_NAME, getString(R.string.setting_feedback))
                 startActivity(intent)
@@ -182,31 +165,14 @@ class SettingActivity : BaseActivity(), OnClickListener {
                 AutoUpdateUtil.checkUpdate(this@SettingActivity, this, "140", getString(R.string.app_name), false)
             }
             R.id.llClearCache -> deleteDialog(true, getString(R.string.delete_cache), getString(R.string.sure_delete_cache), tvCache)
-            R.id.llClearData -> deleteDialog(false, getString(R.string.delete_data), getString(R.string.sure_delete_data), tvData)
             R.id.llBuild -> {
-                val intentBuild = Intent(this, WebviewActivity::class.java)
-                intentBuild.putExtra(CONST.ACTIVITY_NAME, getString(R.string.setting_build))
-                intentBuild.putExtra(CONST.WEB_URL, CONST.BUILD_URL)
-                startActivity(intentBuild)
+//                val intentBuild = Intent(this, WebviewActivity::class.java)
+//                intentBuild.putExtra(CONST.ACTIVITY_NAME, getString(R.string.setting_build))
+//                intentBuild.putExtra(CONST.WEB_URL, CONST.BUILD_URL)
+//                startActivity(intentBuild)
             }
             R.id.tvLogout -> logout(getString(R.string.logout), getString(R.string.sure_logout))
             R.id.llCity -> startActivity(Intent(this, ReserveCityActivity::class.java))
-            R.id.ivPushNews -> {
-                val push = getSharedPreferences("PUSH_STATE", Context.MODE_PRIVATE)
-                val pushState = push.getBoolean("state", true)
-                val editor = push.edit()
-                if (pushState) {
-                    editor.putBoolean("state", false)
-                    editor.apply()
-                    ivPushNews!!.setImageResource(R.drawable.setting_checkbox_off)
-                    MyApplication.disablePush()
-                } else {
-                    editor.putBoolean("state", true)
-                    editor.commit()
-                    ivPushNews!!.setImageResource(R.drawable.setting_checkbox_on)
-                    MyApplication.enablePush()
-                }
-            }
             R.id.llProtocal -> {
                 val intent = Intent(this, WebviewActivity::class.java)
                 intent.putExtra(CONST.ACTIVITY_NAME, "用户协议")

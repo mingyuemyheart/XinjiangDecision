@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">新疆气象</string>
+    <string name="app_name">丝路气象</string>
     <string name="province_name">黑龙江</string>
     <string name="copyright">黑龙江省气象局\n黑龙江省气象服务中心</string>
     <string name="logout">退出登录</string>
@@ -96,10 +96,10 @@
     <string name="setting_my_information">我的信息</string>
 	<string name="setting_push">要闻推送</string>
 	<string name="setting_feedback">意见反馈</string>
-	<string name="setting_version">检测版本</string>
+	<string name="setting_version">版本号</string>
 	<string name="setting_clearcache">清除缓存</string>
 	<string name="setting_cleardata">清除数据</string>
-	<string name="setting_build">黑龙江省气象局简介</string>
+	<string name="setting_build">新疆维吾尔自治区气象局简介</string>
 	<string name="setting_version_code">版本号</string>
 	<string name="setting_quit">退出</string>
 	

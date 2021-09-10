@@ -24,7 +24,7 @@
             android:id="@+id/ivDelete"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/iv_delete_black" />
+            android:src="@drawable/icon_delete_black" />
 
     </LinearLayout>
 

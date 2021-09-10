@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -36,7 +37,7 @@ public class ShawnWeatherMeetingDetailActivity extends BaseActivity implements S
 	private long playerPosition;
 	private boolean playerNeedsPrepare;
 	
-	private RelativeLayout reTitle = null;
+	private ConstraintLayout reTitle = null;
 	private TextView tvPrompt = null;
 	private Configuration configuration = null;//方向监听器
 	

@@ -39,7 +39,7 @@
 		<item>101340101,台北,25.091075,121.559834</item>
 	</string-array>
     
-    <!-- 黑龙江省热门城市cityId http://xinjiangdecision.tianqi.cn:81/Home/work/forcast_citys-->
+    <!-- 热门城市cityId -->
     <string-array name="pro_hotCity">
 		<item>101130101,乌鲁木齐城区,1,乌鲁木齐</item>
 		<item>101130102,天山,2,乌鲁木齐</item>
@@ -275,6 +275,28 @@
 		<item>98,低温</item>
 		<item>99,冰冻</item>
     </string-array>
+
+	<!-- 预警类型 -->
+	<string-array name="warningTypes">
+		<item>11A52,干旱</item>
+		<item>11A54,干旱</item>
+		<item>11B01,台风</item>
+		<item>11B03,暴雨</item>
+		<item>11B04,暴雪</item>
+		<item>11B05,寒潮</item>
+		<item>11B06,大风</item>
+		<item>11B07,沙尘暴</item>
+		<item>11B09,高温</item>
+		<item>11B14,雷电</item>
+		<item>11B15,冰雹</item>
+		<item>11B16,霜冻</item>
+		<item>11B17,大雾</item>
+		<item>11B19,霾</item>
+		<item>11B20,雷雨大风</item>
+		<item>11B21,道路结冰</item>
+		<item>11B22,干旱</item>
+		<item>11B23,海上大风</item>
+	</string-array>
 
 	<!-- 预警颜色 -->
 	<string-array name="warningColor">

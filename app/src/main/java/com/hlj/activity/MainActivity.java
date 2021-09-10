@@ -42,6 +42,7 @@ import com.hlj.fragment.ForecastFragment;
 import com.hlj.fragment.JueceListFragment;
 import com.hlj.fragment.WarningFragment;
 import com.hlj.fragment.WeatherFactFragment;
+import com.hlj.fragment.WeatherVideoFragment;
 import com.hlj.fragment.WebviewFragment;
 import com.hlj.manager.SystemStatusManager;
 import com.hlj.utils.AuthorityUtil;
@@ -115,11 +116,11 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 		}
 
 		//是否显示登录对话框
-		SharedPreferences sp = getSharedPreferences("LOGINDIALOG", Context.MODE_PRIVATE);
-		boolean isFirst = sp.getBoolean("isFirst", true);
-		if (isFirst) {
-			firstLoginDialog(sp);
-		}
+//		SharedPreferences sp = getSharedPreferences("LOGINDIALOG", Context.MODE_PRIVATE);
+//		boolean isFirst = sp.getBoolean("isFirst", true);
+//		if (isFirst) {
+//			firstLoginDialog(sp);
+//		}
 	}
 
 	/**
@@ -201,12 +202,12 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 					fragment = new ForecastFragment();//首页
 				} else if (TextUtils.equals(id, "4")) {
 					fragment = new WarningFragment();//天气预警
-				} else if (TextUtils.equals(id, "5")) {
-					fragment = new JueceListFragment();//决策服务
-				} else if (TextUtils.equals(id, "2") || TextUtils.equals(id, "3") || TextUtils.equals(id, "6")
-						|| TextUtils.equals(id, "7") || TextUtils.equals(id, "8") || TextUtils.equals(id, "9")
-						|| TextUtils.equals(id, "10") ) {
-					fragment = new WeatherFactFragment();//天气实况、天气预报、农业气象、旅游气象、人工影响天气、专业服务、科普宣传
+				} else if (TextUtils.equals(id, "5") || TextUtils.equals(id, "6") || TextUtils.equals(id, "9") || TextUtils.equals(id, "10")) {
+					fragment = new JueceListFragment();//决策服务、农业气象、专业服务、科普宣传
+				} else if (TextUtils.equals(id, "2") || TextUtils.equals(id, "3") || TextUtils.equals(id, "7") || TextUtils.equals(id, "8")) {
+					fragment = new WeatherFactFragment();//天气实况、天气预报、旅游气象、人工影响天气
+				} else if (TextUtils.equals(id, "11")) {
+					fragment = new WeatherVideoFragment();//天气视频
 				} else if (TextUtils.equals(id, "12")) {
 					fragment = new ContactUsFragment();//联系我们
 				}

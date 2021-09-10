@@ -3,6 +3,7 @@ package com.hlj.activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -31,7 +32,7 @@ import shawn.cxwl.com.hlj.R;
  */
 public class ShawnWeatherMeetingVideoActivity extends BaseActivity implements OnClickListener{
 	
-	private RelativeLayout reTitle = null;
+	private ConstraintLayout reTitle = null;
 	private TextView tvContent = null;
 	private WebView webView = null;
 	private String url = null;

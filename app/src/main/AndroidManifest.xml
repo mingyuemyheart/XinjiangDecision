@@ -115,10 +115,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"/>
 
         <activity
-            android:name="com.hlj.activity.HTempratureForecastActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name="com.hlj.activity.WeatherRadarActivity"
             android:screenOrientation="portrait" />
 
@@ -132,11 +128,11 @@
             android:screenOrientation="nosensor" />
 
         <activity
-            android:name="com.hlj.activity.HProvinceForecastActivity"
+            android:name="com.hlj.activity.CityForecastActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HWeatherStaticsActivity"
+            android:name="com.hlj.activity.WeatherStaticsActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -180,6 +176,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name="com.hlj.activity.PointFactActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.hlj.activity.PointForeDetailActivity"
             android:screenOrientation="portrait" />
 
@@ -213,12 +213,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hlj.activity.HPDFActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hlj.activity.SinglePDFActivity"
+            android:name="com.hlj.activity.PDFActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
@@ -304,6 +299,10 @@
 
         <activity
             android:name="com.hlj.activity.HanghuaDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.AreaFallActivity"
             android:screenOrientation="portrait" />
 
     </application>

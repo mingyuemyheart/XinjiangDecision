@@ -2,9 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shawn_bg_corner_white"
+    android:background="@drawable/bg_corner_white"
     android:gravity="center"
     android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:minWidth="260dp"
+        android:textSize="@dimen/level_3"
+        android:textColor="@color/text_color3"
+        android:text="选择时间"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:minWidth="260dp"
+        android:background="@color/light_gray"/>
 
     <com.hlj.view.wheelview.WheelView
         android:visibility="gone"
@@ -76,6 +91,7 @@
 
         <com.hlj.view.wheelview.WheelView
             android:id="@+id/xunyear"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -83,6 +99,7 @@
 
         <com.hlj.view.wheelview.WheelView
             android:id="@+id/xunmonth"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -90,6 +107,7 @@
 
         <com.hlj.view.wheelview.WheelView
             android:id="@+id/xun"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

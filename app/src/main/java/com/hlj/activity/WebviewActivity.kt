@@ -12,12 +12,9 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.WindowManager
-import android.webkit.GeolocationPermissions
-import android.webkit.WebChromeClient
+import android.webkit.*
 import android.webkit.WebChromeClient.CustomViewCallback
 import android.webkit.WebSettings.LayoutAlgorithm
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import com.hlj.common.CONST
 import com.hlj.utils.CommonUtil
@@ -70,9 +67,6 @@ class WebviewActivity : BaseActivity(), OnClickListener{
     private fun initWebView() {
         val url = intent.getStringExtra(CONST.WEB_URL)
         val webSettings = webView!!.settings
-        //支持javascript
-
-        //支持javascript
         webSettings.javaScriptEnabled = true
         webSettings.javaScriptCanOpenWindowsAutomatically = true
         webSettings.domStorageEnabled = true
@@ -87,17 +81,14 @@ class WebviewActivity : BaseActivity(), OnClickListener{
         //自适应屏幕
         webSettings.layoutAlgorithm = LayoutAlgorithm.SINGLE_COLUMN
         webSettings.loadWithOverviewMode = true
+        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        webView!!.loadUrl(url)
 
-        //添加请求头
-        val extraHeaders: MutableMap<String, String> = HashMap()
-        extraHeaders["Referer"] = CommonUtil.getRequestHeader()
-        webView!!.loadUrl(url, extraHeaders)
         webView!!.webChromeClient = object : WebChromeClient() {
             override fun onReceivedTitle(view: WebView, title: String) {
                 super.onReceivedTitle(view, title)
             }
-        }
-        webView!!.webChromeClient = object : WebChromeClient() {
+
             override fun onGeolocationPermissionsShowPrompt(origin: String, callback: GeolocationPermissions.Callback) {
                 callback.invoke(origin, true, false)
             }
@@ -172,8 +163,8 @@ class WebviewActivity : BaseActivity(), OnClickListener{
         return super.onKeyDown(keyCode, event)
     }
 
-    override fun onClick(v: View) {
-        if (v.id == R.id.llBack) {
+    override fun onClick(v: View?) {
+        if (v!!.id == R.id.llBack) {
             finish()
         }
     }

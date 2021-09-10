@@ -68,8 +68,7 @@ import shawn.cxwl.com.hlj.R;
 /**
  * 等风来
  */
-public class WaitWindActivity extends BaseActivity implements OnClickListener, OnCameraChangeListener,
-        AMap.OnMapClickListener, AMapLocationListener {
+public class WaitWindActivity extends BaseActivity implements OnClickListener, OnCameraChangeListener, AMap.OnMapClickListener, AMapLocationListener {
 
     private Context mContext;
     private LinearLayout llHeight,llContainer1;
@@ -209,12 +208,12 @@ public class WaitWindActivity extends BaseActivity implements OnClickListener, O
         MarkerOptions options = new MarkerOptions();
         options.position(latLng);
         options.anchor(0.5f, 1.0f);
-        Bitmap bitmap = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(getResources(), R.drawable.shawn_icon_map_location),
+        Bitmap bitmap = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(getResources(), R.drawable.icon_map_location),
                 (int)(CommonUtil.dip2px(mContext, 21)), (int)(CommonUtil.dip2px(mContext, 32)));
         if (bitmap != null) {
             options.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
         }else {
-            options.icon(BitmapDescriptorFactory.fromResource(R.drawable.shawn_icon_map_location));
+            options.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_map_location));
         }
         if (locationMarker != null) {
             locationMarker.remove();

@@ -112,8 +112,8 @@
             android:maxHeight="2dp"
             android:minHeight="2dp"
             android:progress="100"
-            android:progressDrawable="@drawable/shawn_seekbar_drawable"
-            android:thumb="@drawable/shawn_seekbar_thumb"
+            android:progressDrawable="@drawable/seekbar_drawable"
+            android:thumb="@drawable/seekbar_thumb"
             android:thumbOffset="0dp" />
 
         <TextView
@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:textColor="@color/text_color4"
+            android:textColor="@color/text_color3"
             android:textSize="@dimen/level_5" />
     </LinearLayout>
 

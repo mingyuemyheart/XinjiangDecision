@@ -24,9 +24,7 @@
         android:layout_width="240dp"
         android:layout_height="160dp"
         android:background="@color/white"
-        android:padding="10dp"
-        android:scrollbarStyle="insideOverlay"
-        android:scrollbarThumbVertical="@drawable/pgy_scroll_bar" >
+        android:padding="10dp" >
         
         <LinearLayout 
             android:layout_width="match_parent"

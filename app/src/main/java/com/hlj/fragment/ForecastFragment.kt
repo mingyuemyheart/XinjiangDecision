@@ -166,12 +166,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         tvProWarning!!.setOnClickListener(this)
         tvRain.setOnClickListener(this)
         clHour.setOnClickListener(this)
-        tvDivPolicy.setOnClickListener(this)
-        tvDivPolicy.visibility = View.GONE
-        tvInfo.setOnClickListener(this)
-        tvInfo.visibility = View.GONE
-        ivClimate.setOnClickListener(this)
-        ivClimate.visibility = View.INVISIBLE
         clVideo.setOnClickListener(this)
         clVideo.visibility = View.GONE
         clAudio.setOnClickListener(this)
@@ -180,7 +174,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
             refreshLayout!!.setBackgroundColor(Color.BLACK)
             clDay1.setBackgroundColor(Color.BLACK)
-            clDay2.setBackgroundColor(Color.BLACK)
             clMinute.setBackgroundColor(Color.BLACK)
             clHour.setBackgroundColor(Color.BLACK)
             clFifteen.setBackgroundColor(Color.BLACK)
@@ -228,12 +221,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
             cityName = district+street
             tvPosition!!.text = cityName
             addMarkerToMap(LatLng(amapLocation.latitude, amapLocation.longitude))
-
-//            if (amapLocation.province.contains(amapLocation.city)) {
-//                okHttpInfo(amapLocation.city, amapLocation.district)
-//            } else {
-//                okHttpInfo(amapLocation.province, amapLocation.city)
-//            }
             OkHttpHourRain(amapLocation.longitude,amapLocation.latitude)
             getWeatherInfo(amapLocation.longitude,amapLocation.latitude)
         }
@@ -243,7 +230,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         cityName = "哈尔滨市"
         tvPosition!!.text = cityName
         addMarkerToMap(LatLng(45.803775, 126.534967))
-        okHttpInfo("黑龙江省", cityName!!)
         OkHttpHourRain(126.534967,45.803775)
         getWeatherInfo(126.534967,45.803775)
     }
@@ -341,7 +327,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
             }
         }
     }
-
 
     private val dataList: ArrayList<MinuteFallDto> = ArrayList()
     private val images: ArrayList<MinuteFallDto> = ArrayList()
@@ -571,50 +556,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                 tv.setBackgroundColor(0xff9DC7FA.toInt())
             }
         }
-    }
-
-    /**
-     * 获取疫情
-     */
-    private fun okHttpInfo(pro: String, city: String) {
-        val url = String.format("http://warn-wx.tianqi.cn/Test/getwhqydata?pro=%s&city=%s&appid=%s", pro, city, CONST.APPID)
-        OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                if (!response.isSuccessful) {
-                    return
-                }
-                val result = response.body!!.string()
-                activity!!.runOnUiThread {
-                    if (!TextUtils.isEmpty(result)) {
-                        try {
-                            val obj = JSONObject(result)
-                            var proCount = ""
-                            if (!obj.isNull("total_pro")) {
-                                val proObj = obj.getJSONObject("total_pro")
-                                if (!proObj.isNull("confirm")) {
-                                    proCount = proObj.getString("confirm")
-                                }
-                            }
-                            var cityCount = ""
-                            if (!obj.isNull("total")) {
-                                val cityObj = obj.getJSONObject("total")
-                                if (!cityObj.isNull("confirm")) {
-                                    cityCount = cityObj.getString("confirm")
-                                }
-                            }
-//                            tvInfo!!.text = String.format("今日疫情\n%s累计确诊%s例\n%s累计确诊%s例", city, cityCount, pro, proCount)
-                            tvInfo!!.text = "新冠肺炎疫\n情实时动态"
-                            tvInfo!!.visibility = View.VISIBLE
-                        } catch (e: JSONException) {
-                            e.printStackTrace()
-                        }
-                    }
-                }
-            }
-        })
     }
 
     /**
@@ -1345,12 +1286,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
 //                intent.putExtra(CONST.ACTIVITY_NAME, "空气质量")
 //                startActivity(intent)
             }
-            R.id.ivClimate -> {
-                val intent = Intent(activity, WebviewActivity::class.java)
-                intent.putExtra(CONST.ACTIVITY_NAME, "24节气")
-                intent.putExtra(CONST.WEB_URL, "http://wx.tianqi.cn/Solar/jieqidetail")
-                startActivity(intent)
-            }
             R.id.tvChart, R.id.tvList -> if (listView!!.visibility == View.VISIBLE) {
                 tvChart!!.setBackgroundResource(R.drawable.bg_chart_press)
                 tvList.setBackgroundResource(R.drawable.bg_list)
@@ -1410,18 +1345,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
             }
             R.id.clVideo -> {
                 okHttpVideoList()
-            }
-            R.id.tvDivPolicy -> {
-                val intent = Intent(activity, WebviewActivity::class.java)
-                intent.putExtra(CONST.ACTIVITY_NAME, "各地隔离政策查询")
-                intent.putExtra(CONST.WEB_URL, "http://m.heb.bendibao.com/news/gelizhengce/all.php?leavecity=&src=12379")
-                startActivity(intent)
-            }
-            R.id.tvInfo -> {
-                val intent = Intent(activity, WebviewActivity::class.java)
-                intent.putExtra(CONST.ACTIVITY_NAME, "实时更新：新型冠状病毒肺炎疫情实时大数据报告")
-                intent.putExtra(CONST.WEB_URL, "https://voice.baidu.com/act/newpneumonia/newpneumonia?fraz=partner&paaz=gjyj")
-                startActivity(intent)
             }
             R.id.clAudio -> {
                 if (!mTts!!.isSpeaking) {

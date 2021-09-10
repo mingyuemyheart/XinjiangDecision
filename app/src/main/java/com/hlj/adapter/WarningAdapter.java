@@ -105,7 +105,7 @@ public class WarningAdapter extends BaseAdapter{
 
 		if (!TextUtils.isEmpty(dto.time)) {
 			try {
-				mHolder.tvTime.setText(sdf2.format(sdf1.parse(dto.time)));
+				mHolder.tvTime.setText("发布："+sdf2.format(sdf1.parse(dto.time)));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}

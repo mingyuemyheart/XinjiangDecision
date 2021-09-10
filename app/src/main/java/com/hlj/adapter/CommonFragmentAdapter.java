@@ -72,9 +72,7 @@ public class CommonFragmentAdapter extends BaseAdapter{
 			mHolder.tvName.setText(dto.name);
 		}
 
-		if (TextUtils.isEmpty(dto.icon)) {
-			mHolder.imageView.setImageResource(R.drawable.iv_hlj2);
-		}else {
+		if (!TextUtils.isEmpty(dto.icon)) {
 			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
 			finalBitmap.display(mHolder.imageView, dto.icon, null, 0);
 		}

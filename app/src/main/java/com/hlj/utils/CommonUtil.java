@@ -20,6 +20,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
+import android.media.ThumbnailUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -50,10 +51,13 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolygonOptions;
 import com.amap.api.maps.model.PolylineOptions;
 import com.hlj.common.CONST;
+import com.hlj.common.MyApplication;
+import com.hlj.dto.WarningDto;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,6 +75,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
 
@@ -554,27 +559,50 @@ public class CommonUtil {
 		if (aMap == null) {
 			return;
 		}
-		String result = CommonUtil.getFromAssets(context, "xinjiang.json");
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		String result = CommonUtil.getFromAssets(context, "xinjiang_geo.json");
 		if (!TextUtils.isEmpty(result)) {
 			try {
                 LatLngBounds.Builder builder = LatLngBounds.builder();
-				JSONArray array = new JSONArray(result);
-				if (array.length() > 0) {
-					String[] item = array.get(0).toString().split(";");
-					PolylineOptions polylineOption = new PolylineOptions();
-					polylineOption.width(5).color(0xff406bbf);
+				JSONObject obj = new JSONObject(result);
+				if (!obj.isNull("polyline")) {
+					String polyline = obj.getString("polyline");
+					String[] item = polyline.split(";");
+					PolygonOptions polygonOption = new PolygonOptions();
+					polygonOption.fillColor(0x40889BE8).strokeColor(context.getResources().getColor(R.color.colorPrimary)).strokeWidth(5f);
 					for (int i = 0; i < item.length; i++) {
 						String[] latLng = item[i].split(",");
 						double lng = Double.parseDouble(latLng[0]);
 						double lat = Double.parseDouble(latLng[1]);
-						polylineOption.add(new LatLng(lat, lng));
+						polygonOption.add(new LatLng(lat, lng));
 						builder.include(new LatLng(lat, lng));
 					}
-					aMap.addPolyline(polylineOption);
+					aMap.addPolygon(polygonOption);
+					if (item.length > 0) {
+						aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
+					}
 				}
-				if (array.length() > 0) {
-				    aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
-                }
+//				if (!obj.isNull("citys")) {
+//					JSONArray citys = obj.getJSONArray("citys");
+//					for (int i = 0; i < citys.length(); i++) {
+//						JSONObject itemObj = citys.getJSONObject(i);
+//						String name = itemObj.getString("name");
+//						String[] point = itemObj.getString("point").split(",");
+//						double lat = Double.parseDouble(point[1]);
+//						double lng = Double.parseDouble(point[0]);
+//
+//						LatLng latLng = new LatLng(lat, lng);
+//						MarkerOptions options = new MarkerOptions();
+//						options.anchor(0.5f, 0.5f);
+//						View view = inflater.inflate(R.layout.marker_city, null);
+//						TextView tvName = view.findViewById(R.id.tvName);
+//						tvName.setText(name);
+//						options.icon(BitmapDescriptorFactory.fromView(view));
+//						options.position(latLng);
+//						Marker marker = aMap.addMarker(options);
+//						marker.setClickable(false);
+//					}
+//				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -815,7 +843,7 @@ public class CommonUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH", Locale.CHINA);
 		String addtime = sdf.format(new Date());
 		final String clickUrl = String.format("http://xinjiangdecision.tianqi.cn:81/home/work/clickCount?addtime=%s&appid=%s&eventid=menuClick_%s&eventname=%s&userid=%s&username=%s",
-				addtime, CONST.APPID, columnId, name, CONST.UID, CONST.USERNAME);
+				addtime, CONST.APPID, columnId, name, MyApplication.UID, MyApplication.USERNAME);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -1067,6 +1095,25 @@ public class CommonUtil {
 				view.clearAnimation();
 			}
 		});
+	}
+
+	/**
+	 * 通过预警类型获取预警简称
+	 * @param context
+	 * @param warningType
+	 * @return
+	 */
+	public static String getWarningNameByType(Context context, String warningType) {
+		String warningName = "";
+		String[] array1 = context.getResources().getStringArray(R.array.warningTypes);
+		for (int i = 0; i < array1.length; i++) {
+			String[] value = array1[i].split(",");
+			if (TextUtils.equals(warningType, value[0])) {
+				warningName = value[1];
+				break;
+			}
+		}
+		return warningName;
 	}
 
 }

@@ -3,9 +3,9 @@
 
     <item
         android:id="@android:id/background"
-        android:drawable="@drawable/seekbar_white"/>
+        android:drawable="@drawable/seekbar_gray"/>
     <item android:id="@android:id/progress">
-        <clip android:drawable="@drawable/seekbar_green" />
+        <clip android:drawable="@drawable/seekbar_blue" />
     </item>
 
 </layer-list>

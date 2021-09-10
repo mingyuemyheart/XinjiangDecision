@@ -3,6 +3,7 @@ package com.hlj.activity
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import com.hlj.dto.FactDto
@@ -58,6 +59,7 @@ class FactDetailChartActivity : BaseActivity(), OnClickListener {
     private fun okHttpStationInfo(stationCode: String) {
         Thread {
             val url = "http://decision-171.tianqi.cn/api/heilj/dates/getone48?id=$stationCode"
+            Log.e("okHttpStationInfo", url)
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
