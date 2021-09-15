@@ -2,17 +2,24 @@ package com.hlj.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Point
 import android.media.ThumbnailUtils
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
+import android.util.Log
+import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.SeekBar
@@ -31,16 +38,38 @@ import com.hlj.utils.AuthorityUtil
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_point_fact.*
 import kotlinx.android.synthetic.main.activity_point_fore.*
+import kotlinx.android.synthetic.main.activity_point_fore.imageLegend
+import kotlinx.android.synthetic.main.activity_point_fore.ivHumidity
+import kotlinx.android.synthetic.main.activity_point_fore.ivLayer
+import kotlinx.android.synthetic.main.activity_point_fore.ivLegend
+import kotlinx.android.synthetic.main.activity_point_fore.ivLocation
+import kotlinx.android.synthetic.main.activity_point_fore.ivPlay
+import kotlinx.android.synthetic.main.activity_point_fore.ivPoint
+import kotlinx.android.synthetic.main.activity_point_fore.ivSwitch
+import kotlinx.android.synthetic.main.activity_point_fore.ivTemp
+import kotlinx.android.synthetic.main.activity_point_fore.ivWind
+import kotlinx.android.synthetic.main.activity_point_fore.llSeekBar
+import kotlinx.android.synthetic.main.activity_point_fore.mapView
+import kotlinx.android.synthetic.main.activity_point_fore.seekBar
+import kotlinx.android.synthetic.main.activity_point_fore.tvHumidity
+import kotlinx.android.synthetic.main.activity_point_fore.tvName
+import kotlinx.android.synthetic.main.activity_point_fore.tvTemp
+import kotlinx.android.synthetic.main.activity_point_fore.tvTime
+import kotlinx.android.synthetic.main.activity_point_fore.tvWind
+import kotlinx.android.synthetic.main.layout_point_marker.view.*
 import kotlinx.android.synthetic.main.layout_title.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Request
 import okhttp3.Response
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import shawn.cxwl.com.hlj.R
 import java.io.IOException
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,13 +77,14 @@ import kotlin.collections.ArrayList
 /**
  * 格点预报
  */
-class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener, AMap.OnMarkerClickListener, AMap.OnMapClickListener, FactManager.RadarListener {
+class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener, AMap.OnMapClickListener, FactManager.RadarListener, AMap.OnCameraChangeListener {
 
     private var aMap: AMap? = null
     private var zoom = 3.7f
     private val dataList: MutableList<StationMonitorDto> = ArrayList()
     private val sdf1 = SimpleDateFormat("dd日HH时", Locale.CHINA)
     private val sdf2 = SimpleDateFormat("yyyyMMddHH", Locale.CHINA)
+    private val sdf4 = SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA)
     private var dataType = "气温"
     private var locationLat = 35.926628
     private var locationLng = 105.178100
@@ -69,6 +99,10 @@ class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener,
     private val STATE_PLAYING = 1
     private val STATE_PAUSE = 2
     private val STATE_CANCEL = 3
+    private val pointList: MutableList<StationMonitorDto> = ArrayList()
+    private val texts: ArrayList<Marker> = ArrayList()
+    private var isShowPoint = true
+    private var isShowLayer = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,6 +126,8 @@ class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener,
         tvWind.setOnClickListener(this)
         tvCloud.setOnClickListener(this)
         tvRain.setOnClickListener(this)
+        ivPoint.setOnClickListener(this)
+        ivLayer.setOnClickListener(this)
         ivLocation.setOnClickListener(this)
         ivSwitch.setOnClickListener(this)
         ivLegend.setOnClickListener(this)
@@ -179,11 +215,11 @@ class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener,
         if (aMap == null) {
             aMap = mapView.map
         }
-        aMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(35.926628, 105.178100), zoom))
+        aMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationLat, locationLng), zoom))
         aMap!!.uiSettings.isZoomControlsEnabled = false
         aMap!!.uiSettings.isRotateGesturesEnabled = false
-        aMap!!.setOnMarkerClickListener(this)
         aMap!!.setOnMapClickListener(this)
+        aMap!!.setOnCameraChangeListener(this)
         aMap!!.setOnMapLoadedListener {
             CommonUtil.drawHLJJson(this, aMap)
             okHttpList()
@@ -325,6 +361,64 @@ class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener,
                 showRadar(bitmap, dto.leftLat, dto.leftLng, dto.rightLat, dto.rightLng)
             }
         }
+
+        addPoint(dto.time)
+    }
+
+    private fun addPoint(time: String) {
+        removeTexts()
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        for (i in 0 until pointList.size) {
+            val point = pointList[i]
+            val options = MarkerOptions()
+            options.position(LatLng(point.lat, point.lng))
+            val view = inflater.inflate(R.layout.layout_point_marker, null)
+            view.tvMarker.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10f)
+            if (mapType == AMap.MAP_TYPE_NORMAL) {
+                view.tvMarker.setTextColor(Color.RED)
+            } else if (mapType == AMap.MAP_TYPE_SATELLITE) {
+                view.tvMarker.setTextColor(Color.WHITE)
+            }
+            for (j in 0 until point.itemList.size) {
+                if (TextUtils.isEmpty(time)) {
+                    val item = point.itemList[0]
+                    var content = ""
+                    when(dataType) {
+                        tvTemp.text.toString() -> content = item.pointTemp
+                        tvHumidity.text.toString() -> content = item.humidity
+                        tvWind.text.toString() -> content = item.windSpeed
+                        tvCloud.text.toString() -> content = item.cloud
+                        tvRain.text.toString() -> content = item.rain
+                    }
+                    view.tvMarker.text = content
+                    options.icon(BitmapDescriptorFactory.fromView(view))
+                    if (!TextUtils.isEmpty(content) && !content.contains("99999")) {
+                        val text = aMap!!.addMarker(options)
+                        texts.add(text)
+                    }
+                    break
+                } else {
+                    val item = point.itemList[j]
+                    if (TextUtils.equals(time, item.time)) {
+                        var content = ""
+                        when(dataType) {
+                            tvTemp.text.toString() -> content = item.pointTemp
+                            tvHumidity.text.toString() -> content = item.humidity
+                            tvWind.text.toString() -> content = item.windSpeed
+                            tvCloud.text.toString() -> content = item.cloud
+                            tvRain.text.toString() -> content = item.rain
+                        }
+                        view.tvMarker.text = content
+                        options.icon(BitmapDescriptorFactory.fromView(view))
+                        if (!TextUtils.isEmpty(content) && !content.contains("99999")) {
+                            val text = aMap!!.addMarker(options)
+                            texts.add(text)
+                        }
+                        break
+                    }
+                }
+            }
+        }
     }
 
     private fun showRadar(bitmap: Bitmap, minLat: Double, minLng: Double, maxLat: Double, maxLng: Double) {
@@ -344,6 +438,7 @@ class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener,
             mOverlay!!.setPositionFromBounds(bounds)
             mOverlay!!.setImage(fromView)
         }
+        mOverlay!!.isVisible = isShowLayer
         aMap!!.runOnDrawFrame()
     }
 
@@ -357,7 +452,6 @@ class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener,
         private var isTracking: Boolean
 
         init {
-
             for (i in 0 until dataList.size) {
                 val dto = dataList[i]
                 if (TextUtils.equals(dto.name, dataType)) {
@@ -438,21 +532,121 @@ class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener,
         }
     }
 
-    override fun onMarkerClick(marker: Marker?): Boolean {
-        if (marker != null && marker !== locationMarker) {
-            val intent = Intent(this, PointForeDetailActivity::class.java)
-            intent.putExtra("lat", marker.position.latitude)
-            intent.putExtra("lng", marker.position.longitude)
-            startActivity(intent)
-        }
-        return true
-    }
-
     override fun onMapClick(p0: LatLng?) {
         val intent = Intent(this, PointForeDetailActivity::class.java)
         intent.putExtra("lat", p0!!.latitude)
         intent.putExtra("lng", p0!!.longitude)
         startActivity(intent)
+    }
+
+    override fun onCameraChange(arg0: CameraPosition?) {}
+
+    override fun onCameraChangeFinish(arg0: CameraPosition) {
+        Log.e("zoom", arg0.zoom.toString())
+        val startPoint = Point(0, 0)
+        val endPoint = Point(CommonUtil.widthPixels(this), CommonUtil.heightPixels(this))
+        val start = aMap!!.projection.fromScreenLocation(startPoint)
+        val end = aMap!!.projection.fromScreenLocation(endPoint)
+        zoom = arg0.zoom
+        getPointInfo(1000, start, end)
+    }
+
+    /**
+     * 获取格点数据
+     */
+    private fun getPointInfo(delayMillis: Long, start: LatLng, end: LatLng) {
+        removeTexts()
+        val date = sdf4.format(Date())
+        val url = "https://scapi-py.tianqi.cn/api/getqggdybql?zoom=${zoom.toInt()}&statlonlat=${start.longitude},${start.latitude}&endlonlat=${end.longitude},${end.latitude}&date=$date&appid=f63d32&key=x4pI82d2gd0bNRWNnw7un0baSUo%3D"
+        handler.removeMessages(1000)
+        val msg = handler.obtainMessage(1001)
+        msg.obj = url
+        handler.sendMessageDelayed(msg, delayMillis)
+    }
+
+    @SuppressLint("HandlerLeak")
+    private val handler: Handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            when (msg.what) {
+                1001 -> okHttpPoints(msg.obj.toString())
+            }
+        }
+    }
+
+    private fun okHttpPoints(url: String) {
+        Log.e("okHttpPoints", url)
+        Thread {
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    runOnUiThread {
+                        try {
+                            pointList.clear()
+                            val array = JSONArray(result)
+                            for (i in 0 until array.length()) {
+                                val dto = StationMonitorDto()
+                                val itemObj = array.getJSONObject(i)
+                                dto.lat = itemObj.getDouble("LAT")
+                                dto.lng = itemObj.getDouble("LON")
+                                dto.time = itemObj.getString("TIME")
+                                val tempArray = itemObj.getJSONArray("TMP")
+                                val humidityArray = itemObj.getJSONArray("RRH")
+                                val windSArray = itemObj.getJSONArray("WINS")
+                                val windDArray = itemObj.getJSONArray("WIND")
+                                val cloudArray = itemObj.getJSONArray("ECT")
+                                val rainArray = itemObj.getJSONArray("R03")
+                                val list: MutableList<StationMonitorDto> = java.util.ArrayList()
+                                for (j in 0 until tempArray.length()) {
+                                    val data = StationMonitorDto()
+                                    data.pointTemp = tempArray.getString(j)
+                                    data.humidity = humidityArray.getString(j)
+                                    data.windSpeed = windSArray.getString(j)
+                                    data.windDir = windDArray.getString(j)
+                                    data.cloud = cloudArray.getString(j)
+                                    data.rain = rainArray.getString(j)
+                                    try {
+                                        val time = sdf2.parse(dto.time).time + 1000 * 60 * 60 * 3 * j
+                                        data.time = sdf1.format(time)
+//                                        val currentTime = Date().time
+//                                        if (currentTime <= time) {
+                                            list.add(data)
+//                                        }
+                                    } catch (e: ParseException) {
+                                        e.printStackTrace()
+                                    }
+                                }
+                                dto.itemList.addAll(list)
+                                pointList.add(dto)
+                            }
+
+                            addPoint("")
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+            })
+        }.start()
+    }
+
+    private fun removeTexts() {
+        for (i in texts.indices) {
+            texts[i].remove()
+        }
+        texts.clear()
+    }
+
+    private fun showTexts() {
+        for (i in texts.indices) {
+            texts[i].isVisible = isShowPoint
+        }
     }
 
     override fun onClick(v: View?) {
@@ -598,6 +792,27 @@ class PointForeActivity : BaseActivity(), OnClickListener, AMapLocationListener,
                     mRadarThread = RadarThread()
                     mRadarThread!!.start()
                 }
+            }
+            R.id.ivPoint -> {
+                isShowPoint = !isShowPoint
+                if (isShowPoint) {
+                    ivPoint.setImageResource(R.drawable.icon_map_value_press)
+                } else {
+                    ivPoint.setImageResource(R.drawable.icon_map_value)
+                }
+                showTexts()
+            }
+            R.id.ivLayer -> {
+                if (mOverlay == null) {
+                    return
+                }
+                isShowLayer = !isShowLayer
+                if (isShowLayer) {
+                    ivLayer.setImageResource(R.drawable.icon_map_layer_press)
+                } else {
+                    ivLayer.setImageResource(R.drawable.icon_map_layer)
+                }
+                mOverlay!!.isVisible = isShowLayer
             }
         }
     }

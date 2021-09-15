@@ -84,8 +84,8 @@ class PointForeDetailActivity : BaseActivity(), View.OnClickListener, GeocodeSea
     }
 
     private fun okHttpList(lat: Double, lng: Double) {
-        val url = String.format("http://scapi.weather.com.cn/weather/getqggdyb?type=EDA10,R03,ECT,TMP,RRH&lonlat=%s,%s&tier=24&test=ncg", lng, lat)
-        Thread(Runnable {
+        val url = "https://scapi-py.tianqi.cn/api/getqggdyb?type=EDA10,R03,ECT,TMP,RRH&lonlat=$lng,$lat&tier=24&test=ncg"
+        Thread {
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -104,7 +104,7 @@ class PointForeDetailActivity : BaseActivity(), View.OnClickListener, GeocodeSea
                                     val publishTime = obj.getString("Time")
                                     if (!TextUtils.isEmpty(publishTime)) {
                                         try {
-                                            tvPublishTime.text = "北纬:" + lng + "°" + " " + "东经：" + lat + "°" + "   " + "中央气象台" + sdf2.format(sdf1.parse(publishTime)) + "发布"
+                                            tvPublishTime.text = "北纬: $lng° 东经：$lat°\n中央气象台${sdf2.format(sdf1.parse(publishTime))}发布"
                                         } catch (e: ParseException) {
                                             e.printStackTrace()
                                         }
@@ -208,11 +208,11 @@ class PointForeDetailActivity : BaseActivity(), View.OnClickListener, GeocodeSea
                     }
                 }
             })
-        }).start()
+        }.start()
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
+    override fun onClick(v: View?) {
+        when (v!!.id) {
             R.id.llBack -> finish()
         }
     }
