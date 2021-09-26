@@ -462,6 +462,18 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
                                             }
                                             if (!itemObj.isNull("val")) {
                                                 dto.`val` = itemObj.getDouble("val")
+                                                //图例
+                                                if (!obj.isNull("tl_config")) {
+                                                    val tlArray = obj.getJSONArray("tl_config")
+                                                    for (l in 0 until tlArray.length()) {
+                                                        val tl = tlArray.getString(l).split(",")
+                                                        if (dto.`val` >= tl[0].toDouble() && dto.`val` < tl[1].toDouble()) {
+                                                            dto.bgColor = Color.parseColor(tl[2])
+                                                            dto.lineColor = Color.parseColor(tl[3])
+                                                        }
+                                                    }
+                                                }
+                                                //图例
                                             }
                                             if (!itemObj.isNull("val1")) {
                                                 dto.val1 = itemObj.getDouble("val1")
@@ -733,209 +745,25 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
             view.tvValue.text = ""
         } else {
             var unit = ""
-            var color = Color.WHITE
             when {
                 tvFactRank.text.toString().endsWith("降水") -> {
                     unit = getString(R.string.unit_mm)
-                    color = when {
-                        dto.`val` < 10 -> {
-                            0xffB6F198.toInt()
-                        }
-                        dto.`val` < 25 -> {
-                            0xff5BAD35.toInt()
-                        }
-                        dto.`val` < 50 -> {
-                            0xff78B7F9.toInt()
-                        }
-                        dto.`val` < 100 -> {
-                            0xff1E01EF.toInt()
-                        }
-                        dto.`val` < 250 -> {
-                            0xffE633F3.toInt()
-                        }
-                        else -> {
-                            0xff64140D.toInt()
-                        }
-                    }
                 }
                 tvFactRank.text.toString().endsWith("气温") -> {
                     unit = getString(R.string.unit_degree)
-                    color = when {
-                        dto.`val` < -32 -> {
-                            0xff6F1475.toInt()
-                        }
-                        dto.`val` < -28 -> {
-                            0xff76157B.toInt()
-                        }
-                        dto.`val` < -24 -> {
-                            0xff46086F.toInt()
-                        }
-                        dto.`val` < -20 -> {
-                            0xff0B246F.toInt()
-                        }
-                        dto.`val` < -16 -> {
-                            0xff1E4CA1.toInt()
-                        }
-                        dto.`val` < -12 -> {
-                            0xff4B6FC8.toInt()
-                        }
-                        dto.`val` < -8 -> {
-                            0xff4AA4E1.toInt()
-                        }
-                        dto.`val` < -4 -> {
-                            0xff8EDCFA.toInt()
-                        }
-                        dto.`val` < 0 -> {
-                            0xffB7E6F3.toInt()
-                        }
-                        dto.`val` < 4 -> {
-                            0xffFEFFCD.toInt()
-                        }
-                        dto.`val` < 8 -> {
-                            0xffDDFEB4.toInt()
-                        }
-                        dto.`val` < 12 -> {
-                            0xffBFFD75.toInt()
-                        }
-                        dto.`val` < 16 -> {
-                            0xffFEFF54.toInt()
-                        }
-                        dto.`val` < 20 -> {
-                            0xffF1CA5F.toInt()
-                        }
-                        dto.`val` < 24 -> {
-                            0xffEF8750.toInt()
-                        }
-                        dto.`val` < 28 -> {
-                            0xffEB4E67.toInt()
-                        }
-                        dto.`val` < 32 -> {
-                            0xffE93323.toInt()
-                        }
-                        else -> {
-                            0xff9D1F14.toInt()
-                        }
-                    }
                 }
                 tvFactRank.text.toString().endsWith("风速风向") -> {
                     unit = getString(R.string.unit_speed)
-                    color = when {
-                        dto.`val` < 3.3 -> {
-                            0xffF7F7F7.toInt()
-                        }
-                        dto.`val` < 5.5 -> {
-                            0xffB8D5EE.toInt()
-                        }
-                        dto.`val` < 7.9 -> {
-                            0xffABD5F5.toInt()
-                        }
-                        dto.`val` < 10.8 -> {
-                            0xff5E9AF8.toInt()
-                        }
-                        dto.`val` < 13.8 -> {
-                            0xffF9E14C.toInt()
-                        }
-                        dto.`val` < 17.1 -> {
-                            0xffF3CB64.toInt()
-                        }
-                        dto.`val` < 20.8 -> {
-                            0xffF1A33A.toInt()
-                        }
-                        dto.`val` < 24.4 -> {
-                            0xffEA4325.toInt()
-                        }
-                        dto.`val` < 28.4 -> {
-                            0xffB7321B.toInt()
-                        }
-                        dto.`val` < 32.6 -> {
-                            0xff1220AC.toInt()
-                        }
-                        else -> {
-                            0xff7B170F.toInt()
-                        }
-                    }
                 }
                 tvFactRank.text.toString().endsWith("相对湿度") -> {
                     unit = getString(R.string.unit_percent)
-                    color = when {
-                        dto.`val` < 10 -> {
-                            0xff0A107C.toInt()
-                        }
-                        dto.`val` < 20 -> {
-                            0xff1220AC.toInt()
-                        }
-                        dto.`val` < 30 -> {
-                            0xff306DDB.toInt()
-                        }
-                        dto.`val` < 40 -> {
-                            0xff5695E8.toInt()
-                        }
-                        dto.`val` < 50 -> {
-                            0xff83BDF8.toInt()
-                        }
-                        dto.`val` < 60 -> {
-                            0xffE4C44D.toInt()
-                        }
-                        dto.`val` < 70 -> {
-                            0xffD6873B.toInt()
-                        }
-                        dto.`val` < 80 -> {
-                            0xffC64050.toInt()
-                        }
-                        dto.`val` < 90 -> {
-                            0xffD974C3.toInt()
-                        }
-                        dto.`val` < 100 -> {
-                            0xff872E6A.toInt()
-                        }
-                        else -> {
-                            0xff872E6A.toInt()
-                        }
-                    }
                 }
                 tvFactRank.text.toString().endsWith("能见度") -> {
                     unit = getString(R.string.unit_km)
-                    color = when {
-                        dto.`val` < 0.1 -> {
-                            0xff6F2912.toInt()
-                        }
-                        dto.`val` < 0.2 -> {
-                            0xff8A1BF5.toInt()
-                        }
-                        dto.`val` < 0.5 -> {
-                            0xffE43323.toInt()
-                        }
-                        dto.`val` < 1 -> {
-                            0xffEC5E2C.toInt()
-                        }
-                        dto.`val` < 2 -> {
-                            0xffF5CF49.toInt()
-                        }
-                        dto.`val` < 3 -> {
-                            0xffE9EB58.toInt()
-                        }
-                        dto.`val` < 5 -> {
-                            0xffC3FA5F.toInt()
-                        }
-                        dto.`val` < 10 -> {
-                            0xff99F460.toInt()
-                        }
-                        dto.`val` < 15 -> {
-                            0xff7BF6AE.toInt()
-                        }
-                        dto.`val` < 20 -> {
-                            0xff7ECCE2.toInt()
-                        }
-                        dto.`val` < 30 -> {
-                            0xffA5DBF3.toInt()
-                        }
-                        else -> {
-                            0xffF1F1F1.toInt()
-                        }
-                    }
                 }
             }
-            view.tvValue.setBgColor(color)
+            view.tvValue.setBgColor(dto.bgColor, Color.WHITE)
+            view.tvValue.setTextColor(dto.lineColor)
             view.tvValue.text = dto.`val`.toString()+unit
             if (dto.val1 != -1.0) {
                 val b = CommonUtil.getWindMarker(this, dto.`val`)

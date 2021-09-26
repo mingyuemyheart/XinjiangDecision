@@ -53,6 +53,7 @@ import com.hlj.utils.OkHttpUtil
 import com.hlj.utils.WeatherUtil
 import com.hlj.view.CubicView2
 import com.hlj.view.MinuteFallView
+import com.hlj.view.SunriseView
 import com.hlj.view.WeeklyView
 import com.iflytek.cloud.SpeechConstant
 import com.iflytek.cloud.SpeechError
@@ -221,8 +222,8 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
             cityName = district+street
             tvPosition!!.text = cityName
             addMarkerToMap(LatLng(amapLocation.latitude, amapLocation.longitude))
-            OkHttpHourRain(amapLocation.longitude,amapLocation.latitude)
-            getWeatherInfo(amapLocation.longitude,amapLocation.latitude)
+            okHttpHourRain(amapLocation.latitude,amapLocation.longitude)
+            okHttpXiangJiAqi(amapLocation.latitude,amapLocation.longitude)
         }
     }
 
@@ -230,8 +231,8 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         cityName = "哈尔滨市"
         tvPosition!!.text = cityName
         addMarkerToMap(LatLng(45.803775, 126.534967))
-        OkHttpHourRain(126.534967,45.803775)
-        getWeatherInfo(126.534967,45.803775)
+        okHttpHourRain(126.534967,45.803775)
+        okHttpXiangJiAqi(126.534967,45.803775)
     }
 
     private fun addMarkerToMap(latLng: LatLng) {
@@ -559,17 +560,10 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
     }
 
     /**
-     * 获取天气数据
-     */
-    private fun getWeatherInfo(lng: Double, lat: Double) {
-        OkHttpXiangJiAqi(lat, lng)
-    }
-
-    /**
      * 请求象辑aqi
      */
-    private fun OkHttpXiangJiAqi(lat: Double, lng: Double) {
-        Thread(Runnable {
+    private fun okHttpXiangJiAqi(lat: Double, lng: Double) {
+        Thread {
             val timestamp = Date().time
             val start1 = sdf5.format(timestamp)
             val end1 = sdf5.format(timestamp + 1000 * 60 * 60 * 24)
@@ -625,11 +619,11 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                     super.onError(error, content)
                 }
             })
-        }).start()
+        }.start()
     }
 
     private fun getWeatherInfo(cityId: String) {
-        Thread(Runnable {
+        Thread {
             val url = String.format("https://hfapi.tianqi.cn/getweatherdata.php?area=%s&type=forecast|observe|alarm|air|rise&key=AErLsfoKBVCsU8hs", cityId)
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
@@ -718,7 +712,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                 }
                                             }
 
-                                            okHttpBody(cityId,o.getString("002"), o.getString("005"),o.getString("012"))
+                                            okHttpBody(cityId, o.getString("002"), o.getString("005"), o.getString("012"))
                                         }
                                     }
                                 }
@@ -734,20 +728,26 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                 if (!itemObj.isNull("001") && !itemObj.isNull("002")) {
                                                     val riseTime = itemObj.getString("001")
                                                     val setTime = itemObj.getString("002")
-                                                    val diviTime = sdf6.parse(setTime).time-sdf6.parse(riseTime).time
-                                                    val hour = diviTime/(1000*60*60)
+                                                    val diviTime = sdf6.parse(setTime).time - sdf6.parse(riseTime).time
+                                                    val hour = diviTime / (1000 * 60 * 60)
                                                     val hourStr = if (hour < 10) {
                                                         "0$hour"
                                                     } else {
                                                         "$hour"
                                                     }
-                                                    val minute = (diviTime-hour*1000*60*60)/(1000*60)
+                                                    val minute = (diviTime - hour * 1000 * 60 * 60) / (1000 * 60)
                                                     val minuteStr = if (minute < 10) {
                                                         "0$minute"
                                                     } else {
                                                         "$minute"
                                                     }
                                                     tvRiseTime.text = "日出时间：$riseTime\n日落时间：$setTime\n日照时长：${hourStr}时${minuteStr}分"
+
+                                                    //日出日落
+                                                    val sunriseView = SunriseView(activity)
+                                                    sunriseView.setData(riseTime, setTime)
+                                                    llContainer3.removeAllViews()
+                                                    llContainer3.addView(sunriseView, CommonUtil.widthPixels(activity), CommonUtil.dip2px(activity, 150f).toInt())
                                                 }
                                             }
                                         }
@@ -767,7 +767,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                     tvAqiCount!!.text = aqi
                                                     try {
                                                         tvAqiCount!!.setBackgroundResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)))
-                                                        tvAqi.text = "空气质量 "+WeatherUtil.getAqi(activity, Integer.valueOf(aqi))
+                                                        tvAqi.text = "空气质量 " + WeatherUtil.getAqi(activity, Integer.valueOf(aqi))
                                                     } catch (e: Exception) {
                                                         e.printStackTrace()
                                                     }
@@ -904,19 +904,19 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                     weeklyList.add(dto)
                                                     if (i == 0) {
                                                         weatherText = ""
-                                                        var pheText : String? = null
-                                                        var temperatureText : String? = null
-                                                        var windDirText : String? = null
-                                                        var windForceText : String? = null
+                                                        var pheText: String? = null
+                                                        var temperatureText: String? = null
+                                                        var windDirText: String? = null
+                                                        var windForceText: String? = null
                                                         pheText = if (dto.lowPheCode == dto.highPheCode) {
                                                             getString(WeatherUtil.getWeatherId(dto.lowPheCode))
-                                                        }else {
-                                                            getString(WeatherUtil.getWeatherId(dto.highPheCode))+"转"+getString(WeatherUtil.getWeatherId(dto.lowPheCode))
+                                                        } else {
+                                                            getString(WeatherUtil.getWeatherId(dto.highPheCode)) + "转" + getString(WeatherUtil.getWeatherId(dto.lowPheCode))
                                                         }
-                                                        temperatureText = "最高气温"+dto.highTemp+"摄氏度，"+"最低气温"+dto.lowTemp+"摄氏度"
+                                                        temperatureText = "最高气温" + dto.highTemp + "摄氏度，" + "最低气温" + dto.lowTemp + "摄氏度"
                                                         windDirText = getString(WeatherUtil.getWindDirection(dto.windDir))
                                                         windForceText = WeatherUtil.getDayWindForce(dto.windForce)
-                                                        weatherText = "，今天白天到今天夜间，"+pheText+"，"+temperatureText+"，"+windDirText+windForceText
+                                                        weatherText = "，今天白天到今天夜间，" + pheText + "，" + temperatureText + "，" + windDirText + windForceText
 
 
                                                         tvDay1!!.text = "今天"
@@ -987,17 +987,17 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                             val warningId = queryWarningIdByCityId(cityId)
                             if (!TextUtils.isEmpty(warningId)) {
                                 setPushTags(warningId)
-                                OkHttpWarning("http://decision-admin.tianqi.cn/Home/extra/getwarns?order=0&areaid=" + warningId!!.substring(0, 2), warningId)
+                                okHttpWarning("http://decision-admin.tianqi.cn/Home/extra/getwarns?order=0&areaid=" + warningId!!.substring(0, 2), warningId)
                             }
                         }
                     }
                 }
             })
-        }).start()
+        }.start()
     }
 
     private fun okHttpBody(cityId: String, l1: String, l2: String, l11: String) {
-        Thread(Runnable {
+        Thread {
             val url = "http://decision-admin.tianqi.cn/home/work2019/getBodyTem?cityId=$cityId&l1=$l1&l2=$l2&l11=$l11"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
@@ -1024,7 +1024,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                     }
                 }
             })
-        }).start()
+        }.start()
     }
 
     /**
@@ -1080,8 +1080,8 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
     /**
      * 获取预警信息
      */
-    private fun OkHttpWarning(url: String, warningId: String?) {
-        Thread(Runnable {
+    private fun okHttpWarning(url: String, warningId: String?) {
+        Thread {
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -1153,7 +1153,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                     }
                 }
             })
-        }).start()
+        }.start()
     }
 
     /**
@@ -1169,9 +1169,9 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
      * @param lng
      * @param lat
      */
-    private fun OkHttpHourRain(lng: Double, lat: Double) {
+    private fun okHttpHourRain(lat: Double, lng: Double) {
         val url = String.format("http://api.caiyunapp.com/v2/HyTVV5YAkoxlQ3Zd/%s,%s/forecast", lng, lat)
-        Thread(Runnable {
+        Thread {
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -1218,11 +1218,11 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                     }
                 }
             })
-        }).start()
+        }.start()
     }
 
     private fun okHttpVideoList() {
-        Thread(Runnable {
+        Thread {
             val url = "https://decision-admin.tianqi.cn/Home/work2019/hlg_getVideos"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
@@ -1261,11 +1261,11 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                     }
                 }
             })
-        }).start()
+        }.start()
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
+    override fun onClick(v: View?) {
+        when (v!!.id) {
             R.id.tvPosition -> startActivity(Intent(activity, CityActivity::class.java))
             R.id.tvFact -> {
                 tvTemp.text = tvFact.tag.toString() + ""
@@ -1425,8 +1425,8 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                     if (dto.lng == 0.0 || dto.lat == 0.0) {
                         getLatlngByCityid(dto.cityId)
                     } else {
-                        OkHttpHourRain(dto.lng, dto.lat)
-                        getWeatherInfo(dto.lng, dto.lat)
+                        okHttpHourRain(dto.lat, dto.lng)
+                        okHttpXiangJiAqi(dto.lat, dto.lng)
                     }
                 }
             }
@@ -1434,7 +1434,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
     }
 
     private fun getLatlngByCityid(cityId: String) {
-        Thread(Runnable {
+        Thread {
             WeatherAPI.getWeather2(activity, cityId, Language.ZH_CN, object : AsyncResponseHandler() {
                 override fun onComplete(content: Weather) {
                     super.onComplete(content)
@@ -1447,8 +1447,8 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                     val c = obj.getJSONObject("c")
                                     val lng = c.getDouble("c13")
                                     val lat = c.getDouble("c14")
-                                    OkHttpHourRain(lng, lat)
-                                    getWeatherInfo(lng, lat)
+                                    okHttpHourRain(lat, lng)
+                                    okHttpXiangJiAqi(lat, lng)
                                 }
                             } catch (e: JSONException) {
                                 e.printStackTrace()
@@ -1461,7 +1461,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                     super.onError(error, content)
                 }
             })
-        }).start()
+        }.start()
     }
 
 }

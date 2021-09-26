@@ -13,12 +13,16 @@ import android.widget.TextView;
 public class ArrowTextView extends TextView {
 
     private Paint paint,line;
-    private int bgColor;
+    private int bgColor, lineColor;
 
-    public void setBgColor(int bgColor) {
+    public void setBgColor(int bgColor, int lineColor) {
         this.bgColor = bgColor;
+        this.lineColor = lineColor;
         if (paint != null) {
             paint.setColor(bgColor);
+        }
+        if (line != null) {
+            line.setColor(lineColor);
         }
         postInvalidate();
     }
@@ -47,7 +51,7 @@ public class ArrowTextView extends TextView {
         line = new Paint();
         line.setAntiAlias(true);
         line.setStrokeWidth(2);
-        line.setColor(Color.WHITE);
+        line.setColor(lineColor);
     }
 
     @Override
