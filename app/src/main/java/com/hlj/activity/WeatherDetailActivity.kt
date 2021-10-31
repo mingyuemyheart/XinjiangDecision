@@ -42,6 +42,7 @@ import com.hlj.utils.OkHttpUtil
 import com.hlj.utils.WeatherUtil
 import com.hlj.view.CubicView2
 import com.hlj.view.MinuteFallView
+import com.hlj.view.SunriseView
 import com.hlj.view.WeeklyView
 import com.iflytek.cloud.SpeechConstant
 import com.iflytek.cloud.SpeechError
@@ -131,22 +132,9 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
         tvCityWarning!!.setOnClickListener(this)
         tvProWarning!!.setOnClickListener(this)
         clHour.setOnClickListener(this)
-        tvInfo.setOnClickListener(this)
-        ivClimate.setOnClickListener(this)
-        ivClimate.visibility = View.INVISIBLE
         clAudio.setOnClickListener(this)
         ivPlay2!!.setOnClickListener(this)
         hour = sdf1.format(Date()).toInt()
-        if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-            refreshLayout!!.setBackgroundColor(Color.BLACK)
-            clDay1.setBackgroundColor(Color.BLACK)
-            clDay2.setBackgroundColor(Color.BLACK)
-            clMinute.setBackgroundColor(Color.BLACK)
-            clHour.setBackgroundColor(Color.BLACK)
-            clFifteen.setBackgroundColor(Color.BLACK)
-            ivHourly.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(resources, R.drawable.icon_hour_rain)))
-            ivFifteen.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(resources, R.drawable.icon_fifteen)))
-        }
 
         refresh()
     }
@@ -486,49 +474,6 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
     }
 
     /**
-     * 获取疫情
-     */
-    private fun okHttpInfo(pro: String, city: String) {
-        val url = String.format("http://warn-wx.tianqi.cn/Test/getwhqydata?pro=%s&city=%s&appid=%s", pro, city, CONST.APPID)
-        OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                if (!response.isSuccessful) {
-                    return
-                }
-                val result = response.body!!.string()
-                runOnUiThread {
-                    if (!TextUtils.isEmpty(result)) {
-                        try {
-                            val obj = JSONObject(result)
-                            var proCount = ""
-                            if (!obj.isNull("total_pro")) {
-                                val proObj = obj.getJSONObject("total_pro")
-                                if (!proObj.isNull("confirm")) {
-                                    proCount = proObj.getString("confirm")
-                                }
-                            }
-                            var cityCount = ""
-                            if (!obj.isNull("total")) {
-                                val cityObj = obj.getJSONObject("total")
-                                if (!cityObj.isNull("confirm")) {
-                                    cityCount = cityObj.getString("confirm")
-                                }
-                            }
-                            tvInfo!!.text = String.format("今日疫情\n%s累计确诊%s例\n%s累计确诊%s例", city, cityCount, pro, proCount)
-                            tvInfo!!.visibility = View.VISIBLE
-                        } catch (e: JSONException) {
-                            e.printStackTrace()
-                        }
-                    }
-                }
-            }
-        })
-    }
-
-    /**
      * 获取天气数据
      */
     private fun getWeatherInfo(lng: Double, lat: Double) {
@@ -627,7 +572,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                             }
                                             if (!o.isNull("001")) {
                                                 val weatherCode = o.getString("001")
-                                                if (TextUtils.isEmpty(weatherCode) && !TextUtils.equals(weatherCode, "?") && !TextUtils.equals(weatherCode, "null")) {
+                                                if (!TextUtils.isEmpty(weatherCode) && !TextUtils.equals(weatherCode, "?") && !TextUtils.equals(weatherCode, "null")) {
                                                     try {
                                                         tvPhe!!.text = getString(WeatherUtil.getWeatherId(Integer.valueOf(weatherCode)))
                                                     } catch (e: Exception) {
@@ -646,11 +591,11 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                             }
                                             if (!o.isNull("004")) {
                                                 val windDir = o.getString("004")
-                                                if (TextUtils.isEmpty(windDir) && !TextUtils.equals(windDir, "?") && !TextUtils.equals(windDir, "null")) {
+                                                if (!TextUtils.isEmpty(windDir) && !TextUtils.equals(windDir, "?") && !TextUtils.equals(windDir, "null")) {
                                                     val dir = getString(WeatherUtil.getWindDirection(Integer.valueOf(windDir)))
                                                     if (!o.isNull("003")) {
                                                         val windForce = o.getString("003")
-                                                        if (TextUtils.isEmpty(windForce) && !TextUtils.equals(windForce, "?") && !TextUtils.equals(windForce, "null")) {
+                                                        if (!TextUtils.isEmpty(windForce) && !TextUtils.equals(windForce, "?") && !TextUtils.equals(windForce, "null")) {
                                                             val force = WeatherUtil.getFactWindForce(Integer.valueOf(windForce))
                                                             tvWind!!.text = "$dir $force"
                                                             when {
@@ -679,19 +624,18 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                                     ivWind!!.rotation = 315f
                                                                 }
                                                             }
-                                                            if (TextUtils.equals("1", MyApplication.getAppTheme())) {
-                                                                ivWind!!.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(resources, R.drawable.iv_winddir)))
-                                                            } else {
-                                                                ivWind!!.setImageResource(R.drawable.iv_winddir)
-                                                            }
+                                                            ivWind!!.setImageResource(R.drawable.iv_winddir)
                                                         }
                                                     }
                                                 }
                                             }
+
+                                            okHttpBody(cityId, o.getString("002"), o.getString("005"), o.getString("012"))
                                         }
                                     }
                                 }
 
+                                //日出日落
                                 if (!obj.isNull("rise")) {
                                     val rise = obj.getJSONObject("rise")
                                     if (!rise.isNull(cityId)) {
@@ -703,10 +647,26 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                 if (!itemObj.isNull("001") && !itemObj.isNull("002")) {
                                                     val riseTime = itemObj.getString("001")
                                                     val setTime = itemObj.getString("002")
-                                                    val diviTime = sdf6.parse(setTime).time-sdf6.parse(riseTime).time
-                                                    val hour = diviTime/(1000*60*60)
-                                                    val minute = (diviTime-hour*1000*60*60)/(1000*60)
-                                                    tvRiseTime.text = "日出时间：$riseTime\n日落时间：$setTime\n日照时间：$hour:$minute"
+                                                    val diviTime = sdf6.parse(setTime).time - sdf6.parse(riseTime).time
+                                                    val hour = diviTime / (1000 * 60 * 60)
+                                                    val hourStr = if (hour < 10) {
+                                                        "0$hour"
+                                                    } else {
+                                                        "$hour"
+                                                    }
+                                                    val minute = (diviTime - hour * 1000 * 60 * 60) / (1000 * 60)
+                                                    val minuteStr = if (minute < 10) {
+                                                        "0$minute"
+                                                    } else {
+                                                        "$minute"
+                                                    }
+                                                    tvRiseTime.text = "日出时间：$riseTime\n日落时间：$setTime\n日照时长：${hourStr}时${minuteStr}分"
+
+                                                    //日出日落
+                                                    val sunriseView = SunriseView(this@WeatherDetailActivity)
+                                                    sunriseView.setData(riseTime, setTime)
+                                                    llContainer3.removeAllViews()
+                                                    llContainer3.addView(sunriseView, CommonUtil.widthPixels(this@WeatherDetailActivity), CommonUtil.dip2px(this@WeatherDetailActivity, 150f).toInt())
                                                 }
                                             }
                                         }
@@ -954,6 +914,37 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
         }).start()
     }
 
+    private fun okHttpBody(cityId: String, l1: String, l2: String, l11: String) {
+        Thread {
+            val url = "http://decision-admin.tianqi.cn/home/work2019/getBodyTem?cityId=$cityId&l1=$l1&l2=$l2&l11=$l11"
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    runOnUiThread {
+                        if (!TextUtils.isEmpty(result)) {
+                            try {
+                                val obj = JSONObject(result)
+                                //实况信息
+                                if (!obj.isNull("l12")) {
+                                    val bodyTemp = obj.getString("l12")
+                                    tvBody.tag = "$bodyTemp"
+                                }
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+                }
+            })
+        }.start()
+    }
+
     /**
      * 设置umeng推送的tags
      * @param warningId
@@ -1154,14 +1145,14 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                 startActivityForResult(intent, 1001)
             }
             R.id.tvFact -> {
-                tvTemp.text = tvFact.tag.toString() + ""
+                tvTemp.text = tvFact.tag.toString() + "°"
                 tvFact.setTextColor(Color.WHITE)
                 tvFact.setBackgroundResource(R.drawable.bg_fact_temp_press)
                 tvBody.setTextColor(0x60ffffff)
                 tvBody.setBackgroundResource(R.drawable.bg_body_temp)
             }
             R.id.tvBody -> {
-                tvTemp.text = tvBody.tag.toString() + ""
+                tvTemp.text = tvBody.tag.toString() + "°"
                 tvFact.setTextColor(0x60ffffff)
                 tvFact.setBackgroundResource(R.drawable.bg_fact_temp)
                 tvBody.setTextColor(Color.WHITE)
@@ -1170,12 +1161,6 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
             R.id.tvAqiCount, R.id.tvAqi -> {
                 val intent = Intent(this, HAirPolutionActivity::class.java)
                 intent.putExtra(CONST.ACTIVITY_NAME, "空气质量")
-                startActivity(intent)
-            }
-            R.id.ivClimate -> {
-                val intent = Intent(this, WebviewActivity::class.java)
-                intent.putExtra(CONST.ACTIVITY_NAME, "24节气")
-                intent.putExtra(CONST.WEB_URL, "http://wx.tianqi.cn/Solar/jieqidetail")
                 startActivity(intent)
             }
             R.id.tvChart, R.id.tvList -> if (listView!!.visibility == View.VISIBLE) {
@@ -1228,12 +1213,6 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                 val bundle = Bundle()
                 bundle.putParcelableArrayList("warningList", proWarnings as ArrayList<out Parcelable?>)
                 intent.putExtras(bundle)
-                startActivity(intent)
-            }
-            R.id.tvInfo -> {
-                val intent = Intent(this, WebviewActivity::class.java)
-                intent.putExtra(CONST.ACTIVITY_NAME, "实时更新：新型冠状病毒肺炎疫情实时大数据报告")
-                intent.putExtra(CONST.WEB_URL, "https://voice.baidu.com/act/newpneumonia/newpneumonia?fraz=partner&paaz=gjyj")
                 startActivity(intent)
             }
             R.id.clAudio -> {

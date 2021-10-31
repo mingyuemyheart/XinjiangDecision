@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">丝路气象</string>
-    <string name="province_name">黑龙江</string>
     <string name="copyright">黑龙江省气象局\n黑龙江省气象服务中心</string>
     <string name="logout">退出登录</string>
     <string name="login_prompt">账号登陆</string>

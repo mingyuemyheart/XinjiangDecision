@@ -34,7 +34,7 @@ import java.io.IOException
 /**
  * 天气视频
  */
-class WeatherVideoFragment : Fragment() {
+class WeatherVideoFragment : BaseFragment() {
 
     private var mReceiver: MyBroadCastReceiver? = null
     private var mAdapter: WeatherVideoAdapter? = null

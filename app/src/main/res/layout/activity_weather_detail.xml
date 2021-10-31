@@ -13,8 +13,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -146,10 +145,12 @@
                 <TextView
                     android:id="@+id/tvTemp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
                     android:textColor="@color/white"
-                    android:textSize="70sp"
+                    android:textSize="70dp"
+                    android:includeFontPadding="false"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvFact" />
 
@@ -157,7 +158,7 @@
                     android:id="@+id/tvPhe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="15dp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/level_3"
                     app:layout_constraintBottom_toBottomOf="@+id/tvTemp"
@@ -168,6 +169,7 @@
                     android:layout_width="36dp"
                     android:layout_height="18dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/level_5"
@@ -193,7 +195,6 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/iv_winddir"
                     app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
                     app:layout_constraintStart_toEndOf="@+id/tvAqi"
                     app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
@@ -243,31 +244,48 @@
 
                 </android.support.constraint.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/ivClimate"
-                    android:layout_width="30dp"
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clSunrise"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/icon_climate"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:paddingBottom="10dp"
+                    android:background="@drawable/corner_sunrise"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvAqi" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clAudio">
 
-                <TextView
-                    android:id="@+id/tvInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_warning2"
-                    android:lineSpacingExtra="1dp"
-                    android:paddingStart="20dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="5dp"
-                    android:paddingBottom="6dp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/level_5"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivClimate"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    <TextView
+                        android:id="@+id/sunrise"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="日出日落"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/level_4"/>
+
+                    <TextView
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#40ffffff"
+                        app:layout_constraintTop_toBottomOf="@+id/sunrise"
+                        android:layout_marginTop="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/llContainer3"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp" />
+
+                </android.support.constraint.ConstraintLayout>
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/clDay1"
@@ -284,7 +302,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/clDay2"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivClimate">
+                    app:layout_constraintTop_toBottomOf="@+id/clSunrise">
 
                     <TextView
                         android:id="@+id/tvDay1"
@@ -345,7 +363,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@+id/clDay1"
-                    app:layout_constraintTop_toBottomOf="@+id/ivClimate">
+                    app:layout_constraintTop_toBottomOf="@+id/clSunrise">
 
                     <TextView
                         android:id="@+id/tvDay2"
@@ -391,6 +409,66 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="#9000699e"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/clDay1">
+
+                    <ImageView
+                        android:id="@+id/ivHourly"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/icon_hour_rain"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="逐小时预报"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/level_4"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivHourly"
+                        app:layout_constraintStart_toEndOf="@+id/ivHourly"
+                        app:layout_constraintTop_toTopOf="@+id/ivHourly" />
+
+                    <ImageView
+                        android:id="@+id/ivClose2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="8dp"
+                        android:src="@drawable/iv_close"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivHourly"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/ivHourly" />
+                </android.support.constraint.ConstraintLayout>
+
+                <HorizontalScrollView
+                    android:id="@+id/hScrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clHour">
+
+                    <LinearLayout
+                        android:id="@+id/llContainerHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="300dp"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/clMinute"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -401,7 +479,7 @@
                     android:paddingTop="5dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="5dp"
-                    app:layout_constraintTop_toBottomOf="@+id/clDay1">
+                    app:layout_constraintTop_toBottomOf="@+id/hScrollView">
 
                     <ImageView
                         android:id="@+id/ivRain"
@@ -442,22 +520,22 @@
                     app:layout_constraintTop_toBottomOf="@+id/clMinute" />
 
                 <com.amap.api.maps.MapView
-                    android:visibility="gone"
                     android:id="@+id/mapView"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="400dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/llContainerRain" />
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/ivPlay2"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:src="@drawable/iv_play2"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/mapView"
                     app:layout_constraintStart_toStartOf="@+id/mapView" />
 
@@ -468,8 +546,8 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="10dp"
                     android:scrollbars="none"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@+id/ivPlay2"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivPlay2"
                     app:layout_constraintTop_toTopOf="@+id/ivPlay2">
 
@@ -479,66 +557,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal" />
 
-                </HorizontalScrollView>
-
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/clHour"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="#9000699e"
-                    android:gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    app:layout_constraintTop_toBottomOf="@+id/mapView">
-
-                    <ImageView
-                        android:id="@+id/ivHourly"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/icon_hour_rain"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="逐小时预报"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/level_4"
-                        app:layout_constraintBottom_toBottomOf="@+id/ivHourly"
-                        app:layout_constraintStart_toEndOf="@+id/ivHourly"
-                        app:layout_constraintTop_toTopOf="@+id/ivHourly" />
-
-                    <ImageView
-                        android:id="@+id/ivClose2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="8dp"
-                        android:src="@drawable/iv_open"
-                        app:layout_constraintBottom_toBottomOf="@+id/ivHourly"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/ivHourly" />
-                </android.support.constraint.ConstraintLayout>
-
-                <HorizontalScrollView
-                    android:id="@+id/hScrollView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:overScrollMode="never"
-                    android:scrollbars="none"
-                    android:visibility="visible"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/clHour">
-
-                    <LinearLayout
-                        android:id="@+id/llContainerHour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="300dp"
-                        android:orientation="horizontal" />
                 </HorizontalScrollView>
 
                 <android.support.constraint.ConstraintLayout
@@ -552,7 +570,7 @@
                     android:paddingTop="5dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="5dp"
-                    app:layout_constraintTop_toBottomOf="@+id/hScrollView">
+                    app:layout_constraintTop_toBottomOf="@+id/hsTime">
 
                     <ImageView
                         android:id="@+id/ivFifteen"

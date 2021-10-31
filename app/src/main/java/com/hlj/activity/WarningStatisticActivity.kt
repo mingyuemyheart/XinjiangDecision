@@ -14,7 +14,6 @@ import android.widget.Toast
 import com.hlj.adapter.WarningLegendAdapter
 import com.hlj.adapter.WarningTypeAdapter
 import com.hlj.dto.WarningDto
-import com.hlj.echart.EchartOptionUtil
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import com.hlj.view.wheelview.NumericWheelAdapter
@@ -101,12 +100,12 @@ class WarningStatisticActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun refreshPie() {
-        echartView0.refreshEchartsWithOption(EchartOptionUtil.pieOption(warningList))
-        echartView1.refreshEchartsWithOption(EchartOptionUtil.nestedPieOption(warningList))
+//        echartView0.refreshEchartsWithOption(EchartOptionUtil.pieOption(warningList))
+//        echartView1.refreshEchartsWithOption(EchartOptionUtil.nestedPieOption(warningList))
     }
 
     private fun refreshBar(list: ArrayList<WarningDto?>) {
-        echartView2.refreshEchartsWithOption(EchartOptionUtil.stackedBarOption(list))
+//        echartView2.refreshEchartsWithOption(EchartOptionUtil.stackedBarOption(list))
     }
 
     private fun initGridViewLegend() {

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import com.hlj.adapter.CommonFragmentAdapter
 import com.hlj.common.CONST
 import com.hlj.common.ColumnData
 import com.hlj.dto.AgriDto
-import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import kotlinx.android.synthetic.main.fragment_weather_fact.*
 import okhttp3.Call
@@ -29,9 +27,9 @@ import shawn.cxwl.com.hlj.R
 import java.io.IOException
 
 /**
- * 天气实况、天气预报、农业气象、旅游气象、人工影响天气、专业服务、科普宣传
+ * 天气实况、天气预报、农业气象、人工影响天气、专业服务、科普宣传
  */
-class WeatherFactFragment : Fragment() {
+class WeatherFactFragment : BaseFragment() {
 
     private var mReceiver: MyBroadCastReceiver? = null
     private var mAdapter: CommonFragmentAdapter? = null
@@ -68,9 +66,6 @@ class WeatherFactFragment : Fragment() {
 
     private fun refresh() {
         initGridView()
-        val columnId = arguments!!.getString(CONST.COLUMN_ID)
-        val title = arguments!!.getString(CONST.ACTIVITY_NAME)
-        CommonUtil.submitClickCount(columnId, title)
     }
 
     /**

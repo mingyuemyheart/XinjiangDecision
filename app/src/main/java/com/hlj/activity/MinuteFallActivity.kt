@@ -28,7 +28,6 @@ import com.hlj.dto.WeatherDto
 import com.hlj.manager.CaiyunManager
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
-import com.hlj.view.MinuteFallView
 import com.hlj.view.MinuteFallView2
 import kotlinx.android.synthetic.main.activity_minute_fall.*
 import kotlinx.android.synthetic.main.layout_title.*

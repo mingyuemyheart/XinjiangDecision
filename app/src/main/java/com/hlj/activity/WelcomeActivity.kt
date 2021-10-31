@@ -62,9 +62,6 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 						if (!TextUtils.isEmpty(result)) {
 							try {
 								val obj = JSONObject(result)
-								if (!obj.isNull("style")) {
-									MyApplication.setTheme(obj.getString("style"))
-								}
 								if (!obj.isNull("launch_img")) {
 									val imgUrl = obj.getString("launch_img")
 									if (!TextUtils.isEmpty(imgUrl)) {
@@ -320,6 +317,38 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 														}
 														if (!child3Obj.isNull("showtype")) {
 															child3.showType = child3Obj.getString("showtype")
+														}
+														if (!child3Obj.isNull("child")) {
+															val child4Array = JSONArray(child3Obj.getString("child"))
+															for (n in 0 until child4Array.length()) {
+																val child4Obj = child4Array.getJSONObject(n)
+																val child4 = ColumnData()
+																if (!child4Obj.isNull("id")) {
+																	child3.columnId = child4Obj.getString("id")
+																}
+																if (!child4Obj.isNull("localviewid")) {
+																	child4.id = child4Obj.getString("localviewid")
+																}
+																if (!child4Obj.isNull("name")) {
+																	child4.name = child4Obj.getString("name")
+																}
+																if (!child4Obj.isNull("desc")) {
+																	child4.desc = child4Obj.getString("desc")
+																}
+																if (!child4Obj.isNull("icon")) {
+																	child4.icon = child4Obj.getString("icon")
+																}
+																if (!child4Obj.isNull("icon2")) {
+																	child4.icon2 = child4Obj.getString("icon2")
+																}
+																if (!child4Obj.isNull("dataurl")) {
+																	child4.dataUrl = child4Obj.getString("dataurl")
+																}
+																if (!child4Obj.isNull("showtype")) {
+																	child4.showType = child4Obj.getString("showtype")
+																}
+																child3.child.add(child4)
+															}
 														}
 														child2.child.add(child3)
 													}

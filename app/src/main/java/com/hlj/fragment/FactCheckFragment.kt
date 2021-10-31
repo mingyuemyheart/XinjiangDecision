@@ -36,7 +36,7 @@ import java.util.*
  * 任意时段查询,小时
  * @author shawn_sun
  */
-class FactCheckFragment : Fragment(), OnClickListener {
+class FactCheckFragment : BaseFragment(), OnClickListener {
 
     private var checkArea = ""
     private var areaAdapter: FactCheckCitysAdapter? = null

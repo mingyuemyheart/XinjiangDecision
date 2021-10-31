@@ -8,7 +8,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -57,7 +56,7 @@ import kotlin.collections.ArrayList
 /**
  * 天气预警
  */
-class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarkerClickListener, InfoWindowAdapter {
+class WarningFragment : BaseFragment(), OnClickListener, OnMapClickListener, OnMarkerClickListener, InfoWindowAdapter {
 
     private var mReceiver: MyBroadCastReceiver? = null
     private var aMap: AMap? = null
@@ -110,9 +109,6 @@ class WarningFragment : Fragment(), OnClickListener, OnMapClickListener, OnMarke
         initWidget()
         initListViewStatistic()
         initListView()
-        val columnId = arguments!!.getString(CONST.COLUMN_ID)
-        val title = arguments!!.getString(CONST.ACTIVITY_NAME)
-        CommonUtil.submitClickCount(columnId, title)
     }
 
     /**

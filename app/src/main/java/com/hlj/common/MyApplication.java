@@ -38,18 +38,9 @@ import java.util.Set;
 public class MyApplication extends Application{
 
 	public static String appKey = "5755277767e58e5ca4000e07", msgSecret = "3464bbdf388960ddcea9c5cebf46cd66";//旧
-//	public static String appKey = "5efe98800cafb240580000e2", msgSecret = "a03a519f1e2867391368d006baefd69f";//新
     private static PushAgent mPushAgent = null;
     private static TagManager tagManager = null;
 	public static String DEVICETOKEN = "";
-
-	private static String appTheme = "0";
-	public static String getAppTheme() {
-		return appTheme;
-	}
-	public static void setTheme(String theme) {
-		appTheme = theme;
-	}
 
 	public static ArrayList<ColumnData> columnDataList = new ArrayList<>();
 

@@ -19,9 +19,16 @@ import com.hlj.adapter.CityProAdapter
 import com.hlj.adapter.CityNationAdapter
 import com.hlj.dto.CityDto
 import com.hlj.manager.DBManager
+import com.hlj.utils.OkHttpUtil
 import kotlinx.android.synthetic.main.activity_city.*
 import kotlinx.android.synthetic.main.layout_title.*
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Request
+import okhttp3.Response
+import org.json.JSONArray
 import shawn.cxwl.com.hlj.R
+import java.io.IOException
 import java.util.*
 
 /**
@@ -126,27 +133,28 @@ class CityActivity : BaseActivity(), OnClickListener {
      * 初始化省内热门gridview
      */
     private fun initPGridView() {
-        val stations = resources.getStringArray(R.array.pro_hotCity)
-        for (i in stations.indices) {
-            val value = stations[i].split(",").toTypedArray()
-            val dto = CityDto()
-            dto.cityId = value[0]
-            dto.areaName = value[1]
-            dto.level = value[2]
-            dto.sectionName = value[3]
-            pList.add(dto)
-        }
-        for (i in pList.indices) {
-            val sectionDto = pList[i]
-            if (!sectionMap.containsKey(sectionDto.sectionName)) {
-                sectionDto.section = section
-                sectionMap[sectionDto.sectionName] = section
-                section++
-            } else {
-                sectionDto.section = sectionMap[sectionDto.sectionName]!!
-            }
-            pList[i] = sectionDto
-        }
+        okHttpProCitys()
+//        val stations = resources.getStringArray(R.array.pro_hotCity)
+//        for (i in stations.indices) {
+//            val value = stations[i].split(",").toTypedArray()
+//            val dto = CityDto()
+//            dto.cityId = value[0]
+//            dto.areaName = value[1]
+//            dto.level = value[2]
+//            dto.sectionName = value[3]
+//            pList.add(dto)
+//        }
+//        for (i in pList.indices) {
+//            val sectionDto = pList[i]
+//            if (!sectionMap.containsKey(sectionDto.sectionName)) {
+//                sectionDto.section = section
+//                sectionMap[sectionDto.sectionName] = section
+//                section++
+//            } else {
+//                sectionDto.section = sectionMap[sectionDto.sectionName]!!
+//            }
+//            pList[i] = sectionDto
+//        }
         pAdapter = CityProAdapter(this, pList)
         pGridView!!.adapter = pAdapter
         pGridView!!.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 -> intentWeatherDetail(pList[arg2]) }
@@ -228,6 +236,58 @@ class CityActivity : BaseActivity(), OnClickListener {
                 nGridView!!.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun okHttpProCitys() {
+        Thread {
+            val url = "http://xinjiangdecision.tianqi.cn:81/Home/api/getxjcity_list"
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                }
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    runOnUiThread {
+                        if (!TextUtils.isEmpty(result)) {
+                            var array = JSONArray(result)
+                            pList.clear()
+                            for (i in 0 until array.length()) {
+                                val itemObj = array.getJSONObject(i)
+                                val sectionName = itemObj.getString("name")
+                                if (!itemObj.isNull("list")) {
+                                    val listArray = itemObj.getJSONArray("list")
+                                    for (j in 0 until listArray.length()) {
+                                        val itemArray = listArray.get(j).toString().split(",")
+                                        val dto = CityDto()
+                                        dto.cityId = itemArray[0]
+                                        dto.areaName = itemArray[1]
+                                        dto.sectionName = sectionName
+                                        pList.add(dto)
+                                    }
+                                }
+                            }
+                            for (i in pList.indices) {
+                                val sectionDto = pList[i]
+                                if (!sectionMap.containsKey(sectionDto.sectionName)) {
+                                    sectionDto.section = section
+                                    sectionMap[sectionDto.sectionName] = section
+                                    section++
+                                } else {
+                                    sectionDto.section = sectionMap[sectionDto.sectionName]!!
+                                }
+                                pList[i] = sectionDto
+                            }
+
+                            if (pAdapter != null) {
+                                pAdapter!!.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                }
+            })
+        }.start()
     }
 
 }

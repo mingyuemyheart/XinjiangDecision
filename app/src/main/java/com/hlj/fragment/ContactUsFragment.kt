@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import com.hlj.adapter.ContactAdapter
 import com.hlj.common.CONST
 import com.hlj.common.ColumnData
 import com.hlj.common.MyApplication
-import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import kotlinx.android.synthetic.main.dialog_delete.view.*
 import kotlinx.android.synthetic.main.fragment_contact_us.*
@@ -34,7 +32,7 @@ import java.io.IOException
  * 联系我们
  * @author shawn_sun
  */
-class ContactUsFragment : Fragment(), View.OnClickListener {
+class ContactUsFragment : BaseFragment(), View.OnClickListener {
 
     private var mReceiver: MyBroadCastReceiver? = null
     private var mAdapter1: ContactAdapter? = null
@@ -63,10 +61,6 @@ class ContactUsFragment : Fragment(), View.OnClickListener {
         } else {
             clLogin.visibility = View.GONE
         }
-
-        val columnId = arguments!!.getString(CONST.COLUMN_ID)
-        val title = arguments!!.getString(CONST.ACTIVITY_NAME)
-        CommonUtil.submitClickCount(columnId, title)
 
         initGridView1()
         initGridView2()

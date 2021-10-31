@@ -1,4 +1,4 @@
-package com.hlj.adapter;
+package com.hlj.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

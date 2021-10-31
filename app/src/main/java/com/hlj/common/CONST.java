@@ -11,7 +11,6 @@ public class CONST {
 	public static String APPID = "1";
 	public static final LatLng guizhouLatLng = new LatLng(43.766288715991074,87.62225858867168);
 	public static boolean isDelete = false;//判断是否可以删除
-	public static String BUILD_URL = "http://decision-admin.tianqi.cn/infomes/data/heilongjiang/about_heilongjiang.html";//企业信息地址
 
 	//showType类型，区分本地类或者图文
 	public static final String LOCAL = "local";
@@ -42,5 +41,7 @@ public class CONST {
 	public static String[] yellow = {"02", "_yellow"};
 	public static String[] orange = {"03", "_orange"};
 	public static String[] red = {"04", "_red"};
+
+	public static String JPG = ".jpg";
 
 }

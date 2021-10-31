@@ -30,7 +30,7 @@
             android:layout_below="@+id/tvMessage"
             android:layout_marginTop="10dp"
             android:lineSpacingExtra="5dp"
-            android:text="感谢您信任并使用黑龙江气象！我们依据相关法律制定了"
+            android:text="感谢您信任并使用丝路气象！我们依据相关法律制定了"
             android:textColor="@color/black"
             android:textSize="@dimen/level_4" />
 

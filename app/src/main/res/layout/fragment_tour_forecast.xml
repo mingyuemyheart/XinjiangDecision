@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clFifteen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15天预报"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvChart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chart_press"
+            android:gravity="center"
+            android:text="趋势"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvList"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_list"
+            android:gravity="center"
+            android:text="列表"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <com.hlj.view.ScrollviewListview
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/transparent"
+        android:divider="#30ffffff"
+        android:dividerHeight="0.5dp"
+        android:listSelector="@color/transparent"
+        android:overScrollMode="never"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:scrollbars="none"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/clFifteen" />
+
+    <HorizontalScrollView
+        android:id="@+id/hScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/clFifteen">
+
+        <LinearLayout
+            android:id="@+id/llContainerFifteen"
+            android:layout_width="wrap_content"
+            android:layout_height="320dp"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+</android.support.constraint.ConstraintLayout>

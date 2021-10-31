@@ -35,7 +35,7 @@ import kotlin.collections.ArrayList
 /**
  * 通用列表界面
  */
-class CommonListFragment : Fragment() {
+class CommonListFragment : BaseFragment() {
 
     private var mReceiver: MyBroadCastReceiver? = null
     private var mAdapter: CommonPdfListAdapter? = null

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:background="@drawable/bg_corner_white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/ivPhe"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@+id/ivPhe"
+        android:textSize="@dimen/level_5"
+        android:textColor="@color/text_color3"/>
+
+    <TextView
+        android:id="@+id/tvTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color4"
+        android:textSize="@dimen/level_5"
+        app:layout_constraintStart_toEndOf="@+id/ivPhe"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="2dp"/>
+
+</android.support.constraint.ConstraintLayout>

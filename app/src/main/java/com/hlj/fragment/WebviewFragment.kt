@@ -25,7 +25,7 @@ import shawn.cxwl.com.hlj.R
  * 旅游气象
  * @author shawn_sun
  */
-class WebviewFragment : Fragment(), AMapLocationListener {
+class WebviewFragment : BaseFragment(), AMapLocationListener {
 
     private var mReceiver: MyBroadCastReceiver? = null
 

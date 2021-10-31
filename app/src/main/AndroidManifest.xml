@@ -305,6 +305,54 @@
             android:name="com.hlj.activity.AreaFallActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.hlj.activity.TourRouteActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.TourObserveActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.DisasterActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.DisasterDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.DisasterUploadActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.SelectPictureActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.TourKepuActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.TourRouteDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.TourScenicActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.TourScenicDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.TourWarningActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.TourSearchActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

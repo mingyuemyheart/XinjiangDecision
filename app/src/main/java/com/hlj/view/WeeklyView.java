@@ -7,12 +7,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.media.ThumbnailUtils;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.hlj.common.MyApplication;
 import com.hlj.dto.WeatherDto;
 import com.hlj.utils.CommonUtil;
 import com.hlj.utils.WeatherUtil;
@@ -197,23 +195,18 @@ public class WeeklyView extends View{
 
 			Bitmap lb = WeatherUtil.getNightBitmap(mContext, dto.lowPheCode);
 			Bitmap newLbit = ThumbnailUtils.extractThumbnail(lb, (int)(CommonUtil.dip2px(mContext, 20)), (int)(CommonUtil.dip2px(mContext, 20)));
-			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				canvas.drawBitmap(CommonUtil.grayScaleImage(newBit), dto.highX-newBit.getWidth()/2, CommonUtil.dip2px(mContext, 68), textP);
-				canvas.drawBitmap(CommonUtil.grayScaleImage(newLbit), dto.lowX-newLbit.getWidth()/2, h-CommonUtil.dip2px(mContext, 85), textP);
-			} else {
-				canvas.drawBitmap(newBit, dto.highX-newBit.getWidth()/2, CommonUtil.dip2px(mContext, 68), textP);
-				canvas.drawBitmap(newLbit, dto.lowX-newLbit.getWidth()/2, h-CommonUtil.dip2px(mContext, 85), textP);
-			}
+			canvas.drawBitmap(newBit, dto.highX-newBit.getWidth()/2, CommonUtil.dip2px(mContext, 68), textP);
+			canvas.drawBitmap(newLbit, dto.lowX-newLbit.getWidth()/2, h-CommonUtil.dip2px(mContext, 85), textP);
 
 			//绘制曲线上每个时间点的温度值
 			textP.setColor(getResources().getColor(R.color.white));
 			textP.setTextSize(CommonUtil.dip2px(mContext, 13));
-			float highText = textP.measureText(String.valueOf(tempList.get(i).highTemp));//高温字符串占像素宽度
+			float highText = textP.measureText(tempList.get(i).highTemp+"℃");//高温字符串占像素宽度
 			canvas.drawText(tempList.get(i).highTemp+"℃", dto.highX-highText/2, CommonUtil.dip2px(mContext, 103), textP);
 
 			textP.setColor(getResources().getColor(R.color.white));
 			textP.setTextSize(CommonUtil.dip2px(mContext, 13));
-			float lowText = textP.measureText(String.valueOf(tempList.get(i).lowTemp));//低温字符串所占的像素宽度
+			float lowText = textP.measureText(tempList.get(i).lowTemp+"℃");//低温字符串所占的像素宽度
 			canvas.drawText(tempList.get(i).lowTemp+"℃", dto.lowX-lowText/2, h-CommonUtil.dip2px(mContext, 90), textP);
 
 			float lowPheText = textP.measureText(dto.lowPhe);//天气现象字符串占像素宽度
@@ -227,18 +220,10 @@ public class WeeklyView extends View{
 			}
 
 			//绘制曲线上每个时间点上的圆点marker
-			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				lineP.setColor(Color.WHITE);
-			} else {
-				lineP.setColor(getResources().getColor(R.color.low_color));
-			}
+			lineP.setColor(getResources().getColor(R.color.low_color));
 			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 8));
 			canvas.drawPoint(dto.lowX, dto.lowY, lineP);
-			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				lineP.setColor(Color.WHITE);
-			} else {
-				lineP.setColor(getResources().getColor(R.color.high_color));
-			}
+			lineP.setColor(getResources().getColor(R.color.high_color));
 			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 8));
 			canvas.drawPoint(dto.highX, dto.highY, lineP);
 
@@ -269,11 +254,7 @@ public class WeeklyView extends View{
 			Path pathLow = new Path();
 			pathLow.moveTo(x1, y1);
 			pathLow.cubicTo(x3, y3, x4, y4, x2, y2);
-			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				lineP.setColor(Color.WHITE);
-			} else {
-				lineP.setColor(getResources().getColor(R.color.low_color));
-			}
+			lineP.setColor(getResources().getColor(R.color.low_color));
 			lineP.setStrokeWidth(5.0f);
 			canvas.drawPath(pathLow, lineP);
 		}
@@ -294,11 +275,7 @@ public class WeeklyView extends View{
 			Path pathHigh = new Path();
 			pathHigh.moveTo(x1, y1);
 			pathHigh.cubicTo(x3, y3, x4, y4, x2, y2);
-			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				lineP.setColor(Color.WHITE);
-			} else {
-				lineP.setColor(getResources().getColor(R.color.high_color));
-			}
+			lineP.setColor(getResources().getColor(R.color.high_color));
 			lineP.setStrokeWidth(5.0f);
 			canvas.drawPath(pathHigh, lineP);
 		}

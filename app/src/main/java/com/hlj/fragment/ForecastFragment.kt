@@ -14,7 +14,6 @@ import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.Drawable
 import android.media.ThumbnailUtils
 import android.os.*
-import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.util.TypedValue
@@ -77,7 +76,7 @@ import kotlin.collections.ArrayList
 /**
  * 天气预报
  */
-class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, CaiyunManager.RadarListener{
+class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, CaiyunManager.RadarListener{
 
     private var mReceiver: MyBroadCastReceiver? = null
     private var mAdapter: WeeklyForecastAdapter? = null
@@ -150,11 +149,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
      * 初始化控件
      */
     private fun initWidget() {
-        //解决scrollView嵌套listview，动态计算listview高度后，自动滚动到屏幕底部
-        tvPosition!!.isFocusable = true
-        tvPosition!!.isFocusableInTouchMode = true
-        tvPosition!!.requestFocus()
-        tvPosition!!.setOnClickListener(this)
+        tvPosition.setOnClickListener(this)
         tvFact.setOnClickListener(this)
         tvBody.setOnClickListener(this)
         tvChart.setOnClickListener(this)
@@ -172,15 +167,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         clAudio.setOnClickListener(this)
         ivPlay2!!.setOnClickListener(this)
         hour = sdf1.format(Date()).toInt()
-        if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-            refreshLayout!!.setBackgroundColor(Color.BLACK)
-            clDay1.setBackgroundColor(Color.BLACK)
-            clMinute.setBackgroundColor(Color.BLACK)
-            clHour.setBackgroundColor(Color.BLACK)
-            clFifteen.setBackgroundColor(Color.BLACK)
-            ivHourly.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(resources, R.drawable.icon_hour_rain)))
-            ivFifteen.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(resources, R.drawable.icon_fifteen)))
-        }
+
         if (CommonUtil.isLocationOpen(activity)) {
             startLocation()
         } else {
@@ -192,10 +179,6 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         }
 
         initSpeech()
-
-        val columnId = arguments!!.getString(CONST.COLUMN_ID)
-        val title = arguments!!.getString(CONST.ACTIVITY_NAME)
-        CommonUtil.submitClickCount(columnId, title)
     }
 
     /**
@@ -654,7 +637,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                             }
                                             if (!o.isNull("001")) {
                                                 val weatherCode = o.getString("001")
-                                                if (TextUtils.isEmpty(weatherCode) && !TextUtils.equals(weatherCode, "?") && !TextUtils.equals(weatherCode, "null")) {
+                                                if (!TextUtils.isEmpty(weatherCode) && !TextUtils.equals(weatherCode, "?") && !TextUtils.equals(weatherCode, "null")) {
                                                     try {
                                                         tvPhe!!.text = getString(WeatherUtil.getWeatherId(Integer.valueOf(weatherCode)))
                                                     } catch (e: Exception) {
@@ -664,16 +647,16 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                             }
                                             if (!o.isNull("002")) {
                                                 val factTemp = o.getString("002")
-                                                tvTemp!!.text = "$factTemp"
+                                                tvTemp!!.text = "$factTemp°"
                                                 tvFact.tag = "$factTemp"
                                             }
                                             if (!o.isNull("004")) {
                                                 val windDir = o.getString("004")
-                                                if (TextUtils.isEmpty(windDir) && !TextUtils.equals(windDir, "?") && !TextUtils.equals(windDir, "null")) {
+                                                if (!TextUtils.isEmpty(windDir) && !TextUtils.equals(windDir, "?") && !TextUtils.equals(windDir, "null")) {
                                                     val dir = getString(WeatherUtil.getWindDirection(Integer.valueOf(windDir)))
                                                     if (!o.isNull("003")) {
                                                         val windForce = o.getString("003")
-                                                        if (TextUtils.isEmpty(windForce) && !TextUtils.equals(windForce, "?") && !TextUtils.equals(windForce, "null")) {
+                                                        if (!TextUtils.isEmpty(windForce) && !TextUtils.equals(windForce, "?") && !TextUtils.equals(windForce, "null")) {
                                                             val force = WeatherUtil.getFactWindForce(Integer.valueOf(windForce))
                                                             tvWind!!.text = "$dir $force"
                                                             when {
@@ -702,11 +685,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                                                     ivWind!!.rotation = 315f
                                                                 }
                                                             }
-                                                            if (TextUtils.equals("1", MyApplication.getAppTheme())) {
-                                                                ivWind!!.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(resources, R.drawable.iv_winddir)))
-                                                            } else {
-                                                                ivWind!!.setImageResource(R.drawable.iv_winddir)
-                                                            }
+                                                            ivWind!!.setImageResource(R.drawable.iv_winddir)
                                                         }
                                                     }
                                                 }
@@ -717,6 +696,7 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
                                     }
                                 }
 
+                                //日出日落
                                 if (!obj.isNull("rise")) {
                                     val rise = obj.getJSONObject("rise")
                                     if (!rise.isNull(cityId)) {
@@ -1268,14 +1248,14 @@ class ForecastFragment : Fragment(), OnClickListener, AMapLocationListener, Caiy
         when (v!!.id) {
             R.id.tvPosition -> startActivity(Intent(activity, CityActivity::class.java))
             R.id.tvFact -> {
-                tvTemp.text = tvFact.tag.toString() + ""
+                tvTemp.text = tvFact.tag.toString() + "°"
                 tvFact.setTextColor(Color.WHITE)
                 tvFact.setBackgroundResource(R.drawable.bg_fact_temp_press)
                 tvBody.setTextColor(0x60ffffff)
                 tvBody.setBackgroundResource(R.drawable.bg_body_temp)
             }
             R.id.tvBody -> {
-                tvTemp.text = tvBody.tag.toString() + ""
+                tvTemp.text = tvBody.tag.toString() + "°"
                 tvFact.setTextColor(0x60ffffff)
                 tvFact.setBackgroundResource(R.drawable.bg_fact_temp)
                 tvBody.setTextColor(Color.WHITE)

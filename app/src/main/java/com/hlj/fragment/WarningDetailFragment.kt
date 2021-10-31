@@ -4,7 +4,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +26,7 @@ import java.io.IOException
 /**
  * 预警详情
  */
-class WarningDetailFragment : Fragment() {
+class WarningDetailFragment : BaseFragment() {
 
     private var data: WarningDto? = null
 

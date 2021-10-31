@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -20,12 +21,12 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
-import android.media.ThumbnailUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -43,39 +44,36 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
-import com.amap.api.maps.model.Marker;
-import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolygonOptions;
-import com.amap.api.maps.model.PolylineOptions;
 import com.hlj.common.CONST;
 import com.hlj.common.MyApplication;
-import com.hlj.dto.WarningDto;
+import com.hlj.dto.AgriDto;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -1052,12 +1050,12 @@ public class CommonUtil {
 
 	public static void topToBottom(View view) {
 		startAnimation(false, view);
-		view.setVisibility(View.VISIBLE);
+		view.setVisibility(View.GONE);
 	}
 
 	public static void bottomToTop(View view) {
 		startAnimation(true, view);
-		view.setVisibility(View.GONE);
+		view.setVisibility(View.VISIBLE);
 	}
 
 	/**
@@ -1066,18 +1064,18 @@ public class CommonUtil {
 	private static void startAnimation(boolean flag, final View view) {
 		AnimationSet animationSet = new AnimationSet(true);
 		TranslateAnimation animation;
-		if (!flag) {
+		if (flag) {
 			animation = new TranslateAnimation(
 					Animation.RELATIVE_TO_SELF,0f,
 					Animation.RELATIVE_TO_SELF,0f,
-					Animation.RELATIVE_TO_SELF,-1.0f,
+					Animation.RELATIVE_TO_SELF,1.0f,
 					Animation.RELATIVE_TO_SELF,0f);
 		}else {
 			animation = new TranslateAnimation(
 					Animation.RELATIVE_TO_SELF,0f,
 					Animation.RELATIVE_TO_SELF,0f,
 					Animation.RELATIVE_TO_SELF,0f,
-					Animation.RELATIVE_TO_SELF,-1.0f);
+					Animation.RELATIVE_TO_SELF,1.0f);
 		}
 		animation.setDuration(400);
 		animationSet.addAnimation(animation);
@@ -1114,6 +1112,84 @@ public class CommonUtil {
 			}
 		}
 		return warningName;
+	}
+
+	/**
+	 * 获取所有本地图片文件信息
+	 * @return
+	 */
+	public static List<AgriDto> getAllLocalImages(Context context) {
+		List<AgriDto> list = new ArrayList<>();
+		if (context != null) {
+			Cursor cursor = context.getContentResolver().query(
+					MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null,
+					null, null);
+			if (cursor != null) {
+				while (cursor.moveToNext()) {
+					int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
+					String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.TITLE));
+					String displayName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME));
+					String mimeType = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.MIME_TYPE));
+					String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+					long fileSize = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE));
+
+					AgriDto dto = new AgriDto();
+					dto.imageName = title;
+					dto.imgUrl = path;
+					dto.fileSize = fileSize;
+					list.add(0, dto);
+				}
+				cursor.close();
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * 格式化文件单位
+	 * @param size
+	 * @return
+	 */
+	public static String getFormatSize(long size) {
+		long kiloByte = size / 1024;
+		if (kiloByte < 1) {
+			return "0KB";
+		}
+
+		long megaByte = kiloByte / 1024;
+		if (megaByte < 1) {
+			BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
+			return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB";
+		}
+
+		long gigaByte = megaByte / 1024;
+		if (gigaByte < 1) {
+			BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
+			return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB";
+		}
+
+		long teraBytes = gigaByte / 1024;
+		if (teraBytes < 1) {
+			BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
+			return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB";
+		}
+		BigDecimal result4 = new BigDecimal(teraBytes);
+		return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()+ "TB";
+	}
+
+	/**
+	 * 广播通知相册刷新
+	 * @param context
+	 * @param file
+	 */
+	public static void notifyAlbum(Context context, File file) {
+		try {
+			MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), file.getName(), null);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
 	}
 
 }

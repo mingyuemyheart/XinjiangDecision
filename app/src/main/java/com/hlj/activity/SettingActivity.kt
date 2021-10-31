@@ -136,13 +136,13 @@ class SettingActivity : BaseActivity(), OnClickListener {
         view.tvProtocal.setOnClickListener {
             val intent = Intent(this, WebviewActivity::class.java)
             intent.putExtra(CONST.ACTIVITY_NAME, "用户协议")
-            intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yhxy.html")
+            intent.putExtra(CONST.WEB_URL, "http://xinjiangdecision.tianqi.cn:81/Public/share/xj_htmls/yhxy.html")
             startActivity(intent)
         }
         view.tvPolicy.setOnClickListener {
             val intent = Intent(this, WebviewActivity::class.java)
             intent.putExtra(CONST.ACTIVITY_NAME, "隐私政策")
-            intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yscl.html")
+            intent.putExtra(CONST.WEB_URL, "http://xinjiangdecision.tianqi.cn:81/Public/share/xj_htmls/yscl.html ")
             startActivity(intent)
         }
         view.tvNegtive.setOnClickListener { dialog.dismiss() }
@@ -176,13 +176,13 @@ class SettingActivity : BaseActivity(), OnClickListener {
             R.id.llProtocal -> {
                 val intent = Intent(this, WebviewActivity::class.java)
                 intent.putExtra(CONST.ACTIVITY_NAME, "用户协议")
-                intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yhxy.html")
+                intent.putExtra(CONST.WEB_URL, "http://xinjiangdecision.tianqi.cn:81/Public/share/xj_htmls/yhxy.html")
                 startActivity(intent)
             }
             R.id.llPolicy -> {
                 val intent = Intent(this, WebviewActivity::class.java)
                 intent.putExtra(CONST.ACTIVITY_NAME, "隐私政策")
-                intent.putExtra(CONST.WEB_URL, "http://decision-admin.tianqi.cn/Public/share/hlj_htmls/yscl.html")
+                intent.putExtra(CONST.WEB_URL, "http://xinjiangdecision.tianqi.cn:81/Public/share/xj_htmls/yscl.html ")
                 startActivity(intent)
             }
         }

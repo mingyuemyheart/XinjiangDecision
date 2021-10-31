@@ -170,11 +170,7 @@ public class CubicView extends View{
 			Path pathLow = new Path();
 			pathLow.moveTo(x1, y1);
 			pathLow.cubicTo(x3, y3, x4, y4, x2, y2);
-			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				lineP.setColor(Color.WHITE);
-			} else {
-				lineP.setColor(getResources().getColor(R.color.cubic_color));
-			}
+			lineP.setColor(getResources().getColor(R.color.cubic_color));
 			lineP.setStrokeWidth(5.0f);
 			canvas.drawPath(pathLow, lineP);
 		}
@@ -191,11 +187,7 @@ public class CubicView extends View{
 			}
 
 			//绘制曲线上每个时间点marker
-			if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-				lineP.setColor(Color.WHITE);
-			} else {
-				lineP.setColor(getResources().getColor(R.color.cubic_color));
-			}
+			lineP.setColor(getResources().getColor(R.color.cubic_color));
 			lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 5));
 
 			//绘制风速风向

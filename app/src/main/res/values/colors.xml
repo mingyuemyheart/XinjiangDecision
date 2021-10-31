@@ -16,9 +16,6 @@
     <color name="aqi4">#98374a</color>
     <color name="aqi5">#57252e</color>
 
-    <color name="route_search_location">#ff098edb</color>
-    <color name="route_search_input">#ff474747</color>
-
     <color name="light_pink">#ffd5d5</color>
     <color name="light_blue">#c1e7ff</color>
     <color name="light_gray">#f0eff5</color>
@@ -40,8 +37,6 @@
     <color name="mai">#232440</color>
     <color name="typhoon_bg">#f3758c97</color>
     <color name="title_bg">#4a6ee7</color>
-    <color name="detail_bg_color">#3d45ca</color>
-    <color name="list_double_bg_color">#f1f5f8</color>
     <color name="text_color1">#CBCBCB</color>
     <color name="text_color2">#A3A7AC</color>
     <color name="text_color3">#f0000000</color>
@@ -54,16 +49,4 @@
     <color name="start">#ff4cd964</color>
     <color name="end">#ffef7171</color>
 
-    <!-- 添加频道的gridview -->
-    <color name="subscribe_item_drag_stroke">#ffd2d2d2</color>
-    <color name="subscribe_item_drag_bg">#fff5f5f5</color>
-    <color name="subscribe_item_selected_bg">#ffffffff</color>
-    <color name="subscribe_item_selected_stroke">#ffcc3131</color>
-    <color name="subscribe_item_disabled_stroke">#ffd9d9d9</color>
-    <color name="subscribe_item_disabled_bg">#fffafafa</color>
-    <color name="subscribe_item_pressed_stroke">#ffcdcdcd</color>
-    <color name="subscribe_item_pressed_bg">#fff9f9f9</color>
-    <color name="subscribe_item_normal_stroke">#ffcdcdcd</color>
-    <color name="subscribe_item_normal_bg">#fff5f5f5</color>
-    
 </resources>

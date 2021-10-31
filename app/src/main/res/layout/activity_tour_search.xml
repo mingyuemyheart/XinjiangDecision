@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/llBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/iv_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/back"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_corner_edittext4"
+            android:hint="查询城市/景点/旅游文化/特色美食"
+            android:paddingStart="40dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/text_color4"
+            android:textColorHint="@color/text_color2"
+            android:textSize="@dimen/level_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/llBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/iv_search"
+            app:layout_constraintBottom_toBottomOf="@+id/etSearch"
+            app:layout_constraintStart_toStartOf="@+id/etSearch"
+            app:layout_constraintTop_toTopOf="@+id/etSearch" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/llContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/clTitle"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:cacheColorHint="@color/transparent"
+        android:divider="#30ffffff"
+        android:dividerHeight="0.5dp"
+        android:listSelector="@color/transparent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llContainer" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clTitle">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/ivCity"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/icon_tour_city"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="城市"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCity"
+                app:layout_constraintStart_toEndOf="@+id/ivCity"
+                app:layout_constraintTop_toTopOf="@+id/ivCity" />
+
+            <com.hlj.view.ScrollviewGridview
+                android:id="@+id/gridView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:cacheColorHint="@color/transparent"
+                android:fadingEdge="none"
+                android:gravity="center"
+                android:horizontalSpacing="3dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="4"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/ivCity" />
+
+            <ImageView
+                android:id="@+id/ivSecnic"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/icon_tour_scenic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gridView1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="景点"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivSecnic"
+                app:layout_constraintStart_toEndOf="@+id/ivSecnic"
+                app:layout_constraintTop_toTopOf="@+id/ivSecnic" />
+
+            <com.hlj.view.ScrollviewGridview
+                android:id="@+id/gridView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:cacheColorHint="@color/transparent"
+                android:fadingEdge="none"
+                android:gravity="center"
+                android:horizontalSpacing="3dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="3"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/ivSecnic" />
+
+            <ImageView
+                android:id="@+id/ivCulture"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/icon_tour_culture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gridView2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="旅游文化"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCulture"
+                app:layout_constraintStart_toEndOf="@+id/ivCulture"
+                app:layout_constraintTop_toTopOf="@+id/ivCulture" />
+
+            <com.hlj.view.ScrollviewGridview
+                android:id="@+id/gridView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:cacheColorHint="@color/transparent"
+                android:fadingEdge="none"
+                android:gravity="center"
+                android:horizontalSpacing="3dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="4"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/ivCulture" />
+
+            <ImageView
+                android:id="@+id/ivFood"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/icon_tour_food"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gridView3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="特色美食"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivFood"
+                app:layout_constraintStart_toEndOf="@+id/ivFood"
+                app:layout_constraintTop_toTopOf="@+id/ivFood" />
+
+            <com.hlj.view.ScrollviewGridview
+                android:id="@+id/gridView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:cacheColorHint="@color/transparent"
+                android:fadingEdge="none"
+                android:gravity="center"
+                android:horizontalSpacing="3dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="4"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/ivFood" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

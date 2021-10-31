@@ -1,13 +1,7 @@
 package com.hlj.adapter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +9,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import shawn.cxwl.com.hlj.R;
-
-import com.hlj.common.MyApplication;
 import com.hlj.dto.WeatherDto;
-import com.hlj.utils.CommonUtil;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import shawn.cxwl.com.hlj.R;
 
 public class WeeklyForecastAdapter extends BaseAdapter{
 	
@@ -119,19 +116,13 @@ public class WeeklyForecastAdapter extends BaseAdapter{
 		mHolder.tvLowTemp.setText(dto.lowTemp+"℃");
 		Drawable ld = mContext.getResources().getDrawable(R.drawable.phenomenon_drawable_night);
 		ld.setLevel(dto.lowPheCode);
+		mHolder.ivLowPhe.setBackground(ld);
 		
 		mHolder.tvHighPhe.setText(dto.highPhe);
 		mHolder.tvHighTemp.setText(dto.highTemp+"℃");
 		Drawable hd = mContext.getResources().getDrawable(R.drawable.phenomenon_drawable);
 		hd.setLevel(dto.highPheCode);
-
-		if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-			mHolder.ivHighPhe.setImageBitmap(CommonUtil.grayScaleImage(CommonUtil.drawableToBitmap(hd)));
-			mHolder.ivLowPhe.setImageBitmap(CommonUtil.grayScaleImage(CommonUtil.drawableToBitmap(ld)));
-		} else {
-			mHolder.ivHighPhe.setBackground(hd);
-			mHolder.ivLowPhe.setBackground(ld);
-		}
+		mHolder.ivHighPhe.setBackground(hd);
 		
 		return convertView;
 	}

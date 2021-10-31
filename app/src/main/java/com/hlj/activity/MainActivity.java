@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,7 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hlj.adapter.BaseViewPagerAdapter;
 import com.hlj.adapter.MyPagerAdapter;
 import com.hlj.common.CONST;
 import com.hlj.common.ColumnData;
@@ -40,6 +37,7 @@ import com.hlj.fragment.CommonListFragment;
 import com.hlj.fragment.ContactUsFragment;
 import com.hlj.fragment.ForecastFragment;
 import com.hlj.fragment.JueceListFragment;
+import com.hlj.fragment.TourFragment;
 import com.hlj.fragment.WarningFragment;
 import com.hlj.fragment.WeatherFactFragment;
 import com.hlj.fragment.WeatherVideoFragment;
@@ -110,11 +108,6 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 		llContainer1 = findViewById(R.id.llContainer1);
 		hScrollView1 = findViewById(R.id.hScrollView1);
 
-		if (TextUtils.equals(MyApplication.getAppTheme(), "1")) {
-			clMain.setBackgroundColor(Color.BLACK);
-			ivSetting.setImageBitmap(CommonUtil.grayScaleImage(BitmapFactory.decodeResource(getResources(), R.drawable.iv_setting)));
-		}
-
 		//是否显示登录对话框
 //		SharedPreferences sp = getSharedPreferences("LOGINDIALOG", Context.MODE_PRIVATE);
 //		boolean isFirst = sp.getBoolean("isFirst", true);
@@ -157,6 +150,7 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 			llContainer1.setVisibility(View.GONE);
 		}
 
+		fragments.clear();
 		llContainer.removeAllViews();
 		llContainer1.removeAllViews();
 		for (int i = 0; i < columnSize; i++) {
@@ -204,8 +198,10 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 					fragment = new WarningFragment();//天气预警
 				} else if (TextUtils.equals(id, "5") || TextUtils.equals(id, "6") || TextUtils.equals(id, "9") || TextUtils.equals(id, "10")) {
 					fragment = new JueceListFragment();//决策服务、农业气象、专业服务、科普宣传
-				} else if (TextUtils.equals(id, "2") || TextUtils.equals(id, "3") || TextUtils.equals(id, "7") || TextUtils.equals(id, "8")) {
-					fragment = new WeatherFactFragment();//天气实况、天气预报、旅游气象、人工影响天气
+				} else if (TextUtils.equals(id, "2") || TextUtils.equals(id, "3") || TextUtils.equals(id, "8")) {
+					fragment = new WeatherFactFragment();//天气实况、天气预报、人工影响天气
+				} else if (TextUtils.equals(id, "7")) {
+					fragment = new TourFragment();//旅游气象
 				} else if (TextUtils.equals(id, "11")) {
 					fragment = new WeatherVideoFragment();//天气视频
 				} else if (TextUtils.equals(id, "12")) {
