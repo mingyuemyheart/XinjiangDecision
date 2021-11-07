@@ -1,10 +1,8 @@
 package com.hlj.activity;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -107,37 +104,6 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 		llContainer = findViewById(R.id.llContainer);
 		llContainer1 = findViewById(R.id.llContainer1);
 		hScrollView1 = findViewById(R.id.hScrollView1);
-
-		//是否显示登录对话框
-//		SharedPreferences sp = getSharedPreferences("LOGINDIALOG", Context.MODE_PRIVATE);
-//		boolean isFirst = sp.getBoolean("isFirst", true);
-//		if (isFirst) {
-//			firstLoginDialog(sp);
-//		}
-	}
-
-	/**
-	 * 第一次登陆
-	 */
-	private void firstLoginDialog(final SharedPreferences sp) {
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.dialog_first_login, null);
-		TextView tvSure = view.findViewById(R.id.tvSure);
-
-		final Dialog dialog = new Dialog(mContext, R.style.CustomProgressDialog);
-		dialog.setContentView(view);
-		dialog.setCanceledOnTouchOutside(false);
-		dialog.show();
-
-		tvSure.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				dialog.dismiss();
-				SharedPreferences.Editor editor = sp.edit();
-				editor.putBoolean("isFirst", false);
-				editor.apply();
-			}
-		});
 	}
 
 	/**

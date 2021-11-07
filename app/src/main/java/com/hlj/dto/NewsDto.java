@@ -22,6 +22,7 @@ public class NewsDto implements Parcelable {
 	public String level;
 	public String addr;
 	public String type;
+	public String desc;
 
 	public NewsDto() {
 	}
@@ -44,6 +45,7 @@ public class NewsDto implements Parcelable {
 		level = in.readString();
 		addr = in.readString();
 		type = in.readString();
+		desc = in.readString();
 	}
 
 	public static final Creator<NewsDto> CREATOR = new Creator<NewsDto>() {
@@ -82,5 +84,6 @@ public class NewsDto implements Parcelable {
 		dest.writeString(level);
 		dest.writeString(addr);
 		dest.writeString(type);
+		dest.writeString(desc);
 	}
 }

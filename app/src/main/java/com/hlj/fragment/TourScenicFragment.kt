@@ -34,8 +34,6 @@ import com.hlj.utils.WeatherUtil
 import com.hlj.view.WeeklyViewTour
 import kotlinx.android.synthetic.main.fragment_tour_scenic.*
 import kotlinx.android.synthetic.main.marker_icon_tour.view.*
-import kotlinx.android.synthetic.main.marker_icon_tour.view.tvName
-import kotlinx.android.synthetic.main.marker_icon_tour_press.view.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Request
@@ -371,9 +369,7 @@ class TourScenicFragment : BaseFragment(), OnClickListener, OnMapClickListener, 
                 if (dataMap.containsKey(marker.snippet)) {
                     val dto = dataMap[marker.snippet]
                     val intent = Intent(activity, TourScenicDetailActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putParcelable("data", dto)
-                    intent.putExtras(bundle)
+                    intent.putExtra("id", dto!!.id)
                     startActivity(intent)
                 }
                 return true

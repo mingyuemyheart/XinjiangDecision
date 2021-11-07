@@ -353,6 +353,14 @@
             android:name="com.hlj.activity.TourSearchActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.hlj.activity.TourImpressionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.TourImpressionDetailActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.hlj.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -58,7 +59,52 @@ import com.iflytek.cloud.SpeechConstant
 import com.iflytek.cloud.SpeechError
 import com.iflytek.cloud.SpeechSynthesizer
 import com.iflytek.cloud.SynthesizerListener
+import kotlinx.android.synthetic.main.activity_weather_detail.*
 import kotlinx.android.synthetic.main.fragment_forecast.*
+import kotlinx.android.synthetic.main.fragment_forecast.clAudio
+import kotlinx.android.synthetic.main.fragment_forecast.clHour
+import kotlinx.android.synthetic.main.fragment_forecast.clMain
+import kotlinx.android.synthetic.main.fragment_forecast.clMinute
+import kotlinx.android.synthetic.main.fragment_forecast.hScrollView
+import kotlinx.android.synthetic.main.fragment_forecast.hScrollView2
+import kotlinx.android.synthetic.main.fragment_forecast.hsTime
+import kotlinx.android.synthetic.main.fragment_forecast.ivAudio
+import kotlinx.android.synthetic.main.fragment_forecast.ivClose
+import kotlinx.android.synthetic.main.fragment_forecast.ivClose2
+import kotlinx.android.synthetic.main.fragment_forecast.ivPlay2
+import kotlinx.android.synthetic.main.fragment_forecast.ivWind
+import kotlinx.android.synthetic.main.fragment_forecast.listView
+import kotlinx.android.synthetic.main.fragment_forecast.llContainer3
+import kotlinx.android.synthetic.main.fragment_forecast.llContainerFifteen
+import kotlinx.android.synthetic.main.fragment_forecast.llContainerHour
+import kotlinx.android.synthetic.main.fragment_forecast.llContainerRain
+import kotlinx.android.synthetic.main.fragment_forecast.llContainerTime
+import kotlinx.android.synthetic.main.fragment_forecast.mapView
+import kotlinx.android.synthetic.main.fragment_forecast.refreshLayout
+import kotlinx.android.synthetic.main.fragment_forecast.tvAqi
+import kotlinx.android.synthetic.main.fragment_forecast.tvAqi1
+import kotlinx.android.synthetic.main.fragment_forecast.tvAqi2
+import kotlinx.android.synthetic.main.fragment_forecast.tvAqiCount
+import kotlinx.android.synthetic.main.fragment_forecast.tvBody
+import kotlinx.android.synthetic.main.fragment_forecast.tvChart
+import kotlinx.android.synthetic.main.fragment_forecast.tvCityWarning
+import kotlinx.android.synthetic.main.fragment_forecast.tvDay1
+import kotlinx.android.synthetic.main.fragment_forecast.tvDay2
+import kotlinx.android.synthetic.main.fragment_forecast.tvDisWarning
+import kotlinx.android.synthetic.main.fragment_forecast.tvFact
+import kotlinx.android.synthetic.main.fragment_forecast.tvList
+import kotlinx.android.synthetic.main.fragment_forecast.tvPhe
+import kotlinx.android.synthetic.main.fragment_forecast.tvPhe1
+import kotlinx.android.synthetic.main.fragment_forecast.tvPhe2
+import kotlinx.android.synthetic.main.fragment_forecast.tvPosition
+import kotlinx.android.synthetic.main.fragment_forecast.tvProWarning
+import kotlinx.android.synthetic.main.fragment_forecast.tvRain
+import kotlinx.android.synthetic.main.fragment_forecast.tvRiseTime
+import kotlinx.android.synthetic.main.fragment_forecast.tvTemp
+import kotlinx.android.synthetic.main.fragment_forecast.tvTemp1
+import kotlinx.android.synthetic.main.fragment_forecast.tvTemp2
+import kotlinx.android.synthetic.main.fragment_forecast.tvTime
+import kotlinx.android.synthetic.main.fragment_forecast.tvWind
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Request
@@ -142,7 +188,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
         refreshLayout.setColorSchemeResources(CONST.color1, CONST.color2, CONST.color3, CONST.color4)
         refreshLayout.setProgressViewEndTarget(true, 300)
         refreshLayout.isRefreshing = true
-        refreshLayout.setOnRefreshListener { startLocation() }
+        refreshLayout.setOnRefreshListener { refresh() }
     }
 
     /**
@@ -171,14 +217,29 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
         if (CommonUtil.isLocationOpen(activity)) {
             startLocation()
         } else {
-            Toast.makeText(activity, "未开启定位，请选择城市", Toast.LENGTH_LONG).show()
-            val intent = Intent(activity, CityActivity::class.java)
-            intent.putExtra("selectCity", "selectCity")
-            startActivityForResult(intent, 1001)
-//            locationComplete()
+            refreshLayout.isRefreshing = false
+            firstLoginDialog()
+//            Toast.makeText(activity, "未开启定位，请选择城市", Toast.LENGTH_LONG).show()
+//            val intent = Intent(activity, CityActivity::class.java)
+//            intent.putExtra("selectCity", "selectCity")
+//            startActivityForResult(intent, 1001)
+            locationComplete()
         }
-
         initSpeech()
+    }
+
+    /**
+     * 第一次登陆
+     */
+    private fun firstLoginDialog() {
+        val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.dialog_first_login, null)
+        val tvSure = view.findViewById<TextView>(R.id.tvSure)
+        val dialog = Dialog(activity, R.style.CustomProgressDialog)
+        dialog.setContentView(view)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+        tvSure.setOnClickListener { dialog.dismiss() }
     }
 
     /**
@@ -211,11 +272,11 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
     }
 
     private fun locationComplete() {
-        cityName = "哈尔滨市"
+        cityName = "乌鲁木齐"
         tvPosition!!.text = cityName
-        addMarkerToMap(LatLng(45.803775, 126.534967))
-        okHttpHourRain(126.534967,45.803775)
-        okHttpXiangJiAqi(126.534967,45.803775)
+        addMarkerToMap(CONST.guizhouLatLng)
+        okHttpHourRain(CONST.guizhouLatLng.latitude, CONST.guizhouLatLng.longitude)
+        okHttpXiangJiAqi(CONST.guizhouLatLng.latitude, CONST.guizhouLatLng.longitude)
     }
 
     private fun addMarkerToMap(latLng: LatLng) {
@@ -746,8 +807,14 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                                 if (!TextUtils.isEmpty(aqi) && !TextUtils.equals(aqi, "?") && !TextUtils.equals(aqi, "null")) {
                                                     tvAqiCount!!.text = aqi
                                                     try {
-                                                        tvAqiCount!!.setBackgroundResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)))
-                                                        tvAqi.text = "空气质量 " + WeatherUtil.getAqi(activity, Integer.valueOf(aqi))
+                                                        val value = Integer.valueOf(aqi)
+                                                        tvAqiCount!!.setBackgroundResource(WeatherUtil.getAqiIcon(value))
+                                                        tvAqi.text = "空气质量 " + WeatherUtil.getAqi(activity, value)
+                                                        if (value <= 300) {
+                                                            tvAqiCount.setTextColor(Color.BLACK)
+                                                        } else {
+                                                            tvAqiCount.setTextColor(Color.WHITE)
+                                                        }
                                                     } catch (e: Exception) {
                                                         e.printStackTrace()
                                                     }
@@ -802,7 +869,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                                 val cubicView = CubicView2(activity)
                                                 cubicView.setData(hourlyList)
                                                 llContainerHour!!.removeAllViews()
-                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(activity) * 2, CommonUtil.dip2px(activity, 300f).toInt())
+                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(activity)*4, CommonUtil.dip2px(activity, 300f).toInt())
                                             }
                                         }
                                     }
@@ -916,6 +983,11 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                                             val value: Int = tvAqiCount.text.toString().toInt()
                                                             tvAqi1.text = CommonUtil.getAqiDes(activity, value)
                                                             tvAqi1.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                                            if (value <= 300) {
+                                                                tvAqi1.setTextColor(Color.BLACK)
+                                                            } else {
+                                                                tvAqi1.setTextColor(Color.WHITE)
+                                                            }
                                                         }
                                                     }
                                                     if (i == 1) {
@@ -936,6 +1008,11 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                                                 val value: Int = aqiList[1].aqi.toInt()
                                                                 tvAqi2.text = CommonUtil.getAqiDes(activity, value)
                                                                 tvAqi2.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                                                if (value <= 300) {
+                                                                    tvAqi2.setTextColor(Color.BLACK)
+                                                                } else {
+                                                                    tvAqi2.setTextColor(Color.WHITE)
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -952,7 +1029,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                                 val weeklyView = WeeklyView(activity)
                                                 weeklyView.setData(weeklyList, foreDate, currentDate)
                                                 llContainerFifteen!!.removeAllViews()
-                                                llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(activity) * 2, CommonUtil.dip2px(activity, 320f).toInt())
+                                                llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(activity) * 3, CommonUtil.dip2px(activity, 320f).toInt())
                                             }
                                         }
                                     }

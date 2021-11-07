@@ -11,8 +11,7 @@
         android:background="@drawable/corner_top_white"
         android:padding="15dp"
         android:layout_marginTop="10dp"
-        android:text="1、要开启定位权限\n
-2、右上角注册登录后能够获取更多功能"
+        android:text="开启位置服务，获得当前最新天气情况"
         android:lineSpacingExtra="3dp"
         android:gravity="center"
         android:textColor="@color/text_color3"

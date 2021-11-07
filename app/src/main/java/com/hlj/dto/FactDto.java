@@ -52,6 +52,8 @@ public class FactDto implements Parcelable{
 	public float factRain;//实况降水
 	public float factTemp;//实况温度
 	public float factWind;//实况风速
+	public float factHumidity;//实况湿度
+	public float factVisible;//实况能见度
 	public String factTime;
 	public float x = 0;
 	public float y = 0;
@@ -108,6 +110,8 @@ public class FactDto implements Parcelable{
 		dest.writeFloat(this.factRain);
 		dest.writeFloat(this.factTemp);
 		dest.writeFloat(this.factWind);
+		dest.writeFloat(this.factHumidity);
+		dest.writeFloat(this.factVisible);
 		dest.writeString(this.factTime);
 		dest.writeFloat(this.x);
 		dest.writeFloat(this.y);
@@ -156,6 +160,8 @@ public class FactDto implements Parcelable{
 		this.factRain = in.readFloat();
 		this.factTemp = in.readFloat();
 		this.factWind = in.readFloat();
+		this.factHumidity = in.readFloat();
+		this.factVisible = in.readFloat();
 		this.factTime = in.readString();
 		this.x = in.readFloat();
 		this.y = in.readFloat();

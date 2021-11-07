@@ -452,8 +452,7 @@
             android:background="@drawable/selector_item"
             android:gravity="center_vertical"
             android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:visibility="gone">
+            android:paddingEnd="10dp">
 
             <ImageView
                 android:layout_width="18dp"
@@ -482,8 +481,7 @@
             android:background="@drawable/selector_item"
             android:gravity="center_vertical"
             android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:visibility="gone">
+            android:paddingEnd="10dp">
 
             <ImageView
                 android:layout_width="18dp"

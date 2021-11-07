@@ -1,6 +1,7 @@
 package com.hlj.fragment
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -17,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import cn.com.weather.api.WeatherAPI
 import cn.com.weather.listener.AsyncResponseHandler
 import com.amap.api.location.AMapLocation
@@ -29,9 +31,21 @@ import com.hlj.adapter.TourAdapter
 import com.hlj.common.CONST
 import com.hlj.common.ColumnData
 import com.hlj.dto.NewsDto
+import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import com.hlj.utils.WeatherUtil
+import kotlinx.android.synthetic.main.fragment_forecast.*
 import kotlinx.android.synthetic.main.fragment_tour.*
+import kotlinx.android.synthetic.main.fragment_tour.ivAdd
+import kotlinx.android.synthetic.main.fragment_tour.ivWind
+import kotlinx.android.synthetic.main.fragment_tour.tvAqi
+import kotlinx.android.synthetic.main.fragment_tour.tvAqiCount
+import kotlinx.android.synthetic.main.fragment_tour.tvPhe
+import kotlinx.android.synthetic.main.fragment_tour.tvPosition
+import kotlinx.android.synthetic.main.fragment_tour.tvRiseTime
+import kotlinx.android.synthetic.main.fragment_tour.tvTemp
+import kotlinx.android.synthetic.main.fragment_tour.tvTime
+import kotlinx.android.synthetic.main.fragment_tour.tvWind
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Request
@@ -92,7 +106,16 @@ class TourFragment : BaseFragment(), AMapLocationListener {
     }
 
     private fun refresh() {
-        startLocation()
+        if (CommonUtil.isLocationOpen(activity)) {
+            startLocation()
+        } else {
+            firstLoginDialog()
+//            Toast.makeText(activity, "未开启定位，请选择城市", Toast.LENGTH_LONG).show()
+//            val intent = Intent(activity, CityActivity::class.java)
+//            intent.putExtra("selectCity", "selectCity")
+//            startActivityForResult(intent, 1001)
+            locationComplete()
+        }
         okHttpBanner()
 
         tvSearch.setOnClickListener {
@@ -112,6 +135,20 @@ class TourFragment : BaseFragment(), AMapLocationListener {
         }
         initGridView1()
         initGridView2()
+    }
+
+    /**
+     * 第一次登陆
+     */
+    private fun firstLoginDialog() {
+        val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.dialog_first_login, null)
+        val tvSure = view.findViewById<TextView>(R.id.tvSure)
+        val dialog = Dialog(activity, R.style.CustomProgressDialog)
+        dialog.setContentView(view)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+        tvSure.setOnClickListener { dialog.dismiss() }
     }
 
     /**
@@ -139,6 +176,12 @@ class TourFragment : BaseFragment(), AMapLocationListener {
             ivAdd.setImageResource(R.drawable.icon_location_blue)
             okHttpCityId(amapLocation.latitude,amapLocation.longitude)
         }
+    }
+
+    private fun locationComplete() {
+        tvPosition!!.text = "乌鲁木齐"
+        ivAdd.setImageResource(R.drawable.icon_location_blue)
+        okHttpCityId(CONST.guizhouLatLng.latitude, CONST.guizhouLatLng.longitude)
     }
 
     private fun initViewPager() {
@@ -236,10 +279,9 @@ class TourFragment : BaseFragment(), AMapLocationListener {
                         startActivity(intent)
                     }
                     TextUtils.equals(dto.id, "7004") -> { //新疆印象
-//                        intent = Intent(activity, ShawnStreamFactActivity::class.java)
-//                        intent.putExtra(CONST.COLUMN_ID, dto.columnId)
-//                        intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
-//                        startActivity(intent)
+                        intent = Intent(activity, TourImpressionActivity::class.java)
+                        intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                        startActivity(intent)
                     }
                     TextUtils.equals(dto.id, "7005") -> { //实景上报
                         intent = Intent(activity, DisasterActivity::class.java)

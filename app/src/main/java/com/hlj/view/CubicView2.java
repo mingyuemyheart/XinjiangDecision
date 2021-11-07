@@ -97,11 +97,11 @@ public class CubicView2 extends View{
             }
             if (totalDivider <= 5) {
                 itemDivider = 1;
-            }else if (totalDivider > 5 && totalDivider <= 15) {
+            }else if (totalDivider <= 15) {
                 itemDivider = 2;
-            }else if (totalDivider > 15 && totalDivider <= 25) {
+            }else if (totalDivider <= 25) {
                 itemDivider = 3;
-            }else if (totalDivider > 25 && totalDivider <= 40) {
+            }else if (totalDivider <= 40) {
                 itemDivider = 4;
             }else {
                 itemDivider = 5;
@@ -145,7 +145,7 @@ public class CubicView2 extends View{
             canvas.drawLine(CommonUtil.dip2px(mContext, 25), dividerY, w-rightMargin, dividerY, lineP);
             textP.setColor(mContext.getResources().getColor(R.color.white));
             textP.setTextSize(CommonUtil.dip2px(mContext, 10));
-            canvas.drawText(String.valueOf(i)+"℃", CommonUtil.dip2px(mContext, 5), dividerY, textP);
+            canvas.drawText(i+"℃", CommonUtil.dip2px(mContext, 5), dividerY, textP);
         }
 
         for (int i = 0; i < size-1; i++) {
@@ -169,7 +169,8 @@ public class CubicView2 extends View{
             canvas.drawPath(pathLow, lineP);
         }
 
-        float halfX = (tempList.get(1).x - tempList.get(0).x)/2;
+        float halfX = (tempList.get(1).x - tempList.get(0).x)/3;
+//        float halfX = chartW/6/3;
         for (int i = 0; i < tempList.size(); i++) {
             WeatherDto dto = tempList.get(i);
 

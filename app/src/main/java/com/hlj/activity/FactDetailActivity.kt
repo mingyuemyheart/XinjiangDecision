@@ -88,9 +88,8 @@ class FactDetailActivity : BaseActivity(), OnClickListener {
         listViewRank!!.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
             val dto = realDatas[arg2]
             val intent = Intent(this, FactDetailChartActivity::class.java)
-            val bundle = Bundle()
-            bundle.putParcelable("data", dto)
-            intent.putExtras(bundle)
+            intent.putExtra(CONST.ACTIVITY_NAME, dto!!.stationName)
+            intent.putExtra("stationCode", dto!!.stationCode)
             startActivity(intent)
         }
     }

@@ -49,6 +49,51 @@ import com.iflytek.cloud.SpeechError
 import com.iflytek.cloud.SpeechSynthesizer
 import com.iflytek.cloud.SynthesizerListener
 import kotlinx.android.synthetic.main.activity_weather_detail.*
+import kotlinx.android.synthetic.main.activity_weather_detail.clAudio
+import kotlinx.android.synthetic.main.activity_weather_detail.clHour
+import kotlinx.android.synthetic.main.activity_weather_detail.clMain
+import kotlinx.android.synthetic.main.activity_weather_detail.clMinute
+import kotlinx.android.synthetic.main.activity_weather_detail.hScrollView
+import kotlinx.android.synthetic.main.activity_weather_detail.hScrollView2
+import kotlinx.android.synthetic.main.activity_weather_detail.hsTime
+import kotlinx.android.synthetic.main.activity_weather_detail.ivAudio
+import kotlinx.android.synthetic.main.activity_weather_detail.ivClose
+import kotlinx.android.synthetic.main.activity_weather_detail.ivClose2
+import kotlinx.android.synthetic.main.activity_weather_detail.ivPlay2
+import kotlinx.android.synthetic.main.activity_weather_detail.ivWind
+import kotlinx.android.synthetic.main.activity_weather_detail.listView
+import kotlinx.android.synthetic.main.activity_weather_detail.llContainer3
+import kotlinx.android.synthetic.main.activity_weather_detail.llContainerFifteen
+import kotlinx.android.synthetic.main.activity_weather_detail.llContainerHour
+import kotlinx.android.synthetic.main.activity_weather_detail.llContainerRain
+import kotlinx.android.synthetic.main.activity_weather_detail.llContainerTime
+import kotlinx.android.synthetic.main.activity_weather_detail.mapView
+import kotlinx.android.synthetic.main.activity_weather_detail.refreshLayout
+import kotlinx.android.synthetic.main.activity_weather_detail.tvAqi
+import kotlinx.android.synthetic.main.activity_weather_detail.tvAqi1
+import kotlinx.android.synthetic.main.activity_weather_detail.tvAqi2
+import kotlinx.android.synthetic.main.activity_weather_detail.tvAqiCount
+import kotlinx.android.synthetic.main.activity_weather_detail.tvBody
+import kotlinx.android.synthetic.main.activity_weather_detail.tvChart
+import kotlinx.android.synthetic.main.activity_weather_detail.tvCityWarning
+import kotlinx.android.synthetic.main.activity_weather_detail.tvDay1
+import kotlinx.android.synthetic.main.activity_weather_detail.tvDay2
+import kotlinx.android.synthetic.main.activity_weather_detail.tvDisWarning
+import kotlinx.android.synthetic.main.activity_weather_detail.tvFact
+import kotlinx.android.synthetic.main.activity_weather_detail.tvList
+import kotlinx.android.synthetic.main.activity_weather_detail.tvPhe
+import kotlinx.android.synthetic.main.activity_weather_detail.tvPhe1
+import kotlinx.android.synthetic.main.activity_weather_detail.tvPhe2
+import kotlinx.android.synthetic.main.activity_weather_detail.tvPosition
+import kotlinx.android.synthetic.main.activity_weather_detail.tvProWarning
+import kotlinx.android.synthetic.main.activity_weather_detail.tvRain
+import kotlinx.android.synthetic.main.activity_weather_detail.tvRiseTime
+import kotlinx.android.synthetic.main.activity_weather_detail.tvTemp
+import kotlinx.android.synthetic.main.activity_weather_detail.tvTemp1
+import kotlinx.android.synthetic.main.activity_weather_detail.tvTemp2
+import kotlinx.android.synthetic.main.activity_weather_detail.tvTime
+import kotlinx.android.synthetic.main.activity_weather_detail.tvWind
+import kotlinx.android.synthetic.main.fragment_forecast.*
 import kotlinx.android.synthetic.main.layout_title.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -685,8 +730,14 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                 if (!TextUtils.isEmpty(aqi) && !TextUtils.equals(aqi, "?") && !TextUtils.equals(aqi, "null")) {
                                                     tvAqiCount!!.text = aqi
                                                     try {
-                                                        tvAqiCount!!.setBackgroundResource(WeatherUtil.getAqiIcon(Integer.valueOf(aqi)))
-                                                        tvAqi.text = "空气质量 "+WeatherUtil.getAqi(this@WeatherDetailActivity, Integer.valueOf(aqi))
+                                                        val value = Integer.valueOf(aqi)
+                                                        tvAqiCount!!.setBackgroundResource(WeatherUtil.getAqiIcon(value))
+                                                        tvAqi.text = "空气质量 "+WeatherUtil.getAqi(this@WeatherDetailActivity, value)
+                                                        if (value <= 300) {
+                                                            tvAqiCount.setTextColor(Color.BLACK)
+                                                        } else {
+                                                            tvAqiCount.setTextColor(Color.WHITE)
+                                                        }
                                                     } catch (e: Exception) {
                                                         e.printStackTrace()
                                                     }
@@ -741,7 +792,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                 val cubicView = CubicView2(this@WeatherDetailActivity)
                                                 cubicView.setData(hourlyList)
                                                 llContainerHour!!.removeAllViews()
-                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(this@WeatherDetailActivity) * 2, CommonUtil.dip2px(this@WeatherDetailActivity, 300f).toInt())
+                                                llContainerHour!!.addView(cubicView, CommonUtil.widthPixels(this@WeatherDetailActivity) * 4, CommonUtil.dip2px(this@WeatherDetailActivity, 300f).toInt())
                                             }
                                         }
                                     }
@@ -854,6 +905,11 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                             val value: Int = tvAqiCount.text.toString().toInt()
                                                             tvAqi1.text = CommonUtil.getAqiDes(this@WeatherDetailActivity, value)
                                                             tvAqi1.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                                            if (value <= 300) {
+                                                                tvAqi1.setTextColor(Color.BLACK)
+                                                            } else {
+                                                                tvAqi1.setTextColor(Color.WHITE)
+                                                            }
                                                         }
                                                     }
                                                     if (i == 1) {
@@ -874,6 +930,11 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                                 val value: Int = aqiList[1].aqi.toInt()
                                                                 tvAqi2.text = CommonUtil.getAqiDes(this@WeatherDetailActivity, value)
                                                                 tvAqi2.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                                                if (value <= 300) {
+                                                                    tvAqi2.setTextColor(Color.BLACK)
+                                                                } else {
+                                                                    tvAqi2.setTextColor(Color.WHITE)
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -890,7 +951,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                                 val weeklyView = WeeklyView(this@WeatherDetailActivity)
                                                 weeklyView.setData(weeklyList, foreDate, currentDate)
                                                 llContainerFifteen!!.removeAllViews()
-                                                llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(this@WeatherDetailActivity) * 2, CommonUtil.dip2px(this@WeatherDetailActivity, 320f).toInt())
+                                                llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(this@WeatherDetailActivity) * 3, CommonUtil.dip2px(this@WeatherDetailActivity, 320f).toInt())
                                             }
                                         }
                                     }

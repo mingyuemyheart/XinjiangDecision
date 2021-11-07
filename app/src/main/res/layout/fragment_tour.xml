@@ -1,217 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray"
-    android:padding="10dp">
-
-    <com.hlj.view.MainViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/viewGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/viewPager"
-        app:layout_constraintEnd_toEndOf="@+id/viewPager"
-        app:layout_constraintStart_toStartOf="@+id/viewPager" />
-
-    <TextView
-        android:id="@+id/tvSearch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:textColorHint="@color/text_color2"
-        android:background="@drawable/corner_edittext2"
-        android:hint="查询城市/景点/旅游文化/特色美食"
-        android:paddingStart="35dp"
-        android:paddingEnd="5dp"
-        android:textColor="@color/text_color3"
-        android:textSize="@dimen/level_4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/iv_search"
-        app:layout_constraintBottom_toBottomOf="@+id/tvSearch"
-        app:layout_constraintStart_toStartOf="@+id/tvSearch"
-        app:layout_constraintTop_toTopOf="@+id/tvSearch" />
-
-    <GridView
-        android:id="@+id/gridView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:cacheColorHint="@color/transparent"
-        android:fadingEdge="none"
-        android:gravity="center"
-        android:horizontalSpacing="5dp"
-        android:listSelector="@color/transparent"
-        android:numColumns="5"
-        android:overScrollMode="never"
-        android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvSearch" />
+    android:scrollbars="none">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/clFact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:layout_marginTop="15dp"
-        android:padding="10dp"
-        android:background="@drawable/bg_corner_white"
-        app:layout_constraintTop_toBottomOf="@+id/gridView1">
+        android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/ivAdd"
-            android:layout_width="@dimen/level_3"
-            android:layout_height="@dimen/level_3"
-            app:layout_constraintBottom_toBottomOf="@+id/tvPosition"
-            app:layout_constraintEnd_toStartOf="@+id/tvPosition"
-            app:layout_constraintTop_toTopOf="@+id/tvPosition" />
-
-        <TextView
-            android:id="@+id/tvPosition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/ivAdd"
-            android:layout_marginStart="5dp"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/level_4"
+        <com.hlj.view.MainViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvTime"
+        <LinearLayout
+            android:id="@+id/viewGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textColor="@color/text_color4"
-            android:textSize="@dimen/level_5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/tvPosition"
-            app:layout_constraintTop_toTopOf="@+id/tvPosition" />
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+            app:layout_constraintEnd_toEndOf="@+id/viewPager"
+            app:layout_constraintStart_toStartOf="@+id/viewPager" />
 
         <TextView
-            android:id="@+id/tvTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="70sp"
-            android:textColor="@color/text_color3"
-            android:textSize="70sp"
+            android:id="@+id/tvSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:includeFontPadding="false"
+            android:background="@drawable/corner_edittext2"
+            android:gravity="center_vertical"
+            android:hint="查询城市/景点/旅游文化/特色美食"
+            android:paddingStart="35dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/text_color3"
+            android:textColorHint="@color/text_color2"
+            android:textSize="@dimen/level_4"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
+            app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
         <ImageView
-            android:id="@+id/ivPhe"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvTemp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvTemp"
-            android:adjustViewBounds="true"/>
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/iv_search"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSearch"
+            app:layout_constraintStart_toStartOf="@+id/tvSearch"
+            app:layout_constraintTop_toTopOf="@+id/tvSearch" />
 
-        <TextView
-            android:id="@+id/tvPhe"
-            android:layout_width="wrap_content"
+        <GridView
+            android:id="@+id/gridView1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/level_2"
-            android:includeFontPadding="false"
-            app:layout_constraintStart_toEndOf="@+id/tvTemp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvTemp" />
-
-        <TextView
-            android:id="@+id/tvAqiCount"
-            android:layout_width="36dp"
-            android:layout_height="18dp"
-            android:gravity="center"
             android:layout_marginTop="15dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/level_5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTemp" />
-
-        <TextView
-            android:id="@+id/tvAqi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:cacheColorHint="@color/transparent"
+            android:fadingEdge="none"
             android:gravity="center"
-            android:textColor="@color/text_color4"
-            android:textSize="@dimen/level_4"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
-            app:layout_constraintStart_toEndOf="@+id/tvAqiCount"
-            app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
+            android:horizontalSpacing="5dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="5"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvSearch" />
 
-        <ImageView
-            android:id="@+id/ivWind"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="15dp"
-            android:adjustViewBounds="true"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
-            app:layout_constraintStart_toEndOf="@+id/tvAqi"
-            app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
-
-        <TextView
-            android:id="@+id/tvWind"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clFact"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_corner_white"
+            android:padding="10dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/gridView1">
+
+            <ImageView
+                android:id="@+id/ivAdd"
+                android:layout_width="@dimen/level_3"
+                android:layout_height="@dimen/level_3"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPosition"
+                app:layout_constraintEnd_toStartOf="@+id/tvPosition"
+                app:layout_constraintTop_toTopOf="@+id/tvPosition" />
+
+            <TextView
+                android:id="@+id/tvPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_4"
+                app:layout_constraintStart_toEndOf="@+id/ivAdd"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/text_color4"
+                android:textSize="@dimen/level_5"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPosition"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvPosition" />
+
+            <TextView
+                android:id="@+id/tvTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="70sp"
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/text_color3"
+                android:textSize="70sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
+
+            <ImageView
+                android:id="@+id/ivPhe"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTemp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTemp" />
+
+            <TextView
+                android:id="@+id/tvPhe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textColor="@color/text_color3"
+                android:textSize="@dimen/level_2"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTemp"
+                app:layout_constraintStart_toEndOf="@+id/tvTemp" />
+
+            <TextView
+                android:id="@+id/tvAqiCount"
+                android:layout_width="36dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTemp" />
+
+            <TextView
+                android:id="@+id/tvAqi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:textColor="@color/text_color4"
+                android:textSize="@dimen/level_4"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
+                app:layout_constraintStart_toEndOf="@+id/tvAqiCount"
+                app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
+
+            <ImageView
+                android:id="@+id/ivWind"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
+                app:layout_constraintStart_toEndOf="@+id/tvAqi"
+                app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
+
+            <TextView
+                android:id="@+id/tvWind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:gravity="center"
+                android:textColor="@color/text_color4"
+                android:textSize="@dimen/level_4"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
+                app:layout_constraintStart_toEndOf="@+id/ivWind"
+                app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
+
+            <TextView
+                android:id="@+id/tvRiseTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/text_color4"
+                android:textSize="@dimen/level_5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAqiCount" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <GridView
+            android:id="@+id/gridView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_corner_white"
+            android:cacheColorHint="@color/transparent"
+            android:fadingEdge="none"
             android:gravity="center"
-            android:textColor="@color/text_color4"
-            android:textSize="@dimen/level_4"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
-            app:layout_constraintStart_toEndOf="@+id/ivWind"
-            app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
-
-        <TextView
-            android:id="@+id/tvRiseTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/text_color4"
-            android:textSize="@dimen/level_5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAqiCount" />
+            android:horizontalSpacing="5dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="4"
+            android:overScrollMode="never"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/clFact" />
 
     </android.support.constraint.ConstraintLayout>
-
-    <GridView
-        android:id="@+id/gridView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:background="@drawable/bg_corner_white"
-        android:cacheColorHint="@color/transparent"
-        android:fadingEdge="none"
-        android:gravity="center"
-        android:horizontalSpacing="5dp"
-        android:listSelector="@color/transparent"
-        android:numColumns="4"
-        android:overScrollMode="never"
-        android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/clFact" />
-
-</android.support.constraint.ConstraintLayout>
-
+</ScrollView>

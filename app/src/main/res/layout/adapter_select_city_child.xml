@@ -3,9 +3,9 @@
     android:id="@+id/tvName"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="20dp"
+    android:paddingStart="60dp"
     android:paddingEnd="20dp"
     android:gravity="center_vertical"
     android:background="@drawable/selector_item"
     android:textColor="@color/text_color4"
-    android:textSize="@dimen/level_4" />
+    android:textSize="@dimen/level_5" />

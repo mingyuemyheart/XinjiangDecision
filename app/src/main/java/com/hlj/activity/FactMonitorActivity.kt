@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.*
+import android.media.ThumbnailUtils
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.os.Parcelable
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
-import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
@@ -20,10 +20,11 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.TranslateAnimation
-import android.widget.AdapterView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import com.amap.api.location.AMapLocation
+import com.amap.api.location.AMapLocationClient
+import com.amap.api.location.AMapLocationClientOption
+import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
@@ -60,11 +61,12 @@ import shawn.cxwl.com.hlj.R
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * 自动站实况监测
  */
-class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.OnCameraChangeListener {
+class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.OnCameraChangeListener, AMapLocationListener, AMap.OnMarkerClickListener {
 
     private var aMap: AMap? = null //高德地图
     private var zoom = 11.8f
@@ -76,6 +78,12 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
     private val realDatas: MutableList<FactDto?> = ArrayList() //全省站点列表
     private val sdf1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
     private val sdf2 = SimpleDateFormat("yyyy-MM-dd\nHH:mm:ss", Locale.CHINA)
+    private val sdf3 = SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA)
+    private var locationLat = 35.926628
+    private var locationLng = 105.178100
+    private var locationMarker: Marker? = null
+    private var cityName = "乌鲁木齐市"
+    private var areaName = "全市"
 
     private var b1 = false
     private var b2 = false
@@ -119,6 +127,7 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
         aMap!!.uiSettings.isRotateGesturesEnabled = false
         aMap!!.showMapText(false)
         aMap!!.setOnCameraChangeListener(this)
+        aMap!!.setOnMarkerClickListener(this)
         tvMapNumber.text = aMap!!.mapContentApprovalNumber
         aMap!!.setOnMapTouchListener { arg0 ->
             if (scrollView != null) {
@@ -138,7 +147,9 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
         tvDetail.setOnClickListener(this)
         tvHistory.setOnClickListener(this)
         ivCheck.setOnClickListener(this)
+        ivLuoqu.setOnClickListener(this)
         tvList.setOnClickListener(this)
+        ivLocation.setOnClickListener(this)
 
         ll1.setOnClickListener(this)
         ll2.setOnClickListener(this)
@@ -154,9 +165,50 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
         if (!TextUtils.isEmpty(title)) {
             tvTitle.text = title
         }
+
+        startLocation()
         addColumn()
         val columnId = intent.getStringExtra(CONST.COLUMN_ID)
         CommonUtil.submitClickCount(columnId, title)
+    }
+
+    /**
+     * 开始定位
+     */
+    private fun startLocation() {
+        val mLocationOption = AMapLocationClientOption() //初始化定位参数
+        val mLocationClient = AMapLocationClient(this) //初始化定位
+        mLocationOption.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
+        mLocationOption.isNeedAddress = true //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.isOnceLocation = true //设置是否只定位一次,默认为false
+        mLocationOption.isMockEnable = false //设置是否允许模拟位置,默认为false，不允许模拟位置
+        mLocationOption.interval = 2000 //设置定位间隔,单位毫秒,默认为2000ms
+        mLocationClient.setLocationOption(mLocationOption) //给定位客户端对象设置定位参数
+        mLocationClient.setLocationListener(this)
+        mLocationClient.startLocation() //启动定位
+    }
+
+    override fun onLocationChanged(amapLocation: AMapLocation?) {
+        if (amapLocation != null && amapLocation.errorCode == AMapLocation.LOCATION_SUCCESS) {
+            locationLat = amapLocation.latitude
+            locationLng = amapLocation.longitude
+            if (locationMarker != null) {
+                locationMarker!!.remove()
+            }
+            val latLng = LatLng(locationLat, locationLng)
+            val options = MarkerOptions()
+            options.anchor(0.5f, 1.0f)
+            val bitmap = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(resources, R.drawable.icon_map_location),
+                    CommonUtil.dip2px(this, 21f).toInt(), CommonUtil.dip2px(this, 32f).toInt())
+            if (bitmap != null) {
+                options.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+            } else {
+                options.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_map_location))
+            }
+            options.position(latLng)
+            locationMarker = aMap!!.addMarker(options)
+            locationMarker!!.isClickable = false
+        }
     }
 
     private fun initListViewRank() {
@@ -165,9 +217,8 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
         listViewRank!!.onItemClickListener = AdapterView.OnItemClickListener { arg0, arg1, arg2, arg3 ->
             val dto = detailList[arg2]
             val intent = Intent(this, FactDetailChartActivity::class.java)
-            val bundle = Bundle()
-            bundle.putParcelable("data", dto)
-            intent.putExtras(bundle)
+            intent.putExtra(CONST.ACTIVITY_NAME, dto!!.stationName)
+            intent.putExtra("stationCode", dto!!.stationCode)
             startActivity(intent)
         }
     }
@@ -270,6 +321,7 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
                     ivCheck.visibility = View.VISIBLE
                 } else {
                     ivCheck.visibility = View.GONE
+                    llCheck.visibility = View.INVISIBLE
                 }
                 tvItem.setTextColor(Color.WHITE)
                 tvItem.setBackgroundResource(R.drawable.corner_left_right_blue)
@@ -286,6 +338,7 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
                     ivCheck.visibility = View.VISIBLE
                 } else {
                     ivCheck.visibility = View.GONE
+                    llCheck.visibility = View.INVISIBLE
                 }
                 val itemTag = arg0.tag.toString()
                 if (!itemTag.contains("---")) {
@@ -341,6 +394,7 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
                         val result = response.body!!.string()
                         runOnUiThread {
                             scrollView.visibility = View.VISIBLE
+                            cancelDialog()
                             if (!TextUtils.isEmpty(result)) {
                                 try {
                                     val obj = JSONObject(result)
@@ -444,55 +498,58 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
                                     if (!obj.isNull("realDatas")) {
                                         realDatas.clear()
                                         detailList.clear()
-                                        val array = JSONArray(obj.getString("realDatas"))
-                                        for (i in 0 until array.length()) {
-                                            val itemObj = array.getJSONObject(i)
-                                            val dto = FactDto()
-                                            if (!itemObj.isNull("stationCode")) {
-                                                dto.stationCode = itemObj.getString("stationCode")
-                                            }
-                                            if (!itemObj.isNull("stationName")) {
-                                                dto.stationName = itemObj.getString("stationName")
-                                            }
-                                            if (!itemObj.isNull("area")) {
-                                                dto.area = itemObj.getString("area")
-                                            }
-                                            if (!itemObj.isNull("area1")) {
-                                                dto.area1 = itemObj.getString("area1")
-                                            }
-                                            if (!itemObj.isNull("val")) {
-                                                dto.`val` = itemObj.getDouble("val")
-                                                //图例
-                                                if (!obj.isNull("tl_config")) {
-                                                    val tlArray = obj.getJSONArray("tl_config")
-                                                    for (l in 0 until tlArray.length()) {
-                                                        val tl = tlArray.getString(l).split(",")
-                                                        if (dto.`val` >= tl[0].toDouble() && dto.`val` < tl[1].toDouble()) {
-                                                            dto.bgColor = Color.parseColor(tl[2])
-                                                            dto.lineColor = Color.parseColor(tl[3])
+                                        val realDatasData = obj.get("realDatas")
+                                        if (!TextUtils.isEmpty(realDatasData.toString()) && !TextUtils.equals(realDatasData.toString(), "null")) {
+                                            val array = JSONArray(obj.getString("realDatas"))
+                                            for (i in 0 until array.length()) {
+                                                val itemObj = array.getJSONObject(i)
+                                                val dto = FactDto()
+                                                if (!itemObj.isNull("stationCode")) {
+                                                    dto.stationCode = itemObj.getString("stationCode")
+                                                }
+                                                if (!itemObj.isNull("stationName")) {
+                                                    dto.stationName = itemObj.getString("stationName")
+                                                }
+                                                if (!itemObj.isNull("area")) {
+                                                    dto.area = itemObj.getString("area")
+                                                }
+                                                if (!itemObj.isNull("area1")) {
+                                                    dto.area1 = itemObj.getString("area1")
+                                                }
+                                                if (!itemObj.isNull("val")) {
+                                                    dto.`val` = itemObj.getDouble("val")
+                                                    //图例
+                                                    if (!obj.isNull("tl_config")) {
+                                                        val tlArray = obj.getJSONArray("tl_config")
+                                                        for (l in 0 until tlArray.length()) {
+                                                            val tl = tlArray.getString(l).split(",")
+                                                            if (dto.`val` >= tl[0].toDouble() && dto.`val` < tl[1].toDouble()) {
+                                                                dto.bgColor = Color.parseColor(tl[2])
+                                                                dto.lineColor = Color.parseColor(tl[3])
+                                                            }
                                                         }
                                                     }
+                                                    //图例
                                                 }
-                                                //图例
-                                            }
-                                            if (!itemObj.isNull("val1")) {
-                                                dto.val1 = itemObj.getDouble("val1")
-                                            }
-                                            if (!itemObj.isNull("Lon")) {
-                                                dto.lng = itemObj.getString("Lon").toDouble()
-                                            }
-                                            if (!itemObj.isNull("Lat")) {
-                                                dto.lat = itemObj.getString("Lat").toDouble()
-                                            }
-                                            if (!TextUtils.isEmpty(dto.stationName) && !TextUtils.isEmpty(dto.area)) {
-                                                realDatas.add(dto)
-                                                if (i < 5) {
-                                                    detailList.add(dto)
+                                                if (!itemObj.isNull("val1")) {
+                                                    dto.val1 = itemObj.getDouble("val1")
+                                                }
+                                                if (!itemObj.isNull("Lon")) {
+                                                    dto.lng = itemObj.getString("Lon").toDouble()
+                                                }
+                                                if (!itemObj.isNull("Lat")) {
+                                                    dto.lat = itemObj.getString("Lat").toDouble()
+                                                }
+                                                if (!TextUtils.isEmpty(dto.stationName) && !TextUtils.isEmpty(dto.area)) {
+                                                    realDatas.add(dto)
+                                                    if (i < 5) {
+                                                        detailList.add(dto)
+                                                    }
                                                 }
                                             }
-                                        }
-                                        if (mAdapter != null) {
-                                            mAdapter!!.notifyDataSetChanged()
+                                            if (mAdapter != null) {
+                                                mAdapter!!.notifyDataSetChanged()
+                                            }
                                         }
                                     }
                                     if (!obj.isNull("times")) {
@@ -658,7 +715,6 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
         }
         removeMarkers()
         drawAllDistrict()
-        cancelDialog()
     }
 
     /**
@@ -783,6 +839,7 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
             }
             val options = MarkerOptions()
             options.title(dto.stationName)
+            options.snippet(dto.stationCode)
             options.anchor(0.5f, 0.5f)
             options.position(LatLng(dto.lat, dto.lng))
             options.icon(BitmapDescriptorFactory.fromView(view))
@@ -790,6 +847,14 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
             marker.isVisible = true
             markers.add(marker)
         }
+    }
+
+    override fun onMarkerClick(p0: Marker?): Boolean {
+        val intent = Intent(this, FactDetailChartActivity::class.java)
+        intent.putExtra(CONST.ACTIVITY_NAME, p0!!.title)
+        intent.putExtra("stationCode", p0!!.snippet)
+        startActivity(intent)
+        return true
     }
 
     private fun dialogHistory() {
@@ -803,7 +868,6 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
         view.listView.onItemClickListener = AdapterView.OnItemClickListener { arg0, arg1, arg2, arg3 ->
             dialog.dismiss()
             val dto = timeList[arg2]
-            okHttpFact()
         }
         view.tvNegative.setOnClickListener { dialog.dismiss() }
     }
@@ -823,6 +887,24 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
                     llCheck.visibility = View.GONE
                 } else {
                     llCheck.visibility = View.VISIBLE
+                }
+            }
+            R.id.ivLuoqu -> {
+                if (factOverlay != null) {
+                    if (factOverlay!!.isVisible) {
+                        factOverlay!!.isVisible = false
+                        ivLuoqu.setImageResource(R.drawable.icon_map_luoqu)
+                    } else {
+                        factOverlay!!.isVisible = true
+                        ivLuoqu.setImageResource(R.drawable.icon_map_luoqu_press)
+                    }
+                }
+            }
+            R.id.ivLocation -> {
+                if (zoom >= 12f) {
+                    aMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationLat, locationLng), 3.5f))
+                } else {
+                    aMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationLat, locationLng), 12.0f))
                 }
             }
             R.id.ll1 -> {
@@ -922,7 +1004,7 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
                 startActivity(intent)
             }
             R.id.tvHistory -> dialogHistory()
-            R.id.llCity, R.id.ivCloseCity -> bootTimeLayoutAnimation(layoutCity)
+            R.id.tvCity, R.id.ivCloseCity -> bootTimeLayoutAnimation(layoutCity)
             R.id.tvStartTime -> {
                 isStart = true
                 bootTimeLayoutAnimation(layoutDate)
@@ -942,7 +1024,9 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
                 if (start > end) {
                     Toast.makeText(this, "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show()
                 } else {
-                    val endTime = sdf1.format(sdf2.parse(tvEndTime.text.toString()))
+                    val startTime = sdf3.format(sdf2.parse(tvStartTime.text.toString()))
+                    val endTime = sdf3.format(sdf2.parse(tvEndTime.text.toString()))
+                    childDataUrl = "http://xinjiangdecision.tianqi.cn:81/Home/api/xinjiang_rain_serch?city=$cityName&area=$areaName&stime=$startTime&etime=$endTime"
                     okHttpFact()
                 }
             }
@@ -1116,25 +1200,37 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
     }
 
     private fun initListViewCity() {
-        llCity.setOnClickListener(this)
+        tvCity.text = cityName
+        tvCity.setOnClickListener(this)
         ivCloseCity.setOnClickListener(this)
         okHttpCityList()
-        cityAdapter = SelectCityAdapter(this, cityList)
-        listViewCity.adapter = cityAdapter
-        listViewCity.setOnItemClickListener { parent, view, position, id ->
-            bootTimeLayoutAnimation(layoutCity)
-            val data: CityDto = cityList[position]
-            if (data.areaName != null) {
-                tvCity.text = data.areaName
+        cityAdapter = SelectCityAdapter(this, cityGroupList, cityChildList, listViewCity)
+        listViewCity.setAdapter(cityAdapter)
+        listViewCity.setOnGroupClickListener { parent, v, groupPosition, id ->
+            val data = cityGroupList[groupPosition]
+            if (data.cityName != null) {
+                cityName = data.cityName
+                tvCity.text = data.cityName
             }
+            false
+        }
+        listViewCity.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
+            bootTimeLayoutAnimation(layoutCity)
+            val dto = cityChildList[groupPosition][childPosition]
+            if (dto.cityName != null) {
+                areaName = dto.cityName
+                tvCity.text = dto.cityName
+            }
+            false
         }
     }
 
     private var cityAdapter: SelectCityAdapter? = null
-    private val cityList: MutableList<CityDto> = ArrayList()
+    private val cityGroupList: ArrayList<CityDto> = ArrayList()
+    private val cityChildList: ArrayList<ArrayList<CityDto>> = ArrayList()
     private fun okHttpCityList() {
         Thread {
-            val url = "http://xinjiangdecision.tianqi.cn:81/Home/work/forcast_citys"
+            val url = "http://xinjiangdecision.tianqi.cn:81/Home/api/xinjiang_area"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -1147,33 +1243,38 @@ class FactMonitorActivity : BaseFragmentActivity(), View.OnClickListener, AMap.O
                     runOnUiThread {
                         if (!TextUtils.isEmpty(result)) {
                             try {
-                                cityList.clear()
-                                val array = JSONArray(result)
-                                for (i in 0 until array.length()) {
-                                    val dto = CityDto()
-                                    val itemObj = array.getJSONObject(i)
-                                    if (!itemObj.isNull("name")) {
-                                        dto.areaName = itemObj.getString("name")
-                                        if (i == 0) {
-                                            tvCity.text = dto.areaName
+                                cityGroupList.clear()
+                                cityChildList.clear()
+                                val obj = JSONObject(result)
+                                if (!obj.isNull("area")) {
+                                    val array = obj.getJSONArray("area")
+                                    for (i in 0 until array.length()) {
+                                        val dto = CityDto()
+                                        val itemObj = array.getJSONObject(i)
+                                        if (!itemObj.isNull("city")) {
+                                            dto.cityName = itemObj.getString("city")
+                                            if (i == 0) {
+                                                tvCity.text = dto.cityName
+                                            }
                                         }
+                                        if (!itemObj.isNull("list")) {
+                                            val list: ArrayList<CityDto> = ArrayList()
+                                            val listArray = itemObj.getJSONArray("list")
+                                            for (j in 0 until listArray.length()) {
+                                                val listObj = listArray.getJSONObject(j)
+                                                val data = CityDto()
+                                                if (!listObj.isNull("name")) {
+                                                    data.cityName = listObj.getString("name")
+                                                }
+                                                list.add(data)
+                                            }
+                                            cityChildList.add(list)
+                                        }
+                                        cityGroupList.add(dto)
                                     }
-                                    if (!itemObj.isNull("level")) {
-                                        dto.level = itemObj.getString("level")
+                                    if (cityAdapter != null) {
+                                        cityAdapter!!.notifyDataSetChanged()
                                     }
-                                    if (!itemObj.isNull("areaid")) {
-                                        dto.areaId = itemObj.getString("areaid")
-                                    }
-                                    if (!itemObj.isNull("lat")) {
-                                        dto.lat = itemObj.getDouble("lat")
-                                    }
-                                    if (!itemObj.isNull("lon")) {
-                                        dto.lng = itemObj.getDouble("lon")
-                                    }
-                                    cityList.add(dto)
-                                }
-                                if (cityAdapter != null) {
-                                    cityAdapter!!.notifyDataSetChanged()
                                 }
                             } catch (e: JSONException) {
                                 e.printStackTrace()

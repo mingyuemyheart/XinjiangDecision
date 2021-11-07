@@ -9,7 +9,8 @@ public class CONST {
 	public static final String publicUser = "publicuser";//公众账号
 	public static final String publicPwd = "publicuser@2021";//公众密码
 	public static String APPID = "1";
-	public static final LatLng guizhouLatLng = new LatLng(43.766288715991074,87.62225858867168);
+	public static final LatLng guizhouLatLng = new LatLng(43.825592,87.616848);
+	public static final String cityId = "101130101";
 	public static boolean isDelete = false;//判断是否可以删除
 
 	//showType类型，区分本地类或者图文
