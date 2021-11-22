@@ -3,10 +3,8 @@ package com.hlj.fragment
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -124,7 +122,8 @@ import kotlin.collections.ArrayList
  */
 class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, CaiyunManager.RadarListener{
 
-    private var mReceiver: MyBroadCastReceiver? = null
+    private var lat = CONST.centerLat
+    private var lng = CONST.centerLng
     private var mAdapter: WeeklyForecastAdapter? = null
     private val weeklyList: MutableList<WeatherDto> = ArrayList()
     private val sdf1 = SimpleDateFormat("HH", Locale.CHINA)
@@ -137,7 +136,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
     private val disWarnings: MutableList<WarningDto?> = ArrayList()
     private val cityWarnings: MutableList<WarningDto?> = ArrayList()
     private val proWarnings: MutableList<WarningDto?> = ArrayList()
-    private val aqiList: ArrayList<WeatherDto> = ArrayList()
+    private val dayAqiList: ArrayList<WeatherDto> = ArrayList()
 
     //语音播报
     private var mTts : SpeechSynthesizer? = null// 语音合成对象
@@ -155,24 +154,8 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        initBroadCast()
-        initRefreshLayout()
         initMap(savedInstanceState)
-        initWidget()
-        initListView()
-    }
-
-    private fun initBroadCast() {
-        mReceiver = MyBroadCastReceiver()
-        val intentFilter = IntentFilter()
-        intentFilter.addAction(arguments!!.getString(CONST.BROADCAST_ACTION))
-        activity!!.registerReceiver(mReceiver, intentFilter)
-    }
-
-    private inner class MyBroadCastReceiver : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            refresh()
-        }
+        refresh()
     }
 
     private fun refresh() {
@@ -218,7 +201,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
             startLocation()
         } else {
             refreshLayout.isRefreshing = false
-            firstLoginDialog()
+            dialogLocationPrompt()
 //            Toast.makeText(activity, "未开启定位，请选择城市", Toast.LENGTH_LONG).show()
 //            val intent = Intent(activity, CityActivity::class.java)
 //            intent.putExtra("selectCity", "selectCity")
@@ -229,11 +212,11 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
     }
 
     /**
-     * 第一次登陆
+     * 定位提示
      */
-    private fun firstLoginDialog() {
+    private fun dialogLocationPrompt() {
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.dialog_first_login, null)
+        val view = inflater.inflate(R.layout.dialog_location_prompt, null)
         val tvSure = view.findViewById<TextView>(R.id.tvSure)
         val dialog = Dialog(activity, R.style.CustomProgressDialog)
         dialog.setContentView(view)
@@ -265,23 +248,25 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
             val street = amapLocation.street + amapLocation.streetNum
             cityName = district+street
             tvPosition!!.text = cityName
-            addMarkerToMap(LatLng(amapLocation.latitude, amapLocation.longitude))
-            okHttpHourRain(amapLocation.latitude,amapLocation.longitude)
-            okHttpXiangJiAqi(amapLocation.latitude,amapLocation.longitude)
+            lat = amapLocation.latitude
+            lng = amapLocation.longitude
+            addMarkerToMap()
+            okHttpHourRain()
+            getGeo()
         }
     }
 
     private fun locationComplete() {
         cityName = "乌鲁木齐"
         tvPosition!!.text = cityName
-        addMarkerToMap(CONST.guizhouLatLng)
-        okHttpHourRain(CONST.guizhouLatLng.latitude, CONST.guizhouLatLng.longitude)
-        okHttpXiangJiAqi(CONST.guizhouLatLng.latitude, CONST.guizhouLatLng.longitude)
+        addMarkerToMap()
+        okHttpHourRain()
+        getGeo()
     }
 
-    private fun addMarkerToMap(latLng: LatLng) {
+    private fun addMarkerToMap() {
         val options = MarkerOptions()
-        options.position(latLng)
+        options.position(LatLng(lat, lng))
         options.anchor(0.5f, 0.5f)
         val bitmap = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(resources, R.drawable.iv_map_location),
                 CommonUtil.dip2px(activity, 15f).toInt(), CommonUtil.dip2px(activity, 15f).toInt())
@@ -291,7 +276,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
             options.icon(BitmapDescriptorFactory.fromResource(R.drawable.iv_map_location))
         }
         aMap!!.addMarker(options)
-        aMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 6.0f))
+        aMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 6.0f))
     }
 
     private fun initSpeech() {
@@ -332,10 +317,6 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mReceiver != null) {
-            activity!!.unregisterReceiver(mReceiver)
-        }
-
         mTts!!.stopSpeaking()
         mTts!!.destroy()
 
@@ -603,67 +584,28 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
         }
     }
 
-    /**
-     * 请求象辑aqi
-     */
-    private fun okHttpXiangJiAqi(lat: Double, lng: Double) {
-        Thread {
-            val timestamp = Date().time
-            val start1 = sdf5.format(timestamp)
-            val end1 = sdf5.format(timestamp + 1000 * 60 * 60 * 24)
-            val url = XiangJiManager.getXJSecretUrl(lng, lat, start1, end1, timestamp)
-            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
-                override fun onFailure(call: Call, e: IOException) {}
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    if (!response.isSuccessful) {
-                        return
-                    }
-                    val result = response.body!!.string()
-                    if (!TextUtils.isEmpty(result)) {
-                        try {
-                            val obj = JSONObject(result)
-
-                            if (!obj.isNull("series")) {
-                                aqiList.clear()
-                                val array = obj.getJSONArray("series")
-                                for (i in 0 until array.length()) {
-                                    val data = WeatherDto()
-                                    data.aqi = array[i].toString()
-                                    aqiList.add(data)
-                                }
+    private fun getGeo() {
+        WeatherAPI.getGeo(activity, lng.toString(), lat.toString(), object : AsyncResponseHandler() {
+            override fun onComplete(content: JSONObject) {
+                super.onComplete(content)
+                if (!content.isNull("geo")) {
+                    try {
+                        val geoObj = content.getJSONObject("geo")
+                        if (!geoObj.isNull("id")) {
+                            val cityId = geoObj.getString("id")
+                            if (!TextUtils.isEmpty(cityId)) {
+                                getWeatherInfo(cityId)
                             }
-                        } catch (e1: JSONException) {
-                            e1.printStackTrace()
                         }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
                     }
                 }
-            })
-
-            WeatherAPI.getGeo(activity, lng.toString(), lat.toString(), object : AsyncResponseHandler() {
-                override fun onComplete(content: JSONObject) {
-                    super.onComplete(content)
-                    if (!content.isNull("geo")) {
-                        try {
-                            val geoObj = content.getJSONObject("geo")
-                            if (!geoObj.isNull("id")) {
-                                val cityId = geoObj.getString("id")
-                                if (!TextUtils.isEmpty(cityId)) {
-                                    getWeatherInfo(cityId)
-                                }
-                            }
-                        } catch (e: JSONException) {
-                            e.printStackTrace()
-                        }
-                    }
-                }
-
-                override fun onError(error: Throwable, content: String) {
-                    super.onError(error, content)
-                }
-            })
-        }.start()
+            }
+            override fun onError(error: Throwable, content: String) {
+                super.onError(error, content)
+            }
+        })
     }
 
     private fun getWeatherInfo(cityId: String) {
@@ -881,15 +823,6 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                         if (!`object`.isNull(cityId)) {
                                             val object1 = `object`.getJSONObject(cityId)
                                             val f0 = object1.getString("000")
-                                            var foreDate: Long = 0
-                                            var currentDate: Long = 0
-                                            try {
-                                                val fTime = sdf3.format(sdf4.parse(f0))
-                                                foreDate = sdf3.parse(fTime).time
-                                                currentDate = sdf3.parse(sdf3.format(Date())).time
-                                            } catch (e: ParseException) {
-                                                e.printStackTrace()
-                                            }
                                             if (!object1.isNull("1001001")) {
                                                 val f1 = object1.getJSONArray("1001001")
                                                 var length = f1.length()
@@ -978,17 +911,6 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                                             tvPhe1!!.text = getString(WeatherUtil.getWeatherId(dto.lowPheCode))
                                                         }
                                                         tvTemp1!!.text = dto.lowTemp.toString() + "/" + dto.highTemp + "℃"
-
-                                                        if (!TextUtils.isEmpty(tvAqiCount.text.toString()) && !TextUtils.equals(tvAqiCount.text.toString(), "?") && !TextUtils.equals(tvAqiCount.text.toString(), "null")) {
-                                                            val value: Int = tvAqiCount.text.toString().toInt()
-                                                            tvAqi1.text = CommonUtil.getAqiDes(activity, value)
-                                                            tvAqi1.setBackgroundResource(CommonUtil.getCornerBackground(value))
-                                                            if (value <= 300) {
-                                                                tvAqi1.setTextColor(Color.BLACK)
-                                                            } else {
-                                                                tvAqi1.setTextColor(Color.WHITE)
-                                                            }
-                                                        }
                                                     }
                                                     if (i == 1) {
                                                         tvDay2!!.text = "明天"
@@ -1003,33 +925,10 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                                             tvPhe2!!.text = getString(WeatherUtil.getWeatherId(dto.lowPheCode))
                                                         }
                                                         tvTemp2!!.text = dto.lowTemp.toString() + "/" + dto.highTemp + "℃"
-                                                        if (aqiList.size > 1) {
-                                                            if (!TextUtils.isEmpty(aqiList[1].aqi) && !TextUtils.equals(aqiList[1].aqi, "?") && !TextUtils.equals(aqiList[1].aqi, "null")) {
-                                                                val value: Int = aqiList[1].aqi.toInt()
-                                                                tvAqi2.text = CommonUtil.getAqiDes(activity, value)
-                                                                tvAqi2.setBackgroundResource(CommonUtil.getCornerBackground(value))
-                                                                if (value <= 300) {
-                                                                    tvAqi2.setTextColor(Color.BLACK)
-                                                                } else {
-                                                                    tvAqi2.setTextColor(Color.WHITE)
-                                                                }
-                                                            }
-                                                        }
                                                     }
                                                 }
 
-                                                //一周预报列表
-                                                if (mAdapter != null) {
-                                                    mAdapter!!.foreDate = foreDate
-                                                    mAdapter!!.currentDate = currentDate
-                                                    mAdapter!!.notifyDataSetChanged()
-                                                }
-
-                                                //一周预报曲线
-                                                val weeklyView = WeeklyView(activity)
-                                                weeklyView.setData(weeklyList, foreDate, currentDate)
-                                                llContainerFifteen!!.removeAllViews()
-                                                llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(activity) * 3, CommonUtil.dip2px(activity, 320f).toInt())
+                                                okHttpDayAqi(f0)
                                             }
                                         }
                                     }
@@ -1045,6 +944,110 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                             if (!TextUtils.isEmpty(warningId)) {
                                 setPushTags(warningId)
                                 okHttpWarning("http://decision-admin.tianqi.cn/Home/extra/getwarns?order=0&areaid=" + warningId!!.substring(0, 2), warningId)
+                            }
+                        }
+                    }
+                }
+            })
+        }.start()
+    }
+
+    /**
+     * 获取15天aqi
+     */
+    private fun okHttpDayAqi(f0: String) {
+        Thread {
+            val timestamp = Date().time
+            val start1 = sdf3.format(sdf4.parse(f0))
+            val end1 = sdf3.format(sdf3.parse(start1).time + 1000 * 60 * 60 * 24 * 15)
+            val url = XiangJiManager.getXJSecretUrl2(lng, lat, start1, end1, timestamp)
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                }
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    if (!isAdded) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    activity!!.runOnUiThread {
+                        if (!TextUtils.isEmpty(result)) {
+                            try {
+                                val obj = JSONObject(result)
+
+                                if (!obj.isNull("series")) {
+                                    dayAqiList.clear()
+                                    val array = obj.getJSONArray("series")
+                                    for (i in 0 until array.length()) {
+                                        val data = WeatherDto()
+                                        data.aqi = array[i].toString()
+                                        dayAqiList.add(data)
+                                    }
+
+                                    for (i in 0 until weeklyList.size) {
+                                        val dto = weeklyList[i]
+                                        if (dayAqiList.size > 0 && i < dayAqiList.size) {
+                                            val aqiValue = dayAqiList[i].aqi
+                                            if (!TextUtils.isEmpty(aqiValue)) {
+                                                dto.aqi = aqiValue
+                                            }
+                                        }
+
+                                        if (i == 0) {
+                                            if (!TextUtils.isEmpty(dto.aqi) && !TextUtils.equals(dto.aqi, "?") && !TextUtils.equals(dto.aqi, "null")) {
+                                                val value: Int = dto.aqi.toInt()
+                                                if (value <= 150) {
+                                                    tvAqi1!!.setTextColor(Color.BLACK)
+                                                } else {
+                                                    tvAqi1!!.setTextColor(Color.WHITE)
+                                                }
+                                                tvAqi1.text = CommonUtil.getAqiDes(activity, value)
+                                                tvAqi1.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                            }
+                                        }
+                                        if (i == 1) {
+                                            if (dayAqiList.size > 1) {
+                                                if (!TextUtils.isEmpty(dto.aqi) && !TextUtils.equals(dto.aqi, "?") && !TextUtils.equals(dto.aqi, "null")) {
+                                                    val value: Int = dto.aqi.toInt()
+                                                    if (value <= 150) {
+                                                        tvAqi2!!.setTextColor(Color.BLACK)
+                                                    } else {
+                                                        tvAqi2!!.setTextColor(Color.WHITE)
+                                                    }
+                                                    tvAqi2.text = CommonUtil.getAqiDes(activity, value)
+                                                    tvAqi2.setBackgroundResource(CommonUtil.getCornerBackground(value))
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    var foreDate: Long = 0
+                                    var currentDate: Long = 0
+                                    try {
+                                        val fTime = sdf3.format(sdf4.parse(f0))
+                                        foreDate = sdf3.parse(fTime).time
+                                        currentDate = sdf3.parse(sdf3.format(Date())).time
+                                    } catch (e: ParseException) {
+                                        e.printStackTrace()
+                                    }
+                                    //一周预报列表
+                                    if (mAdapter != null) {
+                                        mAdapter!!.foreDate = foreDate
+                                        mAdapter!!.currentDate = currentDate
+                                        mAdapter!!.notifyDataSetChanged()
+                                    }
+
+                                    //一周预报曲线
+                                    val weeklyView = WeeklyView(activity)
+                                    weeklyView.setData(weeklyList, foreDate, currentDate, Color.WHITE)
+                                    llContainerFifteen!!.removeAllViews()
+                                    llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(activity) * 3, CommonUtil.dip2px(activity, 360f).toInt())
+                                }
+                            } catch (e1: JSONException) {
+                                e1.printStackTrace()
                             }
                         }
                     }
@@ -1217,7 +1220,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
      * 初始化listview
      */
     private fun initListView() {
-        mAdapter = WeeklyForecastAdapter(activity, weeklyList)
+        mAdapter = WeeklyForecastAdapter(activity, weeklyList, Color.WHITE)
         listView.adapter = mAdapter
     }
 
@@ -1226,7 +1229,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
      * @param lng
      * @param lat
      */
-    private fun okHttpHourRain(lat: Double, lng: Double) {
+    private fun okHttpHourRain() {
         val url = String.format("http://api.caiyunapp.com/v2/HyTVV5YAkoxlQ3Zd/%s,%s/forecast", lng, lat)
         Thread {
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
@@ -1479,11 +1482,13 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                 1001 -> if (data != null) {
                     val dto: CityDto = data.getParcelableExtra("data")
                     tvPosition!!.text = dto.areaName
+                    lat = dto.lat
+                    lng = dto.lng
                     if (dto.lng == 0.0 || dto.lat == 0.0) {
                         getLatlngByCityid(dto.cityId)
                     } else {
-                        okHttpHourRain(dto.lat, dto.lng)
-                        okHttpXiangJiAqi(dto.lat, dto.lng)
+                        okHttpHourRain()
+                        getGeo()
                     }
                 }
             }
@@ -1502,10 +1507,10 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                 val obj = JSONObject(result)
                                 if (!obj.isNull("c")) {
                                     val c = obj.getJSONObject("c")
-                                    val lng = c.getDouble("c13")
-                                    val lat = c.getDouble("c14")
-                                    okHttpHourRain(lat, lng)
-                                    okHttpXiangJiAqi(lat, lng)
+                                    lng = c.getDouble("c13")
+                                    lat = c.getDouble("c14")
+                                    okHttpHourRain()
+                                    getGeo()
                                 }
                             } catch (e: JSONException) {
                                 e.printStackTrace()
@@ -1513,7 +1518,6 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                         }
                     }
                 }
-
                 override fun onError(error: Throwable, content: String) {
                     super.onError(error, content)
                 }

@@ -53,7 +53,7 @@ class TourKepuActivity : BaseFragmentActivity(), OnClickListener {
         val dataList: ArrayList<ColumnData> = ArrayList()
         if (intent.hasExtra("data")) {
             val data: ColumnData = intent.getParcelableExtra("data")
-            if (TextUtils.equals(data.id, "7104")) {//交通旅游专报
+            if (TextUtils.equals(data.id, "7104") || TextUtils.equals(data.id, "9105")) {//交通旅游专报、气象专题
                 dataList.add(data)
             } else {
                 dataList.addAll(data.child)

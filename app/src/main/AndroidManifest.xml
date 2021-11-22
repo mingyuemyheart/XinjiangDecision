@@ -361,6 +361,26 @@
             android:name="com.hlj.activity.TourImpressionDetailActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.hlj.activity.RailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.RiskWarningActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.RailForeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.RailFactActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.hlj.activity.RailSectionActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

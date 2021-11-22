@@ -1,13 +1,17 @@
 package com.hlj.fragment
 
+import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import com.hlj.adapter.WeeklyForecastAdapter
+import com.hlj.common.CONST
 import com.hlj.dto.WeatherDto
+import com.hlj.manager.XiangJiManager
 import com.hlj.utils.CommonUtil
 import com.hlj.utils.OkHttpUtil
 import com.hlj.utils.WeatherUtil
@@ -36,6 +40,7 @@ class TourForecastFragment : BaseFragment(), OnClickListener {
     private val sdf1 = SimpleDateFormat("HH", Locale.CHINA)
     private val sdf3 = SimpleDateFormat("yyyyMMdd", Locale.CHINA)
     private val sdf4 = SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA)
+    private val dayAqiList: ArrayList<WeatherDto> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_tour_forecast, null)
@@ -61,7 +66,7 @@ class TourForecastFragment : BaseFragment(), OnClickListener {
      * 初始化listview
      */
     private fun initListView() {
-        weeklyAdapter = WeeklyForecastAdapter(activity, weeklyList)
+        weeklyAdapter = WeeklyForecastAdapter(activity, weeklyList, Color.BLACK)
         listView.adapter = weeklyAdapter
     }
 
@@ -92,15 +97,6 @@ class TourForecastFragment : BaseFragment(), OnClickListener {
                                         if (!`object`.isNull(cityId)) {
                                             val object1 = `object`.getJSONObject(cityId)
                                             val f0 = object1.getString("000")
-                                            var foreDate: Long = 0
-                                            var currentDate: Long = 0
-                                            try {
-                                                val fTime = sdf3.format(sdf4.parse(f0))
-                                                foreDate = sdf3.parse(fTime).time
-                                                currentDate = sdf3.parse(sdf3.format(Date())).time
-                                            } catch (e: ParseException) {
-                                                e.printStackTrace()
-                                            }
                                             if (!object1.isNull("1001001")) {
                                                 val f1 = object1.getJSONArray("1001001")
                                                 var length = f1.length()
@@ -164,18 +160,7 @@ class TourForecastFragment : BaseFragment(), OnClickListener {
                                                     weeklyList.add(dto)
                                                 }
 
-                                                //一周预报列表
-                                                if (weeklyAdapter != null) {
-                                                    weeklyAdapter!!.foreDate = foreDate
-                                                    weeklyAdapter!!.currentDate = currentDate
-                                                    weeklyAdapter!!.notifyDataSetChanged()
-                                                }
-
-                                                //一周预报曲线
-                                                val weeklyView = WeeklyView(activity)
-                                                weeklyView.setData(weeklyList, foreDate, currentDate)
-                                                llContainerFifteen!!.removeAllViews()
-                                                llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(activity) * 2, CommonUtil.dip2px(activity, 320f).toInt())
+                                                okHttpDayAqi(f0)
                                             }
                                         }
                                     }
@@ -190,18 +175,103 @@ class TourForecastFragment : BaseFragment(), OnClickListener {
         }.start()
     }
 
+    /**
+     * 获取15天aqi
+     */
+    private fun okHttpDayAqi(f0: String) {
+        Thread {
+            val timestamp = Date().time
+            val start1 = sdf3.format(sdf4.parse(f0))
+            val end1 = sdf3.format(sdf3.parse(start1).time + 1000 * 60 * 60 * 24 * 15)
+            val lat = arguments!!.getDouble("lat", CONST.centerLat)
+            val lng = arguments!!.getDouble("lng", CONST.centerLng)
+            val url = XiangJiManager.getXJSecretUrl2(lng, lat, start1, end1, timestamp)
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                }
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    if (!isAdded) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    activity!!.runOnUiThread {
+                        if (!TextUtils.isEmpty(result)) {
+                            try {
+                                val obj = JSONObject(result)
+
+                                if (!obj.isNull("series")) {
+                                    dayAqiList.clear()
+                                    val array = obj.getJSONArray("series")
+                                    for (i in 0 until array.length()) {
+                                        val data = WeatherDto()
+                                        data.aqi = array[i].toString()
+                                        dayAqiList.add(data)
+                                    }
+
+                                    for (i in 0 until weeklyList.size) {
+                                        val dto = weeklyList[i]
+                                        if (dayAqiList.size > 0 && i < dayAqiList.size) {
+                                            val aqiValue = dayAqiList[i].aqi
+                                            if (!TextUtils.isEmpty(aqiValue)) {
+                                                dto.aqi = aqiValue
+                                            }
+                                        }
+                                    }
+
+                                    var foreDate: Long = 0
+                                    var currentDate: Long = 0
+                                    try {
+                                        val fTime = sdf3.format(sdf4.parse(f0))
+                                        foreDate = sdf3.parse(fTime).time
+                                        currentDate = sdf3.parse(sdf3.format(Date())).time
+                                    } catch (e: ParseException) {
+                                        e.printStackTrace()
+                                    }
+                                    //一周预报列表
+                                    if (weeklyAdapter != null) {
+                                        weeklyAdapter!!.foreDate = foreDate
+                                        weeklyAdapter!!.currentDate = currentDate
+                                        weeklyAdapter!!.notifyDataSetChanged()
+                                    }
+
+                                    //一周预报曲线
+                                    val weeklyView = WeeklyView(activity)
+                                    weeklyView.setData(weeklyList, foreDate, currentDate, Color.BLACK)
+                                    llContainerFifteen!!.removeAllViews()
+                                    llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(activity) * 3, CommonUtil.dip2px(activity, 360f).toInt())
+                                }
+                            } catch (e1: JSONException) {
+                                e1.printStackTrace()
+                            }
+                        }
+                    }
+                }
+            })
+        }.start()
+    }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.tvChart, R.id.tvList -> if (listView!!.visibility == View.VISIBLE) {
-                tvChart!!.setBackgroundResource(R.drawable.bg_chart_press)
-                tvList.setBackgroundResource(R.drawable.bg_list)
-                listView!!.visibility = View.GONE
-                hScrollView2!!.visibility = View.VISIBLE
-            } else {
-                tvChart!!.setBackgroundResource(R.drawable.bg_chart)
-                tvList.setBackgroundResource(R.drawable.bg_list_press)
-                listView!!.visibility = View.VISIBLE
-                hScrollView2!!.visibility = View.GONE
+            R.id.tvChart, R.id.tvList -> {
+                if (listView!!.visibility == View.VISIBLE) {
+                    tvChart.setTextColor(Color.WHITE)
+                    tvList.setTextColor(ContextCompat.getColor(activity!!, R.color.text_color4))
+                    tvChart!!.setBackgroundResource(R.drawable.bg_chart_press)
+                    tvList.setBackgroundResource(R.drawable.bg_list)
+                    listView!!.visibility = View.GONE
+                    hScrollView2!!.visibility = View.VISIBLE
+                } else {
+                    tvChart.setTextColor(ContextCompat.getColor(activity!!, R.color.text_color4))
+                    tvList.setTextColor(Color.WHITE)
+                    tvChart!!.setBackgroundResource(R.drawable.bg_chart)
+                    tvList.setBackgroundResource(R.drawable.bg_list_press)
+                    listView!!.visibility = View.VISIBLE
+                    hScrollView2!!.visibility = View.GONE
+                }
             }
         }
     }

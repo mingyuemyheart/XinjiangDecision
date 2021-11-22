@@ -128,6 +128,8 @@ class TourScenicDetailActivity : BaseFragmentActivity(), OnClickListener {
             bundle.putString(CONST.ACTIVITY_NAME, dto.title)
             bundle.putString("cityId", dto.cityId)
             bundle.putString("warningId", dto.warningId)
+            bundle.putDouble("lat", dto.lat)
+            bundle.putDouble("lng", dto.lng)
             bundle.putString(CONST.WEB_URL, "http://xinjiangdecision.tianqi.cn:81/Home/api/get_travel_scenic_details?id=${dto.id}")
             fragment!!.arguments = bundle
             fragments.add(fragment)
@@ -239,6 +241,12 @@ class TourScenicDetailActivity : BaseFragmentActivity(), OnClickListener {
                                 }
                                 if (!obj.isNull("areacode")) {
                                     dto.warningId = obj.getString("areacode")
+                                }
+                                if (!obj.isNull("lat")) {
+                                    dto.lat = obj.getDouble("lat")
+                                }
+                                if (!obj.isNull("lon")) {
+                                    dto.lng = obj.getDouble("lon")
                                 }
                                 initViewPager(dto)
                             } catch (e: JSONException) {

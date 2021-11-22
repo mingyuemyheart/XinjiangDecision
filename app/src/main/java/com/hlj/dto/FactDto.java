@@ -49,14 +49,17 @@ public class FactDto implements Parcelable{
 	public String count;
 	public List<FactDto> areaList = new ArrayList<>();//地图下方列表
 
-	public float factRain;//实况降水
+	public float factRain,factRain3,factRain6,factRain12,factRain24;//实况降水
 	public float factTemp;//实况温度
 	public float factWind;//实况风速
+	public float factWindDir;//实况风向角度
 	public float factHumidity;//实况湿度
 	public float factVisible;//实况能见度
 	public String factTime;
 	public float x = 0;
 	public float y = 0;
+
+	public List<WeatherDto> weeklyList = new ArrayList<>();
 
 	public FactDto() {
 	}
@@ -108,13 +111,19 @@ public class FactDto implements Parcelable{
 		dest.writeString(this.count);
 		dest.writeTypedList(this.areaList);
 		dest.writeFloat(this.factRain);
+		dest.writeFloat(this.factRain3);
+		dest.writeFloat(this.factRain6);
+		dest.writeFloat(this.factRain12);
+		dest.writeFloat(this.factRain24);
 		dest.writeFloat(this.factTemp);
 		dest.writeFloat(this.factWind);
+		dest.writeFloat(this.factWindDir);
 		dest.writeFloat(this.factHumidity);
 		dest.writeFloat(this.factVisible);
 		dest.writeString(this.factTime);
 		dest.writeFloat(this.x);
 		dest.writeFloat(this.y);
+		dest.writeTypedList(this.weeklyList);
 	}
 
 	protected FactDto(Parcel in) {
@@ -158,13 +167,19 @@ public class FactDto implements Parcelable{
 		this.count = in.readString();
 		this.areaList = in.createTypedArrayList(FactDto.CREATOR);
 		this.factRain = in.readFloat();
+		this.factRain3 = in.readFloat();
+		this.factRain6 = in.readFloat();
+		this.factRain12 = in.readFloat();
+		this.factRain24 = in.readFloat();
 		this.factTemp = in.readFloat();
 		this.factWind = in.readFloat();
+		this.factWindDir = in.readFloat();
 		this.factHumidity = in.readFloat();
 		this.factVisible = in.readFloat();
 		this.factTime = in.readString();
 		this.x = in.readFloat();
 		this.y = in.readFloat();
+		this.weeklyList = in.createTypedArrayList(WeatherDto.CREATOR);
 	}
 
 	public static final Creator<FactDto> CREATOR = new Creator<FactDto>() {

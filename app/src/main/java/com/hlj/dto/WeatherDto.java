@@ -27,12 +27,15 @@ public class WeatherDto implements Parcelable{
 	public String highPhe = null;//白天天气现象
 	public int highPheCode = 0;//白天天气现象编号
 	public int highTemp = 0;//最高气温
+	public int rain = 0;
 	public float highX = 0;//最高温度x轴坐标点
 	public float highY = 0;//最高温度y轴坐标点
 	public int windDir = 0;//风向编号
 	public int windForce = 0;//风力编号
 	public String windForceString;
 	public String aqi;
+
+	public double lat,lng;
 
 	public WeatherDto() {
 	}
@@ -62,12 +65,15 @@ public class WeatherDto implements Parcelable{
 		dest.writeString(this.highPhe);
 		dest.writeInt(this.highPheCode);
 		dest.writeInt(this.highTemp);
+		dest.writeInt(this.rain);
 		dest.writeFloat(this.highX);
 		dest.writeFloat(this.highY);
 		dest.writeInt(this.windDir);
 		dest.writeInt(this.windForce);
 		dest.writeString(this.windForceString);
 		dest.writeString(this.aqi);
+		dest.writeDouble(this.lat);
+		dest.writeDouble(this.lng);
 	}
 
 	protected WeatherDto(Parcel in) {
@@ -89,12 +95,15 @@ public class WeatherDto implements Parcelable{
 		this.highPhe = in.readString();
 		this.highPheCode = in.readInt();
 		this.highTemp = in.readInt();
+		this.rain = in.readInt();
 		this.highX = in.readFloat();
 		this.highY = in.readFloat();
 		this.windDir = in.readInt();
 		this.windForce = in.readInt();
 		this.windForceString = in.readString();
 		this.aqi = in.readString();
+		this.lat = in.readDouble();
+		this.lng = in.readDouble();
 	}
 
 	public static final Creator<WeatherDto> CREATOR = new Creator<WeatherDto>() {

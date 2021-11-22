@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="okHttpFact" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="stationCodes" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
@@ -61,12 +61,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15ab3c4b-28f1-4ec7-90ce-56991a316228" name="Default" comment="1.修改决策登录对话框提示逻辑&#10;2.适配天气详情逐小时预报和分钟级降水UI&#10;3.增加预警推送功能">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_map_luoqu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_map_luoqu_press.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tour_impression.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tour_impression_detail.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_fact_query_area_child.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_fact_query_area_group.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/generated/source/buildConfig/release/com/github/barteksc/pdfviewer/BuildConfig.java" beforeDir="false" />
@@ -154,26 +148,27 @@
       <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/outputs/logs/manifest-merger-release-report.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactDetailActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactDetailActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactDetailChartActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactDetailChartActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactMonitorActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactMonitorActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/TourKepuActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/TourKepuActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/TourScenicDetailActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/TourScenicDetailActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/TourWarningActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/TourWarningActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/SelectCityAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/SelectCityAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/FactDetailAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/FactDetailAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WeeklyForecastAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/adapter/WeeklyForecastAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/common/CONST.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/common/CONST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/FactDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/FactDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/NewsDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/NewsDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/WeatherDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/dto/WeatherDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ForecastFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ForecastFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/TourForecastFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/TourForecastFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/TourFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/TourFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/TourScenicFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/TourScenicFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/CubicView2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/CubicView2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_fact_detail_chart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_fact_detail_chart.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_fact_monitor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_fact_monitor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/adapter_select_city.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_select_city_group.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_first_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_first_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tour.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tour.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_select_city.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_select_city.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WeatherFactFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/utils/CommonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/utils/CommonUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/WeeklyView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/WeeklyView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/WeeklyViewTour.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/WeeklyViewTour.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_first_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_location_prompt.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forecast.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forecast.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tour_forecast.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tour_forecast.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,12 +200,13 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="XinjiangDecision" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="XinjiangDecision" type="f1a62948:ProjectNode" />
                 <item name="app" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
             </expand>
             <select />
@@ -296,7 +292,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536661182344" />
     <property name="device.picker.selection" value="66J5T19318007315" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/assets" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
@@ -311,31 +307,31 @@
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.hlj.activity" />
+      <recent name="com.hlj.adapter" />
+      <recent name="com.hlj.fragment" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/assets" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/java/com/hlj" />
+      <recent name="$PROJECT_DIR$/app/libs" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.hlj.adapter" />
+      <recent name="com.hlj.view" />
+      <recent name="com.hlj.activity" />
+      <recent name="com.hlj.manager" />
+      <recent name="com.hlj.dto" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/assets/echarts" />
       <recent name="$PROJECT_DIR$/hLJDecision/src/main/res/layout" />
-    </key>
-    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
-      <recent name="com.hlj.adapter" />
-      <recent name="com.hlj.activity" />
-      <recent name="com.hlj.fragment" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.hlj.view" />
-      <recent name="com.hlj.adapter" />
-      <recent name="com.hlj.activity" />
-      <recent name="com.hlj.manager" />
-      <recent name="com.hlj.dto" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/app/src/main/java/com/hlj" />
-      <recent name="$PROJECT_DIR$/app/libs" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/layoutactivity_disaster.xml activity_disaster_detail.xml activity_disaster_upload.xml" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -1051,10 +1047,10 @@
       <screen x="50" y="23" width="1390" height="877" />
     </state>
     <state x="357" y="181" width="880" height="629" key="#com.intellij.execution.impl.EditConfigurationsDialog/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1630996436332" />
-    <state x="2142" y="217" key="#com.intellij.ide.util.MemberChooser" timestamp="1636102573176">
+    <state x="2142" y="217" key="#com.intellij.ide.util.MemberChooser" timestamp="1637368379579">
       <screen x="1440" y="23" width="1920" height="1057" />
     </state>
-    <state x="2142" y="217" key="#com.intellij.ide.util.MemberChooser/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1636102573176" />
+    <state x="2142" y="217" key="#com.intellij.ide.util.MemberChooser/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637368379579" />
     <state x="558" y="184" key="#com.intellij.ide.util.MemberChooser/50.23.1390.877@50.23.1390.877" timestamp="1631022828806" />
     <state x="483" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1635949208566">
       <screen x="50" y="23" width="1390" height="877" />
@@ -1062,47 +1058,48 @@
     <state x="482" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/49.23.1391.877@49.23.1391.877" timestamp="1630497780405" />
     <state x="2038" y="254" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1635399737806" />
     <state x="483" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/50.23.1390.877@50.23.1390.877" timestamp="1635949208566" />
-    <state width="622" height="562" key="DebuggerActiveHint" timestamp="1635323215005">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state width="475" height="467" key="DebuggerActiveHint" timestamp="1637490114208">
+      <screen x="50" y="23" width="1390" height="877" />
     </state>
     <state width="450" height="466" key="DebuggerActiveHint/49.23.1391.877@49.23.1391.877" timestamp="1630589790913" />
     <state width="622" height="562" key="DebuggerActiveHint/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1635323215005" />
-    <state width="1878" height="331" key="GridCell.Tab.0.bottom" timestamp="1636165066648">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state width="475" height="467" key="DebuggerActiveHint/50.23.1390.877@50.23.1390.877" timestamp="1637490114208" />
+    <state width="1348" height="261" key="GridCell.Tab.0.bottom" timestamp="1637493025633">
+      <screen x="50" y="23" width="1390" height="877" />
     </state>
     <state width="1348" height="268" key="GridCell.Tab.0.bottom/47.23.1393.877@47.23.1393.877" timestamp="1630937898858" />
-    <state width="1878" height="410" key="GridCell.Tab.0.bottom/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1630571673268" />
+    <state width="1878" height="330" key="GridCell.Tab.0.bottom/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637226617798" />
     <state width="1348" height="268" key="GridCell.Tab.0.bottom/49.23.1391.877@49.23.1391.877" timestamp="1630589830318" />
-    <state width="1878" height="331" key="GridCell.Tab.0.bottom/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1636165066648" />
+    <state width="1878" height="330" key="GridCell.Tab.0.bottom/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637396412000" />
     <state width="1348" height="307" key="GridCell.Tab.0.bottom/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1631694079317" />
-    <state width="1348" height="319" key="GridCell.Tab.0.bottom/50.23.1390.877@50.23.1390.877" timestamp="1634983716840" />
-    <state width="1878" height="331" key="GridCell.Tab.0.center" timestamp="1636165066646">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state width="1348" height="261" key="GridCell.Tab.0.bottom/50.23.1390.877@50.23.1390.877" timestamp="1637493025633" />
+    <state width="1348" height="261" key="GridCell.Tab.0.center" timestamp="1637493025632">
+      <screen x="50" y="23" width="1390" height="877" />
     </state>
     <state width="1348" height="268" key="GridCell.Tab.0.center/47.23.1393.877@47.23.1393.877" timestamp="1630937898857" />
-    <state width="1878" height="410" key="GridCell.Tab.0.center/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1630571673268" />
+    <state width="1878" height="330" key="GridCell.Tab.0.center/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637226617797" />
     <state width="1348" height="268" key="GridCell.Tab.0.center/49.23.1391.877@49.23.1391.877" timestamp="1630589830317" />
-    <state width="1878" height="331" key="GridCell.Tab.0.center/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1636165066646" />
+    <state width="1878" height="330" key="GridCell.Tab.0.center/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637396411999" />
     <state width="1348" height="307" key="GridCell.Tab.0.center/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1631694079315" />
-    <state width="1348" height="319" key="GridCell.Tab.0.center/50.23.1390.877@50.23.1390.877" timestamp="1634983716839" />
-    <state width="1878" height="331" key="GridCell.Tab.0.left" timestamp="1636165066645">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state width="1348" height="261" key="GridCell.Tab.0.center/50.23.1390.877@50.23.1390.877" timestamp="1637493025632" />
+    <state width="1348" height="261" key="GridCell.Tab.0.left" timestamp="1637493025631">
+      <screen x="50" y="23" width="1390" height="877" />
     </state>
     <state width="1348" height="268" key="GridCell.Tab.0.left/47.23.1393.877@47.23.1393.877" timestamp="1630937898857" />
-    <state width="1878" height="410" key="GridCell.Tab.0.left/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1630571673267" />
+    <state width="1878" height="330" key="GridCell.Tab.0.left/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637226617796" />
     <state width="1348" height="268" key="GridCell.Tab.0.left/49.23.1391.877@49.23.1391.877" timestamp="1630589830317" />
-    <state width="1878" height="331" key="GridCell.Tab.0.left/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1636165066645" />
+    <state width="1878" height="330" key="GridCell.Tab.0.left/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637396411998" />
     <state width="1348" height="307" key="GridCell.Tab.0.left/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1631694079314" />
-    <state width="1348" height="319" key="GridCell.Tab.0.left/50.23.1390.877@50.23.1390.877" timestamp="1634983716839" />
-    <state width="1878" height="331" key="GridCell.Tab.0.right" timestamp="1636165066647">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state width="1348" height="261" key="GridCell.Tab.0.left/50.23.1390.877@50.23.1390.877" timestamp="1637493025631" />
+    <state width="1348" height="261" key="GridCell.Tab.0.right" timestamp="1637493025632">
+      <screen x="50" y="23" width="1390" height="877" />
     </state>
     <state width="1348" height="268" key="GridCell.Tab.0.right/47.23.1393.877@47.23.1393.877" timestamp="1630937898858" />
-    <state width="1878" height="410" key="GridCell.Tab.0.right/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1630571673268" />
+    <state width="1878" height="330" key="GridCell.Tab.0.right/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637226617798" />
     <state width="1348" height="268" key="GridCell.Tab.0.right/49.23.1391.877@49.23.1391.877" timestamp="1630589830317" />
-    <state width="1878" height="331" key="GridCell.Tab.0.right/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1636165066647" />
+    <state width="1878" height="330" key="GridCell.Tab.0.right/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637396411999" />
     <state width="1348" height="307" key="GridCell.Tab.0.right/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1631694079316" />
-    <state width="1348" height="319" key="GridCell.Tab.0.right/50.23.1390.877@50.23.1390.877" timestamp="1634983716839" />
+    <state width="1348" height="261" key="GridCell.Tab.0.right/50.23.1390.877@50.23.1390.877" timestamp="1637493025632" />
     <state x="303" y="171" key="RollbackChangesDialog" timestamp="1631693153312">
       <screen x="50" y="23" width="1390" height="877" />
     </state>
@@ -1112,31 +1109,31 @@
     </state>
     <state x="150" y="123" width="1190" height="677" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/49.23.1391.877@49.23.1391.877" timestamp="1630505673482" />
     <state x="151" y="123" width="1190" height="677" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1631693244751" />
-    <state x="150" y="123" width="1190" height="677" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1635759092130">
+    <state x="150" y="123" width="1190" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1637493401163">
       <screen x="50" y="23" width="1390" height="877" />
     </state>
-    <state x="58" y="25" width="1422" height="871" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1635759092130" />
+    <state x="58" y="25" width="1422" height="871" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637379273770" />
     <state x="150" y="123" width="1190" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1632380595492" />
-    <state x="150" y="123" width="1190" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog/50.23.1390.877@50.23.1390.877" timestamp="1634997484218" />
-    <state x="443" y="216" width="642" height="518" key="find.popup" timestamp="1636277505113">
+    <state x="150" y="123" width="1190" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog/50.23.1390.877@50.23.1390.877" timestamp="1637493401163" />
+    <state x="443" y="216" width="642" height="518" key="find.popup" timestamp="1637492074240">
       <screen x="50" y="23" width="1390" height="877" />
     </state>
     <state x="1983" y="256" width="835" height="591" key="find.popup/47.23.1393.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1630574262050" />
     <state x="441" y="216" width="606" height="518" key="find.popup/47.23.1393.877@47.23.1393.877" timestamp="1630935534528" />
     <state x="1983" y="256" width="835" height="591" key="find.popup/49.23.1391.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1630570374155" />
     <state x="511" y="345" width="606" height="518" key="find.popup/49.23.1391.877@49.23.1391.877" timestamp="1631018248923" />
-    <state x="1983" y="256" width="835" height="591" key="find.popup/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1636163770779" />
+    <state x="1983" y="256" width="835" height="591" key="find.popup/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637392708327" />
     <state x="443" y="216" width="605" height="491" key="find.popup/50.23.1390.877/1440.23.1920.1057@50.23.1390.877" timestamp="1632637977192" />
-    <state x="443" y="216" width="642" height="518" key="find.popup/50.23.1390.877@50.23.1390.877" timestamp="1636277505113" />
+    <state x="443" y="216" width="642" height="518" key="find.popup/50.23.1390.877@50.23.1390.877" timestamp="1637492074240" />
     <state x="2217" y="447" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1629944988324">
       <screen x="1440" y="23" width="1920" height="1057" />
     </state>
     <state x="2217" y="447" key="git4idea.remote.GitConfigureRemotesDialog/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1629944988324" />
-    <state x="1937" y="252" width="670" height="676" key="search.everywhere.popup" timestamp="1636100673619">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state x="410" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1637488990800">
+      <screen x="50" y="23" width="1390" height="877" />
     </state>
-    <state x="1937" y="252" width="670" height="676" key="search.everywhere.popup/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1636100673619" />
-    <state x="410" y="213" key="search.everywhere.popup/50.23.1390.877@50.23.1390.877" timestamp="1630062320270" />
+    <state x="1937" y="252" width="670" height="676" key="search.everywhere.popup/50.23.1390.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1637380589590" />
+    <state x="410" y="213" width="670" height="676" key="search.everywhere.popup/50.23.1390.877@50.23.1390.877" timestamp="1637488990800" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1145,6 +1142,11 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/hlj/activity/FactActivity2.java</url>
           <line>390</line>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/hlj/activity/RailSectionActivity.kt</url>
+          <line>93</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

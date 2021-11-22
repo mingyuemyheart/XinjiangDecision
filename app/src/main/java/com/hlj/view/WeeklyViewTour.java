@@ -150,7 +150,7 @@ public class WeeklyViewTour extends View{
 			tempList.set(i, dto);
 		}
 
-		for (int i = 0; i < tempList.size(); i++) {
+		for (int i = 0; i < size; i++) {
 			WeatherDto dto = tempList.get(i);
 
 			//绘制周几、日期、天气现象和天气现象图标
@@ -215,13 +215,6 @@ public class WeeklyViewTour extends View{
 //			float windForceWidth = textP.measureText(dto.windForceString);//低温字符串所占的像素宽度
 //			canvas.drawText(windDir, dto.highX-windDirWidth/2, CommonUtil.dip2px(mContext, 165), textP);
 //			canvas.drawText(dto.windForceString, dto.highX-windForceWidth/2, CommonUtil.dip2px(mContext, 180), textP);
-
-			//绘制纵向分隔线
-			if (i < tempList.size()-1) {
-				lineP.setColor(0x10ffffff);
-				lineP.setStrokeWidth(CommonUtil.dip2px(mContext, 0.5f));
-				canvas.drawLine((tempList.get(i+1).highX-dto.highX)/2+dto.highX, 0, (tempList.get(i+1).highX-dto.highX)/2+dto.highX, h-CommonUtil.dip2px(mContext, 10), lineP);
-			}
 		}
 
 	}

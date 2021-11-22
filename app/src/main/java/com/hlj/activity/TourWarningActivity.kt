@@ -120,19 +120,20 @@ class TourWarningActivity : BaseActivity(), OnClickListener, OnMapClickListener,
      * 初始化控件
      */
     private fun initWidget() {
-        if (intent.hasExtra(CONST.ACTIVITY_NAME)) {
-            val title = intent.getStringExtra(CONST.ACTIVITY_NAME)
-            if (title != null) {
-                tvTitle.text = title
-            }
-        }
-
+        llBack.setOnClickListener(this)
         arcMenu.onMenuItemClickListener = arcMenuListener
         ivRefresh.setOnClickListener(this)
         tvList.setOnClickListener(this)
         clHistory.setOnClickListener(this)
         clWarning.setOnClickListener(this)
         ivArrow.setOnClickListener(this)
+
+        if (intent.hasExtra(CONST.ACTIVITY_NAME)) {
+            val title = intent.getStringExtra(CONST.ACTIVITY_NAME)
+            if (title != null) {
+                tvTitle.text = title
+            }
+        }
 
         addColumn()
         refresh()
@@ -704,6 +705,7 @@ class TourWarningActivity : BaseActivity(), OnClickListener, OnMapClickListener,
 
     override fun onClick(v: View?) {
         when (v!!.id) {
+            R.id.llBack -> finish()
             R.id.clWarning, R.id.ivArrow -> clickPromptWarning()
             R.id.ivRefresh -> refresh()
             R.id.tvList -> startActivity(Intent(this, WarningListActivity::class.java))

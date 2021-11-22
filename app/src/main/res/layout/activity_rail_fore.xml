@@ -1,0 +1,185 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray">
+
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title" />
+
+    <HorizontalScrollView
+        android:id="@+id/hScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/reTitle">
+
+        <LinearLayout
+            android:id="@+id/llContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+    </HorizontalScrollView>
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hScrollView" />
+
+    <TextView
+        android:id="@+id/tvLayerName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_4"
+        app:layout_constraintEnd_toEndOf="@+id/mapView"
+        app:layout_constraintStart_toStartOf="@+id/mapView"
+        app:layout_constraintTop_toTopOf="@+id/mapView" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clCheck"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="13dp"
+        android:background="@drawable/bg_corner_white"
+        app:layout_constraintEnd_toEndOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/tvLayerName">
+
+        <ImageView
+            android:id="@+id/ivCheck"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/icon_rail_fore_press"/>
+
+        <TextView
+            android:id="@+id/tvCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="24h"
+            android:textSize="@dimen/level_6"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/llContainer1"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_corner_white"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/clCheck"
+        app:layout_constraintTop_toTopOf="@+id/clCheck"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/ivLuoqu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/icon_map_luoqu_press"
+        app:layout_constraintEnd_toEndOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/clCheck" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/ivLegend"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/icon_map_legend_white"
+        app:layout_constraintBottom_toBottomOf="@+id/mapView"
+        app:layout_constraintStart_toStartOf="@+id/mapView" />
+
+    <ImageView
+        android:id="@+id/ivChart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="@+id/ivLegend"
+        app:layout_constraintEnd_toStartOf="@+id/ivLocation"
+        app:layout_constraintStart_toEndOf="@+id/ivLegend"
+        app:layout_constraintTop_toTopOf="@+id/ivLegend" />
+
+    <ImageView
+        android:id="@+id/ivLocation"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/shawn_icon_location_off"
+        app:layout_constraintBottom_toBottomOf="@+id/mapView"
+        app:layout_constraintEnd_toEndOf="@+id/mapView" />
+
+    <android.support.constraint.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/clBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/corner_blue_white_line"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="@dimen/level_3"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:src="@drawable/iv_delete_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <HorizontalScrollView
+            android:id="@+id/hScrollView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvName">
+
+            <LinearLayout
+                android:id="@+id/llContainerFifteen"
+                android:layout_width="wrap_content"
+                android:layout_height="360dp"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

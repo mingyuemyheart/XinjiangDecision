@@ -557,7 +557,6 @@ class TourScenicFragment : BaseFragment(), OnClickListener, OnMapClickListener, 
                                         if (!`object`.isNull(cityId)) {
                                             val object1 = `object`.getJSONObject(cityId)
                                             val f0 = object1.getString("000")
-                                            var foreDate: Long = 0
                                             try {
                                                 val fTime = sdf3.format(sdf4.parse(f0))
                                                 foreDate = sdf3.parse(fTime).time

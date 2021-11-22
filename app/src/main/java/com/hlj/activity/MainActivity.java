@@ -98,7 +98,6 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 	private void initWidget() {
 		AutoUpdateUtil.checkUpdate(MainActivity.this, mContext, "140", getString(R.string.app_name), true);
 
-		ConstraintLayout clMain = findViewById(R.id.clMain);
 		ImageView ivSetting = findViewById(R.id.ivSetting);
 		ivSetting.setOnClickListener(this);
 		llContainer = findViewById(R.id.llContainer);
@@ -162,10 +161,10 @@ public class MainActivity extends BaseFragmentActivity implements OnClickListene
 					fragment = new ForecastFragment();//首页
 				} else if (TextUtils.equals(id, "4")) {
 					fragment = new WarningFragment();//天气预警
-				} else if (TextUtils.equals(id, "5") || TextUtils.equals(id, "6") || TextUtils.equals(id, "9") || TextUtils.equals(id, "10")) {
-					fragment = new JueceListFragment();//决策服务、农业气象、专业服务、科普宣传
-				} else if (TextUtils.equals(id, "2") || TextUtils.equals(id, "3") || TextUtils.equals(id, "8")) {
-					fragment = new WeatherFactFragment();//天气实况、天气预报、人工影响天气
+				} else if (TextUtils.equals(id, "5") || TextUtils.equals(id, "6") || TextUtils.equals(id, "10")) {
+					fragment = new JueceListFragment();//决策服务、农业气象、科普宣传
+				} else if (TextUtils.equals(id, "2") || TextUtils.equals(id, "3") || TextUtils.equals(id, "8") || TextUtils.equals(id, "9")) {
+					fragment = new WeatherFactFragment();//天气实况、天气预报、人工影响天气、专业服务
 				} else if (TextUtils.equals(id, "7")) {
 					fragment = new TourFragment();//旅游气象
 				} else if (TextUtils.equals(id, "11")) {

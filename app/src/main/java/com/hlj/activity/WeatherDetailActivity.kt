@@ -949,7 +949,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
 
                                                 //一周预报曲线
                                                 val weeklyView = WeeklyView(this@WeatherDetailActivity)
-                                                weeklyView.setData(weeklyList, foreDate, currentDate)
+                                                weeklyView.setData(weeklyList, foreDate, currentDate, Color.WHITE)
                                                 llContainerFifteen!!.removeAllViews()
                                                 llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(this@WeatherDetailActivity) * 3, CommonUtil.dip2px(this@WeatherDetailActivity, 320f).toInt())
                                             }
@@ -1136,7 +1136,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
      * 初始化listview
      */
     private fun initListView() {
-        mAdapter = WeeklyForecastAdapter(this, weeklyList)
+        mAdapter = WeeklyForecastAdapter(this, weeklyList, Color.WHITE)
         listView.adapter = mAdapter
     }
 

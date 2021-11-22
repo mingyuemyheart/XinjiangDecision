@@ -142,7 +142,7 @@ class TourFragment : BaseFragment(), AMapLocationListener {
      */
     private fun firstLoginDialog() {
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.dialog_first_login, null)
+        val view = inflater.inflate(R.layout.dialog_location_prompt, null)
         val tvSure = view.findViewById<TextView>(R.id.tvSure)
         val dialog = Dialog(activity, R.style.CustomProgressDialog)
         dialog.setContentView(view)
@@ -278,8 +278,8 @@ class TourFragment : BaseFragment(), AMapLocationListener {
                         intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                         startActivity(intent)
                     }
-                    TextUtils.equals(dto.id, "7004") -> { //新疆印象
-                        intent = Intent(activity, TourImpressionActivity::class.java)
+                    TextUtils.equals(dto.id, "7101") -> { //旅游路线
+                        intent = Intent(activity, TourRouteActivity::class.java)
                         intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                         startActivity(intent)
                     }
@@ -304,8 +304,8 @@ class TourFragment : BaseFragment(), AMapLocationListener {
             val intent: Intent
             if (TextUtils.equals(dto.showType, CONST.LOCAL)) {
                 when(dto.id) {
-                    "7101" -> { //旅游路线
-                        intent = Intent(activity, TourRouteActivity::class.java)
+                    "7004" -> { //新疆印象
+                        intent = Intent(activity, TourImpressionActivity::class.java)
                         intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                         startActivity(intent)
                     }

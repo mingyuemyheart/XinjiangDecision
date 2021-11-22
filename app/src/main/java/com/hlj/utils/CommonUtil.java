@@ -26,6 +26,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
@@ -51,10 +52,13 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.PolygonOptions;
+import com.amap.api.maps.model.Polyline;
+import com.amap.api.maps.model.PolylineOptions;
 import com.hlj.common.CONST;
 import com.hlj.common.MyApplication;
 import com.hlj.dto.AgriDto;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -473,20 +477,20 @@ public class CommonUtil {
 	/**
 	 * 根据风速获取风向标
 	 * @param context
-	 * @param speed
+	 * @param windForce
 	 * @return
 	 */
-	public static Bitmap getWindMarker(Context context, float speed) {
+	public static Bitmap getWindMarker(Context context, int windForce) {
 		Bitmap bitmap = null;
-		if(speed >= 1 && speed <=2){
+		if(windForce <=2){
 			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind12);
-	    }else if(speed >= 3 && speed <=4){
+	    }else if(windForce <=4){
 	    	bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind34);
-	    }else if(speed >= 5 && speed <=6){
+	    }else if(windForce <=6){
 	    	bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind56);
-	    }else if(speed >= 7 && speed <=8){
+	    }else if(windForce <=8){
 	    	bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind78);
-	    }else if(speed >8){
+	    }else {
 	    	bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.iv_wind8s);
 	    }
 		return bitmap;
@@ -553,58 +557,119 @@ public class CommonUtil {
 	/**
 	 * 绘制黑龙江
 	 */
-	public static void drawHLJJson(Context context, AMap aMap) {
+	public static void drawHLJJson(final Context context, final AMap aMap) {
 		if (aMap == null) {
 			return;
 		}
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		String result = CommonUtil.getFromAssets(context, "xinjiang_geo.json");
-		if (!TextUtils.isEmpty(result)) {
-			try {
-                LatLngBounds.Builder builder = LatLngBounds.builder();
-				JSONObject obj = new JSONObject(result);
-				if (!obj.isNull("polyline")) {
-					String polyline = obj.getString("polyline");
-					String[] item = polyline.split(";");
-					PolygonOptions polygonOption = new PolygonOptions();
-					polygonOption.fillColor(0x40889BE8).strokeColor(context.getResources().getColor(R.color.colorPrimary)).strokeWidth(5f);
-					for (int i = 0; i < item.length; i++) {
-						String[] latLng = item[i].split(",");
-						double lng = Double.parseDouble(latLng[0]);
-						double lat = Double.parseDouble(latLng[1]);
-						polygonOption.add(new LatLng(lat, lng));
-						builder.include(new LatLng(lat, lng));
-					}
-					aMap.addPolygon(polygonOption);
-					if (item.length > 0) {
-						aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String result = CommonUtil.getFromAssets(context, "xinjiang_geo.json");
+				if (!TextUtils.isEmpty(result)) {
+					try {
+						LatLngBounds.Builder builder = LatLngBounds.builder();
+						JSONObject obj = new JSONObject(result);
+						if (!obj.isNull("polyline")) {
+							String polyline = obj.getString("polyline");
+							String[] item = polyline.split(";");
+							PolygonOptions polygonOption = new PolygonOptions();
+							polygonOption.fillColor(0x40889BE8).strokeColor(context.getResources().getColor(R.color.colorPrimary)).strokeWidth(5f);
+							for (int i = 0; i < item.length; i++) {
+								String[] latLng = item[i].split(",");
+								double lng = Double.parseDouble(latLng[0]);
+								double lat = Double.parseDouble(latLng[1]);
+								polygonOption.add(new LatLng(lat, lng));
+								builder.include(new LatLng(lat, lng));
+							}
+							aMap.addPolygon(polygonOption);
+							if (item.length > 0) {
+								aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
+							}
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
 					}
 				}
-//				if (!obj.isNull("citys")) {
-//					JSONArray citys = obj.getJSONArray("citys");
-//					for (int i = 0; i < citys.length(); i++) {
-//						JSONObject itemObj = citys.getJSONObject(i);
-//						String name = itemObj.getString("name");
-//						String[] point = itemObj.getString("point").split(",");
-//						double lat = Double.parseDouble(point[1]);
-//						double lng = Double.parseDouble(point[0]);
-//
-//						LatLng latLng = new LatLng(lat, lng);
-//						MarkerOptions options = new MarkerOptions();
-//						options.anchor(0.5f, 0.5f);
-//						View view = inflater.inflate(R.layout.marker_city, null);
-//						TextView tvName = view.findViewById(R.id.tvName);
-//						tvName.setText(name);
-//						options.icon(BitmapDescriptorFactory.fromView(view));
-//						options.position(latLng);
-//						Marker marker = aMap.addMarker(options);
-//						marker.setClickable(false);
-//					}
-//				}
-			} catch (JSONException e) {
-				e.printStackTrace();
 			}
+		}).start();
+	}
+
+	/**
+	 * 绘制黑龙江
+	 */
+	public static void drawHLJJsonLine(final Context context, final AMap aMap) {
+		if (aMap == null) {
+			return;
 		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String result = CommonUtil.getFromAssets(context, "xinjiang_geo.json");
+				if (!TextUtils.isEmpty(result)) {
+					try {
+						LatLngBounds.Builder builder = LatLngBounds.builder();
+						JSONObject obj = new JSONObject(result);
+						if (!obj.isNull("polyline")) {
+							String polyline = obj.getString("polyline");
+							String[] item = polyline.split(";");
+							PolylineOptions polygonOption = new PolylineOptions();
+							polygonOption.color(context.getResources().getColor(R.color.colorPrimary));
+							polygonOption.width(5f);
+							for (int i = 0; i < item.length; i++) {
+								String[] latLng = item[i].split(",");
+								double lng = Double.parseDouble(latLng[0]);
+								double lat = Double.parseDouble(latLng[1]);
+								polygonOption.add(new LatLng(lat, lng));
+								builder.include(new LatLng(lat, lng));
+							}
+							aMap.addPolyline(polygonOption);
+							if (item.length > 0) {
+								aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
+							}
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}
+
+	/**
+	 * 绘制广西市县边界
+	 */
+	public static void drawRailWay(final Context context, final AMap aMap) {
+		if (aMap == null) {
+			return;
+		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String result = CommonUtil.getFromAssets(context, "railway.json");
+				if (!TextUtils.isEmpty(result)) {
+					try {
+						JSONObject obj = new JSONObject(result);
+						JSONArray array = obj.getJSONArray("features");
+						for (int i = 0; i < array.length(); i++) {
+							JSONObject itemObj = array.getJSONObject(i);
+							JSONObject geometry = itemObj.getJSONObject("geometry");
+							JSONArray coordinates = geometry.getJSONArray("coordinates");
+							PolylineOptions polylineOption = new PolylineOptions();
+							polylineOption.width(10).color(0xffd9d9d9);
+							for (int m = 0; m < coordinates.length(); m++) {
+								JSONArray itemArray = coordinates.getJSONArray(m);
+								double lng = itemArray.getDouble(0);
+								double lat = itemArray.getDouble(1);
+								polylineOption.add(new LatLng(lat, lng));
+							}
+							aMap.addPolyline(polylineOption);
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
 	}
 
 	/**

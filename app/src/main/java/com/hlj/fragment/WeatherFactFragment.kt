@@ -153,6 +153,14 @@ class WeatherFactFragment : BaseFragment() {
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                     startActivity(intent)
+                } else if (TextUtils.equals(dto.id, "901")) { //铁路气象服务
+                    intent = Intent(activity, RailActivity::class.java)
+                    intent.putExtra(CONST.COLUMN_ID, dto.columnId)
+                    intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    val bundle = Bundle()
+                    bundle.putParcelable("data", dto)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
                 }
 
                 else if (TextUtils.equals(dto.id, "111")) { //天气雷达

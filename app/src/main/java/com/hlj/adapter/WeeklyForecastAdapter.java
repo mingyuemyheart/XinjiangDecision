@@ -1,6 +1,7 @@
 package com.hlj.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +16,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import shawn.cxwl.com.hlj.R;
 
-public class WeeklyForecastAdapter extends BaseAdapter{
+public class WeeklyForecastAdapter extends BaseAdapter {
 	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<WeatherDto> mArrayList = new ArrayList<>();
-	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-	private SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<WeatherDto> mArrayList;
+	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
+	private SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd", Locale.CHINA);
 	public long foreDate = 0, currentDate = 0;
+	private int textColor = Color.WHITE;
 	
 	private final class ViewHolder{
 		TextView tvWeek;
@@ -38,9 +41,8 @@ public class WeeklyForecastAdapter extends BaseAdapter{
 		TextView tvLowTemp;
 	}
 	
-	private ViewHolder mHolder = null;
-	
-	public WeeklyForecastAdapter(Context context, List<WeatherDto> mArrayList) {
+	public WeeklyForecastAdapter(Context context, List<WeatherDto> mArrayList, int textColor) {
+		this.textColor = textColor;
 		mContext = context;
 		this.mArrayList = mArrayList;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -63,6 +65,7 @@ public class WeeklyForecastAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder mHolder;
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.adapter_weekly_forecast, null);
 			mHolder = new ViewHolder();
@@ -80,6 +83,14 @@ public class WeeklyForecastAdapter extends BaseAdapter{
 		}
 		
 		WeatherDto dto = mArrayList.get(position);
+
+		mHolder.tvWeek.setTextColor(textColor);
+		mHolder.tvDate.setTextColor(textColor);
+		mHolder.tvHighPhe.setTextColor(textColor);
+		mHolder.tvHighTemp.setTextColor(textColor);
+		mHolder.tvLowPhe.setTextColor(textColor);
+		mHolder.tvLowTemp.setTextColor(textColor);
+
 		if (position == 0) {
 			mHolder.tvWeek.setText(mContext.getString(R.string.today));
 		}else {
@@ -96,7 +107,7 @@ public class WeeklyForecastAdapter extends BaseAdapter{
 			}else {
 				mHolder.tvWeek.setText(dto.week);
 			}
-		}else {
+		} else {
 			if (position == 0) {
 				mHolder.tvWeek.setText("今天");
 			}else if (position == 1) {
@@ -110,8 +121,7 @@ public class WeeklyForecastAdapter extends BaseAdapter{
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		mHolder.tvLowPhe.setText(dto.lowPhe);
 		mHolder.tvLowTemp.setText(dto.lowTemp+"℃");
 		Drawable ld = mContext.getResources().getDrawable(R.drawable.phenomenon_drawable_night);
