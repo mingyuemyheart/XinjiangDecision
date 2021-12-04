@@ -53,10 +53,11 @@ class RailSectionActivity : BaseActivity(), View.OnClickListener {
             val dto = dataList[arg2]
             for (i in 0 until dto.itemList.size) {
                 val item = dto.itemList[i]
-                stationCodes += stationCodes+item.stationCode+","
+                stationCodes += item.stationCode+","
             }
             val intent = Intent()
             Log.e("stationCodes", stationCodes)
+            intent.putExtra("stationName", dto.name)
             intent.putExtra("stationCodes", stationCodes)
             setResult(RESULT_OK, intent)
             finish()
@@ -82,8 +83,11 @@ class RailSectionActivity : BaseActivity(), View.OnClickListener {
                             try {
                                 val dataArray = JSONArray(result)
                                 dataList.clear()
+                                var dto = FactDto()
+                                dto.name = "全部站"
+                                dataList.add(dto)
                                 for (m in 0 until dataArray.length()) {
-                                    val dto = FactDto()
+                                    dto = FactDto()
                                     val itemObj = dataArray.getJSONObject(m)
                                     if (!itemObj.isNull("name")) {
                                         dto.name = itemObj.getString("name")

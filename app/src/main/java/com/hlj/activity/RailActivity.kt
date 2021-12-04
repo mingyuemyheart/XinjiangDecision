@@ -133,6 +133,7 @@ class RailActivity : BaseActivity(), AMapLocationListener, View.OnClickListener 
                         "9103" -> { //气象预警
                             intent = Intent(this, TourWarningActivity::class.java)
                             intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                            intent.putExtra("isDrawRail", true)
                             startActivity(intent)
                         }
                         "9104" -> { //风险预警

@@ -49,6 +49,7 @@ import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.PolygonOptions;
@@ -638,7 +639,7 @@ public class CommonUtil {
 	/**
 	 * 绘制广西市县边界
 	 */
-	public static void drawRailWay(final Context context, final AMap aMap) {
+	public static void drawRailWay(final Context context, final AMap aMap, final ArrayList<Polyline> polylines, final String lineName) {
 		if (aMap == null) {
 			return;
 		}
@@ -652,17 +653,47 @@ public class CommonUtil {
 						JSONArray array = obj.getJSONArray("features");
 						for (int i = 0; i < array.length(); i++) {
 							JSONObject itemObj = array.getJSONObject(i);
-							JSONObject geometry = itemObj.getJSONObject("geometry");
-							JSONArray coordinates = geometry.getJSONArray("coordinates");
-							PolylineOptions polylineOption = new PolylineOptions();
-							polylineOption.width(10).color(0xffd9d9d9);
-							for (int m = 0; m < coordinates.length(); m++) {
-								JSONArray itemArray = coordinates.getJSONArray(m);
-								double lng = itemArray.getDouble(0);
-								double lat = itemArray.getDouble(1);
-								polylineOption.add(new LatLng(lat, lng));
+
+							if (TextUtils.equals(lineName, "全部站")) {
+								JSONObject geometry = itemObj.getJSONObject("geometry");
+								JSONArray coordinates = geometry.getJSONArray("coordinates");
+								PolylineOptions polylineOption = new PolylineOptions();
+//								polylineOption.width(10).color(context.getResources().getColor(R.color.orange));
+								for (int m = 0; m < coordinates.length(); m++) {
+									JSONArray itemArray = coordinates.getJSONArray(m);
+									double lng = itemArray.getDouble(0);
+									double lat = itemArray.getDouble(1);
+									polylineOption.add(new LatLng(lat, lng));
+								}
+								Polyline polyline = aMap.addPolyline(polylineOption);
+								polyline.setCustomTexture(BitmapDescriptorFactory.fromResource(R.drawable.bg_railway_line));
+								polyline.setWidth(20);
+								polyline.setZIndex(1000);
+								polylines.add(polyline);
+							} else {
+								JSONObject properties = itemObj.getJSONObject("properties");
+								if (!properties.isNull("NAME")) {
+									String name = properties.getString("NAME");
+									if (lineName.contains(name)) {
+										JSONObject geometry = itemObj.getJSONObject("geometry");
+										JSONArray coordinates = geometry.getJSONArray("coordinates");
+										PolylineOptions polylineOption = new PolylineOptions();
+//										polylineOption.width(10).color(context.getResources().getColor(R.color.orange));
+										for (int m = 0; m < coordinates.length(); m++) {
+											JSONArray itemArray = coordinates.getJSONArray(m);
+											double lng = itemArray.getDouble(0);
+											double lat = itemArray.getDouble(1);
+											polylineOption.add(new LatLng(lat, lng));
+										}
+										Polyline polyline = aMap.addPolyline(polylineOption);
+										polyline.setCustomTexture(BitmapDescriptorFactory.fromResource(R.drawable.bg_railway_line));
+										polyline.setWidth(20);
+										polyline.setZIndex(1000);
+										polylines.add(polyline);
+									}
+								}
 							}
-							aMap.addPolyline(polylineOption);
+
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();

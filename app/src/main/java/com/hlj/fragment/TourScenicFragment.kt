@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -65,6 +66,7 @@ class TourScenicFragment : BaseFragment(), OnClickListener, OnMapClickListener, 
     private val boundBuilder = LatLngBounds.builder()
     private var mAMapNavi: AMapNavi? = null
     private var foreDate: Long = 0//获取预报时间戳
+    private val polylines: ArrayList<Polyline> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_tour_scenic, null)
@@ -135,6 +137,12 @@ class TourScenicFragment : BaseFragment(), OnClickListener, OnMapClickListener, 
                                     var end: NaviPoi? = null
                                     val waysPoiIds: MutableList<NaviPoi> = ArrayList()
 
+
+                                    var lineStyle = "1"//1直连、2导航连线
+                                    if (!obj.isNull("lineStyle")) {
+                                        lineStyle = obj.getString("lineStyle")
+                                    }
+
                                     val array = obj.getJSONArray("list")
                                     for (i in 0 until array.length()) {
                                         val dto = NewsDto()
@@ -167,23 +175,40 @@ class TourScenicFragment : BaseFragment(), OnClickListener, OnMapClickListener, 
                                             dto.addr = itemObj.getString("address")
                                         }
 
-                                        when (i) {
-                                            0 -> {
-                                                start = NaviPoi(dto.title, LatLng(dto.lat, dto.lng), "")
-                                            }
-                                            array.length()-1 -> {
-                                                end = NaviPoi(dto.title, LatLng(dto.lat, dto.lng), "")
-                                            }
-                                            else -> {
-                                                waysPoiIds.add(NaviPoi(dto.title, LatLng(dto.lat, dto.lng), ""))
+                                        if (TextUtils.equals(lineStyle, "2")) {//导航连线
+                                            when (i) {
+                                                0 -> {
+                                                    start = NaviPoi(dto.title, LatLng(dto.lat, dto.lng), "")
+                                                }
+                                                array.length()-1 -> {
+                                                    end = NaviPoi(dto.title, LatLng(dto.lat, dto.lng), "")
+                                                }
+                                                else -> {
+                                                    waysPoiIds.add(NaviPoi(dto.title, LatLng(dto.lat, dto.lng), ""))
+                                                }
                                             }
                                         }
 
                                         dataMap[dto.id] = dto
-                                        okHttpWarning(dto.id, dto.warningId, dto.cityId)
+                                        if (!TextUtils.isEmpty(dto.warningId)) {
+                                            okHttpWarning(dto.id, dto.warningId, dto.cityId)
+                                        }
                                     }
-                                    // POI算路
-                                    mAMapNavi!!.calculateDriveRoute(start, end, waysPoiIds, PathPlanningStrategy.DRIVING_MULTIPLE_ROUTES_DEFAULT)
+
+                                    //默认连线，如果是导航连线，在清除，避免导航失败不连线问题
+                                    val polylineOptions = PolylineOptions()
+                                    polylineOptions.color(ContextCompat.getColor(activity!!, R.color.colorPrimary))
+                                    polylineOptions.width(20f)
+                                    for ((key, value) in dataMap.entries) {
+                                        val latLng = LatLng(value.lat, value.lng)
+                                        polylineOptions.add(latLng)
+                                    }
+                                    val polyline = aMap!!.addPolyline(polylineOptions)
+                                    polylines.add(polyline)
+                                    if (TextUtils.equals(lineStyle, "2")) {//导航连线
+                                        // POI算路
+                                        mAMapNavi!!.calculateDriveRoute(start, end, waysPoiIds, PathPlanningStrategy.DRIVING_MULTIPLE_ROUTES_DEFAULT)
+                                    }
                                 }
                             } catch (e: JSONException) {
                                 e.printStackTrace()
@@ -734,7 +759,6 @@ class TourScenicFragment : BaseFragment(), OnClickListener, OnMapClickListener, 
     }
 
     override fun onCalculateRouteFailure(p0: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun onCalculateRouteFailure(p0: AMapCalcRouteResult?) {
@@ -815,6 +839,13 @@ class TourScenicFragment : BaseFragment(), OnClickListener, OnMapClickListener, 
 //        for ((key, value) in naviPaths.entries) {
 //            value.coordList[0].latitude
 //        }
+
+        for (i in 0 until polylines.size) {
+            val polyline = polylines[i]
+            polyline.remove()
+        }
+        polylines.clear()
+
         for (value in naviPaths.values) {
             val polylineOptions = PolylineOptions()
             polylineOptions.color(ContextCompat.getColor(activity!!, R.color.colorPrimary))

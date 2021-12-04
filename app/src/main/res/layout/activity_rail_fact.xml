@@ -132,17 +132,15 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/llContainerRail"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_corner_white"
+    <ImageView
+        android:id="@+id/ivShowMarker"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/clRailSection"
-        app:layout_constraintTop_toTopOf="@+id/clRailSection"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" />
+        android:src="@drawable/icon_map_marker_show"
+        app:layout_constraintEnd_toEndOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/clRailSection" />
 
     <ImageView
         android:visibility="gone"

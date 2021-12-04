@@ -1,5 +1,6 @@
 package com.hlj.activity
 
+import android.content.Intent
 import android.graphics.*
 import android.media.ThumbnailUtils
 import android.os.Bundle
@@ -56,6 +57,8 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
     private var locationLat = CONST.centerLat
     private var locationLng = CONST.centerLng
     private var locationMarker: Marker? = null
+    private val polylines: ArrayList<Polyline> = ArrayList()
+    private var isShowMarker = true
 
     private val itemName1 = "综合预报"
     private val itemName2 = "降水"
@@ -101,11 +104,20 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         aMap!!.setOnMarkerClickListener(this)
         aMap!!.setOnMapLoadedListener {
             CommonUtil.drawHLJJsonLine(this, aMap)
-            CommonUtil.drawRailWay(this, aMap)
+            drawRailWay("全部站")
             startLocation()
             getWeatherInfo()
             okHttpLayer()
         }
+    }
+
+    private fun drawRailWay(lineName: String) {
+        for (i in 0 until polylines.size) {
+            val polyline = polylines[i]
+            polyline.remove()
+        }
+        polylines.clear()
+        CommonUtil.drawRailWay(this, aMap, polylines,lineName)
     }
 
     private fun initWidget() {
@@ -113,6 +125,8 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         ivLegend.setOnClickListener(this)
         clCheck.setOnClickListener(this)
         ivLuoqu.setOnClickListener(this)
+        clRailSection.setOnClickListener(this)
+        ivShowMarker.setOnClickListener(this)
         ivLocation.setOnClickListener(this)
         ivClose.setOnClickListener(this)
 
@@ -189,6 +203,18 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     }
                 }
             }
+            R.id.clRailSection -> {
+                startActivityForResult(Intent(this, RailSectionActivity::class.java), 1001)
+            }
+            R.id.ivShowMarker -> {
+                isShowMarker = !isShowMarker
+                if (isShowMarker) {
+                    ivShowMarker.setImageResource(R.drawable.icon_map_marker_show)
+                } else {
+                    ivShowMarker.setImageResource(R.drawable.icon_map_marker_hide)
+                }
+                showingMarkers()
+            }
             R.id.ivLocation -> {
                 if (zoom >= 12f) {
                     aMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationLat, locationLng), 3.5f))
@@ -197,6 +223,54 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                 }
             }
             R.id.ivClose -> CommonUtil.topToBottom(clBottom)
+        }
+    }
+
+    private var stationCodes = ""
+    private fun showingMarkers() {
+        for (i in 0 until markers.size) {
+            val marker = markers[i]
+            if (TextUtils.isEmpty(stationCodes)) {
+                marker.isVisible = isShowMarker
+            } else {
+                if (marker.snippet.contains(",")) {
+                    val snippets = marker.snippet.split(",")
+                    if (stationCodes.contains(snippets[1])) {
+                        marker.isVisible = isShowMarker
+                    } else {
+                        marker.isVisible = false
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            when(requestCode) {
+                1001 -> {
+                    if (data != null) {
+                        val stationName = data.getStringExtra("stationName")
+                        if (!TextUtils.isEmpty(stationName)) {
+                            drawRailWay(stationName)
+                            tvRailSection.text = stationName
+                            if (stationName.length >= 3) {
+                                tvRailSection.text = stationName.substring(0, 3)
+                            }
+                        }
+                        if (TextUtils.equals(stationName, "全部站")) {
+                            for (i in 0 until markers.size) {
+                                val marker = markers[i]
+                                marker.isVisible = isShowMarker
+                            }
+                            return
+                        }
+                        stationCodes = data.getStringExtra("stationCodes")
+                        showingMarkers()
+                    }
+                }
+            }
         }
     }
 
@@ -240,6 +314,9 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
 
                                         if (!itemObj.isNull("trip")) {
                                             val trip = itemObj.getJSONObject("trip")
+                                            if (!trip.isNull("tlid")) {
+                                                fact.id = trip.getString("tlid")
+                                            }
                                             if (!trip.isNull("stationName")) {
                                                 fact.stationName = trip.getString("stationName")
                                             }
@@ -400,6 +477,8 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                             name.setTextColor(Color.WHITE)
                             name.setBackgroundResource(R.drawable.corner_left_right_blue)
                             selectItemName = dto.name
+                            tvRailSection.text = "全部站"
+                            stationCodes = ""
                             tvLayerName.text = "全疆站点${dto.name}\n$foreTime"
                             when(dto.name) {
                                 itemName1 -> {
@@ -595,11 +674,12 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     view.tvStationName.text = dto.stationName
                     val options = MarkerOptions()
                     options.title(dto.stationName)
-                    options.snippet(dto.stationCode)
+                    options.snippet(dto.stationCode+","+dto.id)
                     options.anchor(0.5f, 0.5f)
                     options.position(LatLng(dto.lat, dto.lng))
                     options.icon(BitmapDescriptorFactory.fromView(view))
                     val marker = aMap!!.addMarker(options)
+                    marker.isVisible = isShowMarker
                     markers.add(marker)
                 }
                 itemName2 -> {
@@ -613,11 +693,12 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     }
                     val options = MarkerOptions()
                     options.title(dto.stationName)
-                    options.snippet(dto.stationCode)
+                    options.snippet(dto.stationCode+","+dto.id)
                     options.anchor(0.5f, 0.5f)
                     options.position(LatLng(dto.lat, dto.lng))
                     options.icon(BitmapDescriptorFactory.fromView(view))
                     val marker = aMap!!.addMarker(options)
+                    marker.isVisible = isShowMarker
                     markers.add(marker)
                 }
                 itemName3 -> {
@@ -671,11 +752,12 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     }
                     val options = MarkerOptions()
                     options.title(dto.stationName)
-                    options.snippet(dto.stationCode)
+                    options.snippet(dto.stationCode+","+dto.id)
                     options.anchor(0.5f, 0.5f)
                     options.position(LatLng(dto.lat, dto.lng))
                     options.icon(BitmapDescriptorFactory.fromView(view))
                     val marker = aMap!!.addMarker(options)
+                    marker.isVisible = isShowMarker
                     markers.add(marker)
                 }
                 itemName4 -> {
@@ -688,11 +770,12 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     }
                     val options = MarkerOptions()
                     options.title(dto.stationName)
-                    options.snippet(dto.stationCode)
+                    options.snippet(dto.stationCode+","+dto.id)
                     options.anchor(0.5f, 0.5f)
                     options.position(LatLng(dto.lat, dto.lng))
                     options.icon(BitmapDescriptorFactory.fromView(view))
                     val marker = aMap!!.addMarker(options)
+                    marker.isVisible = isShowMarker
                     markers.add(marker)
                 }
                 itemName5 -> {
@@ -705,11 +788,12 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     }
                     val options = MarkerOptions()
                     options.title(dto.stationName)
-                    options.snippet(dto.stationCode)
+                    options.snippet(dto.stationCode+","+dto.id)
                     options.anchor(0.5f, 0.5f)
                     options.position(LatLng(dto.lat, dto.lng))
                     options.icon(BitmapDescriptorFactory.fromView(view))
                     val marker = aMap!!.addMarker(options)
+                    marker.isVisible = isShowMarker
                     markers.add(marker)
                 }
             }

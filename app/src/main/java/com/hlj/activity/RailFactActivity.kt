@@ -55,6 +55,8 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
     private var locationLat = CONST.centerLat
     private var locationLng = CONST.centerLng
     private var locationMarker: Marker? = null
+    private val polylines: ArrayList<Polyline> = ArrayList()
+    private var isShowMarker = true
 
     private val itemName1 = "降水"
     private val itemName2 = "气温"
@@ -69,17 +71,9 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
     private val hour12 = "12小时"
     private val hour24 = "24小时"
 
-    private val stationOption1 = "全部站"
-    private val stationOption2 = "工务段"
-    private val stationOption3 = "铁路段"
-    private var selectStationOption = stationOption1
-
     private val dataList: MutableList<FactDto?> = ArrayList()
     private val markers: MutableList<Marker> = ArrayList()
-    private val sdf1 = SimpleDateFormat("HH", Locale.CHINA)
     private val sdf2 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
-    private val sdf3 = SimpleDateFormat("yyyyMMdd", Locale.CHINA)
-    private val sdf4 = SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA)
     private var f0 = ""
     private var factOverlay: GroundOverlay? = null
     private val layerMap: HashMap<String, JSONObject> = HashMap()
@@ -108,11 +102,20 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         aMap!!.setOnMarkerClickListener(this)
         aMap!!.setOnMapLoadedListener {
             CommonUtil.drawHLJJsonLine(this, aMap)
-            CommonUtil.drawRailWay(this, aMap)
+            drawRailWay("全部站")
             startLocation()
             okHttpList()
             okHttpLayer()
         }
+    }
+
+    private fun drawRailWay(lineName: String) {
+        for (i in 0 until polylines.size) {
+            val polyline = polylines[i]
+            polyline.remove()
+        }
+        polylines.clear()
+        CommonUtil.drawRailWay(this, aMap, polylines,lineName)
     }
 
     private fun initWidget() {
@@ -121,6 +124,7 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         clCheck.setOnClickListener(this)
         ivLuoqu.setOnClickListener(this)
         clRailSection.setOnClickListener(this)
+        ivShowMarker.setOnClickListener(this)
         ivLocation.setOnClickListener(this)
 
         val title = intent.getStringExtra(CONST.ACTIVITY_NAME)
@@ -128,7 +132,6 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
             tvTitle.text = title
         }
 
-        addStationOptions()
     }
 
     /**
@@ -199,17 +202,70 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                 }
             }
             R.id.clRailSection -> {
-                if (llContainerRail.visibility == View.VISIBLE) {
-                    llContainerRail.visibility = View.GONE
+                startActivityForResult(Intent(this, RailSectionActivity::class.java), 1001)
+            }
+            R.id.ivShowMarker -> {
+                isShowMarker = !isShowMarker
+                if (isShowMarker) {
+                    ivShowMarker.setImageResource(R.drawable.icon_map_marker_show)
                 } else {
-                    llContainerRail.visibility = View.VISIBLE
+                    ivShowMarker.setImageResource(R.drawable.icon_map_marker_hide)
                 }
+                showingMarkers()
             }
             R.id.ivLocation -> {
                 if (zoom >= 12f) {
                     aMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationLat, locationLng), 3.5f))
                 } else {
                     aMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationLat, locationLng), 12.0f))
+                }
+            }
+        }
+    }
+
+    private var stationCodes = ""
+    private fun showingMarkers() {
+        for (i in 0 until markers.size) {
+            val marker = markers[i]
+            if (TextUtils.isEmpty(stationCodes)) {
+                marker.isVisible = isShowMarker
+            } else {
+                if (marker.snippet.contains(",")) {
+                    val snippets = marker.snippet.split(",")
+                    if (stationCodes.contains(snippets[1])) {
+                        marker.isVisible = isShowMarker
+                    } else {
+                        marker.isVisible = false
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            when(requestCode) {
+                1001 -> {
+                    if (data != null) {
+                        val stationName = data.getStringExtra("stationName")
+                        if (!TextUtils.isEmpty(stationName)) {
+                            drawRailWay(stationName)
+                            tvRailSection.text = stationName
+                            if (stationName.length >= 3) {
+                                tvRailSection.text = stationName.substring(0, 3)
+                            }
+                        }
+                        if (TextUtils.equals(stationName, "全部站")) {
+                            for (i in 0 until markers.size) {
+                                val marker = markers[i]
+                                marker.isVisible = true
+                            }
+                            return
+                        }
+                        stationCodes = data.getStringExtra("stationCodes")
+                        showingMarkers()
+                    }
                 }
             }
         }
@@ -243,6 +299,9 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                                     for (m in 0 until dataArray.length()) {
                                         val dto = FactDto()
                                         val itemObj = dataArray.getJSONObject(m)
+                                        if (!itemObj.isNull("tlid")) {
+                                            dto.id = itemObj.getString("tlid")
+                                        }
                                         if (!itemObj.isNull("Station_Name")) {
                                             dto.stationName = itemObj.getString("Station_Name")
                                         }
@@ -384,6 +443,8 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     for (n in 0 until llContainer!!.childCount) {
                         val name = llContainer!!.getChildAt(n) as TextView
                         if (TextUtils.equals(tvName.text.toString(), name.text.toString())) {
+                            tvRailSection.text = "全部站"
+                            stationCodes = ""
                             when(dto.name) {
                                 itemName1 -> {
                                     name.setTextColor(Color.WHITE)
@@ -489,23 +550,26 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                 tvCheck.text = item.name
                 addMarkers(item.name)
 
-//                when(dto.name) {
-//                    itemName1 -> {
-//
-//                    }
-//                    itemName2 -> {
-//                        if (layerMap.containsKey("${itemName2}${item.name}")) {
-//                            val obj: JSONObject = layerMap["${itemName2}${item.name}"]!!
-//                            okHttpFactBitmap(obj)
-//                        }
-//                    }
-//                    itemName3 -> {
-//                        if (layerMap.containsKey("${itemName3}${item.name}")) {
-//                            val obj: JSONObject = layerMap["${itemName3}${item.name}"]!!
-//                            okHttpFactBitmap(obj)
-//                        }
-//                    }
-//                }
+                when(dto.name) {
+                    itemName1 -> {
+                        if (layerMap.containsKey("${itemName1}${item.name}")) {
+                            val obj: JSONObject = layerMap["${itemName1}${item.name}"]!!
+                            okHttpFactBitmap(obj)
+                        }
+                    }
+                    itemName2 -> {
+                        if (layerMap.containsKey("${itemName2}${item.name}")) {
+                            val obj: JSONObject = layerMap["${itemName2}${item.name}"]!!
+                            okHttpFactBitmap(obj)
+                        }
+                    }
+                    itemName3 -> {
+                        if (layerMap.containsKey("${itemName3}${item.name}")) {
+                            val obj: JSONObject = layerMap["${itemName3}${item.name}"]!!
+                            okHttpFactBitmap(obj)
+                        }
+                    }
+                }
             } else {
                 tvItem.setTextColor(ContextCompat.getColor(this, R.color.text_color3))
             }
@@ -518,23 +582,26 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                         tvCheck.text = itemName.text.toString()
                         addMarkers(itemName.text.toString())
 
-//                        when(dto.name) {
-//                            itemName1 -> {
-//
-//                            }
-//                            itemName2 -> {
-//                                if (layerMap.containsKey("${itemName2}${item.name}")) {
-//                                    val obj: JSONObject = layerMap["${itemName2}${item.name}"]!!
-//                                    okHttpFactBitmap(obj)
-//                                }
-//                            }
-//                            itemName3 -> {
-//                                if (layerMap.containsKey("${itemName3}${item.name}")) {
-//                                    val obj: JSONObject = layerMap["${itemName3}${item.name}"]!!
-//                                    okHttpFactBitmap(obj)
-//                                }
-//                            }
-//                        }
+                        when(itemName.text.toString()) {
+                            itemName1 -> {
+                                if (layerMap.containsKey("${itemName1}${item.name}")) {
+                                    val obj: JSONObject = layerMap["${itemName1}${item.name}"]!!
+                                    okHttpFactBitmap(obj)
+                                }
+                            }
+                            itemName2 -> {
+                                if (layerMap.containsKey("${itemName2}${item.name}")) {
+                                    val obj: JSONObject = layerMap["${itemName2}${item.name}"]!!
+                                    okHttpFactBitmap(obj)
+                                }
+                            }
+                            itemName3 -> {
+                                if (layerMap.containsKey("${itemName3}${item.name}")) {
+                                    val obj: JSONObject = layerMap["${itemName3}${item.name}"]!!
+                                    okHttpFactBitmap(obj)
+                                }
+                            }
+                        }
                     } else {
                         itemName.setTextColor(ContextCompat.getColor(this, R.color.text_color3))
                     }
@@ -596,12 +663,12 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     }
                     val options = MarkerOptions()
                     options.title(dto.stationName)
-                    options.snippet(dto.stationCode)
+                    options.snippet(dto.stationCode+","+dto.id)
                     options.anchor(0.5f, 0.5f)
                     options.position(LatLng(dto.lat, dto.lng))
                     options.icon(BitmapDescriptorFactory.fromView(view))
                     val marker = aMap!!.addMarker(options)
-                    marker.isVisible = true
+                    marker.isVisible = isShowMarker
                     markers.add(marker)
                 }
                 itemName2 -> {
@@ -613,12 +680,12 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     }
                     val options = MarkerOptions()
                     options.title(dto.stationName)
-                    options.snippet(dto.stationCode)
+                    options.snippet(dto.stationCode+","+dto.id)
                     options.anchor(0.5f, 0.5f)
                     options.position(LatLng(dto.lat, dto.lng))
                     options.icon(BitmapDescriptorFactory.fromView(view))
                     val marker = aMap!!.addMarker(options)
-                    marker.isVisible = true
+                    marker.isVisible = isShowMarker
                     markers.add(marker)
                 }
                 itemName3 -> {
@@ -642,12 +709,12 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                     }
                     val options = MarkerOptions()
                     options.title(dto.stationName)
-                    options.snippet(dto.stationCode)
+                    options.snippet(dto.stationCode+","+dto.id)
                     options.anchor(0.5f, 0.5f)
                     options.position(LatLng(dto.lat, dto.lng))
                     options.icon(BitmapDescriptorFactory.fromView(view))
                     val marker = aMap!!.addMarker(options)
-                    marker.isVisible = true
+                    marker.isVisible = isShowMarker
                     markers.add(marker)
                 }
             }
@@ -657,7 +724,10 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
     override fun onMarkerClick(marker: Marker?): Boolean {
         val intent = Intent(this, FactDetailChartActivity::class.java)
         intent.putExtra(CONST.ACTIVITY_NAME, marker!!.title)
-        intent.putExtra("stationCode", marker!!.snippet)
+        if (marker.snippet.contains(",")) {
+            val snippets = marker.snippet.split(",")
+            intent.putExtra("stationCode", snippets[0])
+        }
         startActivity(intent)
         return true
     }
@@ -667,7 +737,7 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
      */
     private fun okHttpLayer() {
         Thread {
-            val url = "http://hf-sos.tianqi.cn/tile_map/getcimisslayer/650000_yb"
+            val url = "http://xinjiangdecision.tianqi.cn:81/Home/work/getXinjiangTLSKImages"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -687,92 +757,28 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                                     val imgurl = itemObj.getString("imgurl")
                                     if (!TextUtils.isEmpty(imgurl)) {
                                         when {
-                                            imgurl.contains("ybday1_24js") -> {
-                                                layerMap["${itemName2}24h"] = itemObj
+                                            imgurl.contains("xinjiang_1js") -> {
+                                                layerMap["${itemName1}1小时"] = itemObj
                                             }
-                                            imgurl.contains("ybday2_24js") -> {
-                                                layerMap["${itemName2}48h"] = itemObj
+                                            imgurl.contains("xinjiang_3js") -> {
+                                                layerMap["${itemName1}3小时"] = itemObj
                                             }
-                                            imgurl.contains("ybday3_24js") -> {
-                                                layerMap["${itemName2}72h"] = itemObj
+                                            imgurl.contains("xinjiang_6js") -> {
+                                                layerMap["${itemName1}6小时"] = itemObj
                                             }
-                                            imgurl.contains("ybday4_24js") -> {
-                                                layerMap["${itemName2}96h"] = itemObj
+                                            imgurl.contains("xinjiang_12js") -> {
+                                                layerMap["${itemName1}12小时"] = itemObj
                                             }
-                                            imgurl.contains("ybday5_24js") -> {
-                                                layerMap["${itemName2}120h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday6_24js") -> {
-                                                layerMap["${itemName2}144h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday7_24js") -> {
-                                                layerMap["${itemName2}168h"] = itemObj
+                                            imgurl.contains("xinjiang_24js") -> {
+                                                layerMap["${itemName1}24小时"] = itemObj
                                             }
 
-                                            imgurl.contains("ybday1_wind") -> {
-                                                layerMap["${itemName3}24h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday2_wind") -> {
-                                                layerMap["${itemName3}48h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday3_wind") -> {
-                                                layerMap["${itemName3}72h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday4_wind") -> {
-                                                layerMap["${itemName3}96h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday5_wind") -> {
-                                                layerMap["${itemName3}120h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday6_wind") -> {
-                                                layerMap["${itemName3}144h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday7_wind") -> {
-                                                layerMap["${itemName3}168h"] = itemObj
+                                            imgurl.contains("xinjiang_temp") -> {
+                                                layerMap["${itemName2}1小时"] = itemObj
                                             }
 
-                                            imgurl.contains("ybday1_h_temp") -> {
-                                                layerMap["${itemName4}24h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday2_h_temp") -> {
-                                                layerMap["${itemName4}48h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday3_h_temp") -> {
-                                                layerMap["${itemName4}72h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday4_h_temp") -> {
-                                                layerMap["${itemName4}96h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday5_h_temp") -> {
-                                                layerMap["${itemName4}120h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday6_h_temp") -> {
-                                                layerMap["${itemName4}144h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday7_h_temp") -> {
-                                                layerMap["${itemName4}168h"] = itemObj
-                                            }
-
-                                            imgurl.contains("ybday1_l_temp") -> {
-                                                layerMap["${itemName5}24h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday2_l_temp") -> {
-                                                layerMap["${itemName5}48h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday3_l_temp") -> {
-                                                layerMap["${itemName5}72h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday4_l_temp") -> {
-                                                layerMap["${itemName5}96h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday5_l_temp") -> {
-                                                layerMap["${itemName5}120h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday6_l_temp") -> {
-                                                layerMap["${itemName5}144h"] = itemObj
-                                            }
-                                            imgurl.contains("ybday7_l_temp") -> {
-                                                layerMap["${itemName5}168h"] = itemObj
+                                            imgurl.contains("xinjiang_win_1h") -> {
+                                                layerMap["${itemName3}1小时"] = itemObj
                                             }
                                         }
                                     }
@@ -852,77 +858,6 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
             factOverlay!!.setImage(null)
             factOverlay!!.setPositionFromBounds(bounds)
             factOverlay!!.setImage(fromView)
-        }
-    }
-
-    /**
-     * 增加站点选择
-     */
-    private fun addStationOptions() {
-        val optionList: ArrayList<String> = ArrayList()
-        optionList.add(stationOption1)
-        optionList.add(stationOption2)
-        optionList.add(stationOption3)
-
-        llContainerRail.removeAllViews()
-        for (j in 0 until optionList.size) {
-            val name = optionList[j]
-            val tvItem = TextView(this)
-            tvItem.text = name
-            tvItem.gravity = Gravity.CENTER
-            tvItem.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13f)
-            val params1 = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, CommonUtil.dip2px(this, 35f).toInt())
-            tvItem.layoutParams = params1
-            llContainerRail.addView(tvItem)
-            if (TextUtils.equals(name, stationOption1)) {
-                tvItem.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                tvRailSection.text = name
-            } else {
-                tvItem.setTextColor(ContextCompat.getColor(this, R.color.text_color3))
-            }
-
-            tvItem.setOnClickListener {
-                for (m in 0 until llContainerRail.childCount) {
-                    val itemName = llContainerRail.getChildAt(m) as TextView
-                    if (TextUtils.equals(itemName.text.toString(), tvItem.text.toString())) {
-                        itemName.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                        tvRailSection.text = itemName.text.toString()
-                        when(itemName.text.toString()) {
-                            stationOption1 -> {
-                                for (i in 0 until markers.size) {
-                                    val marker = markers[i]
-                                    marker.isVisible = true
-                                }
-                            }
-                            stationOption2 -> {
-
-                            }
-                            stationOption3 -> {
-                                startActivityForResult(Intent(this, RailSectionActivity::class.java), 1001)
-                            }
-                        }
-                    } else {
-                        itemName.setTextColor(ContextCompat.getColor(this, R.color.text_color3))
-                    }
-                }
-            }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when(requestCode) {
-                1001 -> {
-                    if (data != null) {
-                        val stationCodes = data.getStringExtra("stationCodes")
-                        for (i in 0 until markers.size) {
-                            val marker = markers[i]
-                            marker.isVisible = stationCodes.contains(marker.snippet)
-                        }
-                    }
-                }
-            }
         }
     }
 

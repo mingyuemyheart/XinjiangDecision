@@ -22,10 +22,7 @@ import android.widget.TextView
 import com.amap.api.maps.AMap
 import com.amap.api.maps.AMap.*
 import com.amap.api.maps.CameraUpdateFactory
-import com.amap.api.maps.model.BitmapDescriptorFactory
-import com.amap.api.maps.model.LatLng
-import com.amap.api.maps.model.Marker
-import com.amap.api.maps.model.MarkerOptions
+import com.amap.api.maps.model.*
 import com.hlj.adapter.WarningAdapter
 import com.hlj.adapter.WarningStatisticAdapter
 import com.hlj.common.CONST
@@ -67,6 +64,7 @@ class TourWarningActivity : BaseActivity(), OnClickListener, OnMapClickListener,
     private var selectMarker: Marker? = null
     private var isShowPrompt = true
     private val sdf3 = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA)
+    private val polylines: ArrayList<Polyline> = ArrayList()
 
     //预警统计列表
     private var statisticAdapter: WarningStatisticAdapter? = null
@@ -104,6 +102,12 @@ class TourWarningActivity : BaseActivity(), OnClickListener, OnMapClickListener,
         aMap!!.setOnMapLoadedListener {
             tvMapNumber.text = aMap!!.mapContentApprovalNumber
             CommonUtil.drawHLJJson(this, aMap)
+            if (intent.hasExtra("isDrawRail")) {
+                val isDrawRail = intent.getBooleanExtra("isDrawRail", false)
+                if (isDrawRail) {
+                    drawRailWay("全部站")
+                }
+            }
         }
         aMap!!.setOnMapTouchListener { arg0 ->
             if (scrollView != null) {
@@ -114,6 +118,15 @@ class TourWarningActivity : BaseActivity(), OnClickListener, OnMapClickListener,
                 }
             }
         }
+    }
+
+    private fun drawRailWay(lineName: String) {
+        for (i in 0 until polylines.size) {
+            val polyline = polylines[i]
+            polyline.remove()
+        }
+        polylines.clear()
+        CommonUtil.drawRailWay(this, aMap, polylines,lineName)
     }
 
     /**
