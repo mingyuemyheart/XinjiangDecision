@@ -120,38 +120,43 @@ class RailActivity : BaseActivity(), AMapLocationListener, View.OnClickListener 
             when(dto.showType) {
                 CONST.LOCAL -> {
                     when(dto.id) {
-                        "9101" -> { //实况数据
+                        "9101","9201","9301" -> { //实况数据
                             intent = Intent(this, RailFactActivity::class.java)
                             intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                            intent.putExtra(CONST.LOCAL_ID, dto.id)
                             startActivity(intent)
                         }
-                        "9102" -> { //预报
+                        "9102","9202","9302" -> { //预报
                             intent = Intent(this, RailForeActivity::class.java)
                             intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                            intent.putExtra(CONST.LOCAL_ID, dto.id)
                             startActivity(intent)
                         }
-                        "9103" -> { //气象预警
+                        "9103","9203","9303" -> { //气象预警
                             intent = Intent(this, TourWarningActivity::class.java)
                             intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
-                            intent.putExtra("isDrawRail", true)
+                            intent.putExtra(CONST.LOCAL_ID, dto.id)
                             startActivity(intent)
                         }
                         "9104" -> { //风险预警
                             intent = Intent(this, RiskWarningActivity::class.java)
                             intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                            intent.putExtra(CONST.LOCAL_ID, dto.id)
                             startActivity(intent)
                         }
-                        "9105" -> { //气象专题
+                        "9105","9204","9304" -> { //气象专题
                             intent = Intent(this, TourKepuActivity::class.java)
                             intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                            intent.putExtra(CONST.LOCAL_ID, dto.id)
                             val bundle = Bundle()
                             bundle.putParcelable("data", dto)
                             intent.putExtras(bundle)
                             startActivity(intent)
                         }
-                        "9106" -> { //灾情反馈
+                        "9106","9205" -> { //灾情反馈
                             intent = Intent(this, DisasterActivity::class.java)
                             intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                            intent.putExtra(CONST.LOCAL_ID, dto.id)
                             startActivity(intent)
                         }
                     }
@@ -159,6 +164,7 @@ class RailActivity : BaseActivity(), AMapLocationListener, View.OnClickListener 
                 CONST.URL -> {
                     intent = Intent(this, WebviewActivity::class.java)
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                    intent.putExtra(CONST.LOCAL_ID, dto.id)
                     intent.putExtra(CONST.WEB_URL, dto.dataUrl)
                     startActivity(intent)
                 }

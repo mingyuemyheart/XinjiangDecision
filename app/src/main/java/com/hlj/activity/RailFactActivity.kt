@@ -50,6 +50,7 @@ import kotlin.collections.HashMap
  */
 class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocationListener, AMap.OnMarkerClickListener {
 
+    private var localId = ""
     private var aMap: AMap? = null //高德地图
     private var zoom = 7.8f
     private var locationLat = CONST.centerLat
@@ -81,6 +82,7 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rail_fact)
+        localId = intent.getStringExtra(CONST.LOCAL_ID)
         initAmap(savedInstanceState)
         initWidget()
     }
@@ -115,7 +117,11 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
             polyline.remove()
         }
         polylines.clear()
-        CommonUtil.drawRailWay(this, aMap, polylines,lineName)
+        when(localId) {
+            "9101" -> CommonUtil.drawRailWay(this, aMap, polylines,lineName)
+            "9201" -> CommonUtil.drawRoadLine(this, aMap, polylines,lineName)
+            "9301" -> {}
+        }
     }
 
     private fun initWidget() {
@@ -131,7 +137,6 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         if (!TextUtils.isEmpty(title)) {
             tvTitle.text = title
         }
-
     }
 
     /**
@@ -202,7 +207,9 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                 }
             }
             R.id.clRailSection -> {
-                startActivityForResult(Intent(this, RailSectionActivity::class.java), 1001)
+                val intent = Intent(this, RailSectionActivity::class.java)
+                intent.putExtra(CONST.LOCAL_ID, localId)
+                startActivityForResult(intent, 1001)
             }
             R.id.ivShowMarker -> {
                 isShowMarker = !isShowMarker
@@ -273,8 +280,17 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
 
     private fun okHttpList() {
         showDialog()
+        var url = ""
+        when(localId) {
+            "9101" -> url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_railway_SkData"
+            "9201" -> url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_highway_SkData"
+            "9301" -> url = ""
+        }
+        if (TextUtils.isEmpty(url)) {
+            cancelDialog()
+            return
+        }
         Thread {
-            val url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_railway_SkData"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 

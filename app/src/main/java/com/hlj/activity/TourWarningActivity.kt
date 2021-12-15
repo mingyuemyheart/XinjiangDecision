@@ -102,12 +102,7 @@ class TourWarningActivity : BaseActivity(), OnClickListener, OnMapClickListener,
         aMap!!.setOnMapLoadedListener {
             tvMapNumber.text = aMap!!.mapContentApprovalNumber
             CommonUtil.drawHLJJson(this, aMap)
-            if (intent.hasExtra("isDrawRail")) {
-                val isDrawRail = intent.getBooleanExtra("isDrawRail", false)
-                if (isDrawRail) {
-                    drawRailWay("全部站")
-                }
-            }
+            drawRailWay("全部站")
         }
         aMap!!.setOnMapTouchListener { arg0 ->
             if (scrollView != null) {
@@ -126,7 +121,14 @@ class TourWarningActivity : BaseActivity(), OnClickListener, OnMapClickListener,
             polyline.remove()
         }
         polylines.clear()
-        CommonUtil.drawRailWay(this, aMap, polylines,lineName)
+        if (intent.hasExtra(CONST.LOCAL_ID)) {
+            val localId = intent.getStringExtra(CONST.LOCAL_ID)
+            when(localId) {
+                "9103" -> CommonUtil.drawRailWay(this, aMap, polylines,lineName)
+                "9203" -> CommonUtil.drawRoadLine(this, aMap, polylines,lineName)
+                "9303" -> {}
+            }
+        }
     }
 
     /**

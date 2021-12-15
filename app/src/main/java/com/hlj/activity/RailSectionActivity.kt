@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import com.hlj.adapter.RailSectionAdapter
+import com.hlj.common.CONST
 import com.hlj.dto.FactDto
 import com.hlj.utils.OkHttpUtil
 import kotlinx.android.synthetic.main.activity_rail_section.*
@@ -66,8 +67,27 @@ class RailSectionActivity : BaseActivity(), View.OnClickListener {
 
     private fun okHttpList() {
         showDialog()
+        val localId = intent.getStringExtra(CONST.LOCAL_ID)
+        var url = ""
+        when(localId) {
+            "9101","9102" -> {
+                tvTitle.text = "选择铁路段"
+                url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_railway_section"
+            }
+            "9201","9202" -> {
+                tvTitle.text = "选择公路段"
+                url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_highway_section"
+            }
+            "9301","9302" -> {
+                tvTitle.text = "选择电力路段"
+                url = ""
+            }
+        }
+        if (TextUtils.isEmpty(url)) {
+            cancelDialog()
+            return
+        }
         Thread {
-            val url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_railway_section"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 

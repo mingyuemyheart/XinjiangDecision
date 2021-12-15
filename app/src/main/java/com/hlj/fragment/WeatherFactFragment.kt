@@ -153,7 +153,7 @@ class WeatherFactFragment : BaseFragment() {
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
                     startActivity(intent)
-                } else if (TextUtils.equals(dto.id, "901")) { //铁路气象服务
+                } else if (TextUtils.equals(dto.id, "901") || TextUtils.equals(dto.id, "902") || TextUtils.equals(dto.id, "903")) { //铁路气象服务、公路气象服务、电力气象服务
                     intent = Intent(activity, RailActivity::class.java)
                     intent.putExtra(CONST.COLUMN_ID, dto.columnId)
                     intent.putExtra(CONST.ACTIVITY_NAME, dto.name)

@@ -9,7 +9,7 @@ public class WeatherDto implements Parcelable{
 
 	//平滑曲线
 	public int hourlyTemp = 0;//逐小时温度
-	public String hourlyTime = null;//逐小时时间
+	public String hourlyTime = "";//逐小时时间
 	public int hourlyCode = 0;//天气现象编号
 	public float x = 0;//x轴坐标点
 	public float y = 0;//y轴坐标点
@@ -17,23 +17,23 @@ public class WeatherDto implements Parcelable{
 	public int hourlyWindForceCode = 0;
 
 	//列表、趋势
-	public String week = null;//周几
-	public String date = null;//日期
-	public String lowPhe = null;//晚上天气现象
+	public String week = "";//周几
+	public String date = "";//日期
+	public String lowPhe = "";//晚上天气现象
 	public int lowPheCode = 0;//晚上天气现象编号
 	public int lowTemp = 0;//最低气温
 	public float lowX = 0;//最低温度x轴坐标点
 	public float lowY = 0;//最低温度y轴坐标点
-	public String highPhe = null;//白天天气现象
+	public String highPhe = "";//白天天气现象
 	public int highPheCode = 0;//白天天气现象编号
 	public int highTemp = 0;//最高气温
-	public int rain = 0;
+	public String rain = "";
 	public float highX = 0;//最高温度x轴坐标点
 	public float highY = 0;//最高温度y轴坐标点
 	public int windDir = 0;//风向编号
 	public int windForce = 0;//风力编号
-	public String windForceString;
-	public String aqi;
+	public String windForceString = "";
+	public String aqi = "";
 
 	public double lat,lng;
 
@@ -65,7 +65,7 @@ public class WeatherDto implements Parcelable{
 		dest.writeString(this.highPhe);
 		dest.writeInt(this.highPheCode);
 		dest.writeInt(this.highTemp);
-		dest.writeInt(this.rain);
+		dest.writeString(this.rain);
 		dest.writeFloat(this.highX);
 		dest.writeFloat(this.highY);
 		dest.writeInt(this.windDir);
@@ -95,7 +95,7 @@ public class WeatherDto implements Parcelable{
 		this.highPhe = in.readString();
 		this.highPheCode = in.readInt();
 		this.highTemp = in.readInt();
-		this.rain = in.readInt();
+		this.rain = in.readString();
 		this.highX = in.readFloat();
 		this.highY = in.readFloat();
 		this.windDir = in.readInt();

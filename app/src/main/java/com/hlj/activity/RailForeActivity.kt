@@ -50,8 +50,9 @@ import kotlin.collections.HashMap
 /**
  * 专业服务-铁路气象服务-预报
  */
-class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocationListener, AMap.OnMarkerClickListener {
+class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocationListener, AMap.OnMarkerClickListener, AMap.OnMapClickListener {
 
+    private var localId = ""
     private var aMap: AMap? = null //高德地图
     private var zoom = 7.8f
     private var locationLat = CONST.centerLat
@@ -83,6 +84,7 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rail_fore)
+        localId = intent.getStringExtra(CONST.LOCAL_ID)
         initAmap(savedInstanceState)
         initWidget()
     }
@@ -102,6 +104,7 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         aMap!!.uiSettings.isRotateGesturesEnabled = false
         aMap!!.showMapText(false)
         aMap!!.setOnMarkerClickListener(this)
+        aMap!!.setOnMapClickListener(this)
         aMap!!.setOnMapLoadedListener {
             CommonUtil.drawHLJJsonLine(this, aMap)
             drawRailWay("全部站")
@@ -117,7 +120,11 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
             polyline.remove()
         }
         polylines.clear()
-        CommonUtil.drawRailWay(this, aMap, polylines,lineName)
+        when(localId) {
+            "9102" -> CommonUtil.drawRailWay(this, aMap, polylines,lineName)
+            "9202" -> CommonUtil.drawRoadLine(this, aMap, polylines,lineName)
+            "9302" -> {}
+        }
     }
 
     private fun initWidget() {
@@ -157,6 +164,10 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
             locationLat = amapLocation.latitude
             locationLng = amapLocation.longitude
         }
+        addLocationMarker()
+    }
+
+    private fun addLocationMarker() {
         if (locationMarker != null) {
             locationMarker!!.remove()
         }
@@ -204,7 +215,9 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                 }
             }
             R.id.clRailSection -> {
-                startActivityForResult(Intent(this, RailSectionActivity::class.java), 1001)
+                val intent = Intent(this, RailSectionActivity::class.java)
+                intent.putExtra(CONST.LOCAL_ID, localId)
+                startActivityForResult(intent, 1001)
             }
             R.id.ivShowMarker -> {
                 isShowMarker = !isShowMarker
@@ -276,8 +289,17 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
 
     private fun getWeatherInfo() {
         showDialog()
+        var url = ""
+        when(localId) {
+            "9102" -> url = "http://xinjiangdecision.tianqi.cn:81/home/work/stationYBData"
+            "9202" -> url = "http://xinjiangdecision.tianqi.cn:81/home/work/highway_stationYBData"
+            "9302" -> url = ""
+        }
+        if (TextUtils.isEmpty(url)) {
+            cancelDialog()
+            return
+        }
         Thread {
-            val url = "http://xinjiangdecision.tianqi.cn:81/home/work/stationYBData"
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -392,7 +414,7 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                                                 //降水
                                                 val rain = weeklyObj.getString("rain24")
                                                 if (!TextUtils.isEmpty(rain) && !TextUtils.equals(rain, "?") && !TextUtils.equals(rain, "null")) {
-                                                    dto.rain = Integer.valueOf(rain)
+                                                    dto.rain = rain
                                                 }
 
                                                 weeklyList.add(dto)
@@ -803,7 +825,10 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
     override fun onMarkerClick(marker: Marker?): Boolean {
 //        val intent = Intent(this, FactDetailChartActivity::class.java)
 //        intent.putExtra(CONST.ACTIVITY_NAME, marker!!.title)
-//        intent.putExtra("stationCode", marker!!.snippet)
+//        if (marker.snippet.contains(",")) {
+//            val snippets = marker.snippet.split(",")
+//            intent.putExtra("stationCode", snippets[0])
+//        }
 //        startActivity(intent)
         if (marker != null) {
             if (selectMarker == marker) {//两次点击的是同一个marker
@@ -816,23 +841,17 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                 tvName.text = marker.title
             }
 
-            //预报
-//            for (i in 0 until dataList.size) {
-//                val dto = dataList[i]
-//                if (TextUtils.equals(dto!!.stationCode, marker.snippet)) {
-//                    //一周预报曲线
-//                    val weeklyView = WeeklyView(this)
-//                    val currentDate = sdf3.parse(sdf3.format(Date())).time
-//                    weeklyView.setData(dto.weeklyList, foreDate, currentDate, Color.WHITE)
-//                    llContainerFifteen!!.removeAllViews()
-//                    llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(this), CommonUtil.dip2px(this, 360f).toInt())
-//                    break
-//                }
-//            }
-
             okHttpDayAqi(marker)
         }
         return true
+    }
+
+    override fun onMapClick(latLng: LatLng?) {
+        locationLat = latLng!!.latitude
+        locationLng = latLng!!.longitude
+        addLocationMarker()
+        CommonUtil.bottomToTop(clBottom)
+        okHttpDayAqi(latLng)
     }
 
     /**
@@ -873,28 +892,197 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
                                     //预报
                                     for (i in 0 until dataList.size) {
                                         val dto = dataList[i]
-                                        if (TextUtils.equals(dto!!.stationCode, marker!!.snippet)) {
-                                            for (j in 0 until dto.weeklyList.size) {
-                                                val weatherDto = dto.weeklyList[j]
-                                                if (dayAqiList.size > 0 && j < dayAqiList.size) {
-                                                    val aqiValue = dayAqiList[j].aqi
-                                                    if (!TextUtils.isEmpty(aqiValue)) {
-                                                        weatherDto.aqi = aqiValue
+                                        if (marker.snippet.contains(",")) {
+                                            val snippets = marker.snippet.split(",")
+                                            if (TextUtils.equals(dto!!.stationCode, snippets[0])) {
+                                                for (j in 0 until dto.weeklyList.size) {
+                                                    val weatherDto = dto.weeklyList[j]
+                                                    if (dayAqiList.size > 0 && j < dayAqiList.size) {
+                                                        val aqiValue = dayAqiList[j].aqi
+                                                        if (!TextUtils.isEmpty(aqiValue)) {
+                                                            weatherDto.aqi = aqiValue
+                                                        }
                                                     }
                                                 }
+                                                //一周预报曲线
+                                                val weeklyView = WeeklyView(this@RailForeActivity)
+                                                val currentDate = sdf3.parse(sdf3.format(Date())).time
+                                                weeklyView.setData(dto.weeklyList, foreDate, currentDate, Color.WHITE)
+                                                llContainerFifteen!!.removeAllViews()
+                                                llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(this@RailForeActivity), CommonUtil.dip2px(this@RailForeActivity, 360f).toInt())
+                                                break
                                             }
-                                            //一周预报曲线
-                                            val weeklyView = WeeklyView(this@RailForeActivity)
-                                            val currentDate = sdf3.parse(sdf3.format(Date())).time
-                                            weeklyView.setData(dto.weeklyList, foreDate, currentDate, Color.WHITE)
-                                            llContainerFifteen!!.removeAllViews()
-                                            llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(this@RailForeActivity), CommonUtil.dip2px(this@RailForeActivity, 360f).toInt())
-                                            break
                                         }
                                     }
                                 }
                             } catch (e1: JSONException) {
                                 e1.printStackTrace()
+                            }
+                        }
+                    }
+                }
+            })
+        }.start()
+    }
+
+    /**
+     * 获取15天aqi
+     */
+    private fun okHttpDayAqi(latLng: LatLng?) {
+        if (TextUtils.isEmpty(f0)) {
+            return
+        }
+        Thread {
+            val timestamp = Date().time
+            val start1 = sdf3.format(sdf4.parse(f0))
+            val end1 = sdf3.format(sdf3.parse(start1).time + 1000 * 60 * 60 * 24 * 15)
+            val url = XiangJiManager.getXJSecretUrl2(latLng!!.longitude, latLng!!.latitude, start1, end1, timestamp)
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                }
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    runOnUiThread {
+                        if (!TextUtils.isEmpty(result)) {
+                            try {
+                                val obj = JSONObject(result)
+
+                                if (!obj.isNull("series")) {
+                                    dayAqiList.clear()
+                                    val array = obj.getJSONArray("series")
+                                    for (i in 0 until array.length()) {
+                                        val data = WeatherDto()
+                                        data.aqi = array[i].toString()
+                                        dayAqiList.add(data)
+                                    }
+
+                                    okHttpClickWeather(latLng)
+                                }
+                            } catch (e1: JSONException) {
+                                e1.printStackTrace()
+                            }
+                        }
+                    }
+                }
+            })
+        }.start()
+    }
+
+    private fun okHttpClickWeather(latLng: LatLng?) {
+        showDialog()
+        Thread {
+            val url = "http://xinjiangdecision.tianqi.cn:81/Home/api/xjgdyb?lat=${latLng!!.latitude}&lon=${latLng!!.longitude}"
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    runOnUiThread {
+                        cancelDialog()
+                        if (!TextUtils.isEmpty(result)) {
+                            try {
+                                val itemObj = JSONObject(result)
+                                if (!itemObj.isNull("trip")) {
+                                    val trip = itemObj.getJSONObject("trip")
+                                    if (!trip.isNull("stationName")) {
+                                        val stationName = trip.getString("stationName")
+                                        if (stationName != null) {
+                                            tvName.text = stationName
+                                        }
+                                    }
+                                }
+
+                                if (!itemObj.isNull("forecast")) {
+                                    val weeklyList: ArrayList<WeatherDto> = ArrayList()
+                                    val f1 = itemObj.getJSONArray("forecast")
+                                    for (i in 0 until f1.length()) {
+                                        val dto = WeatherDto()
+
+                                        //预报时间
+                                        dto.date = CommonUtil.getDate(f0, i) //日期
+                                        dto.week = CommonUtil.getWeek(f0, i) //星期几
+
+                                        //预报内容
+                                        val weeklyObj = f1.getJSONObject(i)
+
+                                        //晚上
+                                        val two = weeklyObj.getString("WeatherPhenomena2")
+                                        if (!TextUtils.isEmpty(two) && !TextUtils.equals(two, "?") && !TextUtils.equals(two, "null")) {
+                                            dto.lowPheCode = Integer.valueOf(two)
+                                            dto.lowPhe = getString(WeatherUtil.getWeatherId(dto.lowPheCode))
+                                        }
+                                        val four = weeklyObj.getString("Ltem")
+                                        if (!TextUtils.isEmpty(two) && !TextUtils.equals(two, "?") && !TextUtils.equals(two, "null")) {
+                                            dto.lowTemp = Integer.valueOf(four)
+                                        }
+
+                                        //白天
+                                        val one = weeklyObj.getString("WeatherPhenomena2")
+                                        if (!TextUtils.isEmpty(one) && !TextUtils.equals(one, "?") && !TextUtils.equals(one, "null")) {
+                                            dto.highPheCode = Integer.valueOf(one)
+                                            dto.highPhe = getString(WeatherUtil.getWeatherId(dto.highPheCode))
+                                        }
+                                        val three = weeklyObj.getString("Htem")
+                                        if (!TextUtils.isEmpty(three) && !TextUtils.equals(three, "?") && !TextUtils.equals(three, "null")) {
+                                            dto.highTemp = Integer.valueOf(three)
+                                        }
+
+                                        val hour = sdf1.format(Date()).toInt()
+                                        if (hour in 5..17) {
+                                            val seven = weeklyObj.getString("WindDir2")
+                                            if (!TextUtils.isEmpty(seven) && !TextUtils.equals(seven, "?") && !TextUtils.equals(seven, "null")) {
+                                                dto.windDir = Integer.valueOf(seven)
+                                            }
+                                            val five = weeklyObj.getString("WindPow2")
+                                            if (!TextUtils.isEmpty(five) && !TextUtils.equals(five, "?") && !TextUtils.equals(five, "null")) {
+                                                dto.windForce = Integer.valueOf(five)
+                                                dto.windForceString = WeatherUtil.getDayWindForce(dto.windForce)
+                                            }
+                                        } else {
+                                            val eight = weeklyObj.getString("WindDir2")
+                                            if (!TextUtils.isEmpty(eight) && !TextUtils.equals(eight, "?") && !TextUtils.equals(eight, "null")) {
+                                                dto.windDir = Integer.valueOf(eight)
+                                            }
+                                            val six = weeklyObj.getString("WindPow2")
+                                            if (!TextUtils.isEmpty(six) && !TextUtils.equals(six, "?") && !TextUtils.equals(six, "null")) {
+                                                dto.windForce = Integer.valueOf(six)
+                                                dto.windForceString = WeatherUtil.getDayWindForce(dto.windForce)
+                                            }
+                                        }
+
+                                        //降水
+                                        val rain = weeklyObj.getString("rain24")
+                                        if (!TextUtils.isEmpty(rain) && !TextUtils.equals(rain, "?") && !TextUtils.equals(rain, "null")) {
+                                            dto.rain = rain
+                                        }
+
+                                        if (dayAqiList.size > 0 && i < dayAqiList.size) {
+                                            val aqiValue = dayAqiList[i].aqi
+                                            if (!TextUtils.isEmpty(aqiValue)) {
+                                                dto.aqi = aqiValue
+                                            }
+                                        }
+
+                                        weeklyList.add(dto)
+                                    }
+
+                                    //一周预报曲线
+                                    val weeklyView = WeeklyView(this@RailForeActivity)
+                                    val currentDate = sdf3.parse(sdf3.format(Date())).time
+                                    weeklyView.setData(weeklyList, foreDate, currentDate, Color.WHITE)
+                                    llContainerFifteen!!.removeAllViews()
+                                    llContainerFifteen!!.addView(weeklyView, CommonUtil.widthPixels(this@RailForeActivity), CommonUtil.dip2px(this@RailForeActivity, 360f).toInt())
+                                }
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
                             }
                         }
                     }
