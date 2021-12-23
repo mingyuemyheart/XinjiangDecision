@@ -750,10 +750,19 @@ public class CommonUtil {
 
 							if (TextUtils.equals(lineName, "全部站")) {
 								JSONObject geometry = itemObj.getJSONObject("geometry");
+								JSONObject properties = itemObj.getJSONObject("properties");
+								String xzdj = "";
+								if (!properties.isNull("xzdj")) {
+									xzdj = properties.getString("xzdj");
+								}
 								JSONArray coordinates = geometry.getJSONArray("coordinates");
 								if (coordinates.length() > 20) {
 									PolylineOptions polylineOption = new PolylineOptions();
-//									polylineOption.width(10).color(context.getResources().getColor(R.color.orange));
+									if (TextUtils.equals(xzdj, "国道")) {
+										polylineOption.width(10).color(0xffFF9C2B);
+									} else {
+										polylineOption.width(10).color(0xff3E4269);
+									}
 									for (int m = 0; m < coordinates.length(); m++) {
 										JSONArray itemArray = coordinates.getJSONArray(m);
 										double lng = itemArray.getDouble(0);
@@ -761,13 +770,15 @@ public class CommonUtil {
 										polylineOption.add(new LatLng(lat, lng));
 									}
 									Polyline polyline = aMap.addPolyline(polylineOption);
-									polyline.setCustomTexture(BitmapDescriptorFactory.fromResource(R.drawable.bg_railway_line));
-									polyline.setWidth(20);
 									polyline.setZIndex(1000);
 									polylines.add(polyline);
 								}
 							} else if (TextUtils.equals(lineName, "兰新客运专线")) {
 								JSONObject properties = itemObj.getJSONObject("properties");
+								String xzdj = "";
+								if (!properties.isNull("xzdj")) {
+									xzdj = properties.getString("xzdj");
+								}
 								if (!properties.isNull("NAME")) {
 									String name = properties.getString("NAME");
 									if (TextUtils.equals(lineName, name)) {
@@ -775,7 +786,11 @@ public class CommonUtil {
 										JSONArray coordinates = geometry.getJSONArray("coordinates");
 										if (coordinates.length() > 20) {
 											PolylineOptions polylineOption = new PolylineOptions();
-//											polylineOption.width(10).color(context.getResources().getColor(R.color.orange));
+											if (TextUtils.equals(xzdj, "国道")) {
+												polylineOption.width(10).color(0xffFF9C2B);
+											} else {
+												polylineOption.width(10).color(0xff3E4269);
+											}
 											for (int m = 0; m < coordinates.length(); m++) {
 												JSONArray itemArray = coordinates.getJSONArray(m);
 												double lng = itemArray.getDouble(0);
@@ -783,8 +798,6 @@ public class CommonUtil {
 												polylineOption.add(new LatLng(lat, lng));
 											}
 											Polyline polyline = aMap.addPolyline(polylineOption);
-											polyline.setCustomTexture(BitmapDescriptorFactory.fromResource(R.drawable.bg_railway_line));
-											polyline.setWidth(20);
 											polyline.setZIndex(1000);
 											polylines.add(polyline);
 										}
@@ -792,14 +805,22 @@ public class CommonUtil {
 								}
 							} else {
 								JSONObject properties = itemObj.getJSONObject("properties");
+								String xzdj = "";
+								if (!properties.isNull("xzdj")) {
+									xzdj = properties.getString("xzdj");
+								}
 								if (!properties.isNull("NAME")) {
 									String name = properties.getString("NAME");
-									if (!TextUtils.isEmpty(name) && lineName.contains(name)) {
+									if (TextUtils.equals(lineName, name)) {
 										JSONObject geometry = itemObj.getJSONObject("geometry");
 										JSONArray coordinates = geometry.getJSONArray("coordinates");
 										if (coordinates.length() > 20) {
 											PolylineOptions polylineOption = new PolylineOptions();
-//											polylineOption.width(10).color(context.getResources().getColor(R.color.orange));
+											if (TextUtils.equals(xzdj, "国道")) {
+												polylineOption.width(10).color(0xffFF9C2B);
+											} else {
+												polylineOption.width(10).color(0xff3E4269);
+											}
 											for (int m = 0; m < coordinates.length(); m++) {
 												JSONArray itemArray = coordinates.getJSONArray(m);
 												double lng = itemArray.getDouble(0);
@@ -807,8 +828,6 @@ public class CommonUtil {
 												polylineOption.add(new LatLng(lat, lng));
 											}
 											Polyline polyline = aMap.addPolyline(polylineOption);
-											polyline.setCustomTexture(BitmapDescriptorFactory.fromResource(R.drawable.bg_railway_line));
-											polyline.setWidth(20);
 											polyline.setZIndex(1000);
 											polylines.add(polyline);
 										}
