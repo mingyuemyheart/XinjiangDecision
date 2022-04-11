@@ -1,6 +1,7 @@
 package com.hlj.adapter;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,11 @@ public class RailSectionAdapter extends BaseAdapter{
 
 		if (dto.name != null) {
 			mHolder.tvName.setText(dto.name);
+			if (dto.name.length() > 5) {
+				mHolder.tvName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+			} else if (dto.name.length() > 3) {
+				mHolder.tvName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+			}
 		}
 
 		return convertView;

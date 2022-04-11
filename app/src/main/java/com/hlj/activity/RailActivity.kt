@@ -159,6 +159,13 @@ class RailActivity : BaseActivity(), AMapLocationListener, View.OnClickListener 
                             intent.putExtra(CONST.LOCAL_ID, dto.id)
                             startActivity(intent)
                         }
+                        "9206" -> { //交管风险预警
+                            intent = Intent(this, RailTraficActivity::class.java)
+                            intent.putExtra(CONST.ACTIVITY_NAME, dto.name)
+                            intent.putExtra(CONST.LOCAL_ID, dto.id)
+                            intent.putExtra(CONST.WEB_URL, dto.dataUrl)
+                            startActivity(intent)
+                        }
                     }
                 }
                 CONST.URL -> {

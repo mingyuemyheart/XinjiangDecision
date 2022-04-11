@@ -381,6 +381,10 @@
             android:name="com.hlj.activity.RailSectionActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.hlj.activity.RailTraficActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

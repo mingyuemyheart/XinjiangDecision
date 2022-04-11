@@ -123,7 +123,12 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         when(localId) {
             "9102" -> CommonUtil.drawRailWay(this, aMap, polylines,lineName)
             "9202" -> CommonUtil.drawRoadLine(this, aMap, polylines,lineName)
-            "9302" -> {}
+            "9302" -> {
+                CommonUtil.drawPowerLine1100(this, aMap, polylines,lineName)
+                CommonUtil.drawPowerLine750(this, aMap, polylines,lineName)
+                CommonUtil.drawPowerLine500(this, aMap, polylines,lineName)
+                CommonUtil.drawPowerLine220(this, aMap, polylines,lineName)
+            }
         }
     }
 
@@ -293,7 +298,7 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         when(localId) {
             "9102" -> url = "http://xinjiangdecision.tianqi.cn:81/home/work/stationYBData"
             "9202" -> url = "http://xinjiangdecision.tianqi.cn:81/home/work/highway_stationYBData"
-            "9302" -> url = ""
+            "9302" -> url = "http://xinjiangdecision.tianqi.cn:81/home/api/electricity_stationYBData"
         }
         if (TextUtils.isEmpty(url)) {
             cancelDialog()

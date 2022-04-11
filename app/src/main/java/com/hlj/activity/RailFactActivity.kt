@@ -48,7 +48,7 @@ import kotlin.collections.HashMap
 /**
  * 专业服务-铁路气象服务-实况
  */
-class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocationListener, AMap.OnMarkerClickListener {
+class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocationListener, AMap.OnMarkerClickListener, AMap.OnMapClickListener {
 
     private var localId = ""
     private var aMap: AMap? = null //高德地图
@@ -102,6 +102,7 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         aMap!!.uiSettings.isRotateGesturesEnabled = false
         aMap!!.showMapText(false)
         aMap!!.setOnMarkerClickListener(this)
+        aMap!!.setOnMapClickListener(this)
         aMap!!.setOnMapLoadedListener {
             CommonUtil.drawHLJJsonLine(this, aMap)
             drawRailWay("全部站")
@@ -120,7 +121,12 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         when(localId) {
             "9101" -> CommonUtil.drawRailWay(this, aMap, polylines,lineName)
             "9201" -> CommonUtil.drawRoadLine(this, aMap, polylines,lineName)
-            "9301" -> {}
+            "9301" -> {
+                CommonUtil.drawPowerLine1100(this, aMap, polylines,lineName)
+                CommonUtil.drawPowerLine750(this, aMap, polylines,lineName)
+//                CommonUtil.drawPowerLine500(this, aMap, polylines,lineName)
+//                CommonUtil.drawPowerLine220(this, aMap, polylines,lineName)
+            }
         }
     }
 
@@ -284,7 +290,7 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         when(localId) {
             "9101" -> url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_railway_SkData"
             "9201" -> url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_highway_SkData"
-            "9301" -> url = ""
+            "9301" -> url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_electricity_SkData"
         }
         if (TextUtils.isEmpty(url)) {
             cancelDialog()
@@ -746,6 +752,117 @@ class RailFactActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         }
         startActivity(intent)
         return true
+    }
+
+    override fun onMapClick(p0: LatLng?) {
+        when(localId) {
+            "9301" -> okHttpSinglePoint("http://xinjiangdecision.tianqi.cn:81/Home/api/get_site_sk?lon=${p0!!.longitude}&lat=${p0.latitude}")
+        }
+    }
+
+    private fun okHttpSinglePoint(url: String) {
+        Thread {
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+                    val result = response.body!!.string()
+                    runOnUiThread {
+                        if (!TextUtils.isEmpty(result)) {
+                            try {
+                                val obj = JSONObject(result)
+                                if (!obj.isNull("data")) {
+                                    val dto = FactDto()
+                                    val itemObj = obj.getJSONObject("data");
+                                    if (!itemObj.isNull("tlid")) {
+                                        dto.id = itemObj.getString("tlid")
+                                    }
+                                    if (!itemObj.isNull("Station_Name")) {
+                                        dto.stationName = itemObj.getString("Station_Name")
+                                    }
+                                    if (!itemObj.isNull("stationCode")) {
+                                        dto.stationCode = itemObj.getString("stationCode")
+                                    }
+                                    if (!itemObj.isNull("Lat")) {
+                                        dto.lat = itemObj.getDouble("Lat")
+                                    }
+                                    if (!itemObj.isNull("Lon")) {
+                                        dto.lng = itemObj.getDouble("Lon")
+                                    }
+                                    if (!itemObj.isNull("PRE_1h")) {
+                                        val value = itemObj.getString("PRE_1h")
+                                        dto.factRain = value.toFloat()
+                                        if (TextUtils.isEmpty(value) || TextUtils.equals(value, "999999")) {
+                                            dto.factRain = 0f
+                                        }
+                                    }
+                                    if (!itemObj.isNull("PRE_3h")) {
+                                        val value = itemObj.getString("PRE_3h")
+                                        dto.factRain3 = value.toFloat()
+                                        if (TextUtils.isEmpty(value) || TextUtils.equals(value, "999999")) {
+                                            dto.factRain3 = 0f
+                                        }
+                                    }
+                                    if (!itemObj.isNull("PRE_6h")) {
+                                        val value = itemObj.getString("PRE_6h")
+                                        dto.factRain6 = value.toFloat()
+                                        if (TextUtils.isEmpty(value) || TextUtils.equals(value, "999999")) {
+                                            dto.factRain6 = 0f
+                                        }
+                                    }
+                                    if (!itemObj.isNull("PRE_12h")) {
+                                        val value = itemObj.getString("PRE_12h")
+                                        dto.factRain12 = value.toFloat()
+                                        if (TextUtils.isEmpty(value) || TextUtils.equals(value, "999999")) {
+                                            dto.factRain12 = 0f
+                                        }
+                                    }
+                                    if (!itemObj.isNull("PRE_24h")) {
+                                        val value = itemObj.getString("PRE_24h")
+                                        dto.factRain24 = value.toFloat()
+                                        if (TextUtils.isEmpty(value) || TextUtils.equals(value, "999999")) {
+                                            dto.factRain24 = 0f
+                                        }
+                                    }
+                                    if (!itemObj.isNull("TEM")) {
+                                        val value = itemObj.getString("TEM")
+                                        dto.factTemp = value.toFloat()
+                                        if (TextUtils.isEmpty(value) || TextUtils.equals(value, "999999")) {
+                                            dto.factTemp = 0f
+                                        }
+                                    }
+                                    if (!itemObj.isNull("WIN_S_Avg_10mi")) {
+                                        val value = itemObj.getString("WIN_S_Avg_10mi")
+                                        dto.factWind = value.toFloat()
+                                        if (TextUtils.isEmpty(value) || TextUtils.equals(value, "999999")) {
+                                            dto.factWind = 0f
+                                        }
+                                    }
+                                    if (!itemObj.isNull("WIN_D_Avg_10mi")) {
+                                        val value = itemObj.getString("WIN_D_Avg_10mi")
+                                        dto.factWindDir = value.toFloat()
+                                        if (TextUtils.isEmpty(value) || TextUtils.equals(value, "999999") || TextUtils.equals(value, "999017")) {
+                                            dto.factWindDir = 0f
+                                        }
+                                    }
+
+                                    val intent = Intent(this@RailFactActivity, FactDetailChartActivity::class.java)
+                                    intent.putExtra(CONST.ACTIVITY_NAME, dto.stationName)
+                                    intent.putExtra("stationCode", dto.stationCode)
+                                    startActivity(intent)
+                                }
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+                }
+            })
+        }.start()
     }
 
     /**

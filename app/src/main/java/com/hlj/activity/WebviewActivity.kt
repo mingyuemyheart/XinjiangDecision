@@ -209,7 +209,7 @@ class WebviewActivity : BaseActivity(), OnClickListener{
                         inputStream = response.body!!.byteStream() //获取输入流
                         val total = response.body!!.contentLength().toFloat() //获取文件大小
                         if (inputStream != null) {
-                            val files = File("${getExternalFilesDir(null)}/HLJ")
+                            val files = File("${getExternalFilesDir(null)}/XinjiangDecision")
                             if (!files.exists()) {
                                 files.mkdirs()
                             }

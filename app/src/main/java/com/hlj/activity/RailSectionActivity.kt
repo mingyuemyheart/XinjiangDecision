@@ -80,7 +80,7 @@ class RailSectionActivity : BaseActivity(), View.OnClickListener {
             }
             "9301","9302" -> {
                 tvTitle.text = "选择电力路段"
-                url = ""
+                url = "http://xinjiangdecision.tianqi.cn:81/Home/api/get_electricity_section"
             }
         }
         if (TextUtils.isEmpty(url)) {

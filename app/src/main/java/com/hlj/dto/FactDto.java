@@ -61,6 +61,14 @@ public class FactDto implements Parcelable{
 
 	public List<WeatherDto> weeklyList = new ArrayList<>();
 
+	public String roadcode,altitude,province,city,road;
+	public List<String> visList = new ArrayList<>();
+	public List<String> galeList = new ArrayList<>();
+	public List<String> rainList = new ArrayList<>();
+	public List<String> temList = new ArrayList<>();
+	public List<String> roadList = new ArrayList<>();
+	public List<String> comList = new ArrayList<>();
+
 	public FactDto() {
 	}
 
@@ -124,6 +132,11 @@ public class FactDto implements Parcelable{
 		dest.writeFloat(this.x);
 		dest.writeFloat(this.y);
 		dest.writeTypedList(this.weeklyList);
+		dest.writeString(roadcode);
+		dest.writeString(altitude);
+		dest.writeString(province);
+		dest.writeString(city);
+		dest.writeString(road);
 	}
 
 	protected FactDto(Parcel in) {
@@ -180,6 +193,11 @@ public class FactDto implements Parcelable{
 		this.x = in.readFloat();
 		this.y = in.readFloat();
 		this.weeklyList = in.createTypedArrayList(WeatherDto.CREATOR);
+		this.roadcode = in.readString();
+		this.altitude = in.readString();
+		this.province = in.readString();
+		this.city = in.readString();
+		this.road = in.readString();
 	}
 
 	public static final Creator<FactDto> CREATOR = new Creator<FactDto>() {

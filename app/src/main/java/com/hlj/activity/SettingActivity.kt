@@ -3,12 +3,15 @@ package com.hlj.activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.TextView
+import android.widget.Toast
 import com.hlj.common.CONST
 import com.hlj.common.MyApplication
 import com.hlj.manager.DataCleanManager
@@ -21,8 +24,11 @@ import kotlinx.android.synthetic.main.dialog_delete.view.tvMessage
 import kotlinx.android.synthetic.main.dialog_delete.view.tvNegtive
 import kotlinx.android.synthetic.main.dialog_delete.view.tvPositive
 import kotlinx.android.synthetic.main.dialog_prompt.view.*
+import kotlinx.android.synthetic.main.dialog_qr_code.view.*
 import kotlinx.android.synthetic.main.layout_title.*
 import shawn.cxwl.com.hlj.R
+import java.io.File
+import java.io.FileOutputStream
 
 /**
  * 设置
@@ -48,6 +54,7 @@ class SettingActivity : BaseActivity(), OnClickListener {
         llCity!!.setOnClickListener(this)
         llProtocal!!.setOnClickListener(this)
         llPolicy!!.setOnClickListener(this)
+        llQrCode!!.setOnClickListener(this)
         tvTitle!!.text = getString(R.string.setting)
         tvLogout!!.setOnClickListener(this)
         tvVersion!!.text = CommonUtil.getVersion(this)
@@ -152,6 +159,38 @@ class SettingActivity : BaseActivity(), OnClickListener {
         }
     }
 
+    /**
+     * 二维码对话框
+     * @param message 标题
+     * @param content 内容
+     */
+    private fun qrCodeDialog() {
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.dialog_qr_code, null)
+        val dialog = Dialog(this, R.style.CustomProgressDialog)
+        dialog.setContentView(view)
+        dialog.show()
+        view.ivClose.setOnClickListener { dialog.dismiss() }
+        view.tvSave.setOnClickListener {
+            dialog.dismiss()
+            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_qr_code_android)
+            val files = File("${getExternalFilesDir(null)}/XinjiangDecision")
+            if (!files.exists()) {
+                files.mkdirs()
+            }
+            val fileName = "${files.absolutePath}/qr_code.jpg"
+            val fos = FileOutputStream(fileName)
+            if (bitmap != null) {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
+                if (!bitmap.isRecycled) {
+                    bitmap.recycle()
+                }
+            }
+            CommonUtil.notifyAlbum(this, File(fileName))
+            Toast.makeText(this, "已保存至相册", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onClick(v: View) {
         when (v.id) {
             R.id.llBack -> finish()
@@ -185,6 +224,7 @@ class SettingActivity : BaseActivity(), OnClickListener {
                 intent.putExtra(CONST.WEB_URL, "http://xinjiangdecision.tianqi.cn:81/Public/share/xj_htmls/yscl.html ")
                 startActivity(intent)
             }
+            R.id.llQrCode -> qrCodeDialog()
         }
     }
 

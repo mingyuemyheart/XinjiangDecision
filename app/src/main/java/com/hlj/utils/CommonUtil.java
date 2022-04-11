@@ -26,14 +26,12 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -821,6 +819,100 @@ public class CommonUtil {
 											} else {
 												polylineOption.width(10).color(0xff3E4269);
 											}
+											for (int m = 0; m < coordinates.length(); m++) {
+												JSONArray itemArray = coordinates.getJSONArray(m);
+												double lng = itemArray.getDouble(0);
+												double lat = itemArray.getDouble(1);
+												polylineOption.add(new LatLng(lat, lng));
+											}
+											Polyline polyline = aMap.addPolyline(polylineOption);
+											polyline.setZIndex(1000);
+											polylines.add(polyline);
+										}
+									}
+								}
+							}
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}
+
+	/**
+	 * 绘制电力路线
+	 */
+	public static void drawPowerLine1100(final Context context, final AMap aMap, final ArrayList<Polyline> polylines, final String lineName) {
+		drawPowerLine(context, aMap, polylines, lineName, "power1100.json");
+	}
+
+	/**
+	 * 绘制电力路线
+	 */
+	public static void drawPowerLine750(final Context context, final AMap aMap, final ArrayList<Polyline> polylines, final String lineName) {
+		drawPowerLine(context, aMap, polylines, lineName, "power750.json");
+	}
+
+	/**
+	 * 绘制电力路线
+	 */
+	public static void drawPowerLine500(final Context context, final AMap aMap, final ArrayList<Polyline> polylines, final String lineName) {
+		drawPowerLine(context, aMap, polylines, lineName, "power500.json");
+	}
+
+	/**
+	 * 绘制电力路线
+	 */
+	public static void drawPowerLine220(final Context context, final AMap aMap, final ArrayList<Polyline> polylines, final String lineName) {
+		drawPowerLine(context, aMap, polylines, lineName, "power220.json");
+	}
+
+	/**
+	 * 绘制电力路线
+	 */
+	public static void drawPowerLine(final Context context, final AMap aMap, final ArrayList<Polyline> polylines, final String lineName, final String jsonName) {
+		if (aMap == null) {
+			return;
+		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String result = CommonUtil.getFromAssets(context, jsonName);
+				if (!TextUtils.isEmpty(result)) {
+					try {
+						JSONObject obj = new JSONObject(result);
+						JSONArray array = obj.getJSONArray("features");
+						for (int i = 0; i < array.length(); i++) {
+							JSONObject itemObj = array.getJSONObject(i);
+
+							if (TextUtils.equals(lineName, "全部站")) {
+								JSONObject geometry = itemObj.getJSONObject("geometry");
+								JSONArray coordinates = geometry.getJSONArray("coordinates");
+								if (coordinates.length() > 20) {
+									PolylineOptions polylineOption = new PolylineOptions();
+									polylineOption.width(10).color(0xff3E4269);
+									for (int m = 0; m < coordinates.length(); m++) {
+										JSONArray itemArray = coordinates.getJSONArray(m);
+										double lng = itemArray.getDouble(0);
+										double lat = itemArray.getDouble(1);
+										polylineOption.add(new LatLng(lat, lng));
+									}
+									Polyline polyline = aMap.addPolyline(polylineOption);
+									polyline.setZIndex(1000);
+									polylines.add(polyline);
+								}
+							} else {
+								JSONObject properties = itemObj.getJSONObject("properties");
+								if (!properties.isNull("name")) {
+									String name = properties.getString("name");
+									if (TextUtils.equals(lineName, name)) {
+										JSONObject geometry = itemObj.getJSONObject("geometry");
+										JSONArray coordinates = geometry.getJSONArray("coordinates");
+										if (coordinates.length() > 20) {
+											PolylineOptions polylineOption = new PolylineOptions();
+											polylineOption.width(10).color(0xff3E4269);
 											for (int m = 0; m < coordinates.length(); m++) {
 												JSONArray itemArray = coordinates.getJSONArray(m);
 												double lng = itemArray.getDouble(0);
