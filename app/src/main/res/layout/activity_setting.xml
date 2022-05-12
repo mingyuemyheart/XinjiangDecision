@@ -8,547 +8,563 @@
         android:id="@+id/reTitle"
         layout="@layout/layout_title" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/clPortrait"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="50dp"
-        android:background="@drawable/bg_setting"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reTitle">
 
-        <ImageView
-            android:id="@+id/ivPortrait"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/icon_portrait"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="点击登录"
-            android:textColor="@color/white"
-            android:textSize="@dimen/level_3"
-            app:layout_constraintBottom_toBottomOf="@+id/ivPortrait"
-            app:layout_constraintStart_toEndOf="@+id/ivPortrait"
-            app:layout_constraintTop_toTopOf="@+id/ivPortrait" />
-
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/clUnit"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/bg_corner_white"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivPortrait">
+            android:paddingBottom="20dp">
 
-            <TextView
-                android:id="@+id/phone"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clPortrait"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_setting"
+                android:paddingBottom="50dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivPortrait"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/icon_portrait"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="点击登录"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/level_3"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPortrait"
+                    app:layout_constraintStart_toEndOf="@+id/ivPortrait"
+                    app:layout_constraintTop_toTopOf="@+id/ivPortrait" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clUnit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_corner_white"
+                    android:padding="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivPortrait">
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="手机号"
+                        android:textColor="@color/text_color4"
+                        android:textSize="@dimen/level_5"
+                        app:layout_constraintEnd_toStartOf="@+id/divider2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4"
+                        app:layout_constraintEnd_toStartOf="@+id/divider2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/phone" />
+
+                    <TextView
+                        android:id="@+id/divider2"
+                        android:layout_width="0.5dp"
+                        android:layout_height="40dp"
+                        android:background="@color/gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/unit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="单位名称"
+                        android:textColor="@color/text_color4"
+                        android:textSize="@dimen/level_5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/divider2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvUnit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/divider2"
+                        app:layout_constraintTop_toBottomOf="@+id/phone" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clFeedback"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="手机号"
-                android:textColor="@color/text_color4"
-                android:textSize="@dimen/level_5"
-                app:layout_constraintEnd_toStartOf="@+id/divider2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvNumber"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4"
-                app:layout_constraintEnd_toStartOf="@+id/divider2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phone" />
-
-            <TextView
-                android:id="@+id/divider2"
-                android:layout_width="0.5dp"
-                android:layout_height="40dp"
-                android:background="@color/gray"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_corner_white"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/clPortrait"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/clPortrait">
+
+                <TextView
+                    android:id="@+id/tvFeedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_feedback"
+                    android:textColor="@color/text_color3"
+                    android:textSize="@dimen/level_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivEmail"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/icon_email"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFeedback" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="邮箱反馈"
+                    android:textColor="@color/text_color3"
+                    android:textSize="@dimen/level_4"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivEmail"
+                    app:layout_constraintEnd_toStartOf="@+id/ivEmailArrow"
+                    app:layout_constraintStart_toEndOf="@+id/ivEmail"
+                    app:layout_constraintTop_toTopOf="@+id/ivEmail" />
+
+                <ImageView
+                    android:id="@+id/ivEmailArrow"
+                    android:layout_width="10dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/iv_arrow"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivEmail"
+                    app:layout_constraintEnd_toStartOf="@+id/divider1"
+                    app:layout_constraintTop_toTopOf="@+id/ivEmail" />
+
+                <TextView
+                    android:id="@+id/divider1"
+                    android:layout_width="0.5dp"
+                    android:layout_height="40dp"
+                    android:background="@color/gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivPhone"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/icon_mobile"
+                    app:layout_constraintStart_toEndOf="@+id/divider1"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFeedback" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="客服电话"
+                    android:textColor="@color/text_color3"
+                    android:textSize="@dimen/level_4"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPhone"
+                    app:layout_constraintEnd_toStartOf="@+id/ivPhoneArrow"
+                    app:layout_constraintStart_toEndOf="@+id/ivPhone"
+                    app:layout_constraintTop_toTopOf="@+id/ivPhone" />
+
+                <ImageView
+                    android:id="@+id/ivPhoneArrow"
+                    android:layout_width="10dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/iv_arrow"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPhone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ivPhone" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/bg_corner_white"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/clFeedback">
+
+                <LinearLayout
+                    android:id="@+id/llClearCache"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/selector_item"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/icon_cache" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/setting_clearcache"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4" />
+
+                    <TextView
+                        android:id="@+id/tvCache"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/level_4" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/iv_arrow" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/light_gray" />
+
+                <LinearLayout
+                    android:id="@+id/llBuild"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/selector_item"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/icon_intro" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/setting_build"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/iv_arrow" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/light_gray" />
+
+                <LinearLayout
+                    android:id="@+id/llVersion"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/selector_item"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/icon_version" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/setting_version"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4" />
+
+                    <TextView
+                        android:id="@+id/tvVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/level_4" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/iv_arrow" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/light_gray" />
+
+                <LinearLayout
+                    android:id="@+id/llAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/selector_item"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/icon_about" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="关于我们"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/iv_arrow" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/light_gray" />
+
+                <LinearLayout
+                    android:id="@+id/llWeek"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/selector_item"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/icon_week_statistic" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="周报统计"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/iv_arrow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/selector_item"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/icon_email" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="关注城市"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/iv_arrow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llProtocal"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/selector_item"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/icon_email" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="用户协议"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/iv_arrow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/selector_item"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/icon_email" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="隐私政策"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/iv_arrow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llQrCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/selector_item"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/icon_qr" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="安装二维码"
+                        android:textColor="@color/text_color3"
+                        android:textSize="@dimen/level_4" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/iv_arrow" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/unit"
+                android:id="@+id/tvLogout"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/selector_register"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="单位名称"
-                android:textColor="@color/text_color4"
-                android:textSize="@dimen/level_5"
+                android:text="退出登录"
+                android:textColor="@color/red"
+                android:textSize="@dimen/level_2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/divider2"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvUnit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/phone" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llContent" />
 
         </android.support.constraint.ConstraintLayout>
 
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/clFeedback"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/bg_corner_white"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/clPortrait"
-        app:layout_constraintTop_toBottomOf="@+id/clPortrait">
-
-        <TextView
-            android:id="@+id/tvFeedback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/setting_feedback"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/level_3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/ivEmail"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/icon_email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFeedback" />
-
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="邮箱反馈"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/level_4"
-            app:layout_constraintBottom_toBottomOf="@+id/ivEmail"
-            app:layout_constraintEnd_toStartOf="@+id/ivEmailArrow"
-            app:layout_constraintStart_toEndOf="@+id/ivEmail"
-            app:layout_constraintTop_toTopOf="@+id/ivEmail" />
-
-        <ImageView
-            android:id="@+id/ivEmailArrow"
-            android:layout_width="10dp"
-            android:layout_height="18dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/iv_arrow"
-            app:layout_constraintBottom_toBottomOf="@+id/ivEmail"
-            app:layout_constraintEnd_toStartOf="@+id/divider1"
-            app:layout_constraintTop_toTopOf="@+id/ivEmail" />
-
-        <TextView
-            android:id="@+id/divider1"
-            android:layout_width="0.5dp"
-            android:layout_height="40dp"
-            android:background="@color/gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/ivPhone"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/icon_mobile"
-            app:layout_constraintStart_toEndOf="@+id/divider1"
-            app:layout_constraintTop_toBottomOf="@+id/tvFeedback" />
-
-        <TextView
-            android:id="@+id/tvPhone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="客服电话"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/level_4"
-            app:layout_constraintBottom_toBottomOf="@+id/ivPhone"
-            app:layout_constraintEnd_toStartOf="@+id/ivPhoneArrow"
-            app:layout_constraintStart_toEndOf="@+id/ivPhone"
-            app:layout_constraintTop_toTopOf="@+id/ivPhone" />
-
-        <ImageView
-            android:id="@+id/ivPhoneArrow"
-            android:layout_width="10dp"
-            android:layout_height="18dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/iv_arrow"
-            app:layout_constraintBottom_toBottomOf="@+id/ivPhone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ivPhone" />
-
-    </android.support.constraint.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/llContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_corner_white"
-        android:orientation="vertical"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/clFeedback">
-
-        <LinearLayout
-            android:id="@+id/llClearCache"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/selector_item"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_cache" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/setting_clearcache"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4" />
-
-            <TextView
-                android:id="@+id/tvCache"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:background="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/light_gray" />
-
-        <LinearLayout
-            android:id="@+id/llBuild"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/selector_item"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_intro" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/setting_build"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:background="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/light_gray" />
-
-        <LinearLayout
-            android:id="@+id/llVersion"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/selector_item"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_version" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/setting_version"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4" />
-
-            <TextView
-                android:id="@+id/tvVersion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:background="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/light_gray" />
-
-        <LinearLayout
-            android:id="@+id/llAbout"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/selector_item"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_about" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="关于我们"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:background="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/light_gray" />
-
-        <LinearLayout
-            android:id="@+id/llWeek"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/selector_item"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_week_statistic" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="周报统计"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:background="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llCity"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/selector_item"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_email" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="关注城市"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:background="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llProtocal"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/selector_item"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_email" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="用户协议"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:background="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llPolicy"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/selector_item"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_email" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="隐私政策"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:background="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llQrCode"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/selector_item"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_qr" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="安装二维码"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="18dp"
-                android:background="@drawable/iv_arrow" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvLogout"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/selector_register"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="退出登录"
-        android:textColor="@color/red"
-        android:textSize="@dimen/level_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llContent" />
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

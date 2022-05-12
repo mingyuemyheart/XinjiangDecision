@@ -298,7 +298,7 @@ class RailForeActivity : BaseFragmentActivity(), View.OnClickListener, AMapLocat
         when(localId) {
             "9102" -> url = "http://xinjiangdecision.tianqi.cn:81/home/work/stationYBData"
             "9202" -> url = "http://xinjiangdecision.tianqi.cn:81/home/work/highway_stationYBData"
-            "9302" -> url = "http://xinjiangdecision.tianqi.cn:81/home/api/electricity_stationYBData"
+            "9302" -> url = "http://xinjiangdecision.tianqi.cn:81/infomes/data/xj_dl_yb_stationYBData.json"
         }
         if (TextUtils.isEmpty(url)) {
             cancelDialog()

@@ -38,7 +38,7 @@ public class FactWindView extends View{
 	private float minValue = 0;
 	private Paint lineP = null;//画线画笔
 	private Paint textP = null;//写字画笔
-	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
+	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private SimpleDateFormat sdf2 = new SimpleDateFormat("HH时");
 	private SimpleDateFormat sdf3 = new SimpleDateFormat("dd日");
 	private Bitmap bitmap = null;
