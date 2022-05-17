@@ -78,7 +78,7 @@ class WarningFragment : BaseFragment(), OnClickListener, OnMapClickListener, OnM
     private val statisticList: MutableList<WarningDto> = ArrayList()
     private val warningTypes: HashMap<String, WarningDto?> = HashMap()
 
-    private var warningName = "省级预警"
+    private var warningName = "自治区级预警"
     private var warningAdapter: WarningAdapter? = null
     private val dataList: MutableList<WarningDto?> = ArrayList()
 
@@ -163,7 +163,7 @@ class WarningFragment : BaseFragment(), OnClickListener, OnMapClickListener, OnM
         llContainer!!.removeAllViews()
         llContainer1.removeAllViews()
         val nameList: ArrayList<String> = ArrayList()
-        nameList.add("省级预警")
+        nameList.add("自治区级预警")
         nameList.add("市级预警")
         nameList.add("县级预警")
         val size = nameList.size
@@ -220,7 +220,7 @@ class WarningFragment : BaseFragment(), OnClickListener, OnMapClickListener, OnM
     private fun addWarnings() {
         dataList.clear()
         when(warningName) {
-            "省级预警" -> {
+            "自治区级预警" -> {
                 dataList.addAll(proList)
             }
             "市级预警" -> {
@@ -355,7 +355,7 @@ class WarningFragment : BaseFragment(), OnClickListener, OnMapClickListener, OnM
                                     val str1 = "新疆全区共有"
                                     val str2 = warningList.size.toString()
                                     val str3 = "条预警"
-                                    val str4 = "([省级]预警${proList.size}条，[市级]预警${cityList.size}条，[县级]预警${disList.size}条；${strType})"
+                                    val str4 = "([自治区级]预警${proList.size}条，[市级]预警${cityList.size}条，[县级]预警${disList.size}条；${strType})"
                                     tvWarningStatistic.text = "${str1}${str2}${str3}${str4}"
                                     clWarning!!.visibility = View.VISIBLE
 

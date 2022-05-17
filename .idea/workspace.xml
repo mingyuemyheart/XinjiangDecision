@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="okHttpStationInfo" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="dataUrl" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
@@ -64,15 +64,99 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/generated/source/buildConfig/release/com/github/barteksc/pdfviewer/BuildConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/generated/source/r/release/android/support/v4/R.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/generated/source/r/release/com/github/barteksc/pdfviewer/R.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/generated/source/r/release/com/shockwave/pdfium/R.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/attr/R.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/android/support/v4/R.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/AnimationManager$FlingAnimation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/AnimationManager$XAnimation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/AnimationManager$YAnimation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/AnimationManager$ZoomAnimation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/AnimationManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/BuildConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/CacheManager$PagePartComparator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/CacheManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/DecodingAsyncTask.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/DragPinchManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/PDFView$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/PDFView$Configurator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/PDFView$ScrollDir.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/PDFView$State.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/PDFView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/PagesLoader$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/PagesLoader$Holder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/PagesLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/R$attr.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/R$drawable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/R$string.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/R$styleable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/R.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/RenderingHandler$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/RenderingHandler$RenderingTask.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/RenderingHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/exception/FileNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/listener/OnDrawListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/listener/OnErrorListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/listener/OnLoadCompleteListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/listener/OnPageChangeListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/listener/OnPageScrollListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/listener/OnRenderListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/model/PagePart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/scroll/DefaultScrollHandle$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/scroll/DefaultScrollHandle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/scroll/ScrollHandle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/source/AssetSource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/source/ByteArraySource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/source/DocumentSource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/source/FileSource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/source/InputStreamSource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/source/UriSource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/util/ArrayUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/util/Constants$Cache.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/util/Constants$Pinch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/util/Constants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/util/FileUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/util/MathUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/github/barteksc/pdfviewer/util/Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/shockwave/pdfium/R$string.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/classes/release/com/shockwave/pdfium/R.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/compileReleaseAidl/dependency.store" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/mergeReleaseShaders/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/packageReleaseAssets/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/packageReleaseResources/merged.dir/values/values.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/packageReleaseResources/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/incremental/release-mergeJniLibs/merge-state" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/intermediate-jars/release/classes.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/intermediate-jars/release/res.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/javaPrecompile/release/annotationProcessors.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/manifests/aapt/release/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/manifests/aapt/release/output.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/manifests/full/release/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/manifests/full/release/output.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/packaged_res/release/drawable/default_scroll_handle_bottom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/packaged_res/release/drawable/default_scroll_handle_left.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/packaged_res/release/drawable/default_scroll_handle_right.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/packaged_res/release/drawable/default_scroll_handle_top.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/packaged_res/release/values/values.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/res/symbol-table-with-package/release/package-aware-r.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/symbols/release/R.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/transforms/mergeJniLibs/release/__content__.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/intermediates/transforms/stripDebugSymbol/release/__content__.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-pdf-viewer/build/outputs/logs/manifest-merger-release-report.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/RailForeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/RailForeActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactHumidityView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactHumidityView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactRainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactRainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactTempView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactTempView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactVisibleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactVisibleView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactWindView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/view/FactWindView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/TourWarningActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/TourWarningActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningListActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WarningListActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/activity/WeatherDetailActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ContactUsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ContactUsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ForecastFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/ForecastFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WarningFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hlj/fragment/WarningFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/icon_qr_image.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_qr_image.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_contact_us.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_contact_us.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forecast.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forecast.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -32,7 +32,7 @@ import java.util.*
  */
 class WarningListActivity : BaseActivity(), OnClickListener {
 
-    private var warningName = "省级预警"
+    private var warningName = "自治区级预警"
     private var warningAdapter: WarningAdapter? = null
     private val dataList: MutableList<WarningDto?> = ArrayList() //上个界面传过来的所有预警数据
     private val proList: MutableList<WarningDto?> = ArrayList()
@@ -140,7 +140,7 @@ class WarningListActivity : BaseActivity(), OnClickListener {
         llContainer!!.removeAllViews()
         llContainer1.removeAllViews()
         val nameList: ArrayList<String> = ArrayList()
-        nameList.add("省级预警")
+        nameList.add("自治区级预警")
         nameList.add("市级预警")
         nameList.add("县级预警")
         val size = nameList.size
@@ -199,7 +199,7 @@ class WarningListActivity : BaseActivity(), OnClickListener {
     private fun addWarnings() {
         dataList.clear()
         when(warningName) {
-            "省级预警" -> {
+            "自治区级预警" -> {
                 dataList.addAll(proList)
             }
             "市级预警" -> {

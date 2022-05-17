@@ -15,6 +15,7 @@ import android.media.ThumbnailUtils
 import android.os.*
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
+import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.view.View.OnClickListener
@@ -32,10 +33,7 @@ import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
-import com.hlj.activity.CityActivity
-import com.hlj.activity.HeadWarningActivity
-import com.hlj.activity.MinuteFallActivity
-import com.hlj.activity.WebviewActivity
+import com.hlj.activity.*
 import com.hlj.adapter.WeeklyForecastAdapter
 import com.hlj.common.CONST
 import com.hlj.common.MyApplication
@@ -122,6 +120,7 @@ import kotlin.collections.ArrayList
  */
 class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, CaiyunManager.RadarListener{
 
+    private var isFusion = false
     private var lat = CONST.centerLat
     private var lng = CONST.centerLng
     private var mAdapter: WeeklyForecastAdapter? = null
@@ -178,6 +177,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
      * 初始化控件
      */
     private fun initWidget() {
+        ivMap.setOnClickListener(this)
         tvPosition.setOnClickListener(this)
         tvFact.setOnClickListener(this)
         tvBody.setOnClickListener(this)
@@ -191,6 +191,9 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
         tvProWarning!!.setOnClickListener(this)
         tvRain.setOnClickListener(this)
         clHour.setOnClickListener(this)
+        tvDivPolicy.setOnClickListener(this)
+        tvInfo.setOnClickListener(this)
+        ivClimate.setOnClickListener(this)
         clVideo.setOnClickListener(this)
         clVideo.visibility = View.GONE
         clAudio.setOnClickListener(this)
@@ -252,7 +255,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
             lng = amapLocation.longitude
             addMarkerToMap()
             okHttpHourRain()
-            getGeo()
+            getGeo(isFusion)
         }
     }
 
@@ -261,7 +264,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
         tvPosition!!.text = cityName
         addMarkerToMap()
         okHttpHourRain()
-        getGeo()
+        getGeo(isFusion)
     }
 
     private fun addMarkerToMap() {
@@ -584,7 +587,8 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
         }
     }
 
-    private fun getGeo() {
+    private fun getGeo(isFusion: Boolean) {
+        refreshLayout.isRefreshing = true
         WeatherAPI.getGeo(activity, lng.toString(), lat.toString(), object : AsyncResponseHandler() {
             override fun onComplete(content: JSONObject) {
                 super.onComplete(content)
@@ -594,7 +598,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                         if (!geoObj.isNull("id")) {
                             val cityId = geoObj.getString("id")
                             if (!TextUtils.isEmpty(cityId)) {
-                                getWeatherInfo(cityId)
+                                getWeatherInfo(cityId, isFusion)
                             }
                         }
                     } catch (e: JSONException) {
@@ -608,9 +612,12 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
         })
     }
 
-    private fun getWeatherInfo(cityId: String) {
+    private fun getWeatherInfo(cityId: String, isFusion: Boolean) {
         Thread {
-            val url = String.format("https://hfapi.tianqi.cn/getweatherdata.php?area=%s&type=forecast|observe|alarm|air|rise&key=AErLsfoKBVCsU8hs", cityId)
+            var url = "https://hfapi.tianqi.cn/getweatherdata.php?area=$cityId&type=forecast|observe|alarm|air|rise&key=AErLsfoKBVCsU8hs"
+            if (isFusion) {
+                url = "http://decision-admin.tianqi.cn/Home/Work2019/hlj_fusion_weather?lat=$lat&lon=$lng&type=forecast|observe&key=AErLsfoKBVCsU8hs"
+            }
             OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
@@ -621,6 +628,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                     }
                     val result = response.body!!.string()
                     activity!!.runOnUiThread {
+                        refreshLayout.isRefreshing = false
                         if (!TextUtils.isEmpty(result)) {
                             try {
                                 val obj = JSONObject(result)
@@ -1201,7 +1209,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                             tvCityWarning.visibility = View.VISIBLE
                                         }
                                         if (proWarnings.size > 0) {
-                                            tvProWarning.text = "省级预警${proWarnings.size}条"
+                                            tvProWarning.text = "自治区级预警${proWarnings.size}条"
                                             tvProWarning.visibility = View.VISIBLE
                                         }
                                     }
@@ -1326,6 +1334,12 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
 
     override fun onClick(v: View?) {
         when (v!!.id) {
+            R.id.ivMap -> {
+                val intent = Intent(activity, SelectPositionActivity::class.java)
+                intent.putExtra("lat", lat)
+                intent.putExtra("lng", lng)
+                startActivityForResult(intent, 1004)
+            }
             R.id.tvPosition -> startActivity(Intent(activity, CityActivity::class.java))
             R.id.tvFact -> {
                 tvTemp.text = tvFact.tag.toString() + "°"
@@ -1472,6 +1486,24 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                     }
                 }
             }
+            R.id.ivClimate -> {
+                val intent = Intent(activity, WebviewActivity::class.java)
+                intent.putExtra(CONST.ACTIVITY_NAME, "24节气")
+                intent.putExtra(CONST.WEB_URL, "http://wx.tianqi.cn/Solar/jieqidetail")
+                startActivity(intent)
+            }
+            R.id.tvDivPolicy -> {
+                val intent = Intent(activity, WebviewActivity::class.java)
+                intent.putExtra(CONST.ACTIVITY_NAME, "各地隔离政策查询")
+                intent.putExtra(CONST.WEB_URL, "http://m.heb.bendibao.com/news/gelizhengce/all.php?leavecity=&src=12379")
+                startActivity(intent)
+            }
+            R.id.tvInfo -> {
+                val intent = Intent(activity, WebviewActivity::class.java)
+                intent.putExtra(CONST.ACTIVITY_NAME, "实时更新：新型冠状病毒肺炎疫情实时大数据报告")
+                intent.putExtra(CONST.WEB_URL, "https://voice.baidu.com/act/newpneumonia/newpneumonia?fraz=partner&paaz=gjyj")
+                startActivity(intent)
+            }
         }
     }
 
@@ -1487,8 +1519,25 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                     if (dto.lng == 0.0 || dto.lat == 0.0) {
                         getLatlngByCityid(dto.cityId)
                     } else {
+                        isFusion = false
                         okHttpHourRain()
-                        getGeo()
+                        getGeo(isFusion)
+                    }
+                }
+                1004 -> {
+                    if (data != null) {
+                        val bundle = data.extras
+                        if (bundle != null) {
+                            lat = bundle.getDouble("lat", lat)
+                            lng = bundle.getDouble("lng", lng)
+                            val position = bundle.getString("position")
+                            Log.e("position", position)
+                            if (!TextUtils.isEmpty(position)) {
+                                tvPosition.text = position
+                            }
+                            isFusion = true
+                            getGeo(isFusion)
+                        }
                     }
                 }
             }
@@ -1510,7 +1559,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                                     lng = c.getDouble("c13")
                                     lat = c.getDouble("c14")
                                     okHttpHourRain()
-                                    getGeo()
+                                    getGeo(isFusion)
                                 }
                             } catch (e: JSONException) {
                                 e.printStackTrace()

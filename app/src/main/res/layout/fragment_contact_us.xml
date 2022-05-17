@@ -128,7 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="哈尔滨市香坊区电碳路71号"
+                android:text="乌鲁木齐市天山区建国路327号"
                 android:textColor="@color/text_color3"
                 android:textSize="@dimen/level_4"
                 app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="4006000121"
+                android:text="09912623430"
                 android:textColor="@color/text_color3"
                 android:textSize="@dimen/level_4"
                 app:layout_constraintHorizontal_bias="0.8"
@@ -161,6 +161,7 @@
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
+            android:visibility="gone"
             android:id="@+id/clData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

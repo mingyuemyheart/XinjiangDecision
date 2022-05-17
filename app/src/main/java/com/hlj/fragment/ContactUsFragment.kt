@@ -124,11 +124,12 @@ class ContactUsFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun okHttpList() {
-        Thread(Runnable {
-            val url = "https://decision-admin.tianqi.cn/Home/work2019/hlg_get_lxwm"
-            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback{
+        Thread {
+            val url = "http://xinjiangdecision.tianqi.cn:81/Home/api/xj_get_lxwm"
+            OkHttpUtil.enqueue(Request.Builder().url(url).build(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                 }
+
                 override fun onResponse(call: Call, response: Response) {
                     if (!response.isSuccessful) {
                         return
@@ -174,14 +175,14 @@ class ContactUsFragment : BaseFragment(), View.OnClickListener {
                     }
                 }
             })
-        }).start()
+        }.start()
     }
 
     override fun onClick(v: View?) {
         when(v!!.id) {
             R.id.tvLogin -> startActivity(Intent(activity, LoginActivity::class.java))
             R.id.tvPhone, R.id.tvMsg -> {
-                dialPhone("联系电话", "4006000121", "拨打")
+                dialPhone("联系电话", tvPhone.text.toString(), "拨打")
             }
             R.id.clData -> {
                 val intent = Intent(activity, DataIntroActivity::class.java)

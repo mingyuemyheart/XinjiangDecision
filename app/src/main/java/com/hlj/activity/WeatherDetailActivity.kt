@@ -1117,7 +1117,7 @@ class WeatherDetailActivity : BaseActivity(), OnClickListener, CaiyunManager.Rad
                                             tvCityWarning.visibility = View.VISIBLE
                                         }
                                         if (proWarnings.size > 0) {
-                                            tvProWarning.text = "省级预警${proWarnings.size}条"
+                                            tvProWarning.text = "自治区级预警${proWarnings.size}条"
                                             tvProWarning.visibility = View.VISIBLE
                                         }
                                     }

@@ -16,7 +16,7 @@
             android:id="@+id/clMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/ivAdd"
@@ -29,12 +29,13 @@
 
             <TextView
                 android:id="@+id/tvPosition"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/level_4"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,6 +50,16 @@
                 app:layout_constraintStart_toEndOf="@+id/tvPosition"
                 app:layout_constraintTop_toTopOf="@+id/tvPosition" />
 
+            <ImageView
+                android:id="@+id/ivMap"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/icon_map"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPosition"
+                android:layout_marginTop="10dp"/>
+
             <TextView
                 android:id="@+id/tvRiseTime"
                 android:layout_width="wrap_content"
@@ -59,7 +70,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/level_4"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPosition" />
+                app:layout_constraintTop_toBottomOf="@+id/ivMap" />
 
             <TextView
                 android:id="@+id/tvDisWarning"
@@ -269,6 +280,49 @@
 
             </android.support.constraint.ConstraintLayout>
 
+            <ImageView
+                android:id="@+id/ivClimate"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/icon_climate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clAudio" />
+
+            <TextView
+                android:id="@+id/tvDivPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="各地隔离政策查询"
+                android:background="@drawable/bg_warning2"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tvInfo"/>
+
+            <TextView
+                android:id="@+id/tvInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="新冠肺炎疫\n情实时动态"
+                android:background="@drawable/bg_warning2"
+                android:lineSpacingExtra="1dp"
+                android:paddingStart="20dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="6dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_5"
+                app:layout_constraintBottom_toBottomOf="@+id/ivClimate"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/clSunrise"
                 android:layout_width="0dp"
@@ -277,10 +331,11 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/corner_sunrise"
+                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/clAudio">
+                app:layout_constraintTop_toBottomOf="@+id/ivClimate">
 
                 <TextView
                     android:id="@+id/sunrise"

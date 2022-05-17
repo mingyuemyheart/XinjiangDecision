@@ -11,20 +11,26 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1334853090172239" />
         <entry key="app/src/main/res/layout/activity_rail_fact.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/activity_rail_trafic.xml" value="0.1334853090172239" />
+        <entry key="app/src/main/res/layout/activity_select_position.xml" value="0.1334853090172239" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_tour_impression.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/activity_tour_kepu.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/activity_tour_route_detail.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.1334853090172239" />
+        <entry key="app/src/main/res/layout/adapter_position.xml" value="0.1334853090172239" />
         <entry key="app/src/main/res/layout/adapter_rail_section.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/dialog_delete.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.16802536231884058" />
         <entry key="app/src/main/res/layout/dialog_qr_code.xml" value="0.16893115942028986" />
+        <entry key="app/src/main/res/layout/fragment_contact_us.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/fragment_forecast.xml" value="0.1334853090172239" />
+        <entry key="app/src/main/res/layout/fragment_juece_list.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/fragment_tour.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/fragment_tour_scenic.xml" value="0.19384057971014493" />
+        <entry key="app/src/main/res/layout/fragment_warning.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/layout_fact_trafic.xml" value="0.1334853090172239" />
         <entry key="app/src/main/res/layout/layout_fact_value.xml" value="0.19384057971014493" />
+        <entry key="app/src/main/res/layout/layout_marker_info.xml" value="0.1334853090172239" />
         <entry key="app/src/main/res/layout/layout_trafic_marker_info.xml" value="0.1334853090172239" />
         <entry key="app/src/main/res/layout/loading.xml" value="0.16802536231884058" />
         <entry key="app/src/main/res/layout/weather_marker_info.xml" value="0.19384057971014493" />
