@@ -178,6 +178,7 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
      */
     private fun initWidget() {
         ivMap.setOnClickListener(this)
+        ivRouteWeather.setOnClickListener(this)
         tvPosition.setOnClickListener(this)
         tvFact.setOnClickListener(this)
         tvBody.setOnClickListener(this)
@@ -1339,6 +1340,11 @@ class ForecastFragment : BaseFragment(), OnClickListener, AMapLocationListener, 
                 intent.putExtra("lat", lat)
                 intent.putExtra("lng", lng)
                 startActivityForResult(intent, 1004)
+            }
+            R.id.ivRouteWeather -> {
+                val intent = Intent(activity, RouteWeatherActivity::class.java)
+                intent.putExtra(CONST.ACTIVITY_NAME, "沿途天气")
+                startActivity(intent)
             }
             R.id.tvPosition -> startActivity(Intent(activity, CityActivity::class.java))
             R.id.tvFact -> {

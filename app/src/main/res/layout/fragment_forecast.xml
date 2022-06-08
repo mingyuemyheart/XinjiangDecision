@@ -16,7 +16,7 @@
             android:id="@+id/clMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/ivAdd"
@@ -60,29 +60,39 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvPosition"
                 android:layout_marginTop="10dp"/>
 
+            <ImageView
+                android:id="@+id/ivRouteWeather"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/icon_route_weather"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivMap"/>
+
             <TextView
                 android:id="@+id/tvRiseTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:lineSpacingExtra="2dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/level_4"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivMap" />
+                app:layout_constraintTop_toBottomOf="@+id/ivRouteWeather" />
 
             <TextView
                 android:id="@+id/tvDisWarning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/bg_warning2"
                 android:gravity="center"
                 android:paddingStart="15dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/level_4"
+                android:textSize="@dimen/level_5"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRiseTime" />
@@ -97,7 +107,7 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/level_4"
+                android:textSize="@dimen/level_5"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDisWarning" />
@@ -112,7 +122,7 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/level_4"
+                android:textSize="@dimen/level_5"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCityWarning" />
@@ -122,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/bg_fact_temp_press"
                 android:gravity="center"
                 android:text="实测温度"
@@ -135,7 +145,7 @@
                 android:id="@+id/tvBody"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/bg_body_temp"
                 android:gravity="center"
                 android:text="体感温度"
@@ -194,12 +204,12 @@
                 android:id="@+id/ivWind"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toStartOf="parent"
                 android:adjustViewBounds="true"
-                app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
-                app:layout_constraintStart_toEndOf="@+id/tvAqi"
-                app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
+                app:layout_constraintTop_toBottomOf="@+id/tvAqiCount"/>
 
             <TextView
                 android:id="@+id/tvWind"
@@ -209,9 +219,9 @@
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/level_4"
-                app:layout_constraintBottom_toBottomOf="@+id/tvAqiCount"
+                app:layout_constraintBottom_toBottomOf="@+id/ivWind"
                 app:layout_constraintStart_toEndOf="@+id/ivWind"
-                app:layout_constraintTop_toTopOf="@+id/tvAqiCount" />
+                app:layout_constraintTop_toTopOf="@+id/ivWind" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/clAudio"
@@ -221,7 +231,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bg_audio"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvAqiCount">
+                app:layout_constraintTop_toBottomOf="@+id/ivWind">
 
                 <ImageView
                     android:id="@+id/ivAudio"
@@ -285,7 +295,7 @@
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/icon_climate"
                 app:layout_constraintStart_toStartOf="parent"
@@ -297,7 +307,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="各地隔离政策查询"
-                android:background="@drawable/bg_warning2"
+                android:background="@drawable/bg_yiqing"
                 android:gravity="center"
                 android:paddingStart="15dp"
                 android:paddingEnd="10dp"
@@ -311,8 +321,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="新冠肺炎疫\n情实时动态"
-                android:background="@drawable/bg_warning2"
+                android:text="新冠肺炎疫情实时动态"
+                android:background="@drawable/bg_yiqing"
                 android:lineSpacingExtra="1dp"
                 android:paddingStart="20dp"
                 android:paddingTop="6dp"

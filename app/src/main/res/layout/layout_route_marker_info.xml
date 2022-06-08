@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/iv_marker_info_bg"
+    android:paddingTop="5dip"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="15dp" >
+
+    <TextView 
+        android:id="@+id/tvPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_4"/>
+
+    <ImageView
+        android:layout_toRightOf="@+id/tvPosition"
+        android:layout_marginLeft="5dp"
+        android:visibility="gone"
+        android:id="@+id/ivWarning"
+        android:layout_width="20dp"
+        android:layout_height="20dp"/>
+    
+    <LinearLayout
+        android:layout_below="@+id/tvPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="3dp">
+    
+    <TextView 
+        android:id="@+id/tvPhe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color4"
+        android:textSize="@dimen/level_5"/>
+    
+    <TextView 
+        android:id="@+id/tvTemp"
+        android:layout_marginLeft="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color4"
+        android:textSize="@dimen/level_5"/>
+    
+    <TextView 
+        android:id="@+id/tvWindDir"
+        android:layout_marginLeft="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color4"
+        android:textSize="@dimen/level_5"/>
+    
+    <TextView 
+        android:id="@+id/tvWindForce"
+        android:layout_marginLeft="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color4"
+        android:textSize="@dimen/level_5"/>
+    
+    </LinearLayout>
+
+</RelativeLayout>

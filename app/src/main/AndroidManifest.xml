@@ -389,6 +389,14 @@
             android:name="com.hlj.activity.SelectPositionActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.hlj.activity.RouteWeatherActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.hlj.activity.RouteSearchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"/>
+
     </application>
 
 </manifest>

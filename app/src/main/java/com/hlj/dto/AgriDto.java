@@ -10,6 +10,7 @@ import java.util.List;
 
 public class AgriDto implements Parcelable{
 
+	public int itemType;
 	public String columnId;
 	public String id;//localviewid
 	public String name;//名称
@@ -54,6 +55,7 @@ public class AgriDto implements Parcelable{
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(this.itemType);
 		dest.writeString(this.columnId);
 		dest.writeString(this.id);
 		dest.writeString(this.name);
@@ -97,6 +99,7 @@ public class AgriDto implements Parcelable{
 	}
 
 	protected AgriDto(Parcel in) {
+		this.itemType = in.readInt();
 		this.columnId = in.readString();
 		this.id = in.readString();
 		this.name = in.readString();

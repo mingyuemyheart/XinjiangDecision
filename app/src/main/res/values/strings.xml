@@ -142,8 +142,8 @@
     <!-- 沿途天气-->
     <string name="select_start_point">选择起点</string>
     <string name="select_end_point">选择终点</string>
-    <string name="route_start_point">起点：</string>
-    <string name="route_end_point">终点：</string>
+    <string name="route_start_point">起</string>
+    <string name="route_end_point">终</string>
     <string name="route_current_position">当前位置</string>
     <string name="visible">能见度：</string>
     <string name="no_result">对不起，没有搜索到相关数据！</string>

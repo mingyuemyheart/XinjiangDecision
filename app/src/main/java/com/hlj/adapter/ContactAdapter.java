@@ -76,12 +76,13 @@ public class ContactAdapter extends BaseAdapter{
 			mHolder.tvName.setText(dto.name);
 		}
 		if (TextUtils.equals(flag, "1")) {
-			mHolder.tvLogo.setText("");
-		} else if (TextUtils.equals(flag, "2")) {
 			mHolder.tvLogo.setText("公众");
 			mHolder.tvLogo.setBackgroundResource(R.drawable.bg_public);
-		} else if (TextUtils.equals(flag, "3")) {
+		} else if (TextUtils.equals(flag, "2")) {
 			mHolder.tvLogo.setText("专业");
+			mHolder.tvLogo.setBackgroundResource(R.drawable.bg_decision);
+		} else if (TextUtils.equals(flag, "3")) {
+			mHolder.tvLogo.setText("决策");
 			mHolder.tvLogo.setBackgroundResource(R.drawable.bg_special);
 		}
 

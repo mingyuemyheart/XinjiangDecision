@@ -143,6 +143,19 @@ class ContactUsFragment : BaseFragment(), View.OnClickListener {
                             val array = JSONArray(result)
                             for (i in 0 until array.length()) {
                                 val obj = array.getJSONObject(i)
+                                if (!obj.isNull("name")) {
+                                    when (i) {
+                                        0 -> {
+                                            text1.text = "${obj.getString("name")}专属特权"
+                                        }
+                                        1 -> {
+                                            text2.text = "${obj.getString("name")}专属特权"
+                                        }
+                                        else -> {
+                                            text3.text = "${obj.getString("name")}专属特权"
+                                        }
+                                    }
+                                }
                                 if (!obj.isNull("list")) {
                                     val itemArray = obj.getJSONArray("list")
                                     for (j in 0 until itemArray.length()) {

@@ -187,8 +187,8 @@ class JueceListFragment : BaseFragment() {
                                             if (!itemObj.isNull("l3")) {
                                                 dto.time = itemObj.getString("l3")
                                             }
-                                            if (!itemObj.isNull("l5")) {
-                                                dto.icon = itemObj.getString("l5")
+                                            if (!itemObj.isNull("l4")) {
+                                                dto.icon = itemObj.getString("l4")
                                             }
                                             dto.type = type
                                             if (dto.dataUrl.endsWith(".pdf") || dto.dataUrl.endsWith(".PDF")) {

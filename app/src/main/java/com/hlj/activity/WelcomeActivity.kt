@@ -385,13 +385,13 @@ class WelcomeActivity : BaseActivity(), AMapLocationListener {
 							}
 						} else {
 							//失败
-							if (!obje.isNull("msg")) {
-								val msg = obje.getString("msg")
-								if (msg != null) {
-									Toast.makeText(this@WelcomeActivity, msg, Toast.LENGTH_SHORT).show()
-								}
-								okHttpLogin(CONST.publicUser, CONST.publicPwd)
-							}
+//							if (!obje.isNull("msg")) {
+//								val msg = obje.getString("msg")
+//								if (msg != null) {
+//									Toast.makeText(this@WelcomeActivity, msg, Toast.LENGTH_SHORT).show()
+//								}
+//							}
+							okHttpLogin(CONST.publicUser, CONST.publicPwd)
 						}
 					}
 				} catch (e: JSONException) {
